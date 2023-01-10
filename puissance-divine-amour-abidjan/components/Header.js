@@ -1,23 +1,26 @@
 import React from "react";
 
 export default function Header() {
+
+  const getClass = (item, i) => { alert('okk') }
+  
   return (
     <header>
       <h1>
         <a id="logo" href="index.php">
           <img
-            src="images/ecommerce-chretien-notre-dame-toute-graces.jpg"
+            src="img/ecommerce-chretien-notre-dame-toute-graces.webp"
             alt="Librairie Puisance Divine, Abidjan, cocody 2 plateaux"
             width="200px"
           />
         </a>
         <a href="index.php?menu=retraites-de-priere-spirituelles-abidjan">
           <img
-            src="images/ecommerce-catholique-saint-esprit-Dieu-amour.png"
+            src="img/ecommerce-catholique-saint-esprit-Dieu-amour.webp"
             alt="Librairie Puisance Divine, Abidjan, cocody 2 plateaux"
           />
         </a>
-        Puissance Divine
+        <span>Puissance Divine</span>
       </h1>
       <h2>
         <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
@@ -41,7 +44,7 @@ export default function Header() {
             title="ÃvangÃ©liser aider rassembler les chrÃ©tiens sanctification saint esprit"
             id="objectifs"
           >
-            Objectifs
+            <span>Objectifs</span>
           </a>
         </li>
         <li className="menu vente">
@@ -51,7 +54,7 @@ export default function Header() {
             title="Ecommerce religieux chrÃ©tien catholique: icÃ´ne grottes statues bibles"
             id="vente"
           >
-            Vente en ligne
+            <span>Ecommerce</span>
           </a>
         </li>
         <li className="menu enseignements">
@@ -64,7 +67,7 @@ export default function Header() {
             par=""
             id="enseignements"
           >
-            Enseignements
+            <span>Enseignements</span>
           </a>
         </li>
         <li className="menu priere">
@@ -74,7 +77,7 @@ export default function Header() {
             title="Retraites spirituelles, assistance spirituelle, week-ends rosaire sanctuaire dame du rosaire bolobi"
             id="priere"
           >
-            Retraites et PriÃ¨res
+            <span>Retraites-et-Prières</span>
           </a>
         </li>
         <li className="menu lieux-activites">
@@ -84,37 +87,35 @@ export default function Header() {
             title="Puissance Divine Abidjan : nos lieux et activitÃ©s religieux chrÃ©tien catholique"
             id="lieux-activites"
           >
-            Lieux et ActivitÃ©s
+            <span>Lieux et ActivitÃ©s</span>
           </a>
         </li>{" "}
       </menu>
-      <div>
-        <a href="#" onClick='getClass(inscription,"see")'>
-          Inscription
+      <div id="log_and_sign_in">
+        <a href="#" onClick={()=>{getClass("inscription","see")}} title="Inscription">
+          ➕
+        </a> || 
+        <a href="#" onClick={()=>{getClass("connexion","see")}} title="Connexion">
+          👤
         </a>
-        <a href="#" onClick='getClass(connexion,"see")'>
-          Connexion
-        </a>
+        <form id="connexion" action="index.php?admin=ok" method="post">
+          <input type="text" name="user" placeholder="nom utilisateur" />
+          <input type="password" name="pwd" placeholder="**********" />
+          <input
+            style={{
+              padding: 0,
+              width: "95%",
+              height: "50px",
+              cursor: "pointer",
+              color: "goldenrod",
+              fontSize: "1em",
+            }}
+            type="submit"
+            value="ok"
+          />
+        </form>
       </div>
-      <form id="connexion" action="index.php?admin=ok" method="post">
-        <input type="text" name="user" placeholder="nom utilisateur" />
-        <input type="password" name="pwd" placeholder="**********" />
-        <input
-          style={{
-            padding: 0,
-            width: "95%",
-            height: "50px",
-            cursor: "pointer",
-            color: "goldenrod",
-            fontSize: "1em",
-          }}
-          type="submit"
-          value="ok"
-        />
-      </form>
-      <div
-        id="inscription"
-        >
+      <div id="inscription">
           {/*_onMouseOut="this.removeAttribute('class')"
           _onMouseOver="getClass(this,'see')"*/}
         <hr />
@@ -151,7 +152,7 @@ export default function Header() {
           <a
             href="#demandes"
             title="Nous intervenons pour vous sur plusieurs plans spirituelle, faite-y une demande chrétienne."
-            onClick=""
+            onClick={()=>{alert('oifdjoifdsjfdsij')}}
           >
             Demande Chrétienne ?
           </a>
@@ -160,7 +161,7 @@ export default function Header() {
           <a
             href="#partenaires"
             title="Découvrez ceux qui compte pour nous en Côte d'ivoire"
-            onClick=""
+            onClick={()=>{alert('oifdjoifdsjfdsij___2')}}
           >
             Partenaires
           </a>
@@ -176,7 +177,7 @@ export default function Header() {
           <a
             href="#blog"
             title="Suivez nos actualités sur notre blog, ou suivez nos actualités en flux rss"
-            onClick=""
+            onClick={()=>{alert('oifdjoifdsjfdsij___2')}}
           >
             Blog et Flux RSS
           </a>

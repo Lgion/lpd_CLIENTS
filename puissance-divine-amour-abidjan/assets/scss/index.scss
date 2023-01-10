@@ -1,0 +1,310 @@
+@import "./main.scss";
+
+
+/***********************************/
+/***********************************/
+/***********************************/
+body{}
+
+
+
+body>div{
+  >*{
+    position: relative;
+    z-index: 10;
+    &:not(main){
+      width: calc(100% - 16px);
+      left: 8px;
+    }
+  }
+  >header{
+    // background: url(../img/ecommerce-chretien-notre-dame-toute-graces.webp) no-repeat, url(../img/ecommerce-chretien-catholique-puissance-saint-esprit.webp) top right no-repeat;
+    // background-size: contain;
+    height: calc(200px + 7em);
+    border-bottom: 7em solid goldenrod;
+    >h1{
+      position: absolute;
+      width:100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      >a{
+        &:last-of-type{order:2;align-self:end;}
+        >img{
+          // height: 100%;
+          width: 133px;
+        }
+      }
+    }
+    >h2{
+      margin: 0 auto;
+      width: 60%;
+      text-align: center;
+      strong{
+
+      }
+    }
+    >div#blogB{
+      @extend %menu_elements;
+      box-sizing: border-box;
+      float: right;
+      WIDTH: 75px;
+      bottom: -8em;
+      padding: 0 !important;
+      border-radius: 1em !important;
+      z-index: 2;
+      >a{
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+        display: block;
+        span{
+          font-size: .5em;
+        }
+      }
+    }
+    >menu{
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      gap:10px;
+      box-shadow: 0 0 10px 1px inset;
+      list-style-type: none;
+      bottom: -7em;
+      margin: 0;
+      padding: 1em 0;
+      width: 98%;
+      left:1%;
+      >li{
+        width: 25%;
+        text-align: center;
+        bottom: -10%;
+        position: relative;
+        height: 33%;
+        font-size: .9em;
+        >a{
+          @extend %menu_elements;
+          &::before{
+            transition: all .5s;
+            z-index: -1;
+            content: '';
+            top: 0em;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            background: url(../img/menu.png) top left no-repeat;
+          }
+          &:hover,&.active{
+            box-shadow: 0 0 15px 3px beige;
+            // background: #ff5900;
+            // background: linear-gradient(135deg, #ff5900 0%,rgba(204,0,0,0.3) 46%,rgba(204,0,10,0.3) 62%,#ff5900 100%);
+            // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5900', endColorstr='#ff5900',GradientType=1 );
+            &::before{
+              z-index: 0;
+              left: 70%;
+            }
+            >span{top:20px;color:gold;text-shadow: 0 0 3px black, -1px 2px 70px black;}
+          }
+          >span{position:relative;top:0;transition:all .3s;}
+        }
+      }
+    }
+    >div#log_and_sign_in{
+      position: absolute;
+      border: solid;
+      padding: 0.5em;
+      border-radius: 5px;
+      background: wheat;
+      top: 0;
+      right: 10%;
+      width: 85px;
+      height: 40px;
+      display: flex;
+      justify-content: space-between;
+      >a{
+        transition:font-size .2s;
+        &:hover{font-size:1.2em;}
+      }
+      >form#connexion{
+        display: none;
+        >input{
+
+        }
+      }
+    }
+    >div#inscription{
+      height:0;
+      overflow:hidden;
+      display: none;
+      >p{}
+      >ul{
+        >p{
+
+        }
+        >li{
+          
+        }
+      }
+      >form{
+        >textarea{
+
+        }
+        >input{
+
+        }
+      }
+      >b{}
+      >p{}
+    }
+    >ul#menu2{
+      width: 200px;
+      height:0;
+      overflow:hidden;
+      >li{
+        &#demandes{
+          
+        }
+        >a{
+
+        }
+      }
+    }
+    >a#panier{
+
+    }
+    >aside{}
+  }
+  >nav{
+
+  }
+  >main{
+    width: 90%;
+    margin:auto;
+    >section{
+    }
+    >article{
+    }
+    .carte{
+    }
+  }
+  >footer{
+    padding: 3em 1em;
+    >ul{
+      display: flex;
+      justify-content: space-evenly;
+    }
+    >*:not(ul):not(.active){display:none;}
+    >*:not(ul){
+      padding:2em;
+      background:wheat;
+    }
+    >div{
+
+    }
+    >p{
+      
+    }
+  }
+}
+
+
+
+
+header:before, main:before, footer:before {
+  box-shadow: 4px 0 10px 1px rgb(255 89 0 / 30%);
+  border-left: solid;
+  left: -1%;
+  background: rgba(204,0,0,.3);
+  background: linear-gradient(to right, rgb(204,0,0) 0%,rgba(255,89,0,.3) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(204,0,0)', endColorstr='rgba(255,89,0,.3)',GradientType=1 );
+}
+header:after, #containall:after, footer:after {
+  box-shadow: -4px 0 10px 1px rgb(255 89 0 / 30%);
+  border-right: solid;
+  right: calc(-1% + 10px); /* ????????????????????????????????????? */
+  background: rgba(255,89,0,.3);
+  background: linear-gradient(to right, rgba(255,89,0,.3) 0%,rgb(204,0,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(255,89,0)', endColorstr='rgba(204,0,0,.3)',GradientType=1 );
+}
+header:before, header:after, #containall:before, #containall:after, footer:before, footer:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6%;
+  z-index: -1;
+  /* -webkit-transform: rotateY(-60deg) rotateX(-1deg) translateZ(1em); */
+}
+
+
+
+
+@media all and (max-width:$mobile){
+  body{
+    >header{
+      height:75px;
+      text-align: center;
+      >a{>i{}}
+      >img{}
+    }
+    >nav{
+      >form{
+        >input{}
+        >label{>i{}}
+      }
+      >section{
+        >h1{}
+        >p{}
+        >a{}
+      }
+    }
+    >main{
+      >section{}
+      >article{}
+    }
+    >footer{
+      >ul{}
+    }
+  }
+}
+@media all and (min-width:$mobile) and (max-width:$tablette){
+  body{
+    &>header{}
+    &>nav{}
+    &>main{
+      &>section{}
+      &>article{}
+    }
+    &>footer{
+      &>ul{}
+    }
+  }
+}
+@media all and (min-width:$desktop) and (max-width:$tv){
+  body{
+    &>header{}
+    &>nav{}
+    &>main{
+      &>section{}
+      &>article{}
+    }
+    &>footer{
+      &>ul{}
+    }
+  }
+}
+@media all and (min-width:$tv){
+  body{
+    &>header{}
+    &>nav{}
+    &>main{
+      &>section{}
+      &>article{}
+    }
+    &>footer{
+      &>ul{}
+    }
+  }
+}

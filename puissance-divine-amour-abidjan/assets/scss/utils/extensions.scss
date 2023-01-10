@@ -1,0 +1,66 @@
+/**/
+%pa{position: absolute;}
+%pr{position: relative;}
+%pf{position: fixed;}
+
+%go_tl{top:0;left:0;}
+%go_tr{top:0;right:0;}
+%go_bl{bottom:0;left:0;}
+%go_br{bottom:0;right:0;}
+%go_tbr{top:0;bottom:0;right:0;}
+%go_tbl{top:0;bottom:0;left:0;}
+%go_lrt{top:0;left:0;right:0;}
+%go_lrb{bottom:0;left:0;right:0;}
+
+%goa_tl{@extend %pa;top:0;left:0;}
+%goa_tr{@extend %pa;top:0;right:0;}
+%goa_bl{@extend %pa;bottom:0;left:0;}
+%goa_br{@extend %pa;bottom:0;right:0;}
+%goa_tbr{@extend %pa;top:0;bottom:0;right:0;}
+%goa_tbl{@extend %pa;top:0;bottom:0;left:0;}
+%goa_lrt{@extend %pa;top:0;left:0;right:0;}
+%goa_lrb{@extend %pa;bottom:0;left:0;right:0;}
+
+
+%df{display:flex;}
+%dfc{@extend %df;justify-content: center;align-items: center;}
+%dfch{@extend %df;justify-content: center;}
+%dfcv{@extend %df;align-items: center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+*/
+%menu_elements{
+    height: 75px;
+    display: block;
+    // text-indent: 0.5em;
+    box-shadow: 0 0 10px 1px black;
+    border: solid;
+    padding: 20px 0;
+    // margin-right: 20px;
+    position: relative;
+    text-decoration: none;
+    color: goldenrod;
+    text-shadow: 0 0 1px black, -1px 2px 5px black;
+    font-size: 1.5em;
+    font-weight: 900;
+    border-top-left-radius: 10px 100px;
+    border-top-right-radius: 100px 10px;
+    -webkit-transition: all .3s;
+    background: #ff5900;
+    background: linear-gradient(135deg, rgba(255,89,0,0.3) 0%,#cc0000 46%,#cc0a00 62%,rgba(255,89,0,0.3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,89,0,0.3)', endColorstr='rgba(255,89,0,0.3)',GradientType=1 );
+}

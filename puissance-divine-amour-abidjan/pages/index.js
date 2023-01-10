@@ -1,7 +1,8 @@
+import {useContext} from 'react'
 import Head from "next/head";
 import Image from "next/image";
 import AuthContext from "../stores/authContext.js"
-import {useContext} from 'react'
+import Carousel from "../components/_/Carousel"
 // import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -18,8 +19,10 @@ export default function Home() {
 
 
       <main className="">
-        {ok}
-        MAIN CONTENT
+        {/* {ok} */}
+        <Carousel />
+
+        
       </main>
 
 
