@@ -1,0 +1,10 @@
+File from: [images/se-amour.JPG]
+
+File to: [build/img/se-amour.webp]
+
+Compression algorithm: [webp]
+
+Description: Error: Command failed: /home/hikari/Bureau/PROJECTS___BootStarter/_/PRODUCTIONs/pda/PRODUCTION_pda_react/compresse_imgs/node_modules/cwebp-bin/vendor/cwebp images/se-amour.JPG -o build/img/se-amour.webp
+libjpeg error: Unsupported color conversion request
+Error! Could not process file images/se-amour.JPG
+Error! Cannot read input picture file 'images/se-amour.JPG'

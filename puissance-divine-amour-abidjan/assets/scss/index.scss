@@ -8,20 +8,37 @@ body{}
 
 
 
-body>div{
+body{
+  margin: 0;
+  min-height: 100%;
+  height: 10000px;
+  height: auto;
+  position: relative;
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 14.2%;
+    z-index: -1;
+  }
+  &:before{left: 0;background: linear-gradient(to right,  #1e5799 0%,#2989d8 37%,rgba(161,225,244,.5) 100%);}
+  &:after{right: 0;background: linear-gradient(to right,  rgba(161,225,244,.5) 0%,#2989d8 63%,#1e5799 100%);}
+>div{
   >*{
     position: relative;
+    background: whitesmoke;
     z-index: 10;
     &:not(main){
-      width: calc(100% - 16px);
-      left: 8px;
+      width: calc(100% - 10px);
+      left: 5px;
     }
   }
   >header{
     // background: url(../img/ecommerce-chretien-notre-dame-toute-graces.webp) no-repeat, url(../img/ecommerce-chretien-catholique-puissance-saint-esprit.webp) top right no-repeat;
     // background-size: contain;
-    height: calc(200px + 7em);
-    border-bottom: 7em solid goldenrod;
+    height: 200px;
+    margin-bottom: 7em;
     >h1{
       position: absolute;
       width:100%;
@@ -66,6 +83,8 @@ body>div{
     }
     >menu{
       position: absolute;
+      z-index: 1;
+      background:goldenrod;
       display: flex;
       justify-content: center;
       gap:10px;
@@ -73,9 +92,9 @@ body>div{
       list-style-type: none;
       bottom: -7em;
       margin: 0;
-      padding: 1em 0;
-      width: 98%;
-      left:1%;
+      padding: 1.15em;
+      width: 90%;
+      left:5%;
       >li{
         width: 25%;
         text-align: center;
@@ -181,10 +200,52 @@ body>div{
   }
   >main{
     width: 90%;
+    min-height: 475px;
+    max-height: 100%;
+    height: auto;
     margin:auto;
+    padding-bottom: 5em;
+    >h3{
+      &.carousel{text-align: center;}
+    }
     >section{
+      &.carousel{
+        padding-bottom: 3em;
+        border-bottom: solid;
+        figure{
+            height: 555px;
+            img{
+              width:555px;
+              object-fit:contain;
+            }
+        }
+        /*
+        div>div>div>h3{
+            display: block;
+            padding: 1em;
+            background: purple;
+            text-align: center;
+            color: white;
+        }
+        */
+        .slick-slider{
+          >button{background:black;}
+          >ul{
+            background: rebeccapurple;
+            padding:1em 0;
+            position: absolute;
+            bottom: -3.5em;
+            :not(.slick-active)button:before{color:white;opacity:1;}
+          }
+        }
+        .slick-track>div{
+          display: flex;
+          justify-content: center;
+        }
+      }
     }
     >article{
+      text-align: center;
     }
     .carte{
     }
@@ -196,9 +257,17 @@ body>div{
       justify-content: space-evenly;
     }
     >*:not(ul):not(.active){display:none;}
+    >*:not(ul).active{bottom:115px;}
     >*:not(ul){
+      position:absolute;
+      width:calc(100% - 2em);
+      margin:0;
       padding:2em;
+      bottom:0;
+      border-radius:5px 5px 0 0;
+      box-shadow: -3px -10px 10px .1px;
       background:wheat;
+      transition:bottom .3s;
     }
     >div{
 
@@ -207,7 +276,7 @@ body>div{
       
     }
   }
-}
+}}
 
 
 
@@ -215,7 +284,7 @@ body>div{
 header:before, main:before, footer:before {
   box-shadow: 4px 0 10px 1px rgb(255 89 0 / 30%);
   border-left: solid;
-  left: -1%;
+  left: -5px;
   background: rgba(204,0,0,.3);
   background: linear-gradient(to right, rgb(204,0,0) 0%,rgba(255,89,0,.3) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(204,0,0)', endColorstr='rgba(255,89,0,.3)',GradientType=1 );
@@ -223,7 +292,7 @@ header:before, main:before, footer:before {
 header:after, #containall:after, footer:after {
   box-shadow: -4px 0 10px 1px rgb(255 89 0 / 30%);
   border-right: solid;
-  right: calc(-1% + 10px); /* ????????????????????????????????????? */
+  right: -5px; /* ????????????????????????????????????? */
   background: rgba(255,89,0,.3);
   background: linear-gradient(to right, rgba(255,89,0,.3) 0%,rgb(204,0,0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(255,89,0)', endColorstr='rgba(204,0,0,.3)',GradientType=1 );

@@ -4,6 +4,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
+import {carousel} from "../../assets/carousel.js"
+// console.log(carousel)
+
+
 
 //carousel simple: https://react-slick.neostack.com/
 //carousel npm: https://www.npmjs.com/package/react-responsive-carousel
@@ -17,49 +21,42 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 export default class Carousel extends Component {
+    
+    constructor(){
+        super()
+        this.state={
+            h3: "TROUVER UN TITRE"
+        }
+    }
+    
     render() {
         const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-        };
-        return (
-        <div>
-            {/* <style>
-                div>div>div>h3{
-                    display: block;
-                    padding: 1em;
-                    background: purple;
-                    text-align: center;
-                    color: white;
-                }
-                button{background:black;}
-            </style> */}
-            <h2> Single Item</h2>
-            <Slider {...settings}>
-            <div>
-                <h3>1</h3>
-            </div>
-            <div>
-                <h3>2</h3>
-            </div>
-            <div>
-                <h3>3</h3>
-            </div>
-            <div>
-                <h3>4</h3>
-            </div>
-            <div>
-                <h3>5</h3>
-            </div>
-            <div>
-                <h3>6</h3>
-            </div>
-            </Slider>
-        </div>
-        );
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        }
+        , random_indexes = []
+        for (let index = 0; index < 10; index++) 
+            random_indexes[index] = Math.ceil(Math.random()*carousel.length-1)
+        // alert(random_indexes)
+
+
+        
+        return <>
+            <h3 className="carousel">{this.state.h3}</h3>
+            <section className="carousel">
+                <Slider {...settings}>
+                {random_indexes.map((item,i) => <figure key={i}>
+                    {/* {this.setState({h2:carousel[0][1]})} */}
+                    {/* {console.log(item)} */}
+                    <img src={"/img/"+carousel[item][0]} alt={carousel[item][1]} />
+                    <figcaption>{carousel[item][1]}</figcaption>
+                </figure>)}
+                </Slider>
+            </section>
+        </>
     }
 }
 
