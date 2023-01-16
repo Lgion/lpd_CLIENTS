@@ -24,259 +24,270 @@ body{
   }
   &:before{left: 0;background: linear-gradient(to right,  #1e5799 0%,#2989d8 37%,rgba(161,225,244,.5) 100%);}
   &:after{right: 0;background: linear-gradient(to right,  rgba(161,225,244,.5) 0%,#2989d8 63%,#1e5799 100%);}
->div{
-  >*{
-    position: relative;
-    background: whitesmoke;
-    z-index: 10;
-    &:not(main){
-      width: calc(100% - 10px);
-      left: 5px;
-    }
-  }
-  >header{
-    // background: url(../img/ecommerce-chretien-notre-dame-toute-graces.webp) no-repeat, url(../img/ecommerce-chretien-catholique-puissance-saint-esprit.webp) top right no-repeat;
-    // background-size: contain;
-    height: 200px;
-    margin-bottom: 7em;
-    >h1{
-      position: absolute;
-      width:100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      >a{
-        &:last-of-type{order:2;align-self:end;}
-        >img{
-          // height: 100%;
-          width: 133px;
-        }
+  >div{
+    >*{
+      position: relative;
+      background: whitesmoke;
+      z-index: 10;
+      &:not(main){
+        width: calc(100% - 10px);
+        left: 5px;
       }
     }
-    >h2{
-      margin: 0 auto;
-      width: 60%;
-      text-align: center;
-      strong{
-
-      }
-    }
-    >div#blogB{
-      @extend %menu_elements;
-      box-sizing: border-box;
-      float: right;
-      WIDTH: 75px;
-      bottom: -8em;
-      padding: 0 !important;
-      border-radius: 1em !important;
-      z-index: 2;
-      >a{
-        color: white;
-        text-decoration: none;
-        text-align: center;
-        width: 100%;
-        display: block;
-        span{
-          font-size: .5em;
-        }
-      }
-    }
-    >menu{
-      position: absolute;
-      z-index: 1;
-      background:goldenrod;
-      display: flex;
-      justify-content: center;
-      gap:10px;
-      box-shadow: 0 0 10px 1px inset;
-      list-style-type: none;
-      bottom: -7em;
-      margin: 0;
-      padding: 1.15em;
-      width: 90%;
-      left:5%;
-      >li{
-        width: 25%;
-        text-align: center;
-        bottom: -10%;
-        position: relative;
-        height: 33%;
-        font-size: .9em;
+    >header{
+      // background: url(../img/ecommerce-chretien-notre-dame-toute-graces.webp) no-repeat, url(../img/ecommerce-chretien-catholique-puissance-saint-esprit.webp) top right no-repeat;
+      // background-size: contain;
+      height: 200px;
+      margin-bottom: 7em;
+      >h1{
+        position: absolute;
+        width:100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         >a{
-          @extend %menu_elements;
-          &::before{
-            transition: all .5s;
-            z-index: -1;
-            content: '';
-            top: 0em;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            position: absolute;
-            background: url(../img/menu.png) top left no-repeat;
+          &:last-of-type{order:2;align-self:end;}
+          >img{
+            // height: 100%;
+            width: 133px;
           }
-          &:hover,&.active{
-            box-shadow: 0 0 15px 3px beige;
-            // background: #ff5900;
-            // background: linear-gradient(135deg, #ff5900 0%,rgba(204,0,0,0.3) 46%,rgba(204,0,10,0.3) 62%,#ff5900 100%);
-            // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5900', endColorstr='#ff5900',GradientType=1 );
-            &::before{
-              z-index: 0;
-              left: 70%;
-            }
-            >span{top:20px;color:gold;text-shadow: 0 0 3px black, -1px 2px 70px black;}
-          }
-          >span{position:relative;top:0;transition:all .3s;}
         }
       }
-    }
-    >div#log_and_sign_in{
-      position: absolute;
-      border: solid;
-      padding: 0.5em;
-      border-radius: 5px;
-      background: wheat;
-      top: 0;
-      right: 10%;
-      width: 85px;
-      height: 40px;
-      display: flex;
-      justify-content: space-between;
-      >a{
-        transition:font-size .2s;
-        &:hover{font-size:1.2em;}
-      }
-      >form#connexion{
-        display: none;
-        >input{
+      >h2{
+        margin: 0 auto;
+        width: 60%;
+        text-align: center;
+        strong{
 
         }
       }
-    }
-    >div#inscription{
-      height:0;
-      overflow:hidden;
-      display: none;
-      >p{}
-      >ul{
-        >p{
-
+      >div#blogB{
+        @extend %menu_elements;
+        box-sizing: border-box;
+        float: right;
+        WIDTH: 75px;
+        bottom: -8em;
+        padding: 0 !important;
+        border-radius: 1em !important;
+        z-index: 2;
+        >a{
+          color: white;
+          text-decoration: none;
+          text-align: center;
+          width: 100%;
+          display: block;
+          span{
+            font-size: .5em;
+          }
         }
+      }
+      >menu{
+        position: absolute;
+        z-index: 1;
+        background:goldenrod;
+        display: flex;
+        justify-content: center;
+        gap:10px;
+        box-shadow: 0 0 10px 1px inset;
+        list-style-type: none;
+        bottom: -7em;
+        margin: 0;
+        padding: 1.15em;
+        width: 90%;
+        left:5%;
         >li{
-          
-        }
-      }
-      >form{
-        >textarea{
-
-        }
-        >input{
-
-        }
-      }
-      >b{}
-      >p{}
-    }
-    >ul#menu2{
-      width: 200px;
-      height:0;
-      overflow:hidden;
-      >li{
-        &#demandes{
-          
-        }
-        >a{
-
-        }
-      }
-    }
-    >a#panier{
-
-    }
-    >aside{}
-  }
-  >nav{
-
-  }
-  >main{
-    width: 90%;
-    min-height: 475px;
-    max-height: 100%;
-    height: auto;
-    margin:auto;
-    padding-bottom: 5em;
-    >h3{
-      &.carousel{text-align: center;}
-    }
-    >section{
-      &.carousel{
-        padding-bottom: 3em;
-        border-bottom: solid;
-        figure{
-            height: 555px;
-            img{
-              width:555px;
-              object-fit:contain;
+          width: 25%;
+          text-align: center;
+          bottom: -10%;
+          position: relative;
+          height: 33%;
+          font-size: .9em;
+          >a{
+            @extend %menu_elements;
+            &::before{
+              transition: all .5s;
+              z-index: -1;
+              content: '';
+              top: 0em;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              position: absolute;
+              background: url(../img/menu.png) top left no-repeat;
             }
-        }
-        /*
-        div>div>div>h3{
-            display: block;
-            padding: 1em;
-            background: purple;
-            text-align: center;
-            color: white;
-        }
-        */
-        .slick-slider{
-          >button{background:black;}
-          >ul{
-            background: rebeccapurple;
-            padding:1em 0;
-            position: absolute;
-            bottom: -3.5em;
-            :not(.slick-active)button:before{color:white;opacity:1;}
+            &:hover,&.active{
+              box-shadow: 0 0 15px 3px beige;
+              // background: #ff5900;
+              // background: linear-gradient(135deg, #ff5900 0%,rgba(204,0,0,0.3) 46%,rgba(204,0,10,0.3) 62%,#ff5900 100%);
+              // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5900', endColorstr='#ff5900',GradientType=1 );
+              &::before{
+                z-index: 0;
+                left: 70%;
+              }
+              >span{top:20px;color:gold;text-shadow: 0 0 3px black, -1px 2px 70px black;}
+            }
+            >span{position:relative;top:0;transition:all .3s;}
           }
         }
-        .slick-track>div{
-          display: flex;
-          justify-content: center;
+      }
+      >div#log_and_sign_in{
+        position: absolute;
+        border: solid;
+        padding: 0.5em;
+        border-radius: 5px;
+        background: wheat;
+        top: 0;
+        right: 10%;
+        width: 85px;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        >a{
+          transition:font-size .2s;
+          &:hover{font-size:1.2em;}
+        }
+        >form#connexion{
+          display: none;
+          >input{
+
+          }
+        }
+      }
+      >div#inscription{
+        height:0;
+        overflow:hidden;
+        display: none;
+        >p{}
+        >ul{
+          >p{
+
+          }
+          >li{
+            
+          }
+        }
+        >form{
+          >textarea{
+
+          }
+          >input{
+
+          }
+        }
+        >b{}
+        >p{}
+      }
+      >ul#menu2{
+        width: 200px;
+        height:0;
+        overflow:hidden;
+        >li{
+          &#demandes{
+            
+          }
+          >a{
+
+          }
+        }
+      }
+      >a#panier{
+
+      }
+      >aside{}
+    }
+    >nav{
+
+    }
+    >main{
+      width: 90%;
+      min-height: 475px;
+      max-height: 100%;
+      height: auto;
+      margin:auto;
+      padding-bottom: 5em;
+      >h3{
+        &.carousel{text-align: center;}
+      }
+      >section{
+        &.carousel{
+          padding-bottom: 3em;
+          border-bottom: solid;
+          figure{
+              height: 555px;
+              img{
+                width:555px;
+                object-fit:contain;
+              }
+          }
+          /*
+          div>div>div>h3{
+              display: block;
+              padding: 1em;
+              background: purple;
+              text-align: center;
+              color: white;
+          }
+          */
+          .slick-slider{
+            >button{background:black;}
+            >ul{
+              background: rebeccapurple;
+              padding:1em 0;
+              position: absolute;
+              bottom: -3.5em;
+              :not(.slick-active)button:before{color:white;opacity:1;}
+            }
+          }
+          .slick-track>div{
+            display: flex;
+            justify-content: center;
+          }
+        }
+      }
+      >article{
+        text-align: center;
+      }
+      .carte{
+      }
+    }
+    >footer{
+      padding: 3em 1em;
+      >ul{
+        display: flex;
+        justify-content: space-evenly;
+      }
+      >*:not(ul):not(.active){display:none;}
+      >*:not(ul).active{bottom:115px;}
+      >*:not(ul){
+        position:absolute;
+        width:calc(100% - 2em);
+        margin:0;
+        padding:2em;
+        bottom:0;
+        border-radius:5px 5px 0 0;
+        box-shadow: -3px -10px 10px .1px;
+        background:wheat;
+        transition:bottom .3s;
+      }
+      >div{
+
+      }
+      >section{
+        .leaflet-container{
+          position:absolute !important;
+          bottom:0;right:0;
+          width:50%;
+          height:300px;
         }
       }
     }
-    >article{
-      text-align: center;
-    }
-    .carte{
-    }
   }
-  >footer{
-    padding: 3em 1em;
-    >ul{
-      display: flex;
-      justify-content: space-evenly;
-    }
-    >*:not(ul):not(.active){display:none;}
-    >*:not(ul).active{bottom:115px;}
-    >*:not(ul){
-      position:absolute;
-      width:calc(100% - 2em);
-      margin:0;
-      padding:2em;
-      bottom:0;
-      border-radius:5px 5px 0 0;
-      box-shadow: -3px -10px 10px .1px;
-      background:wheat;
-      transition:bottom .3s;
-    }
-    >div{
+}
 
-    }
-    >p{
-      
-    }
-  }
-}}
+
+
+span.close{@extend %btn_close;&:before{content:"X";}}
+
 
 
 

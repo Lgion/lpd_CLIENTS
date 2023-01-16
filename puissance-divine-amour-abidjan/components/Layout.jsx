@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -10,6 +9,8 @@ export default function Layout({ children }) {
       {children}
 
       <Footer />
+
+      <div id="modal"></div>
 
       <style jsx>{`
         header > a {

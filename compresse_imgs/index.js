@@ -4,7 +4,7 @@ const compress_images = require("compress-images");
 compress_images(
     "images/**/*.{jpg,JPG,jpeg,JPEG,gif,png,svg}",
     "build/img/",
-    { compress_force: false, statistic: true, autoupdate: true },
+    { compress_force: true, statistic: true, autoupdate: true },
     false,
     { jpg: { engine: "webp", command: false } },
     { png: { engine: "webp", command: false } },
