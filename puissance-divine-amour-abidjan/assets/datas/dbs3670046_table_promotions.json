@@ -1,0 +1,15 @@
+,{
+    "type": "table",
+    "name": "promotions",
+    "database": "dbs3670046",
+    "data": 
+[
+{
+    "id": "KJhk",
+    "prospecteur": "achi cyrille",
+    "reduc": "1000",
+    "autre": "1"
+}
+]
+
+}

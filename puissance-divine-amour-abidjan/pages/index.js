@@ -18,11 +18,11 @@ export default function Home() {
       </Head>
 
 
-      <Nav />
 
 
       <main className="">
         {/* {ok} */}
+        <Nav />
         <Carousel />
         <article>
 						<p>La <strong>librairie puissance divine</strong>, 2plateaux rue des jardins <strong>cocody</strong> <strong>d'abidjan  côte d'ivoire</strong>, est une <strong>librairie religieuse chrétienne catholique</strong> à but apostolique.</p>

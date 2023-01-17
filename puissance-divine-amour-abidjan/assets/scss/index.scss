@@ -29,7 +29,7 @@ body{
       position: relative;
       background: whitesmoke;
       z-index: 10;
-      &:not(main){
+      &:not(main):not(div){
         width: calc(100% - 10px);
         left: 5px;
       }
@@ -205,6 +205,37 @@ body{
       height: auto;
       margin:auto;
       padding-bottom: 5em;
+      >h1.filAriane{
+        z-index: 5;
+        font-size: .8em;
+        position: absolute;
+        left: 6%;
+        top: 0px;
+        &:hover {
+          background: whitesmoke;
+          padding: 5px;
+        }
+        >a{
+          >img{width:1px;}
+        }
+      }
+      >h3.titrePage{
+        text-align: center;
+        font-size: 3em;
+        text-shadow: 0 0 3px goldenrod, 0 0 3px goldenrod, 0 0 3px white, 0 0 3px white;
+        background: rgba(250,250,250,.5);
+      }
+      >h4.tagzonePage{
+        position: relative;
+        font-size: .8em;
+        border: 1px solid red;
+        box-shadow: 0 0 3px 0px inset;
+        text-align: center;
+        &:hover {
+            padding: 5px 0;
+            background: rgba(255,10,10,.5);
+        }
+      }
       >h3{
         &.carousel{text-align: center;}
       }
@@ -247,8 +278,111 @@ body{
       >article{
         text-align: center;
       }
-      .carte{
+      &.ecommerce{
+        >section{
+          display: flex;
+          flex-flow: wrap;
+          justify-content: space-between;
+          >*{text-align: center;}
+          >div.howtoshow{
+            >button{
+              &.active{
+                color: red;
+              }
+            }
+          }
+          >button{
+            padding: 0.5em 2em;
+            &.active{
+              cursor:auto;
+              color: red;
+              background: orange;
+              border-style: none;
+            }
+          }
+          >select{
+            width: 100%;
+            padding: 0.5em;
+            font-size: 1.5em;
+            >option{}
+          }
+        }
+        >article{
+          display: flex;
+          flex-flow: wrap;
+          justify-content: space-evenly;
+          gap: 25px;
+          >figure{
+            display:none;
+            width: 120px;
+            position: relative;
+            >a{
+              position: absolute;
+            }
+            >button{
+              &.showArticleModal{}
+              &.addToCart{position: absolute;}
+            }
+            >figcaption{
+            }
+            >.description,>figcaption{@extend %txt_rogner;}
+            >.ok{display: none;}
+          }
+          &.publication>figure.publication,&.objet>figure.objet{
+            display:flex;
+            flex-flow: column;
+            justify-content: space-between;
+          }
+          &.lines{
+            >figure{
+              justify-content: space-between;
+              align-items: center;
+              height: 75px;
+              width: 100%;
+              border: solid;
+              >img{
+                height: 100%;
+                width: 55px;
+              }
+              >figcaption{
+
+              }
+              >p{}
+              >span{}
+              >a{
+                top:0;
+                left:75px;
+              }
+              >button{
+                align-self: normal;
+                &.addToCart{bottom:0;left:75px;}
+              }
+            }
+          }
+          &.cards{
+            >figure{
+              // width: calc(33.33% - 16.66px);
+              flex-flow:column;
+              >img{
+
+              }
+              >figcaption{
+
+              }
+              >p{}
+              >span{}
+              >a{
+                top:0;
+                left:0;
+              }
+              >button{
+                &.addToCart{top:0;right:0;}
+              }
+            }
+          }
+        }
       }
+
     }
     >footer{
       padding: 3em 1em;
@@ -281,12 +415,22 @@ body{
         }
       }
     }
+    >#modal{
+      @extend %modal;
+      >.modal___main{
+        >img{
+          height: 100px;
+          width:unset;
+        }
+      }
+    }
   }
 }
 
 
 
 span.close{@extend %btn_close;&:before{content:"X";}}
+.prix:after{content:"fcfa"}
 
 
 

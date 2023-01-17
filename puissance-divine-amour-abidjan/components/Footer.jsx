@@ -20,11 +20,11 @@ export default function Footer() {
   }
   useEffect(() => { 
     window.addEventListener('load', e => { 
-      alert('okkk')
-      Array.from(console.log(document.querySelectorAll('span.close'))).forEach(elt => {
+      // alert(Array)
+      document.querySelectorAll('span.close').forEach(elt => {
         elt.addEventListener('click', e => { 
-          alert('ok')
-          e.parentElement.classList.remove('active')
+          // alert('ok')
+          e.target.parentElement.classList.remove('active')
         })
       })
     })

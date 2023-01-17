@@ -1,0 +1,49 @@
+,{
+    "type": "table",
+    "name": "inscripts",
+    "database": "dbs3670046",
+    "data": 
+[
+{
+    "id_inscript": "1",
+    "email": "achicyr@hotmail.fr",
+    "news": "meditation"
+},
+{
+    "id_inscript": "2",
+    "email": "achicyr@hotmail.fr",
+    "news": "meditation"
+},
+{
+    "id_inscript": "3",
+    "email": "achicyr@hotmail.fr",
+    "news": ""
+},
+{
+    "id_inscript": "4",
+    "email": "achicyr@hotmail.fr",
+    "news": ""
+},
+{
+    "id_inscript": "5",
+    "email": "achicyr@hotmail.fr",
+    "news": ""
+},
+{
+    "id_inscript": "6",
+    "email": "puissancedamour@gmail.com",
+    "news": ""
+},
+{
+    "id_inscript": "7",
+    "email": "qdsqds@ddsq.dsq",
+    "news": ""
+},
+{
+    "id_inscript": "8",
+    "email": "puissancedamour@gmail.com",
+    "news": ""
+}
+]
+
+}

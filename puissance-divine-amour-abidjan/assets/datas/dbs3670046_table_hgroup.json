@@ -1,0 +1,49 @@
+,{
+    "type": "table",
+    "name": "hgroup",
+    "database": "dbs3670046",
+    "data": 
+[
+{
+    "id": "0",
+    "getHg": "objectifs",
+    "h": "33",
+    "text": "Les objectifs apostolique de la Puissance Divine",
+    "img": "objectif-apostolique;les objectifs apostoliques de la puissance divine;les objectifs apostoliques de la puissance divine",
+    "title": "les objectifs apostoliques de la puissance divine"
+},
+{
+    "id": "1",
+    "getHg": "vente",
+    "h": "33",
+    "text": "Vente en ligne d'objets et publications chrétiens catholiques",
+    "img": "vente-en-ligne-chretien-catholique-ecommerce;vente en ligne d objets de piété et prières;ecommerce librairie puissance divine vente en ligne chrétien catholique",
+    "title": "ecommerce librairie puissance divine vente en ligne religieux chrétien"
+},
+{
+    "id": "2",
+    "getHg": "enseignements",
+    "h": "33",
+    "text": "Enseignements spirituels de Jésus-Christ dans les recueils de Maria Valtorta",
+    "img": "enseignement-spirituel-maria-valtorta;enseigenemnts spirituels de la puissance divine;librairie puissance divine enseignement spirituel : jésus enseigne ",
+    "title": "librairie puissance divine enseignement spirituel : jésus enseigne "
+},
+{
+    "id": "3",
+    "getHg": "priere",
+    "h": "33",
+    "text": "Retraites spirituelles au sanctuaire de Bolobi Abidjan",
+    "img": "retraite-spirituelle-esprit-saint;retraites spirituelles de la puissance divine;librairie puissance divine retraite spirituelle : saint-esprit et grégorienne",
+    "title": "retraite spirituelle grégorienne, esprit-saint, week-ends du Rosaire"
+},
+{
+    "id": "4",
+    "getHg": "lieux-activites",
+    "h": "33",
+    "text": "Puissance Divine Abidjan  2plateaux cocody",
+    "img": "retraite-spirituelle-esprit-saint;retraites spirituelles de la puissance divine;librairie puissance divine retraite spirituelle : saint-esprit et grégorienne",
+    "title": "retraite spirituelle grégorienne, esprit-saint, week-ends du Rosaire"
+}
+]
+
+}

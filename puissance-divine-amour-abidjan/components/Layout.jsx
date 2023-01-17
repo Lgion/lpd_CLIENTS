@@ -10,7 +10,20 @@ export default function Layout({ children }) {
 
       <Footer />
 
-      <div id="modal"></div>
+      <div id="modal">
+        <span className="close"></span>
+        <div className="modal___header">
+          
+        </div>
+        <div className="modal___main">
+          
+        </div>
+        <div className="modal___footer">
+          
+        </div>
+
+        
+      </div>
 
       <style jsx>{`
         header > a {
