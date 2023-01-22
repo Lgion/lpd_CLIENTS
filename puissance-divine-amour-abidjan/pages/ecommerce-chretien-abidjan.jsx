@@ -7,6 +7,7 @@ import Nav from '../components/Nav'
 import ModalProduct from '../components/_/ModalProduct'
 import Ecommerce_articles_OPTIONS from "./../assets/datas/articles_options.js"
 import * as Ecommerce_articles from "./../assets/datas/articles.js"
+import * as CartLS from "./../assets/favorisManager.js"
 
 export default function Ecommerce() {
     const {ok} = useContext(AuthContext)
@@ -16,7 +17,7 @@ export default function Ecommerce() {
     , [selectOptions, setSelectOptions] = useState(Object.keys(Ecommerce_articles.articles_title_table)
         .map((item,i) => {
             if(item.charAt(0) == "_")
-                return <option value={item.replace(' ','_')} key={"option_"+i}>
+                return <option value={item.replace(' ','_').replace('.','_').replace('/','_')} key={"option_"+i}>
                     {Ecommerce_articles.articles_title_table[item]}
                 </option>
         })
@@ -44,7 +45,7 @@ export default function Ecommerce() {
                                 document.querySelector('main>section>button.active').innerHTML.charAt(0) == "P" && item.charAt(0) == "_" 
                                 || document.querySelector('main>section>button.active').innerHTML.charAt(0) == "O" && item.charAt(0) != "_" 
                             )
-                                return <option value={item.replace(' ','_')} key={"option_"+i}>
+                                return <option value={item.replace(' ','_').replace('.','_').replace('/','_')} key={"option_"+i}>
                                     {Ecommerce_articles.articles_title_table[item]}
                                 </option>
                             else return ""
@@ -54,7 +55,16 @@ export default function Ecommerce() {
             })
         })
         document.querySelector('#ecommerce_select').addEventListener('change', (e) => { 
-            document.querySelectorAll('figure.'+e.target.value)
+
+            if(e.target.value == "all")articles.classList.remove('filter')
+            else articles.classList.add('filter')
+
+            document.querySelectorAll('article>figure').forEach(el => { 
+                el.classList.remove('on')
+            })
+            document.querySelectorAll('figure.'+(articles.classList.contains("publication") ? e.target.value.substr(1) : e.target.value)).forEach(el => { 
+                el.classList.add('on')
+            })
         })
         document.querySelectorAll('.howtoshow button').forEach(el=>{
             el.addEventListener('click', (e) => { 
@@ -80,6 +90,25 @@ export default function Ecommerce() {
                 document.querySelector("#modal .modal___main").innerHTML = e.target.closest('figure').querySelector('.ok').innerHTML
             })
         })
+        document.querySelectorAll('.addToCart').forEach((elt,i) => {
+            elt.addEventListener('click', (e) => {
+                console.log(CartLS)
+                const el = e.target
+                , id = el.dataset.id
+                , coloris = el.dataset.coloris
+                , couverture = el.dataset.couverture
+                , option_name = el.dataset.option_name
+                , cart_id = JSON.stringify({id,coloris,couverture,option_name})
+                , qty = el.closest('figure').querySelector('.qty').value
+                // alert(qty)
+                // alert(id+coloris+couverture+option_name)
+                if(qty>0 && qty<100)
+                    CartLS.addArticle(cart_id,qty)
+                else alert("pb qty")
+
+            })
+        })
+        
         
         console.log(Ecommerce_articles.articles_title_table)
     }, [])
@@ -113,9 +142,9 @@ export default function Ecommerce() {
                     Ecommerce_articles.articles.data.map((item,i) => {
                         let option = Ecommerce_articles_OPTIONS.data.find(el=>el.img_article==item.img&&(item.autre==(el.opt_nom||"") || item.taille==el.taille_||""))
                         item.fr_ = strip_tags(item.fr)
-                        if(i==0)console.log(option)
+                        if(item.id_produits==15)console.log(option)
 
-                        return <figure className={item.user_name +" "+item.nom.replace(' ','_')} key={"figure_"+i}>
+                        return <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')} key={"figure_"+i}>
                                 <ModalProduct data={item} img={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"} />
                                 <img src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"} alt="dsfihdoi fdio hfds" />
                                 <figcaption title={item.fr}>{item.fr_}</figcaption>
@@ -123,6 +152,7 @@ export default function Ecommerce() {
                                 {/* <p className="description" dangerouslySetInnerHTML={{__html: "<div>"+item.fr1+"</div>"}}></p> */}
                                 <p className="dimensions">{item.dimensions}</p>
                                 <span className="prix">{item.prix} </span>
+                                {/* <span>{item.id_produits && JSON.stringify(option)}</span> */}
                                 { option &&<>
                                         <span className="coloris">{option.coloris}</span>
                                         <span className="couverture">{option.couverture}</span>
@@ -132,8 +162,14 @@ export default function Ecommerce() {
                                 <Link href={"vente-en-ligne/"+id}>
                                     <a target="_blank">open</a>
                                 </Link>
+                                <input defaultValue="0" className="qty" type="number" min="1" max="99"/>
                                 <button className="showArticleModal">afficher article</button>
-                                <button className="addToCart">add to cart</button>
+                                <button className="addToCart" 
+                                    data-id={item.id_produits}
+                                    data-coloris={option?.coloris || ""}
+                                    data-couverture={option?.couverture || ""}
+                                    data-option_name={option?.opt_nom || ""}
+                                >add to cart</button>
                         </figure>
                     })
                 }

@@ -19,15 +19,6 @@ export default function Footer() {
 
   }
   useEffect(() => { 
-    window.addEventListener('load', e => { 
-      // alert(Array)
-      document.querySelectorAll('span.close').forEach(elt => {
-        elt.addEventListener('click', e => { 
-          // alert('ok')
-          e.target.parentElement.classList.remove('active')
-        })
-      })
-    })
     window.addEventListener('hashchange', function (e) {
       // alert('location changed!');
       // console.log(e)
@@ -37,7 +28,7 @@ export default function Footer() {
       this.document.getElementById('footer').childNodes.forEach(el=>{el.classList.remove('active')})
       this.document.getElementById(hash).classList.add("active")
     });
-  })
+  }, [])
   return (
     <footer id="footer">
       <ul>

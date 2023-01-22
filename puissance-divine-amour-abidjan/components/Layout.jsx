@@ -1,7 +1,20 @@
+import {useEffect} from 'react'
 import Header from "./Header";
 import Footer from "./Footer";
 
 export default function Layout({ children }) {
+
+  useEffect(() => { 
+    // alert(Array)
+    console.log(document.querySelectorAll('span.close'))
+    document.querySelectorAll('span.close').forEach(elt => {
+      elt.addEventListener('click', e => { 
+        // alert('ok')
+        e.target.parentElement.classList.remove('active')
+      })
+    })
+  }, [])
+  
   return (
     <>
       <Header />
