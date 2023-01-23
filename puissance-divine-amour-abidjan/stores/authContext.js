@@ -11,11 +11,14 @@ const AuthContext = createContext({
 export default AuthContext
 */
 const AuthContext = createContext({
-    ok: null,
+    // ok: null,
+    // cartBox: null,
+    // setCartBox: null,
 })
 export default AuthContext
 
 export const AuthContextProvider = ({children}) => {
+    let [cartBox, setCartBox] = useState(<ul className="miniCart"></ul>)
     /*
     const [user, setUser] = useState(null)
     const [authReady, setAuthReady] = useState(false)
@@ -50,7 +53,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okok"}
+    const context = {ok:"okokok",cartBox, setCartBox}
     
     return (
         <AuthContext.Provider value={context}>

@@ -9,8 +9,20 @@ import Ecommerce_articles_OPTIONS from "./../assets/datas/articles_options.js"
 import * as Ecommerce_articles from "./../assets/datas/articles.js"
 import * as CartLS from "./../assets/favorisManager.js"
 
+let miniCart = () => <ul className="miniCart">{
+    Object.keys(CartLS.getAllFavoris()).map(item => {
+        const k = JSON.parse(item)
+        // console.log(item)
+        // console.log(k)
+        const article = Ecommerce_articles.articles.data.find(el=>el.id_produits==k.id)
+        // console.log(article)
+        return <li>
+            {article.fr}
+        </li>
+    })
+}</ul>
 export default function Ecommerce() {
-    const {ok} = useContext(AuthContext)
+    const {setCartBox} = useContext(AuthContext)
     , id=3
     
     let a
@@ -92,7 +104,7 @@ export default function Ecommerce() {
         })
         document.querySelectorAll('.addToCart').forEach((elt,i) => {
             elt.addEventListener('click', (e) => {
-                console.log(CartLS)
+                // console.log(CartLS)
                 const el = e.target
                 , id = el.dataset.id
                 , coloris = el.dataset.coloris
@@ -102,9 +114,11 @@ export default function Ecommerce() {
                 , qty = el.closest('figure').querySelector('.qty').value
                 // alert(qty)
                 // alert(id+coloris+couverture+option_name)
-                if(qty>0 && qty<100)
+                // console.log(Ecommerce_articles.articles.data)
+                if(qty>0 && qty<100){
                     CartLS.addArticle(cart_id,qty)
-                else alert("pb qty")
+                    setCartBox(miniCart())
+                }else alert("pb qty")
 
             })
         })

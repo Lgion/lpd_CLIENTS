@@ -1,7 +1,12 @@
-// import React from 'react'
+import {useState,useContext} from 'react'
 import Link from "next/link";
+import AuthContext from "../../stores/authContext.js"
 
 export default function MenuMain() {
+
+    const {cartBox,ok} = useContext(AuthContext)
+    
+    
     return <>
         <div id="blogB">
             <a
@@ -22,6 +27,15 @@ export default function MenuMain() {
                 {id:"lieux-activites",href:"puissance-divine-fraternite-librairie-sanctuaire-rosaire",title:"Puissance Divine Abidjan : nos lieux et activités religieux chrétien catholique",content:"Lieux et Activités"},
                 {id:"priere",href:"retraites-de-priere-spirituelles-abidjan-sanctuaire-rosaire",title:"Retraites spirituelles, assistance spirituelle, week-ends rosaire sanctuaire dame du rosaire bolobi",content:"Retraites-et-Prières"},
                 ].map((item,i) => <li className={"menu "+item.id} key={"m1st___"+i}>
+
+                        {item.id=="ecommerce" && <>
+                            <Link
+                                href="panier-ecommerce-pda"
+                                title="Accedez au panier ecommerce librairie puissance divine"
+                                ><a id="panier">panier</a>
+                            </Link>
+                            {cartBox}
+                        </>}
                     <Link
                     href={item.href}
                     title={item.title}

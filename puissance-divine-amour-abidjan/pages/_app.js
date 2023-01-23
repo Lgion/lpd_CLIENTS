@@ -5,11 +5,11 @@ import "./../assets/scss/index.scss"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <AuthContextProvider>
-        <Component {...pageProps} />
-      </AuthContextProvider>
-    </Layout>
+    <AuthContextProvider>
+      <Layout>
+          <Component {...pageProps} />
+      </Layout>
+    </AuthContextProvider>
   )
 }
 

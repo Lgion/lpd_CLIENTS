@@ -39,6 +39,7 @@ body{
       // background-size: contain;
       height: 200px;
       margin-bottom: 7em;
+      z-index: 100;
       >h1{
         position: absolute;
         width:100%;
@@ -102,7 +103,34 @@ body{
           position: relative;
           height: 33%;
           font-size: .9em;
-          >a{
+          &.menu.ecommerce{
+            >a#panier{
+              width: 100px;
+              height: 100px;
+              /* z-index: 1000; */
+              position: absolute;
+              left: -50px;
+              bottom: -75px;
+              background: url(/_next/static/media/cart.4d01fb3e.png) center no-repeat, rgba(34,105,176,.4);
+              border-radius: 0 10px 10px;
+              background-size: contain;
+              &:hover+.miniCart{
+                display: block;
+              }
+            }
+            >.miniCart{
+              display: none;
+              position: absolute;
+              left: 50px;
+              top: 100%;
+              padding: 1em;
+              background: red;
+              >li{
+                border:solid;
+              }
+            }
+          }
+          >a:not([id="panier"]){
             @extend %menu_elements;
             &::before{
               transition: all .5s;
@@ -189,9 +217,6 @@ body{
 
           }
         }
-      }
-      >a#panier{
-
       }
       >aside{}
     }

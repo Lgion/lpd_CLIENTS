@@ -17,13 +17,6 @@ export default function Header() {
       <LogSignIn />
       <Subscribe />
       <MenuSecondary />
-      <a
-        href="index.php?panier=panier"
-        id="paniers"
-        title="Accedez au panier ecommerce librairie puissance divine"
-      >
-        Panier
-      </a>
       <aside></aside>
   </header>
 }
