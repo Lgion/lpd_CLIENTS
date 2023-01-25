@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-pay/button-react": "^3.0.5",
+    "@paypal/react-paypal-js": "^7.8.2",
     "leaflet": "^1.9.3",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
     "react-leaflet": "^4.2.0",
     "react-slick": "^0.29.0",
     "sass": "^1.57.1",
