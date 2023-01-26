@@ -1,5 +1,6 @@
 
 %btn_close{
+    z-index: 1000000000000000000000;
     position: absolute;
     top: 0;
     right: 0;
@@ -23,15 +24,30 @@
 }
 
 %modal{
+    z-index: 1000000000000000000000;
     position: fixed;
-    top: 1em;right: 1em;bottom: 1em;left: 1em;
+    top: 0em;right: 0em;bottom: 0em;left: 0em;
+    padding:1.5em;
     background: rgba(10,10,10,.5);
     &:not(.active){display: none;}
-    >span.close{@extend %btn_close;}
-    >.modal___header{}
-    >.modal___footer{}
+    &.active{
+        display: flex;
+        flex-direction: column;
+    }
+    >span.close{
+        @extend %btn_close;
+        top: 1.5em;
+        right: 1.5em;
+    }
+    >div{background:whitesmoke;}
+    >.modal___header{
+        border-radius: 10px 10px 0 0;overflow: hidden;height:10%;
+    }
+    >.modal___footer{
+        border-radius: 0 0 10px 10px;overflow: hidden;height:10%;
+    }
     >.modal___main{
-
+        height: 80%;
     }
         &.active{
     }

@@ -4,12 +4,20 @@ import Footer from "./Footer";
 
 export default function Layout({ children }) {
 
+  const cleanModal = () => {
+      document.querySelector('#modal .modal___header').innerHTML = ""
+      document.querySelector('#modal .modal___main').innerHTML = ""
+      document.querySelector('#modal .modal___footer').innerHTML = ""
+  }
+
   useEffect(() => { 
     // alert(Array)
     console.log(document.querySelectorAll('span.close'))
     document.querySelectorAll('span.close').forEach(elt => {
       elt.addEventListener('click', e => { 
-        // alert('ok')
+        // alert()
+        const doParentIsModal = e.target.parentElement == document.querySelector('#modal')
+        if(doParentIsModal)cleanModal()
         e.target.parentElement.classList.remove('active')
       })
     })
