@@ -6,6 +6,7 @@ export {
     , handleProductsDisplay
     , handleSelect
     , handleSelectButtons
+    , handleVariantButtonHover
 }
 
 
@@ -36,6 +37,8 @@ let handleModalShowProduct = (e) => {
     // console.log(Ecommerce_articles.articles.data)
     if(qty>0 && qty<100){
         setCartBox(miniCart(cart_id,qty))
+        document.getElementById('panier').classList.add('active')
+        setTimeout(()=>{document.getElementById('panier').classList.remove('active')}, 3000)
     }else alert("pb qty")
 
 }
@@ -91,6 +94,9 @@ let handleModalShowProduct = (e) => {
             })
         )
     }
+}
+, handleVariantButtonHover = (item) => { 
+    alert("action à faire pour les options d'un produit")
 }
 
 

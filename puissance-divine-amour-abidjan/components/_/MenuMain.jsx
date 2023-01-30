@@ -32,7 +32,7 @@ export default function MenuMain() {
                             <Link
                                 href="panier-ecommerce-pda"
                                 title="Accedez au panier ecommerce librairie puissance divine"
-                                ><a id="panier">panier</a>
+                                ><a id="panier" title="Accéder à la page panier, ou visualiser son contenu, ou encore modifier le rapidement ici à la volé"></a>
                             </Link>
                             {cartBox}
                         </>}

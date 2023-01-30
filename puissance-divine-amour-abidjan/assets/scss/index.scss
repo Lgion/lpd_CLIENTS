@@ -5,11 +5,11 @@
 /***********************************/
 /***********************************/
 %addToCart{
-  width: 100px;
-  height:40px;
-  background: url(../img/addToCart.png) center center no-repeat, black;
+  // width: 100px;
+  // height:40px;
+  background: url(../img/addToCart.png) center center no-repeat;
   background-size: contain;
-  border-radius:10px;
+  // border-radius:10px;
 }
 
 
@@ -124,6 +124,31 @@ body{
               background: url(../img/cart.png) center no-repeat, rgba(34,105,176,.4);
               border-radius: 0 10px 10px;
               background-size: contain;
+              &.active{
+                position: fixed;
+                top:2em;
+                left:2em;
+                background: url(../img/cart.png) center no-repeat, orange;
+                background-size: contain;
+                padding:3em;
+                &:before,&:after{    
+                  background: blue;
+                  position: absolute;
+                  left: -1em;
+                  right: -1em;
+                  padding: 0.5em;
+                  color: white;
+                }
+                &:before{
+                  content:"Un produit  vient d'être ajouté au panier!";
+                  top: 100%;
+                }
+                &:after{
+                  content:"Souhaitez-vous aller au panier ?";
+                  top: calc(100% + 65px);
+                  background: darkcyan;
+                }
+              }
               &:hover+.miniCart{
                 display: block;
               }
@@ -354,19 +379,73 @@ body{
             display:none;
             width: 120px;
             position: relative;
-            >a{
-              position: absolute;
+            &:hover{
+              >section{
+              }
             }
-            >button{
-              &.showArticleModal{}
-              &.addToCart{
-                @extend %addToCart;
-                position: absolute;
+            >section{
+              position: absolute;
+              display: flex;
+              overflow: hidden;
+              background: white;
+              >input.qty{
+                text-align: center;
+                font-size: 1.5em;
+              }
+              >button{
+                &.showArticleModal{
+                  padding: 0;
+                }
+                &.addToCart{
+                  @extend %addToCart;
+                  // position: absolute;
+                }
               }
             }
             >figcaption{
             }
-            >.description,>figcaption{@extend %txt_rogner;}
+            >a{
+              position: absolute;
+              &:after{content:"^"}
+              width: 20px;
+              height: 20px;
+              border-radius: 2px;
+              background: darkblue;
+              color: white;
+              display: flex;
+              justify-content: center;
+              line-height: 25px;
+            }
+            >button.options{
+              position: absolute;
+              top:0;
+              >div{
+                position: relative;
+                // &:before,:after{}
+                &:after{content:"Fcfa";left:100%;}
+                &:before{
+                  position: absolute;
+                  top: 0;
+                  white-space: nowrap;
+                  background:red;
+                  color:white;
+                  left: calc(100% + 20px);
+                }
+                &.coloris{&:before{content:"Coloris";}}
+                &.couverture{&:before{content:"Ajouter Couverture";}}
+                &.option_name{&:before{content:"Ajouter option_name";}}
+              }
+              >div:hover{background:red;}
+            }
+            >span.prix{
+              position: absolute;
+              padding: 5px .5em 0;
+              background: orange;
+              color:white;
+            }
+            >.description,>figcaption{
+              overflow: hidden;
+            }
             >.toPutInModal{display: none;}
           }
           &.publication>figure.publication,&.objet>figure.objet{
@@ -382,6 +461,12 @@ body{
               height: 75px;
               width: 100%;
               border: solid;
+              &:hover{
+                >section{
+                  width: 100px;
+                }
+                >span.prix{right: 100px;}
+              }
               >img{
                 height: 100%;
                 width: 55px;
@@ -390,15 +475,42 @@ body{
 
               }
               >p{}
-              >span{}
+              >span.prix{
+                right: 0;
+                bottom: 0;
+                border-radius:5px 0 0 0;
+                transition: right .3s;
+              }
               >a{
                 top:0;
-                left:75px;
+                left:0;
               }
-              >button{
-                align-self: normal;
-                &.addToCart{
-                  bottom:0;left:75px;
+              >button.options{
+                left:55px;
+                height: 100%;
+                &:not(:has(div)){display:none;}
+                >span{display: none;padding: 0;}
+              }
+              >section{
+                right: 0;
+                height: 100%;
+                width: 0;
+                flex-direction: column;
+                transition: width 0.3s;
+                >*{height:50%;}
+                >input.qty{
+                  width: 50%;
+                }
+                >button{
+                  &.showArticleModal{
+                    position: absolute;
+                    right: 0;
+                    height: 100%;
+                    padding: 0 13px;
+                  }
+                  &.addToCart{
+                    width: 50%;
+                  }
                 }
               }
             }
@@ -407,20 +519,47 @@ body{
             >figure{
               // width: calc(33.33% - 16.66px);
               flex-flow:column;
+              padding-bottom:1.5em;
+              &:hover{
+                >span.prix{bottom: 35px;}
+              }
               >img{
 
               }
               >figcaption{
-
+                height:2em;
+                white-space: pre-wrap;
               }
               >p{}
-              >span{}
+              >span.prix{
+                bottom: 0px;
+                width: 100%;
+                border-radius:5px 5px 0 0;
+                transition: bottom .3s;
+              }
               >a{
                 top:0;
                 left:0;
               }
-              >button{
-                &.addToCart{top:0;right:0;}
+              >button.options{
+                right:0;
+                &:not(:hover){>div{display: none;}}
+              }
+              >section{
+                bottom: 0;
+                height: 0;
+                transition:height .3s;
+                >*{width:50%;}
+                >input.qty{
+                }
+                >button{
+                  &.showArticleModal{
+                    width: unset;
+                  }
+                  &.addToCart{
+                    top:0;right:0;
+                  }
+                }
               }
             }
           }

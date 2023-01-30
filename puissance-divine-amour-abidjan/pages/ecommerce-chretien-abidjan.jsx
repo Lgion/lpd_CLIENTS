@@ -7,7 +7,7 @@ import Nav from '../components/Nav'
 import ModalProduct from '../components/_/ModalProduct'
 import * as Ecommerce_articles from "./../assets/datas/articles.js"
 import Ecommerce_articles_OPTIONS from "./../assets/datas/articles_options.js"
-import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleSelectButtons} from "./../utils/handleEvents.js"
+import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleSelectButtons,handleVariantButtonHover} from "./../utils/handleEvents.js"
 
 export default function Ecommerce() {
     const {setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
@@ -58,6 +58,15 @@ export default function Ecommerce() {
                         return <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')} key={"figure_"+i}>
                                 <ModalProduct {...{item, setCartBox, option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} />
                                 <img src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"} alt="dsfihdoi fdio hfds" />
+                                <button className="options" onMouseOver={handleVariantButtonHover}>
+                                    <span>Ɏ</span>
+                                    { option &&<>
+                                            {option.coloris && <div className="coloris">{option.coloris}</div>}
+                                            {option.couverture && <div className="couverture">{option.couverture}</div>}
+                                            {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
+                                        </>
+                                    }
+                                </button>
                                 <figcaption title={item.fr}>{item.fr__}</figcaption>
                                 {/* <figcaption dangerouslySetInnerHTML={{__html: item.fr}} title={item.fr_}></figcaption> */}
                                 {/* <p className="description" dangerouslySetInnerHTML={{__html: "<div>"+item.fr1+"</div>"}}></p> */}
@@ -67,22 +76,18 @@ export default function Ecommerce() {
                                 <Link href={"vente-en-ligne/"+item.id_produits}>
                                     <a target="_blank" title={"Afficher le produit"}></a>
                                 </Link>
-                                <input defaultValue="0" className="qty" type="number" min="1" max="99"/>
-                                { option &&<>
-                                        <span className="coloris">{option.coloris}</span>
-                                        <span className="couverture">{option.couverture}</span>
-                                        <span className="option_name">{option.opt_nom}</span>
-                                    </>
-                                }
-                                <button className="showArticleModal" onClick={handleModalShowProduct}>afficher article</button>
-                                <button className="addToCart" 
-                                    onClick={(e)=>{handleAddToCart(e,setCartBox, miniCart)}}
-                                    data-id={item.id_produits}
-                                    data-coloris={option?.coloris || ""}
-                                    data-couverture={option?.couverture || ""}
-                                    data-option_name={option?.opt_nom || ""}
-                                    title={"Ajouter au panier"}
-                                ></button>
+                                <section>
+                                    <input defaultValue="0" className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
+                                    <button className="addToCart"
+                                        onClick={(e)=>{handleAddToCart(e,setCartBox, miniCart)}}
+                                        data-id={item.id_produits}
+                                        data-coloris={option?.coloris || ""}
+                                        data-couverture={option?.couverture || ""}
+                                        data-option_name={option?.opt_nom || ""}
+                                        title={"Ajouter au panier"}
+                                    ></button>
+                                    <button className="showArticleModal" onClick={handleModalShowProduct} title={"Afficher article"}>🔎</button>
+                                </section>
                         </figure>
                     })
                 }
