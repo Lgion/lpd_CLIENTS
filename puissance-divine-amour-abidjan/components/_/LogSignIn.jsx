@@ -1,7 +1,12 @@
-import React from 'react'
+import {useContext} from 'react'
+import AuthContext from "../../stores/authContext.js"
 
 export default function LogSignIn() {
-    return <div id="log_and_sign_in">
+
+    const {userConnectedDatas} = useContext(AuthContext)
+    , isCartPage = document.querySelector('#__next>main.cart')
+    
+    return <div id="log_and_sign_in" className={"" + (isCartPage && !userConnectedDatas && "active")}>
         <a href="#" onClick={()=>{getClass("inscription","see")}} title="Inscription">
             ➕
         </a> || 

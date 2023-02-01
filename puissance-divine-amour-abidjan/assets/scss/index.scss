@@ -76,7 +76,7 @@ body{
         @extend %menu_elements;
         box-sizing: border-box;
         float: right;
-        WIDTH: 75px;
+        width: 75px;
         bottom: -8em;
         padding: 0 !important;
         border-radius: 1em !important;
@@ -149,7 +149,7 @@ body{
                   background: darkcyan;
                 }
               }
-              &:hover+.miniCart{
+              &:hover~.miniCart{
                 display: block;
               }
             }
@@ -157,11 +157,18 @@ body{
               display: none;
               position: absolute;
               left: 50px;
+              width:300px;
               top: 100%;
               padding: 1em;
               background: red;
-              >li{
-                border:solid;
+              >div{
+                background:darkcyan;
+                padding:.5em;
+              }
+              >ul{
+                >li{
+                  border:solid;
+                }
               }
             }
           }
@@ -195,9 +202,10 @@ body{
       }
       >div#log_and_sign_in{
         position: absolute;
-        border: solid;
+        border: 1px solid;
+        border-top:0;
         padding: 0.5em;
-        border-radius: 5px;
+        border-radius: 0 0 5px 5px;
         background: wheat;
         top: 0;
         right: 10%;
@@ -205,6 +213,12 @@ body{
         height: 40px;
         display: flex;
         justify-content: space-between;
+        &.active{
+          animation: cta_1 1s linear infinite alternate;
+          position: fixed;
+          z-index: 100;
+          /* animation-name:cta_1;animation-duration:infinites;animation-timing-function:linear;animation-delay:0ss;animation-iteration-count:1;animation-direction:normal;animation-fill-mode:none;animation-play-state:9; */
+        }
         >a{
           transition:font-size .2s;
           &:hover{font-size:1.2em;}
@@ -521,6 +535,9 @@ body{
               flex-flow:column;
               padding-bottom:1.5em;
               &:hover{
+                >section{
+                  height: 35px;
+                }
                 >span.prix{bottom: 35px;}
               }
               >img{
@@ -565,7 +582,49 @@ body{
           }
         }
       }
+      &.cart{
+        >section{
+          display: flex;
+          justify-content: space-around;
+          border-bottom:solid;
+          >div{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1em;
+            &.paypalHold{
+              &.off{
+                filter: grayscale(1);
+                @extend %after_cover;
+                cursor:not-allowed;
+              }
+            }
+            >p{
 
+            }
+            >span{
+              @extend %devise_cfa;
+              font-size: 3em;
+            }
+          }
+        }
+        >ul{
+          >li{
+            display: flex;
+            align-items: center;
+            border-bottom: solid;
+            margin-bottom: 1em;
+            padding: 1em;
+            >*{margin:0 10px;}
+            >img{
+              width:100px;
+            }
+            >span.prix{}
+            >p{}
+            >input.qty{font-size: 2em;width:2em;height: 100%;}
+          }
+        }
+      }
     }
     >footer{
       padding: 3em 1em;

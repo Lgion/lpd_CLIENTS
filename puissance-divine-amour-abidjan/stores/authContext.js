@@ -20,24 +20,50 @@ const AuthContext = createContext({
 export default AuthContext
 
 export const AuthContextProvider = ({children}) => {
-    let miniCart = (cart_id,qty) => {
+    // let userConnectedDatas = {email: "email@exemple.com"}
+    let userConnectedDatas = false
+    , miniCart = (cart_id,qty) => {
         if(cart_id && qty)
             CartLS.addArticle(cart_id,qty)
-        if(!cart_id)return <ul className="miniCart"></ul>
-        else return <ul className="miniCart">{ 
-            Object.keys(CartLS.getAllFavoris()).map(item => {
-                const k = JSON.parse(item)
-                // console.log(item)
-                // console.log(k)
-                const article = Ecommerce_articles.articles.data.find(el=>el.id_produits==k.id)
-                // console.log(article)
-                return <li>
-                    {article.fr}
-                </li>
+
+        if(!cart_id){
+            let clr = setTimeout(() => { setCartBox(miniCart(true)) }, 1000)
+            return <ul className="miniCart"></ul>
+        }else{
+            const  ls = CartLS.getAllFavoris()
+            , cartArray = Object.keys(ls)
+            , len = cartArray.length
+            if(len==0)
+                return <ul className="miniCart"><li>Votre panier est vide..</li></ul>
+            
+            const totalProducts = len == 1 ? ls[cartArray[0]] : cartArray.reduce((a,b, index)=>{
+                if(index==1)return parseInt(ls[a])+parseInt(ls[b])
+                else return a+ls[b]
             })
-        }</ul>
+            , totalAmount = len == 1 ? ls[cartArray[0]]*JSON.parse(cartArray[0]).price : cartArray.reduce((a,b, index)=>{
+                const price = [JSON.parse(a).price,JSON.parse(b).price]
+                if(index==1)return parseInt(ls[a])*parseInt(price[0])+parseInt(ls[b])*parseInt(price[1])
+                else return a+ls[b]*price[1]
+            })
+            return <div className="miniCart">
+                <div>Vous avez {len} produit{len!=1 && "s"} ({totalProducts}) dans le panier.</div>
+                <div>Montant total: {totalAmount}</div>
+                <ul>{ 
+                    cartArray.map(item => {
+                        const k = JSON.parse(item)
+                        // console.log(item)
+                        // console.log(k)
+                        const article = Ecommerce_articles.articles.data.find(el=>el.id_produits==k.id)
+                        // console.log(article)
+                        return <li>
+                            {article.fr}
+                        </li>
+                    })
+                }</ul>
+            </div>
+        }
     }
-    , [cartBox, setCartBox] = useState(<ul className="miniCart">{miniCart()}</ul>)
+    , [cartBox, setCartBox] = useState(<>{miniCart()}</>)
     , [selectOptions, setSelectOptions] = useState(Object.keys(Ecommerce_articles.articles_title_table)
         .map((item,i) => {
             if(item.charAt(0) == "_")
@@ -80,7 +106,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok",cartBox, setCartBox, miniCart, selectOptions, setSelectOptions}
+    const context = {ok:"okokok",cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, userConnectedDatas}
     
     return (
         <AuthContext.Provider value={context}>

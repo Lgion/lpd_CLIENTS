@@ -1,4 +1,15 @@
 
+%trbl0{top: 0;right: 0;bottom: 0;left: 0;}
+%pa_trbl0{position:absolute;top: 0;right: 0;bottom: 0;left: 0;}
+%pf_trbl0{position:fixed;top: 0;right: 0;bottom: 0;left: 0;}
+%after_cover{position:relative;&:after{z-index:1000000000;content:"";@extend %pa_trbl0;}}
+
+%devise_cfa{
+    &:after{
+        content:"Fcfa";
+    }
+}
+
 %btn_close{
     z-index: 1000000000000000000000;
     position: absolute;

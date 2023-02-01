@@ -1,11 +1,27 @@
-import CartRecap from "../components/Cart/_/CartRecap"
-import CartForm from "../components/Cart/_/CartForm"
-import CartHold from "../components/Cart"
+import {useState, useEffect, useContext} from 'react'
+import AuthContext from "../stores/authContext.js"
+import CartRecap from "../components/_/Cart/_/CartRecap"
+import CartUserDatasForm from "../components/_/Cart/_/CartUserDatasForm"
+import CartHold from "../components/_/Cart"
 
 export default function Cart() {
-  return <>
-    <CartRecap />
-    <CartForm />
+
+  const {userConnectedDatas} = useContext(AuthContext)
+
+  let [cartRecap___, setCartRecap___] = useState()
+
+
+  useEffect(() => { 
+    setCartRecap___(CartRecap)
+
+  },[])
+  
+  return <main className="cart">
+    {cartRecap___}
+    {userConnectedDatas 
+      ? <div>Email: {userConnectedDatas.email}</div>
+      : <CartUserDatasForm />
+    }
     <CartHold />
-  </>
+  </main>
 }

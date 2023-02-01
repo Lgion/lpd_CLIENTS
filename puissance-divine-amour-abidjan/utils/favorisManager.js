@@ -2,7 +2,7 @@
 
 
 export function getAllFavoris(){
-    return JSON.parse(localStorage.cart || "[]")
+    return JSON.parse(localStorage.cart || "{}")
 }
 
 

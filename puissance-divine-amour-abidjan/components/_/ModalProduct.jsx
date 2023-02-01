@@ -26,6 +26,7 @@ export default function ModalProduct({item,img,setCartBox,option,handleAddToCart
                     data-coloris={option?.coloris || ""}
                     data-couverture={option?.couverture || ""}
                     data-option_name={option?.opt_nom || ""}
+                    data-price={item.prix}
                     title={"Ajouter au panier"}
                 ></button>
             </div>

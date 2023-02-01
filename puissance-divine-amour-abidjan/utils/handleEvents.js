@@ -30,7 +30,7 @@ let handleModalShowProduct = (e) => {
     , coloris = el.dataset.coloris
     , couverture = el.dataset.couverture
     , option_name = el.dataset.option_name
-    , cart_id = JSON.stringify({id,coloris,couverture,option_name})
+    , cart_id = JSON.stringify({id,coloris,couverture,option_name,price:el.dataset.price})
     , qty = el.closest('figure').querySelector('.qty').value
     // alert(qty)
     // alert(id+coloris+couverture+option_name)

@@ -53,12 +53,12 @@ export default function Ecommerce() {
                         let option = Ecommerce_articles_OPTIONS.data.find(el=>el.img_article==item.img&&(item.autre==(el.opt_nom||"") || item.taille==el.taille_||""))
                         item.fr_ = item.fr.replace("<br>").replace("<br/>")
                         item.fr__ = strip_tags(item.fr)
-                        if(item.id_produits==15)console.log(option)
+                        // if(item.id_produits==15)console.log(option)
 
                         return <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')} key={"figure_"+i}>
                                 <ModalProduct {...{item, setCartBox, option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} />
                                 <img src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"} alt="dsfihdoi fdio hfds" />
-                                <button className="options" onMouseOver={handleVariantButtonHover}>
+                                <button className="options" onClick={handleVariantButtonHover}>
                                     <span>Ɏ</span>
                                     { option &&<>
                                             {option.coloris && <div className="coloris">{option.coloris}</div>}
@@ -84,6 +84,7 @@ export default function Ecommerce() {
                                         data-coloris={option?.coloris || ""}
                                         data-couverture={option?.couverture || ""}
                                         data-option_name={option?.opt_nom || ""}
+                                        data-price={item.prix}
                                         title={"Ajouter au panier"}
                                     ></button>
                                     <button className="showArticleModal" onClick={handleModalShowProduct} title={"Afficher article"}>🔎</button>

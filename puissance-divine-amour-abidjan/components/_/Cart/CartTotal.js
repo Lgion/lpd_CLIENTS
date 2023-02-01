@@ -49,7 +49,7 @@ const CartTotal = (props) => {
 
 
 
-            <div className='gpayBtnHold flex justify-center'>
+            {/*<div className='gpayBtnHold flex justify-center'>
 
 
                 <GooglePayButton className='gpayHold' environment='TEST' paymentRequest={{
@@ -95,6 +95,7 @@ const CartTotal = (props) => {
 
                 />
             </div>
+            */}
 
             <div className='paypalHold'>
                 <PayPalScriptProvider>
