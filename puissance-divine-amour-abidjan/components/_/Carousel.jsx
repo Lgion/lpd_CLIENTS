@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Image from "next/image"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,6 +39,10 @@ export default class Carousel extends Component {
             slidesToScroll: 1
         }
         , random_indexes = []
+        , myLoader = ({ src, width, quality }) => {
+            return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        }
+
         for (let index = 0; index < 10; index++) 
             random_indexes[index] = Math.ceil(Math.random()*carousel.length-1)
         // alert(random_indexes)
@@ -51,7 +56,11 @@ export default class Carousel extends Component {
                 {random_indexes.map((item,i) => <figure key={i}>
                     {/* {this.setState({h2:carousel[0][1]})} */}
                     {/* {console.log(item)} */}
-                    <img src={"/img/"+carousel[item][0]} alt={carousel[item][1]} />
+                    <Image
+                        loader={myLoader}
+                        src={"/img/"+carousel[item][0]}
+                        alt={carousel[item][1]}
+                    />
                     <figcaption>{carousel[item][1]}</figcaption>
                 </figure>)}
                 </Slider>

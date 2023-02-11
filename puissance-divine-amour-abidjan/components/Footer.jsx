@@ -54,20 +54,20 @@ export default function Footer() {
                 // rel="dofollow"
                 title="Laisser une appréciation sur le site librairie-puissance-divine.ci"
               >
-                Livre d'or
+                Livre d&apos;or
               </Link>
             }
           </li>)
         }
       </ul>
       <section id="qui">
-          Nous sommes un ecommerce religieux chrétien, l'extension virtuelle du
-          magasin "
+          Nous sommes un ecommerce religieux chrétien, l&apos;extension virtuelle du
+          magasin &quot;
           <a href="index.php?menu=lieu-librairie" target="_blank">
             Librairie puissance Divine
           </a>
-        " située aux II plateaux rue des Jardins. À but apostoloque, nous
-        faisons notre possible afin d'affermir les croyants dans la foi.
+          &quot; située aux II plateaux rue des Jardins. À but apostoloque, nous
+        faisons notre possible afin d&apos;affermir les croyants dans la foi.
         <br />
         <span className="close"></span>
       </section>
@@ -80,7 +80,7 @@ export default function Footer() {
         ></iframe> */}
         <p>
           <Link href="index.php?menu=lieu-librairie">Librairie Puissance Divine</Link>,
-          Cocody 2 Plateaux, rue des jardins, proche de l'école de police, même
+          Cocody 2 Plateaux, rue des jardins, proche de l&apos;école de police, même
           trottoir que la station Corlay et en face de la pharmacie saint Gil.
         </p>
         <p><u>Téléphone</u> : 09-36-06-72</p>
@@ -124,7 +124,7 @@ export default function Footer() {
           quelque fois que certains de ces modes de paiement soient absents
           temporairement.
         </p>
-        {/* Nous recommandons fortement l'utilisation du moyen de paiement <Link href='http://fr.wikipedia.org/wiki/Cookie_(informatique)' target='_blank'>sanli CASH</Link>, mise en place par <Link href='http://www.laposte.ci/' target='_blank'>laPoste Côte d'Ivoire</Link>. Ce moyen est autant innovant interopérable sur toute la zone UEMOA (Union &Eacute;conomique et Monétaire Ouest Africaine) grâce au système <Link href='http://www.gim-uemoa.org/page_std.php?id=46' target='_blank'>GIM</Link>.
+        {/* Nous recommandons fortement l&apos;utilisation du moyen de paiement <Link href='http://fr.wikipedia.org/wiki/Cookie_(informatique)' target='_blank'>sanli CASH</Link>, mise en place par <Link href='http://www.laposte.ci/' target='_blank'>laPoste Côte d'Ivoire</Link>. Ce moyen est autant innovant interopérable sur toute la zone UEMOA (Union &Eacute;conomique et Monétaire Ouest Africaine) grâce au système <Link href='http://www.gim-uemoa.org/page_std.php?id=46' target='_blank'>GIM</Link>.
 								<br/> */}
         <hr />
         <p>
@@ -132,12 +132,12 @@ export default function Footer() {
           <Link href="" target="_blank">
             cookie
           </Link>
-          , et sont valable 5 jours, après quoi, l'article ajouter est
+          , et sont valable 5 jours, après quoi, l&apos;article ajouter est
           automatiquement supprimé de votre panier.
         </p>
         <hr />
         Notre transporteur principal pour la zone UEMOA est la Poste Côte
-        d'Ivoire. Nous acheminons principalement vos commandes par leurs
+        d&apos;Ivoire. Nous acheminons principalement vos commandes par leurs
         services. Nous proposons deux types de frais de transport:
         <ul>
           <li>
@@ -147,7 +147,7 @@ export default function Footer() {
             <span className="redd">3.000Fcfa</span> pour toutes les commandes inférieures à 30.000 Fcfa.
           </li>
         </ul>
-        {/* Les frais de transport pour certains objets, comme les statues en ciment ou poudre de marbre (lourds) sont inclus dans le prix affiché afin de permettre la faisabilité de livraison sur toute la Côte d'Ivoire de tous nos articles en-ligne. */}
+        {/* Les frais de transport pour certains objets, comme les statues en ciment ou poudre de marbre (lourds) sont inclus dans le prix affiché afin de permettre la faisabilité de livraison sur toute la Côte d&apos;Ivoire de tous nos articles en-ligne. */}
         <p>
           Nous expédions vos commandes sous les 72H (3 jours ouverts) après
           reception du paiement.
@@ -156,9 +156,9 @@ export default function Footer() {
         <p>
           puis, vous serez livré par
           <Link href="http://www.laposte.ci/" target="_blank">
-            laPoste Côte d'Ivoire
+            laPoste Côte d&apos;Ivoire
           </Link>
-          , à l'adresse fournie de votre domicile lors de la commande.
+          , à l&apos;adresse fournie de votre domicile lors de la commande.
         </p>
         <p>
           <u>NB:</u> Il est très important que votre adresse soit la plus précise

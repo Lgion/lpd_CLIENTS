@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import { store } from "../productsStore/Store";
 import { Link } from "react-router-dom";
+import Image from "next/image"
 
 export default class AutoPlayMethods extends Component {
     constructor(props) {
         super(props);
         this.play = this.play.bind(this);
         this.pause = this.pause.bind(this);
+        
     }
     play() {
         this.slider.slickPlay();
@@ -38,7 +40,12 @@ export default class AutoPlayMethods extends Component {
                     }
                 }
             ]
-        };
+        }
+        , myLoader = ({ src, width, quality }) => {
+            return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        }
+
+
         return (
             <div className="youMay">
                 <Slider ref={slider => (this.slider = slider)} {...settings}>
@@ -46,7 +53,12 @@ export default class AutoPlayMethods extends Component {
                         if (item.type == "ourBestSellers") {
                             return (<div key={item.id}>
                                 <Link to={`/${item.id}`}>
-                                    <img src={item.primaryImage} className=" w-48 spCaroImg brForMobile rounded-xl  mb-8" />
+                                    <Image
+                                        loader={myLoader}
+                                        src={item.primaryImage}
+                                        alt={""}
+                                        className=" w-48 spCaroImg brForMobile rounded-xl  mb-8"
+                                    />
                                 </Link>
                             </div>)
                         }

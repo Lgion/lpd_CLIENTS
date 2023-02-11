@@ -1,5 +1,6 @@
 import React from 'react'
-import Link from "next/link";
+import Link from "next/link"
+import Image from "next/image"
 
 export default function ModalProduct({item,img,setCartBox,option,handleAddToCart}) {
 
@@ -9,10 +10,17 @@ export default function ModalProduct({item,img,setCartBox,option,handleAddToCart
     , handleChange = e => { 
 
     }
+    , myLoader = ({ src, width, quality }) => {
+        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+    }
     
     return <div className="toPutInModal">
         <div className="img">
-            <img src={img} alt={item.fr__} />
+            <Image
+                loader={myLoader}
+                src={img}
+                alt={item.fr__}
+            />
         </div>
         <div className="content">
             <figcaption>{item.fr}</figcaption>

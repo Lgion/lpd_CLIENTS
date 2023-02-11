@@ -38,9 +38,9 @@ const CartHold = () => {
 
 
                 <div className='chParent'>
-                    {cartItems.map((item) => (
+                    {cartItems.map((item, key) => (
 
-                        <div className=''>
+                        <div key={"cartItem_"+key} className=''>
 
                             {/* <Cart
                                 key={item.id}

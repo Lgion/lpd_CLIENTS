@@ -5,8 +5,13 @@ import "../styles/Navbar.css";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+import Image from "next/image"
 
 const MobileNav = () => {
+
+    const myLoader = ({ src, width, quality }) => {
+        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+    }
     return (
         <div className='mobNavMainPrant '>
 
@@ -14,7 +19,12 @@ const MobileNav = () => {
                 <div className='flex gap-40'>
 
                     <Link to="/">
-                        <img src={logo} className="w-32" />
+                    <Image
+                        loader={myLoader}
+                        src={logo}
+                        alt={""}
+                        className=" w-32"
+                    />
                     </Link>
 
                     <Link to={"/cart"}>

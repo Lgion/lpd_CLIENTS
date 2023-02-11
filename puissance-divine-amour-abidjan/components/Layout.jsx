@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import Header from "./Header";
 import Footer from "./Footer";
+import Nav from '../components/Nav'
 
 export default function Layout({ children }) {
 
@@ -26,6 +27,8 @@ export default function Layout({ children }) {
   return (
     <>
       <Header />
+
+      <Nav />
 
       {children}
 

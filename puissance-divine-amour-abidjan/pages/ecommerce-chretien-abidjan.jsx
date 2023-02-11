@@ -1,7 +1,8 @@
 import {useState,useEffect,useContext} from 'react'
-import {createPortal} from "react-dom";
-import Link from "next/link";
+import {createPortal} from "react-dom"
+import Link from "next/link"
 import Head from "next/head"
+import Image from "next/image"
 import AuthContext from "../stores/authContext.js"
 import Nav from '../components/Nav'
 import ModalProduct from '../components/_/ModalProduct'
@@ -12,6 +13,9 @@ import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelec
 export default function Ecommerce() {
     const {setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
     , id=3
+    , myLoader = ({ src, width, quality }) => {
+        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+    }
     
     let a
 
@@ -21,7 +25,7 @@ export default function Ecommerce() {
         setCartBox(miniCart(true))
         
         console.log(Ecommerce_articles.articles_title_table)
-    }, [])
+    }, [setCartBox,miniCart])
     
     return <>
         <Head>
@@ -34,16 +38,15 @@ export default function Ecommerce() {
 
 
         <main className="ecommerce">
-            <Nav />
             <section>
                 <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}} className="active">Publications chrétiennes</button>
                 <div className="howtoshow">
                     <button onClick={handleProductsDisplay} className="active">▢</button>
                     <button onClick={handleProductsDisplay}>─</button>
                 </div>
-                <button onClick={handleSelectButtons}>Objets de piété</button>
+                <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}}>Objets de piété</button>
                 <select id="ecommerce_select" onChange={handleSelect}>
-                    <option value="all">Choisir un type d'article</option>
+                    <option value="all">Choisir un type d&apos;article</option>
                     {selectOptions}
                 </select>
             </section>
@@ -57,7 +60,11 @@ export default function Ecommerce() {
 
                         return <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')} key={"figure_"+i}>
                                 <ModalProduct {...{item, setCartBox, option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} />
-                                <img src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"} alt="dsfihdoi fdio hfds" />
+                                <Image
+                                    loader={myLoader}
+                                    src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}
+                                    alt="dsfihdoi fdio hfds"
+                                />
                                 <button className="options" onClick={handleVariantButtonHover}>
                                     <span>Ɏ</span>
                                     { option &&<>

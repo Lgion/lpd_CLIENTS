@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from "next/image"
 import { useSelector } from 'react-redux'
 import { cartActions } from '../redux-state/CartState'
 import { useDispatch } from 'react-redux'
@@ -15,29 +16,29 @@ import { Link } from 'react-router-dom';
 
 const Cart = (props) => {
 
-  const { title, quantity, price, id, image, total, cartLength } = props.item;
+  const { title, quantity, price, id, image, total, cartLength } = props.item
 
 
 
-  const cartList = useSelector((state) => state.cart.items);
+  , cartList = useSelector((state) => state.cart.items)
 
 
 
-  const dispacth = useDispatch();
+  , dispacth = useDispatch()
 
 
-  const totalPrice = cartList.map(item => {
+  , totalPrice = cartList.map(item => {
     return item.quantity * item.price;
-  }).reduce((totalPrice, singleItemPrice) => totalPrice + singleItemPrice, 0);
+  }).reduce((totalPrice, singleItemPrice) => totalPrice + singleItemPrice, 0)
 
 
 
 
-  const removeItemFromCartHandler = () => {
+  , removeItemFromCartHandler = () => {
     dispacth(cartActions.removeItemFromCart(id))
   }
 
-  const addItemToCartHandler = () => {
+  , addItemToCartHandler = () => {
     dispacth(
       cartActions.addItemToCart({
         id,
@@ -46,6 +47,10 @@ const Cart = (props) => {
         image,
       })
     )
+  }
+
+  , myLoader = ({ src, width, quality }) => {
+    return `https://example.com/${src}?w=${width}&q=${quality || 75}`
   }
 
 
@@ -60,7 +65,12 @@ const Cart = (props) => {
         <div className='cartImaegHold relative flex flex-col w-72'>
 
           <Link to={`/${id}`}>
-            <img src={image} className=" relative  fof w-44 rounded-lg cartImg" />
+            <Image
+              loader={myLoader}
+              src={image}
+              alt={""}
+              className=" relative  fof w-44 rounded-lg cartImg"
+            />
           </Link>
 
         </div>

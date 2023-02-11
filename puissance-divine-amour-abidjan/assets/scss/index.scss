@@ -154,7 +154,7 @@ body{
               }
             }
             >.miniCart{
-              display: none;
+              &:not(:hover){display: none;}
               position: absolute;
               left: 50px;
               width:300px;
@@ -270,16 +270,7 @@ body{
       >aside{}
     }
     >nav{
-
-    }
-    >main{
-      width: 90%;
-      min-height: 475px;
-      max-height: 100%;
-      height: auto;
-      margin:auto;
-      padding-bottom: 5em;
-      >h1.filAriane{
+      >h2.filAriane{
         z-index: 5;
         font-size: .8em;
         position: absolute;
@@ -310,6 +301,14 @@ body{
             background: rgba(255,10,10,.5);
         }
       }
+    }
+    >main{
+      width: 90%;
+      min-height: 175px;
+      max-height: 100%;
+      height: auto;
+      margin:auto;
+      padding-bottom: 5em;
       >h3{
         &.carousel{text-align: center;}
       }
@@ -582,7 +581,27 @@ body{
           }
         }
       }
+      &.priere{
+        padding: 2em;
+        >h4{
+          font-size: 1.3em;
+          margin-top: 1em;
+          &.lieuxactivite{
+
+          }
+        }
+        >p{
+          padding: .5em;
+          >img{
+            width: 100px;
+            &.zoomable.bolobi_situation{
+
+            }
+          }
+        }
+      }
       &.cart{
+        >.voidCart{}
         >section{
           display: flex;
           justify-content: space-around;
@@ -622,6 +641,7 @@ body{
             >span.prix{}
             >p{}
             >input.qty{font-size: 2em;width:2em;height: 100%;}
+            >button{color:red;}
           }
         }
       }

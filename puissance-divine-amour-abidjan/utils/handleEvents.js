@@ -37,8 +37,8 @@ let handleModalShowProduct = (e) => {
     // console.log(Ecommerce_articles.articles.data)
     if(qty>0 && qty<100){
         setCartBox(miniCart(cart_id,qty))
-        document.getElementById('panier').classList.add('active')
-        setTimeout(()=>{document.getElementById('panier').classList.remove('active')}, 3000)
+        document.getElementById('panier')?.classList.add('active')
+        setTimeout(()=>{document.getElementById('panier')?.classList.remove('active')}, 3000)
     }else alert("pb qty")
 
 }
@@ -70,7 +70,8 @@ let handleModalShowProduct = (e) => {
     })
 }
 , handleSelectButtons = (e, setSelectOptions) => {
-    console.log(e.target)
+    // console.log(e.target)
+    // console.log(setSelectOptions)
     if(!e.target.classList.contains('active')){
         let tmp = []
         document.querySelectorAll('.ecommerce>section>button').forEach(el => { 

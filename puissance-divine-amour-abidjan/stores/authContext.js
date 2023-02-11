@@ -20,8 +20,18 @@ const AuthContext = createContext({
 export default AuthContext
 
 export const AuthContextProvider = ({children}) => {
-    // let userConnectedDatas = {email: "email@exemple.com"}
-    let userConnectedDatas = false
+    let userConnectedDatas = {email: "email@exemple.com"}
+    // let userConnectedDatas = false
+    , handleQty = (e, ls) => { 
+        // alert(localStorage.cart)
+        
+        
+        ls[e.target.dataset.key] = e.target.value
+        // CartLS.addArticle(e.target.dataset.key, e.target.value)
+        CartLS.saveArticle(ls)
+
+        // alert(localStorage.cart)
+    }
     , miniCart = (cart_id,qty) => {
         if(cart_id && qty)
             CartLS.addArticle(cart_id,qty)
@@ -50,14 +60,16 @@ export const AuthContextProvider = ({children}) => {
                 <div>Montant total: {totalAmount}</div>
                 <ul>{ 
                     cartArray.map(item => {
-                        const k = JSON.parse(item)
+                        const _item = JSON.parse(item)
                         // console.log(item)
-                        // console.log(k)
-                        const article = Ecommerce_articles.articles.data.find(el=>el.id_produits==k.id)
+                        // console.log(_item)
+                        const article = Ecommerce_articles.articles.data.find(el=>el.id_produits==_item.id)
                         // console.log(article)
                         return <li>
-                            {article.fr}
-                        </li>
+                            <p>{article.fr}</p>
+                            <input data-key={item} defaultValue={ls[item]} onChange={e=>{handleQty(e,ls)}} className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
+                            <button data-key={item} onClick={(e)=>{CartLS.deleteArticle(e.target.dataset.key);e.target.parentNode.remove();}}>⌫</button>
+                    </li>
                     })
                 }</ul>
             </div>
@@ -106,7 +118,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok",cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, userConnectedDatas}
+    const context = {ok:"okokok",cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, userConnectedDatas, handleQty}
     
     return (
         <AuthContext.Provider value={context}>

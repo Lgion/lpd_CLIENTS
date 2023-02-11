@@ -12,16 +12,17 @@ export default function Cart() {
 
 
   useEffect(() => { 
-    setCartRecap___(CartRecap)
+    // setCartRecap___(CartRecap)
 
   },[])
   
   return <main className="cart">
-    {cartRecap___}
-    {userConnectedDatas 
+    {/* {cartRecap___} */}
+    <CartRecap />
+    {/* {userConnectedDatas 
       ? <div>Email: {userConnectedDatas.email}</div>
       : <CartUserDatasForm />
-    }
-    <CartHold />
+    } */}
+    {/* <CartHold /> */}
   </main>
 }
