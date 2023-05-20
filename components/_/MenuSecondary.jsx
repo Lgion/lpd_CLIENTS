@@ -15,8 +15,8 @@ export default function MenuSecondary() {
                 <Link
                     href={"#"+item.id}
                     title={item.title}
+                    onClick={()=>{alert('oifdjoifdsjfdsij')}}
                 >
-                    <a onClick={()=>{alert('oifdjoifdsjfdsij')}}>
                         {item.content}
                         {/*item?.ul && <ul>
                             {item.ul.map((item___,j) => <li key={"m2ndbis___j"}>
@@ -25,7 +25,6 @@ export default function MenuSecondary() {
                                 </a>
                             </li>)}
                         </ul>*/}
-                    </a>
                 </Link>
             </li>)
         }

@@ -38,7 +38,9 @@ export default function MenuMain() {
                         <Link
                             href="panier-ecommerce-pda"
                             title="Accedez au panier ecommerce librairie puissance divine"
-                            ><a id="panier" title="Accéder à la page panier, ou visualiser son contenu, ou encore modifier le rapidement ici à la volé"></a>
+                            // title="Accéder à la page panier, ou visualiser son contenu, ou encore modifier le rapidement ici à la volé"
+                            id="panier" 
+                            >
                         </Link>
                         {cartBox}
                     </>}
@@ -47,9 +49,9 @@ export default function MenuMain() {
                         title={item.title}
                         id={item.id+"_menu"}
                     >
-                        <a><span>
+                        <span>
                         {item.content}
-                        </span></a>
+                        </span>
                     </Link>
                 </li>
                 )

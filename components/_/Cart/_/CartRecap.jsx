@@ -58,6 +58,7 @@ export default function CartRecap() {
                                     loader={myLoader}
                                     src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[article.nom]+"/"+article.img+".webp"}
                                     alt={""}
+                                    width={200}                                    height={200}
                                 />
                                 <span className="prix">{article.prix} </span>
                                 <p>{article.fr}</p>

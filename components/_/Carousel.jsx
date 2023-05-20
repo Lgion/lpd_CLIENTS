@@ -60,6 +60,7 @@ export default class Carousel extends Component {
                         loader={myLoader}
                         src={"/img/"+carousel[item][0]}
                         alt={carousel[item][1]}
+                        width={200}                                    height={200}
                     />
                     <figcaption>{carousel[item][1]}</figcaption>
                 </figure>)}

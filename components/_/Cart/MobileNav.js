@@ -24,6 +24,7 @@ const MobileNav = () => {
                         src={logo}
                         alt={""}
                         className=" w-32"
+                        width={200}                                    height={200}
                     />
                     </Link>
 

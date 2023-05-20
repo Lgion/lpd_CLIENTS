@@ -70,6 +70,7 @@ const Cart = (props) => {
               src={image}
               alt={""}
               className=" relative  fof w-44 rounded-lg cartImg"
+              width={200}                                    height={200}
             />
           </Link>
 

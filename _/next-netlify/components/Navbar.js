@@ -14,8 +14,8 @@ export default function Navbar() {
         <h1>Gaming Vibes</h1>
         {authReady && (
           <ul>
-          <li><Link href="/"><a>Home</a></Link></li>
-          <li><Link href="/guides"><a>Guides</a></Link></li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/guides">Guides</Link></li>
           {!user&&<li onClick={login}><a>Login/Signup</a></li>}
           {user&&<li>{user.email}</li>}
           {user&&<li onClick={logout}><a>Logout</a></li>}

@@ -11,7 +11,7 @@ export default function ModalProduct({item,img,setCartBox,option,handleAddToCart
 
     }
     , myLoader = ({ src, width, quality }) => {
-        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        return `${src}?w=${width}&q=${quality || 75}`
     }
     
     return <div className="toPutInModal">
@@ -20,6 +20,7 @@ export default function ModalProduct({item,img,setCartBox,option,handleAddToCart
                 loader={myLoader}
                 src={img}
                 alt={item.fr__}
+                width={200}                                    height={200}
             />
         </div>
         <div className="content">

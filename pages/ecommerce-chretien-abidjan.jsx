@@ -10,11 +10,11 @@ import * as Ecommerce_articles from "./../assets/datas/articles.js"
 import Ecommerce_articles_OPTIONS from "./../assets/datas/articles_options.js"
 import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleSelectButtons,handleVariantButtonHover} from "./../utils/handleEvents.js"
 
-export default function Ecommerce() {
+function Ecommerce() {
     const {setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
     , id=3
     , myLoader = ({ src, width, quality }) => {
-        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        return `${src}?w=${width}&q=${quality || 75}`
     }
     
     let a
@@ -64,6 +64,8 @@ export default function Ecommerce() {
                                     loader={myLoader}
                                     src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}
                                     alt="dsfihdoi fdio hfds"
+                                    width={200}
+                                    height={200}
                                 />
                                 <button className="options" onClick={handleVariantButtonHover}>
                                     <span>Ɏ</span>
@@ -80,8 +82,10 @@ export default function Ecommerce() {
                                 <p className="dimensions">{item.dimensions}</p>
                                 <span className="prix">{item.prix} </span>
                                 {/* <span>{item.id_produits && JSON.stringify(option)}</span> */}
-                                <Link href={"vente-en-ligne/"+item.id_produits}>
-                                    <a target="_blank" title={"Afficher le produit"}></a>
+                                <Link 
+                                    href={"vente-en-ligne/"+item.id_produits}
+                                    target="_blank" title={"Afficher le produit"}
+                                >
                                 </Link>
                                 <section>
                                     <input defaultValue="0" className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
@@ -131,3 +135,6 @@ function strip_tags(html){
     //RETURN THE CLEAN STRING
     return clean_string;
 }
+
+
+export default Ecommerce

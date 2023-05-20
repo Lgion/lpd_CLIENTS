@@ -58,6 +58,7 @@ export default class AutoPlayMethods extends Component {
                                         src={item.primaryImage}
                                         alt={""}
                                         className=" w-48 spCaroImg brForMobile rounded-xl  mb-8"
+                                        width={200}                                    height={200}
                                     />
                                 </Link>
                             </div>)

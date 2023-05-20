@@ -20,6 +20,7 @@ const EmptyCart = () => {
                 src={cartgif}
                 alt={""}
                 className=" absolute cg"
+                width={200}                                    height={200}
             />
         </div>
     )
