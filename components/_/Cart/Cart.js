@@ -50,7 +50,7 @@ const Cart = (props) => {
   }
 
   , myLoader = ({ src, width, quality }) => {
-    return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+    return `${src}?w=${width}&q=${quality || 75}`
   }
 
 

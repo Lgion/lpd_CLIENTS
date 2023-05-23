@@ -118,6 +118,9 @@ body{
           font-size: .9em;
           &.menu.ecommerce{
             >a#panier{
+              &:hover{z-index: 10;opacity:1;}
+              transition:opacity .5s;
+              opacity:.5;
               width: 100px;
               height: 100px;
               /* z-index: 1000; */
@@ -317,7 +320,6 @@ body{
       }
       >section{
         &.carousel{
-          padding-bottom: 3em;
           border-bottom: solid;
           figure{
               height: 555px;
@@ -340,7 +342,7 @@ body{
             >ul{
               background: rebeccapurple;
               padding:1em 0;
-              position: absolute;
+              position: initial;
               bottom: -3.5em;
               :not(.slick-active)button:before{color:white;opacity:1;}
             }
@@ -353,6 +355,92 @@ body{
       }
       >article{
         text-align: center;
+      }
+      &.home{
+        >*{
+          border-bottom:solid;
+          padding-top:1em;
+          box-shadow: 0 3px 10px 1px;
+        }
+        >article{
+          &.bestseller{
+            position: relative;
+            display: flex;
+            height: 30em;
+            >img{
+              position: relative !important;
+              color: transparent;
+              width: 30% !important;
+              object-fit: contain;
+              border-right: solid black;
+            }
+            >section{
+              &.details{
+                padding:1em;
+                position: relative;
+                >h2{margin-bottom: 1em;}
+                >button{
+                  position: absolute;
+                  left: -2em;
+                  bottom: .5em;
+                  width: 50px;
+                  height: 50px;
+                  font-size: 2em;
+                }
+              }
+              &.buying_details{
+                display: flex;
+                flex-flow: column;
+                gap: 1em;
+                font-size: 2em;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                height: calc(100% - 1em);
+                justify-content: end;
+                padding: 0 1em 1em 2em;
+                border-left: solid;
+                >input{
+                  width: 100px;
+                }
+                >button.addToCart{
+                  @extend %addToCart;
+                  height: 50px;
+                }
+              }
+            }
+          }
+          &.CTA{
+            >section{
+              text-align: left;
+              padding: 1em 3em;
+              >ul{
+                list-style: circle;
+                padding-left: 2em;
+                display: flex;
+                width: 50%;
+                margin: 0 auto;
+                gap: 5em;
+                >li{
+                  margin-bottom: 1em;
+                  display: flex;
+                  flex-flow: column;
+                  width: 33%;
+                  >a{
+                    display: inline-block;
+                    text-align: center;
+                    padding:1em;
+                    background: brown;
+                    color:goldenrod;
+                    border-radius: 5px;
+                    &:hover{color:brown;background:goldenrod}
+                  }
+                  >span{text-align: justify;}
+                }
+              }
+            }
+          }
+        }
       }
       &.ecommerce{
         >section{
@@ -468,6 +556,7 @@ body{
             display:flex;
             flex-flow: column;
             justify-content: space-between;
+            height:200px;
           }
           &.lines{
             >figure{
@@ -702,17 +791,15 @@ body{
         overflow: hidden;
         gap: 1em;
         >.img{
-          height: 100%;
+          // height: 100%;
           width: 35%;
           position: relative;
+          display: flex;
+          justify-content: center;
           >img{
             height: 100%;
             width:unset;
-            position: absolute;
-            right: 0;
             &:hover{
-              right: unset;
-              left:0;
               z-index: 100;
             }
           }

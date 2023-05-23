@@ -11,21 +11,20 @@ import Ecommerce_articles_OPTIONS from "./../assets/datas/articles_options.js"
 import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleSelectButtons,handleVariantButtonHover} from "./../utils/handleEvents.js"
 
 function Ecommerce() {
-    const {setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
+    const {myLoader, setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
     , id=3
-    , myLoader = ({ src, width, quality }) => {
-        return `${src}?w=${width}&q=${quality || 75}`
-    }
     
     let a
 
     useEffect(() => { 
-        console.log(Ecommerce_articles)
+        // console.log(Ecommerce_articles)
+        console.log("console.log(Ecommerce_articles)");
 
         setCartBox(miniCart(true))
         
-        console.log(Ecommerce_articles.articles_title_table)
-    }, [setCartBox,miniCart])
+        // console.log(Ecommerce_articles.articles_title_table)
+        console.log("Ecommerce_articles.articles_title_table")
+    }, [])
     
     return <>
         <Head>
@@ -54,18 +53,37 @@ function Ecommerce() {
                 {
                     Ecommerce_articles.articles.data.map((item,i) => {
                         let option = Ecommerce_articles_OPTIONS.data.find(el=>el.img_article==item.img&&(item.autre==(el.opt_nom||"") || item.taille==el.taille_||""))
+                        , strip_tags = (html, ...rest) => {
+                            //PROCESS STRING
+                            if(rest.length < 2) {
+                                html=html.replace(/<\/?(?!\!)[^>]*>/gi, '');
+                            } else {
+                                var allowed = rest[1];
+                                var specified = eval("["+rest[2]+"]" );
+                                if(allowed){
+                                    var regex='</?(?!(' + specified.join('|') + '))\b[^>]*>';
+                                    html=html.replace(new RegExp(regex, 'gi'), '');
+                                } else{
+                                    var regex='</?(' + specified.join('|') + ')\b[^>]*>';
+                                    html=html.replace(new RegExp(regex, 'gi'), '');
+                                }
+                            }
+                            //CHANGE NAME TO CLEAN JUST BECAUSE  
+                            var clean_string = html;
+                            //RETURN THE CLEAN STRING
+                            return clean_string;
+                        }
                         item.fr_ = item.fr.replace("<br>").replace("<br/>")
                         item.fr__ = strip_tags(item.fr)
                         // if(item.id_produits==15)console.log(option)
 
                         return <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')} key={"figure_"+i}>
-                                <ModalProduct {...{item, setCartBox, option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} />
+                                <ModalProduct {...{myLoader, item, setCartBox, option, handleAddToCart, img:"img/vente-religieuse/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} />
                                 <Image
                                     loader={myLoader}
                                     src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}
                                     alt="dsfihdoi fdio hfds"
-                                    width={200}
-                                    height={200}
+                                    fill={true}
                                 />
                                 <button className="options" onClick={handleVariantButtonHover}>
                                     <span>Ɏ</span>
@@ -114,26 +132,6 @@ function Ok(){
         <span>okok</span>
         , document.querySelector('#modal .modal___main')
     )
-}
-function strip_tags(html){
-    //PROCESS STRING
-    if(arguments.length < 3) {
-        html=html.replace(/<\/?(?!\!)[^>]*>/gi, '');
-    } else {
-        var allowed = arguments[1];
-        var specified = eval("["+arguments[2]+"]" );
-        if(allowed){
-            var regex='</?(?!(' + specified.join('|') + '))\b[^>]*>';
-            html=html.replace(new RegExp(regex, 'gi'), '');
-        } else{
-            var regex='</?(' + specified.join('|') + ')\b[^>]*>';
-            html=html.replace(new RegExp(regex, 'gi'), '');
-        }
-    }
-    //CHANGE NAME TO CLEAN JUST BECAUSE  
-    var clean_string = html;
-    //RETURN THE CLEAN STRING
-    return clean_string;
 }
 
 

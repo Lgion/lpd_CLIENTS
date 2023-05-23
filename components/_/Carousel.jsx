@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Link from "next/link";
 import Image from "next/image"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -36,16 +37,21 @@ export default class Carousel extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            pauseOnHover: true,
+            adaptiveHeight: true
         }
         , random_indexes = []
         , myLoader = ({ src, width, quality }) => {
-            return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+            return `${src}?w=${width}&q=${quality || 75}`
         }
 
         for (let index = 0; index < 10; index++) 
-            random_indexes[index] = Math.ceil(Math.random()*carousel.length-1)
-        // alert(random_indexes)
+            // random_indexes[index] = Math.ceil(Math.random()*carousel.length-1)
+            random_indexes[index] = index
+        console.log("TROUVER UN MOYEN D'AFFICHER DES IMAGES ALÉATOIRES DANS LE CAROUSEL")
 
 
         
@@ -53,13 +59,17 @@ export default class Carousel extends Component {
             <h3 className="carousel">{this.state.h3}</h3>
             <section className="carousel">
                 <Slider {...settings}>
-                {random_indexes.map((item,i) => <figure key={i}>
+                    <figure>
+                        <h3>Un teste</h3>
+                        <Link href="">lien ici</Link>
+                    </figure>
                     {/* {this.setState({h2:carousel[0][1]})} */}
+                {random_indexes.map((item,i) => <figure key={"carousel"+i}>
                     {/* {console.log(item)} */}
                     <Image
                         loader={myLoader}
                         src={"/img/"+carousel[item][0]}
-                        alt={carousel[item][1]}
+                        alt={" "+carousel[item][1]}
                         width={200}                                    height={200}
                     />
                     <figcaption>{carousel[item][1]}</figcaption>

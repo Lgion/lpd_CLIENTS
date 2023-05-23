@@ -1,6 +1,6 @@
 import {useState,useEffect,useContext} from 'react'
 import Image from "next/image"
-import * as CartLS from "../../../../utils/favorisManager.js"
+// import * as CartLS from "../../../../utils/favorisManager.js"
 import * as Ecommerce_articles from "../../../../assets/datas/articles.js"
 import CartPaypal from './CartPaypal';
 import CartGoogle from './CartGoogle';
@@ -8,11 +8,11 @@ import AuthContext from "../../../../stores/authContext.js"
 
 export default function CartRecap() {
 
-    const {userConnectedDatas, handleQty} = useContext(AuthContext)
+    const {userConnectedDatas, handleQty, CartLS} = useContext(AuthContext)
     // Perform localStorage action
     , [output, setOutput] = useState([])
     , myLoader = ({ src, width, quality }) => {
-        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        return `${src}?w=${width}&q=${quality || 75}`
     }
     , start = () => { 
         let totalProducts = 0

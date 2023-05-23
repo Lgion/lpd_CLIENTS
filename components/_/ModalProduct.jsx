@@ -2,16 +2,13 @@ import React from 'react'
 import Link from "next/link"
 import Image from "next/image"
 
-export default function ModalProduct({item,img,setCartBox,option,handleAddToCart}) {
+export default function ModalProduct({myLoader,item,img,setCartBox,option,handleAddToCart}) {
 
     const LocalCart = () => <div className="localCart">
         local cart
     </div>
     , handleChange = e => { 
 
-    }
-    , myLoader = ({ src, width, quality }) => {
-        return `${src}?w=${width}&q=${quality || 75}`
     }
     
     return <div className="toPutInModal">

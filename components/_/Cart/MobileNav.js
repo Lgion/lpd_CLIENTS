@@ -10,7 +10,7 @@ import Image from "next/image"
 const MobileNav = () => {
 
     const myLoader = ({ src, width, quality }) => {
-        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        return `${src}?w=${width}&q=${quality || 75}`
     }
     return (
         <div className='mobNavMainPrant '>

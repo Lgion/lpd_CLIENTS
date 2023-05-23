@@ -16,7 +16,7 @@ export default class SimpleSlider extends Component {
     }
     , random_indexes = []
     , myLoader = ({ src, width, quality }) => {
-      return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+      return `${src}?w=${width}&q=${quality || 75}`
     }
     for (let index = 0; index < 10; index++) 
         random_indexes[index] = Math.ceil(Math.random()*carousel.length-1)

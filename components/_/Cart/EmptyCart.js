@@ -6,7 +6,7 @@ import cartgif from "./cartGif.gif";
 const EmptyCart = () => {
 
     const myLoader = ({ src, width, quality }) => {
-        return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+        return `${src}?w=${width}&q=${quality || 75}`
     }
     return (
         <div className=' emptyCartMainParent text-center relative top-20'>

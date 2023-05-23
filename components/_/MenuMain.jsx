@@ -28,10 +28,10 @@ export default function MenuMain() {
             {
                 [
                 // {id:"objectifs",href:"objectifs-apostoliques",title:"Évangéliser aider rassembler les chrétiens sanctification saint esprit",content:"Objectifs"},
-                {id:"ecommerce",href:"ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien"},
+                {id:"ecommerce",href:"/ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien"},
                 // {id:"enseignements",href:"enseignements-spirituels-chretien-catholique",title:"Enseignements spirituels chrétien catholique Puissance Divine, jésus enseigne: l",content:"Enseignements"},
-                {id:"activites-spirituelles",href:"/activites-religieuses-chretienne-puissance-divine",title:"Sanctuaire du Rosaire de Bolobi: activités spirituelles religieuses chrétien catholique",content:"Activités Spirituelles"},
-                {id:"priere",href:"sanctuaire-rosaire-bolobi-adzope",title:"Retraites spirituelles, assistance spirituelle, week-ends rosaire sanctuaire dame du rosaire bolobi",content:"Santuaire du Rosaire de Bolobi"},
+                {id:"activites-spirituelles",href:"/sanctuaire-rosaire-bolobi-adzope",title:"Sanctuaire du Rosaire de Bolobi: activités spirituelles religieuses chrétien catholique",content:"Sanctuaire du Rosaire de Bolobi"},
+                {id:"blog",href:"/blog-de-bolobi-ecole-caritative-larve-msn",title:"Blog de Bolobi: école gratuite d'Adzopé, culture du poivre, élevage de mouches soldat noire, activités spirituelles religieuses chrétien catholique et protestant",content:"Blog de Bolobi"},
                 ].map((item,i) => <li className={"menu "+item.id} key={"m1st___"+i}>
 
                     {!isCartPage && item.id=="ecommerce" && <>

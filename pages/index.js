@@ -3,6 +3,10 @@ import Head from "next/head"
 import Image from "next/image"
 import AuthContext from "../stores/authContext.js"
 import Carousel from "../components/_/Carousel"
+import BestSellers from "../components/_/BestSellers"
+import CTA from "../components/_/CTA"
+import BlogALaUne from "../components/_/BlogALaUne"
+
 import Nav from "../components/Nav"
 // import styles from '../styles/Home.module.css'
 
@@ -22,15 +26,18 @@ export default function Home() {
 
 
 
-      <main className="">
+      <main className="home">
         {/* {ok} */}
         {/* <Nav /> */}
-        <Carousel />
         <article>
 						<p>La <strong>librairie puissance divine</strong>, 2plateaux rue des jardins <strong>cocody</strong> <strong>d&apos;abidjan  côte d&apos;ivoire</strong>, est une <strong>librairie religieuse chrétienne catholique</strong> à but apostolique.</p>
 						<p>En effet, l&apos;objectif premier de la <strong>puissance divine d&apos;abidjan</strong> et d&apos;affermir la foi des <strong>fidèles chrétiens</strong> et les amener à <strong>prier l&apos;esprit-saint</strong>.</p>
 						<p>La <strong>puissance divine</strong> oragnise des <strong>retraites spirituelles</strong>, des <strong>enseignements spirituels</strong> ainsi que la <strong>vente en ligne</strong> d&apos;<strong>articles religieux et spirituels</strong>.</p>
 				</article>
+        <Carousel />
+        <BestSellers />
+        <CTA />
+        <BlogALaUne />
         
       </main>
 
