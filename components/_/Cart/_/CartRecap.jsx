@@ -76,7 +76,7 @@ export default function CartRecap() {
     useEffect(() => { 
         start()
         
-    })
+    }, [])
 
     return output
 }

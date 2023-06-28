@@ -15,7 +15,7 @@ export default function Footer() {
   
   // console.log(process)
   if(process.browser){
-    console.log(window)
+    // console.log(window)
 
   }
   useEffect(() => { 

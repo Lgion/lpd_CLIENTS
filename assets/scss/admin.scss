@@ -1,0 +1,189 @@
+
+
+
+
+body{
+    >div{
+        >header{}
+        >main{
+            &#admin{}
+            &.school{
+                >nav{
+                    &#adminMenus{}
+                    >ul{
+                        display: flex;
+                        text-align: center;
+                        border-bottom: solid;
+                        background:wheat;
+                        &:not(#membersMenu){gap:10px;}
+                        &#membersMenu{
+                        }
+                        &#yearsMenu{
+                            border-color:purple;
+                            position: relative;
+                            padding-top: calc(2em + -4px);
+                            >li{
+                                border: solid purple;
+                                border-width: 0 3px;
+                                &:first-of-type.addClasse{
+                                    width: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    >button{
+                                        transition:all .2s;
+                                        &:hover{background:black;color:white;}
+                                    }
+                                }
+                                >a{padding: .25em;}
+                            }
+                        }
+                        &#classesMenu{
+                            border-color:blue;
+                            >li{
+                                border: solid blue;
+                                border-width: 0 3px;
+                                >a{
+                                    padding: .125em;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    gap: 5px;
+                                    >span{
+                                        display: inline-block;
+                                        width:2em;
+                                        height:2em;
+                                        background:url("/school/edit.svg");
+                                        background-size: cover;
+                                    }
+                                }
+                            }
+                        }
+                        >li{
+                            background:white;
+                            flex: 1;
+                            transition:background .2s;
+                            &:not(.addClasse):hover{background:rgba(0,0,0,.5);}
+                            >a{
+                                display: block;
+                                padding: 1em;
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+                >section{
+                    padding: 1em ;
+                    &#adminContent{}
+                    >table{
+                        >thead{
+                            >tr{
+                                >th{}
+                            }
+                        }
+                        >tbody{
+                            >tr{
+                                >td{
+                                    &:first-of-type{
+                                    }
+                                    &:last-of-type{
+                                        display: flex;
+                                        flex-flow: wrap;
+                                        gap:10px;
+                                        >a{
+    
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    >form{
+                        display:flex;
+                        padding: 1em 1em 0;
+                        border-bottom: solid;
+                        >input{
+                            border-radius: 5px 0 0 0;
+                        }
+                        >button{
+                            width: 10%;
+                            border-radius: 0 5px 0 0;
+                            font-size: 2em;
+                        }
+                    }
+                    >ul{
+                        display: flex;
+                        flex-flow: wrap;
+                        justify-content: space-evenly;
+                        padding: .5em 0;
+                        &#school_members{
+
+                        }
+                        >li{
+                            position: relative;
+                            width: 31%;
+                            height: 300px;
+                            border:1px solid;
+                            border-radius: 5px;
+                            cursor:pointer;
+                            transition: all .3s;
+                            &:hover{
+                                width: 33%;
+                                box-shadow: 0 0 10px 1px;
+                                border-style:dotted;
+                            }
+                            &.off{display:none;}
+                            >figure{
+                                height:40%;
+                                border-bottom: solid;
+                                padding-bottom:.25em; 
+                                >img{height:calc(100% - 1em);object-fit: contain;}
+                                >figcaption{
+                                    text-align: center;
+                                }
+                            }
+                            >span{
+                                position: absolute;
+                                top:0;
+                                right: 0;
+                                height: 2.5em;
+                                width: 2.5em;
+                                background-size: contain !important;
+                                filter:grayscale(1);
+                                &.active{filter:grayscale(0);}
+                                &.isInterne{
+                                    background:url("/school/students/interne.svg");
+                                }
+                                &.doFeesPaid{
+                                    top: 2.5em;
+                                    background:url("/school/students/fees.svg");
+                                }
+                            }
+                            >section{
+                                padding: 1em;
+                                >div{
+
+                                    &.birth{
+    
+                                    }
+                                    &.address{
+    
+                                    }
+                                    &.parents{
+                                        
+                                    }
+                                    &.phone{
+    
+                                    }
+                                    &.email{
+    
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        >footer{}
+    }
+}

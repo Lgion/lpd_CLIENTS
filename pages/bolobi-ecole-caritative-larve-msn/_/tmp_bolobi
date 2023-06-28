@@ -1,0 +1,51 @@
+
+<section>
+    <h4>Exploitation: </h4>
+    <p>Palmier à huile, agrumes, poivrier, élevage de mouton, et étang piscicole en projet.</p>
+    <h1>DIAPORAMA EXPLOITATION AGRICOLTE (POIVRE, CACAO, AUTRES)</h1>
+    <Image
+        loader={myLoader}
+        src={"/img/_/bolobi01.jpg"}
+        alt={" "}
+        width={200} height={200}
+    />
+</section>
+<section>
+    <h1>DIAPORAMA PHOTO PRÉSETRNAITON BOLOBI</h1>
+    <Image
+        loader={myLoader}
+        src={"/img/_/bolobi01.jpg"}
+        alt={" "}
+        width={200} height={200}
+    />
+</section>
+<section>
+    <h4 className='lieuxactivite'>Situation géographique: </h4>
+    <p>
+        30 kilomètres d'&apos;'Abidjan (Côte d&apos;Ivoire), sur la route Abidjan-Adzopé (panneau indicateur).
+        <img src='/img/lieux-activites/bolobi/centre-saint-martin-porres-bolobi-herbergement-1.webp' alt='activite ong' width='75px' />
+    </p>
+    <Image
+        loader={myLoader}
+        src={"/img/_/bolobi01.jpg"}
+        alt={" "}
+        width={200} height={200}
+    />
+</section>
+<section>
+    <h1>MAP BOLOBI</h1>
+    <h4>Présentation du site: </h4>
+    <p>
+        Superficie du domaine: 18Ha. <br />Traversé par une rivière dénommée Bolobi, qui a donné son nom au domaine.
+    </p>
+    <p style={{ padding: '3em 1em' }}>
+        Site valonné, très venté, en ferme d&apos;exploitation agricole. Le silence et le calme y règnent.
+    </p>
+    <Image
+        loader={myLoader}
+        src={"/img/_/bolobi01.jpg"}
+        alt={" "}
+        width={200} height={200}
+    />
+</section>
+<section>

@@ -1,4 +1,5 @@
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+// https://www.youtube.com/watch?v=AGDaLOawJSc&ab_channel=PayPalDeveloper
 
 export default function CartPaypal({connected}) {
     return <div className={'paypalHold' + (!connected && " off")} title={"" + (!connected && "Veuillez-vous connecter pour pouvoir passer commande")}>

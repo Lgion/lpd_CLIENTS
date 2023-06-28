@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image"
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import AuthContext from "../../stores/authContext.js"
 
-
-import {carousel} from "../../assets/carousel.js"
-// console.log(carousel)
+import {carouselHome} from "../../assets/carousels.js"
+// console.log(carouselHome)
 
 
 
@@ -22,62 +20,49 @@ import {carousel} from "../../assets/carousel.js"
 
 
 
-export default class Carousel extends Component {
-    
-    constructor(){
-        super()
-        this.state={
-            h3: "TROUVER UN TITRE"
-        }
+export default function Carousel() {
+    let {settingsSlider} = useContext(AuthContext)
+    , [h3, setH3] = useState("TROUVER UN TITRE")
+    , [random_indexes, setRandom_indexes] = useState(new Set())
+    , myLoader = ({ src, width, quality }) => {
+        return `${src}?w=${width}&q=${quality || 75}`
     }
     
-    render() {
-        const settings = {
-            dots: true,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
-            pauseOnHover: true,
-            adaptiveHeight: true
-        }
-        , random_indexes = []
-        , myLoader = ({ src, width, quality }) => {
-            return `${src}?w=${width}&q=${quality || 75}`
-        }
-
-        for (let index = 0; index < 10; index++) 
-            // random_indexes[index] = Math.ceil(Math.random()*carousel.length-1)
-            random_indexes[index] = index
+    useEffect(() => {
+        let random_indexes_ = random_indexes
+        while(random_indexes_.size < 10) 
+            random_indexes_.add(Math.ceil(Math.random()*carouselHome.length-1))
+            //   random_indexes[index] = index
+        setRandom_indexes(random_indexes_)
+        console.log(random_indexes);
         console.log("TROUVER UN MOYEN D'AFFICHER DES IMAGES ALÉATOIRES DANS LE CAROUSEL")
+    }, [])
+    
 
 
-        
-        return <>
-            <h3 className="carousel">{this.state.h3}</h3>
-            <section className="carousel">
-                <Slider {...settings}>
-                    <figure>
-                        <h3>Un teste</h3>
-                        <Link href="">lien ici</Link>
-                    </figure>
-                    {/* {this.setState({h2:carousel[0][1]})} */}
-                {random_indexes.map((item,i) => <figure key={"carousel"+i}>
-                    {/* {console.log(item)} */}
-                    <Image
-                        loader={myLoader}
-                        src={"/img/"+carousel[item][0]}
-                        alt={" "+carousel[item][1]}
-                        width={200}                                    height={200}
-                    />
-                    <figcaption>{carousel[item][1]}</figcaption>
-                </figure>)}
-                </Slider>
-            </section>
-        </>
-    }
+    
+    return <>
+        <h3 className="carousel">{h3}</h3>
+        <section className="carousel">
+            <Slider {...settingsSlider}>
+                <figure>
+                    <h3>Un teste</h3>
+                    <Link href="">lien ici</Link>
+                </figure>
+                {/* {this.setState({h2:carouselHome[0][1]})} */}
+            {Array.from(random_indexes).map((item,i) => <figure key={"carousel"+i}>
+                {/* {console.log(item)} */}
+                <Image
+                    loader={myLoader}
+                    src={"/img/"+carouselHome[item][0]}
+                    alt={" "+carouselHome[item][1]}
+                    width={200}                                    height={200}
+                />
+                <figcaption>{carouselHome[item][1]}</figcaption>
+            </figure>)}
+            </Slider>
+        </section>
+    </>
 }
 
 

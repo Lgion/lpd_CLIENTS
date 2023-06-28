@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from 'react'
+import {createContext, useEffect, useState, useMemo} from 'react'
 // import netlifyIdentity from 'netlify-identity-widget'
 import * as Ecommerce_articles from "./../assets/datas/articles.js"
 import * as CartLS from "../utils/favorisManager.js"
@@ -21,9 +21,7 @@ const AuthContext = createContext({
 export default AuthContext
 
 export const AuthContextProvider = ({children}) => {
-    let userConnectedDatas = {email: "email@exemple.com"}
-    // let userConnectedDatas = false
-    , handleQty = (e, ls) => { 
+    let handleQty = (e, ls) => { 
         // alert(localStorage.cart)
         
         if (typeof window !== "undefined"){
@@ -92,6 +90,41 @@ export const AuthContextProvider = ({children}) => {
     , myLoader = ({ src, width, quality }) => {
         return `${src}?w=${width}&q=${quality || 75}`
     }
+    , settingsSlider = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnHover: true,
+        adaptiveHeight: true
+    }
+    , mainmenu = [
+        {id:"accueil",href:"/",title:"Librairie religieuse chrétienne Abidjan, Ecommerce chrétien, centre de retraite spirituelle à Bolobi (entre azaguié et yakasseme)",content:"Accueil",tagzone:["librairie","librairie religieuse","librairie religieuse chrétienne", "ecommerce chrétien", "sanctuaire bolobi", "retraites spirituelles"],titrePage:["Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins"],sns:{"Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins":"https://www.facebook.com/genevieve.achi/"},search:"librairie+chrétienne+abidjan+cocody+2plateau"},
+        {id:"ecommerce",href:"/ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'amour"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
+        // {id:"enseignements",href:"enseignements-spirituels-chretien-catholique",title:"Enseignements spirituels chrétien catholique Puissance Divine, jésus enseigne: l",content:"Enseignements",tagzone:[],titrePage:[],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"}},
+        {id:"activites-spirituelles",href:"/sanctuaire-rosaire-bolobi-adzope",title:"Sanctuaire du Rosaire de Bolobi: activités spirituelles religieuses chrétien catholique",content:"Sanctuaire du Rosaire de Bolobi",tagzone:["retraites de prières", "activités spirituelles", "lieu de loisir abidjan", "lieu de détente abidjan", "lieu de repos abidjan"],titrePage:["Retraites spirituelles au Sanctuaire Notre Dame du Rosaire de Bolobi en périphérie d'Abidjan"],sns:{"Sanctuaire notre Dame du Rosaire de Bolobi": "https://www.facebook.com/abidjan.sanctuaire.rosaire.bolobi/"},search:"retraite+spirituelle+sanctuaire+dame+rosaire+bolobi"},
+        {id:"bolobi",href:"/bolobi-ecole-caritative-larve-msn",title:"Bolobi: école gratuite d'Adzopé, culture du poivre, élevage de mouches soldat noire, activités spirituelles religieuses chrétien catholique et protestant",content:"Bolobi",tagzone:["école caritative", "école saint martin de porèz de bolobi"],titrePage:["L'école St Martin de Porèz de Bolobi, et les autres activités de Bolobi"],sns:{"École St Martin de Porèz de Bolobi": "https://www.facebook.com/abidjan.puissance.divine/"},search:"école+primaire+saint+martin+porès+bolobi+azaguié+yakasseme"},
+    ]
+    , [menuActive, setMenuActive] = useState("")
+    , [isCartPage, setIsCartPage] = useState(true)
+    , [isAdmin, setIsAdmin] = useState(false)
+
+    useEffect(() => { 
+        (()=>{setIsCartPage(document.querySelector('#__next>main.cart'))})()
+    }, [])
+    useEffect(() => { 
+        console.log(menuActive);
+        mainmenu.forEach(item=>{
+            if(document.location.href.indexOf(item.href)!==-1 && item.id != menuActive){
+                setMenuActive(item.id)
+            }
+            // else setMenuActive("accueil")
+        })
+        console.log(menuActive);
+    }, [])
     /*
     const [user, setUser] = useState(null)
     const [authReady, setAuthReady] = useState(false)
@@ -126,7 +159,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok", myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, userConnectedDatas, handleQty}
+    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, handleQty}
     
     return (
         <AuthContext.Provider value={context}>

@@ -1,0 +1,12 @@
+import AccessDenied from "../AccessDenied"
+import AuthContext from "../../stores/authContext"
+
+export default function Layout({children}) {
+  const { isAdmin } = useContext(AuthContext)
+
+  
+  return (<>
+    {isAdmin && children}
+    {!isAdmin && <AccessDenied />}
+  </>)
+}

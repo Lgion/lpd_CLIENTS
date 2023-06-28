@@ -1,19 +1,27 @@
-import {useContext} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import Head from "next/head"
 import Image from "next/image"
 import AuthContext from "../stores/authContext.js"
 import Carousel from "../components/_/Carousel"
 import BestSellers from "../components/_/BestSellers"
 import CTA from "../components/_/CTA"
-import BlogALaUne from "../components/_/BlogALaUne"
+import { getAllPosts } from '../components/_/Blog/_/lib/api'
+import BlogPostEnAvant from './_/BlogPostEnAvant'
 
 import Nav from "../components/Nav"
 // import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({onePosts}) {
   // const {ok} = useContext(AuthContext)
 
-
+  /*
+  const [rand, setRand] = useState(-1)
+  console.log(rand);
+  console.log(rand > -1);
+  useEffect(()=>{
+    setRand(Math.ceil(Math.random()*allPosts.length))
+  }, [])
+  */
   
   return (
     <>
@@ -37,8 +45,11 @@ export default function Home() {
         <Carousel />
         <BestSellers />
         <CTA />
-        <BlogALaUne />
-        
+        {/* {console.log(rand)}
+        {console.log(allPosts)}
+        {console.log(allPosts[rand])} */}
+        {/* {rand > -1 && <BlogPostEnAvant post={allPosts[rand]}/>} */}
+        {<BlogPostEnAvant post={onePosts}/>}
       </main>
 
 
@@ -47,3 +58,15 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const allPosts = getAllPosts()
+  , onePosts = allPosts[Math.ceil(Math.random()*allPosts.length)]
+  console.log("ooo");
+  console.log(allPosts);
+
+  return {
+      props: { onePosts },
+  }
+}
+
