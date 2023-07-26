@@ -1,16 +1,36 @@
 const mongoose = require('mongoose')
-const classeSchema = require("./Classe")
+const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
+// const classeSchema = require("./Classe")
+const {schema} = require("./Classe")
+console.log(schema);
 
 const teacherSchema = mongoose.Schema({
-    current_classes: { default: "", type: [classeSchema], required },
-    nom: { default: "", type: String, required },
-    prenoms: { default: [], type: [String], required },
-    naissance: { default: "", type: String, required },
-    adresse: { default: "", type: String, required },
-    photo: { default: "", type: String, required },
-    phone: { default: "", type: String, required },
-    email: { default: "", type: String, required },
+    // current_classes: { default: "", type: Object, required:true },
+    current_classes: { default: "", type: ObjectId, ref: Object.keys(schema.obj)[0], required:true },
+    nom: { default: "", type: String, required:true },
+    prenoms: { default: "", type: String, required:true },
+    naissance_$_date: { default: new Date().getTime(), type: Number, required:true },
+    adresse: { default: "", type: String, required:true },
+    photo_$_file: { default: "", type: String, required:true },
+    phone_$_tel: { default: "+2250102030405", type: String, required:true },
+    email_$_email: { default: "email.exemple.com", type: String, required:true },
 })
 
 
-module.exports = mongoose.model('Profs_Ecole_St_Martin', teacherSchema)
+console.log("teach......");
+// console.log(schema.obj);
+// console.log(Object.keys(schema.obj));
+// console.log(Object.keys(schema.obj)[0]);
+
+
+let model 
+
+if(!mongoose.modelNames().includes("Profs_Ecole_St_Martin")){
+    model = mongoose.model('Profs_Ecole_St_Martin', teacherSchema)
+}else{
+    model = mongoose.model("Profs_Ecole_St_Martin")
+}
+// console.log("model teach");
+// console.log(model);
+module.exports = model

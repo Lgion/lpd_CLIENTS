@@ -17,10 +17,11 @@ let handleModalShowProduct = (e) => {
     const modal = document.querySelector('#modal')
     modal.classList.add('active')
     // console.log(document.querySelector('#modal .modal___main'))
-    modal.querySelector(".modal___main").innerHTML = e.target.closest('figure').querySelector('.toPutInModal').innerHTML
-    modal.querySelector(".modal___header").append(modal.querySelector(".modal___main figcaption"))
-    modal.querySelector(".modal___footer").append(modal.querySelector(".modal___main .options"))
-    modal.querySelector(".modal___footer").append(modal.querySelector(".modal___main .localQty"))
+    modal.querySelector(".modal___header").innerHTML = e.target.closest('figure').querySelector('.toPutInModal').innerHTML
+    modal.querySelector(".modal___main").append(modal.querySelector(".modal___header .img"))
+    modal.querySelector(".modal___main").append(modal.querySelector(".modal___header .content"))
+    modal.querySelector(".modal___footer").append(modal.querySelector(".modal___header .options"))
+    modal.querySelector(".modal___footer").append(modal.querySelector(".modal___header .localQty"))
 }
 , handleAddToCart = (e, setCartBox, miniCart) => {
     // alert(setCartBox)

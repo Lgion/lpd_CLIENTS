@@ -1,6 +1,8 @@
-import React from 'react'
+import {useContext} from 'react'
 import Link from "next/link"
 import Image from "next/image"
+import AuthContext from "../../../stores/authContext.js"
+
 
 export default function ModalProduct({myLoader,item,img,setCartBox,option,handleAddToCart}) {
 

@@ -11,20 +11,40 @@ import Ecommerce_articles_OPTIONS from "../../assets/datas/articles_options.js"
 import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleSelectButtons,handleVariantButtonHover} from "../../utils/handleEvents.js"
 import { getPostsBy } from '../../components/_/Blog/_/lib/api'
 import BlogCategory from '../../components/_/Blog/BlogCategory'
+import EditMongoForm from "../admin/school/EditMongoForm.jsx"
 
 
 // type Props = {
 //     ecommercePosts: Post[]
 // }
 
-function Ecommerce({categoryPosts}) {
+function Ecommerce({categoryPosts,models={}}) {
     const {myLoader, setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
     , id=3
     , headings = {
         h3:"CATÉGORIE: \"LIBRARIE PUISSANCE DIVINE D'AMOUR\""
     }
+    , handleUpdate = (e,item) => {
+        e.stopPropagation()
+        alert(item)
+        console.log(item);
+        setCurrentDatas(item)
+        modal.classList.add('active')
+        document.querySelectorAll('#modal .modal___main>form').forEach(elt=>{elt.classList.remove('active')})
+        document.querySelector('#modal .modal___main>form.ecommerce_update').classList.add('active')
+    }
+    , handleDelete = (e) => {
+        console.log(e.target);
+        console.log(e.target.dataset);
+        const doSupp = confirm("Êtes-vous sûr de vouloir supprimer cette photo du diapo ?")
+        if(doSupp)fetch(`/api/diapo?_id=${e.target.dataset._id}&src=${e.target.dataset.src}`, {
+            method: "DELETE"
+        })
+    }
     
     let a
+    , {isAdmin} = useContext(AuthContext)
+    , [currentDatas, setCurrentDatas] = useState({})
 
     useEffect(() => { 
         // console.log(Ecommerce_articles)
@@ -54,6 +74,40 @@ function Ecommerce({categoryPosts}) {
                     <button onClick={handleProductsDisplay} className="active">▢</button>
                     <button onClick={handleProductsDisplay}>─</button>
                 </div>
+                {isAdmin.toString()}
+                { isAdmin && <>
+                    <button 
+                        title={"Ajouter une produit au ecommerce"}
+                        onClick={e=>{
+                            modal.classList.add('active')
+                            document.querySelector('#modal .modal___main>form.ecommerce').classList.add('active')
+                        }}
+                    >+</button>
+                    {
+                        createPortal(
+                            <EditMongoForm 
+                                // endpoint="ecommerce"
+                                modelKey={"ecommerce"} 
+                                model={models?.schemaEcommerce?.paths || {}} 
+                                // joinedDatasProps={{classes: ecole_classes}} 
+                            />
+                            , document.querySelector('#modal .modal___main')
+                        )
+                    }
+                    {
+                        createPortal(
+                            <EditMongoForm 
+                                // hiddens={{identifiant:"home_0"}}
+                                // endpoint="diapo"
+                                modelKey={"ecommerce"} 
+                                model={models?.schemaEcommerce?.paths || {}} 
+                                datas={currentDatas}
+                                // joinedDatasProps={{classes: ecole_classes}} 
+                            />
+                            , document.querySelector('#modal .modal___main')
+                        )
+                    }
+                </>}
                 <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}}>Objets de piété</button>
                 <select id="ecommerce_select" onChange={handleSelect}>
                     <option value="all">Choisir un type d&apos;article</option>
@@ -89,7 +143,14 @@ function Ecommerce({categoryPosts}) {
                         // if(item.id_produits==15)console.log(option)
 
                         return <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')} key={"figure_"+i}>
-                                <ModalProduct {...{myLoader, item, setCartBox, option, handleAddToCart, img:"img/vente-religieuse/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} />
+                                <ModalProduct {...{
+                                    myLoader
+                                    , item
+                                    , setCartBox
+                                    , option
+                                    , handleAddToCart
+                                    , img:"img/vente-religieuse/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"
+                                }} />
                                 <Image
                                     loader={myLoader}
                                     src={"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}
@@ -104,6 +165,10 @@ function Ecommerce({categoryPosts}) {
                                             {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
                                         </>
                                     }
+                                    { isAdmin && <ul>
+                                        <li onClick={(e)=>{alert('ok');handleUpdate(e,item);alert('wesh')}}>edit</li>
+                                        <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>delete</li>
+                                    </ul>}
                                 </button>
                                 <figcaption title={item.fr}>{item.fr__}</figcaption>
                                 {/* <figcaption dangerouslySetInnerHTML={{__html: item.fr}} title={item.fr_}></figcaption> */}
@@ -127,7 +192,7 @@ function Ecommerce({categoryPosts}) {
                                         data-price={item.prix}
                                         title={"Ajouter au panier"}
                                     ></button>
-                                    <button className="showArticleModal" onClick={handleModalShowProduct} title={"Afficher article"}>🔎</button>
+                                    <button className="showArticleModal" onClick={e=>{handleModalShowProduct(e);}} title={"Afficher article"}>🔎</button>
                                 </section>
                         </figure>
                     })

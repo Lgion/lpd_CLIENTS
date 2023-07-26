@@ -10,7 +10,7 @@ import BlogPost from './BlogPost'
 const BLOG_NAME = "BOLOBI"
 
 
-export default function BlogCategory({categoryPosts,headings}) {
+export default function BlogCategory({categoryPosts,headings,className=""}) {
 
     // console.log(categoryPosts);
     
@@ -31,7 +31,7 @@ export default function BlogCategory({categoryPosts,headings}) {
             </Head> */}
             {/* <button id="do_blog_btn" onClick={handleBtn}>AFFICHER LE BLOG</button> */}
             {/* <Container> */}
-            <div id="blog_container" className="container mx-auto px-5">
+            <div id="blog_container" className={"container mx-auto px-5 "+className}>
                 {/* <Intro /> */}
                 <h2>ARTICLES DU BLOG DE {BLOG_NAME}</h2>
                 <h3>{headings?.h3 || ".....VALEUR PAR DÉFAUT....."}</h3>

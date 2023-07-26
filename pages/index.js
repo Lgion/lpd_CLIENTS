@@ -1,17 +1,22 @@
 import {useState, useEffect, useContext} from 'react'
 import Head from "next/head"
 import Image from "next/image"
+import mongoose from 'mongoose'
 import AuthContext from "../stores/authContext.js"
 import Carousel from "../components/_/Carousel"
 import BestSellers from "../components/_/BestSellers"
 import CTA from "../components/_/CTA"
 import { getAllPosts } from '../components/_/Blog/_/lib/api'
+// import { getPostsBy } from '../components/_/Blog/_/lib/_/api'
 import BlogPostEnAvant from './_/BlogPostEnAvant'
+import Slider from "./api/_/models/Slider"
 
 import Nav from "../components/Nav"
 // import styles from '../styles/Home.module.css'
 
-export default function Home({onePosts}) {
+export default function Home({onePosts,diapos}) {
+  console.log(diapos);
+// export default function Home({no,ok}) {
   // const {ok} = useContext(AuthContext)
 
   /*
@@ -22,6 +27,8 @@ export default function Home({onePosts}) {
     setRand(Math.ceil(Math.random()*allPosts.length))
   }, [])
   */
+  // console.log(new studentSchema().schema.paths);
+  // console.log(new mongoose.model("Eleves_Ecole_St_Martin").schema);
   
   return (
     <>
@@ -42,7 +49,7 @@ export default function Home({onePosts}) {
 						<p>En effet, l&apos;objectif premier de la <strong>puissance divine d&apos;abidjan</strong> et d&apos;affermir la foi des <strong>fidèles chrétiens</strong> et les amener à <strong>prier l&apos;esprit-saint</strong>.</p>
 						<p>La <strong>puissance divine</strong> oragnise des <strong>retraites spirituelles</strong>, des <strong>enseignements spirituels</strong> ainsi que la <strong>vente en ligne</strong> d&apos;<strong>articles religieux et spirituels</strong>.</p>
 				</article>
-        <Carousel />
+        <Carousel diapos={diapos} />
         <BestSellers />
         <CTA />
         {/* {console.log(rand)}
@@ -63,10 +70,38 @@ export const getStaticProps = async () => {
   const allPosts = getAllPosts()
   , onePosts = allPosts[Math.ceil(Math.random()*allPosts.length)]
   console.log("ooo");
+  console.log(onePosts);
   console.log(allPosts);
 
+  const db = await mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'))
+  // console.log(Object.keys(db));
+  // console.log(db.modelNames());
+  let diapos = await db?.model("Diapos_slider")
+    ?.find({"identifiant_$_hidden": "home_0"})
+    ?.then(r=>{
+      console.log(r)
+      return r
+    }) || []
+  diapos = JSON.parse(JSON.stringify(diapos))
+
+  
+  // const response = await fetch('/api/ecole');
+  // const data = await response.json();
+  console.log('lkpokpk');
+  // console.log(data);
+
   return {
-      props: { onePosts },
+      props: { 
+        onePosts
+        , diapos
+      },
   }
 }
 

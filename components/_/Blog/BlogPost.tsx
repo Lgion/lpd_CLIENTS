@@ -44,10 +44,11 @@ const BlogPost = ({
             {title}
           </Link>
         </h3>
-        <div>
-          Le <DateFormatter dateString={date} />, par&nbsp;<Avatar name={author.name} picture={author.picture} />
-        </div>
         <p className="">{excerpt}</p>
+        <div>
+          <p>Le&nbsp;<DateFormatter dateString={date} />&nbsp;</p>
+          Édité par&nbsp;<Avatar name={author.name} picture={author.picture} />&nbsp;
+        </div>
       </section>
     </section>
   )

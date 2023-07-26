@@ -13,6 +13,7 @@ exports.createReservation = (req, res, next) => {
   console.log(req.body)
   console.log(typeof req.body)
   console.log(typeof req.body.reservation)
+  // console.log(Reservation.schema.paths)
   console.log('oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
   const reservationObject = req.body.reservation
   console.log('2oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')

@@ -32,7 +32,7 @@ export default function LieuxActivites({categoryPosts}) {
             <SliderInArticle carousel={carouselBolobi} carouselName="carouselBolobi_spirituel" />
             <LocateBolobi />
             <ReserveForm />
-            <BlogCategory {...{categoryPosts,headings}} />
+            <BlogCategory {...{categoryPosts,headings,className:"sndr"}} />
         </main>
     </>
 }

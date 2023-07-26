@@ -8,8 +8,8 @@ type Props = {
 const Avatar = ({ name, picture }: Props) => {
   return (
     <Link href="#" className="author">
-      <img src={picture} className="" alt={name} />
       <span className="">{name}</span>
+      <img src={picture} className="" alt={name} />
     </Link>
   )
 }

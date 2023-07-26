@@ -15,5 +15,8 @@ const reservationSchema = mongoose.Schema({
   participants: { default:1, type: Number, required: true },
   message: { default:"", type: String },
 })
-
-module.exports = mongoose.model('Reservation_PDA', reservationSchema)
+const ok = mongoose.model('Reservation_PDA', reservationSchema)
+// console.log("ok.schema.paths")
+// console.log(ok.schema.paths)
+// console.log("ok.schema.paths")
+module.exports = ok
