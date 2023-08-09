@@ -51,6 +51,7 @@ function BestSellers() {
     return (
         // <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')}>
         <article className={"bestseller"}>
+            <h3>MISE EN AVANT D'UN BEST-SELLER DE NOTRE ECOMMERCE: </h3>
                 {/* <ModalProduct {...{myLoader, bestSellersArticles.item, setCartBox, bestSellersArticles.option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} /> */}
                 <Image
                     loader={myLoader}

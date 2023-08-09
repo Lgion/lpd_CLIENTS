@@ -80,6 +80,10 @@ textarea{
   min-height:150px;
 }
 
+
+
+$slick_minHeight: 300px;
+$slick_maxHeight: 500px;
 .slick-slider.slick-initialized{
   width: 100%;
   >button{
@@ -98,22 +102,57 @@ textarea{
     }
   }
   >div.slick-list{
-    height: 700px !important;
+    min-height: $slick_minHeight;
+    max-height: $slick_maxHeight;
+    height: auto !important;
     >.slick-track{
       display: flex;
       align-items: center;
       height: 100%;
       >div.slick-slide{
         height: 100%;
+        max-height: $slick_maxHeight;
         >div{
+          width: 100% !important;
           height: 100%;
-          >section{
-            height: 100%;
-            width: 45%;
-            >h1{}
-            >h4{}
-            >p{}
-            >img{object-fit: contain;}
+          max-height: $slick_maxHeight;
+          // >section{ 
+          //   height: 100%;
+          //   width: 45%;
+          //   >h1{}
+          //   >h4{}
+          //   >p{}
+          //   >img{object-fit: contain;}
+          // }
+          >*{
+            height:100%;
+            max-height: $slick_maxHeight;
+            >ul.admin{
+              position: absolute;
+              background: white;
+              display: flex;
+              gap: 1em;
+              border:solid;
+              >li{
+                padding: 1em;
+                cursor:pointer;
+                &:hover{
+                  color:red;
+                  background:wheat;
+                }
+              }
+            }
+          }
+          section{}
+          figure{}
+          h1{}
+          h4{}
+          p{}
+          img{
+            height:100%;
+            max-height: $slick_maxHeight;
+            object-fit: cover;
+            // object-fit: contain;
           }
         }
       }
@@ -624,9 +663,9 @@ body{
         &.carousel{
           border-bottom: solid;
           figure{
-              height: 555px;
+              height: 100%;
               img{
-                width:555px;
+                width:100%;
                 object-fit:contain;
               }
           }
@@ -656,7 +695,7 @@ body{
         }
       }
       >article{
-        text-align: center;
+        text-align: justify;
       }
       &.home{
         >*{
@@ -668,7 +707,16 @@ body{
           &.bestseller{
             position: relative;
             display: flex;
+            flex-flow:wrap;
             height: 30em;
+            >*:not(h3){
+              height: calc(100% - 1.2rem) !important;
+            }
+            >h3{
+              width:100%;
+              text-align: center;
+              text-decoration: underline;
+            }
             >img{
               position: relative !important;
               color: transparent;
@@ -680,6 +728,8 @@ body{
               &.details{
                 padding:1em;
                 position: relative;
+                width: 50%;
+                overflow-y:scroll;
                 >h2{margin-bottom: 1em;}
                 >button{
                   position: absolute;
@@ -695,12 +745,13 @@ body{
                 flex-flow: column;
                 gap: 1em;
                 font-size: 2em;
-                position: absolute;
-                bottom: 0;
-                right: 0;
-                height: calc(100% - 1em);
+                width: 20%;
+                // position: absolute;
+                // bottom: 0;
+                // right: 0;
+                // height: calc(100% - 1em);
                 justify-content: flex-end;
-                padding: 0 1em 1em 2em;
+                padding: 0 1em 1em;
                 border-left: solid;
                 >input{
                   width: 100px;
@@ -1016,12 +1067,13 @@ body{
       }
       &.sanctuaire_ndr{
         >article{
+          padding:2em;
           >.slick-slider.slick-initialized{
             >button{}
             >.slick-list{}
           }
         }
-        >section{
+        >section:not(.bolobiSliders){
           display: flex;
           height: 400px;
           padding: 1em 0.25em;
@@ -1137,11 +1189,19 @@ body{
             justify-content: center;
             display: flex;
             flex-flow: wrap;
-            >h1{text-align: center;}
-            >p{}
-            >h1,p{width:100%;}
-            >img{object-fit: contain;}
-            >button{}
+            gap:1em;
+            >img{
+              width:30%;
+            }
+            >section{
+              width:60%;
+              text-align: justify;
+              >h2,>h3{text-align: center;}
+              >p{}
+              >h1,p{width:100%;}
+              >img{object-fit: contain;}
+              >button{}
+            }
           }
           >form{
             max-height: 1000px;
@@ -1163,10 +1223,21 @@ body{
           }
         }
         >article{
-          display: flex;
-          justify-content: space-between;
-          flex-flow: wrap;
-          gap:5%;
+          &.bolobiSliders{
+            display: flex;
+            justify-content: space-between;
+            flex-flow: wrap;
+            gap:5%;
+          }
+          text-align: justify;
+          >ul{
+            list-style: circle;
+            padding:.5em 1em;
+          }
+          >video{
+            margin: 0 auto;
+            width: 50%;
+          }
         }
         >button{
           display: block;

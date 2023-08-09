@@ -97,16 +97,18 @@ const StudentForm = ({ model, modelKey, joinedDatasProps, endpoint, hiddens={}, 
         console.log(obj);
         alert(multi)
 
-        fetch(`/api/${endpoint?endpoint:modelKey}?_id=${datas?._id}`, settings)
+        fetch(`/api/${endpoint?endpoint:modelKey}`+(datas?`?_id=${datas?._id}`:""), settings)
         .then(r=>r.json())
         .then(data=>{
             console.log(data);
             if(multi){
+                console.log(datas);
+                console.log(datas?.src_$_file);
                 alert('in multi')
                 settings.headers = {}
                 settings.body = ___formData
                 settings.method = "POST"
-                fetch(`/api/media?src=${datas?.src_$_file}`, settings)
+                fetch(`/api/media`+(datas?`?src=${datas?.src_$_file}`:""), settings)
                     .then(r=>r.json())
                     .then(dataMedia=>{
                         console.log(dataMedia);

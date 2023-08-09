@@ -22,7 +22,8 @@ import {createPortal} from "react-dom"
 
 
 
-export default function Carousel({diapos}) {
+export default function Carousel({diapos, titre}) {
+    // alert(diapos)
     let {settingsSlider} = useContext(AuthContext)
     , {isAdmin} = useContext(AuthContext)
     , [h3, setH3] = useState("TROUVER UN TITRE")
@@ -49,6 +50,7 @@ export default function Carousel({diapos}) {
     // console.log(models);
     
     useEffect(() => {
+        setH3(titre)
         let ok = async () => {
           const ok = await fetch("/api/diapo")
           , data = await ok.json()
@@ -110,16 +112,18 @@ export default function Carousel({diapos}) {
                 {/* {this.setState({h2:carouselHome[0][1]})} */}
                 {diapos?.map((item,i) => <figure key={"carousel"+i}>
                 {/*Array.from(random_indexes).map((item,i) => <figure key={"carousel"+i}>*/}
-                    { isAdmin && <ul>
-                        <li onClick={e=>{alert('ok');handleUpdate(e,item)}}>edit</li>
-                        <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>delete</li>
+                    { isAdmin && <ul className="admin">
+                        <li onClick={e=>{alert('ok');handleUpdate(e,item)}}>✎</li>
+                        <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>🗑️</li>
+                        {/* <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>🗑</li> */}
                     </ul>}
                     <Image
                         loader={myLoader}
                         src={item.src_$_file}
                         alt={item.alt}
                         title={item.title}
-                        width={200}                                    height={200}
+                        width={200}
+                        height={200}
                     />
                     <figcaption>
                         <h3>{item.title}</h3>

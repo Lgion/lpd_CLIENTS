@@ -69,6 +69,7 @@ export default function Donation() {
 
   return <section>
     <article>
+      {/*
       <h1>ÉCOLE SAINT MARTIN DE PORÈZ DE BOLOBI</h1>
       <p>Voici une description attractive de l&acute;école</p>
       <Image
@@ -78,6 +79,29 @@ export default function Donation() {
           alt={"Les élèves de l'école de bolobi posent pour la mamie Mme ACHI"}
           width={200} height={400}
       />
+      */}
+      <h2><u>BOLOBI:</u> Un sanctuaire chrétien, son activité caritative, et de leur financement économique.</h2>
+      <Image
+          key={"ecole_bolobi_eleves_pose"}
+          loader={myLoader}
+          src={"/img/_/ecole-primaire-bolobi/photo-classe-ecole-bolobi.jpg"}
+          alt={"Les élèves de l'école de bolobi posent pour la mamie Mme ACHI"}
+          width={200} height={400}
+      />
+      <section>
+        <h3>L'Oeuvre caritative du sanctuaire: l'école Saint Martin de Porrèz</h3>
+        <p>L'école Saint Martin de Porrèz est une école primaire gratuite basé à Bolobi. Cette école est en premier lieu à l'endroit des enfants des travailleurs agricoles des alentours de bolobi (proche yakasseme).</p>
+        <p>
+          Le sanctuaire Notre Dame de Bolobi a ouvert l'école Saint Martin de Porrez en septembre 2020 avec une classe, le CP1.
+          L'objectif du sanctuaire est d'ouvrir toutes les classes du primaire à raison d'une nouvelle classe supplémentaire chaque année. Selon cette objectif nous devrions être reconnu par l'Etat pour l'année scolaire 2025-2026.
+        </p>
+        <p>
+          Un internat et une cantine sont à la disposition des élèves de l'école, actifs depuis septembre 2021.
+          <br/>Pour l'internat nous demandons un financement à auteur de 5000F mensuel aux parents d'élèves
+          <br/>Pour la cantine scolaire, nous nourrissons gratuitement tous les élèves de l'école Saint Martin de Porrèz. Les internes ont en plus le petit-déjeuner.
+        </p>
+      </section>
+
       <button id="do_donation_btn" className="btn3DSimple02" onClick={handleBtn}>FAIRE UN DON</button>
     </article>
     <form id="form_donation" onSubmit={handleSubmit}>

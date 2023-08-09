@@ -8,7 +8,7 @@ export default function PresentationBolobi({carousel, carouselName}) {
     let it
 
     
-    return <article>
+    return <section className="bolobiSliders">
             <Slider {...settingsSlider} >
                 {carousel.map((value) =>{
                     for(it in value){
@@ -27,5 +27,5 @@ export default function PresentationBolobi({carousel, carouselName}) {
                     return value
                 })}
             </Slider>
-    </article>
+    </section>
 }

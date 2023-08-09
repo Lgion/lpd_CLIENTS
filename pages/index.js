@@ -45,11 +45,24 @@ export default function Home({onePosts,diapos}) {
         {/* {ok} */}
         {/* <Nav /> */}
         <article>
-						<p>La <strong>librairie puissance divine</strong>, 2plateaux rue des jardins <strong>cocody</strong> <strong>d&apos;abidjan  côte d&apos;ivoire</strong>, est une <strong>librairie religieuse chrétienne catholique</strong> à but apostolique.</p>
+          
+          <p>Bienvenue sur le site web du sanctuaire Notre Dame du Rosaire de Bolobi</p>
+          <p>Nous sommes là pour éveiller votre fois chrétienne sur tous les plans grâce aux divers services que nous vous proposons.</p>
+          <p>En effet, le Sanctuaire Notre Dame du Rosaire de Bolobi est oecuménique et permet à ses fidèles chrétiens de se recueillir individuellement ou en groupe sur le lieu de <a href="" target="_blank">Bolobi</a> et d'y séjourner plusieurs jours grâce à ses solutions d'hébergement et de restauration pour 100 à 150 pélerins. 
+          {/* Nous offrons gracieusement une recollections mensuelle  */}
+          </p>
+          <p>Le sanctuaire entretien en son lieu une activité caritative en l'école Saint Martin de Porrèz. Celle-ci a démarré en septembre 2020 avec une classe de CP1, et a vocation à terme d'être reconnu par l'institut de l'éducation de Côte d'Ivoire.</p>
+          <p>Afin de financer le fonctionnement du sanctuaire et de ses activités caritatives, certaines activités économique ont lieu sur le lieu de Bolobi, comme l'agriculture, l'élevage, l'accueil des retraitants, et les dons d'institutions philantropes ou de fidèles chrétiens.</p>
+          
+          <ul>
+            <li></li>
+            <li></li>
+          </ul>
+						{/* <p>La <strong>librairie puissance divine</strong>, 2plateaux rue des jardins <strong>cocody</strong> <strong>d&apos;abidjan  côte d&apos;ivoire</strong>, est une <strong>librairie religieuse chrétienne catholique</strong> à but apostolique.</p>
 						<p>En effet, l&apos;objectif premier de la <strong>puissance divine d&apos;abidjan</strong> et d&apos;affermir la foi des <strong>fidèles chrétiens</strong> et les amener à <strong>prier l&apos;esprit-saint</strong>.</p>
-						<p>La <strong>puissance divine</strong> oragnise des <strong>retraites spirituelles</strong>, des <strong>enseignements spirituels</strong> ainsi que la <strong>vente en ligne</strong> d&apos;<strong>articles religieux et spirituels</strong>.</p>
+						<p>La <strong>puissance divine</strong> oragnise des <strong>retraites spirituelles</strong>, des <strong>enseignements spirituels</strong> ainsi que la <strong>vente en ligne</strong> d&apos;<strong>articles religieux et spirituels</strong>.</p> */}
 				</article>
-        <Carousel diapos={diapos} />
+        <Carousel diapos={diapos} titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} />
         <BestSellers />
         <CTA />
         {/* {console.log(rand)}
@@ -83,9 +96,13 @@ export const getStaticProps = async () => {
   .catch(() => console.log('Connexion à MongoDB échouée !'))
   // console.log(Object.keys(db));
   // console.log(db.modelNames());
-  let diapos = await db?.model("Diapos_slider")
+  // console.log(mongoose.modelNames());
+  // console.log(mongoose.models);
+  // console.log(db);
+  let diapos = await mongoose?.model("Diapos_slider")
     ?.find({"identifiant_$_hidden": "home_0"})
     ?.then(r=>{
+      console.log("HELOOOOOOOOOOOOOOOOOOO");
       console.log(r)
       return r
     }) || []
@@ -95,6 +112,8 @@ export const getStaticProps = async () => {
   // const response = await fetch('/api/ecole');
   // const data = await response.json();
   console.log('lkpokpk');
+  console.log(diapos);
+  console.log('222lkpokpk');
   // console.log(data);
 
   return {

@@ -70,11 +70,12 @@ export default function Hgroup() {
                         // fill="layout"
                     />
             </Link>
-            <span>Puissance Divine</span>
+            {/* <span>Puissance Divine</span> */}
         </h1>
         <h2>
-            <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
-            <strong>Assistance spirituelle</strong>
+            SANCTUAIRE Notre Dame du ROSAIRE de Bolobi
+            {/* <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
+            <strong>Assistance spirituelle</strong> */}
         </h2>
     </>
 }

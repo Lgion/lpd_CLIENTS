@@ -46,8 +46,10 @@ const handler = async (req,res,next) => {
     console.log(req.query);
     if(req.query.src){
         fs.unlink(path.join(process.cwd(), "/public", req.query.src), (err) => {
-            if(err)
+            if(err){
+                console.log("ok errorrr ohh");
                 console.log(err);
+            }        
         })
     }
     if(req.method == "POST" || req.method == "PATCH"){
@@ -55,9 +57,12 @@ const handler = async (req,res,next) => {
         try{
             await fs.readdir(path.join(process.cwd()+"/public","/images"))
         }catch(err){
+            console.log("ok errorrr");
             await fs.mkdir(path.join(process.cwd()+"/public","/images"))
         }
         await readFile(req,true)
+        console.log("ok done");
+
         res.json({done: "fichier écrit ;)"})
     }
 }

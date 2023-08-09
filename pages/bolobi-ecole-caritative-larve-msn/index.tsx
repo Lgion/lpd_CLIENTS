@@ -29,7 +29,24 @@ export default function Index({ categoryPosts }: Props) {
       </Head>
       <main className="bolobi">
         <Donation/>
-        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_" />
+        <hr />
+        <article>
+          <h2>Les activités économique qui financent BOLOBI: </h2>
+          <p>
+            Le sanctuaire Notre Dame de Bolobi et son activité caritative, l'école Saint Martin de Porrèz, sont financés via 4 biais principaux: 
+          </p>
+          <ul>
+            <li><b><u>Agriculture</u></b> (potagers, champs de poivre et de cacao, palmeraie, et maïs entre autres)</li>
+            <li><b><u>Elevage</u></b> (de poulet de chair et de ponte)</li>
+            <li><b><u>Hébergement et service de restauration</u></b> pour les retraitants</li>
+            <li><b><u>Dons</u></b> (nature, et espèces)</li>
+          </ul>
+          <p>Ci-dessous une vidéo et des diaporamas qui récapitulent et illustrent les activités du sanctuaire de Bolobi: </p>
+          <video src=""></video>
+        </article>
+        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_fields" />
+        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_feeds" />
+        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_locations" />
         <BlogCategory {...{categoryPosts,headings}} />
       </main>
       
