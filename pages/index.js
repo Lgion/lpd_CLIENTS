@@ -80,7 +80,7 @@ export default function Home({onePosts,diapos}) {
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts()
+  const allPosts = await getAllPosts()
   , onePosts = allPosts[Math.ceil(Math.random()*allPosts.length)]
   console.log("ooo");
   console.log(onePosts);

@@ -58,7 +58,7 @@ export default function Index({ categoryPosts }: Props) {
 
 export const getStaticProps = async () => {
   console.log("uuuuu");
-  const categoryPosts = getPostsBy(
+  const categoryPosts = await getPostsBy(
     "category"
     , "ecole"
   )

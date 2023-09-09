@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
   return {paths,fallback:true}
 }
 export async function getStaticProps({params}){
-  const client = createClient({
+  const client = await createClient({
     accessToken: process.env.CONTENFUL_ACCESS_KEY,
     space: process.env.CONTENFUL_SPACE_ID,
   })

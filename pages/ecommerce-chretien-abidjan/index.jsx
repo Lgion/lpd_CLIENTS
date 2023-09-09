@@ -212,7 +212,7 @@ function Ok(){
 }
 
 export const getStaticProps = async () => {
-    const categoryPosts = getPostsBy(
+    const categoryPosts = await getPostsBy(
       "category"
       , "librairie"
     )

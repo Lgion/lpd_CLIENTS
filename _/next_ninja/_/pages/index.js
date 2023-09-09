@@ -3,7 +3,7 @@ import RecipeCard from "../components/RecipeCard"
 
 export async function getStaticProps(){
 
-  const client = createClient({
+  const client = await createClient({
     space: process.env.CONTENFUL_SPACE_ID,
     accessToken: process.env.CONTENFUL_ACCESS_KEY
   })
