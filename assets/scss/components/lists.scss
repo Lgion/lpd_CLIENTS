@@ -197,7 +197,7 @@ $listChoice: listChoice();
     }
     &__card {
         // $cardsCoeur:()
-        // @extend .cardsCoeur;
+        // @extend %cardsCoeur;
     }
 }
 @mixin listCards($paramMixin: $listCards){
