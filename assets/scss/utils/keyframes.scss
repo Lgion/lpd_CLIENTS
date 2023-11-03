@@ -10,3 +10,15 @@ body{background-color: red;}
         border: 5px solid gold;
     }
 }
+@keyframes bolobi_texte{
+    0%{
+        background-image: linear-gradient(45deg, #ff0000, #00ff00);
+  background-size: 400% 400%;
+  transition-property: background-image, background-size;
+  transition-duration: 2s;
+    }
+    100%{
+        background-image: linear-gradient(45deg, #0000ff, #ff00ff);
+        background-size: 300% 300%;
+    }
+}

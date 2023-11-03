@@ -7,12 +7,13 @@ export default function HeaderAdmin() {
 
   const { adminMenuActive, setAdminMenuActive } = useContext(AdminContext)
   , pathname = usePathname()
+  if(pathname){
   if(pathname.indexOf('/admin/school')==0)setAdminMenuActive('school')
   if(pathname.indexOf('/admin/ecommerce')==0)setAdminMenuActive('ecommerce')
   if(pathname.indexOf('/admin/sanctuaire')==0)setAdminMenuActive('sanctuaire')
   if(pathname.indexOf('/admin/blog')==0)setAdminMenuActive('blog')
   // console.log(pathname);
-  
+  }
   return (
     <header>
       <menu className="mainMenu">
