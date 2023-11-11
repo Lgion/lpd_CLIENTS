@@ -6,6 +6,7 @@ import Subscribe from "./_/Subscribe.jsx"
 import MenuMain from "./_/MenuMain.jsx"
 import Hgroup from "./_/Hgroup.jsx"
 import SNS from "./_/SNS.jsx"
+import Playbox from "./_/Playbox.jsx"
 import MenuSecondary from "./_/MenuSecondary.jsx"
 import AuthContext from "../stores/authContext.js"
 
@@ -39,6 +40,7 @@ export default function Header() {
         </>}
         {/* <Subscribe /> */}
         {/* <MenuSecondary /> */}
-        <aside></aside>
+        <Playbox />
+        <h2 className="page_slogan">Titre contextuel au menu sélectionné</h2>
     </header>
 }

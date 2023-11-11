@@ -5,8 +5,14 @@ import AdminContext from "../stores/adminContext.js"
 
 export default function HeaderAdmin() {
 
-  const { adminMenuActive, setAdminMenuActive } = useContext(AdminContext)
+  console.log("\n\n\n\n")
+  console.log(usePathname())
+  console.log("\n\n\n\n")
+  
+  let { adminMenuActive, setAdminMenuActive } = useContext(AdminContext)
   , pathname = usePathname()
+  pathname = pathname || ""
+
   if(pathname.indexOf('/admin/school')==0)setAdminMenuActive('school')
   if(pathname.indexOf('/admin/ecommerce')==0)setAdminMenuActive('ecommerce')
   if(pathname.indexOf('/admin/sanctuaire')==0)setAdminMenuActive('sanctuaire')

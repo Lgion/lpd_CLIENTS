@@ -1,5 +1,30 @@
 /**/
 
+h1{
+    font-family: Kenia;
+}
+h2{
+    font-family: Agbalumo;
+    @include mobile-only{
+      font-size:2em !important;
+    }
+}
+h3{
+    font-family: "Indie Flower";
+    font-size: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+h4{
+    font-family: "Shippori Mincho";
+    font-size: 30px;
+}
+h5{
+    // font-family: ;
+}
+// h6{}
+
+
 
 $XS: 5px;
 $S: 10px;
@@ -22,8 +47,15 @@ $titres: 'typography des titre';
 $contenus: 'typography des contenus';
 
 $primary:#9356DC;
-$secondary:#FF79DA;
-$ternary:#99E2D0;
+// $secondary:#1397EB;
+$secondary:#1F4EEA;
+$secondary_1:#2989d8;
+$secondary_2:#a1e1f480;
+$ternary:goldenrod;
+$ternary_1:#EBE813;
+$ternary_2:#96943E;
+$fourth:#cc0000;
+$fourth_1:#ff59004d;
 
 $color-primary: $black;
 $color-secondary: $dark2;

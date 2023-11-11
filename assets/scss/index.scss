@@ -1,6 +1,11 @@
 @import "./main.scss";
 @import "./admin.scss";
 
+// @font-face {
+//   font-family:"Agbalumo";
+//   src: url("/font/Agbalumo/Agbalumo-Regular.ttf") format("truetype");
+// }
+
 /*
 .btn-radio{
   cursor: pointer
@@ -60,7 +65,7 @@
 %addToCart{
   // width: 100px;
   // height:40px;
-  background: url(../img/addToCart.png) center center no-repeat;
+  background: url(../img/addToCart.png) center center no-repeat, $fourth;
   background-size: contain;
   // border-radius:10px;
 }
@@ -162,10 +167,12 @@ $slick_maxHeight: 500px;
 }
 div#blog_container{
   // &:not(.on){display: none !important;}
+  padding: 2em;
   >h2{}
   >h3{}
   >h2,h3{}
   >section{
+    background:silver;
     position: relative;
     display: flex;
     gap: 50px;
@@ -175,31 +182,58 @@ div#blog_container{
     border:1px dotted;
     border-radius: 5px;
     transition: box-shadow .5s;
-    &:hover{box-shadow: 0 0 10px 1px;}
+    
+    &:hover{
+      box-shadow: 0 0 10px 1px;
+      >section{
+        background: white;
+        box-shadow: 0 0 10px 1px white, 0 0 15px 3px white, 0 0 20px 5px white;
+        >p{
+          font-size: 1.3em;
+        }
+        >div{
+          top:-70px;
+          z-index: 1;
+        }
+      }
+    }
     >a{
       width: 40%;
+      z-index: 2;
       >img{height:100%;}
     }
     >section{
       width: 60%;
+      padding: .5em;
+      padding-left: 1em;
+      transition: background .4s;
       >h3{
         font-size: 2.5em;
+        line-height: 1em;
         >a{}
       }
-      >p{}
+      >p{transition: font-size .4s;}
       >div{
         display: flex;
         align-items: center;
         position: absolute;
-        bottom: 0;
-        right: 0;    
+        top: -50px;
+        left: 0;    
+        z-index: -1;
+        transition:top .2s;
+        background: gray;
+        box-shadow: 0 0 10px 1px;
+        border-top-right-radius: 5px;
         >time{}
         >a{
           display: flex;
-          flex-flow: column;
+          flex-flow: column wrap;
+          height:70px;
           align-items: center;
           bottom:1em;
           right: 1em;
+          font-size:.8em;
+          // justify-content: flex-end;
           >img{width: 75px;}
           >span{}
         }
@@ -233,8 +267,8 @@ body{
     width: 14.2%;
     z-index: -1;
   }
-  &:before{left: 0;background: linear-gradient(to right,  #1e5799 0%,#2989d8 37%,rgba(161,225,244,.5) 100%);}
-  &:after{right: 0;background: linear-gradient(to right,  rgba(161,225,244,.5) 0%,#2989d8 63%,#1e5799 100%);}
+  &:before{left: 0;background: linear-gradient(to right,  $secondary 0%,$secondary_1 37%,$secondary_2 100%);}
+  &:after{right: 0;background: linear-gradient(to right,  $secondary_2 0%,$secondary_1 63%,$secondary 100%);}
   >div{
     >*{
       position: relative;
@@ -277,20 +311,57 @@ body{
             height: 100%;
             width: 133px;
           }
+          >span{
+            // margin: 0 auto;
+            // width: 60%;
+            // text-align: center;
+            position: absolute;
+            top:3px;
+            left:0;
+            right:0;
+            strong{
+    
+            }
+            @include mobile-only{
+              line-height: .75em;
+            }
+          }
+          @include mobile-only{
+            font-size: .8em;
+            >span{
+              left: 133px;
+              right: 133px;
+            }
+          }
+          &:nth-of-type(2)>span{
+            top:calc(1em + 3px);
+            color:$ternary;
+            text-shadow: 0 0 3px black;
+            @include mobile-only{
+              top: calc(2.5em + 3px);
+            }
+          }
+          &:last-of-type>span{
+            top:calc(2em + 3px);
+            color:$fourth;
+            @include mobile-only{
+              top: calc(4em + 3px);
+            }
+          }
         }
+
+        // ???
+        // ???
+        // ???
         >span{
           position: absolute;
           width: 300px;
           left: calc(50% - 150px);
         }
-      }
-      >h2{
-        margin: 0 auto;
-        width: 60%;
-        text-align: center;
-        strong{
+        // ???
+        // ???
+        // ???
 
-        }
       }
       >div#blogB{
         @extend %menu_elements;
@@ -321,6 +392,9 @@ body{
           width: 50px;
           left:133px;
           top: 0px;
+          @include mobile-only{
+            left:0;
+          }
           >li{
             &#fb>a{
               background: url("/img/fb.svg") center center no-repeat;
@@ -387,6 +461,7 @@ body{
             }
             >a:not([id="panier"]){
               @extend %menu_elements;
+              font-size: unset;
               &::before{
                 transition: all .5s;
                 z-index: -1;
@@ -427,6 +502,9 @@ body{
         display: flex;
         gap:10px;
         justify-content: space-between;
+        @include mobile-only{
+          right:0
+        }
         &.active{
           animation: cta_1 1s linear infinite alternate;
           position: fixed;
@@ -454,7 +532,6 @@ body{
         }
       }
       >a#panier{
-        &:hover{z-index: 10;opacity:1;}
         transition:opacity .5s;
         opacity:.5;
         width: 32px;
@@ -466,6 +543,10 @@ body{
         background: url(../img/cart.png) center no-repeat, rgba(34,105,176,.4);
         border-radius: 0 10px 10px;
         background-size: contain;
+        @include mobile-only{
+          right:0
+        }
+        &:hover{z-index: 10;opacity:1;}
         &.active{
           position: fixed;
           top:2em;
@@ -516,6 +597,14 @@ body{
           }
         }
       }
+      h2.page_slogan{
+        // position: absolute;
+        // bottom: 0;
+        // left: 0;
+        // right: 0;
+        @extend %goa_lrb;
+      }
+      /*
       >div#inscription{
         height:0;
         overflow:hidden;
@@ -553,7 +642,61 @@ body{
           }
         }
       }
-      >aside{}
+      */
+      >aside{
+        >div{
+          position: absolute;
+          bottom:-100px;
+          cursor:pointer;
+          z-index: 1;
+          border:1px solid;
+          width:100px;height:100px;
+          transition:all .4s;
+          @include mobile-only{
+            bottom:-75px;
+            width:75px;height:75px;
+          }
+          &:hover{
+            transform:translateY(-20px)
+          }
+          &.mv{
+            background:$secondary_1;
+            background-size: contain;
+            left: 16px;
+            display: flex;
+            flex-flow: column;
+            justify-content: flex-start;
+            border-top: none;
+            border-color:$secondary;
+            border-radius: 0 0 100px 100px;
+            @include mobile-only{
+              left:0px;
+            }
+            &:hover{
+              box-shadow: 0 0 10px 1px;
+            }
+            >img{
+              width: 70%;
+              margin: 0 auto;
+              filter: drop-shadow(-10px -6px 1px rgba(161, 225, 244, 0.5019607843))
+            }
+            >button{
+              position: relative;
+              bottom: 20px;
+            }
+            
+          }
+          &.yt{
+            right: 16px;
+            background: url(/youtube.png) no-repeat center;
+            background-size: contain;
+            right:16px;
+            @include mobile-only{
+              right:0px;
+            }
+          }
+        }
+      }
     }
     >nav{
       >menu.filAriane{
@@ -567,6 +710,10 @@ body{
         padding: 5px;
         border-radius: 0 5px 0 0;
         background: blueviolet;
+        @include mobile-only{
+          bottom:-30px;
+          border-radius: 0 0 5px 5px;
+        }
         &:hover {
           // background: whitesmoke;
           // padding: 5px;
@@ -578,6 +725,10 @@ body{
           outline:0;
           width: 40px;
           height: 40px;
+          @include mobile-only{
+            width: 20px;
+            height: 20px;
+          }
           background-size: cover !important;
           transition:all .4s;
           // >img{width:30px;}
@@ -590,7 +741,7 @@ body{
             box-shadow: 0 0 10px 4px;
           }
         }
-        >span{margin:1em;}
+        >span{margin:0 1em;}
       }
       >h2.titrePage{
         text-align: center;
@@ -617,19 +768,26 @@ body{
           background: url(/img/fb_pages.svg) center center no-repeat, white;
           background-size: contain;
           display: inline-block;
+          @include mobile-only{
+            bottom:-50px;
+          }
           &:hover{box-shadow: 0 0 10px 1px;}
         }
       }
       >h3.tagzonePage{
         transition: padding .2s;
-        position: relative;
         font-size: .8em;
+        position: relative;
         border: 1px solid red;
         box-shadow: 0 0 3px 0px inset;
         text-align: center;
+        transition: all .4s;
         &:hover {
-            padding: 5px 0;
-            background: rgba(255,10,10,.5);
+          text-shadow: 0 1px 3px black;
+          font-size: 1.1em;
+          color:gold;
+          padding: 5px 0;
+          background: brown;
         }
       }
       :has(+.cl-rootBox) {
@@ -704,91 +862,215 @@ body{
           box-shadow: 0 3px 10px 1px;
         }
         >article{
-          &.bestseller{
-            position: relative;
-            display: flex;
+          &.HomeIntro{
+            padding:1em;
+            >h3{
+              margin-bottom: 1em;
+            }
+            >h4{
+              
+            }
+            >p,>ul{
+              font-family: "Big Shoulders";
+              font-size: 25px;
+              padding-bottom: .25em;
+            }
+            >ul{
+              list-style: disc;
+              padding-left: 2em;
+            }
+            a{}
+          }
+        }
+        >section{
+          display: flex;
+          @include mobile-and-tablette{
             flex-flow:wrap;
-            height: 30em;
-            >*:not(h3){
-              height: calc(100% - 1.2rem) !important;
+          }
+          padding-top: 10em;
+          >article{
+            // flex-basis:33%;
+            width:33%;
+            position: relative;
+            height: 100%;
+            @include mobile-and-tablette{
+              width:100%;
             }
             >h3{
-              width:100%;
-              text-align: center;
-              text-decoration: underline;
+              bottom: 100%;
+              line-height: 1em;
             }
-            >img{
-              position: relative !important;
-              color: transparent;
-              width: 30% !important;
-              object-fit: contain;
-              border-right: solid black;
+            >*:not(h3):not(.buying_details):not(p.safe){
+              height: calc(100% - 1.2rem) !important;
             }
-            >section{
-              &.details{
-                padding:1em;
-                position: relative;
-                width: 50%;
-                overflow-y:scroll;
-                >h2{margin-bottom: 1em;}
-                >button{
-                  position: absolute;
-                  left: -2em;
-                  bottom: .5em;
-                  width: 50px;
-                  height: 50px;
-                  font-size: 2em;
-                }
+            &.esmp{
+              >h3{
+                position:absolute; 
               }
-              &.buying_details{
-                display: flex;
-                flex-flow: column;
-                gap: 1em;
-                font-size: 2em;
-                width: 20%;
-                // position: absolute;
-                // bottom: 0;
-                // right: 0;
-                // height: calc(100% - 1em);
-                justify-content: flex-end;
-                padding: 0 1em 1em;
-                border-left: solid;
-                >input{
-                  width: 100px;
-                }
-                >button.addToCart{
-                  @extend %addToCart;
-                  height: 50px;
-                }
-              }
-            }
-          }
-          &.CTA{
-            >section{
-              text-align: left;
-              padding: 1em 3em;
-              >ul{
-                list-style: circle;
-                padding-left: 2em;
-                display: flex;
-                width: 50%;
+              >img{
+                width: 80%;
                 margin: 0 auto;
-                gap: 5em;
-                >li{
-                  margin-bottom: 1em;
+                aspect-ratio: 9/16;
+              }
+              >p{
+                position: absolute;
+                bottom: 1em;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 1.5em;
+              }
+              
+            }
+            &.bestseller{
+              display: flex;
+              flex-flow:wrap;
+              height: 30em;
+              padding: 1em;
+              box-shadow: 0 0 10px 1px inset black;
+              >*:not(img){
+                position: absolute;
+              }
+              >img{    
+                width: calc(100% - 1em) !important;
+                left: 0.5em !important;
+                top: 0.5em !important;
+                right: 0.5em !important;
+                bottom: 0.5em !important;
+                border-radius: 5px;
+                // position: relative !important;
+                // color: transparent;
+                // width: 30% !important;
+                // object-fit: contain;
+                // border-right: solid black;
+              }
+              
+              >h3{
+                width:100%;
+                text-align: center;
+                text-decoration: underline;
+              }
+              &:hover{
+                >img{
+                  filter: blur(5px);
+                }
+                >section{
+                  opacity: 1;
+                  &.details{
+                  }
+                  &.buying_details{
+                  }
+                }
+              }
+              >section{
+                transition:opacity .2s;
+                opacity: 0;
+                &.details{
+                  top:0;
+                  left:0;
+                  padding:1em;
+                  width: 100%;
+                  overflow-y: scroll;
+                  padding-bottom: 12em;
+                  >h4{
+                    text-shadow:0 1px 3px $fourth;
+                  }
+                  >p{
+                    background:$fourth_1;
+                    color:white;
+                    text-shadow: 1px 1px 2px BLACK;
+                    box-shadow: 0 0 10px 1px inset black;
+                    text-align: justify;
+                    padding: .25em .75em 1.5em;
+                  }
+                  
+                  >button{
+                    position: absolute;
+                    right: 0em;
+                    top: 0em;
+                    width: 35px;
+                    height: 35px;
+                    font-size: 1.5em;
+                  }
+                }
+                &.buying_details{
+                  bottom: 0;
+                  left: 0;
+                  height:40%;
                   display: flex;
                   flex-flow: column;
-                  width: 33%;
-                  >a{
-                    display: inline-block;
-                    text-align: center;
-                    padding:1em;
-                    background: brown;
-                    color:goldenrod;
-                    border-radius: 5px;
-                    &:hover{color:brown;background:goldenrod}
+                  gap: 1em;
+                  font-size: 2em;
+                  width: 100%;
+                  background: rgba(0,0,0,.5);
+                  // position: absolute;
+                  // bottom: 0;
+                  // right: 0;
+                  // height: calc(100% - 1em);
+                  justify-content: flex-end;
+                  padding: 0 1em 1em;
+                  border-left: solid;
+                  >input{
+                    width: 2em;
+                    font-size: 1.7em;
+                    padding: 0.15em;
+                    position: absolute;
+                    left: 0.25em;
+                    bottom: 0.25em;
+                    color:$fourth
                   }
-                  >span{text-align: justify;}
+                  >span.prix{
+                    position: absolute;
+                    top: .25em;
+                    left: .25em;
+                    background: whitesmoke;
+                    padding: 0.1em 0.25em;
+                    border-radius: 5px;
+                    background: $fourth;
+                    color: $ternary_1;
+                  }
+                  >button.addToCart{
+                    @extend %addToCart;
+                    height: 50px;
+                    width: 4.5em;
+                    margin: 0 0 0 auto;
+                    padding: 2em;
+                  }
+                }
+              }
+            }
+            &.CTA{
+              >h3{
+                position: absolute;
+              }
+              >section{
+                text-align: left;
+                padding: 1em 3em;
+                >ul{
+                  list-style: circle;
+                  display: flex;
+                  flex-flow: wrap;
+                  justify-content: center;
+                  width: 100%;
+                  margin: 0 auto;
+                  gap: 1em;
+                  >li{
+                    display: flex;    
+                    flex-basis: 25%;
+                    gap: 1em;
+                    align-items: center;
+                    width: 100%;
+                    >a{
+                      display: inline-block;
+                      text-align: center;
+                      padding:1em;
+                      background: $secondary;
+                      color:$ternary;
+                      border-radius: 5px;
+                      &:hover{color:$secondary;background:$ternary}
+                    }
+                    >span{text-align: justify;}
+                  }
                 }
               }
             }
@@ -1407,7 +1689,7 @@ header:before, main:before, footer:before {
   border-left: solid;
   left: -5px;
   background: rgba(204,0,0,.3);
-  background: linear-gradient(to right, rgb(204,0,0) 0%,rgba(255,89,0,.3) 100%);
+  background: linear-gradient(to right, $fourth 0%,$fourth_1 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(204,0,0)', endColorstr='rgba(255,89,0,.3)',GradientType=1 );
 }
 header:after, #containall:after, footer:after {

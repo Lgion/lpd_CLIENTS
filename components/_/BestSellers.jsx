@@ -51,7 +51,7 @@ function BestSellers() {
     return (
         // <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')}>
         <article className={"bestseller"}>
-            <h3>MISE EN AVANT D'UN BEST-SELLER DE NOTRE ECOMMERCE: </h3>
+            <h3>BEST-SELLERS PUISSANCE DIVINE: </h3>
                 {/* <ModalProduct {...{myLoader, bestSellersArticles.item, setCartBox, bestSellersArticles.option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} /> */}
                 <Image
                     loader={myLoader}
@@ -62,7 +62,7 @@ function BestSellers() {
                     fill={"true"}
                 />
                 <section className="details">
-                    <h2>{bestSellersArticles.item?.fr__}</h2>
+                    <h4>{bestSellersArticles.item?.fr__}</h4>
                     <p className="dimensions">{bestSellersArticles.item?.dimensions}</p>
                     <p>{bestSellersArticles.item?.fr1 != "" ? bestSellersArticles.item?.fr1 : "AUCUNE DESCRIPTION DISPONIBLE POUR CE PRODUIT."}</p>
                     {/* <span>{bestSellersArticles.item.id_produits && JSON.stringify(bestSellersArticles.option)}</span> */}
@@ -77,8 +77,8 @@ function BestSellers() {
                     </button>
                 </section>
                 <section className="buying_details">
-                    <span className="prix">{bestSellersArticles.item?.prix} </span>
                     <input defaultValue="0" className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
+                    <span className="prix">{bestSellersArticles.item?.prix} </span>
                     <button className="addToCart"
                         onClick={(e)=>{handleAddToCart(e,setCartBox, miniCart)}}
                         data-id={bestSellersArticles.item?.id_produits}

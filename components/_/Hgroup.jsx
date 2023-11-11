@@ -44,6 +44,11 @@ export default function Hgroup() {
                         width={200}                                    height={200}
                         // fill="layout"
                     />
+                    <span>
+                        SANCTUAIRE Notre Dame du ROSAIRE de Bolobi
+                        {/* <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
+                        <strong>Assistance spirituelle</strong> */}
+                    </span>
             </Link>
             <Link href="/" 
                 className="imageContextuelMenu" 
@@ -57,6 +62,7 @@ export default function Hgroup() {
                         width={200}                                    height={200}
                         // fill="layout"
                     />
+                    <span>Pour les Oeuvres de Dieu</span>
             </Link>
             <Link href="/" 
                 onClick={()=>{setMenuActive("accueil")}}
@@ -69,13 +75,9 @@ export default function Hgroup() {
                         width={200}                                    height={200}
                         // fill="layout"
                     />
+                    <span>Dans la <span>Communion</span> de l'Esprit-Saint</span>
             </Link>
             {/* <span>Puissance Divine</span> */}
         </h1>
-        <h2>
-            SANCTUAIRE Notre Dame du ROSAIRE de Bolobi
-            {/* <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
-            <strong>Assistance spirituelle</strong> */}
-        </h2>
     </>
 }

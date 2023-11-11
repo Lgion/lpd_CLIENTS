@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from 'next/link'
 import Avatar from './_/avatar'
-import DateFormatter from './_/date-formatter'
 import CoverImage from './_/cover-image'
 import type Author from './_/interfaces/author'
 
@@ -46,8 +45,7 @@ const BlogPost = ({
         </h3>
         <p className="">{excerpt}</p>
         <div>
-          <p>Le&nbsp;<DateFormatter dateString={date} />&nbsp;</p>
-          Édité par&nbsp;<Avatar name={author.name} picture={author.picture} />&nbsp;
+          <Avatar name={author.name} picture={author.picture} date={date} />&nbsp;
         </div>
       </section>
     </section>
