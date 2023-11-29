@@ -78,6 +78,7 @@ export default function LocateBolobi() {
     },[did])
     return (
         <section>
+            <h3>OÙ SE SITUE LE SANCTUAIRE ND ROSAIRE DE BOLOBI</h3>
             <div className="ndr_toggle">
                 <button 
                     className="ndr_toggle_image_map_btn"

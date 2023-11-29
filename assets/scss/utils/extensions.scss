@@ -1,4 +1,8 @@
 
+%w0{width: 0%;}
+%w100{width: 100%;}
+%h0{height: 0%;}
+%h100{height: 100%;}
 %trbl0{top: 0;right: 0;bottom: 0;left: 0;}
 %pa_trbl0{position:absolute;top: 0;right: 0;bottom: 0;left: 0;}
 %pf_trbl0{position:fixed;top: 0;right: 0;bottom: 0;left: 0;}
@@ -75,23 +79,41 @@
 %pr{position: relative;}
 %pf{position: fixed;}
 
+
+
+
 %go_tl{top:0;left:0;}
 %go_tr{top:0;right:0;}
 %go_bl{bottom:0;left:0;}
 %go_br{bottom:0;right:0;}
 %go_tbr{top:0;bottom:0;right:0;}
 %go_tbl{top:0;bottom:0;left:0;}
-%go_lrt{top:0;left:0;right:0;}
-%go_lrb{bottom:0;left:0;right:0;}
+%go_tlr{top:0;left:0;right:0;}
+%go_blr{bottom:0;left:0;right:0;}
+%go_tblr{top:0;bottom:0;left:0;right:0;}
 
-%goa_tl{@extend %pa;top:0;left:0;}
-%goa_tr{@extend %pa;top:0;right:0;}
-%goa_bl{@extend %pa;bottom:0;left:0;}
-%goa_br{@extend %pa;bottom:0;right:0;}
-%goa_tbr{@extend %pa;top:0;bottom:0;right:0;}
-%goa_tbl{@extend %pa;top:0;bottom:0;left:0;}
-%goa_lrt{@extend %pa;top:0;left:0;right:0;}
-%goa_lrb{@extend %pa;bottom:0;left:0;right:0;}
+
+
+%goa_tl{@extend %pa;@extend %go_tl;}
+%goa_tr{@extend %pa;@extend %go_tr;}
+%goa_bl{@extend %pa;@extend %go_bl;}
+%goa_br{@extend %pa;@extend %go_br;}
+%goa_tbr{@extend %pa;@extend %go_tbr;}
+%goa_tbl{@extend %pa;@extend %go_tbl;}
+%goa_tlr{@extend %pa;@extend %go_tlr;}
+%goa_blr{@extend %pa;@extend %go_blr;}
+%goa_lrb{@extend %pa;@extend %go_blr;}
+%goa_tblr{@extend %pa;@extend %go_tblr;}
+
+%gof_tl{@extend %pf;@extend %go_tl;}
+%gof_tr{@extend %pf;@extend %go_tr;}
+%gof_bl{@extend %pf;@extend %go_bl;}
+%gof_br{@extend %pf;@extend %go_br;}
+%gof_tbr{@extend %pf;@extend %go_tbr;}
+%gof_tbl{@extend %pf;@extend %go_tbl;}
+%gof_tlr{@extend %pf;@extend %go_tlr;}
+%gof_blr{@extend %pf;@extend %go_blr;}
+%gof_tblr{@extend %pf;@extend %go_tblr;}
 
 
 %df{display:flex;}

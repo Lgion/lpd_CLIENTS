@@ -12,8 +12,21 @@ import FormContext from "../../../stores/formContext.js"
 
 export default function ReserveForm() {
 
-  const {FieldsetRadioStyled, SectionCheckboxStyled} = useContext(FormContext)
+  const {FieldsetRadioStyled, SectionCheckboxStyled, templateScss} = useContext(FormContext)
+  , onFieldset = e => {
+    // alert(e.target.nodeName!="FIELDSET"?e.target.closest('fieldset').className:e.target.className)
+    const f = e.target.nodeName!="FIELDSET"
+      ? e.target.closest('fieldset').className
+      : e.target.className
+
+    console.log(f)
+    
+    show_image.className = f
+  }
   
+  useEffect(()=>{
+    document.querySelectorAll("#bolobiForm fieldset").forEach(item => {item.addEventListener("mouseover",onFieldset)})
+  }, [])
   useEffect(()=>{
     loadRadios()
   }, [FieldsetRadioStyled])
@@ -103,33 +116,55 @@ export default function ReserveForm() {
     })
    }
 
-  return (
-    <form onSubmit={handleSubmit}>
+  return <>
+    <h3>RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance sur paiement demandé): </h3>
+    <form onSubmit={handleSubmit} id="bolobiForm">
       <section>
-          <fieldset>
-            <h2>Informations générales: </h2>
-            <label htmlFor="community">Communauté: </label>
-            <input type="text" id="community" name="community" />
-            <br />
-            <label htmlFor="names">Nom, Prénoms *: </label>
-            <input type="text" id="names" name="names" />
-            <br />
-            <label htmlFor="phone_number">Numéro de contact *: </label>
-            <input type="tel" pattern="/^(\+225)?\d{8}$/" id="phone_number" name="phone_number" />
-            <br />
-            <label htmlFor="email">Email de contact *: </label>
-            <input type="email" id="email" name="email" />
-          </fieldset>
-          <fieldset>
-            <h2>Choisir une période (du DD/MM/YYYY au DD/MM/YYYY): </h2>
+          <fieldset className="dates">
+            <h4>Choisir une période (du DD/MM/YYYY au DD/MM/YYYY): </h4>
             <label htmlFor="du">Du: *</label>
             <input type="datetime-local" id="du" name="du" />
             <br />
             <label htmlFor="au">Au: *</label>
             <input type="datetime-local" id="au" name="au" />
           </fieldset>
-          <FieldsetRadioStyled>
-            <h2>Choisir le type de logement désiré (chambre à deux, ou dortoir): </h2>
+          <FieldsetRadioStyled className="type">
+            <h4>Quel type d'évènement souhaitez vous organiser à Bolobi ? </h4>
+            <section>
+                <label htmlFor="pray" className="radioLabel">
+                  <input id="pray" type="radio" name="type" />
+                  <span className="radio bottom"></span>
+                  <span>Prière ponctuelle <span>(100Avé, veillée, recollection, ...)</span></span>
+                </label>
+                <label htmlFor="celebration" className="radioLabel">
+                  <input id="celebration" type="radio" name="type" />
+                  <span className="radio bottom"></span>
+                  <span>Célébration <span>(mariage, baptême, conférence, ...)</span></span>
+                </label>
+                <label htmlFor="retraite" className="radioLabel">
+                  <input id="retraite" type="radio" name="type" />
+                  <span className="radio bottom"></span>
+                  <span>Retraite de prière <b>de groupe</b> <span>(le weekend généralement)</span></span>
+                </label>
+                <label htmlFor="individuel" className="radioLabel">
+                  <input id="individuel" type="radio" name="type" />
+                  <span className="radio"></span>
+                  <span>Retraite de prière <b>individuelle</b></span>
+                </label>
+                <label htmlFor="repos" className="radioLabel">
+                  <input id="repos" type="radio" name="type" />
+                  <span className="radio"></span>
+                  <span>Repos<br />Détente<br />Convalescence <span>(individuel ou petit groupe)</span></span>
+                </label>
+                <label htmlFor="longTerm" className="radioLabel">
+                  <input id="longTerm" type="radio" name="type" />
+                  <span className="radio"></span>
+                  <span>Vacances / long séjour <span>(maximum 2 mois)</span></span>
+                </label>
+            </section>
+          </FieldsetRadioStyled>
+          <FieldsetRadioStyled className="location">
+            <h4>Choisir le type de logement désiré (chambre à deux, ou dortoir): </h4>
             <label htmlFor="participants">Nombre de paticipants ? *</label>
             <input id="participants" type="number" name="participants" max="250" min="1" />
             <section>
@@ -144,9 +179,27 @@ export default function ReserveForm() {
                 <span className="oko">dortoire</span>
               </label>
             </section>
+            <hr />
+            <section>
+              <label htmlFor="un" className="radioLabel">
+                <input id="un" type="radio" name="type_reservation" />
+                <span className="radio"></span>
+                <span>Individuel <b>(500Fcfa seulement par personne)</b></span>
+              </label>
+              <label htmlFor="deux" className="radioLabel">
+                <input id="deux" type="radio" name="type_reservation" />
+                <span className="radio"></span>
+                <span>Individuel <b>(2500Fcfa/personne)</b></span>
+              </label>
+              <label htmlFor="trois" className="radioLabel">
+                <input id="trois" type="radio" name="type_reservation" />
+                <span className="radio"></span>
+                <span>Individuel <b>(1500Fcfa/personne)</b></span>
+              </label>
+            </section>
           </FieldsetRadioStyled>
-          <fieldset>
-            <h2>Choisir si vous souhaitez que les repas vous soient préparé (3000Fcfa/jour): </h2>
+          <fieldset className="meal">
+            <h4>Choisir si vous souhaitez que les repas vous soient préparé (3000Fcfa/jour): </h4>
             <SectionCheckboxStyled>
               <label htmlFor="meal">
                 <input type="checkbox" id="meal" name="meal" />
@@ -169,30 +222,25 @@ export default function ReserveForm() {
               </label>
             </SectionCheckboxStyled>
           </fieldset>
-          <FieldsetRadioStyled>
-            <h2>Type de réservation (individuel, en groupe, vacances): *</h2>
-            <section>
-              <label htmlFor="un" className="radioLabel">
-                <input id="un" type="radio" name="type_reservation" />
-                <span className="radio"></span>
-                <span>Individuel <b>(500Fcfa seulement par personne)</b></span>
-              </label>
-              <label htmlFor="deux" className="radioLabel">
-                <input id="deux" type="radio" name="type_reservation" />
-                <span className="radio"></span>
-                <span>Individuel <b>(2500Fcfa/personne)</b></span>
-              </label>
-              <label htmlFor="trois" className="radioLabel">
-                <input id="trois" type="radio" name="type_reservation" />
-                <span className="radio"></span>
-                <span>Individuel <b>(1500Fcfa/personne)</b></span>
-              </label>
-            </section>
-          </FieldsetRadioStyled>
+          <fieldset className="infos">
+            <h4>Informations générales: </h4>
+            <label htmlFor="community">Communauté: </label>
+            <input type="text" id="community" name="community" />
+            <br />
+            <label htmlFor="names">Nom, Prénoms *: </label>
+            <input type="text" id="names" name="names" />
+            <br />
+            <label htmlFor="phone_number">Numéro de contact *: </label>
+            <input type="tel" pattern="/^(\+225)?\d{8}$/" id="phone_number" name="phone_number" />
+            <br />
+            <label htmlFor="email">Email de contact *: </label>
+            <input type="email" id="email" name="email" />
+          </fieldset>
       </section>
-      <img src="/img/_/bolobi/alle-bolobi.jpg" alt="" />
+      <div id="show_image" />
       {/* https://github.com/Hacker0x01/react-datepicker/ */}
       <fieldset className="datepicker">
+        <h4>RÉCAPITULATIF: </h4>
         <DatePicker 
           // locale="fr-FR"
           dateFormat="d MMMM yyyy, h:mm aa"
@@ -229,12 +277,17 @@ export default function ReserveForm() {
           // dateFormat="MM/yyyy"
           todayButton="yuuhooo, today c'est ajd !!!"
         />
+        <p className="dates"></p>
+        <p className="location"></p>
+        <p className="meal"></p>
+        <p className="infos"></p>
+        <p style={{color:"red"}}>*il faut que je rajoute un bouton en bas à droite en position:fixed, pour permettre de sauter directement au formulaire, ou aux différents fieldsets du formulaire</p>
       </fieldset>
       <fieldset>
-        <h2>Si vous souhaitez passer un message pour cette réservation, nous y tiendront compte lorsque nous vous rapellons pour confirmer votre réservation: </h2>
+        <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendront compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
         <textarea name="message" cols="30" rows="10"></textarea>
       </fieldset>
       <fieldset><input type="submit" /></fieldset>
     </form>
-  )
+  </>
 }

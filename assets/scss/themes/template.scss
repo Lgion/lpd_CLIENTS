@@ -24,6 +24,11 @@ h5{
 }
 // h6{}
 
+p:not(.pound),ul:not(.pound){
+    font-family: "Big Shoulders";
+    font-size: 25px;
+    padding-bottom: .25em;
+}
 
 
 $XS: 5px;
@@ -50,7 +55,8 @@ $primary:#9356DC;
 // $secondary:#1397EB;
 $secondary:#1F4EEA;
 $secondary_1:#2989d8;
-$secondary_2:#a1e1f480;
+// $secondary_2:#a1e1f480;
+$secondary_2:#a1e1f4;
 $ternary:goldenrod;
 $ternary_1:#EBE813;
 $ternary_2:#96943E;

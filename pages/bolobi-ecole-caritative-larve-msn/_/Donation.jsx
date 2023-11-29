@@ -13,7 +13,7 @@ export default function Donation() {
   , handleBtn = (e) => {
     if(form_donation.classList.contains('on')){
       form_donation.classList.remove('on')
-      e.target.innerHTML = "FAIRE UN DON"
+      e.target.innerHTML = "FAIRE UN AUX ÉCOLE ST MARTIN DE PORREZ"
     }else{
       form_donation.classList.add('on')
       e.target.innerHTML = "Fermer"
@@ -102,7 +102,7 @@ export default function Donation() {
         </p>
       </section>
 
-      <button id="do_donation_btn" className="btn3DSimple02" onClick={handleBtn}>FAIRE UN DON</button>
+      <button id="do_donation_btn" className="btn3DSimple02" onClick={handleBtn}>FAIRE UN AUX ÉCOLE ST MARTIN DE PORREZ</button>
     </article>
     <form id="form_donation" onSubmit={handleSubmit}>
       <FieldsetRadioStyled>

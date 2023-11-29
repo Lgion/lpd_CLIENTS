@@ -222,8 +222,8 @@ div#blog_container{
         z-index: -1;
         transition:top .2s;
         background: gray;
-        box-shadow: 0 0 10px 1px;
         border-top-right-radius: 5px;
+        &:hover{box-shadow: 0 0 10px 1px;}
         >time{}
         >a{
           display: flex;
@@ -277,6 +277,7 @@ body{
       &:not(main):not(div){
         width: calc(100% - 10px);
         left: 5px;
+        z-index: 20;
       }
     }
     >header{
@@ -397,22 +398,22 @@ body{
           }
           >li{
             &#fb>a{
-              background: url("/img/fb.svg") center center no-repeat;
+              background: url("/img/sns/fb.svg") center center no-repeat;
             }
             &#whatsapp>a{
-              background: url("/img/whatsapp.svg") center center no-repeat;
+              background: url("/img/sns/whatsapp.svg") center center no-repeat;
             }
             &#ytube>a{
-              background: url("/img/youtube.svg") center center no-repeat;
+              background: url("/img/sns/youtube.svg") center center no-repeat;
             }
             &#instam>a{
-              background: url("/img/instagram.svg") center center no-repeat;
+              background: url("/img/sns/instagram.svg") center center no-repeat;
             }
             &#tiktok>a{
-              background: url("/img/tiktok.svg") center center no-repeat;
+              background: url("/img/sns/tiktok.svg") center center no-repeat;
             }
             &#blogB>a{
-              background: url("/img/blog.svg") center center no-repeat;
+              background: url("/img/sns/blog.svg") center center no-repeat;
               >span{
                 margin-top: 10px;
                 margin: 1.5em -10px;
@@ -461,7 +462,9 @@ body{
             }
             >a:not([id="panier"]){
               @extend %menu_elements;
-              font-size: unset;
+              @include mobile-and-tablette{
+                font-size: unset;
+              }
               &::before{
                 transition: all .5s;
                 z-index: -1;
@@ -602,7 +605,7 @@ body{
         // bottom: 0;
         // left: 0;
         // right: 0;
-        @extend %goa_lrb;
+        @extend %goa_blr;
       }
       /*
       >div#inscription{
@@ -710,10 +713,10 @@ body{
         padding: 5px;
         border-radius: 0 5px 0 0;
         background: blueviolet;
-        @include mobile-only{
-          bottom:-30px;
+        // @include mobile-only{
+          bottom:-50px;
           border-radius: 0 0 5px 5px;
-        }
+        // }
         &:hover {
           // background: whitesmoke;
           // padding: 5px;
@@ -746,13 +749,11 @@ body{
       >h2.titrePage{
         text-align: center;
         font-size: 3em;
-        text-shadow: 0 0 3px goldenrod, 0 0 3px goldenrod, 0 0 3px white, 0 0 3px white;
-        background: rgba(250,250,250,.5);
         >span{
           position: relative;
           &:hover{z-index: 10;}
           >a{
-            background:url("/img/gsearch.svg") center center no-repeat;
+            background:url("/img/sns/gsearch.svg") center center no-repeat;
             background-size: contain;
             padding: 0.5em;
             margin-right: 0.5em;
@@ -765,12 +766,12 @@ body{
           bottom: 20px;
           right: 0px;
           border-radius: 5px 5px 0 5px;
-          background: url(/img/fb_pages.svg) center center no-repeat, white;
+          background: url(/img/sns/fb_pages.svg) center center no-repeat, white;
           background-size: contain;
           display: inline-block;
-          @include mobile-only{
+          // @include mobile-only{
             bottom:-50px;
-          }
+          // }
           &:hover{box-shadow: 0 0 10px 1px;}
         }
       }
@@ -793,6 +794,18 @@ body{
       :has(+.cl-rootBox) {
         margin-bottom: 500px;
       }
+      &:has(+main.bolobi){>h2{>span{
+        text-shadow: 0 0 3px goldenrod, 0 0 3px goldenrod, 0 0 3px white, 0 0 3px white;
+        background: rgba(250,250,250,.5);
+      }}}
+      &:has(+main.sanctuaire_ndr){>h2{>span{
+        text-shadow: 0 0 3px goldenrod, 0 0 3px goldenrod, 0 0 3px white, 0 0 3px white;
+        background: rgba(250,250,250,.5);
+      }}}
+      &:has(+main.bolobi){>h2{>span{
+        text-shadow: 0 0 3px goldenrod, 0 0 3px goldenrod, 0 0 3px white, 0 0 3px white;
+        background: rgba(250,250,250,.5);
+      }}}
     }
     >.cl-signIn-root,.cl-signUp-root{
       position: fixed;
@@ -870,14 +883,18 @@ body{
             >h4{
               
             }
-            >p,>ul{
-              font-family: "Big Shoulders";
-              font-size: 25px;
-              padding-bottom: .25em;
-            }
+            // >p,>ul{
+            //   font-family: "Big Shoulders";
+            //   font-size: 25px;
+            //   padding-bottom: .25em;
+            // }
             >ul{
               list-style: disc;
               padding-left: 2em;
+            }
+            >ol{
+              list-style: unset;
+              padding-left: 1em;
             }
             a{}
           }
@@ -900,7 +917,7 @@ body{
               bottom: 100%;
               line-height: 1em;
             }
-            >*:not(h3):not(.buying_details):not(p.safe){
+            >*:not(h3):not(.buying_details):not(.safe){
               height: calc(100% - 1.2rem) !important;
             }
             &.esmp{
@@ -920,7 +937,41 @@ body{
                 text-align: center;
                 font-size: 1.5em;
               }
-              
+              >section{
+                @extend %goa_blr;
+                height: 100px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: end;
+                gap:.5em;
+                // background-color: purple;
+                padding-top: .5em;
+                &:hover{
+                  >svg{
+                    background: orangered;
+                    border-radius: 3px;
+                  }
+                }
+                >svg{
+                  padding: .5em;
+                  border: solid;
+                  border-radius: 100px 100px 0 0;
+                  cursor:pointer;
+                  transition:border-radius .2s;
+                  &:hover{
+                    background:white;
+                    &+p{opacity: 1;}
+                  }
+                  &+p{
+                    position: absolute;
+                    top: 0;
+                    opacity: 0;
+                    transition: opacity .2s;
+                    background: rgba(255,255,255,.7);
+                    padding:.5em;
+                  }
+                }
+              }
             }
             &.bestseller{
               display: flex;
@@ -1044,30 +1095,77 @@ body{
                 position: absolute;
               }
               >section{
+                display: flex;
+                flex-flow: wrap;
+                justify-content: space-between;
                 text-align: left;
-                padding: 1em 3em;
+                padding: 6em 3em 1em;
+                background: url(/img/sanctuaire/03.webp) center center no-repeat;
+                background-size: cover;
+                >svg{
+                  padding: 0.5em;
+                  background: whitesmoke;
+                  border: solid;
+                  border-radius: 3px;
+                  &:hover+p{
+                    opacity:1;
+                  }
+                  +p{
+                    position: absolute;
+                    top: .5em;
+                    left: .5em;
+                    right: .5em;
+                    padding: .5em;
+                    line-height: 1em;
+                    background-color: rgba(255,255,255,.7);
+                    opacity:0;
+                    transition: opacity .2s;
+                    text-align: justify;
+                  }
+                }
+                >p{}
                 >ul{
+                  padding-top: 4em;
+                  position: relative;
                   list-style: circle;
                   display: flex;
                   flex-flow: wrap;
                   justify-content: center;
-                  width: 100%;
-                  margin: 0 auto;
                   gap: 1em;
+                  width: 100%;
+                  margin: .5em auto 0;
+                  background:brown;
                   >li{
                     display: flex;    
                     flex-basis: 25%;
                     gap: 1em;
                     align-items: center;
+                    justify-content: center;
                     width: 100%;
                     >a{
-                      display: inline-block;
+                      display: flex;
                       text-align: center;
-                      padding:1em;
+                      padding:.25em;
                       background: $secondary;
                       color:$ternary;
                       border-radius: 5px;
-                      &:hover{color:$secondary;background:$ternary}
+                      &:hover{color:$secondary;background:$ternary;
+                        >span{
+                          opacity: 1;
+                        }
+                      }
+                      >span{
+                        position: absolute;
+                        top: .25em;
+                        left: .5em;
+                        right: .5em;
+                        padding: 0 .5em;
+                        line-height: 1em;
+                        background:gold;
+                        opacity: 0;
+                        transition: opacity .2s;
+                      }
+                      
                     }
                     >span{text-align: justify;}
                   }
@@ -1350,10 +1448,81 @@ body{
       &.sanctuaire_ndr{
         >article{
           padding:2em;
-          >.slick-slider.slick-initialized{
-            >button{}
-            >.slick-list{}
+          h3{}
+          p{}
+          button{
+            margin: 3em auto;
+            display: block;
           }
+          ul{
+            display: flex;
+            flex-flow: wrap;
+            gap:1em;
+            justify-content: space-evenly;
+            // overflow:hidden;
+            li{
+              flex-basis:30%;
+              height: 300px;
+              border:solid $secondary_2;
+              position: relative;
+              transition: transform .5s .3s;
+              &::before{content:"";
+                position:absolute;top:0;right:0;left:0;bottom:0;
+              }
+              &.lieuBeni::before{
+                background:url(/img/sanctuaire/01.webp);
+              }
+              &.serenite::before{
+                background:url(/img/sanctuaire/02.webp);
+              }
+              &.grotteMarial::before{
+                background:url(/img/sanctuaire/03.webp);
+              }
+              &.facilities::before{
+                background:url(/img/sanctuaire/04.webp);
+              }
+              &.facilitiesBis::before{
+                background:url(/img/sanctuaire/05.webp);
+              }
+              &.other::before{
+                background:url(/img/sanctuaire/06.webp);
+              }
+              &:hover{
+                transform:scale(1.3);
+                z-index: 9;
+                box-shadow: 0 0 10px 3px;
+                >p{
+                  opacity: 1;
+                }
+              }
+              h4{
+                color: $secondary;
+                text-align-last: left;
+                position: relative;
+                text-align: left;
+                text-shadow: 1px 0px 2px white;
+                background: rgba(255,255,255,.5);
+                padding:0 .25em;
+              }
+              p{
+                padding:.25em;
+                max-height: 85%;
+                position: relative;
+                transition:all .5s .4s;
+                opacity:0;
+                overflow-y:scroll;
+                background: rgba(255,255,255,.5);
+                text-shadow: 1px 1px 3px $secondary_1;
+                &:hover{
+                  // font-size:1.2em;
+                }
+              }
+            }
+          }
+          // >.slick-slider.slick-initialized{
+          //   >button{}
+          //   >.slick-list{}
+          // }
         }
         >section:not(.bolobiSliders){
           display: flex;
@@ -1361,6 +1530,14 @@ body{
           padding: 1em 0.25em;
           border: 1px dotted;
           margin-top: 1em;
+          position: relative;
+          padding-top: 3em;
+          >h3{
+            position: absolute;
+            top: 0;
+            width: 100%;
+          }
+          
           >div{
             width: calc(100% - 80px);
             &.ndr_toggle{
@@ -1430,9 +1607,63 @@ body{
               display: flex;
               flex-flow: wrap;
               >section{
+                //suite a la classe de styledcomponent fieldset
+                gap: .25em;
+                flex-flow: wrap;
                 >label{
+                  position: relative;
+                  width: 30%;
+                  transition:transform .2s;
+                  &:hover{
+                    z-index: 10;
+                    transform: scale(1.5);
+                    &::before{
+                      background:white;
+                    }
+                  }
+                  &::before{
+                    content:"";
+                    transition:background .4s;
+                    z-index: -1;
+                    @extend %goa_tblr;
+                  }
                   >span{
+                    &.radio{
+                      border: 3px dotted $secondary;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      &::before{
+                        content: "";
+                        background: $secondary_2;
+                        width: 100px;
+                        position: absolute;
+                        z-index: -1;
+                        height: 50px;
+                        border:1px dotted $secondary;
+                      }
+                      &::after{
+                        position: relative !important;
+                        top:.75px !important;
+                        left:.75px !important;
+                      }
+                      &.bottom{
+                        bottom:-.5em;top:unset;
+                        &+span{
+                          position: relative;
+                          bottom: 1em;
+                        }
+                      }
+                    }
                     >b{
+                    }
+                    >span{
+                      display: block;
+                      font-size: .5em;
+                      text-decoration: underline;
+                      color: $secondary_1;
+                      text-shadow: 1px 1px 1px $ternary,0px 0px 5px $ternary,0px 0px 3px $ternary,0px 0px 5px $ternary;
+                      // &:first-letter,&:last-letter{color:black;}
                     }
                   }
                 }
@@ -1448,7 +1679,24 @@ body{
               >textarea,section>textarea{}
             }
           }
-          >img{width: 50%;}
+          >div{
+            &#show_image{}
+            width: 50%;
+            background: url(../img/_/bolobi/alle-bolobi.jpg) no-repeat center center;
+            background-size: cover !important;
+            &.dates{
+              background: url(../img/_/bolobi/sanctuaire-bolobi-fb.webp) no-repeat center center;
+            }
+            &.type{
+              background: url(../img/_/bolobi/chapelle-sanctuaire-rosaire-bolobi.webp) no-repeat center center;
+            }
+            &.location{
+              background: url(../img/_/bolobi/centre-saint-martin-porres-bolobi-herbergement-1.webp) no-repeat center center;
+            }
+            &.meal{
+              background: url(../img/_/bolobi/centre-saint-martin-porres-bolobi-allee-centrale.webp) no-repeat center center;
+            }
+          }
           >fieldset{
             &.datepicker{
               text-align: center;

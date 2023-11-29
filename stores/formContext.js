@@ -13,6 +13,20 @@ export const FormContextProvider = ({children}) => {
 
     let [FieldsetRadioStyled, setFieldsetRadioStyled] = useState("fieldset")
     , [SectionCheckboxStyled, setSectionCheckboxStyled] = useState("section")
+    , templateScss = {
+        colors: {
+        "$primary":"#9356DC",
+        // $secondary:#1397EB;
+        "$secondary":"#1F4EEA",
+        "$secondary_1":"#2989d8",
+        "$secondary_2":"#a1e1f480",
+        "$ternary":"goldenrod",
+        "$ternary_1":"#EBE813",
+        "$ternary_2":"#96943E",
+        "$fourth":"#cc0000",
+        "$fourth_1":"#ff59004d",
+        }
+    }
 
     useEffect(() => { 
         console.log(FieldsetRadioStyled);
@@ -27,22 +41,23 @@ export const FormContextProvider = ({children}) => {
             }
             label.radioLabel{
                 display: block;
-                flex:1;
+                flex:1 1 30%;
                 position: relative;
                 // padding-left: 4rem;
                 padding: 1em 0 0.25em;
-                margin: 1.5rem 0;
+                margin: 1.5rem 0 1.5em;
                 text-align:center;
                 cursor: pointer;
                 font-size: 2rem;
                 user-select: none;
                 color: #555;
+                line-height: .75em;
                 >section{
                     text-align: center;
                 }
                 &:hover>input~span.radio{
                     //using opacity for hover effect, because background is used (amd delayed!) for the shuffle
-                    opacity: 0.8;
+                    // opacity: 0.8;
                 }
                 input{
                     position: absolute;
@@ -52,10 +67,10 @@ export const FormContextProvider = ({children}) => {
                     width: 0;
                     &:checked {
                         ~span{
-                            color: #0bae72;
+                            color: ${templateScss.colors.$secondary};
                             transition: color .5s;
                             &.radio {
-                                background-color: #0ac07d;
+                                background-color: ${templateScss.colors.$secondary};
                                 opacity: 1!important;
                                 &::after {
                                     opacity: 1;
@@ -69,7 +84,7 @@ export const FormContextProvider = ({children}) => {
                 >span{
                     &.radio {
                         position: absolute;
-                        top: 0;
+                        top: -.5em;
                         left: calc(50% - 1.25rem);
                         height: 2.5rem;
                         width: 2.5rem;
