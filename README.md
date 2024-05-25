@@ -1,3 +1,8 @@
+
+- il manque le dossier "/public/img/"
+- faire npm install --legacy-peer-deps
+
+
 # RECONSTRUCTION DE [pda](http://puissance-divine.ci/)
 
 Je passe donc de la vielle et 1ère version faite en PHP ([code visible sur ce repo](https://github.com/webdev-archist/PRODUCTION_pda)),

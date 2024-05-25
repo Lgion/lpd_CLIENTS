@@ -40,7 +40,7 @@
     "react-slick": "^0.29.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
-    "sass": "^1.63.3",
+    "sass": "^1.77.2",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
     "typescript": "^4.7.4"
