@@ -15,6 +15,7 @@ export const FormContextProvider = ({children}) => {
     , [SectionCheckboxStyled, setSectionCheckboxStyled] = useState("section")
     , templateScss = {
         colors: {
+        "$void_gray":"#c9ded6",
         "$primary":"#9356DC",
         // $secondary:#1397EB;
         "$secondary":"#1F4EEA",
@@ -35,9 +36,13 @@ export const FormContextProvider = ({children}) => {
         setFieldsetRadioStyled(styled.fieldset`
             display: flex;
             flex-flow: wrap;
+            >label{
+                width:100%;
+            }
             >section{
                 width: 100%;
                 display: flex;
+                padding-top:1em;
             }
             label.radioLabel{
                 display: block;
@@ -65,12 +70,19 @@ export const FormContextProvider = ({children}) => {
                     cursor: pointer;
                     height: 0;
                     width: 0;
+                    &#individual_room_participants{
+                        opacity:0;
+                        bottom:-1em;
+                        left:1em;
+                    }
                     &:checked {
                         ~span{
-                            color: ${templateScss.colors.$secondary};
+                            color: ${templateScss.colors.$ternary};
                             transition: color .5s;
+                            opacity:1;
+                            text-shadow: 0 0 3px BLACK;
                             &.radio {
-                                background-color: ${templateScss.colors.$secondary};
+                                background-color: ${templateScss.colors.$ternary};
                                 opacity: 1!important;
                                 &::after {
                                     opacity: 1;
@@ -79,6 +91,22 @@ export const FormContextProvider = ({children}) => {
                                 }
                             }
                         }
+                        ~input#individual_room_participants{
+                            opacity:1;
+                            padding:0 .5em;
+                            height:1em;
+                            width:2em;
+                        }
+                    }
+                }
+                &:has(input#individual_room_participants):has(input:checked){
+                    &::after{
+                        content:"personnes";
+                        position:absolute;
+                        bottom:-1em;
+                        right:0;
+                        // width:100px;
+                        // height:100px;
                     }
                 }
                 >span{
@@ -88,7 +116,6 @@ export const FormContextProvider = ({children}) => {
                         left: calc(50% - 1.25rem);
                         height: 2.5rem;
                         width: 2.5rem;
-                        background: #c9ded6;
                         border-radius: 50%;
                         &::after {
                             display: block;
@@ -128,26 +155,26 @@ export const FormContextProvider = ({children}) => {
                     position: absolute;
                     left: -10000px;
                     &:checked{
-                    +span{
-                        margin-left: 0;
-                    }
-                    ~.indicator{
-                        .circ{
-                        stroke: #557D25;
-                        opacity: 1;
+                        +span{
+                            margin-left: 0;
                         }
-                        .tick{
-                        opacity: 1;
-                        stroke-dashoffset: 0;
-                        transition-delay: 0.5s;  
+                        ~.indicator{
+                            .circ{
+                            stroke: #557D25;
+                            opacity: 1;
+                            }
+                            .tick{
+                            opacity: 1;
+                            stroke-dashoffset: 0;
+                            transition-delay: 0.5s;  
+                            }
+                            .cross{
+                            opacity: 0;
+                            transition: stroke-dashoffset 0.5s ease, opacity 0.5s ease;
+                            transition-delay: 0;
+                            stroke-dashoffset: 15;
+                            }
                         }
-                        .cross{
-                        opacity: 0;
-                        transition: stroke-dashoffset 0.5s ease, opacity 0.5s ease;
-                        transition-delay: 0;
-                        stroke-dashoffset: 15;
-                        }
-                    }
                     }
                 }
                 >span{

@@ -30,7 +30,7 @@ let strip_tags = (html, ...rest) => {
 
 function BestSellers() {
 
-    const {myLoader, setCartBox, miniCart} = useContext(AuthContext)
+    const {myLoader, setCartBox, miniCart, articles_title_table} = useContext(AuthContext)
     , [bestSellersArticles, setBestSellersArticles] = useState({})
 
     useEffect(() => {
@@ -51,8 +51,10 @@ function BestSellers() {
     return (
         // <figure className={item.user_name +" "+item.nom.replace(' ','_').replace('.','_').replace('/','_')}>
         <article className={"bestseller"}>
-            <h3>BEST-SELLERS PUISSANCE DIVINE: </h3>
+            <h4><u>ACHETER UN BEST-SELLERS</u> DE LA LIBRAIRE PUISSANCE DIVINE: </h4>
                 {/* <ModalProduct {...{myLoader, bestSellersArticles.item, setCartBox, bestSellersArticles.option, handleAddToCart, img:"img/vente-religieuse/min/"+Ecommerce_articles.articles_img_table[item.nom]+"/"+item.img+".webp"}} /> */}
+
+                {/* 
                 <Image
                     loader={myLoader}
                     src={bestSellersArticles.img}
@@ -61,10 +63,22 @@ function BestSellers() {
                     // height={"100"}
                     fill={"true"}
                 />
+                */}
+                <img src={bestSellersArticles.img} alt="dsfihdoi fdio hfds" className='safe' />
+
                 <section className="details">
-                    <h4>{bestSellersArticles.item?.fr__}</h4>
-                    <p className="dimensions">{bestSellersArticles.item?.dimensions}</p>
-                    <p>{bestSellersArticles.item?.fr1 != "" ? bestSellersArticles.item?.fr1 : "AUCUNE DESCRIPTION DISPONIBLE POUR CE PRODUIT."}</p>
+                    {/* <div>{JSON.stringify(articles_title_table)}</div> */}
+                    <h5 title={bestSellersArticles.item?.fr__}>{bestSellersArticles.item?.fr__}</h5>
+                    {/* <p className="dimensions">{bestSellersArticles.item?.dimensions}</p> */}
+                    <div>
+                        {/* {bestSellersArticles.item?.nom} - 
+                        {bestSellersArticles.item?.nom.substr(1)} - 
+                        {articles_title_table[bestSellersArticles.item?.nom]} - 
+                        {articles_title_table[bestSellersArticles.item?.nom.substr(1)]} -  */}
+                        <span className='cat'>{articles_title_table[bestSellersArticles.item?.nom]||articles_title_table[bestSellersArticles.item?.nom.substr(1)]}</span>
+                        <span className='dim'>{articles_title_table[bestSellersArticles.item?.dimensions]}</span>
+                    </div>
+                    <p className='descr'>{bestSellersArticles.item?.fr1 != "" ? bestSellersArticles.item?.fr1 : "AUCUNE DESCRIPTION DISPONIBLE."}</p>
                     {/* <span>{bestSellersArticles.item.id_produits && JSON.stringify(bestSellersArticles.option)}</span> */}
                     <button className="options" onClick={handleVariantButtonHover}>
                         <span>Ɏ</span>
@@ -87,7 +101,9 @@ function BestSellers() {
                         data-option_name={bestSellersArticles.option?.opt_nom || ""}
                         data-price={bestSellersArticles.item?.prix}
                         title={"Ajouter au panier"}
-                    ></button>
+                    >
+                        <span>buy it now!</span>
+                    </button>
                     {/* <button className="showArticleModal" onClick={handleModalShowProduct} title={"Afficher article"}>🔎</button> */}
                 </section>
         </article>

@@ -24,9 +24,10 @@ import {createPortal} from "react-dom"
 
 export default function Carousel({diapos, titre}) {
     // alert(diapos)
-    let {settingsSlider} = useContext(AuthContext)
-    , {isAdmin} = useContext(AuthContext)
-    , [h3, setH3] = useState("TROUVER UN TITRE")
+    console.log("diapos")
+    console.log(process.browser)
+
+    let [h3, setH3] = useState("TROUVER UN TITRE")
     , [random_indexes, setRandom_indexes] = useState(new Set())
     , [models, setModels] = useState({})
     , [currentDatas, setCurrentDatas] = useState({})
@@ -47,7 +48,24 @@ export default function Carousel({diapos, titre}) {
             method: "DELETE"
         })
     }
+    // , {settingsSlider, isAdmin} = useContext(AuthContext)
+    , settingsSlider = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        pauseOnHover: true,
+        adaptiveHeight: true
+    }
+    , isAdmin = true
+
+    
     // console.log(models);
+    // console.log(isAdmin)
+    // console.log(settingsSlider)
     
     useEffect(() => {
         setH3(titre)
@@ -66,12 +84,11 @@ export default function Carousel({diapos, titre}) {
         console.log(random_indexes);
         console.log("TROUVER UN MOYEN D'AFFICHER DES IMAGES ALÉATOIRES DANS LE CAROUSEL")
     }, [])
-    
 
 
     
     return <>
-        {isAdmin.toString()}
+        {/* {isAdmin.toString()} */}
         { isAdmin && <>
             <button 
                 title={"Ajouter une slide à votre diapo"}
@@ -80,7 +97,7 @@ export default function Carousel({diapos, titre}) {
                     document.querySelector('#modal .modal___main>form.slider').classList.add('active')
                 }}
             >+</button>
-            {
+            {process.browser &&
                 createPortal(
                     <EditMongoForm 
                         hiddens={{identifiant:"home_0"}}
@@ -92,7 +109,7 @@ export default function Carousel({diapos, titre}) {
                     , document.querySelector('#modal .modal___main')
                 )
             }
-            {
+            {process.browser && 
                 createPortal(
                     <EditMongoForm 
                         hiddens={{identifiant:"home_0"}}
@@ -125,8 +142,9 @@ export default function Carousel({diapos, titre}) {
                         width={200}
                         height={200}
                     />
+                    <ul></ul>
                     <figcaption>
-                        <h3>{item.title}</h3>
+                        <h4>{item.title}</h4>
                         <p>{item.figcaption}</p>
                     </figcaption>
                 </figure>)}

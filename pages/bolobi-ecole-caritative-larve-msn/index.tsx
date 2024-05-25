@@ -5,7 +5,7 @@ import SliderInArticle from '../../components/_/SliderInArticle'
 import Post from '../../components/_/Blog/_/interfaces/post'
 import { getPostsBy } from '../../components/_/Blog/_/lib/api'
 import {carouselBolobi_} from "../../assets/carousels"
-
+import Features from "./../../components/fromWorkout/features"
 type Props = {
   categoryPosts: Post[]
 }
@@ -30,6 +30,7 @@ export default function Index({ categoryPosts }: Props) {
       <main className="bolobi">
         <Donation/>
         <hr />
+        {/* 
         <article>
           <h2>Les activités économique qui financent BOLOBI: </h2>
           <p>
@@ -41,12 +42,14 @@ export default function Index({ categoryPosts }: Props) {
             <li><b><u>Hébergement et service de restauration</u></b> pour les retraitants</li>
             <li><b><u>Dons</u></b> (nature, et espèces)</li>
           </ul>
-          <p>Ci-dessous une vidéo et des diaporamas qui récapitulent et illustrent les activités du sanctuaire de Bolobi: </p>
+          <p>Ci-dessous une vidéo et des diaporamas qui récapitulent et illustrent les activités du <strong>sanctuaire NDR de Bolobi</strong>: </p>
           <video src=""></video>
         </article>
-        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_fields" />
+        */}
+        <Features />
+        {/* <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_fields" />
         <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_feeds" />
-        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_locations" />
+        <SliderInArticle carousel={carouselBolobi_} carouselName="carouselBolobi_locations" /> */}
         <BlogCategory {...{categoryPosts,headings}} />
       </main>
       

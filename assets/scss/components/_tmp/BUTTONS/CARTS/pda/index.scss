@@ -1,0 +1,80 @@
+%cart_from_pda{
+    &:hover {
+        z-index: 10;
+        opacity: 1;
+    }
+
+    transition:opacity .5s;
+    opacity:.5;
+    width: 32px;
+    height: 40px;
+    z-index: 2;
+    position: absolute;
+    right: 136px;
+    top: 40px;
+    background: url(../img/cart.png) center no-repeat,
+    rgba(34, 105, 176, .4);
+    border-radius: 0 10px 10px;
+    background-size: contain;
+
+    &.active {
+        position: fixed;
+        top: 2em;
+        left: 2em;
+        background: url(../img/cart.png) center no-repeat, orange;
+        background-size: contain;
+        padding: 3em;
+
+        &:before,
+        &:after {
+            background: blue;
+            position: absolute;
+            left: -1em;
+            right: -1em;
+            padding: 0.5em;
+            color: white;
+        }
+
+        &:before {
+            content: "Un produit  vient d'être ajouté au panier!";
+            top: 100%;
+        }
+
+        &:after {
+            content: "Souhaitez-vous aller au panier ?";
+            top: calc(100% + 65px);
+            background: darkcyan;
+        }
+    }
+
+    &:hover~.miniCart {
+        display: block;
+    }
+}
+
+%miniCart_from_pda{
+    &:not(:hover) {
+        display: none;
+    }
+
+    z-index: 1;
+    position: absolute;
+    box-shadow: 0 0 1em 5px;
+    right: 165px;
+    width: 300px;
+    top: 45px;
+    border-radius: 5px 0 5px 5px;
+    padding: 1em;
+    background: red;
+
+    >div {
+        background: darkcyan;
+        padding: .5em;
+    }
+
+    >ul {
+        >li {
+            border: solid;
+        }
+    }
+}

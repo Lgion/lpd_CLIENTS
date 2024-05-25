@@ -7,7 +7,7 @@ import AuthContext from "../stores/authContext.js"
 
 export default function Nav() {
 
-    const {menuActive, mainmenu, myLoader,} = useContext(AuthContext)
+    const {menuActive, mainmenu, myLoader,sommaire} = useContext(AuthContext)
     
     return <nav>
         <menu className="filAriane">
@@ -60,5 +60,6 @@ export default function Nav() {
                 </a>
             </>}
         </h3>
+        {sommaire}
     </nav>
 }

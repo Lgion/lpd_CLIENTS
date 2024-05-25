@@ -34,7 +34,7 @@ export default function BlogCategory({categoryPosts,headings,className=""}) {
             <div id="blog_container" className={"container mx-auto px-5 "+className}>
                 {/* <Intro /> */}
                 <h2>ARTICLES DU BLOG DE {BLOG_NAME}</h2>
-                <h3>{headings?.h3 || ".....VALEUR PAR DÉFAUT....."}</h3>
+                <h3 id="blog">{headings?.h3 || ".....VALEUR PAR DÉFAUT....."}</h3>
                 {categoryPosts && categoryPosts.map((post,i) => <BlogPost
                         key={"post_"+post.category+"_"+i}
                         title={post.title}

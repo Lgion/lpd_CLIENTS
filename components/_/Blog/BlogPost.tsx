@@ -34,7 +34,7 @@ const BlogPost = ({
         />
       </Link>
       <section className="">
-        <h3 className="">
+        <h4 className="">
           <Link
             as={`/posts/${slug}`}
             href="/posts/[slug]"
@@ -42,7 +42,7 @@ const BlogPost = ({
           >
             {title}
           </Link>
-        </h3>
+        </h4>
         <p className="">{excerpt}</p>
         <div>
           <Avatar name={author.name} picture={author.picture} date={date} />&nbsp;

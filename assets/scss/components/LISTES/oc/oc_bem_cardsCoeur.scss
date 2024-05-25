@@ -1,0 +1,40 @@
+
+%listCards{
+// IL FAUT COLLER ICI EN COMMENTAIRES
+// LE CODE HTML ASSOCIÉ
+    padding: 3em 1em;
+    background: $dark1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1em;
+    &__titre {
+        margin-bottom: 1em;
+        width: 100%;
+    }
+    &__card {
+    // ÉTENDRE D'UNE CARD ICI
+        // @extend %cardCoeur;
+    }
+}
+@mixin listCards($paramMixin: $listCards){
+    @extend %listCards;
+
+    // >h2,
+    &__titre {
+        @extend %listCards__titre;
+    }
+
+    // >figure,
+    &__card {
+        @extend %listCards__card;
+    }
+}
+@function listCards(){
+    
+    @return ();
+}
+$listCards: listCards();
+.listCards{
+    @include listCards($listCards);
+}

@@ -26,9 +26,14 @@ exports.createReservation = (req, res, next) => {
   console.log('3oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
   reservation.save()
   
-  .then(() => { res.status(201).json({message: 'Objet enregistré !'})})
-  .catch(error => { res.status(400).json( { error })})
-  console.log('4oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
+  .then(() => { 
+    console.log('4oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
+    res.status(201).json({message: 'Objet enregistré !'})
+  })
+  .catch(error => {
+    console.log('4/BAD erroooooooooooor catched')
+    res.status(400).json( { error })
+  })
 }
 
 /************************************************************************************************************ */

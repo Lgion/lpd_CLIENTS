@@ -78,7 +78,8 @@ export default function LocateBolobi() {
     },[did])
     return (
         <section>
-            <h3>OÙ SE SITUE LE SANCTUAIRE ND ROSAIRE DE BOLOBI</h3>
+            <h3 id="deux">OÙ SE SITUE LE SANCTUAIRE ND ROSAIRE DE BOLOBI</h3>
+            <p>Le Sanctuaire ND Rosaire de Bolobi se situe à la périphérie d'Abidjan, juste après <a href="#" target="_blank">Azaguié</a>, un peu avant <a href="#" target="_blank">Yakasseme</a> (des panneaux indicateurs inscript "BOLOBI" pointent vers l'entrée du sanctuaire).</p>
             <div className="ndr_toggle">
                 <button 
                     className="ndr_toggle_image_map_btn"

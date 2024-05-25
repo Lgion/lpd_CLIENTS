@@ -48,20 +48,24 @@ export default function Home({onePosts,diapos}) {
           
           <h3>Bienvenue sur le site web du <a href="#">Sanctuaire Notre Dame du Rosaire</a> de Bolobi</h3>
           <h4>Le sanctuaire est là pour réveiller votre foi sur le plan chrétien: </h4>
-          <p>Au travers de nos 3 activités: <u><a href="#"><strong>librairie chrétienne</strong></a></u>, <u><a href="#"><strong>retraites oecuméniques</strong></a></u>, <u><a href="#"><strong>caritas</strong></a></u>.</p>
-          <p>&emsp;En effet, les <strong>écoles Saint Martin de Porrez</strong> est une merveilleuse oeuvre caritative, elle en est, en Novembre 2023, à leur balbutiement :D Venez découvrir à <a href="#">Bolobi</a> (périphérie d'abidjan) le bel avenir que donne la communauté chrétienne à ces enfants, et affirmez-y aussi votre chrétienneté en soutenant régulièrement cette école.</p>
-          <p>&emsp;La <strong>Puissance Divine d'Amour</strong> est une librairie chrétienne ayant pignon sur rue des jardin aux 2 plateaux, elle étanchera votre soif de savoir sur le mystère chrétien.</p>
-          <p>&emsp;Quant à voir faim, le <strong>Sanctuaire Notre Dame du Rosaire</strong> de Bolobi est oecuménique et permet à ses fidèles chrétiens de se recueillir individuellement ou en groupe sur le lieu de <a href="#" target="_blank">Bolobi</a> et d'y séjourner plusieurs jours grâce à ses solutions d'hébergement et de restauration pour 100 à 150 pélerins, qui assouviront leur faim en l'<strong>Esprit-Saint</strong>.</p>
+          <p>Au travers de nos 3 activités: <u><a href="#"><strong>retraites spirituelles</strong></a></u>, <u><a href="#"><strong>caritas</strong></a></u>, <u><a href="#"><strong>librairie chrétienne</strong></a></u>.</p>
+          <p>{/* &emsp;Quant à voir faim, */}&emsp;Le <strong>Sanctuaire Notre Dame du Rosaire de Bolobi</strong> est oecuménique, a des solutions d'hébergement et de restauration pour 150 à 200 pélerins. Il permet aux fidèles chrétiens de se recueillir individuellement ou en groupe {/* en son lieu de <a href="#" target="_blank">Bolobi</a> */}. {/* et d'y séjourner plusieurs jours grâce */}{/* , qui assouviront leur faim en l'<strong>Esprit-Saint</strong> */}</p>
+          <p>&emsp;L' <strong>École (Saint) Martin de Porrez</strong> est une merveilleuse oeuvre caritative. Venez découvrir à <a href="#">Bolobi</a> (périphérie d'abidjan) le bel avenir qu'offre le sanctuaire à ces enfants venus des campements alentours, pour les éloigner de la misère matérielle mais surtout spirituelle. <u>Participer à cette oeuvre charitative est la nourriture spirituelle qus nous vous offrons</u>.</p>
+          <p>&emsp;La <strong>Puissance Divine d'Amour</strong> est une librairie chrétienne ayant pignon sur la rue des jardins (à Cocody, 2Plateaux), elle étanchera votre soif de savoir sur le mystère chrétien.</p>
           {/* Nous offrons gracieusement une recollections mensuelle  */}
-          <h4>Le sanctuaire entretien en son lieu <strong>une <a href="#">activité caritative</a> en l'<u>école <a href="#">Saint Martin de Porrèz</a></u></strong>.</h4> 
-          <p>Celle-ci a démarré en septembre 2020 avec une classe de CP1, et a vocation à terme d'être reconnu par l'institut de l'éducation de Côte d'Ivoire.</p>
-          <p>Afin de <a href="#">financer le fonctionnement du sanctuaire</a> et de ses activités caritatives, certaines activités économique ont lieu sur le lieu de Bolobi, comme: </p>
+          <h4>Le sanctuaire et son fonctionnement: </h4> 
+          <p>Celle-ci a démarré en septembre 2020 avec une classe de CP1, et a vocation à terme d'être reconnu par l'État de Côte d'Ivoire.
+          <br/>
+          Les frais liés sont lourds
+          </p>
+          <p>Afin de <a href="#">financer le fonctionnement du sanctuaire et de ses activités caritatives</a>, plusieurs activités économiques sont progressivement mis en place à Bolobi, comme: </p>
           <ul className='safe'>
-            <li>l'accueil des <strong>retraitants</strong>, </li>
+            <li><strong>retraitants</strong>, </li>
             <li>l'<b>agriculture maréchaire</b> (fruits&légumes, cacao, poivre, palme), </li>
             <li>l'<b>élevage</b> (poulets chair&ponte, porc, escargots),</li>
-            <li>la production de <b>produits faits maison (à base de cacao, poivre, palme, citron)</b></li>
+            {/* <li>la production de <b>produits faits maison (à base de cacao, poivre, palme, citron)</b></li> */}
             <li>et les <b>dons</b> d'institutions philantropes ou de fidèles chrétiens.</li>
+            <li>etc...</li>
           </ul>
           
 						{/* <p>La <strong>librairie puissance divine</strong>, 2plateaux rue des jardins <strong>cocody</strong> <strong>d&apos;abidjan  côte d&apos;ivoire</strong>, est une <strong>librairie religieuse chrétienne catholique</strong> à but apostolique.</p>
@@ -69,16 +73,35 @@ export default function Home({onePosts,diapos}) {
 						<p>La <strong>puissance divine</strong> oragnise des <strong>retraites spirituelles</strong>, des <strong>enseignements spirituels</strong> ainsi que la <strong>vente en ligne</strong> d&apos;<strong>articles religieux et spirituels</strong>.</p> */}
 				</article>
         <Carousel diapos={diapos} titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} />
-        <section>
+        
+        
+        
+        
+        {/* <section>
+          <h3>Nos services: </h3>
           <BestSellers />
           <ESMP />
           <CTA />
-        </section>
+        </section> */}
+
+
+
+        
         {/* {console.log(rand)}
         {console.log(allPosts)}
         {console.log(allPosts[rand])} */}
         {/* {rand > -1 && <BlogPostEnAvant post={allPosts[rand]}/>} */}
-        {<BlogPostEnAvant post={onePosts}/>}
+
+        
+        
+        
+        
+        {/* {<BlogPostEnAvant post={onePosts}/>} */}
+
+
+
+
+
       </main>
 
 

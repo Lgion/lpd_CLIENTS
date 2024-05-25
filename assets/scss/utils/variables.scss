@@ -7,6 +7,10 @@ $desktop: 1460;
 $tv: "taille XL";
 $breakpoints:(mobile:$mobile,tablette:$tablette,desktop:$desktop);
 
+$darkmode: rgba(33,37,41,1);
+$dark: $darkmode;
+$bright: #eaeaea;
+
 $black: black;
 $black1: lighten($black,10%);
 $black2: lighten($black,20%);

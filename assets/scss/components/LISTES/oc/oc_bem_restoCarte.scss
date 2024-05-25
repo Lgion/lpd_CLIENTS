@@ -1,0 +1,144 @@
+
+%carteRestaurant{
+// IL FAUT COLLER ICI EN COMMENTAIRES
+// LE CODE HTML ASSOCIÉ
+    position: relative;
+    overflow: hidden;
+    // background: url(/assets/images/restaurants/restaurant-1.jpg) no-repeat, $dark;
+
+    @include from-tablette {
+        // background: url(/assets/images/restaurants/restaurant-1.jpg);
+        background-size: contain;
+
+        &::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0 0 100px 15em white;
+            content: "";
+        }
+    }
+
+    background-size: contain;
+    padding: 270px 0 5em;
+
+    &__titre {
+        // @extend %titreType0_level1;
+        background: $dark;
+        border-radius: 1.5em 1.5em 0 0;
+        padding: 1.25em 1em;
+        position: relative;
+
+        >input {
+            display: none;
+        }
+
+        >label {
+            position: absolute;
+            top: .5em;
+            right: 2em;
+            font-size: 1.5em;
+            cursor: pointer;
+
+            &::before {
+                font-weight: 100;
+            }
+
+            &::after {
+                opacity: 0;
+                transition: opacity .4s;
+            }
+
+            &::before,
+            &::after {
+                @extend %fawesome;
+                content: "\f004";
+                position: absolute;
+            }
+
+            &:hover {
+                &::after {
+                    opacity: 1;
+                    color: red;
+                }
+            }
+        }
+
+        >input:checked+label {
+            &::after {
+                opacity: 1;
+                color: red;
+            }
+        }
+    }
+    
+    &__section {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+
+        @include from-tablette {
+            background: rgba(255, 255, 255, .8);
+        }
+
+        padding:1em;
+
+        >h2,
+        &__titre {
+            @extend %bold1;
+            position: relative;
+
+            &::after {
+                content: "";
+                width: 50px;
+                border-bottom: solid #99E2D0;
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+            }
+        }
+
+        >ul,
+        &__liste {
+            @extend %listChoice__liste;
+            @extend %listChoice__liste--languette_0;
+        }
+    }
+    
+    &__btn {
+        @extend %button_0;
+        display: block;
+        text-align: center;
+        width: 200px;
+        z-index: 2;
+        position: relative;
+    }
+    //bge
+    //bgm
+}
+@mixin carteRestaurant($paramMixi: $carteRestaurant){
+    @extend %carteRestaurant;
+
+    &__section {
+        @extend %carteRestaurant__section;
+    }
+
+    &__titre {
+        @extend %carteRestaurant__titre;
+    }
+    &__btn {
+        @extend %carteRestaurant__btn;
+    }
+    //bgm
+}
+@function carteRestaurant(){
+    
+    @return ();
+}
+$carteRestaurant: carteRestaurant();
+.carteRestaurant{
+    @include carteRestaurant($carteRestaurant);
+    //bge
+    //bgm
+}

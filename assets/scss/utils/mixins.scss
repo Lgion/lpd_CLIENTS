@@ -134,6 +134,12 @@ $txt-input-palette: (
     }
 }
 
+@mixin from-bigScreen($min: map-get($breakpoints, desktop) + 1 + "px") {
+    @media screen and (min-width: $min) {
+        @content;
+    }
+}
+
 @mixin from-desktop($min: map-get($breakpoints, tablette) + 1 + "px") {
     @media screen and (min-width: $min) {
         @content;
@@ -146,7 +152,20 @@ $txt-input-palette: (
     }
 }
 
+
+
+@mixin to-desktop($max: map-get($breakpoints, desktop) + "px") {
+    @media screen and (max-width: $max) {
+        @content;
+    }
+}
+
 @mixin until-desktop($max: map-get($breakpoints, desktop) + "px") {
+    @media screen and (max-width: $max) {
+        @content;
+    }
+}
+@mixin to-tablette($max: map-get($breakpoints, tablette) + "px") {
     @media screen and (max-width: $max) {
         @content;
     }

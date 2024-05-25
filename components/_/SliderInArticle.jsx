@@ -4,18 +4,18 @@ import Slider from "react-slick";
 import AuthContext from "../../stores/authContext.js"
 
 export default function PresentationBolobi({carousel, carouselName}) {
-    const {settingsSlider, myLoader} = useContext(AuthContext)
     let it
 
+  console.log("ok")
     
     return <section className="bolobiSliders">
-            <Slider {...settingsSlider} >
+            <Slider  >
                 {carousel.map((value) =>{
                     for(it in value){
                         value = value[it].map((elt,i) => <section key={carouselName+""+i}>
                             <h1>{elt.h1}</h1>
                             <Image
-                                loader={myLoader}
+                                // loader={myLoader}
                                 src={`/img/_/${it}/${elt.src}`}
                                 alt={" "}
                                 width={200} height={500}

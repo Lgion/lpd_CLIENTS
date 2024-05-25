@@ -49,13 +49,9 @@ const classeSchema = mongoose.Schema({
 // console.log(Object.keys(schemaTeacher.obj)[0]);
 
 
-let modelClasses
-
-if(!mongoose.modelNames().includes("Ecole_St_Martin"))
-modelClasses = mongoose.model('Ecole_St_Martin', classeSchema)
-else modelClasses = mongoose.model("Ecole_St_Martin")
-// console.log("model classe");
-// console.log(modelClasses);
+let modelClasses = !mongoose.modelNames().includes("Ecole_St_Martin")
+  ? mongoose.model('Ecole_St_Martin', classeSchema)
+  : mongoose.model("Ecole_St_Martin")
 
 
 

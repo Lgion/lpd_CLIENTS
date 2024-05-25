@@ -403,7 +403,7 @@
 
     .slick-prev,
     .slick-next {
-        top: 5rem !important;
+        top: calc(50% - 2.5rem) !important;
         max-width: 100% !important;
 
     }
@@ -416,8 +416,9 @@
 
     .slick-next {
         position: absolute !important;
-        left: 20.4rem !important;
-        top: 5.2rem !important;
+        right: -0.5rem !important;
+        /* left: 20.4rem !important; */
+        /* top: 5.2rem !important; */
     }
 
     .welcomStore {

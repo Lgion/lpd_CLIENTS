@@ -1,25 +1,31 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Image from "next/image"
 import Link from "next/link";
 import Head from "next/head"
 import AuthContext from "../../stores/authContext.js"
-import SliderInArticle from '../../components/_/SliderInArticle'
+import mongoose from 'mongoose'
+// import SliderInArticle from '../../components/_/SliderInArticle'
+import Carousel from '../../components/_/Carousel'
 // import Nav from '../../../components/Nav.jsx'
 import { carouselBolobi_ } from "../../assets/carousels.js"
 import LocateBolobi from "./_/LocateBolobi";
 import ReserveForm from "./_/ReserveForm";
 import { getPostsBy } from '../../components/_/Blog/_/lib/api'
 import BlogCategory from '../../components/_/Blog/BlogCategory'
+import Slider from "../api/_/models/Slider"
 
 let carouselBolobi = carouselBolobi_.filter(elt => elt[Object.keys(elt)[0]] != "ecole-primaire-bolobi")
 
-export default function LieuxActivites({ categoryPosts }) {
+export default function LieuxActivites({ categoryPosts,diapos }) {
     // let {} = useContext(AuthContext)
-    const [showArticle, setShowArticle] = useState(false)
-
     const headings = {
         h3: "CATÉGORIE: \"SANCTUAIRE NOTRE DAME DU ROSAIRE DE BOLOBI\""
     }
+    , [showArticle, setShowArticle] = useState(true)
+
+
+    console.log(diapos)
+    console.log(carouselBolobi)
 
     return <>
         <Head>
@@ -28,10 +34,13 @@ export default function LieuxActivites({ categoryPosts }) {
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-
         <main className="sanctuaire_ndr">
             <article>
-                <h3>Bienvenue au Sanctuaire Notre Dame du Rosaire à Bolobi, Abidjan, Côte d'Ivoire</h3>
+                <h3 id="un" data-icon="😎">Bienvenue au Sanctuaire Notre Dame du Rosaire à Bolobi, Abidjan, Côte d'Ivoire</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/zG-Izk2dvy0?si=vClpbpS8Tqc_ecJK" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+                <p>Si vous êtes à la recherche d'<b>un lieu de paix, de prière et de recueillement au cœur de la nature</b>, le <Link href="#">Sanctuaire Notre Dame du Rosaire à Bolobi</Link> est l'endroit idéal pour vous.</p>
+                <p>Niché dans les magnifiques collines verdoyantes du <b>diocèse d'Agboville</b>, en périphérie du grand Abidjan sur la <b>route Abidjan-Adzopé</b>, s'étendant sur 18Ha, ce sanctuaire chrétien offre une expérience spirituelle apaisante et unique.</p>
+                <p>Voici les principaux spots et infrastructures du Sanctuare ND du Rosaire de Bolobi: </p>
                 <ul>
                     <li className='lieuBeni'>
                         <h4>Le Lieu Béni</h4>
@@ -58,21 +67,11 @@ export default function LieuxActivites({ categoryPosts }) {
                         <p>Les activités spirituelles abondent au Sanctuaire Notre Dame du Rosaire, y compris des prières quotidiennes, des prières à l'Esprit Saint et des prières d'intercession. De plus, ne manquez pas la journée nationale du Rosaire, qui est célébrée chaque année le 14 Août à Bolobi, rassemblant les cœurs et les esprits dans la prière et la méditation.</p>
                     </li>
                 </ul>
-                <button onClick={()=>{setShowArticle(!showArticle)}}>Afficher {!showArticle?"plus":"moins"}...</button>
-                {showArticle && <>
-                    <p>Si vous êtes à la recherche d'<b>un lieu de paix, de prière et de recueillement au cœur de la nature</b>, le <Link href="#">Sanctuaire Notre Dame du Rosaire à Bolobi</Link> est l'endroit idéal pour vous.</p>
-                    <p>Niché dans les magnifiques collines verdoyantes du <b>diocèse d'Agboville</b>, à seulement 30 km d'Abidjan sur la <b>route Abidjan-Adzopé</b>, ce sanctuaire chrétien offre une expérience spirituelle et apaisante unique.</p>
-                    <p>Le sanctuaire est <u>alimenté en électricité par l'énergie solaire</u>, <u><b>un groupe électrogène complète cette source</b> en cas de temps défavorable</u>. * <i>Pour une réservation au delà de 100 retraitants le carburant est offert par le sanctuaire</i>.</p>
-                    <p>Les solutions d'hébergement du sanctuaire vont de la chambre individuel-couple, au chambre communes de 4 à 12 personnes, jusqu'aux dortoirs d'environ 80 places. Les chambres et dortoires sont protégés des moustiques. * <i>Aucun accessoire d'hébergement n'est fourni (drap, oreillet, etc), ces effets sont à la charge du client</i>.</p>
-                    <p>Enfin, des <b>solutions de restauration</b> sont à disposition des retraitants selon 2 formules:
-                        <ol>
-                            <li>Les retraitants peuvent se faire la cuisine dans le réfectoires qui leur est dédié à cette effet,</li>
-                            <li>Commander le repas (pour environ 1500F le repas)</li>
-                        </ol>
-                    </p>
-                    <SliderInArticle carousel={carouselBolobi} carouselName="carouselBolobi_spirituel" />
-                </>
-                }
+                <p>encore un peu de blablabla pour présenter les différents types d'activités possibles au Sanctuaire... Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque suscipit, explicabo aperiam, eius eaque ratione, iusto deleniti quos iste quasi non assumenda rem neque quaerat sit in voluptatibus provident sed!</p>
+                <Carousel diapos={diapos} titre={"TEST - EXEMPLE: "} />
+                {/* <SliderInArticle carousel={carouselBolobi} carouselName="carouselBolobi_spirituel" /> */}
+                {/* <button onClick={()=>{setShowArticle(!showArticle)}}>Afficher {!showArticle?"plus":"moins"}...</button> */}
+                
             </article>
             <LocateBolobi />
             <ReserveForm />
@@ -88,7 +87,29 @@ export const getStaticProps = async () => {
         , "sanctuaire"
     )
 
+    const db = await mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    )
+    .then(() => console.log('Connexion à MongoDB réussie !'))
+    .catch(() => console.log('Connexion à MongoDB échouée !'))
+    // console.log(Object.keys(db));
+    // console.log(db.modelNames());
+    // console.log(mongoose.modelNames());
+    // console.log(mongoose.models);
+    // console.log(db);
+    let diapos = await mongoose?.model("Diapos_slider")
+      ?.find({"identifiant_$_hidden": "home_0"})
+      ?.then(r=>{
+        console.log("HELOOOOOOOOOOOOOOOOOOO");
+        console.log(r)
+        return r
+      }) || []
+    diapos = JSON.parse(JSON.stringify(diapos))
+
     return {
-        props: { categoryPosts },
+        props: { categoryPosts, diapos },
     }
 }

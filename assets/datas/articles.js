@@ -18,8 +18,8 @@ export const articles_title_table = {
     'tableau/icone': "Icônes Religieuses",
     '_livret P.D': "Publication Puissance Divine",
     '_bibles': "Saintes Bibles",
-    // 'NEI': "NEI",
-    // 'texte&priere': "Textes & Prières",
+            'NEI': "NEI",
+            'texte&priere': "Textes & Prières",
     'croixp': "Croix Posées",
     'croixm': "Croix Murales",
     'croix': "Croix Jésus",
@@ -27,8 +27,8 @@ export const articles_title_table = {
     'statue': "Statue Religieuse",
     'grotte': "Grotte Religieuse",
     'chapelet': "Chapelet de Prière",
-    'divers': "Divers autreproduits",
-    '_divers': "Divers autreproduits",
+    'divers': "Divers",
+    '_divers': "Divers",
 }
 
 export const articles = {
