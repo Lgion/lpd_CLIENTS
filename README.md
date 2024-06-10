@@ -1,15 +1,29 @@
 
 - il manque le dossier "/public/img/"
 - faire npm install --legacy-peer-deps
-
-
+# FIGMA MOCKUP & STYLE-GUIDE
+https://www.figma.com/design/MaXfDGH8SAk1O6rzkhgK5r/LPD_CLIENT's-style-guide?node-id=1-37&t=wKYJ3xmZT2qIjTEc-0
+# TODO LIST:
+## HOMEPAGE:
+### HEADER TAG
+- combinaison gagnante à trouver entre:
+    1. le header:before/:after, 
+    2. et les images dans le h1 (surtout le vierge, l'autre a une transparence qu'on peut déjà exploité, mais pas la vierge)
+- l'image du centre dans le h1 doit etre redéfinie pour chaque page
+- menu.SNS: créer les liens si nécessaire, et les faire relier au lien adéquate de  menu. Il faudra définir une politique sur la hiérarchie ou le sens des liens sur chaque SNS (youtube, insta, x, fb, tiktok, whatsapp, ...legion xD)
+- menu.mainMenu a encore quelque chose de dégueulasse, il faut trouver quoi rajouter/retirer pour améliorer son aspect visuel
+- les buttons cart et log/sign/in: juger s'il est bon de les déplacer, ou de changer leur apparence. Il faut avec #panier prendre en considération ul.miniCart
+- aside:
+    1. créer une page pour rassembler MV dessus, et rediriger au moins vers cette page au clic
+    2. rediriger vers la chaine youtube du sanctuaire (la créer si nécessaire)
+- définir un slogan pour chaque page, et l'insérer dans h2.page_slogan
 # RECONSTRUCTION DE [pda](http://puissance-divine.ci/)
 
 Je passe donc de la vielle et 1ère version faite en PHP ([code visible sur ce repo](https://github.com/webdev-archist/PRODUCTION_pda)),
 
 À une toute nouvelle version faite avec [NextJS](https://nextjs.org/), le framework React tendance du moment.
 
-# TODO: 
+# OLD TODO: 
 J'ai écrit quelque part dans un cahier les modifications à faire pour la nouvelle version, qu'il faut absolument que je numérise et mette sur la branche master de ce projet
 
 Aussi, il faudrait reprendre le repo de l'ancienne version, et transposer le code de cette nouvelle version là-bas, ceci afin d'avoir un système de version pour ce projet (v1.0 pour l'ancienne version, et v2.0.1 pour débuter cette nouvelle version)
