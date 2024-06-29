@@ -17,6 +17,7 @@ https://www.figma.com/design/MaXfDGH8SAk1O6rzkhgK5r/LPD_CLIENT's-style-guide?nod
     1. créer une page pour rassembler MV dessus, et rediriger au moins vers cette page au clic
     2. rediriger vers la chaine youtube du sanctuaire (la créer si nécessaire)
 - définir un slogan pour chaque page, et l'insérer dans h2.page_slogan
+
 # RECONSTRUCTION DE [pda](http://puissance-divine.ci/)
 
 Je passe donc de la vielle et 1ère version faite en PHP ([code visible sur ce repo](https://github.com/webdev-archist/PRODUCTION_pda)),
