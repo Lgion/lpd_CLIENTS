@@ -96,13 +96,17 @@ export const AuthContextProvider = ({children}) => {
         , h4s = document.querySelectorAll("h4")
         , nav = document.querySelector("#__next>header+nav")
         , romains = ["Ⅰ","Ⅱ","Ⅲ","Ⅳ","Ⅴ","Ⅵ","Ⅶ","Ⅷ","Ⅸ","Ⅹ","Ⅺ","Ⅻ"]
+        // ,iconList = [
 
-        setSommaire(<div>{
+        // ]
+
+        setSommaire(<div id="sommaire">{
             h3s.map((item,i) => <a key={"sanctuaireH3___"+i} href={"#"+item.id}>
                 {/* {item.id} */}
-                {item.dataset.icon && <span>{item.dataset.icon}</span>}
-                <span>{romains[i]}</span>
-                <span>{item.innerText}</span>
+                {console.log(item.dataset)}
+                {item.dataset.icon && <span className={"icon _"+item.dataset.icon}></span>}
+                {/* <span>{romains[i]}</span> */}
+                <span>{item.dataset.sommaire || item.innerText}</span>
             </a>)
         }</div>)
 
@@ -123,12 +127,25 @@ export const AuthContextProvider = ({children}) => {
         adaptiveHeight: true
     }
     , mainmenu = [
-        {id:"accueil",href:"/",title:"Librairie religieuse chrétienne Abidjan, Ecommerce chrétien, centre de retraite spirituelle à Bolobi (entre azaguié et yakasseme)",content:"Accueil",tagzone:["librairie","librairie religieuse","librairie religieuse chrétienne", "ecommerce chrétien", "sanctuaire bolobi", "retraites spirituelles"],titrePage:["Sanctuaire Notre Dame du Rosaire de Bolobi, et la Librairie Puissance Divine, vous souhaitent la bienvenue :)シツ"],sns:{"Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins":"https://www.facebook.com/genevieve.achi/"},search:"librairie+chrétienne+abidjan+cocody+2plateau"},
+        {
+            id:"accueil",
+            href:"/",
+            title:"Librairie religieuse chrétienne Abidjan, Ecommerce chrétien, centre de retraite spirituelle à Bolobi (entre azaguié et yakasseme)",
+            h2: "La Puissance Divine de Côte d'ivoire",
+            content:"Accueil",
+            tagzone:["librairie","librairie religieuse","librairie religieuse chrétienne", "ecommerce chrétien", "sanctuaire bolobi", "retraites spirituelles"],
+            titrePage:["Sanctuaire Notre Dame du Rosaire de Bolobi, et la Librairie Puissance Divine, vous souhaitent la bienvenue :)シツ"],
+            sns:{"Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins":"https://www.facebook.com/genevieve.achi/"},
+            search:"librairie+chrétienne+abidjan+cocody+2plateau"
+        },
         // {id:"enseignements",href:"enseignements-spirituels-chretien-catholique",title:"Enseignements spirituels chrétien catholique Puissance Divine, jésus enseigne: l",content:"Enseignements",tagzone:[],titrePage:[],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"}},
-        {id:"activites-spirituelles",href:"/sanctuaire-rosaire-bolobi-adzope",title:"Sanctuaire du Rosaire de Bolobi: activités spirituelles religieuses chrétien catholique",content:"Sanctuaire ND du Rosaire Bolobi",tagzone:["retraites de prières", "activités spirituelles", "lieu de loisir abidjan", "lieu de détente abidjan", "lieu de repos abidjan"],titrePage:["Retraites spirituelles en périphérie d'Abidjan au Sanctuaire Notre Dame du Rosaire de Bolobi"],sns:{"Sanctuaire notre Dame du Rosaire de Bolobi": "https://www.facebook.com/abidjan.sanctuaire.rosaire.bolobi/"},search:"retraite+spirituelle+sanctuaire+dame+rosaire+bolobi"},
+        {id:"activites-spirituelles",href:"/sanctuaire-rosaire-bolobi-adzope",title:"Sanctuaire du Rosaire de Bolobi: activités spirituelles religieuses chrétien catholique",h2:"Sanctuaire ND Rosaire Bolobi, Librairie Puissance Divine",content:"Sanctuaire ND du Rosaire Bolobi",tagzone:["retraites de prières", "activités spirituelles", "lieu de loisir abidjan", "lieu de détente abidjan", "lieu de repos abidjan"],titrePage:["Retraites spirituelles en périphérie d'Abidjan au Sanctuaire Notre Dame du Rosaire de Bolobi"],sns:{"Sanctuaire notre Dame du Rosaire de Bolobi": "https://www.facebook.com/abidjan.sanctuaire.rosaire.bolobi/"},search:"retraite+spirituelle+sanctuaire+dame+rosaire+bolobi"},
         // {id:"bolobi",href:"/bolobi-ecole-caritative-larve-msn",title:"Bolobi: école gratuite d'Adzopé, culture du poivre, élevage de mouches soldat noire, activités spirituelles religieuses chrétien catholique et protestant",content:"Oeuvres Caritatives",tagzone:["école caritative", "école saint martin de porèz de bolobi"],titrePage:["Les activités religieuses, caritatives, et économiques du sanctuaire de Bolobi, et de l'école St Martin de Porrez"],sns:{"École St Martin de Porèz de Bolobi": "https://www.facebook.com/abidjan.puissance.divine/"},search:"école+primaire+saint+martin+porès+bolobi+azaguié+yakasseme"},
         // {id:"ecommerce",href:"/ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
     ]
+    , findByIDMainMenu = (data, id) => data.find(
+        (item,i) => item.id == id
+    )
     , [menuActive, setMenuActive] = useState("")
     , [isCartPage, setIsCartPage] = useState(true)
     , [isAdmin, setIsAdmin] = useState(false)
@@ -150,6 +167,7 @@ export const AuthContextProvider = ({children}) => {
             // else setMenuActive("accueil")
         })
         console.log(menuActive);
+        // console.log(findByIDMainMenu(mainmenu, menuActive))
     }, [])
     /*
     const [user, setUser] = useState(null)
@@ -185,7 +203,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire}
+    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire}
     
     return (
         <AuthContext.Provider value={context}>

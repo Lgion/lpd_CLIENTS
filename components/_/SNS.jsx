@@ -10,6 +10,9 @@ export default function SNS() {
     
     return (
         <menu className="SNS">
+            {/* <li id="share">
+                <button></button>
+            </li> */}
             <li id="fb">
             {/* https://www.npmjs.com/package/react-facebook */}
                 <a href="https://www.facebook.com/genevieve.achi/" target="_blank" rel="noopener noreferrer">
@@ -31,7 +34,7 @@ export default function SNS() {
                 </Link>
             </li>
             <li id="ytube">
-                <a href="https://www.facebook.com/genevieve.achi/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.youtube.com/@puissancedivineabidjan2568" target="_blank" rel="noopener noreferrer">
                 </a>
             </li>
             <li id="instam">

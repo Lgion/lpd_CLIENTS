@@ -1,7 +1,7 @@
+import Link from "next/link";
 
 export default function YtChannel() {
-  return <div className='yt'>
-    <a href=""></a>
-    <iframe src="" frameBorder="0"></iframe>
-  </div>
+  return <Link href="bolobi-youtube-channel" className='yt'>
+    {/* <iframe src="" frameBorder="0"></iframe> */}
+  </Link>
 }

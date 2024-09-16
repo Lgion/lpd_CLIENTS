@@ -34,10 +34,15 @@ export default function LogSignIn() {
         {/* <a href="#" onClick={()=>{getClass("inscription","see")}} title="Inscription">
             ➕
         </a> */}
+
+
         <SignedOut>
+            <SignInButton title="Se conncecter/S'incrire">&nbsp;</SignInButton>
+        </SignedOut>
+        {/* <SignedOut>
             <SignInButton>➕</SignInButton>
             <SignUpButton>👤</SignUpButton>
-        </SignedOut>
+        </SignedOut> */}
 
         <SignedIn>
             <UserButton afterSignOutUrl="/"/>

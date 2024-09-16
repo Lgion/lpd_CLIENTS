@@ -22,7 +22,7 @@ import {createPortal} from "react-dom"
 
 
 
-export default function Carousel({diapos, titre}) {
+export default function Carousel({diapos, titre, icon=1,sommaire,h3id="anchorCarousel"}) {
     // alert(diapos)
     console.log("diapos")
     console.log(process.browser)
@@ -123,7 +123,7 @@ export default function Carousel({diapos, titre}) {
                 )
             }
         </>}
-        <h3 className="carousel">{h3}</h3>
+        <h3 className="carousel" id={h3id} data-icon={icon} data-sommaire={sommaire||titre}>{h3}</h3>
         <section className="carousel">
             <Slider {...settingsSlider}>
                 {/* {this.setState({h2:carouselHome[0][1]})} */}

@@ -46,7 +46,7 @@ export default function Home({onePosts,diapos}) {
         {/* <Nav /> */}
         <article className='HomeIntro'>
           
-          <h3>Bienvenue sur le site web du <a href="#">Sanctuaire Notre Dame du Rosaire</a> de Bolobi</h3>
+          <h3 data-id="firstH3" data-icon="1" data-sommaire="BIENVENUE AU SANCUTAIRE ND ROSAIRE BOLOBI">Bienvenue sur le site web du <a href="#">Sanctuaire Notre Dame du Rosaire</a> de Bolobi</h3>
           <h4>Le sanctuaire est là pour réveiller votre foi sur le plan chrétien: </h4>
           <p>Au travers de nos 3 activités: <u><a href="#"><strong>retraites spirituelles</strong></a></u>, <u><a href="#"><strong>caritas</strong></a></u>, <u><a href="#"><strong>librairie chrétienne</strong></a></u>.</p>
           <p>{/* &emsp;Quant à voir faim, */}&emsp;Le <strong>Sanctuaire Notre Dame du Rosaire de Bolobi</strong> est oecuménique, a des solutions d'hébergement et de restauration pour 150 à 200 pélerins. Il permet aux fidèles chrétiens de se recueillir individuellement ou en groupe {/* en son lieu de <a href="#" target="_blank">Bolobi</a> */}. {/* et d'y séjourner plusieurs jours grâce */}{/* , qui assouviront leur faim en l'<strong>Esprit-Saint</strong> */}</p>
@@ -72,7 +72,7 @@ export default function Home({onePosts,diapos}) {
 						<p>En effet, l&apos;objectif premier de la <strong>puissance divine d&apos;abidjan</strong> et d&apos;affermir la foi des <strong>fidèles chrétiens</strong> et les amener à <strong>prier l&apos;esprit-saint</strong>.</p>
 						<p>La <strong>puissance divine</strong> oragnise des <strong>retraites spirituelles</strong>, des <strong>enseignements spirituels</strong> ainsi que la <strong>vente en ligne</strong> d&apos;<strong>articles religieux et spirituels</strong>.</p> */}
 				</article>
-        <Carousel diapos={diapos} titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} />
+        <Carousel diapos={diapos} icon="2" titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} />
         
         
         

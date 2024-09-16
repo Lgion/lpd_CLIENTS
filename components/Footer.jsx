@@ -26,8 +26,10 @@ export default function Footer() {
       // console.log(e.newURL.substring(e.newURL.indexOf("#!")+2))
       const hash = e.newURL.substring(e.newURL.indexOf("#!")+2)
       console.log(hash)
-      this.document.getElementById('footer').childNodes.forEach(el=>{el.classList.remove('active')})
-      this.document.getElementById(hash).classList.add("active")
+      this.document.getElementById('footer').childNodes
+        .forEach(el=>{el.classList.remove('active')})
+      // this.document.getElementById(hash).classList.add("active")
+      document.getElementById(hash).classList.add("active")
     });
   }, [])
   return (
@@ -46,6 +48,13 @@ export default function Footer() {
                 rel="dofollow" 
                 href={"#!"+item.id} 
                 title={item.title}
+                onClick={e => {
+                  const hash = location.href.substring(location.href.indexOf("#!")+2)
+                  e.target.parentNode.parentNode.childNodes.forEach(el=>{el.classList.remove('active')})
+                  if(hash==(e.target.href.substr(e.target.href.indexOf("#!")+2))){
+                    document.getElementById(e.target.href.substr(e.target.href.indexOf("#!")+2)).classList.toggle('active')
+                  }else e.target.parentNode.classList.toggle('active')
+                }}
               >
                 {item.content}
               </a>

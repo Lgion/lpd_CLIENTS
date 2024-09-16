@@ -41,6 +41,8 @@ export default function LocateBolobi() {
     // const props = {width: 400, height: 250, zoomWidth: 2500, img: "/abidjan-adzope.png"}
     const props = {width: 400, height: 250, zoomWidth: 500, img: "celluloid-shot0002.jpg", offset: {vertical: 0, horizontal: 10}}
     , [did,setDid] = useState(0)
+    , titreH3 = "OÙ SE SITUE LE SANCTUAIRE ND ROSAIRE DE BOLOBI"
+    , sommaire = "GÉOLOCALISER BOLOBI"
 
     {/*}
     const Magnifier = React.useMemo(() => dynamic(
@@ -78,7 +80,7 @@ export default function LocateBolobi() {
     },[did])
     return (
         <section>
-            <h3 id="deux">OÙ SE SITUE LE SANCTUAIRE ND ROSAIRE DE BOLOBI</h3>
+            <h3 id="thirdH3" data-icon="3" data-sommaire={sommaire||titreH3}>{titreH3}</h3>
             <p>Le Sanctuaire ND Rosaire de Bolobi se situe à la périphérie d'Abidjan, juste après <a href="#" target="_blank">Azaguié</a>, un peu avant <a href="#" target="_blank">Yakasseme</a> (des panneaux indicateurs inscript "BOLOBI" pointent vers l'entrée du sanctuaire).</p>
             <div className="ndr_toggle">
                 <button 
@@ -100,7 +102,7 @@ export default function LocateBolobi() {
                     Afficher <span>Google Map</span>
                 </button>
             </div>
-            <div className="ndr_image">
+            <div className="ndr_image off">
             {/*
 https://github.com/AndersDJohnson/magnificent.js
 https://github.com/mark-rolich/Magnifier.js
@@ -133,7 +135,7 @@ https://github.com/mark-rolich/Magnifier.js
                 }} /> */}
                 {/* <img src="/abidjan-adzope.png" alt="" /> */}
             </div>
-            <div className="ndr_map off">
+            <div className="ndr_map">
 			    <Gmap />
                 {/* <MapLeaflet /> */}
             </div>

@@ -3,7 +3,17 @@
 - faire npm install --legacy-peer-deps
 # FIGMA MOCKUP & STYLE-GUIDE
 https://www.figma.com/design/MaXfDGH8SAk1O6rzkhgK5r/LPD_CLIENT's-style-guide?node-id=1-37&t=wKYJ3xmZT2qIjTEc-0
+
+
+
+
 # TODO LIST:
+## HEADER:
+
+
+
+
+
 ## HOMEPAGE:
 ### HEADER TAG
 - combinaison gagnante à trouver entre:

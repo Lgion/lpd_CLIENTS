@@ -9,10 +9,10 @@ export default function Gmap() {
         return <h1>{status}</h1>
     }
     , [clicks, setClicks] = React.useState([])
-    , [zoom, setZoom] = React.useState(3) // initial zoom
+    , [zoom, setZoom] = React.useState(12) // initial zoom
     , [center, setCenter] = React.useState({
-        lat: 0,
-        lng: 0,
+        lat: 5.748560,
+        lng:  -3.983372,
     })
 
     const onClick = (e) => {
@@ -39,39 +39,45 @@ export default function Gmap() {
             {clicks.map((latLng, i) => (<Marker key={i} position={latLng} />))}
         </Map>
         <section>
+            <form onSubmit={handleSubmit}>
+                <input 
+                    placeholder="Entrer nom lieu, ou coordonnées de géolocalisation" 
+                    className="safe"
+                />
+                <button>🔍</button>
+            </form>
             <fieldset>
-                <label htmlFor="lat">Latitude</label>
                 <input
                     type="number"
                     id="lat"
                     name="lat"
+                    className="safe"
                     value={center.lat}
                     onChange={(event) =>
                         setCenter({ ...center, lat: Number(event.target.value) })
                     }
                 />
+                <label htmlFor="lat">Latitude</label>
             </fieldset>
             <fieldset>
-                <label htmlFor="lng">Longitude</label>
                 <input
                     type="number"
                     id="lng"
                     name="lng"
+                    className="safe"
                     value={center.lng}
                     onChange={(event) =>
                         setCenter({ ...center, lng: Number(event.target.value) })
                     }
                 />
+                <label htmlFor="lng">Longitude</label>
             </fieldset>
-            <form onSubmit={handleSubmit}>
-                <input placeholder="Entrer nom lieu, ou coordonnées de géolocalisation" />
-                <button>🔍</button>
-            </form>
         </section>
     </Wrapper>
 }
 
 const handleSubmit = e => { 
+    e.preventDefault()
     alert('ok submitted')
 }
 

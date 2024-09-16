@@ -13,23 +13,38 @@ export default function Hgroup() {
     const myLoader = ({ src, width, quality }) => {
         return `${src}?w=${width}&q=${quality || 75}`
     }
-    , {menuActive, setMenuActive} = useContext(AuthContext)
-    , [imageContextuelMenu, setImageContextuelMenu] = useState(accueil)
-
+    , {menuActive, setMenuActive, mainmenu, findByIDMainMenu} = useContext(AuthContext)
+    , [imageContextuelMenu, setImageContextuelMenu] = useState([accueil,ecommerce])
+    , [indexImageContextuelMenu, setIndexImageContextuelMenu] = useState(0)
+    , handleTimeout = (item,i) => {
+        // console.log("je suis la "+menuActive)
+        // console.log(imageContextuelMenu)
+        // console.log(indexImageContextuelMenu)
+        // console.log(imageContextuelMenu[indexImageContextuelMenu])
+        setIndexImageContextuelMenu((indexImageContextuelMenu+1)%imageContextuelMenu.length)
+    }
+    
     useEffect(()=>{
         console.log(menuActive);
         setMenuActive(menuActive == "" ? "accueil" : menuActive)
         switch(menuActive){
-            case "ecommerce":setImageContextuelMenu(ecommerce)
+            case "ecommerce":setImageContextuelMenu([ecommerce])
             break;
-            case "activites-spirituelles":setImageContextuelMenu(sanctuaire)
+            case "activites-spirituelles":setImageContextuelMenu([sanctuaire,bolobi,ecommerce])
             break;
-            case "bolobi":setImageContextuelMenu(bolobi)
+            case "bolobi":setImageContextuelMenu([bolobi])
             break;
-            default: setImageContextuelMenu(accueil)
+            default: setImageContextuelMenu([accueil])
         }
+        setTimeout(handleTimeout, 5000)
+        console.log(mainmenu)
+        console.log(menuActive)
+        console.log(findByIDMainMenu(mainmenu, menuActive))
+        console.log(findByIDMainMenu(mainmenu, menuActive)?.h2)
     }, [menuActive])
-    
+    useEffect(()=>{
+        setTimeout(handleTimeout,5000)
+    }, [indexImageContextuelMenu])
     return <>
         <h1>
             <Link href="/" 
@@ -52,11 +67,14 @@ export default function Hgroup() {
             </Link>
             <Link href="/" 
                 className="imageContextuelMenu" 
-                onClick={()=>{setMenuActive("accueil")}}
+                onClick={()=>{
+                    setMenuActive("accueil")
+                    // setMainMenuObject(item.h2)
+                }}
                 title="Librairie religieuse chrétienne, abidjan 2plateaux rue des jardins">
                     <Image
                         // loader={myLoader}
-                        src={imageContextuelMenu}
+                        src={imageContextuelMenu[indexImageContextuelMenu]}
                         alt={"Librairie Puisance Divine, Abidjan, cocody 2 plateaux"}
                         className=""
                         width={200}                                    height={200}
@@ -79,5 +97,6 @@ export default function Hgroup() {
             </Link>
             {/* <span>Puissance Divine</span> */}
         </h1>
+        <h2 className="page_slogan">{findByIDMainMenu(mainmenu, menuActive)?.h2}</h2>
     </>
 }

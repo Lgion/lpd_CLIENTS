@@ -20,7 +20,10 @@ export default function MenuMain() {
                         title={item.title}
                         id={item.id+"_menu"}
                         className={menuActive==item.id?"active":""}
-                        onClick={()=>{setMenuActive(item.id)}}
+                        onClick={()=>{
+                            setMenuActive(item.id)
+                            // setMainMenuObject(item.h2)
+                        }}
                     >
                         <span>
                             {item.content}

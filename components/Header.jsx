@@ -41,6 +41,5 @@ export default function Header() {
         {/* <Subscribe /> */}
         {/* <MenuSecondary /> */}
         <Playbox />
-        <h2 className="page_slogan">Titre contextuel au menu sélectionné</h2>
     </header>
 }

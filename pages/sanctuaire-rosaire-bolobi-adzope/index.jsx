@@ -9,7 +9,8 @@ import Carousel from '../../components/_/Carousel'
 // import Nav from '../../../components/Nav.jsx'
 import { carouselBolobi_ } from "../../assets/carousels.js"
 import LocateBolobi from "./_/LocateBolobi";
-import ReserveForm from "./_/ReserveForm";
+import Article from "./_/Article";
+import ReserveForm from "./_/ReserveForm/index.jsx";
 import { getPostsBy } from '../../components/_/Blog/_/lib/api'
 import BlogCategory from '../../components/_/Blog/BlogCategory'
 import Slider from "../api/_/models/Slider"
@@ -35,47 +36,13 @@ export default function LieuxActivites({ categoryPosts,diapos }) {
         </Head>
 
         <main className="sanctuaire_ndr">
-            <article>
-                <h3 id="un" data-icon="😎">Bienvenue au Sanctuaire Notre Dame du Rosaire à Bolobi, Abidjan, Côte d'Ivoire</h3>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/zG-Izk2dvy0?si=vClpbpS8Tqc_ecJK" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
-                <p>Si vous êtes à la recherche d'<b>un lieu de paix, de prière et de recueillement au cœur de la nature</b>, le <Link href="#">Sanctuaire Notre Dame du Rosaire à Bolobi</Link> est l'endroit idéal pour vous.</p>
-                <p>Niché dans les magnifiques collines verdoyantes du <b>diocèse d'Agboville</b>, en périphérie du grand Abidjan sur la <b>route Abidjan-Adzopé</b>, s'étendant sur 18Ha, ce sanctuaire chrétien offre une expérience spirituelle apaisante et unique.</p>
-                <p>Voici les principaux spots et infrastructures du Sanctuare ND du Rosaire de Bolobi: </p>
-                <ul>
-                    <li className='lieuBeni'>
-                        <h4>Le Lieu Béni</h4>
-                        <p>Étendu sur 18 hectares d'espace vert, le sanctuaire de Bolobi offre un cadre vallonné, serein et rafraîchissant. C'est un havre de paix où vous pouvez vous retirer du tumulte de la vie quotidienne pour vous connecter avec votre foi et trouver la tranquillité intérieure.</p>
-                    </li>
-                    <li className='serenite'>
-                        <h4>L'Église de Sérénité</h4>
-                        <p>L'église au sein du sanctuaire peut accueillir jusqu'à 150 fidèles assis. De plus, une spacieuse esplanade permet d'accueillir plusieurs centaines de personnes pour des célébrations en plein air. Cette église a été dédicacée le 10 Septembre 2016 par Monseigneur Alexis Touably Youlo, l'évêque du diocèse d'Agboville.</p>
-                    </li>
-                    <li className='grotteMarial'>
-                        <h4>La Grotte Mariale</h4>
-                        <p>Un joyau spirituel du sanctuaire est la Grotte Mariale dédiée à Notre Dame du Rosaire. Consacrée le 10 Septembre 2016 par Monseigneur Alexis Touably Youlo, cette grotte est située au cœur d'une vaste plantation de palmiers à huile. Elle a la capacité d'accueillir plusieurs centaines de pèlerins et de retraitants. De plus, les célébrations de la messe en plein air peuvent y avoir lieu, créant une atmosphère profondément connectée à la nature.</p>
-                    </li>
-                    <li className='facilities'>
-                        <h4>Facilités d'Hébergement 1</h4>
-                        <p>Si vous souhaitez prolonger votre séjour spirituel, le sanctuaire offre un centre d'accueil et d'hébergement avec une capacité de 150 à 200 places. Cet espace est ouvert aux organisateurs de retraites spirituelles, de pèlerinages, de récollections, d'excursions, ainsi qu'aux familles, aux personnes seules et aux convalescents. Le cadre paisible du sanctuaire crée un environnement propice à la réflexion et à la reconnexion avec soi-même.</p>
-                    </li>
-                    <li className='facilitiesBis'>
-                        <h4>Solutions d'Hébergement 2</h4>
-                        <p>Le sanctuaire propose des hébergements abordables pour répondre à vos besoins. Vous avez le choix entre des dortoirs avec salle d'eau extérieure à seulement 1500 francs CFA par jour et par personne. Des studios avec salle d'eau sont également disponibles; veuillez nous contacter pour plus d'informations sur les tarifs. De plus, le sanctuaire offre des options de restauration pour les pèlerins et les retraitants qui le souhaitent.</p>
-                    </li>
-                    <li className='other'>
-                        <h4>Activités Inspirantes</h4>
-                        <p>Les activités spirituelles abondent au Sanctuaire Notre Dame du Rosaire, y compris des prières quotidiennes, des prières à l'Esprit Saint et des prières d'intercession. De plus, ne manquez pas la journée nationale du Rosaire, qui est célébrée chaque année le 14 Août à Bolobi, rassemblant les cœurs et les esprits dans la prière et la méditation.</p>
-                    </li>
-                </ul>
-                <p>encore un peu de blablabla pour présenter les différents types d'activités possibles au Sanctuaire... Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque suscipit, explicabo aperiam, eius eaque ratione, iusto deleniti quos iste quasi non assumenda rem neque quaerat sit in voluptatibus provident sed!</p>
-                <Carousel diapos={diapos} titre={"TEST - EXEMPLE: "} />
-                {/* <SliderInArticle carousel={carouselBolobi} carouselName="carouselBolobi_spirituel" /> */}
-                {/* <button onClick={()=>{setShowArticle(!showArticle)}}>Afficher {!showArticle?"plus":"moins"}...</button> */}
-                
-            </article>
+            
+            <Article />
+            <Carousel diapos={diapos} titre={"TEST - EXEMPLE: "} icon="2" sommaire="AUTRE TITRE SOMMAIRE" />
             <LocateBolobi />
             <ReserveForm />
             <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} />
+            
         </main>
     </>
 }
