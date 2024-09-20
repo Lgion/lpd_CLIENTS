@@ -13,6 +13,10 @@ export const FormContextProvider = ({children}) => {
 
     let [FieldsetRadioStyled, setFieldsetRadioStyled] = useState("fieldset")
     , [SectionCheckboxStyled, setSectionCheckboxStyled] = useState("section")
+    , [formNdrToggleImg, setFormNdrToggleImg] = useState("section")
+    , toggleFormNdrImg = () => {
+        setFormNdrToggleImg(!formNdrToggleImg)
+    }
     , templateScss = {
         colors: {
         "$void_gray":"#c9ded6",
@@ -28,6 +32,24 @@ export const FormContextProvider = ({children}) => {
         "$fourth_1":"#ff59004d",
         }
     }
+    , dateDiff = (date1, date2) => {
+        var diff = {}							// Initialisation du retour
+        var tmp = date2 - date1;
+      
+        tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
+        diff.sec = tmp % 60;					// Extraction du nombre de secondes
+      
+        tmp = Math.floor((tmp-diff.sec)/60);	// Nombre de minutes (partie entière)
+        diff.min = tmp % 60;					// Extraction du nombre de minutes
+      
+        tmp = Math.floor((tmp-diff.min)/60);	// Nombre d'heures (entières)
+        diff.hour = tmp % 24;					// Extraction du nombre d'heures
+        
+        tmp = Math.floor((tmp-diff.hour)/24);	// Nombre de jours restants
+        diff.day = tmp;
+        
+        return diff;
+      }
 
     useEffect(() => { 
         console.log(FieldsetRadioStyled);
@@ -64,16 +86,18 @@ export const FormContextProvider = ({children}) => {
                     //using opacity for hover effect, because background is used (amd delayed!) for the shuffle
                     // opacity: 0.8;
                 }
-                input{
+                input:not(#location_dortoir_readlony){
                     position: absolute;
                     opacity: 0;
                     cursor: pointer;
                     height: 0;
                     width: 0;
                     &#individual_room_participants{
-                        opacity:0;
-                        bottom:-1em;
-                        left:1em;
+                        width: 3em;
+                        font-size: 1em;
+                        opacity: 1;
+                        height: 100%;
+                        position: unset;
                     }
                     &:checked {
                         ~span{
@@ -82,7 +106,7 @@ export const FormContextProvider = ({children}) => {
                             opacity:1;
                             text-shadow: 0 0 3px BLACK;
                             &.radio {
-                                background-color: ${templateScss.colors.$ternary};
+                                background-color: ${templateScss.colors.$secondary};
                                 opacity: 1!important;
                                 &::after {
                                     opacity: 1;
@@ -99,16 +123,16 @@ export const FormContextProvider = ({children}) => {
                         }
                     }
                 }
-                &:has(input#individual_room_participants):has(input:checked){
-                    &::after{
-                        content:"personnes";
-                        position:absolute;
-                        bottom:-1em;
-                        right:0;
-                        // width:100px;
-                        // height:100px;
-                    }
-                }
+                // &:has(input#individual_room_participants):has(input:checked){
+                //     &::after{
+                //         content:"personnes";
+                //         position:absolute;
+                //         bottom:-1em;
+                //         right:0;
+                //         // width:100px;
+                //         // height:100px;
+                //     }
+                // }
                 >span{
                     &.radio {
                         position: absolute;
@@ -124,8 +148,8 @@ export const FormContextProvider = ({children}) => {
                             opacity: 0;
                             top: .5rem;
                             left: .5rem;
-                            width: 1.5rem;
-                            height: 1.5rem;
+                            width: 25px;
+                            height: 25px;
                             border-radius: 50%;
                             background: #fff;
                             //applying in JS, so as not to make selections delayed when no js:
@@ -239,7 +263,7 @@ export const FormContextProvider = ({children}) => {
             }
         `)
     }, [])
-    const context = {SectionCheckboxStyled, FieldsetRadioStyled}
+    const context = {SectionCheckboxStyled, FieldsetRadioStyled, dateDiff, formNdrToggleImg, toggleFormNdrImg}
     
     return (
         <FormContext.Provider value={context}>
