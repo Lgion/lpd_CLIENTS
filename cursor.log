@@ -1,0 +1,35 @@
+nohup: les entrées sont ignorées
+MESA-INTEL: warning: Haswell Vulkan support is incomplete
+libva error: /usr/lib/x86_64-linux-gnu/dri/iHD_drv_video.so init failed
+[90m[main 2024-09-25T07:14:24.903Z][0m update#setState disabled
+[90m[main 2024-09-25T07:14:24.911Z][0m update#ctor - updates are disabled as there is no update URL
+[91m[main 2024-09-25T07:14:25.003Z][0m [storage state.vscdb] error checking size of src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.workspaceUser: Error: Unexpected number of rows - 0
+[91m[main 2024-09-25T07:14:26.918Z][0m vscode-file: Refused to load resource /tmp/.mount_cursorz2008s/resources/app/extensions/theme-seti/icons/seti.woff from vscode-file: protocol (original URL: vscode-file://vscode-app/tmp/.mount_cursorz2008s/resources/app/extensions/theme-seti/icons/seti.woff)
+[90m[main 2024-09-26T21:57:54.331Z][0m Extension host with pid 49736 exited with code: 0, signal: unknown.
+[90m[main 2024-09-27T07:18:14.718Z][0m Extension host with pid 53092 exited with code: 0, signal: unknown.
+[18294:0927/092452.851210:ERROR:atom_cache.cc(229)] Add chromium/from-privileged to kAtomsToCache
+[node.js fs] readdir with filetypes failed with error:  [Error: ENOENT: no such file or directory, scandir '/home/samurai/Bureau/roma_project/components/ui'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '/home/samurai/Bureau/roma_project/components/ui'
+}
+[18294:0927/093319.542273:ERROR:atom_cache.cc(229)] Add code/file-list to kAtomsToCache
+[93m[main 2024-09-27T11:27:07.354Z][0m No ptyHost heartbeat after 6 seconds
+[93m[main 2024-09-27T14:33:26.071Z][0m No ptyHost heartbeat after 6 seconds
+[93m[main 2024-09-27T20:30:13.438Z][0m No ptyHost heartbeat after 6 seconds
+[91m[main 2024-09-27T21:27:45.468Z][0m ptyHost terminated unexpectedly with code 0
+[18294:0927/232745.478079:ERROR:network_service_instance_impl.cc(599)] Network service crashed, restarting service.
+[18294:0927/232745.497947:ERROR:zygote_communication_linux.cc(290)] Failed to send GetTerminationStatus message to zygote
+[90m[main 2024-09-27T21:27:45.501Z][0m Extension host with pid 50201 exited with code: 0, signal: unknown.
+[18294:0927/232745.504371:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.506406:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.507066:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.507500:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.507899:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.508291:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.509328:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.509802:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.510274:ERROR:gpu_process_host.cc(983)] GPU process launch failed: error_code=1002
+[18294:0927/232745.510286:FATAL:gpu_data_manager_impl_private.cc(448)] GPU process isn't usable. Goodbye.
+[0927/232745.524804:ERROR:elf_dynamic_array_reader.h(64)] tag not found

@@ -20,7 +20,7 @@ export default function ReserveForm() {
 
   const ulRef = useRef()
   // , fieldsets = ["dates","type","location","meal","infos"]
-  , {FieldsetRadioStyled, SectionCheckboxStyled, templateScss} = useContext(FormContext)
+  , {FieldsetRadioStyled, SectionCheckboxStyled, dateDiff, formNdrToggleImg, toggleFormNdrImg, templateScss} = useContext(FormContext)
   , titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE <br /> (avance sur paiement demandé): "
   , sommaire = "RÉSERVER DATE"
   , onFieldset = e => {
@@ -35,6 +35,7 @@ export default function ReserveForm() {
     
     show_image.className = f.split(' ').at(-1)
   }
+  , dateDiffDuAu = e => dateDiff(new Date(du.value),new Date(au.value))
   
   useEffect(()=>{
     // participants
@@ -62,24 +63,6 @@ export default function ReserveForm() {
   // const [dateRange, setDateRange] = useState(new Date(),null)
   // const [dateRange, setDateRange] = useState([new Date().setHours(9,0,0),null])
   const [dateRange, setDateRange] = useState([setHours(setMinutes(new Date(), 0), 9),null])
-  , dateDiff = (date1, date2) => {
-    var diff = {}							// Initialisation du retour
-    var tmp = date2 - date1;
-  
-    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
-    diff.sec = tmp % 60;					// Extraction du nombre de secondes
-  
-    tmp = Math.floor((tmp-diff.sec)/60);	// Nombre de minutes (partie entière)
-    diff.min = tmp % 60;					// Extraction du nombre de minutes
-  
-    tmp = Math.floor((tmp-diff.min)/60);	// Nombre d'heures (entières)
-    diff.hour = tmp % 24;					// Extraction du nombre d'heures
-    
-    tmp = Math.floor((tmp-diff.hour)/24);	// Nombre de jours restants
-    diff.day = tmp;
-    
-    return diff;
-  }
   , onChange = (update) => {
     // alert(+new Date(update[0]))
     let a = new Date(update[0])
@@ -92,7 +75,7 @@ export default function ReserveForm() {
     au.value = b.toISOString().slice(0, 10)
     // alert(a.toISOString().slice(0, 16))
     setDateRange(update);
-    document.querySelector('p.dates b').innerHTML = dateDiff(new Date(du.value),new Date(au.value)).day
+    document.querySelector('p.dates b').innerHTML = dateDiffDuAu()
   }
   , handleDateChange = (e) => {
     if(du.value!="" && au.value!=""){
@@ -144,18 +127,36 @@ export default function ReserveForm() {
 
 
   return <>
+
+
+  
     <Intro {...{sommaire,titreH3}} />
+
+    
+
     <form onSubmit={handleSubmit} id="bolobiForm">
+
+
+
       <MobileChoices />
-      <section>
-        <FieldsetDate {...{handleDateChange}} />
+
+
+
+      <section
+        className = { formNdrToggleImg && "on" }
+      >
+
+        <FieldsetDate {...{handleDateChange,toggleFormNdrImg,dateDiffDuAu}} />
+
         <FieldsetRadioStyled id="type" className="type">
-          <FieldsetType />
+          <FieldsetType {...{toggleFormNdrImg}} />
         </FieldsetRadioStyled>
+
         <FieldsetRadioStyled id="location" className="location">
-          <FieldsetLocation />
+          <FieldsetLocation {...{toggleFormNdrImg}} />
           
-          <hr />
+          {/* <hr />
+
           <section>
             <label htmlFor="un" className="radioLabel">
               <input id="un" type="radio" name="type_reservation" />
@@ -172,21 +173,40 @@ export default function ReserveForm() {
               <span className="radio"></span>
               <span>Individuel <b>(1500Fcfa/personne)</b></span>
             </label>
-          </section>
-          <FieldsetMeal SectionCheckboxStyled={SectionCheckboxStyled} />
+          </section> */}
+
         </FieldsetRadioStyled>
-        <FieldsetInfos />
+        
+        <FieldsetMeal  {...{SectionCheckboxStyled,toggleFormNdrImg}} />
+        
+        <FieldsetInfos {...{toggleFormNdrImg}} />
+
       </section>
-      <div id="show_image" />
+
+
+
+      <div 
+        id="show_image" 
+      />
+
+
+
       {/* https://github.com/Hacker0x01/react-datepicker/ */}
       <Resume {...{dateRange,setDateRange,onChange}} />
+
+
+
       <fieldset>
         <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendrons compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
         <textarea name="message" cols="30" rows="10"></textarea>
       </fieldset>
+
       <fieldset>
         <input type="submit" />
       </fieldset>
+
+
+      
     </form>
   </>
 }

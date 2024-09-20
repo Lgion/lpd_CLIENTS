@@ -2,9 +2,9 @@
 
 
 
-export default function FieldsetMeal({SectionCheckboxStyled}) {
+export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg}) {
     return <fieldset className="meal">
-        <h4>Choisir si vous souhaitez que les repas vous soient préparé (3000Fcfa/jour): </h4>
+        <h4 onClick={toggleFormNdrImg}>Choisir si vous souhaitez que les repas vous soient préparé (3000Fcfa/jour): </h4>
         <SectionCheckboxStyled>
             <label htmlFor="meal">
                 <input type="checkbox" id="meal" name="meal" />

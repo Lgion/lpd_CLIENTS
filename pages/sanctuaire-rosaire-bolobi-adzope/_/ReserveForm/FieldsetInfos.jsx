@@ -3,9 +3,9 @@
 
 
 
-export default function FieldsetInfos() {
+export default function FieldsetInfos({toggleFormNdrImg}) {
     return <fieldset className="infos">
-        <h4>Informations générales: </h4>
+        <h4 onClick={toggleFormNdrImg}>Informations générales: </h4>
         <label htmlFor="community">Communauté:
             <input type="text" id="community" name="community" />
         </label>

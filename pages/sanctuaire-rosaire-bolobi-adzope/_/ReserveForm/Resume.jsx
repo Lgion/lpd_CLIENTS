@@ -54,6 +54,13 @@ export default function Resume({dateRange,setDateRange,onChange}) {
 
     return <fieldset className="datepicker">
         <h4>RÉCAPITULATIF: </h4>
+        <p className="type"><span>Type de <b>réservation</b>:</span> <b>🚫</b></p>
+        <p className="dates"><span>Nombre de <b>nuités</b>:</span> <b>🚫</b></p>
+        <p className="location"><span>Nombre de participant estimé (<b>chbres communes</b>):</span> <b>🚫</b> (3.000 Fcfa la nuit)</p>
+        <p className="location_"><span>Nombre de <b>chambres individuelles</b> nécessaires:</span> <b>🚫</b> (10.000 Fcfa la nuit)</p>
+        <p className="meal"><span>Nombre de <b>repas</b>:</span> <b>Aucun</b></p>
+        <p className="infos"></p>
+
         <DatePicker
             // locale="fr-FR"
             // dateFormat="d MMMM yyyy, h:mm aa"
@@ -91,12 +98,8 @@ export default function Resume({dateRange,setDateRange,onChange}) {
             // dateFormat="MM/yyyy"
             todayButton="Réservation dates à Bolobi"
         />
-        <p className="type"><span>Type de réservation:</span> <b>🚫</b></p>
-        <p className="dates"><span>Nombre de nuités:</span> <b>🚫</b></p>
-        <p className="location"><span>Nombre de participant estimé (chbres communes):</span> <b>🚫</b> (3.000 Fcfa la nuit)</p>
-        <p className="location_"><span>Nombre de chambres individuelles nécessaires:</span> <b>🚫</b> (10.000 Fcfa la nuit)</p>
-        <p className="meal"><span>Nombre de repas:</span> <b>Aucun</b></p>
-        <p className="infos"></p>
+
+        
         <p style={{ color: "red" }}>*il faut que je rajoute un bouton en bas à droite en position:fixed, pour permettre de sauter directement au formulaire, ou aux différents fieldsets du formulaire</p>
     </fieldset>
 }
