@@ -1,3 +1,5 @@
+"use client"
+
 import {createContext, useEffect, useState, useMemo} from 'react'
 import styled,{createGlobalStyle} from 'styled-components'
 
@@ -92,13 +94,6 @@ export const FormContextProvider = ({children}) => {
                     cursor: pointer;
                     height: 0;
                     width: 0;
-                    &#individual_room_participants{
-                        width: 3em;
-                        font-size: 1em;
-                        opacity: 1;
-                        height: 100%;
-                        position: unset;
-                    }
                     &:checked {
                         ~span{
                             color: ${templateScss.colors.$ternary};
@@ -166,13 +161,13 @@ export const FormContextProvider = ({children}) => {
         setSectionCheckboxStyled(styled.section`
             
             display:unset !important;
-            background: #384c60;
-            height: 50px;
-            width: 150px !important;
+            height: 85px;
+            width: 100% !important;
             overflow: hidden;
             border-radius: 3px;
             cursor: pointer;
             >label{
+                background: #384c60;
                 cursor: pointer;
                 input{
                     opacity: 0;

@@ -1,12 +1,12 @@
 @import "./utils/variables";
 
-@import "./themes/template";
-@import "./themes/animations";
-
 @import "./utils/functions";
 @import "./utils/mixins";
 @import "./utils/extensions";
 @import "./utils/keyframes";
+
+@import "./themes/template";
+@import "./themes/animations";
 
 @import "./base/normalize";
 @import "./base/base";

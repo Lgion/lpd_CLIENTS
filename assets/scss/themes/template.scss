@@ -25,6 +25,9 @@ p:not(.pound),ul:not(.pound){
     font-family: "Big Shoulders";
     font-size: 25px;
     padding-bottom: .25em;
+    @include mobile-only{
+        font-size: 20px;
+    }
 }
 
 

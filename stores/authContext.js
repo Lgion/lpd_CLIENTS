@@ -1,28 +1,17 @@
-import {createContext, useEffect, useState, useMemo} from 'react'
-import { useRouter } from 'next/router'
-// import netlifyIdentity from 'netlify-identity-widget'
+"use client"
+
+import { createContext, useEffect, useState } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import * as Ecommerce_articles from "./../assets/datas/articles.js"
 import * as CartLS from "../utils/favorisManager.js"
-//FIX localstorage: https://dev.to/collegewap/how-to-use-local-storage-in-nextjs-2l2j
+import mongoose from 'mongoose'
 
-/*
-const AuthContext = createContext({
-    user: null,
-    login: ()=>{},
-    logout: ()=>{},
-    authReady: false
-})
-export default AuthContext
-*/
-const AuthContext = createContext({
-    // ok: null,
-    // cartBox: null,
-    // setCartBox: null,
-})
+const AuthContext = createContext({})
 export default AuthContext
 
 export const AuthContextProvider = ({children}) => {
     let router = useRouter()
+    let pathname = usePathname()
     , articles_title_table = Ecommerce_articles.articles_title_table
     , handleQty = (e, ls) => { 
         // alert(localStorage.cart)
@@ -81,6 +70,7 @@ export const AuthContextProvider = ({children}) => {
             }
         }
     }
+    , [data, setData] = useState({ categoryPosts: [], diapos: [] })
     , [cartBox, setCartBox] = useState(<>{miniCart()}</>)
     , [selectOptions, setSelectOptions] = useState(Object.keys(Ecommerce_articles.articles_title_table)
         .map((item,i) => {
@@ -111,6 +101,17 @@ export const AuthContextProvider = ({children}) => {
         }</div>)
 
         //  div.append(h3s)
+    }
+    , cleanModal = () => {
+        document.querySelector('#modal .modal___header').innerHTML = ""
+        // document.querySelector('#modal .modal___main').innerHTML = ""
+        // console.log(document.querySelector('#modal .modal___main'));
+        document.querySelector('#modal .modal___footer').innerHTML = ""
+    
+        const img = document.querySelector('#modal .modal___main .img')
+        , content = document.querySelector('#modal .modal___main .content')
+        img && img.remove()
+        content && content.remove()
     }
     , myLoader = ({ src, width, quality }) => {
         return `${src}?w=${width}&q=${quality || 75}`
@@ -153,10 +154,10 @@ export const AuthContextProvider = ({children}) => {
     useEffect(() => { 
         (()=>{setIsCartPage(document.querySelector('#__next>main.cart'))})()
         renderSommaire()
-        router.events.on('routeChangeStart', (item,i) => {
+        router.events?.on('routeChangeStart', (item,i) => {
             console.log("entrain de changer de page")
         })
-        router.events.on('routeChangeComplete', renderSommaire)
+        router.events?.on('routeChangeComplete', renderSommaire)
     }, [])
     useEffect(() => { 
         console.log(menuActive);
@@ -168,6 +169,42 @@ export const AuthContextProvider = ({children}) => {
         })
         console.log(menuActive);
         // console.log(findByIDMainMenu(mainmenu, menuActive))
+    }, [])
+    useEffect(() => {
+    
+        console.log(pathname);
+        console.log(pathname?.indexOf('admin'));
+        console.log(pathname?.indexOf('admin') != -1);
+        // alert(Array)
+        // console.log(document.querySelectorAll('span.close'))
+        document.querySelectorAll('span.close').forEach(elt => {
+            elt.addEventListener('click', e => {
+            // alert("okkk")
+            console.log(e.target.parentElement);
+            console.log(document.querySelector('#modal'));
+            const doParentIsModal = e.target.parentElement == document.querySelector('#modal')
+            if (doParentIsModal && pathname?.indexOf('ecommerce')!==-1) 
+                cleanModal()
+            e.target.parentElement.classList.remove('active')
+            })
+        })
+        if(document.querySelector('main.sanctuaire_ndr')){
+            const fetchData = async () => {
+                try {
+                    const postsResponse = await fetch('/api/posts?field=category&value=sanctuaire')
+                    const categoryPosts = await postsResponse.json()
+
+                    const diaposResponse = await fetch('/api/diapos?identifiant=home_0')
+                    const diapos = await diaposResponse.json()
+
+                    setData({ categoryPosts, diapos })
+                } catch (error) {
+                    console.error("Erreur lors de la récupération des données:", error)
+                }
+            }
+
+            fetchData()
+        }
     }, [])
     /*
     const [user, setUser] = useState(null)
@@ -203,7 +240,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire}
+    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire, data}
     
     return (
         <AuthContext.Provider value={context}>
@@ -211,5 +248,3 @@ export const AuthContextProvider = ({children}) => {
         </AuthContext.Provider>
     )
 }
-
-

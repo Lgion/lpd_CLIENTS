@@ -1,0 +1,13 @@
+nohup: les entrées sont ignorées
+MESA-INTEL: warning: Haswell Vulkan support is incomplete
+libva error: /usr/lib/x86_64-linux-gnu/dri/iHD_drv_video.so init failed
+[90m[main 2024-11-04T08:43:54.711Z][0m update#setState disabled
+[90m[main 2024-11-04T08:43:54.727Z][0m update#ctor - updates are disabled as there is no update URL
+[91m[main 2024-11-04T08:43:54.857Z][0m [storage state.vscdb] error checking size of src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.workspaceUser: Error: Unexpected number of rows - 0
+[91m[main 2024-11-04T08:43:56.833Z][0m vscode-file: Refused to load resource /tmp/.mount_cursorx2R3WK/resources/app/extensions/theme-seti/icons/seti.woff from vscode-file: protocol (original URL: vscode-file://vscode-app/tmp/.mount_cursorx2R3WK/resources/app/extensions/theme-seti/icons/seti.woff)
+[91m[main 2024-11-04T08:44:07.243Z][0m [uncaught exception in main]: Error: net::ERR_NETWORK_IO_SUSPENDED
+[91m[main 2024-11-04T08:44:07.243Z][0m Error: net::ERR_NETWORK_IO_SUSPENDED
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:109791)
+    at SimpleURLLoaderWrapper.emit (node:events:514:28)
+[90m[main 2024-11-04T13:01:06.282Z][0m Extension host with pid 7925 exited with code: 0, signal: unknown.
+[1104/140106.411161:ERROR:elf_dynamic_array_reader.h(64)] tag not found
