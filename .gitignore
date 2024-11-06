@@ -1,10 +1,34 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+assets/img/**.jpeg
+assets/img/**.jpg
+assets/img/**.png
+_/compresse_imgs/images
+_/compresse_imgs/log
+**/node_modules
+
+#/public/*
+#!/public/**/*.webp
+#---
+#public/img
+#public/**.jpeg
+#public/**.png
+#public/images
+#public/img_
+#---
+public/**.jpeg
+public/**.jpg
+public/**.png
+
 
 # dependencies
 /node_modules
 /.pnp
-.pnp.js
-.yarn/install-state.gz
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
 
 # testing
 /coverage
@@ -25,8 +49,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# env files (can opt-in for commiting if needed)
+# .env*
 
 # vercel
 .vercel

@@ -115,7 +115,7 @@ export default function Footer() {
             Nous suivre sur twitter
           </Link>
         </p>
-        <Map />
+        {/* <Map /> */}
         <span className="close"></span>
       </section>
       <section id="paiement-livraison">

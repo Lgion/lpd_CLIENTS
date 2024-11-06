@@ -8,7 +8,7 @@ export default function LogSignIn() {
 
     const [isCartPage, setIsCartPage] = useState()
     , {setIsAdmin} = useContext(AuthContext)
-    , { isLoaded, userId, sessionId, getToken } = useAuth()
+    // , { isLoaded, userId, sessionId, getToken } = useAuth()
     , { isSignedIn, user } = useUser()
     , { signOut } = useClerk();
 

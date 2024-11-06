@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react"
 import dynamic from 'next/dynamic'
-import ReactImageZoom from 'react-image-zoom';
+// import ReactImageZoom from 'react-image-zoom';
 // import ReactImageMagnify from 'react-image-magnify';
 import 'leaflet/dist/leaflet.css'
 // import watchImg300 from 

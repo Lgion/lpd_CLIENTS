@@ -68,7 +68,7 @@ $void_gray: #c9ded6;
 %addToCart{
   // width: 100px;
   // height:40px;
-  background: url(../img/addToCart.png) center center no-repeat, $fourth;
+  background: url(../../public/img/addToCart.png) center center no-repeat, $fourth;
   background-size: contain;
   // border-radius:10px;
 }
@@ -118,7 +118,7 @@ $slick_maxHeight: 500px;
     }
     &.slick-prev::before,&.slick-next::before{
       content: "";
-      background: url(../img/arrow.webp) no-repeat;
+      background: url(../../public/img/arrow.webp) no-repeat;
       background-size: contain;
     }
     &.slick-prev::before{rotate: 180deg;}
@@ -356,7 +356,7 @@ body>div[data-floating-ui-portal]{
 
   .cross-image {
     width:150px;
-    background:url(../img/cross2.webp) center center no-repeat;
+    background:url(../../public/img/cross2.webp) center center no-repeat;
     // position: absolute;
     top: 0%;
     bottom: 0%;
@@ -483,7 +483,7 @@ body{
     }
   }
   >header{
-    // background: url(../img/ecommerce-chretien-notre-dame-toute-graces.webp) no-repeat, url(../img/ecommerce-chretien-catholique-puissance-saint-esprit.webp) top right no-repeat;
+    // background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces.webp) no-repeat, url(../../public/img/ecommerce-chretien-catholique-puissance-saint-esprit.webp) top right no-repeat;
     // background-size: contain;
     height: 200px;
     margin-bottom: 7em;
@@ -498,6 +498,7 @@ body{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      text-align: center;
       >a{
         &:last-of-type:after
         ,&:last-of-type:before
@@ -508,7 +509,7 @@ body{
           left:133px;
           width: 88px;
           height: 100%;
-          background: url(../img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
+          background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
         }
         &:last-of-type:after{
           left:unset;
@@ -617,7 +618,9 @@ body{
         width: 100%;
         left:133px;
         top: 0px;
-        background: white;
+        @include mobile-only{
+          background: white;
+        }
         // &:before{
         //   content:"";
         //     position: absolute;
@@ -629,7 +632,7 @@ body{
         //   //   left: 133px;
         //   //   width: 13.3px;
         //   //   height:100%;
-        //   background: url(../img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
+        //   background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
         // }
         @include mobile-only{
           z-index: 2;
@@ -651,7 +654,7 @@ body{
             display: none;
             @include mobile-only{
               display: block;
-              background: url(../img/share.png) no-repeat;
+              background: url(../../public/img/share.png) no-repeat;
               background-size: contain;
               width: 40px;
               height: 40px;
@@ -708,7 +711,7 @@ body{
       &.mainMenu{
         position: absolute;
         z-index: 1;
-        background:url(../img/menu_bg_test0.webp) top left;
+        background:url(../../public/img/menu_bg_test0.webp) top left;
         display: flex;
         justify-content: center;
         gap:10px;
@@ -745,7 +748,7 @@ body{
               right: 0;
               bottom: 0;
               position: absolute;
-              background: url(../img/menu.webp) top left no-repeat;
+              background: url(../../public/img/menu.webp) top left no-repeat;
             }
             &:hover,&.active{
               box-shadow: 0 0 15px 3px beige;
@@ -799,8 +802,9 @@ body{
         // background:transparent;
         transition:font-size .2s;
         &:hover{font-size:1.2em;}
-        background: url(../img/login.png) no-repeat;
+        background: url(../../public/img/login.png) no-repeat;
         background-size: contain;
+        z-index: 2;
       }
       >form#connexion{
         display: none;
@@ -818,7 +822,7 @@ body{
       position: absolute;
       right: 136px;
       top: calc(40px + .5em);
-      background: url(../img/cart.png) center no-repeat, rgba(34,105,176,.4);
+      background: url(../../public/img/cart.png) center no-repeat, rgba(34,105,176,.4);
       border-radius: 10px 0 0 10px;
       border: 1px solid;
       background-size: contain;
@@ -830,7 +834,7 @@ body{
         position: fixed;
         top:2em;
         left:2em;
-        background: url(../img/cart.png) center no-repeat, orange;
+        background: url(../../public/img/cart.png) center no-repeat, orange;
         background-size: contain;
         padding:3em;
         &:before,&:after{    
@@ -855,7 +859,7 @@ body{
         z-index: 10;
         opacity:1;
         right:133px;
-        background: url(../img/cart.png) center no-repeat, gold;
+        background: url(../../public/img/cart.png) center no-repeat, gold;
         background-size: contain;
         box-shadow: 0 0 10px 1px;
         @include mobile-only{
@@ -882,10 +886,10 @@ body{
       height: 0;
       border-radius: 0 0 5px 5px;
       // background: $fourth;
-      background: url(../img/patternMiniCart.webp);
-      // border-image: url(../img/borderImage_test.png) 10% stretch;
-      // border-image: url(../img/borderImage_test.png) 30 fill / 30px / 30px space;
-      border-image: url(../img/borderImage_test3.png) round;
+      background: url(../../public/img/patternMiniCart.webp);
+      // border-image: url(../../public/img/borderImage_test.png) 10% stretch;
+      // border-image: url(../../public/img/borderImage_test.png) 30 fill / 30px / 30px space;
+      border-image: url(../../public/img/borderImage_test3.png) round;
       border-image-slice: 50;
       border-image-width: 30px 40px;
       // 30 fill / 30px / 30px space;
@@ -1111,10 +1115,10 @@ body{
           border:1px solid red;
         }
         // >img{width:30px;}
-        &.accueil{background:url(../img/home.svg), whitesmoke; color:$black;}
-        &.ecommerce{background:url(../img/heart0b.webp), whitesmoke; color: $fourth;}
-        &.activites-spirituelles{background:url(../img/heart0a.webp), whitesmoke; color: $secondary;}
-        &.bolobi{background:url(../img/heart0c.webp), whitesmoke; color: $ternary;}
+        &.accueil{background:url(../../public/img/home.svg), whitesmoke; color:$black;}
+        &.ecommerce{background:url(../../public/img/heart0b.webp), whitesmoke; color: $fourth;}
+        &.activites-spirituelles{background:url(../../public/img/heart0a.webp), whitesmoke; color: $secondary;}
+        &.bolobi{background:url(../../public/img/heart0c.webp), whitesmoke; color: $ternary;}
         &:hover{
           // outline: .5em solid brown;
           box-shadow: 0 0 10px 4px;
@@ -1179,11 +1183,11 @@ body{
             }
           }
         }
-        ._1{background:url(../img/cross1a.webp) center center no-repeat;}
-        ._2{background:url(../img/cross1b.webp) center center no-repeat;}
-        ._3{background:url(../img/cross1c.webp) center center no-repeat;}
-        ._4{background:url(../img/cross1d.webp) center center no-repeat;}
-        ._5{background:url(../img/cross1e.webp) center center no-repeat;}
+        ._1{background:url(../../public/img/cross1a.webp) center center no-repeat;}
+        ._2{background:url(../../public/img/cross1b.webp) center center no-repeat;}
+        ._3{background:url(../../public/img/cross1c.webp) center center no-repeat;}
+        ._4{background:url(../../public/img/cross1d.webp) center center no-repeat;}
+        ._5{background:url(../../public/img/cross1e.webp) center center no-repeat;}
       }
       >a{
         display: flex;
@@ -1203,7 +1207,7 @@ body{
       font-size: 2em;
       margin-bottom: 0;
       padding-bottom: .5rem;
-      background: url(../img/patternReligieux7.webp);
+      background: url(../../public/img/patternReligieux7.webp);
       @include mobile-only{
         font-size: x-large;;
       }
@@ -2046,7 +2050,7 @@ body{
         font-weight: 900;
         &:before{
           content: "";
-          background: url(../img/patternReligieux017.webp);
+          background: url(../../public/img/patternReligieux017.webp);
           width: 100%;
           display: block;
           position: absolute;
@@ -2131,7 +2135,7 @@ body{
               left: 0;
               opacity: .2;
               z-index: -1;
-              background:url(../img/patternReligieux9.webp);
+              background:url(../../public/img/patternReligieux9.webp);
             }
             &:hover{
               // @include from-desktop{
@@ -2272,7 +2276,7 @@ body{
                 width: 50px;
                 height: 50px;
                 
-                background: url(../img/gmap.png);
+                background: url(../../public/img/gmap.png);
                 // box-shadow: 0 0 5px .1px;
               }
               &:after{
@@ -2285,7 +2289,7 @@ body{
                 filter: grayscale(1);
 
                 box-shadow: 0 0 5px .1px;
-                background: url(../img/roadPlan.png);
+                background: url(../../public/img/roadPlan.png);
                 transition: all, .1s;
               }
               &:hover:after{
@@ -2295,10 +2299,10 @@ body{
               &:has(~div.ndr_map.off){
                 &:before{
                   border: 1px solid;
-                  background: url(../img/roadPlan.png);
+                  background: url(../../public/img/roadPlan.png);
                 }
                 &:after{
-                  background: url(../img/gmap.png);
+                  background: url(../../public/img/gmap.png);
                 }
               }
               >button {
@@ -2392,7 +2396,7 @@ body{
                     &:first-of-type{
                       position: absolute;
                       bottom: 0;
-                      background: url(../img/lpd_itineraire_icon.png) center center no-repeat;
+                      background: url(../../public/img/lpd_itineraire_icon.png) center center no-repeat;
                       width: 75px;
                       height: 75px;
                       background-size: contain;
@@ -2405,7 +2409,7 @@ body{
                         box-shadow: 0 0 10px 1px;
                       }
                       &.on{
-                        background: url(../img/lpd_itineraire_icon.png) center center no-repeat, white;
+                        background: url(../../public/img/lpd_itineraire_icon.png) center center no-repeat, white;
                         background-size: contain;
                         bottom:50px;
                         border:1px solid $secondary_1;
@@ -2497,7 +2501,7 @@ body{
                       position: relative;
                       width: 50px;
                       height: 50px;
-                      background: url('../img/psArrows.png') no-repeat;
+                      background: url('../../public/img/psArrows.png') no-repeat;
                       background-size: contain;
                       .ps-arrow {
                         position: absolute;
@@ -2753,7 +2757,7 @@ body{
                   height: 75px;
                   border: 1px solid;
                   border-radius: 2px;
-                  background: url(../img/ndr_date_box_.png) center center no-repeat;
+                  background: url(../../public/img/ndr_date_box_.png) center center no-repeat;
                   background-size: cover;
                   &:before{
                     content:"";
@@ -2974,19 +2978,19 @@ body{
           &#show_image{}
           position: relative;
           width: 50%;
-          background: url(../img/_/bolobi/alle-bolobi.jpg) no-repeat center center;
+          background: url(../../public/img/_/bolobi/alle-bolobi.webp) no-repeat center center;
           background-size: cover !important;
           &.dates{
-            background: url(../img/_/bolobi/sanctuaire-bolobi-fb.webp) no-repeat center center;
+            background: url(../../public/img/_/bolobi/sanctuaire-bolobi-fb.webp) no-repeat center center;
           }
           &.type{
-            background: url(../img/_/bolobi/chapelle-sanctuaire-rosaire-bolobi.webp) no-repeat center center;
+            background: url(../../public/img/_/bolobi/chapelle-sanctuaire-rosaire-bolobi.webp) no-repeat center center;
           }
           &.location{
-            background: url(../img/_/bolobi/centre-saint-martin-porres-bolobi-herbergement-1.webp) no-repeat center center;
+            background: url(../../public/img/_/bolobi/centre-saint-martin-porres-bolobi-herbergement-1.webp) no-repeat center center;
           }
           &.meal{
-            background: url(../img/_/bolobi/centre-saint-martin-porres-bolobi-allee-centrale.webp) no-repeat center center;
+            background: url(../../public/img/_/bolobi/centre-saint-martin-porres-bolobi-allee-centrale.webp) no-repeat center center;
           }
           &:before{
             content: "";
@@ -3157,7 +3161,7 @@ body{
               ,&.nature>.nature{display: block;}
               &.money>ul.money{display: flex;}
               >fieldset.money,>fieldset.nature{
-                @extend %b5_fieldset01;
+                @extend %b5_fieldset01 !optional;
                 width: 100%;
               }
               >article.money{
@@ -3379,16 +3383,16 @@ body{
           }
         }
       }
-      >li:nth-child(1){background: url(../img/patternReligieux012a.webp) top left no-repeat;}
-      >li:nth-child(2){background: url(../img/patternReligieux012b.webp) top left no-repeat;}
-      >li:nth-child(3){background: url(../img/patternReligieux012c.webp) top left no-repeat;}
-      >li:nth-child(4){background: url(../img/patternReligieux012d.webp) top left no-repeat;}
-      >li:nth-child(5){background: url(../img/patternReligieux012e.webp) top left no-repeat;}
-      >li:nth-child(1):hover,>li:nth-child(1).active{background: url(../img/patternReligieux012a_.webp) top left no-repeat;}
-      >li:nth-child(2):hover,>li:nth-child(2).active{background: url(../img/patternReligieux012b_.webp) top left no-repeat;}
-      >li:nth-child(3):hover,>li:nth-child(3).active{background: url(../img/patternReligieux012c_.webp) top left no-repeat;}
-      >li:nth-child(4):hover,>li:nth-child(4).active{background: url(../img/patternReligieux012d_.webp) top left no-repeat;}
-      >li:nth-child(5):hover,>li:nth-child(5).active{background: url(../img/patternReligieux012e_.webp) top left no-repeat;}
+      >li:nth-child(1){background: url(../../public/img/patternReligieux012a.webp) top left no-repeat;}
+      >li:nth-child(2){background: url(../../public/img/patternReligieux012b.webp) top left no-repeat;}
+      >li:nth-child(3){background: url(../../public/img/patternReligieux012c.webp) top left no-repeat;}
+      >li:nth-child(4){background: url(../../public/img/patternReligieux012d.webp) top left no-repeat;}
+      >li:nth-child(5){background: url(../../public/img/patternReligieux012e.webp) top left no-repeat;}
+      >li:nth-child(1):hover,>li:nth-child(1).active{background: url(../../public/img/patternReligieux012a_.webp) top left no-repeat;}
+      >li:nth-child(2):hover,>li:nth-child(2).active{background: url(../../public/img/patternReligieux012b_.webp) top left no-repeat;}
+      >li:nth-child(3):hover,>li:nth-child(3).active{background: url(../../public/img/patternReligieux012c_.webp) top left no-repeat;}
+      >li:nth-child(4):hover,>li:nth-child(4).active{background: url(../../public/img/patternReligieux012d_.webp) top left no-repeat;}
+      >li:nth-child(5):hover,>li:nth-child(5).active{background: url(../../public/img/patternReligieux012e_.webp) top left no-repeat;}
     }
     >*:not(ul):not(.active){
       // display: none;
@@ -3422,7 +3426,7 @@ body{
         bottom: .5em;
         right: .5em;
         opacity: 0.5;
-        background: url(../img/patternReligieux011.webp);
+        background: url(../../public/img/patternReligieux011.webp);
         z-index: -1;
         box-shadow: 0 0 10px 1px inset;
       }

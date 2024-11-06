@@ -3,7 +3,7 @@
 
 import {createContext, useEffect, useState, useMemo} from 'react'
 // import styled,{createGlobalStyle} from 'styled-components'
-import EditMongoForm from "../app/admin/school/EditMongoForm"
+import EditMongoForm from "../app/admin/_school/EditMongoForm"
 
 const AdminContext = createContext({
     // ok: null,

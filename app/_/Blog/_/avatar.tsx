@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import DateFormatter from '../_/date-formatter'
+import DateFormatter from './date-formatter'
 
 type Props = {
   name: string
   picture: string
+  date: string
 }
 
 const Avatar = ({ name, picture, date }: Props) => {

@@ -5,9 +5,9 @@ import AuthContext from "../../stores/authContext.js"
 import img1 from "./../../public/img/ecommerce-chretien-notre-dame-toute-graces.webp"
 import img2 from "./../../public/img/ecommerce-catholique-saint-esprit-Dieu-amour.webp"
 import ecommerce from "./../../public/img/librairie-puissance-divine/librairie-religieuse-exterieur.webp"
-import sanctuaire from "./../../public/img/_/eglise-du-rosaire-bolobi/eglise-exterieur.jpg"
-import bolobi from "./../../public/img/_/bolobi/croix-bolobi.jpg"
-import accueil from "./../../public/accueil.jpeg"
+import sanctuaire from "./../../public/img/_/eglise-du-rosaire-bolobi/eglise-exterieur.webp"
+import bolobi from "./../../public/img/_/bolobi/croix-bolobi.webp"
+import accueil from "./../../public/accueil.webp"
 
 export default function Hgroup() {
     const myLoader = ({ src, width, quality }) => {
