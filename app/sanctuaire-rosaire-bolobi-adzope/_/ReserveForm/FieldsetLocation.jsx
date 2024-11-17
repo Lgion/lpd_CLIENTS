@@ -67,8 +67,8 @@ export default function FieldsetLocation({toggleFormNdrImg}) {
                             // location_dortoir_readlony.value = participants.value - e.target.value
                         }} 
                     />
-                    <label htmlFor="individual_room_participants">chambres</label>
                 </div>
+                <label htmlFor="individual_room_participants">chambres</label>
             </label>
         </section>
     </>

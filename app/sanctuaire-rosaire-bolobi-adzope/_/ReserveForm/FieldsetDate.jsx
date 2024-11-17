@@ -17,7 +17,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         // console.log(du.value);
         // console.log(au.value);
         // console.log(dateDiffDuAu());
-        document.querySelector(".dates div div>b").innerHTML = (du.value && au.value) 
+        document.querySelector(".dates div:last-of-type>b").innerHTML = (du.value && au.value) 
             ? dateDiffDuAu().day
             : 0
 
@@ -30,7 +30,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         , e1={target:du}
         , e2={target:au}
 
-        document.querySelector(".dates div div b").innerHTML = 2
+        document.querySelector(".dates div b").innerHTML = 2
 
         document.querySelector(".dates ul li.on").classList.remove('on')
         e.target.classList.add('on')
@@ -102,6 +102,14 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
             />
         </div> */}
         <p>Vous pouvez choisir une tranche de dates de votre spécifique, ou alors sélectionner un numéro de semaine (cas fréquent pour les retraites de groupe)</p>
+        
+        <div>
+            <label htmlFor="du"><span></span></label>
+            <input type="date" id="du" name="du" {...{onChange, onFocus}} />
+            <label htmlFor="au"><span></span></label>
+            <input type="date" id="au" name="au" {...{onChange, onFocus}} />
+        </div>
+
         <ul onMouseOver={e => {e.target.querySelector('li.on')?.scrollIntoView({ behavior: "smooth", block: "center"})}}>
             <li>SEMAINES {new Date().getFullYear()}: </li>
             {weeks_list.map((elt,i) => (i>=currentWeekNum) && <li 
@@ -113,14 +121,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
                 </li>
             )}
         </ul>
-        <div>
-            <label htmlFor="du"><span></span></label>
-            <input type="date" id="du" name="du" {...{onChange, onFocus}} />
-            <label htmlFor="au"><span></span></label>
-            <input type="date" id="au" name="au" {...{onChange, onFocus}} />
-            <div>Nombre de nuits: <b>0</b></div>
-        </div>
-
+        <div>Nombre de nuits: <b>0</b></div>
 
         {/* {isWeek ? <>
             <label htmlFor="du">Du: *</label>

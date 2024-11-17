@@ -11,7 +11,7 @@ export default function Intro({sommaire,titreH3}) {
         </p>
         <ol className='safe'>
             <li>Les retraitants peuvent se faire eux-même la cuisine,</li>
-            <li>Les retraitants peuvent <u>commander</u> les repas (3000Fcfa les <u>2 repas + petit déjeuner</u>, ou 1500Fcfa pour <u>1 repas</u>)</li>
+            <li>Les retraitants peuvent <u>commander</u> les repas (3000Fcfa les <u>2 repas + petit déjeuner</u>, ou 2000Fcfa pour <u>1 repas</u>)</li>
         </ol>
     </>
 }

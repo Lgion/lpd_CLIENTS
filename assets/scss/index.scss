@@ -489,9 +489,10 @@ body{
     margin-bottom: 7em;
     z-index: 100 !important;
     @include mobile-only{
-      margin-top: 40px;
+      margin-top: 50px;
     }
     >h1{
+      z-index: 1;
       position: absolute;
       width:100%;
       height: 100%;
@@ -500,10 +501,11 @@ body{
       align-items: center;
       text-align: center;
       >a{
-        &:last-of-type:after
-        ,&:last-of-type:before
+        &:nth-of-type(2):after
+        ,&:nth-of-type(2):before
         {
           content:"";
+          z-index: 2;
           position: absolute;
           top:0;
           left:133px;
@@ -511,7 +513,7 @@ body{
           height: 100%;
           background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
         }
-        &:last-of-type:after{
+        &:nth-of-type(2):after{
           left:unset;
           right:133px;
           rotate: 0 1 0 180deg;
@@ -542,10 +544,12 @@ body{
           // margin: 0 auto;
           // width: 60%;
           // text-align: center;
+          z-index: 3;
           position: absolute;
           top:3px;
           left:133px;
           right:133px;
+          font-weight: 900;
           strong{
   
           }
@@ -553,25 +557,30 @@ body{
         @include mobile-only{
           font-size: .8em;
           >span{
-            left: 133px;
-            right: 133px;
-            font-size: initial;
+            left: 160px;
+            right: 160px;
+            font-size: .8em;
             line-height: .75em;
           }
+        }
+        &:nth-of-type(1)>span{
+          color: $secondary;
+          text-shadow: 0 1px 0px black,.1px 0px 0px black;
         }
         &:nth-of-type(2)>span{
           top:calc(1em + 3px);
           color:$ternary;
-          text-shadow: 0 0 3px black;
+          text-shadow: 0 0 1px red,-1px -1px 1px red,2px -1px 1px black,-1px 1px 1px blue,-2px 2px 1px blue,-3px 4px 3px black;
           @include mobile-only{
-            // top: calc(2.5em + 3px);
+            top:calc(2em + 3px);
+            letter-spacing: 1px;
           }
         }
         &:last-of-type>span{
           top:calc(2em + 3px);
           color:$fourth;
           @include mobile-only{
-            // top: calc(4em + 3px);
+            top: calc(4em + 3px);
           }
         }
       }
@@ -611,16 +620,14 @@ body{
     }
     >menu{
       &.SNS{
+        z-index: 2;
         display: flex;
         flex-flow: column;
         gap: 1px;
         position: absolute;
-        width: 100%;
+        width: 50px;
         left:133px;
         top: 0px;
-        @include mobile-only{
-          background: white;
-        }
         // &:before{
         //   content:"";
         //     position: absolute;
@@ -635,16 +642,17 @@ body{
         //   background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
         // }
         @include mobile-only{
+          background: white;
           z-index: 2;
           flex-flow: row;
-          top: -40px;
+          width: 100%;
+          top: -50px;
           left: 0;
         }
         &:hover li:not(#share):not(#pound){
           &:has(a:hover){
             border-radius: 5px;
             height: 50px;
-            background: white;
           }
         }
         >li{
@@ -671,6 +679,7 @@ body{
           }
           &#whatsapp>a{
             background: url("/img/sns/whatsapp.svg") center center no-repeat;
+            border-radius: 1em;
           }
           &#ytube>a{
             background: url("/img/sns/youtube.svg") center center no-repeat;
@@ -714,6 +723,7 @@ body{
         background:url(../../public/img/menu_bg_test0.webp) top left;
         display: flex;
         justify-content: center;
+        align-items: center;
         gap:10px;
         box-shadow: 0 0 10px 1px inset;
         list-style-type: none;
@@ -730,40 +740,70 @@ body{
           height: 33%;
           font-size: .9em;
           @include mobile-only{
-            width: 40%;
+            &:not(.accueil){width: 40%;}
+            &.accueil{width: 10%}
           }
           &.menu.ecommerce{
           }
-          >a:not([id="panier"]){
-            @extend %menu_elements;
-            @include mobile-and-tablette{
-              font-size: unset;
-            }
-            &::before{
-              transition: all .5s;
-              z-index: -1;
-              content: '';
-              top: 0em;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              position: absolute;
-              background: url(../../public/img/menu.webp) top left no-repeat;
-            }
-            &:hover,&.active{
-              box-shadow: 0 0 15px 3px beige;
-              // background: #ff5900;
-              // background: linear-gradient(135deg, #ff5900 0%,rgba(204,0,0,0.3) 46%,rgba(204,0,10,0.3) 62%,#ff5900 100%);
-              // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5900', endColorstr='#ff5900',GradientType=1 );
-              &::before{
-                z-index: 0;
-                width: 12%;
-                left:unset;
-                top: -1.5em;
+          >a{
+            &:not([id="panier"]){
+              &:not(.homeLink){
+                @extend %menu_elements;
+                &::before{
+                  transition: all .5s;
+                  z-index: -1;
+                  content: '';
+                  top: 0em;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  position: absolute;
+                  background: url(../../public/img/menu.webp) top left no-repeat;
+                }
+                &:hover,&.active{
+                  border-color: gold;
+                  box-shadow: 0 0 15px 3px beige;
+                  // background: #ff5900;
+                  // background: linear-gradient(135deg, #ff5900 0%,rgba(204,0,0,0.3) 46%,rgba(204,0,10,0.3) 62%,#ff5900 100%);
+                  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5900', endColorstr='#ff5900',GradientType=1 );
+                  &::before{
+                    z-index: 0;
+                    width: 12%;
+                    left:unset;
+                    top: -1.5em;
+                  }
+                  >span{color:gold;text-shadow: 0 0 3px black, -1px 2px 70px black, 0 0 10px deeppink;}
+                }
+                >span{position:relative;top:-.5em;transition:all .3s;}
               }
-              >span{color:gold;text-shadow: 0 0 3px black, -1px 2px 70px black, 0 0 10px deeppink;}
+              &.homeLink{
+                >span{    
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 2em;
+                  border: 1px solid;
+                  box-shadow: 0 0 10px 1px black;
+                  background: white;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 1.25em;
+                  position:relative;
+                  // top:-.5em;
+                  transition:all .1s;
+                  &:hover{
+                    border-width: 3px;
+                  }
+                }
+              }
+              @include mobile-and-tablette{
+                font-size: unset !important;
+              }
             }
-            >span{position:relative;top:-.5em;transition:all .3s;}
+            &#activites-spirituelles_menu{
+              color: #2989d8;
+              background: linear-gradient(135deg, $secondary_1_30 0%, #1F4EEA 46%, #1F4EEA 62%, $secondary_1_30 100%);
+            }
           }
         }
       }
@@ -863,11 +903,12 @@ body{
         background-size: contain;
         box-shadow: 0 0 10px 1px;
         @include mobile-only{
-          right: calc(40px + .5m);
+          right: calc(40px + .5em);
         }
         ~.miniCart:before{content: "";}
         ~.miniCart{
           // display: block;
+          z-index: 2;
           height: 600px;
           padding: 1.5em 2em;
           box-shadow: 0 0 1em 5px;
@@ -940,10 +981,15 @@ body{
       // bottom: 0;
       // left: 0;
       // right: 0;
+      z-index: 1;
       @extend %goa_blr;
       left: 133px;
       right: 133px;
-      font-size: initial;
+      font-size: large;
+      text-align: center;
+      background: rgba(0,0,0,.7);
+      color: white;
+      margin-bottom: 0;
     }
     /*
     >div#inscription{
@@ -1051,7 +1097,7 @@ body{
     &:has(+main.sanctuaire_ndr){
       >h2{>span{
         color:$secondary;
-        text-shadow: 3px 3px 3px $secondary_2, 5px 4px 0 $secondary, 0 0 3px white;
+        text-shadow: 1px 1px 3px $secondary_2, 2px 1px 0 $secondary, 0 0 3px white;
         // text-shadow: 0 0 3px $secondary_2, 0 0 3px $secondary_2, 0 0 3px white, 0 0 3px white;
       }}
       >h3.tagzonePage{
@@ -2058,6 +2104,7 @@ body{
           left: 0;
           height: 100%;
           opacity: .21;
+          z-index: -1;
         }
       }
       
@@ -2603,18 +2650,20 @@ body{
           display: none;
           width: 100%;
           // justify-content: center;
-          gap: 1em;
+          gap: .5em;
           padding: 1em 1em 1em 7em;
           overflow-x: scroll;
           background: $secondary_1;
           @include mobile-and-tablette{
             display: flex;
+            justify-content: center;
+            flex-flow: wrap;
             border: solid $secondary_1;
             border-bottom: none;
             border-radius: 5px 5px 0 0;
             box-shadow: 0 0 10px 1px inset;
             &:not(#un):not(#deux){
-              padding: 1em 2em !important;
+              padding: 1em !important;
             }
           }
           >li{
@@ -2639,6 +2688,9 @@ body{
               color:white;
               text-shadow: 0 0px 3px $secondary_1;
               &:hover{font-weight: bolder;}
+              >svg{ 
+                width: 16px; height: 16px;
+              }
             }
           }
         }
@@ -2675,6 +2727,7 @@ body{
             flex-flow: wrap;
             border-bottom-color: $secondary;
             transition:all .2s;
+            padding-bottom: 4em;
             &:hover{
               border: 0 solid $secondary;
               border-width: 0 5px;
@@ -2685,6 +2738,7 @@ body{
               &.active{
                 border: solid $secondary;
                 border-width: 0 10px;
+                padding-bottom: 4em;
                 &:hover{
                   box-shadow: 0 0px 10px 5px $secondary;
                   border-radius: 8px;
@@ -2698,12 +2752,18 @@ body{
                 
               }
             }
+            >p,>h5{
+              padding: 0 1em;
+            }
             &.dates{
+              position: relative;
               >ul{
                 width: 30%;
                 height: 200px;
                 overflow-y: scroll;
                 border-right: solid;
+                box-shadow: 0 0 10px 1px;
+                border-top-left-radius: 5px;
                 >li{
                   height: 35px;
                   text-align: center;
@@ -2781,16 +2841,18 @@ body{
                   span{
                     position: absolute;
                     top: 95%;
-                    width: 200%;
-                    left: -50%;
+                    width: 300%;
+                    left: -100%;
                     text-align: center;
                     border: 1px solid;
                     z-index: -1;
                     border-radius: 0 0 10px 10px;
                     background: $secondary;
+                    padding: 3px;
+                    color: white;                
                   }
                 }
-                div{
+                &:last-of-type{
                   position: absolute;
                   bottom: 0;
                   border-top: solid;
@@ -2847,6 +2909,7 @@ body{
               >section{
                   width: 100%;
                   display: flex;
+                  justify-content: center;
                   padding-top:1em;
                   >div{
                       flex-basis: 30%;
@@ -2885,6 +2948,9 @@ body{
               >label:not(:has(#meal)){
                 position: relative;
                 width: 30%;
+                @include mobile-only{
+                  width: 100%;
+                }
                 background: none;
                 z-index: 1;
                 border: 1px solid;

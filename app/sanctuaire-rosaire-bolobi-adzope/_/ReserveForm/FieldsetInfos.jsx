@@ -78,7 +78,7 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                     <input 
                         type="tel" 
                         className="form-control" 
-                        pattern="/^(\+225)?\d{8}$/" 
+                        // pattern="/^(\+225)?\d{8}$/" 
                         id="phone_number" 
                         name="phone_number" 
                         required 
