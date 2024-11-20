@@ -295,8 +295,8 @@ div#blog_container{
 }
 
 body>div[data-floating-ui-portal]{
+  z-index: 100;
   >.cl-userButtonPopoverRootBox{
-    z-index: 100;
   }
 }
 
@@ -845,6 +845,7 @@ body{
         background: url(../../public/img/login.png) no-repeat;
         background-size: contain;
         z-index: 2;
+        &:has(*){background: unset;}
       }
       >form#connexion{
         display: none;
@@ -2727,11 +2728,11 @@ body{
             flex-flow: wrap;
             border-bottom-color: $secondary;
             transition:all .2s;
-            padding-bottom: 4em;
+            // padding-bottom: 4em;
             &:hover{
               border: 0 solid $secondary;
               border-width: 0 5px;
-              padding: 0 .75em 1em;
+              // padding: 0 .75em 1em;
               box-shadow: 0 0px 10px -5px $secondary, 0 0px 10px 0px $secondary;
             }
             @include mobile-and-tablette{
@@ -2764,6 +2765,9 @@ body{
                 border-right: solid;
                 box-shadow: 0 0 10px 1px;
                 border-top-left-radius: 5px;
+                @include mobile-only{
+                  width: 40%;
+                }
                 >li{
                   height: 35px;
                   text-align: center;
@@ -2782,6 +2786,7 @@ body{
                   //   border-bottom:1px solid;
                   // }
                   &:first-of-type{
+                    line-height: 22px;
                     height: 50px;
                     background: $secondary_2;
                     position: sticky;
@@ -2795,13 +2800,14 @@ body{
                 display: flex;
                 justify-content: space-around;
                 /* align-items: center; */
-                padding-top: 2em;
+                // padding-top: 2em;
+                padding-top: 0em;
                 width: 70%;
                 position: relative;
                 @include mobile-only{
                   justify-content: center;
                   flex-flow: wrap;
-                  padding-top: 0em;
+                  width: 60%;
                   >label{
                     margin: 0 2em;
                   }
@@ -2860,6 +2866,11 @@ body{
                   text-align: center;
                   background: black;
                   color: white;
+                  @include desktop-only{
+                    display: unset;
+                    padding-left: 2em;
+                    left:0;
+                  }
                 }
               }
             }

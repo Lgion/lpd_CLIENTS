@@ -99,37 +99,50 @@ export default function ReserveForm() {
   }
   */
   async function handleSubmit(e){
-    alert('ok')
-    // console.log(e.target);
-    // console.log(Array.from(new FormData(e.target)))
-    // console.log(Array.from(new FormData(e.target)).map(elt=>({[elt[0]]:elt[1]})))
     e.preventDefault()
 
     const fd = new FormData(e.target)
     , fd_ = {reservation: {}}
+    
+    // Récupérer les informations de contact
+    const contactInfo = {
+      community: fd.get('community'),
+      names: fd.get('names'),
+      phone_number: fd.get('phone_number'),
+      email: fd.get('email')
+    }
+    
     document.querySelectorAll('input[type="radio"]:checked').forEach(elt=>{
         if(fd.has(elt.name))fd.set(elt.name,elt.id)
         else fd.append(elt.name,elt.id)
     })
+    
     fd.set('sleep', (fd.get('sleep')=="on"?1:0))
     fd.delete('time-input')
-    Array.from(fd).forEach(elt=>{fd_.reservation[elt[0]] = elt[1]})
-    console.log(fd_);
-
     
+    // Supprimer les champs individuels de contact du FormData
+    fd.delete('community')
+    fd.delete('names')
+    fd.delete('phone_number')
+    fd.delete('email')
+    
+    // Ajouter le tableau de contacts converti en JSON
+    fd.append('contact', JSON.stringify([contactInfo]))
+    
+    Array.from(fd).forEach(elt=>{fd_.reservation[elt[0]] = elt[1]})
+    console.log("Données à envoyer:", fd_);
+
     fetch("/api/reservation", {
-        method: "POST"
-        , headers: {
+        method: "POST",
+        headers: {
             'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(fd_),
-        //   body: JSON.stringify({oui:"n,on"}),
-        //   body: new FormData(e.target),
+        },
+        body: JSON.stringify(fd_),
     })
-      .then(r => r.json())
-      .then(data => {
-        console.log(data)
-      })
+    .then(r => r.json())
+    .then(data => {
+        console.log("Réponse du serveur:", data)
+    })
   }
 
 

@@ -1,12 +1,24 @@
 nohup: les entrées sont ignorées
-MESA-INTEL: warning: Haswell Vulkan support is incomplete
-libva error: /usr/lib/x86_64-linux-gnu/dri/iHD_drv_video.so init failed
-[90m[main 2024-11-16T08:20:56.986Z][0m update#setState disabled
-[90m[main 2024-11-16T08:20:57.005Z][0m update#ctor - updates are disabled as there is no update URL
-[91m[main 2024-11-16T08:20:57.113Z][0m [storage state.vscdb] error checking size of src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.workspaceUser: Error: Unexpected number of rows - 0
-[91m[main 2024-11-16T08:20:59.038Z][0m vscode-file: Refused to load resource /tmp/.mount_cursorLsBelA/resources/app/extensions/theme-seti/icons/seti.woff from vscode-file: protocol (original URL: vscode-file://vscode-app/tmp/.mount_cursorLsBelA/resources/app/extensions/theme-seti/icons/seti.woff)
+MESA-INTEL: warning: Performance support disabled, consider sysctl dev.i915.perf_stream_paranoid=0
+
+[90m[main 2024-11-20T06:24:45.416Z][0m update#setState disabled
+[90m[main 2024-11-20T06:24:45.438Z][0m update#ctor - updates are disabled as there is no update URL
+[91m[main 2024-11-20T06:24:45.687Z][0m [storage state.vscdb] error checking size of src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.workspaceUser: Error: Unexpected number of rows - 0
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(Use `cursor --trace-warnings ...` to show where the warning was created)
+[91m[main 2024-11-20T06:24:50.581Z][0m vscode-file: Refused to load resource /tmp/.mount_cursorZpjGmP/resources/app/extensions/theme-seti/icons/seti.woff from vscode-file: protocol (original URL: vscode-file://vscode-app/tmp/.mount_cursorZpjGmP/resources/app/extensions/theme-seti/icons/seti.woff)
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+[34610:1120/075815.673886:ERROR:atom_cache.cc(229)] Add chromium/from-privileged to kAtomsToCache
+[34672:1120/080449.552357:ERROR:ssl_client_socket_impl.cc(970)] handshake failed; returned -1, SSL error code 1, net_error -101
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+[91m[main 2024-11-20T07:06:00.044Z][0m [uncaught exception in main]: Error: net::ERR_NAME_NOT_RESOLVED
+[91m[main 2024-11-20T07:06:00.045Z][0m Error: net::ERR_NAME_NOT_RESOLVED
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:109791)
+    at SimpleURLLoaderWrapper.emit (node:events:514:28)
 c [FetchError]: request to https://api2.cursor.sh/aiserver.v1.AuthService/DownloadUpdate failed, reason: getaddrinfo ENOTFOUND api2.cursor.sh
-    at ClientRequest.<anonymous> (/tmp/.mount_cursorZpjGmP/resources/app/out/main.js:1:313656)
+    at ClientRequest.<anonymous> (/tmp/.mount_cursorqrYArh/resources/app/out/main.js:1:313656)
     at ClientRequest.emit (node:events:514:28)
     at TLSSocket.socketErrorListener (node:_http_client:495:9)
     at TLSSocket.emit (node:events:514:28)
@@ -17,19 +29,16 @@ c [FetchError]: request to https://api2.cursor.sh/aiserver.v1.AuthService/Downlo
   errno: 'ENOTFOUND',
   code: 'ENOTFOUND'
 }
-[91m[main 2024-11-16T17:12:16.452Z][0m [storage state.vscdb] prepare(): Error: SQLITE_FULL: database or disk is full (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.applicationUser Length: 7051
-[91m[main 2024-11-16T17:12:16.456Z][0m [storage state.vscdb] transaction(): Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:12:16.457Z][0m [uncaught exception in main]: Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:12:16.457Z][0m Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:12:16.458Z][0m [storage state.vscdb] prepare(): Error: SQLITE_FULL: database or disk is full (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.workspaceUser Length: 8678
-[91m[main 2024-11-16T17:12:16.459Z][0m [storage state.vscdb] transaction(): Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:12:16.459Z][0m [uncaught exception in main]: Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:12:16.459Z][0m Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:14:16.470Z][0m [storage state.vscdb] prepare(): Error: SQLITE_FULL: database or disk is full (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.applicationUser Length: 7051
-[91m[main 2024-11-16T17:14:16.471Z][0m [storage state.vscdb] transaction(): Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:14:16.471Z][0m [uncaught exception in main]: Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:14:16.471Z][0m Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:14:16.488Z][0m [storage state.vscdb] prepare(): Error: SQLITE_FULL: database or disk is full (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: src.vs.platform.reactivestorage.browser.reactiveStorageServiceImpl.persistentStorage.workspaceUser Length: 8678
-[91m[main 2024-11-16T17:14:16.488Z][0m [storage state.vscdb] transaction(): Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:14:16.488Z][0m [uncaught exception in main]: Error: SQLITE_ERROR: cannot commit - no transaction is active
-[91m[main 2024-11-16T17:14:16.489Z][0m Er
+[91m[main 2024-11-20T07:14:52.304Z][0m [uncaught exception in main]: Error: net::ERR_INTERNET_DISCONNECTED
+[91m[main 2024-11-20T07:14:52.305Z][0m Error: net::ERR_INTERNET_DISCONNECTED
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:109791)
+    at SimpleURLLoaderWrapper.emit (node:events:514:28)
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+[34610:1120/082521.891513:ERROR:atom_cache.cc(229)] Add code/file-list to kAtomsToCache
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(node:34610) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+[90m[main 2024-11-20T08:15:08.953Z][0m Extension host with pid 34905 exited with code: 0, signal: unknown.
+[1120/091509.228073:ERROR:elf_dynamic_array_reader.h(64)] tag not found

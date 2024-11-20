@@ -111,7 +111,10 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         </div>
 
         <ul onMouseOver={e => {e.target.querySelector('li.on')?.scrollIntoView({ behavior: "smooth", block: "center"})}}>
-            <li>SEMAINES {new Date().getFullYear()}: </li>
+            <li>
+                {/* SÉLECTION RAPIDE: 
+                <br/>  */}
+                Weekends semaines {new Date().getFullYear()}: </li>
             {weeks_list.map((elt,i) => (i>=currentWeekNum) && <li 
                     key={i} 
                     onClick={ e=>weekSelection(e,i) } 

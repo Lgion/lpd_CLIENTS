@@ -29,7 +29,7 @@ export default function Header() {
         <MenuMain />
 
         <LogSignIn />
-        {!isCartPage && <>
+        {/* {!isCartPage && <>
             <Link
                 href="panier-ecommerce-religieux"
                 title="Accedez au panier ecommerce religieux chrétien de la librairie puissance divine d'abidjan"
@@ -39,7 +39,8 @@ export default function Header() {
             >
             </Link>
             {cartBox}
-        </>}
+        </>} */}
+        
         {/* <Subscribe /> */}
         {/* <MenuSecondary /> */}
         <Playbox />

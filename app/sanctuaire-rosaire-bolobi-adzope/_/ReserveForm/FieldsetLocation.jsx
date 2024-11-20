@@ -22,7 +22,7 @@ export default function FieldsetLocation({toggleFormNdrImg}) {
         <h4 onClick={toggleFormNdrImg}>Choisir le nombre de participants, ainsi que le type de logement désiré <br /> (chambre indiv., ou dortoir): </h4>
         <section>
             <div className={isnotZeroParticipant!=false?"on":""}>
-                <label htmlFor="participants">Nombre de paticipants total ? *</label>
+                <label htmlFor="participants"><b><u>Estimer</u></b> nombre de paticipants total ? *</label>
                 <div className="custom-number-input">
                     <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants.value)-1)}}>-</button>
                     <input 

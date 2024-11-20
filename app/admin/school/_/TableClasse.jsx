@@ -1,6 +1,10 @@
+"use client"
 
-export default () => {
-    const {renderClasse} = useContext(AdminContext)
+import { useContext } from 'react'
+import AdminContext from "../../../../stores/adminContext.js"
+
+export default ({renderClasse}) => {
+    // const {renderClasse} = useContext(AdminContext)
 
     
     return <>

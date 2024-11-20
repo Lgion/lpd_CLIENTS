@@ -17,11 +17,14 @@ export default function Hgroup() {
     , [imageContextuelMenu, setImageContextuelMenu] = useState([accueil,ecommerce])
     , [indexImageContextuelMenu, setIndexImageContextuelMenu] = useState(0)
     , handleTimeout = (item,i) => {
-        // console.log("je suis la "+menuActive)
-        // console.log(imageContextuelMenu)
-        // console.log(indexImageContextuelMenu)
-        // console.log(imageContextuelMenu[indexImageContextuelMenu])
-        setIndexImageContextuelMenu((indexImageContextuelMenu+1)%imageContextuelMenu.length)
+        console.log("je suis la "+menuActive)
+        console.log(imageContextuelMenu)
+        console.log(imageContextuelMenu.length)
+        console.log(indexImageContextuelMenu)
+        console.log(imageContextuelMenu[indexImageContextuelMenu])
+        console.log(imageContextuelMenu.length==1?0:(indexImageContextuelMenu+1)%imageContextuelMenu.length);
+        
+        if(menuActive) setIndexImageContextuelMenu(imageContextuelMenu.length==1?0:(indexImageContextuelMenu+1)%imageContextuelMenu.length)
     }
     
     useEffect(()=>{

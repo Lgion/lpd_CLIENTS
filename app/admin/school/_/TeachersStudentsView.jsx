@@ -1,8 +1,8 @@
 import EditMongoForm from '../EditMongoForm'
 import MembersList from './MembersList'
 
-export default () => {
-    const {renderClasse,showTeachers,showStudents} = useContext(AdminContext)
+export default ({$}) => {
+    const {renderClasse,showTeachers,showStudents} = $
 
     
     return <>

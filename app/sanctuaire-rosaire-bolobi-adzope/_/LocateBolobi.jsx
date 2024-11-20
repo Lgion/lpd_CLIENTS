@@ -62,35 +62,39 @@ export default function LocateBolobi() {
         { ssr: false } // This line is important. It's what prevents server-side render
       ), [])
     */}
-    useEffect(()=>{
-        // console.log(Event);
-        console.log(did);
-        setDid(1)
-    }, [])
-    useEffect(()=>{
-        console.log("iiiiii");
-        console.log(did);
-        if(did){
-            console.log("iooooo");
-            let evt = new Event()
-            , m = new Magnifier(evt)
-            // let m = new Magnifier(ok)
-            m.attach({
-                thumb: '#thumb1',
-                large: 'abidjan-adzope.png',
-                largeWrapper: 'preview1',
-                zoom: 3,
-                zoomable: false
-            })
-        }
-    },[did])
+
+
+
+    
+    // useEffect(()=>{
+    //     // console.log(Event);
+    //     console.log(did);
+    //     setDid(1)
+    // }, [])
+    // useEffect(()=>{
+    //     console.log("iiiiii");
+    //     console.log(did);
+    //     if(did){
+    //         console.log("iooooo");
+    //         let evt = new Event()
+    //         , m = new Magnifier(evt)
+    //         // let m = new Magnifier(ok)
+    //         m.attach({
+    //             thumb: '#thumb1',
+    //             large: 'abidjan-adzope.png',
+    //             largeWrapper: 'preview1',
+    //             zoom: 3,
+    //             zoomable: false
+    //         })
+    //     }
+    // },[did])
     return (
         <section>
             <h3 id="thirdH3" data-icon="3" data-sommaire={sommaire||titreH3}>{titreH3}</h3>
             <p>Le Sanctuaire ND Rosaire de Bolobi se situe à la périphérie d'Abidjan, juste après <a href="#" target="_blank">Azaguié</a>, un peu avant <a href="#" target="_blank">Yakasseme</a> (des panneaux indicateurs inscript "BOLOBI" pointent vers l'entrée du sanctuaire).</p>
             <div>
-                <NdrToggle />
-                <NdrImage />
+                {/* <NdrToggle />
+                <NdrImage /> */}
                 <div className="ndr_map">
                     <Gmap />
                     {/* <MapLeaflet /> */}
