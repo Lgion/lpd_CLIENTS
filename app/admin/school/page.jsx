@@ -1,48 +1,27 @@
-"use client"
-
-import { useContext } from 'react'
-import {createPortal} from "react-dom"
-// import { usePathname } from 'next/navigation'
+// Supprimer "use client" car nous allons faire le rendu côté serveur
 import Link from "next/link";
 import EditMongoForm from "./EditMongoForm.jsx"
-// import { getModels } from "../../api/lib/ecole"
 import AdminContext from "../../../stores/adminContext.js"
 import MembersList from "./_/MembersList.jsx";
 import NavAdminMenus from "./_/NavAdminMenus.jsx";
 import TableClasse from "./_/TableClasse.jsx";
 import TeachersStudentsView from "./_/TeachersStudentsView.jsx";
 
-
-export default async function School({theModels = JSON.parse("{\"void\":\"oui\"}")
-  // theModels: JSON.parse("oui")
-  // theModels: JSON.parse(getModels())
-}) {
-
-  // const {schemaEleve,schemaTeacher,schemaClasse} = theModels
-  const {schemaEleve} = theModels
-
-  // console.log(ecole_classes)
-  // console.log()
-  let a
-    // , pathname = usePathname()
-    , tmpDate = new Date()
-  // console.log(models);
-
-
-  // const handleYears = (e) => 
-  // console.log(renderClasse);
-  console.log(schemaEleve);
-
-  return (<main id="admin" className="school">
-    {/* {JSON.stringify(showStudents)} */}
-    <NavAdminMenus />
-
-
-  </main>)
+// Fonction pour charger les données statiquement
+async function getModels() {
+  const res = await fetch('/api/ecole', { cache: 'force-cache' });
+  if (!res.ok) throw new Error('Failed to fetch models');
+  return res.json();
 }
 
+export default async function School() {
+  // const models = await getModels();
+  // const { schemaEleve } = models;
 
+  // let tmpDate = new Date();
+  // console.log(schemaEleve);
 
-
-
-
+  return (<main id="admin" className="school">
+    <NavAdminMenus />
+  </main>)
+}

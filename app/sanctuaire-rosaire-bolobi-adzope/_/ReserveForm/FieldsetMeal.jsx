@@ -8,7 +8,7 @@ const mealOptions = {
     dinner: ["APF", "Tchep", "Kedjenou"]
 };
 
-export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg}) {
+export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, onMealPlanChange, onCustomMealChange}) {
     const [isMealIncluded, setIsMealIncluded] = useState(false);
     const [mealPlan, setMealPlan] = useState(""); 
     const [customMeal, setCustomMeal] = useState({
@@ -21,6 +21,11 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg}) 
         lunch: false,
         dinner: false
     });
+
+    // Notifier le parent des changements de repas
+    useEffect(() => {
+        onCustomMealChange(customMeal);
+    }, [customMeal, onCustomMealChange]);
 
     useEffect(() => {
         const div = document.querySelector('article.meal>div')
@@ -39,10 +44,10 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg}) 
     };
 
     const handleMealPlanChange = (e) => {
-        setMealPlan(prevMealPlan => {
-            if(e.target.value)document.querySelector("article.meal>b").innerHTML = e.target.value + " repas /jour/personne"
-            return parseInt(e.target.value)
-        });
+        const value = parseInt(e.target.value, 10);
+        setMealPlan(value);
+        if(value) document.querySelector("article.meal>b").innerHTML = value + " repas /jour/personne";
+        onMealPlanChange(value); // Notifier le composant parent
     };
 
     const handleCustomMealChange = (mealType, e) => {
@@ -72,26 +77,54 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg}) 
                     <div className="form-check" key={`${mealType}-${option}`}>
                         <input 
                             className="form-check-input" 
-                            type="radio" 
+                            type={mealType === "breakfast" ? "radio" : "checkbox"}
                             name={mealType} 
                             id={`${mealType}-${option}`} 
                             value={option.toLowerCase()} 
-                            onChange={() => handleRadioChange(mealType, option.toLowerCase())}
-                            checked={customMeal[mealType] === option.toLowerCase()}
+                            onChange={(e) => {
+                                if (mealType === "breakfast") {
+                                    handleRadioChange(mealType, option.toLowerCase());
+                                } else {
+                                    // Pour checkbox, on gère un tableau de valeurs
+                                    const currentValues = customMeal[mealType] ? customMeal[mealType].split(';') : [];
+                                    if (e.target.checked) {
+                                        currentValues.push(option.toLowerCase());
+                                    } else {
+                                        const index = currentValues.indexOf(option.toLowerCase());
+                                        if (index > -1) currentValues.splice(index, 1);
+                                    }
+                                    setCustomMeal(prev => ({
+                                        ...prev,
+                                        [mealType]: currentValues.join(';')
+                                    }));
+                                }
+                            }}
+                            checked={mealType === "breakfast" 
+                                ? customMeal[mealType] === option.toLowerCase()
+                                : customMeal[mealType]?.split(';').includes(option.toLowerCase())
+                            }
                         />
                         <label className="form-check-label" htmlFor={`${mealType}-${option}`}>
                             {option}
                         </label>
                     </div>
                 ))}
-                {mealType!="breakfast" && <div className="form-check">
+                {mealType !== "breakfast" && <div className="form-check">
                     <input 
                         className="form-check-input" 
-                        type="radio" 
-                        name={mealType} 
+                        type="checkbox"
+                        name={`${mealType}-custom`} 
                         id={`${mealType}-custom`} 
-                        value="custom" 
-                        onChange={() => handleRadioChange(mealType, 'custom')}
+                        onChange={(e) => {
+                            setShowCustomInput(prev => ({...prev, [mealType]: e.target.checked}));
+                            if (!e.target.checked) {
+                                setCustomMeal(prev => {
+                                    const values = prev[mealType].split(';').filter(v => mealOptions[mealType].map(o => o.toLowerCase()).includes(v));
+                                    return {...prev, [mealType]: values.join(';')};
+                                });
+                            }
+                        }}
+                        checked={showCustomInput[mealType]}
                     />
                     <label className="form-check-label" htmlFor={`${mealType}-custom`}>
                         Personnalisé <sup>(séparer par des ";" si vous avez plusieurs propositions)</sup>
@@ -254,7 +287,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg}) 
             {isMealIncluded && mealPlan && (
                 <div className="mealOptions">
                     {breakfastColumn}
-                    {mealPlan === 2 && lunchColumn}
+                    {mealPlan >= 2 && lunchColumn}
                     {dinnerColumn}
                 </div>
             )}

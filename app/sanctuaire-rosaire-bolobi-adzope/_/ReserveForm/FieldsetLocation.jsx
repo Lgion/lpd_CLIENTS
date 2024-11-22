@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react"
 
-
-
-
-export default function FieldsetLocation({toggleFormNdrImg}) {
+export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants}) {
 
     const [isnotZeroParticipant, setIsnotZeroParticipant] = useState(0)
     , onChangeParticipants = (e,alt) => {
-        setIsnotZeroParticipant(alt||participants.value)
-        document.querySelector("article.nuites>b").innerHTML = parseInt(alt||participants.value)
-        document.querySelector("article.location>b").innerHTML = parseInt(alt||participants.value) - parseInt(individual_room_participants.value)
+        setIsnotZeroParticipant(alt||participants)
+        onParticipantsChange(alt||e.target.value)
     }
 
     useEffect(()=>{
@@ -24,17 +20,17 @@ export default function FieldsetLocation({toggleFormNdrImg}) {
             <div className={isnotZeroParticipant!=false?"on":""}>
                 <label htmlFor="participants"><b><u>Estimer</u></b> nombre de paticipants total ? *</label>
                 <div className="custom-number-input">
-                    <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants.value)-1)}}>-</button>
+                    <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)-1)}}>-</button>
                     <input 
                         id="participants" 
                         type="number" 
                         name="participants" 
                         max="250" 
                         min="1" 
-                        value={isnotZeroParticipant}
+                        value={participants}
                         onChange={onChangeParticipants} 
                     />
-                    <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants.value)+1)}}>+</button>
+                    <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)+1)}}>+</button>
                 </div>
 
             </div>
@@ -48,7 +44,7 @@ export default function FieldsetLocation({toggleFormNdrImg}) {
                 </div>
             </label> */}
             <label htmlFor="chambre" className="radioLabel">
-                <input id="chambre" type="checkbox" name="sleep" />
+                {/* <input id="chambre" type="checkbox" name="sleep" /> */}
                 <span className="radio"></span>
                 <span>Chambre Individuel <b>(<b>10000Fcfa</b>/personne la nuité)</b></span>
                 {/* <span>chambre</span> */}
@@ -57,14 +53,12 @@ export default function FieldsetLocation({toggleFormNdrImg}) {
                         id="individual_room_participants" 
                         type="number" 
                         name="individual_room_participants" 
-                        defaultValue={0} 
-                        max={isnotZeroParticipant} 
+                        // defaultValue={0} 
+                        max={participants} 
                         min="0" 
+                        value={individualRoomParticipants}
                         onChange={e => {
-                            alert(e.target)
-                            document.querySelector("article.location>b").innerHTML = parseInt(participants.value) - parseInt(e.target.value)
-                            document.querySelector("article.location_ind>b").innerHTML = e.target.value
-                            // location_dortoir_readlony.value = participants.value - e.target.value
+                            onIndividualRoomChange(e.target.value)
                         }} 
                     />
                 </div>

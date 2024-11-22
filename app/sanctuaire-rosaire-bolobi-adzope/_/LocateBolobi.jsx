@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css'
 
 
 import Event from './Locate/Event.js'
-import Magnifier from './Locate/Magnifier.js'
+// import Magnifier from './Locate/Magnifier.js'
 import NdrToggle from './Locate/NdrToggle.jsx'
 import NdrImage from './Locate/NdrImage.jsx'
 import Gmap from '../../_/Gmap.jsx'

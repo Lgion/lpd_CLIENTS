@@ -9,31 +9,26 @@ const Reservation = require('../models/Reservation')
 /************************************************************************************************************ */
 /************************************************************************************************************ */
 
-exports.createReservation = (req, res, next) => {
-  console.log(req.body)
-  console.log(typeof req.body)
-  console.log(typeof req.body.reservation)
-  // console.log(Reservation.schema.paths)
-  console.log('oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
-  const reservationObject = req.body.reservation
-  console.log('2oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
-  // const reservationObject = JSON.parse(req.body.reservation)
-  const reservation = new Reservation({
+exports.createReservation = async (req, res) => {
+  try {
+    console.log('Controller - Request body:', req.body);
+    
+    const reservationObject = req.body.reservation;
+    console.log('Controller - Reservation object:', reservationObject);
+    
+    const reservation = new Reservation({
       ...reservationObject
-      // , userId: req.auth.userId
-      // , imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-  })
-  console.log('3oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
-  reservation.save()
-  
-  .then(() => { 
-    console.log('4oijiojiojoioijfdsoijfdoijfoijfdsoijfdsijfds')
-    res.status(201).json({message: 'Objet enregistré !'})
-  })
-  .catch(error => {
-    console.log('4/BAD erroooooooooooor catched')
-    res.status(400).json( { error })
-  })
+    });
+    
+    await reservation.save();
+    console.log('Controller - Reservation saved successfully');
+    
+    return res.status(201).json({ message: 'Réservation enregistrée !' });
+    
+  } catch (error) {
+    console.error('Controller - Error:', error);
+    return res.status(400).json({ message: 'Erreur serveur', error: error.message });
+  }
 }
 
 /************************************************************************************************************ */
