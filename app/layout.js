@@ -45,6 +45,7 @@ const geistMono = localFont({
 export const metadata = {
   title: "Accueil - Puissance Divine & Sanctuaire Bolobi, Côte d'ivoire",
   description: "Librairie chrétienne à abidjan 2plateaux, et retraite spirituelle à bolobi",
+  "google-site-verification": "ZfnSq8l0ItGI4LbbtXHa3F0NzkbFPEUyATDoCTXgF-c"
 };
 
 export default function RootLayout({ children }) {
