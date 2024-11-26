@@ -1,0 +1,85 @@
+/**/
+
+h1{
+    font-family: Kenia !important;
+}
+h2{
+    font-family: Agbalumo !important;
+}
+h3{
+    font-family: "Indie Flower" !important;
+    font-size: 40px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+h4{
+    font-family: "Shippori Mincho" !important;
+    font-size: 30px;
+}
+h5{
+    // font-family:  !important;
+}
+// h6{}
+
+p:not(.pound),ul:not(.pound){
+    font-family: "Big Shoulders";
+    font-size: 25px;
+    padding-bottom: .25em;
+    @include mobile-only{
+        font-size: 20px;
+    }
+}
+
+
+$XS: 5px;
+$S: 10px;
+$S_: 15px;
+$M: 20px;
+$L: 30px;
+$XL: 50px;
+$XXL: 60px;
+$_XS: .25em;
+$_S: .5em;
+$_S_: .75em;
+$_M: 1em;
+$_M_: 1.25em;
+$_M__: 1.5em;
+$_L: 2em;
+$_XL: 3em;
+$_XXL: 5em;
+
+$titres: 'typography des titre';
+$contenus: 'typography des contenus';
+
+$b5_mobile: 575;
+$b5_tablette: 767;
+$b5_desktop: 991;
+$b5_bigScreen: 1299;
+$b5_tv: 1399;
+$b5_breakpoints:(mobile:$b5_mobile,tablette:$b5_tablette,desktop:$b5_desktop);
+
+$primary:#9356DC;
+// $secondary:#1397EB;
+$secondary:#1F4EEA;
+$secondary_1:#2989d8;
+// $secondary_2:#a1e1f480;
+$secondary_2:#a1e1f4;
+$ternary:goldenrod;
+$ternary_1:#EBE813;
+$ternary_2:#96943E;
+%ternary_ts{text-shadow: 0 0 5px black, 3px 3px 3px $ternary_2, 5px 4px 0 $ternary, 0 0 3px white;}
+$fourth:#cc0000;
+$fourth_1:#ff59004d;
+$fourth_2:#ff8e8e;
+
+$color-primary: $black;
+$color-secondary: $dark2;
+
+
+%titreType0_level1{@extend %font__titre;@extend %bold1;font-size:2em;color:$color-primary;}
+%titreType0_level2{@extend %font__titre;@extend %bold1;font-size:1em;color:$color-primary;}
+%titreType1_level1{@extend %font__content;font-size:2em;color:$color-primary;}
+%titreType1_level2{@extend %font__content;font-size:2em;color:$color-primary;}
+%titreType2_level1,%titre_footer1{@extend %font__content;font-size:1em;color:$color-primary;}
+%titreType2_level2,%titre_footer2{@extend %font__content;font-size:1em;color:$color-primary;}
+

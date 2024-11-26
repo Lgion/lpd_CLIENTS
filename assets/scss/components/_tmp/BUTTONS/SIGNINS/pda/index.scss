@@ -1,0 +1,42 @@
+
+
+
+%signin_from_pda{
+    position: absolute;
+    border: 1px solid;
+    border-top:0;
+    padding: 0.5em;
+    border-radius: 0 0 5px 5px;
+    background: wheat;
+    top: 0;
+    right: 136px;
+    height: 40px;
+    display: flex;
+    gap:10px;
+    justify-content: space-between;
+    &.active{
+      animation: cta_1 1s linear infinite alternate;
+      position: fixed;
+      z-index: 100;
+      /* animation-name:cta_1;animation-duration:infinites;animation-timing-function:linear;animation-delay:0ss;animation-iteration-count:1;animation-direction:normal;animation-fill-mode:none;animation-play-state:9; */
+    }
+    &.connected{justify-content: center;align-items: center;background:none;border:none;
+      div:has(>img){
+        outline: 1px solid #00ff00;
+        box-shadow: 0 0 10px 7px gold;
+      }
+    }
+    >a,button{
+      padding:0;
+      border:none;
+      background:transparent;
+      transition:font-size .2s;
+      &:hover{font-size:1.2em;}
+    }
+    >form#connexion{
+      display: none;
+      >input{
+
+      }
+    }
+  }

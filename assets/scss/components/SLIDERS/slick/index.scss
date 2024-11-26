@@ -1,0 +1,128 @@
+$slick_minHeight: 300px;
+$slick_maxHeight: 500px;
+
+
+/*
+.slick-slider {
+    >button {
+        background: black;
+    }
+
+    >ul {
+        background: rebeccapurple;
+        padding: 1em 0;
+        position: initial;
+        bottom: -3.5em;
+
+        :not(.slick-active)button:before {
+            color: white;
+            opacity: 1;
+        }
+    }
+}
+.slick-track>div {
+    display: flex;
+    justify-content: center;
+}
+*/
+
+
+%slick,
+.slick-slider.slick-initialized {
+    width: 100%;
+
+    >button {
+        background: brown;
+        width: 50px;
+        height: 50px;
+        z-index: 9;
+
+        &::before {
+            padding: .5em;
+        }
+
+        &:first-of-type {
+            border-radius: 100px 0 0 100px;
+        }
+
+        &:last-of-type {
+            border-radius: 0 100px 100px 0;
+        }
+    }
+
+    >div.slick-list {
+        min-height: $slick_minHeight;
+        max-height: $slick_maxHeight;
+        height: auto !important;
+
+        >.slick-track {
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            >div.slick-slide {
+                height: 100%;
+                max-height: $slick_maxHeight;
+
+                >div {
+                    width: 100% !important;
+                    height: 100%;
+                    max-height: $slick_maxHeight;
+
+                    // >section{ 
+                    //   height: 100%;
+                    //   width: 45%;
+                    //   >h1{}
+                    //   >h4{}
+                    //   >p{}
+                    //   >img{object-fit: contain;}
+                    // }
+                    >* {
+                        height: 100%;
+                        max-height: $slick_maxHeight;
+
+                        >ul.admin {
+                            position: absolute;
+                            background: white;
+                            display: flex;
+                            gap: 1em;
+                            border: solid;
+
+                            >li {
+                                padding: 1em;
+                                cursor: pointer;
+
+                                &:hover {
+                                    color: red;
+                                    background: wheat;
+                                }
+                            }
+                        }
+                    }
+
+                    section {}
+
+                    figure {}
+
+                    h1 {}
+
+                    h4 {}
+
+                    p {}
+
+                    img {
+                        height: 100%;
+                        max-height: $slick_maxHeight;
+                        object-fit: cover;
+                        // object-fit: contain;
+                    }
+                }
+            }
+        }
+    }
+
+    >ul {
+        position: relative;
+        bottom: 0;
+    }
+}

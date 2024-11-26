@@ -1,0 +1,72 @@
+/*
+ce serait intéressant mais, les module ne prennent pas en compte les sélecteurs imbriqués:
+VOICI LA RÉPONSE DE CHATGPT:
+
+Dans votre exemple, vous utilisez des sélecteurs imbriqués dans votre fichier CSS module. Malheureusement, les modules CSS générés par défaut avec Create React App ou Webpack ne prennent pas en charge les sélecteurs imbriqués de cette manière. Les modules CSS généralement générés fournissent des noms de classes uniques pour chaque sélecteur, mais ils ne prennent pas en charge les sélecteurs imbriqués tels que les sélecteurs enfants (>).
+
+Pour obtenir le résultat souhaité, vous pouvez utiliser une autre approche comme Styled Components, qui offre une syntaxe similaire aux sélecteurs CSS imbriqués.
+*/
+
+.radioLabel{
+    display: block;
+    flex:1;
+    position: relative;
+    // padding-left: 4rem;
+    margin: 1.5rem 0;
+    cursor: pointer;
+    font-size: 2rem;
+    user-select: none;
+    color: #555;
+    &:hover>input~span.radio{
+      //using opacity for hover effect, because background is used (amd delayed!) for the shuffle
+      opacity: 0.8;
+    }
+    input{
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      &:checked {
+        ~span{
+          color: #0bae72;
+          transition: color .5s;
+          &.radio {
+            background-color: #0ac07d;
+            opacity: 1!important;
+            &::after {
+              opacity: 1;
+              //applying in JS, so as not to make selections delayed when no js:
+              // transition: opacity 0s 0.75s;
+            }
+          }
+        }
+      }
+    }
+    .oko{color:blue;}
+    >span{
+      &.radio {
+        position: absolute;
+        top: 0;
+        left: calc(50% - 1.25rem);
+        height: 2.5rem;
+        width: 2.5rem;
+        background: #c9ded6;
+        border-radius: 50%;
+        &::after {
+          display: block;
+          content: '';
+          position: absolute;
+          opacity: 0;
+          top: .5rem;
+          left: .5rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 50%;
+          background: #fff;
+          //applying in JS, so as not to make selections delayed when no js:
+          // transition: opacity 0s 0.75s;
+        }
+      }
+    }
+  }

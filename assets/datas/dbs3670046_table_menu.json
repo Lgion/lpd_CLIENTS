@@ -1,0 +1,74 @@
+,{
+    "type": "table",
+    "name": "menu",
+    "database": "dbs3670046",
+    "data": 
+[
+{
+    "id": "1",
+    "user_name": "objectifs",
+    "img": "<img src=\"\"alt=\"\" title=\"\"\/>",
+    "fr": "Objectifs",
+    "en": "",
+    "es": "",
+    "title": "Puissance Divine: vente en ligne ecommerce évangile révélé Maria Valtorta",
+    "description": "Institution chrétienne catholique de la Puissance Divine. Unie le saint-esprit aux fidèles chrétiens : prière assistance action caritative.",
+    "keywords": "vente objet piété, retraite spirituelle, louer espace prière, prière, ecommerce chrétien catholique, ecommerce religieux, librairie religieuse abidjan cocody 2plateaux, librairie catholique",
+    "keywords-1": null,
+    "keywords-2": null
+},
+{
+    "id": "2",
+    "user_name": "vente",
+    "img": "<img src=\"\"alt=\"\" title=\"\"\/>",
+    "fr": "Vente en ligne",
+    "en": "",
+    "es": "",
+    "title": "Librairie Puissance Divine : ecommerce publication chrétienne et objets de piété",
+    "description": "Puissance Divine, fraternité de prière chrétienne catholique, boutique en ligne, ecommerce religieux d'objets et livres de piétés. enseignements et retraites spirituelle",
+    "keywords": "vente en ligne, ecommerce religieux,e-boutique, publications catholique,évangile révélé maria valtorta, bible, prière, saint-esprit, Jésus christ",
+    "keywords-1": "vente en ligne catholique, ecommerce religieux, vente-en-ligne publications chrétienne, vente-en-ligne bibles, vente-en-ligne publications catholique, évangile révélé maria valtorta, bible, bible enfant, prière, saint-esprit, Dieu, Jésus christ, sainte vierge Marie, foi",
+    "keywords-2": "vente en ligne catholique, ecommerce religieux, vente-en-ligne publications chrétienne, vente-en-ligne icône religieuse, vente-en-ligne statue religieuse, vente-en-ligne chapelets, vente-en-ligne croix religieuse, crucifix, saint-esprit, Dieu, Jésus christ, sainte vierge Marie, sainte, foi"
+},
+{
+    "id": "3",
+    "user_name": "enseignements",
+    "img": "<img src=\"\"alt=\"\" title=\"\"\/>",
+    "fr": "Enseignements",
+    "en": "",
+    "es": "",
+    "title": "Enseignements spirituels de Jésus Christ : Saint-esprit Dieu et Homme",
+    "description": "Institution chrétienne catholique de la Puissance Divine. Unie le saint-esprit aux fidèles chrétiens : prière assistance action caritative.",
+    "keywords": "sanctuaire rosaire, fraternité prière, librairie puissance divine, ecommerce chrétien catholique, retraite spirituelle, louer espace prière, prière, jésus christ, Dieu, Jésus christ, virege Marie, saint-esprit, foi",
+    "keywords-1": "fraternité prière, vente en ligne, vente-en-ligne objet piété, vente-en-ligne publications catholique, évangile révélé maria valtorta, vente bible, louer espace prière, prière au saint-esprit, veillé 1000 ave, prière, Dieu, Jésus christ, sainte vierge Marie, saint-esprit, foi",
+    "keywords-2": "sanctuaire rosaire, retraite spirituelle, retraite grégorienne, retraite au saint-esprit, séminaire, conférence, saint martin de porrès, fille-mère rue, activités caritatives, prière, Dieu, Jésus christ, sainte vierge Marie, saint-esprit, foi"
+},
+{
+    "id": "4",
+    "user_name": "priere",
+    "img": "<img src=\"\"alt=\"\" title=\"\"\/>",
+    "fr": "Retraites et Prières",
+    "en": "",
+    "es": "",
+    "title": "retraite spirituelle, retraite Grégorienne, retraite à l'esprit-saint, chemin du rosaire à Abidjan",
+    "description": "La Fraternité chrétienne catholique Puissance Divine d'Amour, organise régulièrement des activités spirituelles sur deux lieux d'Abidjan: 2plateaux et Azaguié",
+    "keywords": "retraite spirituelle, retraite spirituelle grégorienne, retraite spirituelle au saint-esprit, prière à esprit-saint, prière, sanctuaire du rosaire, prière du rosaire, location espace prière, librairie religieuse, ecommerce chrétien catholique, Dieu, Jésus christ, vierge Marie, saint-esprit, foi",
+    "keywords-1": null,
+    "keywords-2": null
+},
+{
+    "id": "5",
+    "user_name": "lieux-activites",
+    "img": "<img src=\"\"alt=\"\" title=\"\"\/>",
+    "fr": "Lieux et Activités",
+    "en": "",
+    "es": "",
+    "title": "Description de nos lieux consacrés pour la foi des fidèle chrétiens",
+    "description": "Description de lieux de la Puissance Divine d'Abidjan: centre du coeur d'accueil de Jésus, fraternité de prière au saint-esprit, Librairie Puissance Divine",
+    "keywords": "sanctuaire rosaire, fraternité prière, librairie puissance divine, ecommerce chrétien catholique, retraite spirituelle, louer espace prière, prière, jésus christ, Dieu, Jésus christ, virege Marie, saint-esprit, foi",
+    "keywords-1": "fraternité prière, vente en ligne, vente-en-ligne objet piété, vente-en-ligne publications catholique, évangile révélé maria valtorta, vente bible, louer espace prière, prière au saint-esprit, veillé 1000 ave, prière, Dieu, Jésus christ, sainte vierge Marie, saint-esprit, foi",
+    "keywords-2": "sanctuaire rosaire, retraite spirituelle, retraite grégorienne, retraite au saint-esprit, séminaire, conférence, saint martin de porrès, fille-mère rue, activités caritatives, prière, Dieu, Jésus christ, sainte vierge Marie, saint-esprit, foi"
+}
+]
+
+}

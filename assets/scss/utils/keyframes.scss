@@ -1,0 +1,12 @@
+body{background-color: red;}
+
+@keyframes cta_1{
+    0%{
+        box-shadow: 0 0 100px 40px red;
+        border: 1px solid orange;
+    }
+    100%{
+        box-shadow: 0 0 100px 40px darkred;
+        border: 5px solid gold;
+    }
+}

@@ -1,0 +1,62 @@
+
+
+
+%sns_from_pda {
+  display: flex;
+  flex-flow: column;
+  gap: 1px;
+  position: absolute;
+  width: 50px;
+  left: 133px;
+  top: 0px;
+
+  >li {
+    &#fb>a {
+      background: url("/img/fb.svg") center center no-repeat;
+    }
+
+    &#whatsapp>a {
+      background: url("/img/whatsapp.svg") center center no-repeat;
+    }
+
+    &#ytube>a {
+      background: url("/img/youtube.svg") center center no-repeat;
+    }
+
+    &#instam>a {
+      background: url("/img/instagram.svg") center center no-repeat;
+    }
+
+    &#tiktok>a {
+      background: url("/img/tiktok.svg") center center no-repeat;
+    }
+
+    &#blogB>a {
+      background: url("/img/blog.svg") center center no-repeat;
+
+      >span {
+        margin-top: 10px;
+        margin: 1.5em -10px;
+        display: inline-block;
+      }
+    }
+
+    a {
+      background-size: contain !important;
+      position: relative;
+      transition: all .4s;
+      height: 25px;
+      width: 30px;
+      display: inline-block;
+
+      &:hover {
+        height: 50px;
+        width: 50px;
+      }
+    }
+
+    // &#blogB{
+    //   img{height: 50px;}
+    // }
+  }
+}

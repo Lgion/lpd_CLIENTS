@@ -1,0 +1,70 @@
+
+
+
+%mainMenu_from_pda {
+    position: absolute;
+    z-index: 1;
+    background: goldenrod;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 0 10px 1px inset;
+    list-style-type: none;
+    bottom: -7em;
+    margin: 0;
+    padding: 1.15em;
+    width: 90%;
+    left: 5%;
+
+    >li {
+        width: 25%;
+        text-align: center;
+        bottom: -10%;
+        position: relative;
+        height: 33%;
+        font-size: .9em;
+
+        &.menu.ecommerce {}
+
+        >a:not([id="panier"]) {
+            @extend %menu_elements;
+
+            &::before {
+                transition: all .5s;
+                z-index: -1;
+                content: '';
+                top: 0em;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                position: absolute;
+                background: url(../img/menu.webp) top left no-repeat;
+            }
+
+            &:hover,
+            &.active {
+                box-shadow: 0 0 15px 3px beige;
+
+                // background: #ff5900;
+                // background: linear-gradient(135deg, #ff5900 0%,rgba(204,0,0,0.3) 46%,rgba(204,0,10,0.3) 62%,#ff5900 100%);
+                // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5900', endColorstr='#ff5900',GradientType=1 );
+                &::before {
+                    z-index: 0;
+                    left: 70%;
+                }
+
+                >span {
+                    top: 10px;
+                    color: gold;
+                    text-shadow: 0 0 3px black, -1px 2px 70px black, 0 0 10px deeppink;
+                }
+            }
+
+            >span {
+                position: relative;
+                top: -.5em;
+                transition: all .3s;
+            }
+        }
+    }
+}

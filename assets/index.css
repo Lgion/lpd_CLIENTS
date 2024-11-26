@@ -1,0 +1,1067 @@
+@charset "UTF-8";
+/**/ /**/ /**/
+/*********************************************************************************************************/
+/***********ICON******************************************************************************************/
+/*********************************************************************************************************/
+/***********GET CHILD RELATIVE TO HIS PARENT**************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/******************PSEUDO-CLASS**************************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/***************SHADOW************************************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/******************MEDIA-QUERIES**************************************************************************/
+/**/
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&family=Shrikhand&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.css");
+.headerbarLogo__retourBtn {
+  position: absolute;
+}
+
+.headerbarLogo__retourBtn {
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.headerbarLogo__retourBtn {
+  display: flex;
+}
+
+.headerbarLogo__retourBtn {
+  align-items: center;
+}
+
+/**/
+.carteRestaurant__titre {
+  font-size: 2em;
+  color: black;
+}
+
+.footerBasic0__titreLogo {
+  font-size: 1em;
+  color: black;
+}
+
+.listChoice__titre {
+  font-size: 2em;
+  color: black;
+}
+
+/* @keyframes duration | timing-function | delay |
+iteration-count | direction | fill-mode | play-state | name 
+    animation: 3s ease-in 1s 
+    2 reverse both paused slidein;
+*/
+@keyframes fonctionnement {
+  10% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+@keyframes map {
+  5% {
+    transform: translateX(-2px) rotateZ(-20deg);
+  }
+  15% {
+    transform: translateX(2px) rotateZ(20deg);
+  }
+  30% {
+    transform: translateX(-4px) rotateZ(-45deg);
+  }
+  45% {
+    transform: translateX(4px) rotateZ(45deg);
+  }
+  60% {
+    transform: translateX(-4px) rotateZ(-45deg);
+  }
+  75% {
+    transform: translateX(4px) rotateZ(45deg);
+  }
+  85% {
+    transform: translateX(-2px) rotateZ(-20deg);
+  }
+  95% {
+    transform: translateX(2px) rotateZ(20deg);
+  }
+  100% {
+    transform: translateX(0px) rotateZ(0deg);
+  }
+}
+@keyframes button {
+  10% {
+    border-radius: 5em;
+    transform: scale3d(1, 1, 1);
+  }
+  25% {
+    border-radius: 5em;
+    transform: scale3d(0.68, 0.68, 0.68);
+  }
+  75% {
+    border-radius: 100%;
+  }
+  100% {
+    transform: scale3d(1.2, 1.2, 1.2);
+    border-radius: 5em;
+  }
+}
+@keyframes loaderSpinner {
+  0% {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: black;
+  }
+  90% {
+    background: purple;
+  }
+  100% {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+  }
+}
+@keyframes loaderSpinner_ {
+  0% {
+    color: #9356DC;
+    font-size: 1em;
+  }
+  50% {
+    color: #FF79DA;
+    font-size: 2em;
+  }
+  100% {
+    color: #99E2D0;
+    font-size: 3em;
+  }
+}
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+/**
+ * Remove the margin in all browsers.
+ */
+body {
+  margin: 0;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  /*    line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type=checkbox],
+[type=radio] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type=search] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+/**
+ * Add the correct display in IE 10+.
+ */
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+[hidden] {
+  display: none;
+}
+
+/**
+* TOUS LES ELEMENTS QUE JE NORMALISE A MA SAUCE   :)
+*/
+ul {
+  list-style: none;
+}
+
+/**/
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+ul, ol, menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+figure {
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/**/
+.listChoice__titre, :root {
+  font-family: "Roboto", sans-serif;
+}
+
+.carteRestaurant__titre, .footerBasic0__titreLogo {
+  font-family: "Shrikhand", cursive;
+}
+
+.cardsCoeur:nth-of-type(1)::before, .cardsCoeur:nth-of-type(2)::before {
+  font-weight: bolder;
+}
+
+.carteRestaurant__btn, .jumbotronCTA > a {
+  font-weight: 700;
+}
+
+.carteRestaurant__section > h2, .carteRestaurant__titre, .footerBasic0__titreLogo {
+  font-weight: 400;
+}
+
+.jumbotronCTA > p, .cardsCoeur__content > p {
+  font-weight: 200;
+}
+
+.footerBasic0__titreIcon::before, .headerbarLogo__retourBtn::before, .carteRestaurant__titre > label::before, .carteRestaurant__titre > label::after, .carteRestaurant__section > ul.--languette_0 > li::after, .--languette_0.listChoice__liste > li::after, .carteRestaurant__section > ul > li::after, .formBarreLocation > label::before, .cardsCoeur__content > label::before, .cardsCoeur__content > label::after {
+  font-weight: 900;
+  font-family: "Font Awesome 6 Free";
+}
+
+.modal {
+  /*
+      <div class="modal">
+          <div>???.;.:.<span>Oh</span><span>My</span><span>FoOd</span>.;.:.!!!</div>
+      </div>
+  */
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0;
+  height: 0;
+}
+.modal > div {
+  color: white;
+}
+.modal > div > span {
+  animation: 1s linear 2 alternate loaderSpinner_;
+}
+.modal > div > span:nth-of-type(1) {
+  animation-delay: 1s;
+}
+.modal > div > span:nth-of-type(2) {
+  animation-delay: 2s;
+}
+.modal > div > span:nth-of-type(3) {
+  animation-delay: 3s;
+}
+
+/**/
+.carteRestaurant__btn, .jumbotronCTA > a {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  margin: auto;
+  border-radius: 5em;
+  text-decoration: none;
+  color: #eaeaea;
+  z-index: 1;
+  background: rgb(255, 121, 218);
+  background: linear-gradient(175deg, rgb(255, 121, 218) 0%, rgb(147, 86, 220) 100%);
+  -moz-box-shadow: 8px 25px 45px -12px rgba(94, 94, 94, 0.62);
+  -webkit-box-shadow: 8px 25px 45px -12px rgba(94, 94, 94, 0.62);
+  -ms-box-shadow: 8px 25px 45px -12px rgba(94, 94, 94, 0.62);
+  box-shadow: 8px 25px 45px -12px rgba(94, 94, 94, 0.62);
+  transition: filter 1.25s, box-shadow 1s;
+}
+.carteRestaurant__btn:hover, .jumbotronCTA > a:hover {
+  filter: brightness(125%);
+  animation: button 1s forwards 1;
+  box-shadow: 8px 25px 45px 0px rgb(94, 94, 94);
+}
+
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/******************BOUTON À 4 FORMAT**************************************************************************/
+.btn {
+  /*
+   <div class="container">
+      <div class="btn">Solid Button</div>
+      <div class="btn btn--outline">Outline Button</div>
+
+      <div class="btn btn--disabled">Solid Button</div>
+      <div class="btn btn--outline btn--disabled">Outline Button</div>
+  </div>
+  */
+  display: inline-block;
+  margin: 0 auto;
+  background: #15DEA5;
+  padding: 1rem;
+}
+.btn--disabled {
+  background: grey;
+}
+.btn--outline {
+  background: transparent;
+  border: 2px solid #15DEA5;
+}
+.btn--outline.btn--disabled {
+  border: 2px solid grey;
+}
+
+/**/
+.cardsCoeur {
+  position: relative;
+  width: 100%;
+  border-radius: 1em;
+  box-shadow: 8px 8px 45px -12px rgba(94, 94, 94, 0.62);
+}
+@media screen and (min-width: 571px) {
+  .cardsCoeur {
+    width: 45%;
+  }
+}
+.cardsCoeur:nth-of-type(1)::before, .cardsCoeur:nth-of-type(2)::before {
+  content: "Nouveau";
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  padding: 0.5em 1em;
+  border-radius: 2px;
+  background: #99E2D0;
+  color: #217460;
+}
+.cardsCoeur__makeClickable::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.cardsCoeur__image {
+  height: 250px;
+  border-radius: 1em 1em 0 0;
+}
+.cardsCoeur__content {
+  position: relative;
+  padding: 1.5em 1em;
+}
+.cardsCoeur__content > h3 {
+  margin-bottom: 0.25em;
+}
+.cardsCoeur__content > p {
+  margin: 0;
+}
+.cardsCoeur__content > input {
+  display: none;
+}
+.cardsCoeur__content > label {
+  position: absolute;
+  z-index: 10;
+  top: 0.5em;
+  right: 2em;
+  font-size: 1.5em;
+  cursor: copy;
+}
+.cardsCoeur__content > label::before {
+  font-weight: 100;
+}
+.cardsCoeur__content > label::after {
+  opacity: 0;
+  transition: all 0.4s;
+}
+.cardsCoeur__content > label::before, .cardsCoeur__content > label::after {
+  content: "\f004";
+  position: absolute;
+}
+.cardsCoeur__content > label:hover::after {
+  opacity: 1;
+  color: red;
+}
+.cardsCoeur__content > input:checked + label::after {
+  opacity: 1;
+  color: purple;
+  animation: map 1s ease 1;
+}
+.cardsCoeur__content > input:not(:checked) + label::before {
+  animation: map 0.5s ease 1;
+  z-index: 10;
+}
+
+/**/
+.formBarreLocation {
+  background: #eaeaea;
+  display: flex;
+  justify-content: center;
+}
+.formBarreLocation:hover label::before {
+  animation: map 1s alternate 1;
+}
+.formBarreLocation > label {
+  width: 200px;
+  font-size: 1.1em;
+  display: flex;
+}
+.formBarreLocation > label::before {
+  content: "\f3c5";
+  align-self: center;
+  font-weight: 900;
+}
+.formBarreLocation > label > input {
+  width: 100%;
+  border: none;
+  padding: 1em;
+  background: transparent;
+  outline: none;
+}
+.formBarreLocation > label > input::placeholder {
+  color: #666666;
+  font-weight: 700;
+}
+
+/**/
+.jumbotronCTA {
+  padding: 2em 0 4em;
+  text-align: center;
+  background: #f6f6f6;
+}
+.jumbotronCTA > * {
+  display: block;
+}
+.jumbotronCTA > h1 {
+  padding: 0 18%;
+}
+.jumbotronCTA > p {
+  padding: 0 5%;
+  font-size: 1.5em;
+}
+/**/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+.listChoice {
+  padding: 3em 1em;
+  counter-reset: i;
+}
+@media screen and (min-width: 961px) {
+  .carteRestaurant__section > ul, .listChoice__liste {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+  }
+}
+.carteRestaurant__section > ul > li, .listChoice__liste > li {
+  position: relative;
+  display: flex;
+  background: #eaeaea;
+  box-shadow: 8px 8px 45px -12px rgba(94, 94, 94, 0.62);
+  border-radius: 1.5em;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+.carteRestaurant__section > ul.--languette_0 > li, .--languette_0.listChoice__liste > li, .carteRestaurant__section > ul > li {
+  width: 33%;
+  flex-flow: wrap;
+  box-shadow: 0px 5px 30px -10px rgba(94, 94, 94, 0.62);
+  padding: 1em;
+  overflow: hidden;
+}
+.carteRestaurant__section > ul.--languette_0 > li::before, .--languette_0.listChoice__liste > li::before, .carteRestaurant__section > ul.--languette_0 > li::after, .--languette_0.listChoice__liste > li::after, .carteRestaurant__section > ul > li::before, .carteRestaurant__section > ul > li::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  transition: all 0.4s;
+}
+.carteRestaurant__section > ul.--languette_0 > li::before, .--languette_0.listChoice__liste > li::before, .carteRestaurant__section > ul > li::before {
+  content: "";
+  background: #99E2D0;
+  border-radius: 0 1.5em 1.5em 0;
+}
+.carteRestaurant__section > ul.--languette_0 > li::after, .--languette_0.listChoice__liste > li::after, .carteRestaurant__section > ul > li::after {
+  content: "\f058";
+  right: -25px;
+  color: white;
+  font-size: 25px;
+  top: calc(50% - 12.5px);
+  width: 25px;
+  height: 25px;
+}
+.--languette_0.listChoice__liste > li:hover::before, .carteRestaurant__section > ul > li:hover::before {
+  width: 75px;
+}
+.--languette_0.listChoice__liste > li:hover::after, .carteRestaurant__section > ul > li:hover::after {
+  right: 25px;
+  transform: rotate(2turn);
+}
+.--languette_0.listChoice__liste > li:hover > p, .carteRestaurant__section > ul > li:hover > p {
+  width: 80%;
+}
+.carteRestaurant__section > ul.--languette_0 > li > h3, .--languette_0.listChoice__liste > li > h3, .carteRestaurant__section > ul > li > h3 {
+  width: 100%;
+}
+.carteRestaurant__section > ul.--languette_0 > li > p, .--languette_0.listChoice__liste > li > p, .carteRestaurant__section > ul > li > p {
+  margin: 0.25em 0 0;
+  width: 100%;
+  transition: width 0.4s;
+  display: flex;
+  justify-content: space-between;
+}
+.--languette_0.listChoice__liste > li > p > span:first-of-type, .carteRestaurant__section > ul > li > p > span:first-of-type {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.carteRestaurant__section > ul.--numerotee_0 > li, .--numerotee_0.listChoice__liste > li {
+  margin-left: 15px;
+  padding: 2em;
+}
+.carteRestaurant__section > ul.--numerotee_0 > li::before, .--numerotee_0.listChoice__liste > li::before {
+  counter-increment: i;
+  content: counter(i);
+  align-self: center;
+  position: absolute;
+  left: -15px;
+  border-radius: 1em;
+  background: #9356DC;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  transform: rotateY(0deg);
+  transition: all 0.4s;
+}
+.carteRestaurant__section > ul.--numerotee_0 > li:hover::before, .--numerotee_0.listChoice__liste > li:hover::before {
+  transform: rotateY(180deg);
+  background: #FF79DA;
+}
+.carteRestaurant__section > ul.--iconed_0 > li:nth-of-type(1) > h3::before, .--iconed_0.listChoice__liste > li:nth-of-type(1) > h3::before {
+  content: "\f3cd";
+}
+.carteRestaurant__section > ul.--iconed_0 > li:nth-of-type(2) > h3::before, .--iconed_0.listChoice__liste > li:nth-of-type(2) > h3::before {
+  content: "\f0ca";
+}
+.carteRestaurant__section > ul.--iconed_0 > li:nth-of-type(3) > h3::before, .--iconed_0.listChoice__liste > li:nth-of-type(3) > h3::before {
+  content: "\f54e";
+}
+.carteRestaurant__section > ul.--iconed_0 > li > h3::before, .--iconed_0.listChoice__liste > li > h3::before {
+  transition: color 0.2s;
+  margin: 0 1em;
+  font-family: "Font Awesome 6 Free";
+}
+.carteRestaurant__section > ul.--iconed_0 > li:hover > h3::before, .--iconed_0.listChoice__liste > li:hover > h3::before {
+  color: #9356DC;
+}
+.carteRestaurant__section > ul.--hoverable_0 > li, .--hoverable_0.listChoice__liste > li {
+  transition: background 0.4s;
+}
+.carteRestaurant__section > ul.--hoverable_0 > li:hover, .--hoverable_0.listChoice__liste > li:hover {
+  background: #e4d5f6;
+}
+.carteRestaurant__section > ul.--hoverable_0 > li:hover > h3, .--hoverable_0.listChoice__liste > li:hover > h3 {
+  animation: fonctionnement 2s forwards 1;
+}
+
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+.listCards {
+  padding: 3em 1em;
+  background: #f6f6f6;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+}
+.listCards__titre {
+  margin-bottom: 1em;
+  width: 100%;
+}
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+.carteRestaurant {
+  position: relative;
+  overflow: hidden;
+  background-size: contain;
+  padding: 270px 0 5em;
+}
+@media screen and (min-width: 571px) {
+  .carteRestaurant {
+    background-size: contain;
+  }
+  .carteRestaurant::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 100px 15em white;
+    content: "";
+  }
+}
+.carteRestaurant__titre {
+  background: #eaeaea;
+  border-radius: 1.5em 1.5em 0 0;
+  padding: 1.25em 1em;
+  position: relative;
+}
+.carteRestaurant__titre > input {
+  display: none;
+}
+.carteRestaurant__titre > label {
+  position: absolute;
+  top: 0.5em;
+  right: 2em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.carteRestaurant__titre > label::before {
+  font-weight: 100;
+}
+.carteRestaurant__titre > label::after {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.carteRestaurant__titre > label::before, .carteRestaurant__titre > label::after {
+  content: "\f004";
+  position: absolute;
+}
+.carteRestaurant__titre > label:hover::after {
+  opacity: 1;
+  color: red;
+}
+.carteRestaurant__titre > input:checked + label::after {
+  opacity: 1;
+  color: red;
+}
+.carteRestaurant__section {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  padding: 1em;
+}
+@media screen and (min-width: 571px) {
+  .carteRestaurant__section {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+.carteRestaurant__section > h2 {
+  position: relative;
+}
+.carteRestaurant__section > h2::after {
+  content: "";
+  width: 50px;
+  border-bottom: solid #99E2D0;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+.carteRestaurant__btn {
+  display: block;
+  text-align: center;
+  width: 200px;
+  z-index: 2;
+  position: relative;
+}
+
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/*********************************************************************************************************/
+/**/
+.headerbarLogo {
+  text-align: center;
+  box-shadow: 0 0 10px 1px #b3b3b3;
+  position: relative;
+  padding: 1em 0;
+}
+.headerbarLogo__retourBtn {
+  font-size: 1.5em;
+  padding-left: 1em;
+}
+.headerbarLogo__retourBtn::before {
+  content: "\f060";
+}
+.headerbarLogo__logo {
+  width: 200px;
+  display: inline-block;
+}
+
+/**/
+.footerBasic0 {
+  padding: 2em;
+  background: #333333;
+  color: white;
+}
+.footerBasic0__titreLogo {
+  font-size: 1.5em;
+  color: white;
+  margin-bottom: 1em;
+}
+.footerBasic0__titreIcon {
+  display: flex;
+}
+.footerBasic0__titreIcon::before {
+  display: block;
+  width: 25px;
+}
+.footerBasic0__titreIcon:nth-of-type(1)::before {
+  content: "\f2e7";
+}
+.footerBasic0__titreIcon:nth-of-type(2)::before {
+  content: "\f4c4";
+}
+.footerBasic0__lien {
+  display: block;
+}
+.footerBasic0__lien, .footerBasic0__titreIcon {
+  margin-bottom: 0.75em;
+  font-size: 1em;
+}
+
+/**/
+.header {
+  padding: 1em;
+  border-bottom: solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px 1px #b3b3b3;
+  position: relative;
+}
+.header > menu, .header__mainMenu {
+  display: flex;
+  gap: 1em;
+}
+.header > menu > li.active, .header__mainMenu > li.active {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+.header > menu a, .header__mainMenu a {
+  color: black;
+  text-decoration: none;
+}
+.header__logins {
+  display: flex;
+  gap: 1em;
+}
+
+/**/
+.filAriane > ul {
+  display: flex;
+  justify-content: center;
+}
+
+/**/ /**/
+.footer {
+  padding: 1em;
+  border-top: solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px 1px #b3b3b3;
+  position: relative;
+}
+
+/***********************************/
+/***********************************/
+/***********************************/
+@media all and (max-width: 570) {
+  body > header {
+    height: 75px;
+    text-align: center;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

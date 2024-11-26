@@ -1,0 +1,41 @@
+%btn_close {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 30px;
+    background: black;
+    color: orangered;
+    font-weight: 900;
+    border-radius: 0 0 0 5px;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:before {
+        content: "X";
+    }
+
+    &:hover {
+        color: white;
+    }
+
+    &.off {
+        background: silver;
+
+        &:hover {
+            background: black;
+        }
+    }
+}
+
+span.close {
+    @extend %btn_close;
+
+    &:before {
+        content: "X";
+    }
+}
