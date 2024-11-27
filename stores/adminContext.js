@@ -1,9 +1,12 @@
 "use client"
 
+import Link from "next/link";
+import {createPortal} from "react-dom"
 
 import {createContext, useEffect, useState, useMemo} from 'react'
 // import styled,{createGlobalStyle} from 'styled-components'
-import EditMongoForm from "../app/admin/_school/EditMongoForm"
+import { ecole_classes, ecole_profs, ecole_eleves } from "../assets/classes"
+import EditMongoForm from "../app/admin/school/EditMongoForm"
 
 const AdminContext = createContext({
     // ok: null,
@@ -17,6 +20,7 @@ export const AdminContextProvider = ({children}) => {
     
     const [adminMenuActive, setAdminMenuActive] = useState("")
     // , [year, setYear] = useState((tmpDate.getMonth()+1)<9 ? (tmpDate.getFullYear()-1)+"-"+tmpDate.getFullYear() : tmpDate.getFullYear()+"-"+(tmpDate.getFullYear()+1))
+    , years = Array.from(new Set(ecole_classes.map(elt => elt.annee)))
     , [year, setYear] = useState("")
     , [classe, setClasse] = useState({})
     , [renderClasse, setRenderClasse] = useState([])

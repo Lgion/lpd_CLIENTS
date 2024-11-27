@@ -1,4 +1,3 @@
-import {useContext} from 'react'
 
 export default ({ data, type }) => <ul id="school_members">
     {data.map((elt, i) => <li

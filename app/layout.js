@@ -12,7 +12,7 @@ import {FormContextProvider} from '../stores/formContext.js'
 
 // import Nav from '../components/Nav'
 import ClientIsHome from "./ClientIsHome";
-// import ClientIsAdmin from "./ClientIsAdmin";
+import ClientIsAdmin from "./ClientIsAdmin";
 import Footer from "./Footer";
 import AfterFooter from "./AfterFooter";
 
@@ -60,9 +60,9 @@ export default function RootLayout({ children }) {
               <ClientIsHome>
                 {children}
               </ClientIsHome>
-              {/* <ClientIsAdmin>
+              <ClientIsAdmin>
                 {children}
-              </ClientIsAdmin> */}
+              </ClientIsAdmin>
               <Footer />
               <AfterFooter />
             </ClerkProvider>
