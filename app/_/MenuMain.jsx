@@ -13,13 +13,13 @@ export default function MenuMain() {
                 <li><Link href="/admin/school">ÉCOLE</Link></li>   
             </menu>} */}
             {
-                mainmenu.map((item,i) => item.id!="accueil" && <li className={"menu "+item.id} key={"m1st___"+i}>
+                mainmenu.map((item,i) => /*item.id!="accueil" &&*/ <li className={"menu "+item.id} key={"m1st___"+i}>
                     {/* {console.log(item)} */}
                     <Link
                         href={item.href}
                         title={item.title}
                         id={item.id+"_menu"}
-                        className={menuActive==item.id?"active":""}
+                        className={(item.id=="accueil"?"homeLink ":"")+(menuActive==item.id?"active":"")}
                         onClick={()=>{
                             setMenuActive(item.id)
                             // setMainMenuObject(item.h2)

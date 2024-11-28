@@ -37,7 +37,7 @@ export default function SNS() {
                 <a href="https://www.youtube.com/@puissancedivineabidjan2568" target="_blank" rel="noopener noreferrer">
                 </a>
             </li>
-            <li id="instam">
+            {/* <li id="instam">
                 <a href="https://www.facebook.com/genevieve.achi/" target="_blank" rel="noopener noreferrer">
                 </a>
             </li>
@@ -54,7 +54,7 @@ export default function SNS() {
                 >
                     <span>bolobi.ci</span>
                 </a>
-            </li>
+            </li> */}
         </menu>
     )
 }
