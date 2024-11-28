@@ -262,7 +262,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
             <h5>il faut juste prévoir <u><b>VOTRE</b> propre bouteille de gaz</u></h5>
             <SectionCheckboxStyled>
                 <label htmlFor="meal">
-                    <input type="checkbox" id="meal" name="meal" onChange={handleMealChange} />
+                    <input type="checkbox" id="meal" name="meal_included" onChange={handleMealChange} />
                     <span>Repas Inclus 🍔 😋 🍲</span>
                     <i className="indicator">
                         <svg version="1.1" id="toggle" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

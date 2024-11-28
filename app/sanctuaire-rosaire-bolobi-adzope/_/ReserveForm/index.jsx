@@ -170,9 +170,9 @@ export default function ReserveForm() {
         if(elt.name === 'type_reservation') {
             fd_.reservation.type_reservation = elt.value;
         } else if(fd.has(elt.name)) {
-            fd.set(elt.name, elt.id);
+            fd.set(elt.name, elt.value);
         } else {
-            fd.append(elt.name, elt.id);
+            fd.append(elt.name, elt.value);
         }
     })
     
@@ -204,25 +204,42 @@ export default function ReserveForm() {
     const montantChambresIndividuelles = individual_room_participants * PRIX_NUIT_INDIVIDUELLE * nombreNuits;
     
     // Calcul du montant des repas
-    const mealIncluded = fd.get('meal') === 'on';
+    const mealIncluded = fd.get('meal_included') === 'on';
     let montantRepas = 0;
     if (mealIncluded) {
+        // Récupérer les repas sélectionnés
         const customMeal = {
-            breakfast: fd.get('breakfast'),
-            lunch: fd.get('lunch'),
-            dinner: fd.get('dinner')
+            breakfast: fd.get('breakfast') || '',
+            lunch: fd.get('lunch') || '',
+            dinner: fd.get('dinner') || ''
         };
         
-        // Compter le nombre de repas par jour
-        const nbRepasParJour = Object.values(customMeal).filter(Boolean).length;
+        // Ajouter les repas à la réservation
+        console.log(fd_.reservation.meal_included);
+        fd_.reservation.meal_included = true;
+        console.log(fd_.reservation.meal_included,0);
+        fd_.reservation.meal_plan = parseInt(fd.get('meal_plan') || '1', 10);
+        fd_.reservation.meals = customMeal;  // Directement comme un objet, pas en JSON
         
-        if (mealPlan === 1) {
+        // Calcul du montant des repas
+        if (fd_.reservation.meal_plan === 1) {
             montantRepas = participants * PRIX_REPAS_UNIQUE * nombreNuits;
         }
-        if (mealPlan === 2) {
+        if (fd_.reservation.meal_plan === 2) {
             montantRepas = participants * PRIX_REPAS_COMPLET * nombreNuits;
         }
+        console.log(fd_.reservation.meal_included);
+    } else {
+        // Si pas de repas, initialiser avec les valeurs par défaut
+        fd_.reservation.meal_included = false;
+        fd_.reservation.meal_plan = 0;
+        fd_.reservation.meals = {
+            breakfast: '',
+            lunch: '',
+            dinner: ''
+        };
     }
+    console.log(fd_.reservation.meal_included,2);
     
     const montantTotal = montantChambresCommunes + montantChambresIndividuelles + montantRepas;
     const montantAvance = Math.ceil(montantTotal * 0.2);
@@ -239,7 +256,7 @@ export default function ReserveForm() {
     // Copier les données du FormData dans fd_.reservation
     Array.from(fd).forEach(([key, value]) => {
         // Ne pas écraser les montants déjà calculés
-        if (key !== 'montant_total' && key !== 'montant_avance') {
+        if (key !== 'montant_total' && key !== 'montant_avance' && key !== 'meal_included') {
             fd_.reservation[key] = value;
         }
     });
@@ -250,6 +267,10 @@ export default function ReserveForm() {
       to: fd_.reservation.to
     });
 
+    console.log(fd_.reservation.meal_included,3);
+    console.log(fd_);
+    
+    // if(true)return false
     try {
       const response = await fetch("/api/reservation", {
           method: "POST",

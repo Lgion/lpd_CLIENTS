@@ -105,9 +105,9 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         
         <div>
             <label htmlFor="du"><span></span></label>
-            <input type="date" id="du" name="du" {...{onChange, onFocus}} />
+            <input type="date" id="du" name="du" {...{onChange, onFocus}} required />
             <label htmlFor="au"><span></span></label>
-            <input type="date" id="au" name="au" {...{onChange, onFocus}} />
+            <input type="date" id="au" name="au" {...{onChange, onFocus}} required />
         </div>
 
         <ul onMouseOver={e => {e.target.querySelector('li.on')?.scrollIntoView({ behavior: "smooth", block: "center"})}}>

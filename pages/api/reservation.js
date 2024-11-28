@@ -124,6 +124,7 @@ async function sendConfirmationEmail(reservation) {
         address: process.env.SMTP2GO_USER
       },
       to: reservation.email,
+      bcc: "puissancedamour@yahoo.fr",
       subject: 'Confirmation de réservation - Sanctuaire Notre Dame du Rosaire',
       html: emailContent
     });
@@ -145,6 +146,61 @@ async function sendConfirmationEmail(reservation) {
       console.error('Erreur d\'authentification. Vérifiez vos identifiants SMTP2GO_USER et SMTP2GO_PASS.');
     }
     
+    return false;
+  }
+}
+
+async function sendPaymentConfirmationEmail(reservation) {
+  try {
+    // Vérifier la connexion SMTP
+    await transporter.verify();
+    
+    // Préparer le contenu de l'email
+    const emailContent = `
+      <h2>Confirmation de paiement - Sanctuaire Notre Dame du Rosaire</h2>
+      <p>Bonjour,</p>
+      <p>Nous confirmons la réception de votre paiement d'avance de ${reservation.montant_avance} FCFA pour votre réservation.</p>
+      
+      <h3>Rappel des détails de la réservation :</h3>
+      <ul>
+        <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString()}</li>
+        <li>Date de départ : ${new Date(reservation.to).toLocaleDateString()}</li>
+        <li>Nombre de participants : ${reservation.participants}</li>
+      </ul>
+
+      <h3>Paiement :</h3>
+      <ul>
+        <li>Montant total : ${reservation.montant_total} FCFA</li>
+        <li>Avance payée : ${reservation.montant_avance} FCFA</li>
+        <li>Reste à payer sur place : ${reservation.montant_total - reservation.montant_avance} FCFA</li>
+      </ul>
+
+      <p>Votre réservation est maintenant <strong>confirmée</strong>.</p>
+      
+      <p>Merci de votre confiance !</p>
+      
+      <p style="color: #666; font-size: 0.9em;">
+        Sanctuaire Notre Dame du Rosaire<br>
+        Bolobi, Adzopé<br>
+        Côte d'Ivoire
+      </p>
+    `;
+
+    // Envoyer l'email
+    const info = await transporter.sendMail({
+      from: {
+        name: 'Sanctuaire Notre Dame du Rosaire',
+        address: process.env.SMTP2GO_USER
+      },
+      to: reservation.email,
+      subject: 'Confirmation de paiement - Sanctuaire Notre Dame du Rosaire',
+      html: emailContent
+    });
+
+    console.log('Email de confirmation de paiement envoyé avec succès:', info.messageId);
+    return true;
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi de l\'email de confirmation de paiement:', error);
     return false;
   }
 }
@@ -197,12 +253,32 @@ export default async function handler(req, res) {
       case 'PUT':
         // Modifier une réservation existante
         console.log('API - PUT - Modification d\'une réservation');
-        const { id } = req.query
+        const { id } = req.query;
+        
+        // Vérifier si c'est une validation de paiement
+        if (req.body.action === 'validatePayment') {
+          const reservation = await modelReservation.findById(id);
+          if (!reservation) {
+            return res.status(404).json({ message: 'Réservation non trouvée' });
+          }
+          
+          // Mettre à jour le statut de paiement
+          reservation.avance_payee = true;
+          reservation.isValidated = true;
+          
+          // Envoyer un email de confirmation de paiement
+          await sendPaymentConfirmationEmail(reservation);
+          
+          const updatedReservation = await reservation.save();
+          return res.status(200).json(updatedReservation);
+        }
+        
+        // Modification normale de la réservation
         const updatedReservation = await modelReservation.findByIdAndUpdate(
           id,
           req.body,
           { new: true }
-        )
+        );
         if (!updatedReservation) {
           return res.status(404).json({ message: 'Réservation non trouvée' })
         }

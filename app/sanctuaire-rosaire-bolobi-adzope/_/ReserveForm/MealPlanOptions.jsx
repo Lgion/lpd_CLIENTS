@@ -32,7 +32,7 @@ export default function MealPlanOptions({ mealPlan, handleMealPlanChange }) {
                 <input
                     className="form-check-input"
                     type="radio"
-                    name="mealPlan"
+                    name="meal_plan"
                     id="oneMeal"
                     value="1"
                     checked={mealPlan === 1}
@@ -46,7 +46,7 @@ export default function MealPlanOptions({ mealPlan, handleMealPlanChange }) {
                 <input
                     className="form-check-input"
                     type="radio"
-                    name="mealPlan"
+                    name="meal_plan"
                     id="twoMeals"
                     value="2"
                     checked={mealPlan === 2}
