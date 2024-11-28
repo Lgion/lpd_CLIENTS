@@ -151,7 +151,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
     const dinnerColumn = generateMealColumn("dinner", mealOptions.dinner);
 
     return <>
-        {JSON.stringify(customMeal)}
+        {/* {JSON.stringify(customMeal)} */}
         <style jsx>{`
             .meal {
                 margin-bottom: 2rem;
@@ -257,7 +257,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
         `}</style>
         <fieldset className="meal">
             <h4 onClick={toggleFormNdrImg}>Choisir si vous souhaitez que les repas vous soient préparés: </h4>
-            <h5>Vous pouvez soit préparer vos repas soit choisir un plan de repas</h5>
+            <h5>Vous pouvez <u><b>soit préparer vous-même</b> vos repas</u> au refectoire du santuaire, <u><b>soit commander</b> votre repas</u> à la cuisine du sanctuaire.</h5>
             <h5>Si vous préparez vous-même, tous les outils de cuisine et de dégustation sont à votre disposition (marmite, casserols, couteaux, etc...)</h5>
             <h5>il faut juste prévoir <u><b>VOTRE</b> propre bouteille de gaz</u></h5>
             <SectionCheckboxStyled>

@@ -14,7 +14,7 @@ const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
         <Carousel diapos={diapos} titre={"TEST - EXEMPLE: "} icon="2" sommaire="AUTRE TITRE SOMMAIRE" />
         <LocateBolobi />
         <ReserveForm />
-        <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} />
+        {/* <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} /> */}
     </main>
 ));
 

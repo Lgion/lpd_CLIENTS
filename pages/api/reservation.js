@@ -4,18 +4,53 @@ import mongoose from 'mongoose'
 import nodemailer from 'nodemailer'
 
 // Configurer le transporteur d'email
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.EMAIL_USER, // votre adresse gmail
+//     pass: process.env.EMAIL_PASS  // votre mot de passe d'application gmail
+//     // LIEN POUR CRÉER UN MOT DE PASSE D'APPLCIATION: 
+//     // https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4Pv88u1tQAu32DzpYoL5lkR20vdGY_xWV6q_1gJSQViWmNd1fCrNX4CcpKMMyaHUVQEOch66VkCr0TvUj0zk8O6iUXLCMdFf33DWXQ_Ix-izoy1EPE
+//   }
+// });
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // true pour le port 465, false pour les autres ports
   auth: {
     user: process.env.EMAIL_USER, // votre adresse gmail
     pass: process.env.EMAIL_PASS  // votre mot de passe d'application gmail
     // LIEN POUR CRÉER UN MOT DE PASSE D'APPLCIATION: 
     // https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4Pv88u1tQAu32DzpYoL5lkR20vdGY_xWV6q_1gJSQViWmNd1fCrNX4CcpKMMyaHUVQEOch66VkCr0TvUj0zk8O6iUXLCMdFf33DWXQ_Ix-izoy1EPE
+  },
+  tls: {
+    rejectUnauthorized: false // Attention: à utiliser uniquement en développement
   }
 });
+// // // Les avantages de SMTP2GO par rapport à Gmail sont :
+  /*
+  Pour utiliser SMTP2GO :
+  - Créez un compte gratuit sur SMTP2GO (https://www.smtp2go.com/)
+  - Dans votre fichier .env.local, ajoutez ces variables :
+  SMTP2GO_USER=votre_utilisateur_smtp2go
+  SMTP2GO_PASS=votre_mot_de_passe_smtp2go
+  */
+// const transporter = nodemailer.createTransport({
+//   host: 'mail.smtp2go.com',
+//   port: 2525,
+//   secure: false,
+//   auth: {
+//     user: process.env.SMTP2GO_USER,
+//     pass: process.env.SMTP2GO_PASS
+//   }
+// });
 
 async function sendConfirmationEmail(reservation) {
   try {
+    // Vérifier la connexion SMTP
+    await transporter.verify();
+    console.log('Connexion SMTP vérifiée avec succès');
+
     // Préparer le contenu de l'email
     const emailContent = `
       <h2>Confirmation de réservation - Sanctuaire Notre Dame du Rosaire</h2>
@@ -39,7 +74,7 @@ async function sendConfirmationEmail(reservation) {
     const info = await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: reservation.email,
-      bcc: "puissancedamour@yahoo.fr",
+      // bcc: "puissancedamour@yahoo.fr",
       subject: 'Confirmation de réservation - Sanctuaire Notre Dame du Rosaire',
       html: emailContent
     });
@@ -47,7 +82,20 @@ async function sendConfirmationEmail(reservation) {
     console.log('Email envoyé avec succès:', info.messageId);
     return true;
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email:', error);
+    console.error('Erreur détaillée lors de l\'envoi de l\'email:', {
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      responseCode: error.responseCode,
+      stack: error.stack
+    });
+    
+    if (error.code === 'ESOCKET') {
+      console.error('Erreur de connexion au serveur SMTP. Vérifiez votre connexion Internet et les paramètres du serveur SMTP.');
+    } else if (error.code === 'EAUTH') {
+      console.error('Erreur d\'authentification. Vérifiez vos identifiants EMAIL_USER et EMAIL_PASS.');
+    }
+    
     return false;
   }
 }

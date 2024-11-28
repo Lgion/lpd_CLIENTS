@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import AdminContext from "../../../../stores/adminContext.js"
 import { ecole_classes } from "../../../../assets/classes.js"
 import TableClasse from './TableClasse.jsx'
+import TeachersStudentsView from './TeachersStudentsView.jsx'
 
 export default () => {
     const {year,MembersMenu,YearsList,ClassesList,renderClasse,showTeachers,showStudents} = useContext(AdminContext)
@@ -18,7 +19,7 @@ export default () => {
         </nav>
         <section id="adminContent">
             <TableClasse renderClasse={renderClasse} />
-            <showStudents $={{renderClasse,showTeachers,showStudents}} />
+            <TeachersStudentsView $={{renderClasse,showTeachers,showStudents}} />
         </section>
     </>
 }

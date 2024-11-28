@@ -38,8 +38,10 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
 
     return (
         <fieldset className="infos card mb-4 position-relative">
-            {JSON.stringify(infos)}
+            {/* {JSON.stringify(infos)} */}
             <h4 className="mb-0">Informations générales</h4>
+            <h5>Nous attendrons le <b>paiment wave</b> via le numéro mentionné ci-dessous,</h5>
+            <h5>Nous vous enverrons un <b>email de confirmation</b> à l'adresse mentionné ci-dessous</h5>
             <div className="card-body">
                 <div className="mb-3">
                     <label htmlFor="community" className="form-label d-flex align-items-center">
@@ -50,6 +52,7 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                         type="text" 
                         className="form-control" 
                         id="community" 
+                        required 
                         name="community" 
                         value={infos.community}
                         onChange={handleInputChange}
@@ -95,6 +98,7 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                         type="email" 
                         className="form-control" 
                         id="email" 
+                        required 
                         name="email" 
                         value={infos.email}
                         onChange={handleInputChange}

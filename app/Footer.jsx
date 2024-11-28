@@ -42,7 +42,7 @@ export default function Footer() {
             {id:"qui",title:"Qui sommes-nous ?",content:"Qui somme-nous?"},
             {id:"partenaires",title:"Partenaires",content:"Nos partenaires"},
             {id:"contact",title:"Contactez-nous",content:"Contact"},
-            {id:"paiement-livraison",title:"Comment se passe les paiements sur ce siteweb",content:"Paiements & Livraisons"},
+            // {id:"paiement-livraison",title:"Comment se passe les paiements sur ce siteweb",content:"Paiements & Livraisons"},
             // {id:"livredor",title:"Laisser une appréciation sur le site librairie-puissance-divine.ci",content:"Livre d'or"},
             {id:"webmaster",title:"Découvrez le webmaster de ce site",content:"Powered by"},
           ].map((item,i) => <li className={item.id} key={"mfooter___"+i}>
@@ -64,7 +64,11 @@ export default function Footer() {
         }
       </ul>
       <section id="qui">
-          <p>
+        <p>
+          Nous sommes un Sanctuaire oecuménique chrétien, situé sur la route d'Adzopé, entre Azaguié et Yakasseme.
+        </p>
+        <p>Notre mission apostolique est l'accueil de pélerins en quête de spiritualité et de repos.</p>
+          {/* <p>
             Nous sommes un ecommerce religieux chrétien, l&apos;extension virtuelle du
             magasin &quot;
             <a href="index.php?menu=lieu-librairie" target="_blank">
@@ -72,7 +76,7 @@ export default function Footer() {
             </a>
             &quot; située aux II plateaux rue des Jardins. À but apostoloque, nous
                     faisons notre possible afin d&apos;affermir les croyants dans la foi.
-          </p>
+          </p> */}
         <br />
         <span className="close"></span>
       </section>
@@ -83,11 +87,12 @@ export default function Footer() {
           style={{float:"left",width:"400px",margin:"20px"}}
           src="content/gmap.html"
         ></iframe> */}
-        <p>
+
+        {/* <p>
           <Link target="_blank" href="https://www.google.com/maps/dir/librairies/Librairie+Puissance+Divine,+9245%2B99R,+Rue+des+Jardins,+Abidjan/@5.3559772,-4.0740258,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0xfc1eb60c06c0ea3:0xbfc0c8773b1cae8c!2m2!1d-3.9916104!2d5.355982?entry=ttu">Librairie Puissance Divine</Link>,
           Cocody 2 Plateaux, rue des jardins, proche de l&apos;école de police, même
           trottoir que la station Corlay et en face de la pharmacie saint Gil.
-        </p>
+        </p> */}
         <p><u>Téléphone</u> : <a href="#tel:+2250709360672">+225-07-09-36-06-72</a></p>
         <p><u>Email</u> : puissancedivine@gmail.fr</p>
         <p>Nos liens:</p>

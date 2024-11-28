@@ -197,10 +197,34 @@ export default function ReserveForm() {
     
     const PRIX_NUIT_COMMUNE = 3000;
     const PRIX_NUIT_INDIVIDUELLE = 10000;
+    const PRIX_REPAS_COMPLET = 3000; // 2 repas + petit déjeuner
+    const PRIX_REPAS_UNIQUE = 2000;  // 1 repas + petit déjeuner
     
     const montantChambresCommunes = participantsCommune * PRIX_NUIT_COMMUNE * nombreNuits;
     const montantChambresIndividuelles = individual_room_participants * PRIX_NUIT_INDIVIDUELLE * nombreNuits;
-    const montantTotal = montantChambresCommunes + montantChambresIndividuelles;
+    
+    // Calcul du montant des repas
+    const mealIncluded = fd.get('meal') === 'on';
+    let montantRepas = 0;
+    if (mealIncluded) {
+        const customMeal = {
+            breakfast: fd.get('breakfast'),
+            lunch: fd.get('lunch'),
+            dinner: fd.get('dinner')
+        };
+        
+        // Compter le nombre de repas par jour
+        const nbRepasParJour = Object.values(customMeal).filter(Boolean).length;
+        
+        if (mealPlan === 1) {
+            montantRepas = participants * PRIX_REPAS_UNIQUE * nombreNuits;
+        }
+        if (mealPlan === 2) {
+            montantRepas = participants * PRIX_REPAS_COMPLET * nombreNuits;
+        }
+    }
+    
+    const montantTotal = montantChambresCommunes + montantChambresIndividuelles + montantRepas;
     const montantAvance = Math.ceil(montantTotal * 0.2);
 
     // Ajouter les montants au FormData
@@ -212,7 +236,14 @@ export default function ReserveForm() {
     console.log("Final FormData entries:", Array.from(fd.entries()));
     console.log("Final fd_ object:", fd_);
     
-    Array.from(fd).forEach(elt=>{fd_.reservation[elt[0]] = elt[1]})
+    // Copier les données du FormData dans fd_.reservation
+    Array.from(fd).forEach(([key, value]) => {
+        // Ne pas écraser les montants déjà calculés
+        if (key !== 'montant_total' && key !== 'montant_avance') {
+            fd_.reservation[key] = value;
+        }
+    });
+    
     console.log("Données à envoyer:", fd_);
     console.log("Vérification des dates:", {
       from: fd_.reservation.from,

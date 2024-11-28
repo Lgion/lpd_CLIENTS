@@ -1,7 +1,8 @@
 export default function FieldsetPayment({ participants, individual_room_participants, dateDiffDuAu, mealPlan }) {
     const PRIX_NUIT_COMMUNE = 3000;
     const PRIX_NUIT_INDIVIDUELLE = 10000;
-    const PRIX_REPAS = 2000; // Prix par repas par personne
+    const PRIX_REPAS_COMPLET = 3000; // 2 repas + petit déjeuner
+    const PRIX_REPAS_UNIQUE = 2000;  // 1 repas + petit déjeuner
     
     // Calcul du nombre de nuits
     const nombreNuits = dateDiffDuAu()?.day || 0;
@@ -14,7 +15,12 @@ export default function FieldsetPayment({ participants, individual_room_particip
     const montantChambresIndividuelles = (individual_room_participants || 0) * PRIX_NUIT_INDIVIDUELLE * nombreNuits;
     
     // Calcul du montant des repas
-    const montantRepas = (mealPlan || 0) * PRIX_REPAS * participants * nombreNuits;
+    let montantRepas = 0;
+    if (mealPlan === 1) {
+        montantRepas = participants * PRIX_REPAS_UNIQUE * nombreNuits;
+    } else if (mealPlan === 2) {
+        montantRepas = participants * PRIX_REPAS_COMPLET * nombreNuits;
+    }
     
     // Calcul du montant total
     const montantTotal = montantChambresCommunes + montantChambresIndividuelles + montantRepas;
@@ -32,35 +38,36 @@ export default function FieldsetPayment({ participants, individual_room_particip
                     <li>Durée : {nombreNuits} nuit{nombreNuits > 1 ? 's' : ''}</li>
                     {participantsCommune > 0 && (
                         <li>
-                            Chambres communes : {participantsCommune} personne{participantsCommune > 1 ? 's' : ''} 
-                            × {PRIX_NUIT_COMMUNE}F/nuit × {nombreNuits} nuit{nombreNuits > 1 ? 's' : ''} 
+                            Chambres communes: {participantsCommune} personne{participantsCommune > 1 ? 's' : ''} 
+                             × {PRIX_NUIT_COMMUNE}F/nuit × {nombreNuits} nuit{nombreNuits > 1 ? 's' : ''} 
                             = {montantChambresCommunes}F
                         </li>
                     )}
                     {individual_room_participants > 0 && (
                         <li>
-                            Chambres individuelles : {individual_room_participants} personne{individual_room_participants > 1 ? 's' : ''} 
-                            × {PRIX_NUIT_INDIVIDUELLE}F/nuit × {nombreNuits} nuit{nombreNuits > 1 ? 's' : ''} 
+                            Chambres individuelles: {individual_room_participants} personne{individual_room_participants > 1 ? 's' : ''} 
+                             × {PRIX_NUIT_INDIVIDUELLE}F/nuit × {nombreNuits} nuit{nombreNuits > 1 ? 's' : ''} 
                             = {montantChambresIndividuelles}F
                         </li>
                     )}
                     {mealPlan > 0 && (
                         <li>
-                            Repas : {participants} personne{participants > 1 ? 's' : ''} 
-                            × {mealPlan} repas/jour × {PRIX_REPAS}F/repas × {nombreNuits} jour{nombreNuits > 1 ? 's' : ''} 
+                            Restauration: {participants} personne{participants > 1 ? 's' : ''} 
+                            × {mealPlan === 1 ? PRIX_REPAS_UNIQUE : PRIX_REPAS_COMPLET}F/jour × {nombreNuits} jour{nombreNuits > 1 ? 's' : ''} 
                             = {montantRepas}F
+                            {mealPlan === 1 ? ' (1 repas + petit déjeuner)' : ' (2 repas + petit déjeuner)'}
                         </li>
                     )}
                 </ul>
 
                 <div className="total">
-                    <p>Montant total du séjour : <strong>{montantTotal}F</strong></p>
-                    <p>Avance requise (20%) : <strong>{montantAvance}F</strong></p>
+                    <p>Montant total du séjour: <strong>{montantTotal}F</strong></p>
+                    <p>Avance requise (20%): <strong>{montantAvance}F</strong></p>
                 </div>
 
                 <div className="payment-info">
                     <p>
-                        <strong>Processus de réservation :</strong>
+                        <strong>Processus de réservation:</strong>
                     </p>
                     <ol>
                         <li>Après validation de ce formulaire, vous recevrez un email contenant un QR code.</li>

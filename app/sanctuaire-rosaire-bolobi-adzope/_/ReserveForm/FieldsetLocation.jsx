@@ -16,9 +16,14 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
     
     return <>
         <h4 onClick={toggleFormNdrImg}>Choisir le nombre de participants, ainsi que le type de logement désiré <br /> (chambre indiv., ou dortoir): </h4>
+        <p>Les Chambres individuelles et dortoirs sont <u>protégés par moustiquaires</u></p>
+        <ul>
+            <li><u>Chambre individuelle (<b>10.000F</b> / nuit):</u> ventilateur - douche - lavabo - wc</li>
+            <li><u>Chambre en dortoir (<b>3.000F</b> / nuit):</u> 10 matelas double - ventilateurs plafond - wc & sdb commun</li>
+        </ul>
         <section>
             <div className={isnotZeroParticipant!=false?"on":""}>
-                <label htmlFor="participants"><b><u>Estimer</u></b> nombre de paticipants total ? *</label>
+                <label htmlFor="participants"><b><u>Estimez</u></b> nombre de paticipants total ? *</label>
                 <div className="custom-number-input">
                     <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)-1)}}>-</button>
                     <input 
@@ -43,9 +48,9 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                     <label>chambres</label>
                 </div>
             </label> */}
-            <label htmlFor="chambre" className="radioLabel">
+            <label htmlFor="chambre" className="radioLabel safe">
                 {/* <input id="chambre" type="checkbox" name="sleep" /> */}
-                <span className="radio"></span>
+                {/* <span className="radio"></span> */}
                 <span>Chambre Individuel <b>(<b>10000Fcfa</b>/personne la nuité)</b></span>
                 {/* <span>chambre</span> */}
                 <div>
