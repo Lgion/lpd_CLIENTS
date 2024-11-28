@@ -125,7 +125,7 @@ export default function Gmap() {
             ))}
         </Map>
         <section>
-            <form onSubmit={handleItineraireSubmit}>
+            {/* <form onSubmit={handleItineraireSubmit}>
                 <button 
                     type="button"
                     className={doItineraireIsOn?"on":""}
@@ -134,7 +134,6 @@ export default function Gmap() {
                     }}
                     title="Définir un itinéraire jusqu'à le Sanctuaire Nd Rosaire Bolobi"
                 >
-                    {/* {doItineraireIsOn ? "Annuler" : "Définir e"} */}
                 </button>
                 <fieldset className={doItineraireIsOn ? 'on' : ''}>
                     <input 
@@ -167,8 +166,8 @@ export default function Gmap() {
                     />
                     <label htmlFor="arrivee">Arrivée</label>
                 </fieldset>
-            </form>
-            <fieldset>
+            </form> */}
+            {/* <fieldset>
               <div class="ps-controller">
                 <div class="ps-arrows">
                   <button class="ps-arrow up" aria-label="Augmenter" onClick={() => handleArrowClick('up', 'lat')}></button>
@@ -205,7 +204,7 @@ export default function Gmap() {
                 />
               </div>
               <label htmlFor="lng">Longitude</label>
-            </fieldset>
+            </fieldset> */}
         </section>
     </Wrapper>
 }
