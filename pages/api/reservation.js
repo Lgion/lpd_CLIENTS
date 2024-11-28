@@ -51,11 +51,38 @@ async function sendConfirmationEmail(reservation) {
     await transporter.verify();
     console.log('Connexion SMTP vérifiée avec succès');
 
+    // Calculer les détails des chambres
+    const chambresIndividuelles = reservation.individual_room_participants > 0 
+      ? `<li>Chambre(s) individuelle(s) : ${reservation.individual_room_participants} personne(s) × 10,000 FCFA/nuit</li>` 
+      : '';
+    const chambresCollectives = reservation.participants - reservation.individual_room_participants > 0
+      ? `<li>Chambre(s) collective(s) : ${reservation.participants - reservation.individual_room_participants} personne(s) × 3,000 FCFA/nuit</li>`
+      : '';
+
+    // Préparer les détails des repas
+    let detailsRepas = '';
+    if (reservation.meal_included) {
+      const planRepas = reservation.meal_plan === 1 
+        ? '1 repas + petit-déjeuner (2,000 FCFA/jour/personne)'
+        : '2 repas + petit-déjeuner (3,000 FCFA/jour/personne)';
+      
+      detailsRepas = `
+        <h3>Détails des repas :</h3>
+        <ul>
+          <li>Plan choisi : ${planRepas}</li>
+          ${reservation.meals.breakfast ? `<li>Petit-déjeuner : ${reservation.meals.breakfast}</li>` : ''}
+          ${reservation.meals.lunch ? `<li>Déjeuner : ${reservation.meals.lunch}</li>` : ''}
+          ${reservation.meals.dinner ? `<li>Dîner : ${reservation.meals.dinner}</li>` : ''}
+        </ul>
+      `;
+    }
+
     // Préparer le contenu de l'email
     const emailContent = `
       <h2>Confirmation de réservation - Sanctuaire Notre Dame du Rosaire</h2>
       <p>Bonjour,</p>
       <p>Votre réservation a été enregistrée avec succès.</p>
+      
       <h3>Détails de la réservation :</h3>
       <ul>
         <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString()}</li>
@@ -64,17 +91,39 @@ async function sendConfirmationEmail(reservation) {
         ${reservation.individual_room_participants > 0 ? 
           `<li>Dont en chambre individuelle : ${reservation.individual_room_participants}</li>` : ''}
       </ul>
+
+      <h3>Hébergement :</h3>
+      <ul>
+        ${chambresIndividuelles}
+        ${chambresCollectives}
+      </ul>
+
+      ${reservation.meal_included ? detailsRepas : '<p>Repas non inclus dans la réservation.</p>'}
+
       <h3>Paiement :</h3>
-      <p>Montant total : ${reservation.montant_total} FCFA</p>
-      <p>Montant de l'avance à payer : ${reservation.montant_avance} FCFA</p>
+      <ul>
+        <li>Montant total : ${reservation.montant_total} FCFA</li>
+        <li>Montant de l'avance à payer : ${reservation.montant_avance} FCFA</li>
+      </ul>
+
+      <p style="font-style: italic;">Note : L'avance doit être payée pour confirmer définitivement votre réservation.</p>
+      
       <p>Merci de votre confiance !</p>
+      
+      <p style="color: #666; font-size: 0.9em;">
+        Sanctuaire Notre Dame du Rosaire<br>
+        Bolobi, Adzopé<br>
+        Côte d'Ivoire
+      </p>
     `;
 
     // Envoyer l'email
     const info = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: {
+        name: 'Sanctuaire Notre Dame du Rosaire',
+        address: process.env.SMTP2GO_USER
+      },
       to: reservation.email,
-      // bcc: "puissancedamour@yahoo.fr",
       subject: 'Confirmation de réservation - Sanctuaire Notre Dame du Rosaire',
       html: emailContent
     });
@@ -93,7 +142,7 @@ async function sendConfirmationEmail(reservation) {
     if (error.code === 'ESOCKET') {
       console.error('Erreur de connexion au serveur SMTP. Vérifiez votre connexion Internet et les paramètres du serveur SMTP.');
     } else if (error.code === 'EAUTH') {
-      console.error('Erreur d\'authentification. Vérifiez vos identifiants EMAIL_USER et EMAIL_PASS.');
+      console.error('Erreur d\'authentification. Vérifiez vos identifiants SMTP2GO_USER et SMTP2GO_PASS.');
     }
     
     return false;
