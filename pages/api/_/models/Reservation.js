@@ -23,7 +23,10 @@ const reservationSchema = mongoose.Schema({
   // Nouveaux champs pour la gestion du paiement
   montant_total: { type: Number, required: true },
   montant_avance: { type: Number, required: true },
-  avance_payee: { type: Boolean, default: false }
+  avance_payee: { type: Boolean, default: false },
+  isValidated: { type: Boolean, default: false },
+  isArchived: { type: Boolean, default: false },
+  deletedAt: { type: Date, default: null }
 })
 
 let modelReservation = !mongoose.modelNames().includes("Reservation_PDA")

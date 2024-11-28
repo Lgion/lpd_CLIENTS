@@ -454,6 +454,37 @@ body>div[data-floating-ui-portal]{
         }
     }
 }
+.ant-table-content{>table {
+    >tbody {
+      >tr {
+        >td {
+          &:last-of-type{
+            >div {
+              flex-flow: wrap;
+              >div {
+                width: 100%;
+              }
+            }
+          }
+          >div {
+            >span {}
+          }
+        }
+      }
+    }
+    >thead {
+      >tr {
+        >th {
+          >div {
+            >span {}
+          }
+        }
+      }
+    }
+
+  }
+
+}
 
 
 
