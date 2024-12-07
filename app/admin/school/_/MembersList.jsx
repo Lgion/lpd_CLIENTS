@@ -1,3 +1,4 @@
+import './MembersList.css'
 
 export default ({ data, type }) => <ul id="school_members">
     {data.map((elt, i) => <li

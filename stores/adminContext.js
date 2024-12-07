@@ -310,7 +310,9 @@ export const AdminContextProvider = ({children}) => {
 
 
     const context = {adminMenuActive, setAdminMenuActive,
-        year,classe,renderClasse,showTeachers,showStudents,setAdminMenuActive,setYear,setYear,setClasse,setRenderClasse,setShowTeachers,setShowStudents,setModels
+        year,classe,renderClasse,showTeachers,showStudents,setAdminMenuActive,setYear,setYear,setClasse,setRenderClasse,setShowTeachers,setShowStudents
+        ,ecole_classes,ecole_profs,ecole_eleves
+        ,setModels, models
         // ,setShowModal
         ,MembersMenu,YearsList,ClassesList
     }

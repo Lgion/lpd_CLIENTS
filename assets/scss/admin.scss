@@ -119,14 +119,14 @@ body{
                         }
                         >li{
                             position: relative;
-                            width: 31%;
+                            // width: 31%;
                             height: 300px;
                             border:1px solid;
                             border-radius: 5px;
                             cursor:pointer;
                             transition: all .3s;
                             &:hover{
-                                width: 33%;
+                                // width: 33%;
                                 box-shadow: 0 0 10px 1px;
                                 border-style:dotted;
                             }

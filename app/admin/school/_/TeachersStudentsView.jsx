@@ -1,10 +1,11 @@
 import { useContext } from 'react'
+import {createPortal} from "react-dom"
 import AdminContext from "../../../../stores/adminContext.js"
 import EditMongoForm from '../EditMongoForm'
 import MembersList from './MembersList'
 
 export default () => {
-    const {renderClasse,showTeachers,showStudents} = useContext(AdminContext)
+    const {renderClasse,showTeachers,showStudents,models,ecole_classes,ecole_profs,ecole_eleves} = useContext(AdminContext)
 // export default ({$}) => {
 //   const {renderClasse,showTeachers,showStudents} = $
     
