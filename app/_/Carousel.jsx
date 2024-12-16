@@ -4,6 +4,8 @@ import React, { useState, useContext, useEffect, memo, useCallback, useMemo } fr
 import Image from "next/image"
 import Slider from "react-slick";
 import AuthContext from "../../stores/authContext.js"
+import EditMongoForm from '../admin/school/EditMongoForm'
+import {createPortal} from "react-dom"
 
 
 
@@ -17,10 +19,11 @@ import AuthContext from "../../stores/authContext.js"
 
 
 
-const Carousel = memo(function Carousel({diapos: initialDiapos, titre, icon=1, sommaire, h3id="anchorCarousel"}) {
+const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titre, icon=1, sommaire, h3id="anchorCarousel"}) {
     const [h3, setH3] = useState("TROUVER UN TITRE")
     const [diapos, setDiapos] = useState(initialDiapos || [])
     const { settingsSlider, isAdmin } = useContext(AuthContext)
+    , [models, setModels] = useState({})
 
     const myLoader = useCallback(({ src, width, quality }) => {
         return `${src}?w=${width}&q=${quality || 75}`
@@ -76,6 +79,19 @@ const Carousel = memo(function Carousel({diapos: initialDiapos, titre, icon=1, s
         }
     }, [])
 
+
+    useEffect(() => {
+
+        let ok = async () => {
+            const ok = await fetch("/api/diapo")
+            , data = await ok.json()
+            console.log(data);
+            setModels(data)
+            console.log(data);
+            
+          }
+          ok()
+    }, [])
     useEffect(() => {
         setH3(titre)
         fetchDiapos()
@@ -85,7 +101,7 @@ const Carousel = memo(function Carousel({diapos: initialDiapos, titre, icon=1, s
 
     return (
         <>
-            {isAdmin && (
+            {isAdmin && (<>
                 <button 
                     title="Ajouter une slide à votre diapo"
                     onClick={() => {
@@ -98,11 +114,28 @@ const Carousel = memo(function Carousel({diapos: initialDiapos, titre, icon=1, s
                 >
                     +
                 </button>
+                {/* {JSON.stringify(models)}
+                ---
+                {JSON.stringify(models?.schemaDiapo?.paths)} */}
+                {/* {JSON.stringify(memoizedDiapos[0]['identifiant_$_hidden'])} */}
+                {
+                    createPortal(
+                        <EditMongoForm 
+                            hiddens={{identifiant:"home_0"}}
+                            endpoint="diapo"
+                            modelKey={"slider"} 
+                            model={models?.schemaDiapo?.paths || {}} 
+                            // joinedDatasProps={{classes: ecole_classes}} 
+                        />
+                        , document.querySelector('#modal .modal___main')
+                    )
+                }
+                </>
             )}
             <h3 className="carousel" id={h3id} data-icon={icon} data-sommaire={sommaire || titre}>{h3}</h3>
             <section className="carousel">
                 <Slider {...settingsSlider}>
-                    {memoizedDiapos.map((item, i) => (
+                    {memoizedDiapos.map((item, i) => item['identifiant_$_hidden'].indexOf(page)!==-1 && (
                         <figure key={`carousel${i}`}>
                             {isAdmin && (
                                 <ul className="admin">

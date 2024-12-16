@@ -13,16 +13,16 @@ const HomeContent = memo(({ diapos }) => (
       <h4>Le sanctuaire est là pour réveiller votre foi sur le plan chrétien: </h4>
       <p>Au travers de nos 3 activités: <u><a href="#"><strong>retraites spirituelles</strong></a></u>, <u><a href="#"><strong>caritas</strong></a></u>, <u><a href="#"><strong>librairie chrétienne</strong></a></u>.</p>
       <p>&emsp;Le <strong>Sanctuaire Notre Dame du Rosaire de Bolobi</strong> est oecuménique, a des solutions d'hébergement et de restauration pour 200 à 220 pélerins. Il permet aux fidèles chrétiens de se recueillir individuellement ou en groupe.</p>
-      <p>&emsp;L' <strong>École (Saint) Martin de Porrez</strong> est une merveilleuse oeuvre caritative. Venez découvrir à <a href="#">Bolobi</a> (périphérie d'abidjan) le bel avenir qu'offre le sanctuaire à ces enfants venus des campements alentours, pour les éloigner de la misère matérielle mais surtout spirituelle. <u>Participer à cette oeuvre charitative est la nourriture spirituelle que nous vous offrons</u>.</p>
+      <p>&emsp;L' <strong>École (Saint) Martin de Porrez</strong> est une merveilleuse oeuvre caritative. Venez découvrir à <a href="#">Bolobi</a> (périphérie d'abidjan) le bel avenir qu'offre le sanctuaire à ces enfants venus des campements alentours, pour les éloigner de la misère matérielle mais surtout spirituelle. <u>Participer à cette oeuvre caritative est la nourriture spirituelle que nous vous offrons</u>.</p>
       <p>&emsp;La <strong>Puissance Divine d'Amour</strong> est une librairie chrétienne ayant pignon sur la rue des jardins (à Cocody, 2Plateaux), elle étanchera votre soif de savoir sur le mystère chrétien.</p>
       <h4>La caritas du sanctuaire: </h4> 
-      <p>Celui-ci a démarré en septembre 2020 avec une classe de CP1, et a vocation à terme d'être reconnu par l'État de Côte d'Ivoire.
+      <p>Celle-ci a démarré en septembre 2020 avec une classe de CP1, et a vocation à terme d'être reconnu par l'État de Côte d'Ivoire.
       <br/>
-      Les frais liés sont lourds
+      Les frais liés (à cette école) sont lourds..
       </p>
-      <p>Afin de <a href="#">financer le fonctionnement du sanctuaire et de ses activités caritatives</a>, plusieurs activités économiques sont progressivement mis en place à Bolobi, comme: </p>
+      <p>Afin de <a href="#">financer le fonctionnement du sanctuaire et de son oeuvre caritatives</a>, plusieurs activités économiques sont progressivement mis en place à Bolobi, comme: </p>
       <ul className='safe'>
-        <li><strong>retraitants</strong>, </li>
+        <li>les activités du sanctuaire <strong>(hébergement et restauration)</strong></li>
         <li>l'<b>agriculture maraîchaire</b> (fruits&légumes, cacao, poivre, palme), </li>
         <li>l'<b>élevage</b> (poulets chair&ponte, porc, escargots),</li>
         <li>etc...</li>

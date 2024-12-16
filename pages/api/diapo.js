@@ -1,15 +1,19 @@
-// import multer from "multer"
+import multer from "multer"
 import modelSlider from './_/models/Slider'
 const { createEntry, deleteEntry, modifyEntry } = require('./_/controllers/entryController')
-// , upload = multer()
+, upload = multer()
+
+let { schema: schemaDiapo } = modelSlider
+
 
 const handler = async (req,res,next) => {
 
 
     if(req.method == "GET"){
         console.log("GET")
-        // console.log(modelSlider.schema);
-        res.status(200).json({schemaDiapo: modelSlider.schema})
+        console.log(schemaDiapo);
+        
+        res.status(200).json({schemaDiapo})
     }
     if(req.method == "POST"){
 

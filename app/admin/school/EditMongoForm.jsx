@@ -98,6 +98,7 @@ const StudentForm = ({ model, modelKey, joinedDatasProps, endpoint, hiddens={}, 
         console.log(Array.from(___formData));
         console.log(obj);
         alert(multi)
+        alert(`/api/${endpoint?endpoint:modelKey}`+(datas?`?_id=${datas?._id}`:""))
 
         fetch(`/api/${endpoint?endpoint:modelKey}`+(datas?`?_id=${datas?._id}`:""), settings)
         .then(r=>r.json())
@@ -130,8 +131,10 @@ const StudentForm = ({ model, modelKey, joinedDatasProps, endpoint, hiddens={}, 
         <form onSubmit={handleSubmit} className={modelKey+(datas?"_update":"")}>
             <input type="hidden" name="modelKey" defaultValue={modelKey} />
             <input type="hidden" name="timestamp" defaultValue={formData.timestamp} />
+            {/* { console.log(model) } */}
             {/* {datas && <input type="hidden" value={datas._id} name="_id" />} */}
             { Object.keys(model).map((key) => {if(model.hasOwnProperty(key) && key!="_id" && key!="__v"){
+                
                 // const { instance: type, default: defaultValue } = model[key];
                 const { instance: fieldType } = model[key];
                 // console.log(fieldType);

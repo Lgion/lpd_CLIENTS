@@ -65,6 +65,9 @@ export const AdminContextProvider = ({children}) => {
         }}
       >
         <button>+</button>
+                {JSON.stringify(models)}
+                ---
+                {JSON.stringify(models?.schemaClasse?.paths)}
         {
           createPortal(
             <EditMongoForm 
@@ -125,6 +128,8 @@ export const AdminContextProvider = ({children}) => {
             const ok = await fetch("/api/ecole")
             , data = await ok.json()
             setModels(data)
+            console.log(data);
+            
         }
         ok()
         

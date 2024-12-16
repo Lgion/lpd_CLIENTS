@@ -23,6 +23,8 @@ let { schema: schemaClasse } = modelClasses
 export function getModels(req, res, next) {
   // console.log(Eleve.schema.paths);
   // return Eleve.schema.paths
+  console.log({schemaEleve});
+  
   res.status(200).json({ schemaEleve, schemaTeacher, schemaClasse })
   // return {"ok":"ok"}
 }

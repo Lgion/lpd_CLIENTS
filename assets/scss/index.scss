@@ -605,19 +605,20 @@ body{
           text-shadow: 0 1px 0px black,.1px 0px 0px black;
         }
         &:nth-of-type(2)>span{
-          top:calc(1em + 3px);
+          top:calc(2em + 3px);
           color:$ternary;
           text-shadow: 0 0 1px red,-1px -1px 1px red,2px -1px 1px black,-1px 1px 1px blue,-2px 2px 1px blue,-3px 4px 3px black;
           @include mobile-only{
-            top:calc(2em + 3px);
+            top:calc(3em + 3px);
             letter-spacing: 1px;
           }
         }
         &:last-of-type>span{
-          top:calc(2em + 3px);
+          bottom: .5em;
+          top:unset;
           color:$fourth;
           @include mobile-only{
-            top: calc(4em + 3px);
+            bottom:2.5em;
           }
         }
       }
@@ -682,9 +683,12 @@ body{
           background: white;
           z-index: 2;
           flex-flow: row;
-          width: 100%;
           top: -50px;
-          left: 0;
+          height: 50px;
+          left: -5px;
+          right: -5px;
+          padding-top: 10px;
+          width: unset;
         }
         &:hover li:not(#share):not(#pound){
           &:has(a:hover){
