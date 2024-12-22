@@ -101,7 +101,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
 
     return (
         <>
-            {isAdmin && (<>
+            {false && isAdmin && (<>
                 <button 
                     title="Ajouter une slide à votre diapo"
                     onClick={() => {
@@ -137,7 +137,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                 <Slider {...settingsSlider}>
                     {memoizedDiapos.map((item, i) => item['identifiant_$_hidden'].indexOf(page)!==-1 && (
                         <figure key={`carousel${i}`}>
-                            {isAdmin && (
+                            {false && isAdmin && (
                                 <ul className="admin">
                                     <li onClick={(e) => handleUpdate(e, item)}>✎</li>
                                     <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>🗑️</li>

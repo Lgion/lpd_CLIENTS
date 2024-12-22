@@ -25,7 +25,7 @@ const HomeContent = memo(({ diapos }) => (
         <li>les activités du sanctuaire <strong>(hébergement et restauration)</strong></li>
         <li>l'<b>agriculture maraîchaire</b> (fruits&légumes, cacao, poivre, palme), </li>
         <li>l'<b>élevage</b> (poulets chair&ponte, porc, escargots),</li>
-        <li>etc...</li>
+        {/* <li>etc...</li> */}
       </ul>
       <p>Aussi, occasionnellement, nous recevons des <b>dons</b> d'institutions philantropes ou de fidèles chrétiens.</p>
     </article>
