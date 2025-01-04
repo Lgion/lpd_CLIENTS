@@ -66,7 +66,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
         }
 
         try {
-            const response = await fetch('/api/diapos?identifiant=home_0')
+            const response = await fetch('/api/diapos?identifiant='+page+'_0')
             const data = await response.json()
             if (Array.isArray(data) && data.length > 0) {
                 setDiapos(data)
@@ -101,7 +101,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
 
     return (
         <>
-            {false && isAdmin && (<>
+            {/*false && */isAdmin && (<>
                 <button 
                     title="Ajouter une slide à votre diapo"
                     onClick={() => {
@@ -121,7 +121,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                 {
                     createPortal(
                         <EditMongoForm 
-                            hiddens={{identifiant:"home_0"}}
+                            hiddens={{identifiant: page+"_0"}}
                             endpoint="diapo"
                             modelKey={"slider"} 
                             model={models?.schemaDiapo?.paths || {}} 

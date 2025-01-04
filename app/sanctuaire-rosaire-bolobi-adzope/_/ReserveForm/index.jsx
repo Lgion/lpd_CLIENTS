@@ -59,7 +59,7 @@ export default function ReserveForm() {
   const ulRef = useRef()
   // , fieldsets = ["dates","type","location","meal","infos"]
   , {FieldsetRadioStyled, SectionCheckboxStyled, dateDiff, formNdrToggleImg, toggleFormNdrImg, templateScss} = useContext(FormContext)
-  , titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE <br /> (avance sur paiement demandé): "
+  , titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance sur paiement demandé): "
   , sommaire = "RÉSERVER DATE"
   , onFieldset = e => {
     // console.log(e.target.className)

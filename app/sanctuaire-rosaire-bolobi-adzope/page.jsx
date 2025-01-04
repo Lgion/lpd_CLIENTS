@@ -11,7 +11,7 @@ import BlogCategory from '../_/Blog/BlogCategory'
 const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
     <main className="sanctuaire_ndr">
         <Article />
-        <Carousel page="sanctuaire" diapos={diapos} titre={"TEST - EXEMPLE: "} icon="2" sommaire="AUTRE TITRE SOMMAIRE" />
+        <Carousel page="sanctuaire" diapos={diapos} titre={"LE SANCTUAIRE DE BOLOBI EN IMAGES"} icon="2" sommaire="La grotte Mariale de notre dame du Rosaire de Bolobi" />
         <LocateBolobi />
         <ReserveForm />
         {/* <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} /> */}

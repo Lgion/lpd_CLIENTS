@@ -594,9 +594,9 @@ body{
         @include mobile-only{
           font-size: .8em;
           >span{
-            left: 160px;
-            right: 160px;
-            font-size: .8em;
+            left: 133px;
+            right: 133px;
+            font-size: .7em;
             line-height: .75em;
           }
         }
@@ -618,7 +618,7 @@ body{
           top:unset;
           color:$fourth;
           @include mobile-only{
-            bottom:2.5em;
+            bottom:3em;
           }
         }
       }
@@ -1032,6 +1032,9 @@ body{
       background: rgba(0,0,0,.7);
       color: white;
       margin-bottom: 0;
+      @include mobile-only{
+        font-size: .7em;
+      }
     }
     /*
     >div#inscription{
@@ -2151,6 +2154,9 @@ body{
         }
       }
       
+      >ol{
+        font-size: x-large;
+      }
       >p
       ,>form
       ,>form h4
@@ -2295,23 +2301,23 @@ body{
             &.clicked{
               overflow-y: scroll;
             }
-            &.lieuBeni::before{
+            &.bolobi::before{
               background:url(/img/sanctuaire/01.webp);
             }
-            &.serenite::before{
+            &.priere::before{
               background:url(/img/sanctuaire/02.webp);
+            }
+            &.fideles::before{
+              background:url(/img/sanctuaire/04.webp);
+            }
+            &.ecole::before{
+              background:url(/img/sanctuaire/05.webp);
+            }
+            &.economie::before{
+              background:url(/img/sanctuaire/06.webp);
             }
             &.grotteMarial::before{
               background:url(/img/sanctuaire/03.webp);
-            }
-            &.facilities::before{
-              background:url(/img/sanctuaire/04.webp);
-            }
-            &.facilitiesBis::before{
-              background:url(/img/sanctuaire/05.webp);
-            }
-            &.other::before{
-              background:url(/img/sanctuaire/06.webp);
             }
           }
         }

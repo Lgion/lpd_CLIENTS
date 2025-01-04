@@ -229,6 +229,11 @@ export default function Footer() {
       </section>
       <section id="partenaires">
         <p>Nous avons pour partenaire les sociétés suivantes:</p>
+        <ul>
+          <li><a href="https://www.facebook.com/people/Paroisse-Saint-Jean-Paul-II-Angr%C3%A9-Djibi/100083056250619/?locale=eo_EO&_rdr">
+            Communauté Saint-Jean, Cocody
+          </a></li>
+        </ul>
         {/* <Link href='https://www.sanlishop.ci/' target='_blank'>SanliShop</Link> */}
         <span className="close"></span>
       </section>
