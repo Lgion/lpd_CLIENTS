@@ -52,10 +52,14 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
 
     const fetchDiapos = useCallback(async () => {
         const storedDiapos = localStorage.getItem('carouselDiapos')
+        const timeStamp = localStorage.getItem('carouselDiaposTimeStamp')
+        const now = +new Date()
+        const shouldFetch = (((now - timeStamp) / 1000) / 3600) > 24
         
-        if (storedDiapos) {
+        if (storedDiapos && !shouldFetch) {
             try {
-                const parsedDiapos = JSON.parse(storedDiapos)
+                let parsedDiapos = JSON.parse(storedDiapos)
+                parsedDiapos = parsedDiapos.filter(item => item['identifiant_$_hidden']==page+"_0")
                 if (Array.isArray(parsedDiapos) && parsedDiapos.length > 0) {
                     setDiapos(parsedDiapos)
                     return
@@ -67,10 +71,14 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
 
         try {
             const response = await fetch('/api/diapos?identifiant='+page+'_0')
+            // const response = await fetch('/api/diapos')
             const data = await response.json()
             if (Array.isArray(data) && data.length > 0) {
-                setDiapos(data)
+                const timeStamp = +new Date()
+                localStorage.setItem('carouselDiaposTimeStamp', timeStamp)
                 localStorage.setItem('carouselDiapos', JSON.stringify(data))
+                const currentData = data.filter(item => item['identifiant_$_hidden']==page+"_0")
+                setDiapos(currentData)
             } else {
                 console.error('Les données de diapos reçues ne sont pas un tableau valide')
             }
@@ -98,10 +106,15 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
     }, [titre, fetchDiapos])
 
     const memoizedDiapos = useMemo(() => diapos, [diapos])
+    const reloadBtn = () => {
+        localStorage.clear()
+        location.reload()
+    }
 
     return (
         <>
             {/*false && */isAdmin && (<>
+                <button style={{left:"2em"}} onClick={reloadBtn}>⟳</button> 
                 <button 
                     title="Ajouter une slide à votre diapo"
                     onClick={() => {

@@ -1432,7 +1432,9 @@ body{
             // bottom: -3.5em;
             position: absolute;
             bottom: 0;
-
+            right: 1rem;
+            left: 1rem;
+            width: unset;
             &:hover:before {
               box-shadow: 0 0 0 0;
             }

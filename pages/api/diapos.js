@@ -11,7 +11,8 @@ export default async function handler(req, res) {
     await mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority')
 
     const Diapos = mongoose.models.Diapos_slider || mongoose.model('Diapos_slider', new mongoose.Schema({}))
-    const diapos = await Diapos.find({ "identifiant_$_hidden": identifiant })
+    // const diapos = await Diapos.find({ "identifiant_$_hidden": identifiant })
+    const diapos = await Diapos.find()
 
     if (Array.isArray(diapos)) {
       res.status(200).json(diapos)
