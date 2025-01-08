@@ -18,7 +18,7 @@ _/compresse_imgs/log
 public/**.jpeg
 public/**.jpg
 public/**.png
-public/**.mp4
+public/**/**.mp4
 public/images/**/build/**
 
 

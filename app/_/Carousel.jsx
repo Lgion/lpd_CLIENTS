@@ -156,9 +156,6 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                                     <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>🗑️</li>
                                 </ul>
                             )}
-                            <p style={{background:"red"}}>
-                                {JSON.parse(item.metas)?.path || ""}
-                            </p>
                             <Image
                                 loader={myLoader}
                                 src={item.src_$_file.replace("images/","images/"+(JSON.parse(item.metas)?.path || "")+"/")}
@@ -170,7 +167,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                             <ul></ul>
                             <figcaption>
                                 <h4>{item.title}</h4>
-                                <p>{item.figcaption}</p>
+                                {/* <p>{item.figcaption}</p> */}
                             </figcaption>
                         </figure>
                     ))}
