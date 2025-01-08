@@ -156,9 +156,12 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                                     <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>🗑️</li>
                                 </ul>
                             )}
+                            <p style={{background:"red"}}>
+                                {JSON.parse(item.metas)?.path || ""}
+                            </p>
                             <Image
                                 loader={myLoader}
-                                src={item.src_$_file}
+                                src={item.src_$_file.replace("images/","images/"+(JSON.parse(item.metas)?.path || "")+"/")}
                                 alt={item.alt}
                                 title={item.title}
                                 width={200}
