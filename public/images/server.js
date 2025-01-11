@@ -4,7 +4,7 @@ import imageminWebp from 'imagemin-webp';
 await imagemin(['./*.{jpg,png}'], {
 	destination: 'build/',
 	plugins: [
-		imageminWebp({quality: 50})
+		imageminWebp({quality: 10})
 	]
 });
 
