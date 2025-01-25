@@ -1,3 +1,4 @@
+import { headers } from 'next/headers'
 import { ClerkProvider } from "@clerk/nextjs";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -41,12 +42,24 @@ const geistMono = localFont({
   weight: "100 900",
 })
 ;
+export async function generateMetadata() {
+  const headersList = headers()
+  const domain = headersList.get('host')
+  
+  // URL de base en fonction du domaine
+  const baseUrl = domain.indexOf("sactuaire-rosaire-bolobi") !== -1
+    ? 'https://sanctuaire-rosaire-bolobi.com'
+    : 'https://librairie-puissance-divine.ci'
 
-export const metadata = {
-  title: "Accueil - Puissance Divine & Sanctuaire Bolobi, Côte d'ivoire",
-  description: "Librairie chrétienne à abidjan 2plateaux, et retraite spirituelle à bolobi",
-  "google-site-verification": "ZfnSq8l0ItGI4LbbtXHa3F0NzkbFPEUyATDoCTXgF-c"
-};
+  return {
+    title: "Accueil - Puissance Divine & Sanctuaire Bolobi, Côte d'ivoire",
+    description: "Librairie chrétienne à abidjan 2plateaux, et retraite spirituelle à bolobi",
+    "google-site-verification": "ZfnSq8l0ItGI4LbbtXHa3F0NzkbFPEUyATDoCTXgF-c",
+    alternates: {
+      canonical: baseUrl,
+    },
+  }
+}
 
 export default function RootLayout({ children }) {
   return (
