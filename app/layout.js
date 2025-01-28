@@ -43,7 +43,7 @@ const geistMono = localFont({
 })
 ;
 export async function generateMetadata() {
-  const headersList = headers()
+  const headersList = await headers()
   const domain = headersList.get('host')
   
   // URL de base en fonction du domaine

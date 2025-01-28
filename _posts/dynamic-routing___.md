@@ -1,7 +1,7 @@
 ---
 title: 'Le Sanctuaire Notre Dame du Rosaire de Bolobiii'
 excerpt: '...un lieu paisible de pélérinage'
-coverImage: "/img/_/bolobi01.jpg"
+coverImage: "/img/_/bolobi/centre-saint-martin-porres-bolobi-allee-centrale.webp"
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: ACHI Cyrille

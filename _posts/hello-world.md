@@ -1,7 +1,7 @@
 ---
 title: 'Bolobi et son école'
 excerpt: "...créé en 2021, comporte pour l'instant 3 classes ...."
-coverImage: "/img/_/bolobi01.jpg"
+coverImage: "/img/_/bolobi/alle-bolobi.jpg"
 date: '2020-03-16T05:35:07.322Z'
 author:
   name: ACHI Cyrille

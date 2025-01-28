@@ -47,7 +47,13 @@ export default function Header() {
         
         {/* <Playbox /> */}
 
-
+        <Link
+            href="/blog"
+            title="Découvrez nos articles et actualités"
+            className="blog-button"
+        >
+            Blog
+        </Link>
 
     </header>
 }
