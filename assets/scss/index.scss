@@ -1,6 +1,7 @@
 @import "./main.scss";
 @import "./admin.scss";
 
+@import "../../app/blog/blog.scss";
 
 $void_gray: #c9ded6;
 
@@ -1217,6 +1218,7 @@ body{
         &.ecommerce{background:url(../../public/img/heart0b.webp), whitesmoke; color: $fourth;}
         &.activites-spirituelles{background:url(../../public/img/heart0a.webp), whitesmoke; color: $secondary;}
         &.bolobi{background:url(../../public/img/heart0c.webp), whitesmoke; color: $ternary;}
+        &.blog-bolobi{background:url(../../public/img/blog.png), whitesmoke; color: $ternary;}
         &:hover{
           // outline: .5em solid brown;
           box-shadow: 0 0 10px 4px;
@@ -3701,56 +3703,6 @@ body{
 span.close{@extend %btn_close;&:before{content:"X";}}
 .prix:after{content:"fcfa"}
 
-  .blog-container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 60px; /* Pour éviter le chevauchement avec le header */
-
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
-      color: #333;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 2rem;
-      font-size: 1.2rem;
-      color: #666;
-    }
-
-    .blog-grid {
-      display: grid;
-      gap: 2rem;
-      padding: 1rem;
-      
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-      }
-    }
-  }
-
-  .blog-button {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    background: #4a90e2;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background 0.3s ease;
-    z-index: 1000;
-
-    &:hover {
-      background: #357abd;
-    }
-  }
-
 header:before, main:before, footer:before {
   box-shadow: 4px 0 10px 1px rgb(255 89 0 / 30%);
   border-left: solid;
@@ -3777,255 +3729,7 @@ header:before, header:after, #containall:before, #containall:after, footer:befor
   /* -webkit-transform: rotateY(-60deg) rotateX(-1deg) translateZ(1em); */
 }
 
-.blog-container {
-    padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  margin-top: 60px; /* Pour éviter le chevauchement avec le header */
 
-  h1 {
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-    font-size: 2.5rem;
-
-    .form-group {
-      margin-bottom: 1.5rem;
-
-      label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: #333;
-      }
-
-      input, textarea {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        
-        &:focus {
-          outline: none;
-          border-color: #4a90e2;
-        }
-      }
-
-      textarea {
-        resize: vertical;
-        min-height: 100px;
-      }
-    }
-
-    .submit-btn {
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s ease;
-
-      &:hover {
-        background: #45a049;
-      }
-    }
-  }
-
-  .blog-post {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    margin-top: 60px;
-
-    .blog-post-header {
-      margin-bottom: 2rem;
-
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-        color: #333;
-      }
-
-      .blog-post-cover {
-        width: 100%;
-        height: 400px;
-        margin-bottom: 1.5rem;
-        border-radius: 8px;
-        overflow: hidden;
-        
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      .blog-post-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #666;
-        font-size: 0.9rem;
-
-        .blog-post-author {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-
-          .author-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-          }
-        }
-      }
-    }
-
-    .blog-post-content {
-      .blog-post-excerpt {
-        font-size: 1.2rem;
-        color: #666;
-        margin-bottom: 2rem;
-        line-height: 1.6;
-        font-style: italic;
-      }
-
-      .blog-post-body {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #333;
-
-        h2 {
-          font-size: 1.8rem;
-          margin: 2rem 0 1rem;
-          color: #222;
-        }
-
-        h3 {
-          font-size: 1.5rem;
-          margin: 1.5rem 0 1rem;
-          color: #333;
-        }
-
-        p {
-          margin-bottom: 1.5rem;
-        }
-
-        a {
-          color: #4a90e2;
-          text-decoration: none;
-          
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-
-        img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 4px;
-          margin: 1.5rem 0;
-        }
-
-        ul, ol {
-          margin: 1.5rem 0;
-          padding-left: 2rem;
-
-          li {
-            margin-bottom: 0.5rem;
-          }
-        }
-
-        blockquote {
-          margin: 1.5rem 0;
-          padding: 1rem 2rem;
-          border-left: 4px solid #4a90e2;
-          background: #f8f9fa;
-          font-style: italic;
-        }
-
-        code {
-          background: #f8f9fa;
-          padding: 0.2rem 0.4rem;
-          border-radius: 4px;
-          font-size: 0.9em;
-        }
-
-        pre {
-          background: #f8f9fa;
-          padding: 1rem;
-          border-radius: 4px;
-          overflow-x: auto;
-          margin: 1.5rem 0;
-
-          code {
-            background: none;
-            padding: 0;
-          }
-        }
-      }
-    }
-
-    .blog-post-footer {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid #eee;
-
-      .back-to-blog {
-        display: inline-flex;
-        align-items: center;
-        color: #4a90e2;
-        text-decoration: none;
-        font-weight: 600;
-        
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
-  .blog-post-loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    
-    .spinner {
-      color: #4a90e2;
-      font-size: 1.2rem;
-    }
-  }
-
-  .blog-post-error {
-    text-align: center;
-    padding: 4rem 2rem;
-
-    h1 {
-      color: #dc3545;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      color: #666;
-      margin-bottom: 2rem;
-    }
-
-    .back-link {
-      color: #4a90e2;
-      text-decoration: none;
-      font-weight: 600;
-      
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
 
   @media all and (max-width:$mobile){
     body{
@@ -4120,4 +3824,3 @@ header:before, header:after, #containall:before, #containall:after, footer:befor
     z-index: -1;
     /* -webkit-transform: rotateY(-60deg) rotateX(-1deg) translateZ(1em); */
   }
-}

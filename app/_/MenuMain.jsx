@@ -13,8 +13,9 @@ export default function MenuMain() {
                 <li><Link href="/admin/school">ÉCOLE</Link></li>   
             </menu>} */}
             {
-                mainmenu.map((item,i) => /*item.id!="accueil" &&*/ <li className={"menu "+item.id} key={"m1st___"+i}>
-                    {/* {console.log(item)} */}
+                // mainmenu.map((item,i) => /*item.id!="accueil" &&*/ <li className={"menu "+item.id} key={"m1st___"+i}>
+                mainmenu.map((item,i) => item.id!="blog-bolobi" && <li className={"menu "+item.id} key={"m1st___"+i}>
+                {/* {console.log(item)} */}
                     <Link
                         href={item.href}
                         title={item.title}

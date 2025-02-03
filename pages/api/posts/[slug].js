@@ -1,6 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { remark } from 'remark'
+import html from 'remark-html'
+import gfm from 'remark-gfm'
 
 export default async function handler(req, res) {
   const { slug } = req.query
@@ -17,6 +20,13 @@ export default async function handler(req, res) {
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
+      // Convertir le Markdown en HTML avec support GFM
+      const processedContent = await remark()
+        .use(gfm) // Support GitHub Flavored Markdown
+        .use(html, { sanitize: false }) // Ne pas sanitizer pour permettre les balises HTML personnalisées
+        .process(content)
+      const contentHtml = processedContent.toString()
+
       const post = {
         slug,
         title: data.title,
@@ -24,7 +34,7 @@ export default async function handler(req, res) {
         coverImage: data.coverImage,
         date: data.date,
         author: data.author,
-        content: content,
+        content: contentHtml,
       }
 
       res.status(200).json(post)

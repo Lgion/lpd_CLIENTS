@@ -11,6 +11,7 @@ type Props = {
   excerpt: string
   author: Author
   slug: string
+  category?: string
 }
 
 const BlogPost = ({
@@ -20,10 +21,21 @@ const BlogPost = ({
   excerpt,
   author,
   slug,
+  category,
 }: Props) => {
   
   return (
     <section className="schoolPosts">
+      <h4 className="">
+        <Link
+          as={`/posts/${slug}`}
+          href="/posts/[slug]"
+          className=""
+        >
+          {title}
+          {category && <span className={`category-badge ${category}`}>{category}</span>}
+        </Link>
+      </h4>
       {/* <CoverImage title={title} src={coverImage} slug={slug} /> */}
       <Link as={`/posts/${slug}`} href="/posts/[slug]" aria-label={title}>
         <Image
@@ -34,15 +46,6 @@ const BlogPost = ({
         />
       </Link>
       <section className="">
-        <h4 className="">
-          <Link
-            as={`/posts/${slug}`}
-            href="/posts/[slug]"
-            className=""
-          >
-            {title}
-          </Link>
-        </h4>
         <p className="">{excerpt}</p>
         <div>
           <Avatar name={author.name} picture={author.picture} date={date} />&nbsp;

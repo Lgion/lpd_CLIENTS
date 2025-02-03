@@ -44,17 +44,18 @@ export default function SNS() {
             <li id="tiktok">
                 <a href="https://www.facebook.com/genevieve.achi/" title=" librairie puissance divine abidjan 2plateaux rue des jardins" target="_blank" rel="noopener noreferrer">
                 </a>
-            </li>
+            </li>*/}
             <li id="blogB">
                 <a
-                    href="http://bolobi.ci"
+                    href="blog"
                     rel="noreferrer"
                     target="_blank"
                     title="Blog du Sanctuaire notre Dame du Rosaire"
                 >
-                    <span>bolobi.ci</span>
+                    {/* <span>bolobi.ci</span> */}
+                    <span>BLOG</span>
                 </a>
-            </li> */}
+            </li> 
         </menu>
     )
 }

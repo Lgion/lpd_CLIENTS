@@ -16,8 +16,9 @@ export default function LogSignIn() {
         console.log(user?.primaryEmailAddress?.emailAddress)
         if(!isSignedIn)
             setIsAdmin(false)
-        if(user?.primaryEmailAddress?.emailAddress == "hi.cyril@gmail.com"
-            || true
+        if(process.env.NEXT_PUBLIC_EMAIL_USER.indexOf(user?.primaryEmailAddress?.emailAddress) !== -1
+        // if(user?.primaryEmailAddress?.emailAddress == "hi.cyril@gmail.com"
+            // || true 
         )
             setIsAdmin(true)
     }, [user])

@@ -23,6 +23,11 @@ export default function ClientIsAdmin({children}) {
     const renderContent = useCallback(() => {
         const isAdminPath = pathname?.indexOf('admin') !== -1
         
+        console.log(isAdminPath);
+        console.log(isAdmin);
+        
+        
+        
         if (!isAdminPath) return null
         
         if (!isAdmin) return <AccessDenied />

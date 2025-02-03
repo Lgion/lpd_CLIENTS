@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback, useMemo } from 'react';
 
 const BLOG_NAME = "BOLOBI"
 
-export default function BlogCategory({categoryPosts, headings, className="", onEdit, onDelete}) {
+export default function BlogCategory({categoryPosts, headings, className="", onEdit, onDelete, isAdmin}) {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,12 +56,12 @@ export default function BlogCategory({categoryPosts, headings, className="", onE
   }, [categoryPosts, fetchPosts]);
 
   return (
-    <section className={"blog_category "+className}>
+    <>
       <div className="blog_category_header">
         <h3>{headings.h3}</h3>
         <p>{headings.subtitle}</p>
       </div>
-      <div className="blog_category_posts">
+      <div className="blog_category_posts blog-grid">
         {isLoading ? (
           <div>Chargement...</div>
         ) : posts.length > 0 ? (
@@ -74,8 +74,9 @@ export default function BlogCategory({categoryPosts, headings, className="", onE
                 author={post.author}
                 slug={post.slug}
                 excerpt={post.excerpt}
+                category={post.category}
               />
-              <div className="blog-post-actions">
+              {isAdmin && <div className="blog-post-actions">
                 <button
                   onClick={() => onEdit(post)}
                   className="edit-btn"
@@ -88,13 +89,13 @@ export default function BlogCategory({categoryPosts, headings, className="", onE
                 >
                   Supprimer
                 </button>
-              </div>
+              </div>}
             </div>
           ))
         ) : (
           <div>Aucun article disponible</div>
         )}
       </div>
-    </section>
+    </>
   )
 }
