@@ -1,18 +1,29 @@
+"use client"
+
 import { useState, useEffect } from "react"
 
 export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants}) {
-
     const [isnotZeroParticipant, setIsnotZeroParticipant] = useState(0)
-    , onChangeParticipants = (e,alt) => {
+    const [isApproximateCount, setIsApproximateCount] = useState(false)
+
+    const onChangeParticipants = (e,alt) => {
         setIsnotZeroParticipant(alt||participants)
         onParticipantsChange(alt||e.target.value)
     }
 
-    useEffect(()=>{
+    const handleApproximateChange = (value) => {
+        const participantsMap = {
+            '10-30': 15,
+            '30-50': 40,
+            '50-100': 75,
+            '100+': 120
+        }
+        onParticipantsChange(participantsMap[value])
+    }
 
+    useEffect(()=>{
         // document.querySelector('article.dates b').innerHTML = dateDiffDuAu()
     },[])
-    
     
     return <>
         <h4 onClick={toggleFormNdrImg}>Choisir le nombre de participants, ainsi que le type de logement désiré <br /> (chambre indiv., ou dortoir): </h4>
@@ -22,8 +33,21 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
             <li><u>Chambre en dortoir (<b>3.000F</b> / nuit):</u> 10 matelas double - ventilateurs plafond - wc & sdb commun</li>
         </ul>
         <section>
-            <div className={isnotZeroParticipant!=false?"on":""}>
-                <label htmlFor="participants"><b><u>Estimez</u></b> nombre de paticipants total ? *</label>
+            <div className="checkApproxim">
+                <label>
+                    <div>SI VOUS NE SAVEZ PAS, COCHEZ CETTE CASE</div>
+                    <div>PUIS, DONNEZ JUSTE UNE FOURCHETTE APPROXIMATIVE DU NOMBRE DE PARTICIPANTS</div>
+                    <input 
+                        type="checkbox" 
+                        checked={isApproximateCount}
+                        onChange={(e) => setIsApproximateCount(e.target.checked)}
+                    />
+                    <i><b>*</b> Estimation <strong>{isApproximateCount ? "approximative" : "précise"}</strong> du nombre de participants <b>active</b></i>
+                </label>
+            </div>
+
+            <div className={`${isnotZeroParticipant!=false?"on":""} ${isApproximateCount ? 'hidden' : ''}`}>
+                <label htmlFor="participants"><b><u>Précisez</u></b> le nombre exact de participants *</label>
                 <div className="custom-number-input">
                     <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)-1)}}>-</button>
                     <input 
@@ -37,28 +61,37 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                     />
                     <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)+1)}}>+</button>
                 </div>
-
             </div>
-            {/* <label htmlFor="dortoirs" className="radioLabel">
-                <input id="dortoirs" type="checkbox" name="sleep" />
-                <span className="radio"></span>
-                <span>Chambre Commune <b>(<b>3000Fcfa</b>/personne la nuité)</b></span>
+
+            <div className={`approxim-number-input ${!isApproximateCount ? 'hidden' : ''}`}>
+                <label><b><u>Sélectionnez</u></b> une estimation du nombre de participants *</label>
                 <div>
-                    <input readonly id="location_dortoir_readlony" value="0" disabled />
-                    <label>chambres</label>
+                    {[
+                        { value: '10-30'},
+                        { value: '30-50'},
+                        { value: '50-100'},
+                        { value: '100+' }
+                    ].map(option => (
+                        <label key={option.value} className="radio-label">
+                            <input
+                                type="radio"
+                                name="approximateCount"
+                                value={option.value}
+                                onChange={(e) => handleApproximateChange(e.target.value)}
+                            />
+                            <div>entre <span>{option.value}</span> participants</div>
+                        </label>
+                    ))}
                 </div>
-            </label> */}
+            </div>
+
             <label htmlFor="chambre" className="radioLabel safe">
-                {/* <input id="chambre" type="checkbox" name="sleep" /> */}
-                {/* <span className="radio"></span> */}
                 <span>Chambre Individuel <b>(<b>10000Fcfa</b>/personne la nuité)</b></span>
-                {/* <span>chambre</span> */}
                 <div>
                     <input 
                         id="individual_room_participants" 
                         type="number" 
                         name="individual_room_participants" 
-                        // defaultValue={0} 
                         max={participants} 
                         min="0" 
                         value={individualRoomParticipants}

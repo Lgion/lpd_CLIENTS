@@ -113,40 +113,59 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
 
     return (
         <>
-            {/*false && */isAdmin && (<>
-                <button style={{left:"2em"}} onClick={reloadBtn}>⟳</button> 
-                <button 
-                    title="Ajouter une slide à votre diapo"
-                    onClick={() => {
-                        const modal = document.getElementById('modal')
-                        if (modal) {
-                            modal.classList.add('active')
-                            document.querySelector('#modal .modal___main>form.slider')?.classList.add('active')
-                        }
-                    }}
-                >
-                    +
-                </button>
-                {/* {JSON.stringify(models)}
-                ---
-                {JSON.stringify(models?.schemaDiapo?.paths)} */}
-                {/* {JSON.stringify(memoizedDiapos[0]['identifiant_$_hidden'])} */}
-                {
-                    createPortal(
-                        <EditMongoForm 
-                            hiddens={{identifiant: page+"_0"}}
-                            endpoint="diapo"
-                            modelKey={"slider"} 
-                            model={models?.schemaDiapo?.paths || {}} 
-                            // joinedDatasProps={{classes: ecole_classes}} 
-                        />
-                        , document.querySelector('#modal .modal___main')
-                    )
-                }
-                </>
-            )}
             <h3 className="carousel" id={h3id} data-icon={icon} data-sommaire={sommaire || titre}>{h3}</h3>
             <section className="carousel">
+                {/*false && */isAdmin && (<>
+                    <div id="admin_carousel">
+                        <button title="Recharger les données du carousel" style={{left:"2em"}} onClick={reloadBtn}>⟳</button>
+                        <button
+                            title="Ajouter une slide à votre diapo"
+                            onClick={() => {
+                                const modal = document.getElementById('modal')
+                                if (modal) {
+                                    modal.classList.add('active')
+                                    // Ajout du header et footer à la modale
+                                    const header = document.querySelector('#modal .modal___header')
+                                    const footer = document.querySelector('#modal .modal___footer')
+                                    if (header) {
+                                        header.innerHTML = `
+                                            <figcaption>
+                                                <strong>Ajouter une nouvelle diapositive</strong>
+                                                <span class="close">×</span>
+                                            </figcaption>
+                                        `
+                                    }
+                                    if (footer) {
+                                        footer.innerHTML = `
+                                            <button type="submit" class="submit">Enregistrer</button>
+                                            <button type="button" class="cancel">Annuler</button>
+                                        `
+                                    }
+                                    document.querySelector('#modal .modal___main>form.slider')?.classList.add('active')
+                                }
+                            }}
+                        >
+                            +
+                        </button>
+                    </div>
+                    {/* {JSON.stringify(models)}
+                    ---
+                    {JSON.stringify(models?.schemaDiapo?.paths)} */}
+                    {/* {JSON.stringify(memoizedDiapos[0]['identifiant_$_hidden'])} */}
+                    {
+                        createPortal(
+                            <EditMongoForm 
+                                hiddens={{identifiant: page+"_0"}}
+                                endpoint="diapo"
+                                modelKey={"slider"} 
+                                model={models?.schemaDiapo?.paths || {}} 
+                                // joinedDatasProps={{classes: ecole_classes}} 
+                            />
+                            , document.querySelector('#modal .modal___main')
+                        )
+                    }
+                    </>
+                )}
                 <Slider {...settingsSlider}>
                     {memoizedDiapos.map((item, i) => item['identifiant_$_hidden'].indexOf(page)!==-1 && (
                         <figure key={`carousel${i}`}>
