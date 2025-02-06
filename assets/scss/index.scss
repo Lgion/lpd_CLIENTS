@@ -286,6 +286,14 @@ div#blog_container{
     }
   }
 }
+%recap{
+  background: wheat;
+  margin: 1em 0;
+  padding: 2em 0 !important;
+  border: solid;
+  box-shadow: 0 0 10px 1px inset;
+  border-radius: 5px;
+}
 .fade-in {
   opacity: 1;
   transition: opacity 0.5s ease-in;
@@ -2767,7 +2775,7 @@ body{
         flex-flow: wrap;
         border: 3px solid $secondary;
         border-width: 3px 0;
-        padding-top: 2em !important;
+        padding: 2em 0 !important;
         box-shadow: 0 0 10px 1px $secondary_2 inset;
         >ul.bolobiForm_choices{
           display: none;
@@ -2811,11 +2819,12 @@ body{
               border-color: $secondary_1;
               box-shadow: 0 0 5px 1px;
               color:black
+              >a:hover{font-weight: bolder;}
             }
             >a{
               color:white;
               text-shadow: 0 0px 3px $secondary_1;
-              &:hover{font-weight: bolder;}
+              // &:hover{font-weight: bolder;}
               >svg{ 
                 width: 16px; height: 16px;
                 color:$secondary;
@@ -2826,6 +2835,9 @@ body{
           }
         }
         >section{
+          padding: 1em;
+          background: blue;
+          box-shadow: 0 0 10px 1px black inset;
           width: 50%;
           display: flex;
           flex-wrap: wrap;
@@ -2856,6 +2868,7 @@ body{
             width: 100%;
             display: flex;
             flex-flow: wrap;
+            background: white;
             border-bottom-color: $secondary;
             transition:all .2s;
             // padding-bottom: 4em;
@@ -3001,13 +3014,14 @@ body{
                   &:first-of-type:after{content:"DÉBUT";}
                   &:last-of-type:after{content:"FIN";}
                   span{
+                    // z-index: -1;
+                    z-index: 1;
                     position: absolute;
                     top: 95%;
                     width: 300%;
                     left: -100%;
                     text-align: center;
                     border: 1px solid;
-                    z-index: -1;
                     border-radius: 0 0 10px 10px;
                     background: $secondary;
                     padding: 3px;
@@ -3086,8 +3100,17 @@ body{
                       &.checkApproxim{
                         flex-basis:100%;
                         >label{
+                          width: 50%;
+                          border: solid;
+                          align-self: center;
+                          padding: 1em;
+                          box-shadow: 0 0 10px 1px inset;
+                          border-radius: 3px;
                           >div{
                             font-weight: bold;
+                            >u{
+                              color: $secondary;
+                            }
                           }
                           >input{
                             height: 50px;
@@ -3281,6 +3304,7 @@ body{
             position: relative;
             width:100%;
             text-align: center;
+            &:not(#pound){@extend %recap;}
             @include mobile-and-tablette{
               justify-content: center;
             }
@@ -3334,6 +3358,16 @@ body{
                   margin: 0 1em;
                 }
               }
+            }
+          }
+          &.payment{
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            .payment-details{
+              @extend %recap;
+              width: 100%;
             }
           }
         }

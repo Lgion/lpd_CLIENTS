@@ -31,7 +31,7 @@ export default function Footer() {
       this.document.getElementById('footer').childNodes
         .forEach(el=>{el.classList.remove('active')})
       // this.document.getElementById(hash).classList.add("active")
-      document.getElementById(hash).classList.add("active")
+      document.getElementById(hash)?.classList?.add("active")
     });
   }, [])
   return (

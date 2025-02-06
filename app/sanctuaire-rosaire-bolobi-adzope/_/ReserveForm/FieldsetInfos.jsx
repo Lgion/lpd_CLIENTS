@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import { FaUser, FaPhone, FaEnvelope, FaBuilding } from 'react-icons/fa';
+import { SignInButton,SignedOut,useUser } from "@clerk/nextjs"
 
 export default function FieldsetInfos({ toggleFormNdrImg }) {
     const [infos, setInfos] = useState({
@@ -7,20 +8,25 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
         names: '',
         phone_number: '',
         email: ''
-    });
+    })
+    , { user } = useUser()
 
 
+    // Pré-remplir le formulaire quand l'utilisateur est connecté
     useEffect(() => {
-        const div = document.querySelector('article.infos>div')
-        let tmp = ""
-        // if(infos["community"])tmp += "<span>Community: <b>"+infos["community"]+"</b></span>"
-        if(infos["names"])tmp += "<span>Responsable: <b>"+infos["names"]+"</b></span>"
-        if(infos["phone_number"])tmp += "<span>Téléphone: <b>"+infos["phone_number"]+"</b></span>" 
-        if(infos["email"])tmp += "<span>Email: <b>"+infos["email"]+"</b></span>" 
-        div.innerHTML = tmp
-
-        document.querySelector('article.infos>b')
-    }, [infos]);
+        console.log(user);
+        
+        if (user) {
+            setInfos(prevInfos => ({
+                ...prevInfos,
+                names: user.fullName || '',
+                email: user.primaryEmailAddress?.emailAddress || '',
+                phone_number: user.phoneNumbers?.[0] || '',
+                // La communauté n'est généralement pas disponible dans les données utilisateur par défaut
+                community: user.publicMetadata?.community || prevInfos.community
+            }))
+        }
+    }, [user])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -42,6 +48,15 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
             <h4 className="mb-0">Informations générales</h4>
             <h5>Nous attendrons le <b>paiment wave</b> via le numéro mentionné ci-dessous,</h5>
             <h5>Nous vous enverrons un <b>email de confirmation</b> à l'adresse mentionné ci-dessous</h5>
+            <div>
+                {!user ? <>
+                    <div>Vous n'êtes pas connecté</div>
+                    <SignedOut>
+                        <SignInButton title="Se conncecter/S'incrire">Se connecter pour remplir les informations de contact ?</SignInButton>
+                    </SignedOut>
+                </>:""
+                }
+            </div>
             <div className="card-body">
                 <div className="mb-3">
                     <label htmlFor="community" className="form-label d-flex align-items-center">

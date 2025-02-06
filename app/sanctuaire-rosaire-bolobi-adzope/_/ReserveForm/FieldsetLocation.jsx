@@ -35,8 +35,8 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
         <section>
             <div className="checkApproxim">
                 <label>
-                    <div>SI VOUS NE SAVEZ PAS, COCHEZ CETTE CASE</div>
-                    <div>PUIS, DONNEZ JUSTE UNE FOURCHETTE APPROXIMATIVE DU NOMBRE DE PARTICIPANTS</div>
+                    <div>SI VOUS<u> NE SAVEZ PAS,</u> COCHEZ CETTE CASE</div>
+                    <div>PUIS, DONNEZ JUSTE UNE FOURCHETTE APPROXIMATIVE DU<u> NOMBRE DE PARTICIPANTS.</u></div>
                     <input 
                         type="checkbox" 
                         checked={isApproximateCount}

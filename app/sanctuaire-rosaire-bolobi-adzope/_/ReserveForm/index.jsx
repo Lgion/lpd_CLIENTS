@@ -118,7 +118,7 @@ export default function ReserveForm() {
     // alert(a.toISOString().slice(0, 16))
     setDateRange(update);
     console.log(dateDiffDuAu());
-    document.querySelector('article.dates>b').innerHTML = dateDiffDuAu().day +"jours"
+    document.querySelector('article.dates>b').innerHTML = dateDiffDuAu().day +" nuits"
   }
   , handleDateChange = (e) => {
     if(du.value!="" && au.value!=""){
