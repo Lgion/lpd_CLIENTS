@@ -1,20 +1,28 @@
 ---
-title: 'Preview Mode for Static Generation'
-excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
-coverImage: '/img/_/eglise-du-rosaire-bolobi/eglise-exterieur.webp'
-date: '2020-03-16T05:35:07.322Z'
+title: 'Sanctuaire Notre-Dame du Rosaire de Bolobi'
+excerpt: 'Découvrez le Sanctuaire Notre-Dame du Rosaire de Bolobi, un lieu de prière et de recueillement situé à Adzopé en Côte d''Ivoire. Ce sanctuaire marial offre un cadre paisible pour la méditation et la célébration de la foi.'
+coverImage: '/images/sanctuaire_entree_piste.webp'
+date: '2025-02-07T08:34:15Z'
 author:
-  name: Joe Haddad
-  picture: '/assets/blog/authors/joe.jpeg'
+  name: LPD
+  picture: '/assets/blog/authors/lpd.jpeg'
 ogImage:
-  url: '/assets/blog/preview/cover.jpg'
-category: librairie
+  url: '/images/sanctuaire_entree_piste.webp'
+category: sanctuaire
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
+Le Sanctuaire Notre-Dame du Rosaire de Bolobi est un lieu de culte chrétien oeucuménique situé sur la route d'Adzopé, entre Azaguié et yakasseme, en Côte d'Ivoire. Ce sanctuaire du rosaire est devenu un important centre de pèlerinage pour les fidèles de la région.
 
-Venenatis cras sed felis eget velit. Consectetur libero id faucibus nisl tincidunt. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus. Volutpat consequat mauris nunc congue nisi vitae. Id aliquet risus feugiat in ante metus dictum at tempor. Sed blandit libero volutpat sed cras. Sed odio morbi quis commodo odio aenean sed adipiscing. Velit euismod in pellentesque massa placerat. Mi bibendum neque egestas congue quisque egestas diam in arcu. Nisi lacus sed viverra tellus in. Nibh cras pulvinar mattis nunc sed. Luctus accumsan tortor posuere ac ut consequat semper viverra. Fringilla ut morbi tincidunt augue interdum velit euismod.
+## Un lieu de prière et de recueillement
 
-## Lorem Ipsum
+Niché au cœur d'une magnifique palmeraie, le sanctuaire bénéficie d'un cadre naturel exceptionnel propice au ressourcement spirituel. Les infrastructures, soigneusement intégrées dans cet environnement verdoyant, offrent tout le confort nécessaire aux personnes en quête de recueillement et de méditation.
 
-Tristique senectus et netus et malesuada fames ac turpis. Ridiculous mus mauris vitae ultricies leo integer malesuada nunc vel. In mollis nunc sed id semper. Egestas tellus rutrum tellus pellentesque. Phasellus vestibulum lorem sed risus ultricies tristique nulla. Quis blandit turpis cursus in hac habitasse platea dictumst quisque. Eros donec ac odio tempor orci dapibus ultrices. Aliquam sem et tortor consequat id porta nibh. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla. Diam vulputate ut pharetra sit amet. Ut tellus elementum sagittis vitae et leo. Arcu non odio euismod lacinia at quis risus sed vulputate.
+## Services et activités
+
+Les retraitants viennent souvent en groupe le weekend, passants 2 nuits dans le sanctuaire du vendredi au dimanche. Sur demande uniquement actuellement, le service de messe peut etre assuré par le prêtre de Yakasseme, ou de tant en tant un prêtre de la [Communauté Saint Jean](https://www.facebook.com/p/Fr%C3%A8res-de-Saint-Jean-Abidjan-100064366852261/) (communauté d'abidjan [à la palmeraie](https://freres-saint-jean.org/ou-sommes-nous/afrique/cote-divoire/)), nous espérons dans un avenir proche pouvoir disposer un culte régulier, nous y travaillons.
+
+## Hébergement et accueil
+
+Pour les pèlerins souhaitant séjourner sur place, le sanctuaire dispose d'infrastructures d'accueil permettant de vivre une expérience spirituelle enrichissante dans un cadre adapté.
+
+Pour organiser votre visite ou obtenir plus d'informations sur les activités du sanctuaire, n'hésitez pas à contacter l'équipe d'accueil qui se fera un plaisir de vous accompagner dans votre démarche spirituelle.

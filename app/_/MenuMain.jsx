@@ -1,11 +1,12 @@
 import {useState, useContext, useEffect} from 'react'
 import Link from "next/link";
 import AuthContext from "../../stores/authContext.js"
+import { usePathname } from 'next/navigation';
 
 export default function MenuMain() {
 
     const {isAdmin, cartBox, isCartPage, mainmenu, menuActive, setMenuActive} = useContext(AuthContext)
-    
+    const pathname = usePathname();
     
     return <>
         <menu className="mainMenu">
@@ -13,9 +14,7 @@ export default function MenuMain() {
                 <li><Link href="/admin/school">ÉCOLE</Link></li>   
             </menu>} */}
             {
-                // mainmenu.map((item,i) => /*item.id!="accueil" &&*/ <li className={"menu "+item.id} key={"m1st___"+i}>
                 mainmenu.map((item,i) => item.id!="blog-bolobi" && <li className={"menu "+item.id} key={"m1st___"+i}>
-                {/* {console.log(item)} */}
                     <Link
                         href={item.href}
                         title={item.title}
@@ -33,6 +32,13 @@ export default function MenuMain() {
                 </li>
                 )
             }
+            {(pathname?.startsWith('/blog') || pathname?.startsWith('/posts')) && (
+                <li className="menu blog">
+                    <Link id="blog_menu" className="active" href="/blog">
+                        <span>Blog</span>
+                    </Link>
+                </li>
+            )}
         </menu>
     </>
 }

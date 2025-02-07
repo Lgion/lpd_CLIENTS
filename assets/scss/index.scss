@@ -861,6 +861,10 @@ body{
               color: $secondary_2;
               background: linear-gradient(135deg, $secondary_1_30 0%, #1F4EEA 46%, #1F4EEA 62%, $secondary_1_30 100%);
             }
+            &#blog_menu{
+              color: $purple;
+              background: linear-gradient(135deg, rgba(128, 0, 128, 0.3) 0%, pink 46%, pink 62%, rgba(128, 0, 128, 0.3) 100%);
+            }
           }
         }
       }

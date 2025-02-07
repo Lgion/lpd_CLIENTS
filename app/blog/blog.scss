@@ -10,8 +10,8 @@ $box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 $transition: all 0.3s ease;
 
 .blog-container {
-  max-width: 1200px;
-  margin: 0 2rem auto;
+  // max-width: 1200px;
+  // margin: 0 2rem auto;
   padding: 0 1.5rem 5em;
 
   .blog-header {
@@ -270,8 +270,8 @@ $transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  >section>section,>div{transition:opacity .4s;position: absolute;opacity: 0;width: 100%;height: 100%;left:0;}
-  &:hover>section>section,&:hover>div{opacity: 1;}
+  >section section,>div{transition:opacity .4s;position: absolute;opacity: 0;width: 100%;height: 100%;left:0;}
+  &:hover>section section,&:hover>div{opacity: 1;}
   &:hover>section>h4{display:none;}
   >section>h4{
     position: absolute;
@@ -282,12 +282,19 @@ $transition: all 0.3s ease;
     margin: 0;
     padding: .5em;
   }
-  >section>section{
+  >section section{
     background: rgba(255, 255, 255, .8);
     top: 0;
     left: 0;
-    height: 50%;
+    // height: 50%;
     padding: 1em;
+    .author{
+      display: flex;
+      border:solid;
+      p{
+        position: absolute;
+      }
+    }
   }
   >div{bottom:0;height: 100px;}
 
@@ -610,7 +617,7 @@ $transition: all 0.3s ease;
   }
 }
 
-.schoolPosts {
+.ndrPosts {
   h4 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;

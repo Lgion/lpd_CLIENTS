@@ -25,7 +25,7 @@ const BlogPost = ({
 }: Props) => {
   
   return (
-    <section className="schoolPosts">
+    <section className="ndrPosts">
       <h4 className="">
         <Link
           as={`/posts/${slug}`}
@@ -44,13 +44,13 @@ const BlogPost = ({
           width={1300}
           height={630}
         />
-      </Link>
       <section className="">
         <p className="">{excerpt}</p>
         <div>
           <Avatar name={author.name} picture={author.picture} date={date} />&nbsp;
         </div>
       </section>
+      </Link>
     </section>
   )
 }

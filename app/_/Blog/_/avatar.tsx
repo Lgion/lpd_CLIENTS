@@ -9,12 +9,16 @@ type Props = {
 
 const Avatar = ({ name, picture, date }: Props) => {
   return (
-    <Link href="#" className="author">
+    // <Link href="#" className="author">
+    <div className="author">
+
       <img src={picture} className="" alt={name} />
       Édité par&nbsp;
       <span className="">{name}</span>
       <p>Le&nbsp;<DateFormatter dateString={date} />&nbsp;</p>
-    </Link>
+      
+    </div>
+    // </Link>
   )
 }
 
