@@ -234,6 +234,11 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                 padding: 1rem;
                 background-color: #f8f9fa;
                 border-radius: 0.25rem;
+                width: 50%;
+                align-self: center;
+                border: 1px solid;
+                box-shadow: 0 0 10px 1px;
+                padding: 1em 3em;
             }
 
             .mealPlanOptions h5 {
@@ -266,7 +271,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                     <span>Repas Inclus 🍔 😋 🍲</span>
                     <i className="indicator">
                         <svg version="1.1" id="toggle" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 33 33" xmlSpace="preserve"
+                            viewBox="0 0 55 55" xmlSpace="preserve"
                         >
                             <path className="circ path" style={{ fill: "none", strokeWidth: 3, strokeLinejoin: "round", strokeMiterlimit: 10 }} d="M6.2,6.2L6.2,6.2
                     c-5.7,5.7-5.7,14.8,0,20.5l0,0c5.7,5.7,14.8,5.7,20.5,0l0,0c5.7-5.7,5.7-14.8,0-20.5l0,0C21.1,0.6,11.9,0.6,6.2,6.2z"

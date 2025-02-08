@@ -105,7 +105,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
                 document.querySelector("li"+(tmp&&"."+e.target.className)).click()
             })
         })
-        document.querySelector('fieldset.datepicker>article.dates>div').removeAttribute('style')
+        document.querySelector('fieldset.recap>article.dates>div').removeAttribute('style')
 
         // Initialiser les dates avec la semaine courante
         const e = { target: document.querySelector('li.on') };

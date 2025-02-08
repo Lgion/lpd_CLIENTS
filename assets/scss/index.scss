@@ -2875,7 +2875,7 @@ body{
             background: white;
             border-bottom-color: $secondary;
             transition:all .2s;
-            // padding-bottom: 4em;
+            padding-bottom: 4em;
             &:hover{
               border: 0 solid $secondary;
               border-width: 0 5px;
@@ -2886,7 +2886,7 @@ body{
               &.active{
                 border: solid $secondary;
                 border-width: 0 10px;
-                padding-bottom: 4em;
+                // padding-bottom: 4em;
                 &:hover{
                   box-shadow: 0 0px 10px 5px $secondary;
                   border-radius: 8px;
@@ -3049,6 +3049,16 @@ body{
               }
             }
             &.meal{
+              display: flex;
+              justify-content: center;
+              flex-flow: column;
+              >h4{}
+              >h5{}
+              >section{
+                display: flex !important;
+                justify-content: center;
+                >label{overflow: hidden;}
+              }
               >ul{
                 width: 100%;
                 margin:1em 0;
@@ -3105,6 +3115,10 @@ body{
                         flex-basis:100%;
                         >label{
                           width: 50%;
+                          @include mobile-and-tablette{
+                            width: 100%;
+                            font-size:large;
+                          }
                           border: solid;
                           align-self: center;
                           padding: 1em;
@@ -3296,11 +3310,11 @@ body{
             width: 100%;
             padding: 1em 3em !important;
             >input{
-              background: #1F4EEA;
+              background: $secondary;;
               color: white;
             }
           }
-          &.datepicker{
+          &.recap{
             display: flex;
             justify-content: center;
             gap: 1em;
@@ -3308,12 +3322,29 @@ body{
             position: relative;
             width:100%;
             text-align: center;
-            &:not(#pound){@extend %recap;}
+            &:not(.active){
+              min-height: auto !important;
+              margin: 1em 0;
+              >h4{padding:1em 0 !important;}
+              >*:not(h4){
+                display: none;
+              }
+            }
+            &.active:not(#pound){@extend %recap;}
             @include mobile-and-tablette{
               justify-content: center;
             }
             @include from-desktop{
               min-height: 500px;
+            }
+            >h4{
+              padding: 1em 0;
+              >button{
+                padding: 1em;
+                background: $secondary;;
+                border-radius: 5px;
+                color: white;
+              }
             }
             >div{
               @include from-desktop{
@@ -3371,6 +3402,7 @@ body{
             align-items: center;
             .payment-details{
               @extend %recap;
+              padding: 2em !important;
               width: 100%;
             }
           }
