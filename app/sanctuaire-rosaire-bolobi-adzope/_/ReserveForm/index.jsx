@@ -87,7 +87,7 @@ export default function ReserveForm() {
         document.querySelector("li"+(tmp&&"."+e.target.className)).click()
       })
     })
-    document.querySelector('fieldset.datepicker>article.dates>div').removeAttribute('style')
+    document.querySelector('fieldset.recap>article.dates>div').removeAttribute('style')
   }, [])
   useEffect(()=>{
     loadRadios()

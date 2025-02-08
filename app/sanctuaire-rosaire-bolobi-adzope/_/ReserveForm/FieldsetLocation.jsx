@@ -86,7 +86,7 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
             </div>
 
             <label htmlFor="chambre" className="radioLabel safe">
-                <span>Chambre Individuel <b>(<b>10000Fcfa</b>/personne la nuité)</b></span>
+                <span>Chambre Individuel <b>(<b>10000Fcfa</b> la nuité)</b></span>
                 <div>
                     <input 
                         id="individual_room_participants" 
