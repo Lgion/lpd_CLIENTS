@@ -53,7 +53,7 @@ export default function Resume({dateRange,setDateRange,onChange}) {
 
 
     return <fieldset className="recap">
-        <h4><button onClick={e=>{e.target.parentNode.parentNode.classList.toggle('active')}}>RÉCAPITULATIF</button></h4>
+        <h4><button type="button" onClick={e=>{e.target.parentNode.parentNode.classList.toggle('active')}}>RÉCAPITULATIF</button></h4>
         <article className="type card">
             <h5>Type de <b>réservation</b>:</h5>
             <b>🚫</b>
