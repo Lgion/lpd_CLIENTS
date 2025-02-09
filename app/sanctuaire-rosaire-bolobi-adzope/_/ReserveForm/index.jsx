@@ -137,6 +137,7 @@ export default function ReserveForm() {
   async function handleSubmit(e){
     e.preventDefault();
     setIsSubmitting(true);
+                          document.querySelectorAll('section.on fieldset').forEach(fs => fs.classList.add('active'));
 
     // Créer un timeout de 10 secondes
     const timeout = setTimeout(() => {
@@ -393,7 +394,7 @@ export default function ReserveForm() {
       </fieldset>
 
 
-      </form>}
+    </form>}
 
     {isFormValidated && <section className={`validated ${isFormValidated ? 'show' : ''}`}>
       {isFormValidated && <ValidationSection reservationData={reservationData} />}

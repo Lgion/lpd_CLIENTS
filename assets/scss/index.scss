@@ -420,7 +420,8 @@ body>div[data-floating-ui-portal]{
     border-radius: 25px;
     padding: 5px;
     width: fit-content;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid;
+    box-shadow: 0 0 5px 1px inset;
 
     input[type="number"] {
         -webkit-appearance: textfield;
@@ -442,6 +443,7 @@ body>div[data-floating-ui-portal]{
 
     button {
         background-color: #007bff;
+        padding-top: 5px;
         border: none;
         color: white;
         font-size: 20px;
@@ -2797,11 +2799,16 @@ body{
             border-bottom: none;
             border-radius: 5px 5px 0 0;
             box-shadow: 0 0 10px 1px inset;
+            flex-flow: nowrap;
+            position: relative;
             &:not(#un):not(#deux){
-              padding: 1em !important;
+              padding: 2em !important;
             }
           }
           >p{
+            position: absolute;
+            &:first-of-type{top: 0;}
+            &:last-of-type{bottom: -1em;}
             width:100%;
             text-align: center;
             text-decoration: underline;
@@ -2824,18 +2831,28 @@ body{
               box-shadow: 0 0 5px 1px;
               color:black
               >a:hover{font-weight: bolder;}
+              >a{
+                width: 150px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              }
             }
             >a{
-              color:white;
-              text-shadow: 0 0px 3px $secondary_1;
+              padding: 0 .5em;
+              color: black;
+              font-weight: bold;
+              // text-shadow: 0 0px 3px $secondary_1;
               // &:hover{font-weight: bolder;}
               >svg{ 
                 width: 16px; height: 16px;
                 color:$secondary;
                 transform:scale(2);
-                margin-right:.5em;
+                // margin-right:.5em;
               }
+              >span{margin-left:.5em;}
             }
+            &:not(:hover):not(.active) span{display: none;}
           }
         }
         >section{
@@ -2859,7 +2876,7 @@ body{
             width: 100%;
             >fieldset{
               &:not(.active){
-                display:none;
+                display:none !important;
               }
             }
             +#show_image{
@@ -3142,6 +3159,9 @@ body{
                       }
                       &.approxim-number-input{
                         flex-basis: 55%;
+                        @include mobile-and-tablette{
+                          flex-basis:100%;
+                        }
                         >div{
                           >label{
                             &:hover{border:solid blue;border-width:0 0 3px 3px;}

@@ -99,8 +99,8 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                             onIndividualRoomChange(e.target.value)
                         }} 
                     />
+                    <label htmlFor="individual_room_participants">chambres</label>
                 </div>
-                <label htmlFor="individual_room_participants">chambres</label>
             </label>
         </section>
     </>
