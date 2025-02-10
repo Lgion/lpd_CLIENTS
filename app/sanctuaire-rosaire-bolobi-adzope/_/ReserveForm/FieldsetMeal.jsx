@@ -8,7 +8,7 @@ const mealOptions = {
     dinner: ["APF", "Tchep", "Kedjenou"]
 };
 
-export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, onMealPlanChange, onCustomMealChange}) {
+export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, onMealPlanChange, onCustomMealChange, handleFieldsetValidation}) {
     const [isMealIncluded, setIsMealIncluded] = useState(false);
     const [mealPlan, setMealPlan] = useState(""); 
     const [customMeal, setCustomMeal] = useState({
@@ -296,6 +296,15 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                     {dinnerColumn}
                 </div>
             )}
+            <button 
+              className="validate-button"
+              onClick={(e) => {
+                e.preventDefault();
+                handleFieldsetValidation('meal');
+              }}
+            >
+              Valider
+            </button>
         </fieldset>
     </>
 }

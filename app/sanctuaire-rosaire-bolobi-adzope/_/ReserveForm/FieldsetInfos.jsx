@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import { FaUser, FaPhone, FaEnvelope, FaBuilding } from 'react-icons/fa';
 import { SignInButton,SignedOut,useUser } from "@clerk/nextjs"
 
-export default function FieldsetInfos({ toggleFormNdrImg }) {
+export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidation }) {
     const [infos, setInfos] = useState({
         community: '',
         names: '',
@@ -67,7 +67,6 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                         type="text" 
                         className="form-control" 
                         id="community" 
-                        required 
                         name="community" 
                         value={infos.community}
                         onChange={handleInputChange}
@@ -83,7 +82,6 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                         className="form-control" 
                         id="names" 
                         name="names" 
-                        required 
                         value={infos.names}
                         onChange={handleInputChange}
                     />
@@ -99,7 +97,6 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                         // pattern="/^(\+225)?\d{8}$/" 
                         id="phone_number" 
                         name="phone_number" 
-                        required 
                         value={infos.phone_number}
                         onChange={handleInputChange}
                     />
@@ -107,19 +104,53 @@ export default function FieldsetInfos({ toggleFormNdrImg }) {
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label d-flex align-items-center">
                         <FaEnvelope className="me-2" />
-                        Email de contact
+                        Email de contact <span className="text-danger">*</span>
                     </label>
                     <input 
                         type="email" 
                         className="form-control" 
                         id="email" 
-                        required 
                         name="email" 
                         value={infos.email}
                         onChange={handleInputChange}
                     />
                 </div>
             </div>
+            <button 
+              className="validate-button"
+              onClick={(e) => {
+                e.preventDefault();
+                
+                const names = document.querySelector('#names')?.value?.trim();
+                const phone = document.querySelector('#phone_number')?.value?.trim();
+                const email = document.querySelector('#email')?.value?.trim();
+                
+                // Vérifier si le nom est rempli
+                if (!names) {
+                  alert('Veuillez entrer votre nom');
+                  return;
+                }
+                
+                // Vérifier si le numéro de téléphone est valide
+                const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+                if (!phone || !phoneRegex.test(phone)) {
+                  alert('Veuillez entrer un numéro de téléphone valide');
+                  return;
+                }
+                
+                // Vérifier si l'email est valide
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                  alert('Veuillez entrer une adresse email valide');
+                  return;
+                }
+                
+                // Si toutes les validations passent
+                handleFieldsetValidation('infos');
+              }}
+            >
+              Valider
+            </button>
             <div className="cross-image d-none d-lg-block">
             </div>
         </fieldset>

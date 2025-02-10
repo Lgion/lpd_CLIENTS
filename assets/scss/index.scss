@@ -3,6 +3,8 @@
 
 @import "../../app/blog/blog.scss";
 
+@import "./style.scss";
+
 $void_gray: #c9ded6;
 
 // @font-face {
@@ -2802,18 +2804,19 @@ body{
             flex-flow: nowrap;
             position: relative;
             &:not(#un):not(#deux){
-              padding: 2em !important;
+              padding: 4em 2em !important;
             }
           }
           >p{
             position: absolute;
             &:first-of-type{top: 0;}
-            &:last-of-type{bottom: -1em;}
+            &:last-of-type{top: 2em;}
             width:100%;
             text-align: center;
             text-decoration: underline;
           }
           >li{
+            position: relative;
             padding:.5em;
             border: 1px solid;
             border-radius: 3px;
@@ -2823,19 +2826,55 @@ body{
             cursor:pointer;
             &:not(:hover):not(.active){
               opacity:.7;
+              span{
+                // display: none;
+              }
             }
             &:hover,&.active{
               background: $secondary_2;
               border-width: 3px;
               border-color: $secondary_1;
               box-shadow: 0 0 5px 1px;
-              color:black
+              color:black;
+              z-index: 2;
+              box-shadow: 0 0 10px .25em $secondary;
+
               >a:hover{font-weight: bolder;}
               >a{
-                width: 150px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                // width: 150px;
+                // display: flex;
+                // justify-content: space-between;
+                // align-items: center;
+              }
+              span{
+                color: $secondary;
+              }
+            }
+            &.active {
+              >a{
+                font-size: 1.2em;
+              }
+              svg{
+              }
+              span{
+                width: 125px;
+                left: -30px;
+              }
+            }
+            &.validated {
+              border-color: springgreen !important;
+              box-shadow: 0 0 10px 0.25em springgreen !important;
+              svg{
+                color: palegreen;
+              }
+              span{
+                background-color: limegreen !important;;
+                color: white !important;
+              }
+            }
+            &.invalidated:not(.active) {
+              span{
+                background-color: red;
               }
             }
             >a{
@@ -2850,9 +2889,27 @@ body{
                 transform:scale(2);
                 // margin-right:.5em;
               }
-              >span{margin-left:.5em;}
+              >span{
+                position: absolute;
+                bottom: -1.5em;
+                left: -0.5em;
+                border: 1px solid;
+                width: calc(1em + 60px);
+                text-align: center;
+                border-radius: 0 0 5px 5px;
+                background: silver;
+              }
             }
-            &:not(:hover):not(.active) span{display: none;}
+          }
+          >div{
+            position: absolute;
+            bottom: 0;
+            font-size: 1.5em;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color:white;
+            text-shadow: 0 0 3px black;
           }
         }
         >section{

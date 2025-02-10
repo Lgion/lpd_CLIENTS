@@ -5,7 +5,7 @@ import moment from "moment"
 
 moment.locale('fr')
 
-export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiffDuAu}) {
+export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiffDuAu, handleFieldsetValidation}) {
     const [isWeek, setIsWeek] = useState(false)
     , onFocus = e => e.target.showPicker()
     , onChange = e => {
@@ -121,9 +121,9 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         
         <div>
             <label htmlFor="du"><span></span></label>
-            <input type="date" id="du" name="du" {...{onChange, onFocus}} required />
+            <input type="date" id="du" name="du" {...{onChange, onFocus}} />
             <label htmlFor="au"><span></span></label>
-            <input type="date" id="au" name="au" {...{onChange, onFocus}} required />
+            <input type="date" id="au" name="au" {...{onChange, onFocus}} />
         </div>
 
         <ul onMouseOver={e => {e.target.querySelector('li.on')?.scrollIntoView({ behavior: "smooth", block: "center"})}}>
@@ -139,5 +139,31 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
             )}
         </ul>
         <div>Nombre de nuits: <b>0</b></div>
+        <button 
+          className="validate-button"
+          onClick={(e) => {
+            e.preventDefault();
+            
+            const dateDebut = document.querySelector('#du')?.value;
+            const dateFin = document.querySelector('#au')?.value;
+            
+            // Vérifier si les deux dates sont remplies
+            if (!dateDebut || !dateFin) {
+              alert('Veuillez sélectionner les dates de début et de fin');
+              return;
+            }
+            
+            // Vérifier si la date de fin est après la date de début
+            if (new Date(dateFin) <= new Date(dateDebut)) {
+              alert('La date de fin doit être après la date de début');
+              return;
+            }
+            
+            // Si tout est valide, appeler handleFieldsetValidation
+            handleFieldsetValidation('dates');
+          }}
+        >
+          Valider
+        </button>
     </fieldset>
 }

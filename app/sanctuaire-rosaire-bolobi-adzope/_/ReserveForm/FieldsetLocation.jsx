@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants}) {
+export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants, handleFieldsetValidation}) {
     const [isnotZeroParticipant, setIsnotZeroParticipant] = useState(0)
     const [isApproximateCount, setIsApproximateCount] = useState(false)
 
@@ -103,5 +103,37 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                 </div>
             </label>
         </section>
+        <button 
+          className="validate-button"
+          onClick={(e) => {
+            e.preventDefault();
+            
+            const totalParticipants = parseInt(document.querySelector('#participants')?.value || '0');
+            const individualRooms = parseInt(document.querySelector('#individual_room_participants')?.value || '0');
+            
+            // Vérifier si le nombre total de participants est valide
+            if (totalParticipants <= 0) {
+              alert('Le nombre total de participants doit être supérieur à 0');
+              return;
+            }
+            
+            // Vérifier si le nombre de chambres individuelles est valide
+            if (individualRooms < 0) {
+              alert('Le nombre de chambres individuelles ne peut pas être négatif');
+              return;
+            }
+            
+            // Vérifier si le nombre de chambres individuelles n'excède pas le nombre total de participants
+            if (individualRooms > totalParticipants) {
+              alert('Le nombre de chambres individuelles ne peut pas être supérieur au nombre total de participants');
+              return;
+            }
+            
+            // Si toutes les validations passent
+            handleFieldsetValidation('location');
+          }}
+        >
+          Valider
+        </button>
     </>
 }

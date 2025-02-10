@@ -3,7 +3,7 @@
 
 
 
-export default function FieldsetType({toggleFormNdrImg}) {
+export default function FieldsetType({toggleFormNdrImg, handleFieldsetValidation}) {
     <p>Nous vous proposons 2 types générales de réservations, la prière ou le recueillement, chacun sous 3 formes: </p>
     return <>
         <h4 onClick={toggleFormNdrImg}>Quel type d'évènement souhaitez vous organiser à Bolobi ? </h4>
@@ -39,5 +39,24 @@ export default function FieldsetType({toggleFormNdrImg}) {
                 <span>Vacances / long séjour <span>(maximum 2 mois)</span></span>
             </label>
         </section>
+        <button 
+          className="validate-button"
+          onClick={(e) => {
+            e.preventDefault();
+            
+            // Vérifier si un type de réservation est sélectionné
+            const typeReservation = document.querySelector('input[name="type_reservation"]:checked');
+            
+            if (!typeReservation) {
+              alert('Veuillez sélectionner un type de réservation');
+              return;
+            }
+            
+            // Si un type est sélectionné, valider le fieldset
+            handleFieldsetValidation('type');
+          }}
+        >
+          Valider
+        </button>
     </>
 }

@@ -1,5 +1,5 @@
-@import "./main.scss";
-@import "./index.scss";
+// @import "./main.scss";
+// @import "./index.scss";
 
 /*
      CE DOCUMENT EST POUR LES PERSONNES QUI DEVRONT COLLABORER AU PROJET, 
@@ -8,5 +8,31 @@
 
 
 
-
-
+// Style du bouton de validation
+.validate-button {
+  display: none; // Caché par défaut sur desktop
+  
+  @include mobile-and-tablette {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: darken(#007bff, 10%);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}

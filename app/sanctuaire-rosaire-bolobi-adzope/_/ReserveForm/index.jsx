@@ -22,11 +22,23 @@ export default function ReserveForm() {
   const [isFormValidated, setIsFormValidated] = useState(false);
   const [reservationData, setReservationData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isActive, setIsActive] = useState("dates")
 
   const [participants, setParticipants] = useState(1);
   const [individualRoomParticipants, setIndividualRoomParticipants] = useState(0);
   const [mealPlan, setMealPlan] = useState(0);
   const [customMealData, setCustomMealData] = useState(null);
+
+  // State pour suivre la validation des fieldsets
+  const [fieldsetsValidation, setFieldsetsValidation] = useState({
+    dates: false,
+    type: false,
+    location: false,
+    meal: false,
+    infos: false
+  });
+
+  // Fonction pour mettre à jour la validation d'un fieldset
 
   // Gestionnaires pour les changements
   const handleParticipantsChange = (value) => {
@@ -125,6 +137,71 @@ export default function ReserveForm() {
       onChange([new Date(du.value),new Date(au.value)])
     }
   }
+  , handleFieldsetValidation = (fieldsetName) => {
+    setFieldsetsValidation(prev => {
+      console.log(prev);
+      console.log(Object.keys(prev));
+      
+      const currentIndex = Object.keys(prev).findIndex(elt=>elt===fieldsetName)
+      , nextFieldsetName = Object.keys(prev)[currentIndex+1]
+      , nextFieldsetEventLikeObject = {target: document.querySelector(`.bolobiForm_choices .${nextFieldsetName}`)}
+      console.log(currentIndex);
+      console.log(Object.keys(prev)[currentIndex+1]);
+      console.log(nextFieldsetEventLikeObject);
+      
+      
+      if(nextFieldsetEventLikeObject.target)onClickMobileChoices(nextFieldsetEventLikeObject)
+      else{
+        if(Object.values(fieldsetsValidation).filter(el=>!!!el).length==0)
+          recapitulatif.scrollIntoView({ behavior: "smooth", block: "start" })
+        else
+          bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+      
+      return {
+        ...prev,
+        [fieldsetName]: true
+      }
+    });
+  }
+  , onClickMobileChoices = e => {
+    // console.log(item.textContent==e.target.textContent)
+    // console.log(item.textContent)
+    // console.log(e.target.textContent)
+
+    // if (e.target.nodeName == "LI" || e.target.nodeName == "A") {
+console.log(e);
+
+        // POUR ACTIVER LE LI CORRESPONDANT
+        let lis = Array.from(e.target.closest('ul').querySelectorAll('li'))
+        , f = Array.from(bolobiForm.querySelectorAll('fieldset'))
+        , li = lis.find((item, i) => {
+          console.log(item, " yyy ", e.target.closest('li'));
+          console.log(item.textContent, " xxx ", e.target.closest('li').textContent);
+          
+          return item.textContent == e.target.closest('li').textContent
+        })
+        console.log(li)
+        lis.forEach((item, i) => item.classList.remove('active'))
+        li.classList.add('active')
+        f.forEach((item, i) => item.classList.remove('active'))
+
+        console.log(li);
+        
+
+
+        // POUR ACTIVER LE FIELDSET CORRESPONDANT
+        const fieldsetClassName = e.target.closest('li')?.className.split(' ')[0]
+        console.log(fieldsetClassName)
+        document.querySelector("fieldset.active")?.classList.remove("active")
+        document.querySelector("fieldset." + fieldsetClassName).className = "active " + document.querySelector("fieldset." + fieldsetClassName).className
+
+    // }
+    
+    const isActiveValue = e.target.closest('li').className.split(" ")[0]
+    setIsActive(isActiveValue)
+    
+  }
   /*
   const [startDate, setStartDate] = useState(new Date())
   , [endDate, setEndDate] = useState(null)
@@ -134,10 +211,29 @@ export default function ReserveForm() {
     setEndDate(end);
   }
   */
+  async function handleEmptyInputsChecking(e){
+    console.log(document.querySelectorAll('section.on fieldset'));
+    document.querySelectorAll('section.on fieldset').forEach(fs => fs.classList.add('active'));
+
+      // Récupérer tous les champs requis
+      const requiredFields = Array.from(document.querySelectorAll('[required]'));
+
+      // Filtrer les champs vides et créer un rapport détaillé
+      const invalidFields = requiredFields.filter(field => !field.value.trim()).map(field => ({
+        id: field.id,
+        name: field.name,
+        type: field.type,
+        fieldset: field.closest('fieldset')?.className.split(' ')[0] || 'unknown'
+      }));
+  }
   async function handleSubmit(e){
+    alert('ok')
     e.preventDefault();
     setIsSubmitting(true);
-                          document.querySelectorAll('section.on fieldset').forEach(fs => fs.classList.add('active'));
+    
+    ////// GÉRER LES CHAMPS VIDES
+    // handleEmptyInputsChecking()
+    
 
     // Créer un timeout de 10 secondes
     const timeout = setTimeout(() => {
@@ -301,6 +397,7 @@ export default function ReserveForm() {
       // Ici vous pourriez ajouter une gestion d'erreur plus détaillée
     }
   }
+  
 
   return <>
     <Intro {...{sommaire,titreH3}} />
@@ -314,27 +411,37 @@ export default function ReserveForm() {
     {!isFormValidated && <form 
       onSubmit={handleSubmit} 
       id="bolobiForm"
+      noValidate
       className={isFormValidated ? 'form-validated' : ''}
     >
-      <MobileChoices />
+      <MobileChoices {...{onClickMobileChoices,isActive,fieldsetsValidation}} />
 
       <section
         className = { formNdrToggleImg && "on" }
       >
 
-        <FieldsetDate {...{handleDateChange,toggleFormNdrImg,dateDiffDuAu}} />
+        <FieldsetDate 
+          handleDateChange={handleDateChange}
+          toggleFormNdrImg={toggleFormNdrImg}
+          dateDiffDuAu={dateDiffDuAu}
+          handleFieldsetValidation={handleFieldsetValidation}
+        />
 
         <FieldsetRadioStyled id="type" className="type">
-          <FieldsetType {...{toggleFormNdrImg}} />
+          <FieldsetType 
+            toggleFormNdrImg={toggleFormNdrImg}
+            handleFieldsetValidation={handleFieldsetValidation}
+          />
         </FieldsetRadioStyled>
 
         <FieldsetRadioStyled id="location" className="location">
-          <FieldsetLocation 
+          <FieldsetLocation
             toggleFormNdrImg={toggleFormNdrImg}
             onParticipantsChange={handleParticipantsChange}
             onIndividualRoomChange={handleIndividualRoomChange}
             participants={participants}
             individualRoomParticipants={individualRoomParticipants}
+            handleFieldsetValidation={handleFieldsetValidation}
           />
           
           {/* <hr />
@@ -359,14 +466,18 @@ export default function ReserveForm() {
 
         </FieldsetRadioStyled>
         
-        <FieldsetMeal 
+        <FieldsetMeal
           SectionCheckboxStyled={SectionCheckboxStyled}
           toggleFormNdrImg={toggleFormNdrImg}
           onMealPlanChange={handleMealPlanChange}
           onCustomMealChange={handleCustomMealChange}
+          handleFieldsetValidation={handleFieldsetValidation}
         />
         
-        <FieldsetInfos {...{toggleFormNdrImg}} />
+        <FieldsetInfos 
+          toggleFormNdrImg={toggleFormNdrImg}
+          handleFieldsetValidation={handleFieldsetValidation}
+        />
 
       </section>
 
