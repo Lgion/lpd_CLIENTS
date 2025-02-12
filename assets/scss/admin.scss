@@ -1,7 +1,3 @@
-
-
-
-
 body{
         >header{}
         >main{
@@ -184,4 +180,84 @@ body{
             }
         }
         >footer{}
+}
+.ant-modal-close{
+    background-color: red !important;
+    transition: background .1s;
+    &:hover{
+        background: orangered !important;
+        color:white !important;
+    }
+}
+body>div:has(.ant-modal-root){
+    z-index: 100;
+}
+.ant-modal-root{
+    >.ant-modal-wrap{
+        margin: 0 2em;
+        overflow: hidden !important;
+        top: 0;
+    }
+}
+.ant-modal{
+    // padding-bottom:10em;
+    height: 100%;
+    width: 100% !important;
+    top: 0 !important;
+    >div{
+        height: 100%;
+        >.ant-modal-content{
+            height: 100%;
+            >div{
+                background: whitesmoke !important;
+                    box-shadow: 0 0 10px 1px inset;
+                    padding: 1em;
+                    display: flex;
+                    flex-flow: wrap;
+                    gap: 1em;
+                    justify-content: center;
+                &.ant-modal-body{
+                    height: 80%;
+                    overflow: scroll;
+                }
+            }
+        }
+
+    }
+}
+.reservation-details {
+  .detail-section {
+    margin-bottom: 24px;
+    padding: 16px;
+    // background-color: #fafafa;
+    border-radius: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      margin: 0 0 16px 0;
+      color: #1890ff;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 8px 0;
+      color: rgba(0, 0, 0, 0.85);
+
+      strong {
+        margin-right: 8px;
+        color: rgba(0, 0, 0, 0.65);
+      }
+    }
+  }
+}
+
+// Style pour rendre les lignes du tableau cliquables
+.ant-table-tbody > tr {
+  &:hover {
+    background-color: #e6f7ff !important;
+  }
 }
