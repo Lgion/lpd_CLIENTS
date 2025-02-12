@@ -34,6 +34,8 @@ export default function Hgroup() {
             break;
             case "bolobi":setImageContextuelMenu([bolobi])
             break;
+            case "blog-bolobi"://setImageContextuelMenu([bolobi])
+            break;
             default: setImageContextuelMenu([accueil])
         }
         setTimeout(handleTimeout, 5000)

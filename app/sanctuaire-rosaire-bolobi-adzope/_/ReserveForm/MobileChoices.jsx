@@ -6,11 +6,11 @@ import { faCalendarDays, faChurch, faUsers, faUtensils, faIdCard, faCreditCard }
 
 export default function MobileChoices({ onClickMobileChoices: onClick, isActive, fieldsetsValidation }) {
     const menuItems = [
-        { className: "dates", label: "Dates", icon: faCalendarDays, titre: "Choisir une date" },
+        { className: "infos", label: "Contact", icon: faIdCard, titre: "Informations de contact" },
         { className: "type", label: "Évènement", icon: faChurch, titre: "Choisir un évènement" },
+        { className: "dates", label: "Dates", icon: faCalendarDays, titre: "Choisir une date" },
         { className: "location", label: "Nombre", icon: faUsers, titre: "Choisir nombre participants" },
         { className: "meal", label: "Repas", icon: faUtensils, titre: "Choisir le repas" },
-        { className: "infos", label: "Contact", icon: faIdCard, titre: "Informations de contact" },
         // { className: "payment", label: "Paiement", icon: faCreditCard }
     ]
     , activeTitleToShow = menuItems.find(item => item.className.split(" ")[0] === isActive)?.titre

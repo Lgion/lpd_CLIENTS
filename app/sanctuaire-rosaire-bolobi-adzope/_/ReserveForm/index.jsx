@@ -22,7 +22,7 @@ export default function ReserveForm() {
   const [isFormValidated, setIsFormValidated] = useState(false);
   const [reservationData, setReservationData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isActive, setIsActive] = useState("dates")
+  const [isActive, setIsActive] = useState("infos")
 
   const [participants, setParticipants] = useState(1);
   const [individualRoomParticipants, setIndividualRoomParticipants] = useState(0);
@@ -419,11 +419,9 @@ console.log(e);
       <section
         className = { formNdrToggleImg && "on" }
       >
-
-        <FieldsetDate 
-          handleDateChange={handleDateChange}
+        
+        <FieldsetInfos 
           toggleFormNdrImg={toggleFormNdrImg}
-          dateDiffDuAu={dateDiffDuAu}
           handleFieldsetValidation={handleFieldsetValidation}
         />
 
@@ -433,6 +431,13 @@ console.log(e);
             handleFieldsetValidation={handleFieldsetValidation}
           />
         </FieldsetRadioStyled>
+
+        <FieldsetDate 
+          handleDateChange={handleDateChange}
+          toggleFormNdrImg={toggleFormNdrImg}
+          dateDiffDuAu={dateDiffDuAu}
+          handleFieldsetValidation={handleFieldsetValidation}
+        />
 
         <FieldsetRadioStyled id="location" className="location">
           <FieldsetLocation
@@ -473,11 +478,11 @@ console.log(e);
           onCustomMealChange={handleCustomMealChange}
           handleFieldsetValidation={handleFieldsetValidation}
         />
-        
-        <FieldsetInfos 
-          toggleFormNdrImg={toggleFormNdrImg}
-          handleFieldsetValidation={handleFieldsetValidation}
-        />
+
+        <fieldset>
+          <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendrons compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
+          <textarea name="message" cols="30" rows="10"></textarea>
+        </fieldset>
 
       </section>
 
@@ -485,13 +490,13 @@ console.log(e);
         id="show_image" 
       />
 
+      <fieldset className="submit">
+        <input type="submit" value="Réserver" />
+      </fieldset>
+
+
       {/* https://github.com/Hacker0x01/react-datepicker/ */}
       <Resume {...{dateRange,setDateRange,onChange}} />
-
-      <fieldset>
-        <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendrons compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
-        <textarea name="message" cols="30" rows="10"></textarea>
-      </fieldset>
 
       <FieldsetPayment 
         participants={participants}
@@ -499,10 +504,6 @@ console.log(e);
         dateDiffDuAu={dateDiffDuAu}
         mealPlan={mealPlan}
       />
-
-      <fieldset className="submit">
-        <input type="submit" value="Réserver" />
-      </fieldset>
 
 
     </form>}

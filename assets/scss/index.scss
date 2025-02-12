@@ -2925,7 +2925,8 @@ body{
             &.on{
               width:100%;
               &~#show_image{
-                width: 0;
+                // width: 0;
+                display: none;
               }
             }
           }
@@ -2949,7 +2950,8 @@ body{
             background: white;
             border-bottom-color: $secondary;
             transition:all .2s;
-            padding-bottom: 4em;
+            padding-bottom: 3em;
+            // padding-bottom: 4em;
             &:hover{
               border: 0 solid $secondary;
               border-width: 0 5px;
@@ -3058,11 +3060,56 @@ body{
                     margin: 0 2em;
                   }
                 }
+                &.zero_night_box{
+                  background:whitesmoke;
+                  width: 100%;
+                  border:solid;
+                  border-radius: 5px;
+                  margin:.5em;
+                  padding:1em;
+                  margin-bottom: 2em;
+                  box-shadow: 0 0 5px 1px;
+                  >p{
+                    text-align: center;
+                    >u{
+                      font-weight: bold;
+                    }
+                  }
+                  >div{
+                    width: 100%;
+                    // display: flex;
+                    justify-content: center;
+                    &:has(input#zero_night:checked){
+                      +div{
+                        display: flex;
+                      }
+                    }
+                    +div{
+                      display: none;
+                    }
+                  }
+                  &:has(input:checked){
+                    +div,~ul{
+                      display: none;
+                    }
+                  }
+                }
                 input{
-                  position:absolute;
-                  width: 0;
-                  height: 0;
-                  padding: 0;
+                  &.safe{
+                    height: 3em !important;
+                    &#zero_night{
+                      box-shadow: none;
+                      &:checked{
+                        color:red;
+                      }
+                    }
+                  }
+                  &:not(.safe){
+                    position:absolute;
+                    width: 0;
+                    height: 0;
+                    padding: 0;
+                  }
                 }
                 label{
                   position: relative;
@@ -3079,6 +3126,7 @@ body{
                     left: -2em;
                     border:1px dotted;
                   }
+                  &:has(+input#le):before{content:"LE";}
                   &:first-of-type:before{content:"DU";}
                   &:last-of-type:before{content:"AU";}
                   &:after{
@@ -3382,10 +3430,14 @@ body{
           }
         }
         >fieldset{
-          &:last-of-type{
+          &.submit{
             display: flex;
             width: 100%;
             padding: 1em 3em !important;
+            margin: 2em;
+    font-size: 2em;
+    border: 15px double blue;
+    border-radius: 10px;
             >input{
               background: $secondary;;
               color: white;

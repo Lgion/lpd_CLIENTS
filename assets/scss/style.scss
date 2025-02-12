@@ -26,6 +26,8 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 50%;
+    margin: 0 auto;
     
     &:hover {
       background-color: darken(#007bff, 10%);

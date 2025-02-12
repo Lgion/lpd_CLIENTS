@@ -114,10 +114,19 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         }
     }, [])
     
-    return <fieldset className="active dates">
+    return <fieldset className="dates">
         <h4 onClick={toggleFormNdrImg}>Choisir une période (du DD/MM/YYYY au DD/MM/YYYY): </h4>
         
         <p>Vous pouvez choisir une tranche de dates de votre spécifique, ou alors sélectionner un numéro de semaine (cas fréquent pour les retraites de groupe)</p>
+        
+        <div className="zero_night_box">
+            <p>SI VOUS NE RÉSERVEZ <u>AUCUNE NUÎTÉ</u>, ALORS <u>COCHEZ CETTE CASE</u>:</p>
+            <div><input type="checkbox" className="safe" name="zero_night" id="zero_night" /></div>
+            <div>                
+                <label htmlFor="le"><span></span></label>
+                <input type="date" id="le" name="le" />
+            </div>
+        </div>
         
         <div>
             <label htmlFor="du"><span></span></label>

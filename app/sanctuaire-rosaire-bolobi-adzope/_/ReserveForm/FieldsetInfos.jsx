@@ -43,7 +43,7 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
     };
 
     return (
-        <fieldset className="infos card mb-4 position-relative">
+        <fieldset className="active infos card mb-4 position-relative">
             {/* {JSON.stringify(infos)} */}
             <h4 className="mb-0">Informations générales</h4>
             <h5>Nous attendrons le <b>paiment wave</b> ou <b>OrangeMoney</b> via le numéro ci-mentionné,</h5>
