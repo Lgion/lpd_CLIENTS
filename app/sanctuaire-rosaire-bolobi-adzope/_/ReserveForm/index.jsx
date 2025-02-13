@@ -138,6 +138,7 @@ export default function ReserveForm() {
     }
   }
   , handleFieldsetValidation = (fieldsetName) => {
+    location.href = "/sanctuaire-rosaire-bolobi-adzope#bolobiForm_choices_ul"
     setFieldsetsValidation(prev => {
       console.log(prev);
       console.log(Object.keys(prev));

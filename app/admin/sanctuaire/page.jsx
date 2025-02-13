@@ -37,18 +37,58 @@ export default function ReservationManager() {
     fetchReservations()
   }, [])
 
+  // Ajouter une fonction de gestion des dates
+  const handleDateRangeChange = (dates, dateStrings) => {
+    console.log('Dates reçues du RangePicker:', dates);
+    console.log('Dates en format string:', dateStrings);
+    
+    if (dates) {
+      // Créer de nouveaux objets moment à partir des chaînes de date
+      const [startStr, endStr] = dateStrings;
+      const startDate = moment(startStr, 'DD/MM/YYYY').startOf('day');
+      const endDate = moment(endStr, 'DD/MM/YYYY').endOf('day');
+      
+
+      console.log('Dates converties:', {
+        start: startDate.format('YYYY-MM-DD HH:mm:ss'),
+        end: endDate.format('YYYY-MM-DD HH:mm:ss')
+      });
+      setDateRange([startDate, endDate]);
+    } else {
+      setDateRange(null);
+    }
+  };
+
   // Filtrer les réservations
   const filteredReservations = reservations.filter(reservation => {
-    const searchLower = searchText.toLowerCase()
+    const searchLower = searchText.toLowerCase();
+    
+    // Debug des dates
+    console.log('État actuel de dateRange:', dateRange);
+    
+    // Convertir les dates de la réservation en objets moment
+    const reservationStart = moment(reservation.from).startOf('day');
+    const reservationEnd = moment(reservation.to).endOf('day');
+    
+    // Vérifier si une plage de dates est sélectionnée
     const dateInRange = !dateRange || (
-      moment(reservation.from).isSameOrAfter(dateRange[0], 'day') &&
-      moment(reservation.to).isSameOrBefore(dateRange[1], 'day')
-    )
+      reservationStart.isSameOrAfter(dateRange[0], 'day') &&
+      reservationEnd.isSameOrBefore(dateRange[1], 'day')
+    );
+    
+    console.log('Comparaison des dates pour réservation:', {
+      reservation_id: reservation._id,
+      reservationStart: reservationStart.format('YYYY-MM-DD HH:mm:ss'),
+      reservationEnd: reservationEnd.format('YYYY-MM-DD HH:mm:ss'),
+      rangeStart: dateRange ? dateRange[0].format('YYYY-MM-DD HH:mm:ss') : 'pas de date',
+      rangeEnd: dateRange ? dateRange[1].format('YYYY-MM-DD HH:mm:ss') : 'pas de date',
+      dateInRange
+    });
     
     // Vérifier si isArchived est défini, sinon considérer comme non archivé
     const isArchivedMatch = typeof reservation.isArchived === 'undefined' 
       ? !showArchived  // Si isArchived n'est pas défini, montrer dans la vue normale
-      : reservation.isArchived === showArchived
+      : reservation.isArchived === showArchived;
 
     return dateInRange && 
       (searchText === '' ||
@@ -57,8 +97,8 @@ export default function ReservationManager() {
         reservation.email?.toLowerCase().includes(searchLower) ||
         reservation.phone_number?.includes(searchText)
       ) &&
-      isArchivedMatch
-  })
+      isArchivedMatch;
+  });
 
   // Gérer la validation du paiement
   const handlePaymentValidation = async (record) => {
@@ -242,8 +282,12 @@ export default function ReservationManager() {
             style={{ width: 300 }}
           />
           <RangePicker
-            onChange={setDateRange}
+            onChange={handleDateRangeChange}
             format="DD/MM/YYYY"
+            style={{ minWidth: '240px' }}
+            placeholder={['Date début', 'Date fin']}
+            allowClear={true}
+            showTime={false}
           />
           <Button
             type={showArchived ? 'primary' : 'default'}
@@ -252,8 +296,8 @@ export default function ReservationManager() {
             {showArchived ? 'Voir réservations actives' : 'Voir archives'}
           </Button>
         </Space>
-        <ul style={{fontSize:".8em"}}>
-          <p style={{fontSize:".8em"}}>Ce filtre s'applique sur les propriétés suivantes: 
+        <ul style={{}}>
+          <p style={{}}>Ce filtre s'applique sur les propriétés suivantes: 
           </p>
           <li>La communauté (community)</li>
           <li>Le nom (names)</li>
