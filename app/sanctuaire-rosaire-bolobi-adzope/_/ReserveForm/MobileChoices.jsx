@@ -20,7 +20,7 @@ console.log(isActive);
         <p>INSCRIPTION: </p>
         <p>SÉLECTIONNER UNE ÉTAPE</p>
         {menuItems.map((item, index) => (
-            <li key={index} onClick={e=>{onClick(e)}} className={`${item.className}${index === 0 ? ' active' : ''} ${fieldsetsValidation[item.className] ? 'validated' : 'invalidated'}`}>
+            <li key={index} onClick={e=>{onClick(e)}} className={`${item.className}${isActive === item.className ? ' active' : ''} ${fieldsetsValidation[item.className] ? 'validated' : 'invalidated'}`}>
                 <a href={`#${item.className}`}>
                     <FontAwesomeIcon icon={item.icon} /> <span>{item.label}</span>
                 </a>

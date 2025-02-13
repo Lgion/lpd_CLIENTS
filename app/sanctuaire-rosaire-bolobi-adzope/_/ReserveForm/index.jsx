@@ -24,18 +24,18 @@ export default function ReserveForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isActive, setIsActive] = useState("infos")
 
-  const [participants, setParticipants] = useState(1);
+  const [participants, setParticipants] = useState(0);
   const [individualRoomParticipants, setIndividualRoomParticipants] = useState(0);
   const [mealPlan, setMealPlan] = useState(0);
   const [customMealData, setCustomMealData] = useState(null);
 
   // State pour suivre la validation des fieldsets
   const [fieldsetsValidation, setFieldsetsValidation] = useState({
-    dates: false,
+    infos: false,
     type: false,
+    dates: false,
     location: false,
     meal: false,
-    infos: false
   });
 
   // Fonction pour mettre à jour la validation d'un fieldset
@@ -132,13 +132,18 @@ export default function ReserveForm() {
     console.log(dateDiffDuAu());
     document.querySelector('article.dates>b').innerHTML = dateDiffDuAu().day +" nuits"
   }
-  , handleDateChange = (e) => {
-    if(du.value!="" && au.value!=""){
+  , handleDateChange = (is_SingleDateInputChoice) => {
+    if(is_SingleDateInputChoice){
+      document.querySelector('article.dates>b').innerHTML = "0 nuits"
+    }else if(du.value!="" && au.value!=""){
       onChange([new Date(du.value),new Date(au.value)])
     }
   }
   , handleFieldsetValidation = (fieldsetName) => {
-    location.href = "/sanctuaire-rosaire-bolobi-adzope#bolobiForm_choices_ul"
+
+    // location.href = "/sanctuaire-rosaire-bolobi-adzope#bolobiForm_choices_ul"
+    bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
+    
     setFieldsetsValidation(prev => {
       console.log(prev);
       console.log(Object.keys(prev));
@@ -151,19 +156,38 @@ export default function ReserveForm() {
       console.log(nextFieldsetEventLikeObject);
       
       
+      // Si on est en mode mobile, ".bolobiForm_choices" existera et nextFieldsetEventLikeObject.target aussi
       if(nextFieldsetEventLikeObject.target)onClickMobileChoices(nextFieldsetEventLikeObject)
+        
+        
+        
+// JE PENSE QU'IL Y A UN PROBLÈME ICI
+// ENTRE VERSION MOBILE ET DESKTOP
       else{
+        // Si tous les fieldsets sont validés, on va au récapitulatif
         if(Object.values(fieldsetsValidation).filter(el=>!!!el).length==0)
           recapitulatif.scrollIntoView({ behavior: "smooth", block: "start" })
-        else
+        else{
+          const tmpNextFieldsetIndex = Object.values(fieldsetsValidation).findIndex(el=>!!!el)
+          , tmpNextFieldsetName = Object.keys(fieldsetsValidation)[tmpNextFieldsetIndex]
+          , tmpNextFieldsetEventLikeObject = {target: document.querySelector(`.bolobiForm_choices .${tmpNextFieldsetName}`)}
+
+          if(tmpNextFieldsetEventLikeObject.target)onClickMobileChoices(tmpNextFieldsetEventLikeObject)
+
           bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
       }
+// END
+// END
+      
+      
       
       return {
         ...prev,
         [fieldsetName]: true
       }
     });
+    
   }
   , onClickMobileChoices = e => {
     // console.log(item.textContent==e.target.textContent)
@@ -171,33 +195,52 @@ export default function ReserveForm() {
     // console.log(e.target.textContent)
 
     // if (e.target.nodeName == "LI" || e.target.nodeName == "A") {
-console.log(e);
+        // console.log(e);
 
         // POUR ACTIVER LE LI CORRESPONDANT
-        let lis = Array.from(e.target.closest('ul').querySelectorAll('li'))
+        // let lis = Array.from(e.target.closest('ul').querySelectorAll('li'))
+        let lis = Array.from(bolobiForm_choices_ul.querySelectorAll('li'))
         , f = Array.from(bolobiForm.querySelectorAll('fieldset'))
-        , li = lis.find((item, i) => {
-          console.log(item, " yyy ", e.target.closest('li'));
-          console.log(item.textContent, " xxx ", e.target.closest('li').textContent);
+        , li = e.target.closest('li')
+        , li_item_related_to_li_clicked = lis.find((item, i) => {
+          console.log(item.className, " yyy ", li.className);
+          console.log(item.textContent, " xxx ", li.textContent);
           
-          return item.textContent == e.target.closest('li').textContent
+          return item.textContent == li.textContent
         })
         console.log(li)
-        lis.forEach((item, i) => item.classList.remove('active'))
-        li.classList.add('active')
-        f.forEach((item, i) => item.classList.remove('active'))
-
+        console.log(lis)
+        lis.forEach((item, i) => {
+          console.log("li: ", item.className);
+          item.classList.remove('active')
+          console.log("li bis: ", item.className);
+        })
         console.log(li);
+        console.log(li.className)
+        console.log(lis)
+        li.classList.add('active')
+        console.log(li);
+        console.log(li.className)
+        f.forEach((item, i) => {item.classList.remove('active')})
+
         
 
 
         // POUR ACTIVER LE FIELDSET CORRESPONDANT
-        const fieldsetClassName = e.target.closest('li')?.className.split(' ')[0]
+        const fieldsetClassName = li?.className.split(' ')[0]
         console.log(fieldsetClassName)
         document.querySelector("fieldset.active")?.classList.remove("active")
         document.querySelector("fieldset." + fieldsetClassName).className = "active " + document.querySelector("fieldset." + fieldsetClassName).className
 
     // }
+
+    setFieldsetsValidation(prev => {
+      // alert(li)
+      // alert(e.target)
+      // alert(e.target.className)
+      // e.target.classList.add("active")
+      return {...prev, [li.className.split(" ")[0]]: false}
+    })
     
     const isActiveValue = e.target.closest('li').className.split(" ")[0]
     setIsActive(isActiveValue)
@@ -228,18 +271,30 @@ console.log(e);
       }));
   }
   async function handleSubmit(e){
-    alert('ok')
+
     e.preventDefault();
     setIsSubmitting(true);
+    // Créer un timeout de 10 secondes
+    const timeout = setTimeout(() => {
+      setIsSubmitting(false);
+    }, 10000);
+
+
+
+    // alert('ok')
+    // Si tous les fieldsets sont validés, on va au récapitulatif
+    if(Object.values(fieldsetsValidation).filter(el=>!!!el).length!==0){
+      alert("Le formulaire n'est pas complet...")
+      clearTimeout(timeout); // Annuler le timeout si la réponse arrive avant
+      setIsSubmitting(false);
+      bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
+      return;
+    }
     
     ////// GÉRER LES CHAMPS VIDES
     // handleEmptyInputsChecking()
     
 
-    // Créer un timeout de 10 secondes
-    const timeout = setTimeout(() => {
-      setIsSubmitting(false);
-    }, 10000);
 
     const fd = new FormData(e.target)
     , fd_ = {
@@ -281,8 +336,8 @@ console.log(e);
     fd.delete('time-input')
     
     // Ajouter les dates de début et fin
-    fd.set('from', du.value)
-    fd.set('to', au.value)
+    fd.set('from', zero_night.checked? le.value : du.value)
+    fd.set('to', zero_night.checked? le.value : au.value)
     
     // Ajouter le tableau de contacts converti en JSON
     fd.append('contact', JSON.stringify([contactInfo]))
@@ -491,13 +546,10 @@ console.log(e);
         id="show_image" 
       />
 
-      <fieldset className="submit">
-        <input type="submit" value="Réserver" />
-      </fieldset>
-
 
       {/* https://github.com/Hacker0x01/react-datepicker/ */}
       <Resume {...{dateRange,setDateRange,onChange}} />
+
 
       <FieldsetPayment 
         participants={participants}
@@ -505,6 +557,11 @@ console.log(e);
         dateDiffDuAu={dateDiffDuAu}
         mealPlan={mealPlan}
       />
+
+
+      <fieldset className="submit">
+        <input type="submit" value="Réserver" />
+      </fieldset>
 
 
     </form>}

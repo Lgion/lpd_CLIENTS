@@ -300,6 +300,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
               className="validate-button"
               onClick={(e) => {
                 e.preventDefault();
+                confirm('Voulez-vous vraiment NE PAS commander un repas pour votre séjour ?')
                 handleFieldsetValidation('meal');
               }}
             >

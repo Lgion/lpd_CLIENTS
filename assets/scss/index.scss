@@ -2861,7 +2861,7 @@ body{
                 left: -30px;
               }
             }
-            &.validated {
+            &.validated:not(.active) {
               border-color: springgreen !important;
               box-shadow: 0 0 10px 0.25em springgreen !important;
               svg{
@@ -2999,9 +2999,13 @@ body{
                   cursor: pointer;
                   overflow: hidden;
                   position: relative;
-                  display: flex                ;
+                  display: flex;
                   justify-content: center;
                   align-items: center;
+                  border: solid;
+                  border-width: 0 3px;
+                  box-shadow: 0 0 5px .1px;
+                  overflow: hidden;
                   &:hover{
                     background: $secondary_2;
                     >div{
@@ -3072,6 +3076,9 @@ body{
                   >p{
                     text-align: center;
                     >u{
+                      &:first-of-type{
+                        color:blue;
+                      }
                       font-weight: bold;
                     }
                   }
@@ -3086,6 +3093,16 @@ body{
                     }
                     +div{
                       display: none;
+                      flex-flow: wrap;
+                      border: 2px solid;
+                      padding: .5em;
+                      box-shadow: 0 0 5px 1px blue inset;
+                      border-radius: 5px;
+                      >p{
+                        width: 100%;
+                        text-align: center;
+                        margin-bottom: 0;
+                      }
                     }
                   }
                   &:has(input:checked){
@@ -3443,6 +3460,18 @@ body{
               color: white;
             }
           }
+          &.recap,&.payment{
+            text-align: center;
+            >h4{
+              padding: 1em 0 !important;
+              >button{
+                padding: 1em;
+                background: $secondary;;
+                border-radius: 5px;
+                color: white;
+              }
+            }
+          }
           &.recap{
             display: flex;
             justify-content: center;
@@ -3450,7 +3479,6 @@ body{
             flex-flow: wrap;
             position: relative;
             width:100%;
-            text-align: center;
             &:not(.active){
               min-height: auto !important;
               margin: 1em 0;
@@ -3465,15 +3493,6 @@ body{
             }
             @include from-desktop{
               min-height: 500px;
-            }
-            >h4{
-              padding: 1em 0;
-              >button{
-                padding: 1em;
-                background: $secondary;;
-                border-radius: 5px;
-                color: white;
-              }
             }
             >div{
               @include from-desktop{

@@ -13,12 +13,14 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         , span = e.target.parentNode.querySelector("label[for="+e.target.id+"] span")
         , tmp = moment(e.target.value)
         span.innerHTML = tmp.format('LL')
+        
+        // document.querySelector(".dates div:last-of-type>b").innerHTML = ((du.value && au.value) && (!zero_night.checked)) 
+        document.querySelector(".dates div b").innerHTML
+            = ((du.value && au.value) && (!zero_night.checked)) 
+                ? dateDiffDuAu().day
+                : 0
 
-        document.querySelector(".dates div:last-of-type>b").innerHTML = (du.value && au.value) 
-            ? dateDiffDuAu().day
-            : 0
-
-        handleDateChange()
+        handleDateChange(zero_night.checked&&true)
     }
     , weekSelection = (e,weekNum) => {
         
@@ -29,7 +31,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         document.querySelector(".dates div b").innerHTML = 2
 
         document.querySelector(".dates ul li.on")?.classList.remove('on')
-        e.target.classList.add('on')
+        e.target.closest('li').classList.add('on')
 
         du.value = range[0]
         onChange(e1)
@@ -121,10 +123,26 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         
         <div className="zero_night_box">
             <p>SI VOUS NE RÉSERVEZ <u>AUCUNE NUÎTÉ</u>, ALORS <u>COCHEZ CETTE CASE</u>:</p>
-            <div><input type="checkbox" className="safe" name="zero_night" id="zero_night" /></div>
-            <div>                
+            <div><input type="checkbox" className="safe" name="zero_night" id="zero_night"
+            onChange={
+                e=>{
+                    document.querySelector(".dates div b").innerHTML="0"
+                    if(zero_night.checked){
+                        du.value=""
+                        du.previousElementSibling.querySelector("span").innerHTML=""
+                        au.value=""
+                        au.previousElementSibling.querySelector("span").innerHTML=""
+                    }else{
+                        le.value=""
+                        le.previousElementSibling.querySelector("span").innerHTML=""
+                    }
+                }
+            }
+             /></div>
+            <div>    
+                <p>Choisir le jour de réservation: </p>            
                 <label htmlFor="le"><span></span></label>
-                <input type="date" id="le" name="le" />
+                <input type="date" id="le" name="le" {...{onChange, onFocus}}/>
             </div>
         </div>
         
@@ -139,7 +157,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
             <li>Weekends semaines {new Date().getFullYear()}: </li>
             {weeks_list.map((elt,i) => (i>=currentWeekNum) && <li 
                     key={i} 
-                    onClick={ e=>weekSelection(e,i) } 
+                    onClick={ e=>weekSelection(e,i+"") } 
                     className={currentWeekNum==i ? "on" : ""} 
                 >
                     <span>{i}</span>
@@ -155,9 +173,15 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
             
             const dateDebut = document.querySelector('#du')?.value;
             const dateFin = document.querySelector('#au')?.value;
+            const dateLe = document.querySelector('#le')?.value;
             
             // Vérifier si les deux dates sont remplies
-            if (!dateDebut || !dateFin) {
+            if(zero_night.checked){
+                if(!dateLe){
+                    alert('Veuillez sélectionner une date pour votre évènement.');
+                    return;
+                  }
+            }else if (!dateDebut || !dateFin) {
               alert('Veuillez sélectionner les dates de début et de fin');
               return;
             }

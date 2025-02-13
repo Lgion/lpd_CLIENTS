@@ -42,7 +42,7 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                         checked={isApproximateCount}
                         onChange={(e) => setIsApproximateCount(e.target.checked)}
                     />
-                    <i><b>*</b> Estimation <strong>{isApproximateCount ? "approximative" : "précise"}</strong> du nombre de participants <b>active</b></i>
+                    <i><b>*</b> Estimation <strong>{isApproximateCount ? "approximative" : "précise"}</strong> du nombre de participants.</i>
                 </label>
             </div>
 

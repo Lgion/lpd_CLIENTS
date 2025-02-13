@@ -11,11 +11,11 @@
 // Style du bouton de validation
 .validate-button {
   display: none; // Caché par défaut sur desktop
+  box-shadow: 0 0 5px 2px  black !important;
   
   @include mobile-and-tablette {
     display: block;
     width: 100%;
-    margin-top: 1rem;
     padding: 0.75rem;
     background-color: #007bff;
     color: white;
@@ -27,7 +27,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 50%;
-    margin: 0 auto;
+    margin: 1rem auto;
     
     &:hover {
       background-color: darken(#007bff, 10%);
@@ -36,5 +36,49 @@
     &:active {
       transform: translateY(1px);
     }
+  }
+}
+
+// Style du bouton de basculement des informations de paiement
+.payment-toggle-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #e9ecef;
+  }
+  
+  h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #212529;
+  }
+  
+  .arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.payment-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  
+  &.open {
+    max-height: 2000px; // Une valeur suffisamment grande pour contenir tout le contenu
+    transition: max-height 0.5s ease-in;
   }
 }

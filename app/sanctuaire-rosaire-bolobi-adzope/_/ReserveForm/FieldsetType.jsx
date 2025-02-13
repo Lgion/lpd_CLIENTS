@@ -46,6 +46,16 @@ export default function FieldsetType({toggleFormNdrImg, handleFieldsetValidation
             
             // Vérifier si un type de réservation est sélectionné
             const typeReservation = document.querySelector('input[name="type_reservation"]:checked');
+
+            if(typeReservation.value=="pray"){
+                zero_night.checked = true
+                zero_night.hidden = true
+                zero_night.parentNode.previousElementSibling.hidden = true
+            }else{
+                zero_night.checked = false
+                zero_night.hidden = false
+                zero_night.parentNode.previousElementSibling.hidden = false
+            }
             
             if (!typeReservation) {
               alert('Veuillez sélectionner un type de réservation');
