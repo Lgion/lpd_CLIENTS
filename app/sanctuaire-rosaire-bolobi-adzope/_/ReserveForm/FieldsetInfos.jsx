@@ -104,7 +104,8 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label d-flex align-items-center">
                         <FaEnvelope className="me-2" />
-                        Email de contact <span className="text-danger">*</span>
+                        Email de contact 
+                        {/* <span className="text-danger">*</span> */}
                     </label>
                     <input 
                         type="email" 
@@ -139,11 +140,11 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
                 }
                 
                 // Vérifier si l'email est valide
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!email || !emailRegex.test(email)) {
-                  alert('Veuillez entrer une adresse email valide');
-                  return;
-                }
+                // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                // if (!email || !emailRegex.test(email)) {
+                //   alert('Veuillez entrer une adresse email valide');
+                //   return;
+                // }
                 
                 // Si toutes les validations passent
                 handleFieldsetValidation('infos');

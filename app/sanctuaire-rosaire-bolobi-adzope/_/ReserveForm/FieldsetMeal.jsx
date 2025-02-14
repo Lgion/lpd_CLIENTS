@@ -242,7 +242,7 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
             }
 
             .mealPlanOptions h5 {
-                margin-bottom: 0.5rem;
+                margin: 1.5rem .5rem;
                 color: #495057;
             }
 
@@ -259,16 +259,17 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                     width: 100%;
                 }
             }
-        `}</style>
+        `}</style> 
         <fieldset className="meal">
             <h4 onClick={toggleFormNdrImg}>Choisir si vous souhaitez que les repas vous soient préparés: </h4>
             <h5>Vous pouvez <u><b>soit préparer vous-même</b> vos repas</u> au refectoire du santuaire, <u><b>soit commander</b> votre repas</u> à la cuisine du sanctuaire.</h5>
             <h5>Si vous préparez vous-même, tous les outils de cuisine et de dégustation sont à votre disposition (marmite, casserols, couteaux, etc...)</h5>
             <h5>il faut juste prévoir <u><b>VOTRE</b> propre bouteille de gaz</u></h5>
+            <p>CHOISIR <u><b>AVEC</b> OU <b>SANS</b></u> REPAS: (<i><u>sans repas</u> par défaut</i>)</p>
             <SectionCheckboxStyled>
                 <label htmlFor="meal">
                     <input type="checkbox" id="meal" name="meal_included" onChange={handleMealChange} />
-                    <span>Repas Inclus 🍔 😋 🍲</span>
+                    <span><span>Avec Repas</span> <span>🍔 😋 🍲</span></span>
                     <i className="indicator">
                         <svg version="1.1" id="toggle" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             viewBox="0 0 55 55" xmlSpace="preserve"
@@ -283,25 +284,40 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                             />
                         </svg>
                     </i>
-                    <span>Sans repas 🚫</span>
+                    <span>Sans Repas 🚫</span>
                 </label>
             </SectionCheckboxStyled>
+            <p>
+                {isMealIncluded && <>Vous avez choisi <span>AVEC <span className={!mealPlan&&"alert"}>{mealPlan || "0"}</span> repas</span></>}
+                {!isMealIncluded && <>Vous avez choisi <span>SANS repas</span></>}
+            </p>
             {isMealIncluded && (
                 <MealPlanOptions mealPlan={mealPlan} handleMealPlanChange={handleMealPlanChange} />
             )}
-            {isMealIncluded && mealPlan && (
+
+            
+            {/* POUR INCLURE LES REPAS (QUE MAMAN N'A PAS VOULU INCLURE)*/}
+            {/* {isMealIncluded && mealPlan && (
                 <div className="mealOptions">
                     {breakfastColumn}
                     {mealPlan >= 2 && lunchColumn}
                     {dinnerColumn}
                 </div>
-            )}
+            )} */}
+
+
+
             <button 
               className="validate-button"
               onClick={(e) => {
                 e.preventDefault();
-                confirm('Voulez-vous vraiment NE PAS commander un repas pour votre séjour ?')
-                handleFieldsetValidation('meal');
+                console.log();
+                
+                if(!document.querySelector('input[name="meal_included"]').checked){
+                    const mealConfirm = confirm('Voulez-vous vraiment NE PAS commander un repas pour votre séjour ?')
+                    if(mealConfirm)handleFieldsetValidation('meal');
+                }else if(oneMeal.checked||twoMeals.checked)handleFieldsetValidation('meal');
+                else alert("Vous avez choisi \"AVEC Repas\"\nVeuillez alors sélectionner votre formule: \n1repas ou 2repas ?")
               }}
             >
               Valider

@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBed,faUsers } from '@fortawesome/free-solid-svg-icons'
 
 export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants, handleFieldsetValidation}) {
     const [isnotZeroParticipant, setIsnotZeroParticipant] = useState(0)
@@ -60,6 +62,7 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                         onChange={onChangeParticipants} 
                     />
                     <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)+1)}}>+</button>
+                    <FontAwesomeIcon icon={faUsers} title="Nombre total de participants" />
                 </div>
             </div>
 
@@ -85,21 +88,26 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                 </div>
             </div>
 
+            <p>Vous pouvez réserver jusqu'à 7 chambres individuelles: </p>
+
             <label htmlFor="chambre" className="radioLabel safe">
                 <span>Chambre Individuel <b>(<b>10000Fcfa</b> la nuité)</b></span>
-                <div>
+                <div className="custom-number-input">
+                    <button type="button" onClick={e => {onIndividualRoomChange(parseInt(individual_room_participants.value)-1)}}>-</button>
                     <input 
                         id="individual_room_participants" 
                         type="number" 
                         name="individual_room_participants" 
-                        max={participants} 
+                        // max={participants} 
+                        max={7} 
                         min="0" 
                         value={individualRoomParticipants}
                         onChange={e => {
                             onIndividualRoomChange(e.target.value)
                         }} 
                     />
-                    <label htmlFor="individual_room_participants">chambres</label>
+                    <button type="button" onClick={e => {onIndividualRoomChange(parseInt(individual_room_participants.value)+1)}}>-</button>
+                    <label htmlFor="individual_room_participants" title="chambres individuelles"><FontAwesomeIcon icon={faBed} /></label>
                 </div>
             </label>
         </section>

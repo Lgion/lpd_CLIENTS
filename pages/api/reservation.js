@@ -124,7 +124,7 @@ async function sendConfirmationEmail(reservation) {
         address: process.env.SMTP2GO_USER
       },
       to: reservation.email,
-      bcc: "puissancedamour@yahoo.fr",
+      bcc: process.env.NEXT_PUBLIC_EMAIL_USER,
       subject: 'Confirmation de réservation - Sanctuaire Notre Dame du Rosaire',
       html: emailContent
     });

@@ -46,6 +46,7 @@ export default function ReserveForm() {
     setParticipants(newValue);
     // Ajuster le nombre de chambres individuelles si nécessaire
     if (individualRoomParticipants > newValue) {
+      alert('okkk')
       setIndividualRoomParticipants(newValue);
     }
     // Mettre à jour l'affichage
@@ -55,7 +56,12 @@ export default function ReserveForm() {
 
   const handleIndividualRoomChange = (value) => {
     const newValue = parseInt(value) || 0;
-    setIndividualRoomParticipants(newValue);
+    // alert(participants)
+    // alert(newValue)
+    if(participants >= newValue)
+      setIndividualRoomParticipants(newValue);
+    else
+      alert('Impossible de réserver un nombre de chambre individuelle, plus grand que le nombre de participants')
     // Mettre à jour l'affichage
     document.querySelector("article.location>b").innerHTML = participants - newValue;
     document.querySelector("article.location_ind>b").innerHTML = newValue;
@@ -114,9 +120,20 @@ export default function ReserveForm() {
       })
     })
   }, [FieldsetRadioStyled])
+  useEffect(()=>{
+
+    // console.log(fieldsetsValidation);
+    // alert('oklmlmlml')
+    
+    if(Object.values(fieldsetsValidation).filter(el=>!!!el).length==0){
+      recapitulatif.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }, [fieldsetsValidation])
+
+
   // const [dateRange, setDateRange] = useState(new Date(),null)
   // const [dateRange, setDateRange] = useState([new Date().setHours(9,0,0),null])
-  const [dateRange, setDateRange] = useState([setHours(setMinutes(new Date(), 0), 9),null])
+  const [dateRange, setDateRange] = useState([null,null])
   , onChange = (update) => {
     // alert(+new Date(update[0]))
     let a = new Date(update[0])
@@ -147,22 +164,30 @@ export default function ReserveForm() {
     setFieldsetsValidation(prev => {
       console.log(prev);
       console.log(Object.keys(prev));
+
+      let isLastFieldset
       
       const currentIndex = Object.keys(prev).findIndex(elt=>elt===fieldsetName)
-      , nextFieldsetName = Object.keys(prev)[currentIndex+1]
+      , nextFieldsetName = Object.keys(prev)[currentIndex+1] || Object.keys(prev)[0]
       , nextFieldsetEventLikeObject = {target: document.querySelector(`.bolobiForm_choices .${nextFieldsetName}`)}
       console.log(currentIndex);
       console.log(Object.keys(prev)[currentIndex+1]);
       console.log(nextFieldsetEventLikeObject);
       
-      
-      // Si on est en mode mobile, ".bolobiForm_choices" existera et nextFieldsetEventLikeObject.target aussi
-      if(nextFieldsetEventLikeObject.target)onClickMobileChoices(nextFieldsetEventLikeObject)
+      isLastFieldset = Object.keys(prev)[currentIndex+1] ? false : true
+
+
+      // Si on est en mode mobile, "bolobiForm_choices.offsetParent" ne sera pas null,
+      if(bolobiForm_choices_ul.offsetParent){
+        onClickMobileChoices(nextFieldsetEventLikeObject)
+      }
         
         
-        
+    console.log(fieldsetsValidation);
 // JE PENSE QU'IL Y A UN PROBLÈME ICI
 // ENTRE VERSION MOBILE ET DESKTOP
+// ENTRE VERSION MOBILE ET DESKTOP
+/*
       else{
         // Si tous les fieldsets sont validés, on va au récapitulatif
         if(Object.values(fieldsetsValidation).filter(el=>!!!el).length==0)
@@ -177,6 +202,7 @@ export default function ReserveForm() {
           bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
         }
       }
+*/
 // END
 // END
       
@@ -187,7 +213,8 @@ export default function ReserveForm() {
         [fieldsetName]: true
       }
     });
-    
+
+      
   }
   , onClickMobileChoices = e => {
     // console.log(item.textContent==e.target.textContent)
@@ -234,13 +261,13 @@ export default function ReserveForm() {
 
     // }
 
-    setFieldsetsValidation(prev => {
-      // alert(li)
-      // alert(e.target)
-      // alert(e.target.className)
-      // e.target.classList.add("active")
-      return {...prev, [li.className.split(" ")[0]]: false}
-    })
+    // setFieldsetsValidation(prev => {
+    //   // alert(li)
+    //   // alert(e.target)
+    //   // alert(e.target.className)
+    //   // e.target.classList.add("active")
+    //   return {...prev, [li.className.split(" ")[0]]: false}
+    // })
     
     const isActiveValue = e.target.closest('li').className.split(" ")[0]
     setIsActive(isActiveValue)
@@ -282,12 +309,25 @@ export default function ReserveForm() {
 
 
     // alert('ok')
+
+    // Si on est en mode desktop, "bolobiForm_choices.offsetParent" sera null,
+    // Seulement alors on simulera le clic sur les boutons de validation
+    if(!bolobiForm_choices_ul.offsetParent){
+      bolobiForm.querySelectorAll('section>fieldset button.validate-button')
+        .forEach(el => el.click())
+    }
     // Si tous les fieldsets sont validés, on va au récapitulatif
     if(Object.values(fieldsetsValidation).filter(el=>!!!el).length!==0){
+      console.log(fieldsetsValidation);
       alert("Le formulaire n'est pas complet...")
       clearTimeout(timeout); // Annuler le timeout si la réponse arrive avant
       setIsSubmitting(false);
+
+      //DFILER POUR LA VERSION DESKTOP
+      document.querySelector('fieldset.infos').scrollIntoView({ behavior: "smooth", block: "start" })
+      //DFILER POUR LA VERSION MOBILE
       bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
+      
       return;
     }
     
@@ -551,17 +591,17 @@ export default function ReserveForm() {
       <Resume {...{dateRange,setDateRange,onChange}} />
 
 
+      <fieldset className="submit">
+        <input type="submit" value="Réserver" />
+      </fieldset>
+
+
       <FieldsetPayment 
         participants={participants}
         individual_room_participants={individualRoomParticipants}
         dateDiffDuAu={dateDiffDuAu}
         mealPlan={mealPlan}
       />
-
-
-      <fieldset className="submit">
-        <input type="submit" value="Réserver" />
-      </fieldset>
 
 
     </form>}
