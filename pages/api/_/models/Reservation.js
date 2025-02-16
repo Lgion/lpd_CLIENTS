@@ -4,7 +4,7 @@ const reservationSchema = mongoose.Schema({
   community: { default:"0", type: String, required: true},
   names: { default:"John smith", type: String, required: true },
   phone_number: { default:"+2250102030405", type: String, required: true },
-  email: { default:"a@b.c", type: String, required: true },
+  email: { default:"a@b.c", type: String, required: false },
   from: { default:1686007599860, type: Date, required: true },
   to: { default:1686007699860, type: Date, required: true },
   // sleep: { default:0, type: Number, required: true },

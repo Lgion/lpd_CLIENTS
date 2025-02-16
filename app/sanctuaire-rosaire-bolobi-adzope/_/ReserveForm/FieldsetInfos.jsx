@@ -4,9 +4,9 @@ import { SignInButton,SignedOut,useUser } from "@clerk/nextjs"
 
 export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidation }) {
     const [infos, setInfos] = useState({
-        community: '',
+        community: 'aaa',
         names: '',
-        phone_number: '',
+        phone_number: '0704763132',
         email: ''
     })
     , { user } = useUser()
@@ -21,7 +21,7 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
                 ...prevInfos,
                 names: user.fullName || '',
                 email: user.primaryEmailAddress?.emailAddress || '',
-                phone_number: user.phoneNumbers?.[0] || '',
+                phone_number: user.phoneNumbers?.[0] || prevInfos.phone_number,
                 // La communauté n'est généralement pas disponible dans les données utilisateur par défaut
                 community: user.publicMetadata?.community || prevInfos.community
             }))
@@ -32,8 +32,11 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
         const { name, value } = e.target;
         setInfos(prevInfos => {
             
-            if(infos["community"])
-                document.querySelector("article.infos>b").innerHTML = "Communauté: <b>"+infos["community"]+"</b>"
+            // if(infos["community"])
+            if(name=="community")
+                // document.querySelector("article.infos>b").innerHTML = "Communauté: <b>"+infos["community"]+"</b>"
+                document.querySelector("article.infos>b").innerHTML = "Communauté: <b>"+value+"</b>"
+
             return {
                 ...prevInfos,
                 [name]: value
@@ -125,10 +128,16 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
                 const names = document.querySelector('#names')?.value?.trim();
                 const phone = document.querySelector('#phone_number')?.value?.trim();
                 const email = document.querySelector('#email')?.value?.trim();
+                const community = document.querySelector('#community')?.value?.trim();
                 
                 // Vérifier si le nom est rempli
                 if (!names) {
                   alert('Veuillez entrer votre nom');
+                  return;
+                }
+                // Vérifier si le nom de la community est rempli
+                if (!community) {
+                  alert('Veuillez entrer le nom de votre communauté');
                   return;
                 }
                 

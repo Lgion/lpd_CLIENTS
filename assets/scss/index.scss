@@ -2222,12 +2222,14 @@ body{
           left: 0;
           height: 100%;
           opacity: .21;
-          z-index: -1;
+          z-index: 0;
         }
       }
       #bolobiForm>fieldset{
         &.recap,&.payment{
-          h4{}
+          h4{
+            &:before{z-index: -1;}
+          }
           z-index: 0 !important;
         }
       }
@@ -3481,7 +3483,7 @@ body{
             >textarea,section>textarea{}
           }
         }
-        >div{
+        >div:not(.safe):not(.flash-message){
           &#show_image{}
           position: relative;
           width: 50%;

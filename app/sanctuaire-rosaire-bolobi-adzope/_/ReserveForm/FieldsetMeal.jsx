@@ -21,6 +21,9 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
         lunch: false,
         dinner: false
     });
+    const [showFlash, setShowFlash] = useState(false);
+    const [flashMessage, setFlashMessage] = useState("");
+    const [flashType, setFlashType] = useState("");
 
     // Notifier le parent des changements de repas
     useEffect(() => {
@@ -149,6 +152,30 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
     const breakfastColumn = generateMealColumn("breakfast", mealOptions.breakfast);
     const lunchColumn = generateMealColumn("lunch", mealOptions.lunch);
     const dinnerColumn = generateMealColumn("dinner", mealOptions.dinner);
+
+    const handleValidate = () => {
+        const oneMeal = document.querySelector('input[name="one_meal"]');
+        const twoMeals = document.querySelector('input[name="two_meals"]');
+                
+        if(!document.querySelector('input[name="meal_included"]').checked){
+            // const mealConfirm = confirm('Voulez-vous vraiment NE PAS commander un repas pour votre séjour ?')
+            const mealConfirm = true
+            console.log("mealConfirm:",mealConfirm);
+            if(mealConfirm){
+                handleFieldsetValidation('meal');
+            }else {                
+                setShowFlash(true);
+                setFlashMessage("Validez vos choix de restauration avant de réessayer");
+                setFlashType("warning");
+            }
+        } else if(oneMeal.checked || twoMeals.checked) {
+            handleFieldsetValidation('meal');
+        } else {
+            setShowFlash(true);
+            setFlashMessage("Vous avez choisi \"AVEC Repas\"\nVeuillez alors sélectionner votre formule: \n1repas ou 2repas ?");
+            setFlashType("warning");
+        }
+    }
 
     return <>
         {/* {JSON.stringify(customMeal)} */}
@@ -311,17 +338,16 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
               className="validate-button"
               onClick={(e) => {
                 e.preventDefault();
-                console.log();
-                
-                if(!document.querySelector('input[name="meal_included"]').checked){
-                    const mealConfirm = confirm('Voulez-vous vraiment NE PAS commander un repas pour votre séjour ?')
-                    if(mealConfirm)handleFieldsetValidation('meal');
-                }else if(oneMeal.checked||twoMeals.checked)handleFieldsetValidation('meal');
-                else alert("Vous avez choisi \"AVEC Repas\"\nVeuillez alors sélectionner votre formule: \n1repas ou 2repas ?")
+                handleValidate();
               }}
             >
               Valider
             </button>
+            {showFlash && (
+                <div className={`alert alert-${flashType}`} role="alert">
+                    {flashMessage}
+                </div>
+            )}
         </fieldset>
     </>
 }

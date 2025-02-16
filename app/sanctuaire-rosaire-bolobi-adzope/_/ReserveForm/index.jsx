@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect, useMemo, useContext } from "react"
 import dynamic from 'next/dynamic'
 import { subDays, addDays, setHours, setMinutes, addMonths } from 'date-fns';
 import {loadRadios} from '../../../_/swappy_radio'
+import FlashMessage from '../components/FlashMessage'
 // import styles from "./swappy_radio.module.scss"
 import FormContext from "../../../../stores/formContext.js"
 import Resume from "./Resume"
@@ -23,8 +24,18 @@ export default function ReserveForm() {
   const [reservationData, setReservationData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isActive, setIsActive] = useState("infos")
+  const [flashMessage, setFlashMessage] = useState(null);
 
-  const [participants, setParticipants] = useState(0);
+  const showFlash = (message, type = 'info') => {
+    // Remplace directement le message existant
+    setFlashMessage({ message, type });
+  };
+
+  const clearFlash = () => {
+    setFlashMessage(null);
+  };
+
+  const [participants, setParticipants] = useState(1);
   const [individualRoomParticipants, setIndividualRoomParticipants] = useState(0);
   const [mealPlan, setMealPlan] = useState(0);
   const [customMealData, setCustomMealData] = useState(null);
@@ -37,6 +48,7 @@ export default function ReserveForm() {
     location: false,
     meal: false,
   });
+  const fieldsetsValidationRef = useRef(fieldsetsValidation);
 
   // Fonction pour mettre à jour la validation d'un fieldset
 
@@ -46,7 +58,7 @@ export default function ReserveForm() {
     setParticipants(newValue);
     // Ajuster le nombre de chambres individuelles si nécessaire
     if (individualRoomParticipants > newValue) {
-      alert('okkk')
+      showFlash('okkk')
       setIndividualRoomParticipants(newValue);
     }
     // Mettre à jour l'affichage
@@ -61,7 +73,7 @@ export default function ReserveForm() {
     if(participants >= newValue)
       setIndividualRoomParticipants(newValue);
     else
-      alert('Impossible de réserver un nombre de chambre individuelle, plus grand que le nombre de participants')
+      showFlash('Impossible de réserver un nombre de chambre individuelle, plus grand que le nombre de participants')
     // Mettre à jour l'affichage
     document.querySelector("article.location>b").innerHTML = participants - newValue;
     document.querySelector("article.location_ind>b").innerHTML = newValue;
@@ -128,6 +140,8 @@ export default function ReserveForm() {
     if(Object.values(fieldsetsValidation).filter(el=>!!!el).length==0){
       recapitulatif.scrollIntoView({ behavior: "smooth", block: "start" })
     }
+    fieldsetsValidationRef.current = fieldsetsValidation;
+    
   }, [fieldsetsValidation])
 
 
@@ -158,23 +172,28 @@ export default function ReserveForm() {
   }
   , handleFieldsetValidation = (fieldsetName) => {
 
+    console.log("fieldsetsValidation(0):",fieldsetsValidation);
     // location.href = "/sanctuaire-rosaire-bolobi-adzope#bolobiForm_choices_ul"
     bolobiForm_choices_ul.scrollIntoView({ behavior: "smooth", block: "start" })
     
     setFieldsetsValidation(prev => {
-      console.log(prev);
-      console.log(Object.keys(prev));
+      console.log("prev(0):",prev);
+      // console.log("fieldsetsValidation:",fieldsetsValidation);
+      // console.log(Object.keys(prev));
 
       let isLastFieldset
       
       const currentIndex = Object.keys(prev).findIndex(elt=>elt===fieldsetName)
       , nextFieldsetName = Object.keys(prev)[currentIndex+1] || Object.keys(prev)[0]
       , nextFieldsetEventLikeObject = {target: document.querySelector(`.bolobiForm_choices .${nextFieldsetName}`)}
-      console.log(currentIndex);
-      console.log(Object.keys(prev)[currentIndex+1]);
-      console.log(nextFieldsetEventLikeObject);
+
       
       isLastFieldset = Object.keys(prev)[currentIndex+1] ? false : true
+      console.log("currentIndex:",currentIndex);
+      console.log("isLastFieldset:",isLastFieldset);
+      console.log("currentFieldsetName:",Object.keys(prev)[currentIndex]);
+      console.log("nextFieldsetName:",Object.keys(prev)[currentIndex+1]);
+      console.log("nextFieldsetEventLikeObject:",nextFieldsetEventLikeObject);
 
 
       // Si on est en mode mobile, "bolobiForm_choices.offsetParent" ne sera pas null,
@@ -183,7 +202,6 @@ export default function ReserveForm() {
       }
         
         
-    console.log(fieldsetsValidation);
 // JE PENSE QU'IL Y A UN PROBLÈME ICI
 // ENTRE VERSION MOBILE ET DESKTOP
 // ENTRE VERSION MOBILE ET DESKTOP
@@ -208,12 +226,14 @@ export default function ReserveForm() {
       
       
       
+      console.log("prev(1):",prev);
       return {
         ...prev,
         [fieldsetName]: true
       }
     });
 
+    console.log("fieldsetsValidation(1):",fieldsetsValidation);
       
   }
   , onClickMobileChoices = e => {
@@ -304,7 +324,7 @@ export default function ReserveForm() {
     // Créer un timeout de 10 secondes
     const timeout = setTimeout(() => {
       setIsSubmitting(false);
-    }, 10000);
+    }, 100000);
 
 
 
@@ -313,13 +333,28 @@ export default function ReserveForm() {
     // Si on est en mode desktop, "bolobiForm_choices.offsetParent" sera null,
     // Seulement alors on simulera le clic sur les boutons de validation
     if(!bolobiForm_choices_ul.offsetParent){
-      bolobiForm.querySelectorAll('section>fieldset button.validate-button')
-        .forEach(el => el.click())
+      const validateButtons = Array.from(bolobiForm.querySelectorAll('section>fieldset button.validate-button'));
+      
+      // Créer un tableau de promesses pour chaque clic
+      const clickPromises = validateButtons.map(button => {
+        return new Promise(resolve => {
+          // Utiliser setTimeout pour permettre au state de se mettre à jour
+          setTimeout(() => {
+            button.click();
+            resolve();
+          }, 100); // Petit délai entre chaque clic
+        });
+      });
+    
+      // Attendre que tous les clics soient traités
+      await Promise.all(clickPromises);
+      console.log("Current fieldsetsValidation:", fieldsetsValidationRef.current);
     }
+    console.log(fieldsetsValidation);
     // Si tous les fieldsets sont validés, on va au récapitulatif
-    if(Object.values(fieldsetsValidation).filter(el=>!!!el).length!==0){
-      console.log(fieldsetsValidation);
-      alert("Le formulaire n'est pas complet...")
+    if(Object.values(fieldsetsValidationRef.current).filter(el=>!!!el).length!==0){
+      console.log("fieldsetsValidation(3):",fieldsetsValidation);
+      showFlash("Le formulaire n'est pas complet...", "error");
       clearTimeout(timeout); // Annuler le timeout si la réponse arrive avant
       setIsSubmitting(false);
 
@@ -465,7 +500,7 @@ export default function ReserveForm() {
     
     // if(true)return false
     try {
-      const response = await fetch("/api/reservation", {
+      const response = await fetch("/api/reservationn", {
           method: "POST",
           headers: {
               'Content-Type': 'application/json',
@@ -489,187 +524,213 @@ export default function ReserveForm() {
     } catch (error) {
       console.error("Erreur lors de la soumission:", error);
       clearTimeout(timeout);
-      setIsSubmitting(false);
+      // setIsSubmitting(false);
       // Ici vous pourriez ajouter une gestion d'erreur plus détaillée
     }
   }
   
 
-  return <>
-    <Intro {...{sommaire,titreH3}} />
-
-    {isSubmitting && (
-      <div className="overlay">
-        <div className="spinner"></div>
-      </div>
-    )}
-
-    {!isFormValidated && <form 
-      onSubmit={handleSubmit} 
-      id="bolobiForm"
-      noValidate
-      className={isFormValidated ? 'form-validated' : ''}
-    >
-      <MobileChoices {...{onClickMobileChoices,isActive,fieldsetsValidation}} />
-
-      <section
-        className = { formNdrToggleImg && "on" }
-      >
-        
-        <FieldsetInfos 
-          toggleFormNdrImg={toggleFormNdrImg}
-          handleFieldsetValidation={handleFieldsetValidation}
+  return (
+    <form id="bolobiForm" onSubmit={handleSubmit}>
+      {flashMessage && (
+        <FlashMessage
+          message={flashMessage.message}
+          type={flashMessage.type}
+          onClose={clearFlash}
         />
+      )}
+      <Intro {...{sommaire,titreH3}} />
 
-        <FieldsetRadioStyled id="type" className="type">
-          <FieldsetType 
-            toggleFormNdrImg={toggleFormNdrImg}
-            handleFieldsetValidation={handleFieldsetValidation}
+      {isSubmitting && (
+        <div className="overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
+
+      {!isFormValidated && (
+        <>
+
+          <MobileChoices {...{onClickMobileChoices,isActive,fieldsetsValidation}} />
+
+          <section
+            className = { formNdrToggleImg && "on" }
+          >
+            
+            <FieldsetInfos 
+              toggleFormNdrImg={toggleFormNdrImg}
+              handleFieldsetValidation={handleFieldsetValidation}
+            />
+
+            <FieldsetRadioStyled id="type" className="type">
+              <FieldsetType 
+                toggleFormNdrImg={toggleFormNdrImg}
+                handleFieldsetValidation={handleFieldsetValidation}
+              />
+            </FieldsetRadioStyled>
+
+            <FieldsetDate 
+              handleDateChange={handleDateChange}
+              toggleFormNdrImg={toggleFormNdrImg}
+              dateDiffDuAu={dateDiffDuAu}
+              handleFieldsetValidation={handleFieldsetValidation}
+            />
+
+            <FieldsetRadioStyled id="location" className="location">
+              <FieldsetLocation
+                toggleFormNdrImg={toggleFormNdrImg}
+                onParticipantsChange={handleParticipantsChange}
+                onIndividualRoomChange={handleIndividualRoomChange}
+                participants={participants}
+                individualRoomParticipants={individualRoomParticipants}
+                handleFieldsetValidation={handleFieldsetValidation}
+              />
+              
+              {/* <hr />
+
+              <section>
+                <label htmlFor="un" className="radioLabel">
+                  <input id="un" type="radio" name="type_reservation" />
+                  <span className="radio"></span>
+                  <span>Chambre Commune <b>(3000Fcfa/personne la nuité)</b></span>
+                </label>
+                <label htmlFor="deux" className="radioLabel">
+                  <input id="deux" type="radio" name="type_reservation" />
+                  <span className="radio"></span>
+                  <span>Chambre Individuel <b>(10000Fcfa/personne la nuité)</b></span>
+                </label>
+                <label htmlFor="trois" className="radioLabel">
+                  <input id="trois" type="radio" name="type_reservation" />
+                  <span className="radio"></span>
+                  <span>Individuel <b>(1500Fcfa/personne)</b></span>
+                </label>
+              </section> */}
+
+            </FieldsetRadioStyled>
+            
+            <FieldsetMeal
+              SectionCheckboxStyled={SectionCheckboxStyled}
+              toggleFormNdrImg={toggleFormNdrImg}
+              onMealPlanChange={handleMealPlanChange}
+              onCustomMealChange={handleCustomMealChange}
+              handleFieldsetValidation={handleFieldsetValidation}
+            />
+
+            <fieldset>
+              <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendrons compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
+              <textarea name="message" cols="30" rows="10"></textarea>
+            </fieldset>
+
+          </section>
+
+          <div 
+            id="show_image" 
           />
-        </FieldsetRadioStyled>
 
-        <FieldsetDate 
-          handleDateChange={handleDateChange}
-          toggleFormNdrImg={toggleFormNdrImg}
-          dateDiffDuAu={dateDiffDuAu}
-          handleFieldsetValidation={handleFieldsetValidation}
-        />
 
-        <FieldsetRadioStyled id="location" className="location">
-          <FieldsetLocation
-            toggleFormNdrImg={toggleFormNdrImg}
-            onParticipantsChange={handleParticipantsChange}
-            onIndividualRoomChange={handleIndividualRoomChange}
+          {/* https://github.com/Hacker0x01/react-datepicker/ */}
+          <Resume {...{dateRange,setDateRange,onChange}} />
+
+
+          <fieldset className="submit">
+            <input id="submit_reservation" type="submit" value="Réserver" />
+          </fieldset>
+
+
+          <FieldsetPayment 
             participants={participants}
-            individualRoomParticipants={individualRoomParticipants}
-            handleFieldsetValidation={handleFieldsetValidation}
+            individual_room_participants={individualRoomParticipants}
+            dateDiffDuAu={dateDiffDuAu}
+            mealPlan={mealPlan}
           />
-          
-          {/* <hr />
 
-          <section>
-            <label htmlFor="un" className="radioLabel">
-              <input id="un" type="radio" name="type_reservation" />
-              <span className="radio"></span>
-              <span>Chambre Commune <b>(3000Fcfa/personne la nuité)</b></span>
-            </label>
-            <label htmlFor="deux" className="radioLabel">
-              <input id="deux" type="radio" name="type_reservation" />
-              <span className="radio"></span>
-              <span>Chambre Individuel <b>(10000Fcfa/personne la nuité)</b></span>
-            </label>
-            <label htmlFor="trois" className="radioLabel">
-              <input id="trois" type="radio" name="type_reservation" />
-              <span className="radio"></span>
-              <span>Individuel <b>(1500Fcfa/personne)</b></span>
-            </label>
-          </section> */}
 
-        </FieldsetRadioStyled>
+        </>
+      )}
+
+      {isFormValidated && (
+        <section className={`validated ${isFormValidated ? 'show' : ''}`}>
+          {isFormValidated && <ValidationSection reservationData={reservationData} />}
+        </section>
+      )}
+
+      <style jsx>{`
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(255, 255, 255, 0.8);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9998;
+        }
+
+        .form-validate{
+          height:0;
+        }
+
+        .spinner {
+          width: 50px;
+          height: 50px;
+          border: 5px solid #f3f3f3;
+          border-top: 5px solid #2196f3;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        form {
+          transition: height 0.3s ease-in-out;
+          pointer-events: ${isSubmitting ? 'none' : 'auto'};
+          opacity: ${isSubmitting ? 0.3 : 1};
+          ${isSubmitting && `
+            &:before {
+              content: "";
+              position: fixed;
+              top: calc(50% - 50px);
+              left: calc(50% - 50px);
+              z-index: 9998;
+              width: 100px;
+              height: 100px;
+              border: 15px solid #f3f3f3;
+              border-top: 15px solid #2196f3;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
+              background: blue;
+              box-shadow: 0 0 1em 10px;
+            }
+          `}
+        }
         
-        <FieldsetMeal
-          SectionCheckboxStyled={SectionCheckboxStyled}
-          toggleFormNdrImg={toggleFormNdrImg}
-          onMealPlanChange={handleMealPlanChange}
-          onCustomMealChange={handleCustomMealChange}
-          handleFieldsetValidation={handleFieldsetValidation}
-        />
+        form.validated {
+          height: 0;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+        }
 
-        <fieldset>
-          <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendrons compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
-          <textarea name="message" cols="30" rows="10"></textarea>
-        </fieldset>
+        section.validated {
+          height: auto;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+          transition: all 0.5s ease-in-out;
+          opacity: 0;
+          transform: translateY(20px);
+        }
 
-      </section>
-
-      <div 
-        id="show_image" 
-      />
-
-
-      {/* https://github.com/Hacker0x01/react-datepicker/ */}
-      <Resume {...{dateRange,setDateRange,onChange}} />
-
-
-      <fieldset className="submit">
-        <input type="submit" value="Réserver" />
-      </fieldset>
-
-
-      <FieldsetPayment 
-        participants={participants}
-        individual_room_participants={individualRoomParticipants}
-        dateDiffDuAu={dateDiffDuAu}
-        mealPlan={mealPlan}
-      />
-
-
-    </form>}
-
-    {isFormValidated && <section className={`validated ${isFormValidated ? 'show' : ''}`}>
-      {isFormValidated && <ValidationSection reservationData={reservationData} />}
-    </section>}
-
-    <style jsx>{`
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9998;
-      }
-
-      .form-validate{
-        height:0;
-      }
-
-      .spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid #f3f3f3;
-        border-top: 5px solid #2196f3;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-
-      form {
-        transition: height 0.3s ease-in-out;
-        pointer-events: ${isSubmitting ? 'none' : 'auto'};
-        opacity: ${isSubmitting ? 0.7 : 1};
-      }
-      
-      form.validated {
-        height: 0;
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-      }
-
-      section.validated {
-        height: auto;
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-        transition: all 0.5s ease-in-out;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      section.validated.show {
-        opacity: 1;
-        transform: translateY(0);
-        padding: 2rem;
-      }
-    `}</style>
-  </>
+        section.validated.show {
+          opacity: 1;
+          transform: translateY(0);
+          padding: 2rem;
+        }
+      `}</style>
+    </form>
+  );
 }

@@ -14,7 +14,7 @@ export default function MobileChoices({ onClickMobileChoices: onClick, isActive,
         // { className: "payment", label: "Paiement", icon: faCreditCard }
     ]
     , activeTitleToShow = menuItems.find(item => item.className.split(" ")[0] === isActive)?.titre
-console.log(isActive);
+    console.log("isActive", isActive);
 
     return <ul id="bolobiForm_choices_ul" className="bolobiForm_choices">
         <p>INSCRIPTION: </p>

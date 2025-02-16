@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // true pour le port 465, false pour les autres ports
   auth: {
-    user: process.env.EMAIL_USER, // votre adresse gmail
+    user: process.env.EMAIL_USER_CYR, // votre adresse gmail
     pass: process.env.EMAIL_PASS  // votre mot de passe d'application gmail
     // LIEN POUR CRÉER UN MOT DE PASSE D'APPLCIATION: 
     // https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL4Pv88u1tQAu32DzpYoL5lkR20vdGY_xWV6q_1gJSQViWmNd1fCrNX4CcpKMMyaHUVQEOch66VkCr0TvUj0zk8O6iUXLCMdFf33DWXQ_Ix-izoy1EPE
@@ -121,10 +121,10 @@ async function sendConfirmationEmail(reservation) {
     const info = await transporter.sendMail({
       from: {
         name: 'Sanctuaire Notre Dame du Rosaire',
-        address: process.env.SMTP2GO_USER
+        address: process.env.EMAIL_USER_MAM
       },
       to: reservation.email,
-      bcc: process.env.NEXT_PUBLIC_EMAIL_USER,
+      bcc: process.env.NEXT_PUBLIC_EMAIL_ADMIN,
       subject: 'Confirmation de réservation - Sanctuaire Notre Dame du Rosaire',
       html: emailContent
     });
@@ -234,8 +234,9 @@ export default async function handler(req, res) {
           const newReservation = await modelReservation.create(req.body.reservation);
           console.log('API - POST - Réservation créée avec succès:', newReservation);
           
+          return res.status(200).json({blablabla: "msg temporaire"});
           // Envoyer l'email de confirmation
-          await sendConfirmationEmail({
+          const tmp = await sendConfirmationEmail({
             ...newReservation.toObject(),
             email: req.body.reservation.email
           });

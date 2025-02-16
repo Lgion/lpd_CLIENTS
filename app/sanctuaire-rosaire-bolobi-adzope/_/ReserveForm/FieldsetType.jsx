@@ -14,7 +14,7 @@ export default function FieldsetType({toggleFormNdrImg, handleFieldsetValidation
                 <span>Prière ponctuelle <span>(100Avé, veillée, recollection, ...)</span></span>
             </label>
             <label htmlFor="retraite" className="radioLabel">
-                <input id="retraite" value="retraite" type="radio" name="type_reservation" />
+                <input id="retraite" checked value="retraite" type="radio" name="type_reservation" />
                 <span className="radio bottom"></span>
                 <span>Retraite de prière <b>de groupe</b> <span>(le weekend généralement)</span></span>
             </label>
@@ -47,7 +47,7 @@ export default function FieldsetType({toggleFormNdrImg, handleFieldsetValidation
             // Vérifier si un type de réservation est sélectionné
             const typeReservation = document.querySelector('input[name="type_reservation"]:checked');
 
-            if(typeReservation.value=="pray"){
+            if(typeReservation?.value=="pray"){
                 zero_night.checked = true
                 zero_night.hidden = true
                 zero_night.parentNode.previousElementSibling.hidden = true

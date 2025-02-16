@@ -104,16 +104,16 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
                 const tmp = e.target.className
                 console.log(document.querySelector("fieldset"+(tmp&&"."+e.target.className)))
                 console.log("li."+e.target.className)
-                // document.querySelector("li"+(tmp&&"."+e.target.className)).click()
+                document.querySelector("li"+(tmp&&"."+e.target.className)).click()
             })
         })
         document.querySelector('fieldset.recap>article.dates>div').removeAttribute('style')
 
         // Initialiser les dates avec la semaine courante
         const e = { target: document.querySelector('li.on') };
-        // if (e.target) {
-        //     weekSelection(e, currentWeekNum);
-        // }
+        if (e.target) {
+            weekSelection(e, currentWeekNum);
+        }
     }, [])
     
     return <fieldset className="dates">
