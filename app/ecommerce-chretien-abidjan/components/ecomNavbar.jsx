@@ -10,18 +10,25 @@ export default function EcomNavbar({models,currentDatas}) {
     const { hoveredTitle } = useHover()
 
     return <section id="navbarEcom">
-        <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}} className="active">Publications chrétiennes</button>
-        <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}}>Objets de piété</button>
-        <select id="ecommerce_select" onChange={handleSelect}>
-            <option value="all">Choisir un type d&apos;article</option>
-            {selectOptions}
-        </select>
+        <section>
+            <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}} className="active">Publications chrétiennes</button>
+            <button onClick={(e)=>{handleSelectButtons(e,setSelectOptions)}}>Objets de piété</button>
+        </section>
+        
+        <div className="search-container">
+            <input type="text" placeholder="Rechercher un article..." />
+            <select id="ecommerce_select" onChange={handleSelect}>
+                <option value="all">Choisir un type d&apos;article</option>
+                {selectOptions}
+            </select>
+        </div>
+
         <div className="howtoshow">
             <button onClick={handleProductsDisplay} className="active">▢</button>
             <button onClick={handleProductsDisplay}>─</button>
         </div>
-        {isAdmin.toString()}
-        { isAdmin && <>
+
+        {isAdmin && <>
             <button 
                 title={"Ajouter une produit au ecommerce"}
                 onClick={e=>{

@@ -37,6 +37,9 @@ main.ecommerce {
             >option {}
         }
         &#navbarEcom {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             background: linear-gradient(to right, #f8f9fa, #e9ecef);
             padding: 1.5rem 2rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -45,6 +48,99 @@ main.ecommerce {
             z-index: 1000;
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+            > section {
+                display: flex;
+                gap: 0;
+                
+                > button {
+                    padding: 0.8rem 1.5rem;
+                    border: 1px solid #ddd;
+                    background: #f8f9fa;
+                    color: #6c757d;
+                    transition: all 0.3s ease;
+                    
+                    &:first-child {
+                        border-radius: 4px 0 0 4px;
+                    }
+                    
+                    &:last-child {
+                        border-radius: 0 4px 4px 0;
+                    }
+                    
+                    &.active {
+                        background: #007bff;
+                        color: white;
+                        border-color: #0056b3;
+                    }
+                }
+            }
+
+            .search-container {
+                position: relative;
+                flex: 1;
+                
+                input {
+                    width: 100%;
+                    padding: 0.5rem 2.5rem 0.5rem 1rem;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 1rem;
+                }
+                
+                select {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    width: 2.5rem;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+                
+                &::after {
+                    content: "";
+                    position: absolute;
+                    right: 0.75rem;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 12px;
+                    height: 12px;
+                    background: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E") no-repeat center/contain;
+                    pointer-events: none;
+                }
+            }
+
+            .howtoshow {
+                display: flex;
+                gap: 0;
+                
+                button {
+                    padding: 0.5rem 1rem;
+                    border: 1px solid #ddd;
+                    background: #fff;
+                    color: #6c757d;
+                    transition: all 0.3s ease;
+                    
+                    &:first-child {
+                        border-radius: 4px 0 0 4px;
+                    }
+                    
+                    &:last-child {
+                        border-radius: 0 4px 4px 0;
+                    }
+                    
+                    &.active {
+                        background: #007bff;
+                        color: white;
+                        border-color: #0056b3;
+                    }
+                    
+                    &:hover {
+                        background: #e9ecef;
+                    }
+                }
+            }
         
             >select {
                 appearance: none;

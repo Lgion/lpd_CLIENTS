@@ -46,12 +46,14 @@ export default function ArticleGrid({
             <article id="articles" className="publication cardsAI">
                 {Ecommerce_articles.articles.data.map((item, i) => {
                     let option = Ecommerce_articles_OPTIONS.data.find(
-                        el => el.img_article == item.img && 
-                        (item.autre == (el.opt_nom||"") || item.taille == el.taille_||"")
+                        el => el.img_article == item.img
+                        // && (item.autre == (el.opt_nom||"") || item.taille == el.taille_||"")
                     );
                     
                     item.fr_ = item.fr.replace("<br>").replace("<br/>");
                     item.fr__ = strip_tags(item.fr);
+
+                    
 
                     return (
                         <figure 
@@ -69,18 +71,31 @@ export default function ArticleGrid({
                                 />
                             </div>
                             <div className="info-container">
-                                <button className="options" onClick={handleVariantButtonHover}>
+                                {(option||isAdmin)&&<button className="options"
+                                    // onClick={handleVariantButtonHover}
+                                >
                                     <span>Ɏ</span>
                                     {option && <>
                                         {option.coloris && <div className="coloris">{option.coloris}</div>}
-                                        {option.couverture && <div className="couverture">{option.couverture}</div>}
+                                        {option.couverture && <div className="couverture" 
+                                            onClick={e=>{const tmp = e.target.closest('figure');
+                                            if(tmp.isActive==undefined){
+                                                tmp.isActive=true
+                                                alert("couverture ajoutée")
+                                            }else{
+                                                tmp.isActive=!tmp.isActive
+                                                alert("couverture retiré")
+                                            }}}
+                                            onMouseOver={e=>{const tmp=e.target.closest('figure').querySelector('img').srcset;if(tmp.indexOf('-cov')==-1)e.target.closest('figure').querySelector('img').srcset=tmp.replaceAll('.webp','-cov.webp')}}
+                                            onMouseOut={e=>{const tmp_=e.target.closest('figure');const tmp=tmp_.querySelector('img').srcset;if(!e.target.closest('figure').isActive&&tmp.indexOf('-cov')!==-1)e.target.closest('figure').querySelector('img').srcset=tmp.replaceAll('-cov.webp','.webp')}}
+                                        >avec couverture: +{option.couverture} Fcfa</div>}
                                         {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
                                     </>}
                                     {isAdmin && <ul>
                                         <li onClick={(e) => handleUpdate(e,item)}>edit</li>
                                         <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>delete</li>
                                     </ul>}
-                                </button>
+                                </button>}
                                 <figcaption title={item.fr}>{item.fr__}</figcaption>
                                 <p className="dimensions">{item.dimensions}</p>
                                 <span className="prix">{item.prix} €</span>
