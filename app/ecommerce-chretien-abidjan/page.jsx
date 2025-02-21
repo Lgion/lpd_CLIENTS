@@ -6,6 +6,8 @@ import Image from "next/image"
 import AuthContext from "../../stores/authContext.js"
 // import Nav from '../../components/Nav.jsx'
 import ModalProduct from './_/ModalProduct.jsx'
+import Intro from './components/Intro.jsx'
+import IntroVideo from './components/IntroVideo.jsx'
 import EcomNavbar from './components/ecomNavbar.jsx'
 import "./style.scss"
 import * as Ecommerce_articles from "../../assets/datas/articles.js"
@@ -58,6 +60,8 @@ function Ecommerce({categoryPosts,models={}}) {
     return (
         <HoverProvider>
             <main className="ecommerce">
+                <IntroVideo />
+                <Intro handleProductsDisplay={handleProductsDisplay} />
                 <EcomNavbar {...{models,currentDatas}} />
                 <ArticleGrid 
                     Ecommerce_articles={Ecommerce_articles}

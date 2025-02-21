@@ -10,6 +10,10 @@ export default function MenuMain() {
     
     return <>
         <menu className="mainMenu">
+            {isAdmin &&<li className='admin_menu'>
+                <Link href="/admin">ADMIN</Link>
+            </li>}
+            
             {/* {isAdmin && <menu className="admin">
                 <li><Link href="/admin/school">ÉCOLE</Link></li>   
             </menu>} */}

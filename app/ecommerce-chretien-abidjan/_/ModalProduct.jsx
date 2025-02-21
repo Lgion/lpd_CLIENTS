@@ -1,11 +1,11 @@
 import Link from "next/link"
 import Image from "next/image"
 import AuthContext from "../../../stores/authContext.js"
+import styles from './ShareButton.module.css'
 
 export default function ModalProduct({myLoader, item, img, setCartBox, option, handleAddToCart}) {
     const handleChange = e => {
-        // Gestion du changement de quantité
-        const qty = parseInt(e.target.value) || 0;
+        const qty = parseInt(e.target.value);
         e.target.value = Math.min(Math.max(qty, 1), 99);
     }
 
@@ -68,9 +68,43 @@ export default function ModalProduct({myLoader, item, img, setCartBox, option, h
                     className="view-details"
                     target="_blank"
                 >
-                    Voir les détails
+                    Ouvrir lien direct du produit
                 </Link>
-                
+                <div className="shareOneProduct" style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+                    <div className={styles.shareDropdown}>
+                        <button 
+                            className={styles.shareBtn}
+                            title="Partager"
+                        >
+                        </button>
+                        <div className={styles.shareMenu}>
+                            <a
+                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${window.location.origin}/vente-en-ligne/${item.id_produits}`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.shareOption+" fb"}
+                                title="Partager sur Facebook"
+                            >
+                            </a>
+                            <a
+                                href={`https://wa.me/?text=Découvrez ${encodeURIComponent(item.nom)} sur notre boutique chrétienne ${encodeURIComponent(`${window.location.origin}/vente-en-ligne/${item.id_produits}`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.shareOption+" wa"}
+                                title="Partager sur WhatsApp"
+                            >
+                            </a>
+                            <a
+                                href={`https://twitter.com/intent/tweet?text=Découvrez ${encodeURIComponent(item.nom)} sur notre boutique chrétienne&url=${encodeURIComponent(`${window.location.origin}/vente-en-ligne/${item.id_produits}`)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.shareOption+" x"}
+                                title="Partager sur Twitter"
+                            >
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <button
                     className="add-to-cart"
                     onClick={(e) => handleAddToCart(e, setCartBox)}

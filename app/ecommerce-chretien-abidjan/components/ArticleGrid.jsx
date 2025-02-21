@@ -60,59 +60,65 @@ export default function ArticleGrid({
                             onMouseEnter={() => setHoveredTitle(item.fr__)}
                             onMouseLeave={() => setHoveredTitle('')}
                         >
-                            <Image
-                                loader={myLoader}
-                                src={`img/vente-religieuse/min/${Ecommerce_articles.articles_img_table[item.nom]}/${item.img}.webp`}
-                                alt={item.fr__ || "Product image"}
-                                fill={true}
-                            />
-                            <button className="options" onClick={handleVariantButtonHover}>
-                                <span>Ɏ</span>
-                                {option && <>
-                                    {option.coloris && <div className="coloris">{option.coloris}</div>}
-                                    {option.couverture && <div className="couverture">{option.couverture}</div>}
-                                    {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
-                                </>}
-                                {isAdmin && <ul>
-                                    <li onClick={(e) => handleUpdate(e,item)}>edit</li>
-                                    <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>delete</li>
-                                </ul>}
-                            </button>
-                            <figcaption title={item.fr}>{item.fr__}</figcaption>
-                            <p className="dimensions">{item.dimensions}</p>
-                            <span className="prix">{item.prix} </span>
+                            <div>
+                                <Image
+                                    loader={myLoader}
+                                    src={`img/vente-religieuse/min/${Ecommerce_articles.articles_img_table[item.nom]}/${item.img}.webp`}
+                                    alt={item.fr__ || "Product image"}
+                                    fill={true}
+                                />
+                            </div>
+                            <div className="info-container">
+                                <button className="options" onClick={handleVariantButtonHover}>
+                                    <span>Ɏ</span>
+                                    {option && <>
+                                        {option.coloris && <div className="coloris">{option.coloris}</div>}
+                                        {option.couverture && <div className="couverture">{option.couverture}</div>}
+                                        {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
+                                    </>}
+                                    {isAdmin && <ul>
+                                        <li onClick={(e) => handleUpdate(e,item)}>edit</li>
+                                        <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>delete</li>
+                                    </ul>}
+                                </button>
+                                <figcaption title={item.fr}>{item.fr__}</figcaption>
+                                <p className="dimensions">{item.dimensions}</p>
+                                <span className="prix">{item.prix} €</span>
+                                <section>
+                                    <input 
+                                        defaultValue="1" 
+                                        className="qty" 
+                                        type="number" 
+                                        min="1" 
+                                        max="99" 
+                                        title="Choisir une quantité entre 1 et 99" 
+                                    />
+                                    <button 
+                                        className="addToCart"
+                                        onClick={(e) => handleAddToCart(e, setCartBox, miniCart)}
+                                        data-id={item.id_produits}
+                                        data-coloris={option?.coloris || ""}
+                                        data-couverture={option?.couverture || ""}
+                                        data-option_name={option?.opt_nom || ""}
+                                        data-price={item.prix}
+                                        title="Ajouter au panier"
+                                    >
+                                        Ajouter au panier
+                                    </button>
+                                    <button 
+                                        className="showArticleModal" 
+                                        onClick={() => handleModalShow(item, option)}
+                                        title="Afficher article"
+                                    >
+                                        🔎
+                                    </button>
+                                </section>
+                            </div>
                             <Link 
                                 href={`/vente-en-ligne/${item.id_produits}`}
                                 target="_blank" 
                                 title="Afficher le produit"
                             />
-                            <section>
-                                <input 
-                                    defaultValue="1" 
-                                    className="qty" 
-                                    type="number" 
-                                    min="1" 
-                                    max="99" 
-                                    title="Choisir une quantité entre 1 et 99" 
-                                />
-                                <button 
-                                    className="addToCart"
-                                    onClick={(e) => handleAddToCart(e, setCartBox, miniCart)}
-                                    data-id={item.id_produits}
-                                    data-coloris={option?.coloris || ""}
-                                    data-couverture={option?.couverture || ""}
-                                    data-option_name={option?.opt_nom || ""}
-                                    data-price={item.prix}
-                                    title="Ajouter au panier"
-                                />
-                                <button 
-                                    className="showArticleModal" 
-                                    onClick={() => handleModalShow(item, option)}
-                                    title="Afficher article"
-                                >
-                                    🔎
-                                </button>
-                            </section>
                         </figure>
                     );
                 })}

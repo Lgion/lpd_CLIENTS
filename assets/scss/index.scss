@@ -981,6 +981,7 @@ body{
     >.miniCart{
       &:not(:hover) li{display: none;}
       transition: height .4s;
+      overflow: hidden;
       z-index: 1;
       position: absolute;
       left: 133px;
@@ -999,6 +1000,15 @@ body{
       @include mobile-only{
         left: 0;
         right: 150px;
+      }
+      &:hover {
+        // display: block;
+        z-index: 2;
+        height: 600px;
+        padding: 1.5em 2em;
+        box-shadow: 0 0 1em 5px;
+        &:before{content:"";}
+        li{display: block;}
       }
       &:before {
         position: absolute;
