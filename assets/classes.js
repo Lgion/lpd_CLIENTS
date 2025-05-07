@@ -15,7 +15,7 @@ export const ecole_classes = [
     // }
     {
         id: "1"
-        , professeur: ["1"]
+        , professeur: ["6808326690dd2d72decf2e87"]
         , eleves: ["1","2"]
         , annee: "2022-2023"
         , niveau: "CP1"

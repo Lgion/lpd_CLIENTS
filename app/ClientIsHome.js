@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import AuthContext from "../stores/authContext.js"
 import Header from "./Header";
 import Nav from "./Nav";
+import Footer from "./Footer";
 
 export default function ClientIsHome({children}) {
 
@@ -23,6 +24,8 @@ export default function ClientIsHome({children}) {
 
             <Nav />
         </>}
-        {pathname?.indexOf('admin') == -1 && children}
+        {pathname?.indexOf('admin') == -1 && <>{children} <Footer /></>}
+        
+        
     </>
 }

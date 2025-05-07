@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import {createPortal} from "react-dom"
+import useSWR from "swr"
+import {createContext, useEffect, useState, useMemo, useContext} from 'react'
+import { useUser } from "@clerk/nextjs"
 
-import {createContext, useEffect, useState, useMemo} from 'react'
+import {useGetEleves} from "./hooks"
 // import styled,{createGlobalStyle} from 'styled-components'
 import { ecole_classes, ecole_profs, ecole_eleves } from "../assets/classes"
 import EditMongoForm from "../app/admin/school/EditMongoForm"
+import AuthContext from "../stores/authContext.js"
 
 const AdminContext = createContext({
     // ok: null,
@@ -15,12 +19,21 @@ const AdminContext = createContext({
 })
 export default AdminContext
 
+
+
+
+
+
+
 export const AdminContextProvider = ({children}) => {
     
     
-    const [adminMenuActive, setAdminMenuActive] = useState("")
+    const {setIsAdmin,role,setRole} = useContext(AuthContext)
+    , [adminMenuActive, setAdminMenuActive] = useState("")
     // , [year, setYear] = useState((tmpDate.getMonth()+1)<9 ? (tmpDate.getFullYear()-1)+"-"+tmpDate.getFullYear() : tmpDate.getFullYear()+"-"+(tmpDate.getFullYear()+1))
-    , years = Array.from(new Set(ecole_classes.map(elt => elt.annee)))
+    // , { eleves, profs, classes, error } = useGetEleves()
+    , {eleves, profs, school, error } = useGetEleves()
+    , [years, setYears] = useState([])
     , [year, setYear] = useState("")
     , [classe, setClasse] = useState({})
     , [renderClasse, setRenderClasse] = useState([])
@@ -28,6 +41,11 @@ export const AdminContextProvider = ({children}) => {
     , [showStudents, setShowStudents] = useState(false)
     // , [showModal, setShowModal] = useState(false)
     , [models, setModels] = useState({})
+    , { user } = useUser()
+    console.log(eleves);
+    console.log(profs);
+    console.log(school);
+    
     
     
     const MembersMenu = () => <ul id="membersMenu">
@@ -54,32 +72,34 @@ export const AdminContextProvider = ({children}) => {
       </li>
     </ul>
     , YearsList = () => <ul id="yearsMenu">
-      <li
-        className="addClasse"
-        onClick={e => {
-              modal.classList.add('active')
-              // setShowModal(true)
-              document.querySelector('#modal .modal___main>form').classList.remove('student')
-              document.querySelector('#modal .modal___main>form').classList.remove('teacher')
-              document.querySelector('#modal .modal___main>form.classe').classList.add('active')
+        {console.log(user)}
+        {["admin","editeur"].indexOf(role) != -1 && <li
+            className="addClasse"
+            onClick={e => {
+            modal.classList.add('active')
+            // setShowModal(true)
+            document.querySelector('#modal .modal___main>form.student')?.classList.remove('active')
+            document.querySelector('#modal .modal___main>form.teacher')?.classList.remove('active')
+            document.querySelector('#modal .modal___main>form.classe')?.classList.add('active')
         }}
       >
+        {JSON.stringify(user.role)}
+        {user.role}
         <button>+</button>
-                {JSON.stringify(models)}
+                {/* {JSON.stringify(models)}
                 ---
-                {JSON.stringify(models?.schemaClasse?.paths)}
-        {
-          createPortal(
+                {JSON.stringify(models?.schemaClasse?.paths)} */}
+        {createPortal(
             <EditMongoForm 
               endpoint="ecole"
               modelKey="classe" 
               model={models?.schemaClasse?.paths || {}} 
-              joinedDatasProps={{eleves: ecole_eleves, teachers: ecole_profs}} 
+            //   joinedDatasProps={{eleves:ecole_eleves, teachers: ecole_profs}} 
+              joinedDatasProps={{eleves:eleves, teachers: profs}} 
             />
             , document.querySelector('#modal .modal___main')
-          )
-        }
-      </li>
+        )}
+      </li>}
       {years.map((elt, i) => <li
         key={"years_" + i}
         onClick={(e) => {
@@ -95,6 +115,7 @@ export const AdminContextProvider = ({children}) => {
     </ul>
     , ClassesList = ({ data }) => {
       console.log(data);
+    //   alert('ok')
 
       const toRender = <ul id="classesMenu">
         {data.map((elt, i) => <li
@@ -109,19 +130,60 @@ export const AdminContextProvider = ({children}) => {
                 alert("modifier classe")
               }}
               title="Éditer classe"
-            ></span>
+            >✎</span>
           </Link>
         </li>)}
       </ul>
 
       return toRender
     }
+    , isWhichHash = () => {
+
+        // let a = pathname.split('#')
+        let loc = location.hash.substring(1)
+        , isTeachersUrl = loc.indexOf('teachers') != -1
+        , isStudentsUrl = loc.indexOf('students') != -1
+        , isClassesUrl = loc.length > 0 && !isTeachersUrl && !isStudentsUrl
+        if (isStudentsUrl) {
+            setShowStudents(true)
+        }
+        if (isTeachersUrl) {
+            setShowTeachers(true)
+        }
+        if (isClassesUrl) {
+            let annee = loc.split('___')
+            console.log(annee)
+            setYear(annee[0])
+            // setClasse(annee?.[1] ? ecole_classes.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : [])
+            // setClasse(annee?.[1] ? school?.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1])||{} : {})
+            const foundClasse = annee?.[1] ? school?.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : undefined;
+            setClasse(foundClasse || {}); // Use foundClasse if truthy, otherwise default to {}
+        
+        }
+    }
 
 
     
     useEffect(() => { 
-    }, [])
+        
+    }, [role])
     
+    useEffect(() => { 
+        console.log(eleves);
+
+    }, [eleves])
+    // Add useEffect to calculate years after classes is available
+    useEffect(() => {
+        // Ensure classes is a non-empty array before processing
+        if (school && Array.isArray(school) && school.length > 0) {
+          // Extract years, filter out any undefined/null values, get unique set
+          const uniqueYears = Array.from(new Set(school.map(elt => elt.annee).filter(Boolean)));
+          setYears(uniqueYears);
+        } else {
+          setYears([]); // Reset years if classes is not valid
+        }
+      }, [school]); // Dependency array ensures this runs when classes changes
+  
     useEffect(() => {
         // /*
         let ok = async () => {
@@ -143,80 +205,73 @@ export const AdminContextProvider = ({children}) => {
         
         
         
-        
-        
-        // let a = pathname.split('#')
-        let loc = location.hash.substring(1)
-        , isTeachersUrl = loc.indexOf('teachers') != -1
-        , isStudentsUrl = loc.indexOf('students') != -1
-        , isClassesUrl = loc.length > 0 && !isTeachersUrl && !isStudentsUrl
-        if (isStudentsUrl) {
-            setShowStudents(true)
-        }
-        if (isTeachersUrl) {
-            setShowTeachers(true)
-        }
-        if (isClassesUrl) {
-            let annee = loc.split('___')
-            console.log(annee)
-            setYear(annee[0])
-            setClasse(annee?.[1] ? ecole_classes.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : [])
-        }
+        isWhichHash()
     }, [])
     useEffect(() => {
         console.log("ookokokk");
+        console.log(profs);
+        console.log(eleves);
+        console.log(classe);
+        
+        const tmp_prof = classe.professeur ? "professeur" : "professeur_$_ref_µ_teachers"
+        const tmp_eleves = classe.eleves ? "eleves" : "eleves_$_ref_µ_eleves"
+
+        console.log(tmp_prof);
+        console.log(tmp_eleves);
+        
+        
         let tmp = Object.keys(classe).map(elt => {
             console.log(elt);
             switch (elt) {
-                case "professeur":
-                return <tr>
-                <td>{elt}: </td>
-                <td>
-                {ecole_profs.filter(elt_ => classe.professeur.indexOf(elt_.id) != -1)
-                    .map((elt_, i) => (
-                        <Link 
-                            key={"classe_profs_" + i} 
-                            href={`/admin/school/teacher/${elt_.id}`}
-                            className="member-link"
-                        >
-                            {elt_.nom} - {elt_.prenoms.join(', ')}
-                        </Link>
-                    ))
-                }
-                </td>
-                </tr>
-                break;
-                case "eleves":
-                return <tr>
-                <td>{elt}: </td>
-                <td>
-                {ecole_eleves.filter(elt_ => classe.eleves.indexOf(elt_.id) != -1)
-                    .map((elt_, i) => (
-                        <Link 
-                            key={"classe_eleves_" + i} 
-                            href={`/admin/school/student/${elt_.id}`}
-                            className="member-link"
-                        >
-                            {elt_.nom} - {elt_.prenoms.join(', ')}
-                        </Link>
-                    ))
-                }
-                </td>
-                </tr>
-                break;
+                case tmp_prof:
+                    return <tr>
+                    <td>{elt}: </td>
+                    <td>
+                    {profs?.filter(elt_ => classe[tmp_prof].indexOf(elt_._id) != -1)
+                        .map((elt_, i) => (
+                            <Link 
+                                key={"classe_profs_" + i} 
+                                href={`/admin/school/teacher/${elt_._id}`}
+                                className="member-link"
+                            >
+                                {elt_.nom} - {elt_.prenoms.join(', ')}
+                            </Link>
+                        ))
+                    }
+                    </td>
+                    </tr>
+                    break;
+                case tmp_eleves:
+                    return <tr>
+                    <td>{elt}: </td>
+                    <td>
+                    {eleves?.filter(elt_ => classe[tmp_eleves].indexOf(elt_._id) != -1)
+                        .map((elt_, i) => (
+                            <Link 
+                                key={"classe_eleves_" + i} 
+                                href={`/admin/school/student/${elt_._id}`}
+                                className="member-link"
+                            >
+                                {elt_.nom} - {elt_.prenoms.join(', ')}
+                            </Link>
+                        ))
+                    }
+                    </td>
+                    </tr>
+                    break;
                 case "niveau":
                 // case"alias":
-                return <tr>
-                <td>Classe: </td>
-                <td>{classe["niveau"] + "-" + classe["alias"]}</td>
-                </tr>
-                break;
+                    return <tr>
+                    <td>Classe: </td>
+                    <td>{classe["niveau"] + "-" + classe["alias"]}</td>
+                    </tr>
+                    break;
                 case "photo":
-                return <tr>
-                <td>{elt}: </td>
-                <td><img src={classe.photo} alt={"photo de classe: " + classe["niveau"] + "-" + classe["alias"] + " " + classe["annee"]} /></td>
-                </tr>
-                break;
+                    return <tr>
+                    <td>{elt}: </td>
+                    <td><img src={classe.photo} alt={"photo de classe: " + classe["niveau"] + "-" + classe["alias"] + " " + classe["annee"]} /></td>
+                    </tr>
+                    break;
                 case "annee":
                     return <tr>
                         <td>Année scolaire :</td>
@@ -246,8 +301,8 @@ export const AdminContextProvider = ({children}) => {
                     </tr>
                     break;
                 case "compositions":
-                  alert(JSON.stringify(classe))
-                  alert(JSON.stringify(classe.compositions))
+                    alert(JSON.stringify(classe))
+                    alert(JSON.stringify(classe.compositions))
                     return <tr>
                         <td>Compositions :</td>
                         <td>
@@ -268,7 +323,7 @@ export const AdminContextProvider = ({children}) => {
                             </div>
                         </td>
                         {/* <div>{JSON.stringify()}</div> */}
-                      </tr>
+                    </tr>
                 break;
                 case "moyenne_trimetriel":
                     return <tr>
@@ -309,15 +364,16 @@ export const AdminContextProvider = ({children}) => {
         tmp.shift()
         console.log(tmp);
         { setRenderClasse(tmp) }
-    }, [classe])
+    }, [classe,eleves,profs])
     
     
 
 
     const context = {adminMenuActive, setAdminMenuActive,
         year,classe,renderClasse,showTeachers,showStudents,setAdminMenuActive,setYear,setYear,setClasse,setRenderClasse,setShowTeachers,setShowStudents
-        ,ecole_classes,ecole_profs,ecole_eleves
+        ,ecole_classes:school,ecole_profs:profs,ecole_eleves:eleves||[]
         ,setModels, models
+        ,isWhichHash
         // ,setShowModal
         ,MembersMenu,YearsList,ClassesList
     }

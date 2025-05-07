@@ -3,7 +3,7 @@ import Link from "next/link";
 import EditMongoForm from "./EditMongoForm.jsx"
 import AdminContext from "../../../stores/adminContext.js"
 import MembersList from "./_/MembersList.jsx";
-import NavAdminMenus from "./_/NavAdminMenus.jsx";
+import NavAdminMenus from "./NavAdminMenus.jsx";
 import TableClasse from "./_/TableClasse.jsx";
 import TeachersStudentsView from "./_/TeachersStudentsView.jsx";
 

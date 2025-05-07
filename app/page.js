@@ -29,7 +29,7 @@ const HomeContent = memo(({ diapos }) => (
       </ul>
       <p>Aussi, occasionnellement, nous recevons des <b>dons</b> d'institutions philantropes ou de fidèles chrétiens.</p>
     </article>
-    <Carousel diapos={diapos} icon="2" titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} />
+    {/* <Carousel diapos={diapos} icon="2" titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} /> */}
   </main>
 ));
 

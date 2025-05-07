@@ -153,6 +153,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                     {JSON.stringify(models?.schemaDiapo?.paths)} */}
                     {/* {JSON.stringify(memoizedDiapos[0]['identifiant_$_hidden'])} */}
                     {
+                        // console.log("DANS carousel.jsx, J'AI UN PROBLEME AVEC LE COMPOSANT EditMongoForm, QUI N'ARRETE PAS DE SE RERENDRE INDÉFINIMENT. JE L'AI MIS EN COMMENTAIRE POUR L'INSTANT")
                         createPortal(
                             <EditMongoForm 
                                 hiddens={{identifiant: page+"_0"}}

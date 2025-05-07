@@ -18,8 +18,8 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon
 
-export default function MapLeaflet() {
-    const position = [51.505, -0.09]
+export default function MapLeaflet(position=[51.505, -0.09]) {
+    // const position = [51.505, -0.09]
     const [isMounted, setIsMounted] = useState(false)
 
     useEffect(() => {

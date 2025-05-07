@@ -13,6 +13,8 @@ _/compresse_imgs/log
 #public/**.jpeg
 #public/**.png
 #public/images
+public/images/*.*
+!public/images/*.webp
 #public/img_
 #---
 public/**.jpeg

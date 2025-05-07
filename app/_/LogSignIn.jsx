@@ -1,30 +1,59 @@
 import {useState,useEffect,useContext} from 'react'
 import Link from "next/link";
-import { SignInButton, SignUpButton, UserProfile, UserButton, useAuth, useUser, SignedIn, SignedOut, useClerk } from "@clerk/nextjs"
+import { SignInButton, SignUpButton, UserProfile, UserButton, useAuth, isLoaded, useUser, SignedIn, SignedOut, useClerk } from "@clerk/nextjs"
 
 import AuthContext from "../../stores/authContext.js"
 
 export default function LogSignIn() {
 
     const [isCartPage, setIsCartPage] = useState()
-    , {setIsAdmin} = useContext(AuthContext)
+    , {setIsAdmin,role,setRole} = useContext(AuthContext)
     // , { isLoaded, userId, sessionId, getToken } = useAuth()
     , { isSignedIn, user } = useUser()
     , { signOut } = useClerk();
 
     useEffect(() => {
         console.log(user?.primaryEmailAddress?.emailAddress)
+        console.log(process.env.NEXT_PUBLIC_EMAIL_USER)
+        console.log(process.env.NEXT_PUBLIC_EMAIL_USER.indexOf(user?.primaryEmailAddress?.emailAddress))
+
+        
         if(!isSignedIn)
             setIsAdmin(false)
         if(process.env.NEXT_PUBLIC_EMAIL_USER.indexOf(user?.primaryEmailAddress?.emailAddress) !== -1
         // if(user?.primaryEmailAddress?.emailAddress == "hi.cyril@gmail.com"
             // || true 
-        )
+        ){
+            const prev_email = user?.primaryEmailAddress?.emailAddress.substring(0,user?.primaryEmailAddress?.emailAddress.indexOf("@"))
+            let myRole = ""
+            console.log(user?.primaryEmailAddress?.emailAddress);
+            console.log(prev_email);
+            
             setIsAdmin(true)
+            switch(prev_email){
+                case"hi.cyril":case"legion.athenienne": myRole = "admin"
+                break;
+                case"puissancedamour": myRole = "editeur"
+                break;
+                case"prof": myRole = "enseignant"
+                break;
+            }
+            console.log(myRole);
+            console.log(role);
+            setRole(myRole)
+            console.log(role);
+            
+        }
     }, [user])
     
     
     useEffect(() => { 
+
+//EASY DEV PURPOSE
+// setIsAdmin(true);
+
+
+        
         (()=>{setIsCartPage(document.querySelector('#__next>main.cart'))})()
         console.log("TRY TO USE CLERK NPM PACKAGE SOLUTION FOR LOGIN SERVICES")
         // alert("TRY TO USE CLERK NPM PACKAGE SOLUTION FOR LOGIN SERVICES")

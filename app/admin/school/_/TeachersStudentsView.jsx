@@ -19,7 +19,7 @@ export default () => {
               let notIn = showTeachers ? ecole_profs : ecole_eleves
               notIn = notIn.filter(member => {
                 let nom = member.nom.indexOf(e.target.value)
-                  , prenoms = member.prenoms.join(', ').indexOf(e.target.value)
+                  , prenoms = member.prenoms?.join(', ').indexOf(e.target.value)
                 if ((nom && prenoms) == -1) return member
               })
               console.log(notIn);
@@ -45,9 +45,11 @@ export default () => {
               // modal.style.display="block"
               modal.classList.add('active')
               // setShowModal(true)
-              console.log('#modal .modal___main>form.'+(showTeachers?"teacher":"student"));
-              document.querySelector('#modal .modal___main>form').classList.remove('classe')
-              document.querySelector('#modal .modal___main>form.'+(showTeachers?"teacher":"student")).classList.add('active')
+              // console.log('#modal .modal___main>form.'+(showTeachers?"teacher":"student"));
+              document.querySelector('#modal .modal___header').innerHTML = "<h2>Modifier les informations d'un " + (showTeachers ? "professeur" : "élève") + ": </h2>"
+              document.querySelector('#modal .modal___main>form.classe').classList.remove('active')
+              document.querySelector('#modal .modal___main>form.member.'+(showTeachers?"teacher":"student")).classList.add('active')
+              document.querySelector('#modal .modal___footer').innerHTML = `<button onClick="e=>{document.querySelector('#modal .modal___main form.active>button').click()}">SOUMETTRE (not working yet...)</button>`
             }}
           >+</button>
           {
@@ -57,6 +59,7 @@ export default () => {
                 modelKey={showTeachers?"teacher":"student"} 
                 model={showTeachers ? models?.schemaTeacher?.paths || {} : models?.schemaEleve?.paths || {}} 
                 joinedDatasProps={{classes: ecole_classes}} 
+                hides={["school_history","absences","notes","compositions","moyenne_trimetriel","bonus","manus","commentaires","documents"]}
               />
               , document.querySelector('#modal .modal___main')
             )

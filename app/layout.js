@@ -14,7 +14,6 @@ import {FormContextProvider} from '../stores/formContext.js'
 // import Nav from '../components/Nav'
 import ClientIsHome from "./ClientIsHome";
 import ClientIsAdmin from "./ClientIsAdmin";
-import Footer from "./Footer";
 import AfterFooter from "./AfterFooter";
 
 // dans votre fichier _app.js ou un composant spécifique
@@ -76,7 +75,6 @@ export default function RootLayout({ children }) {
               <ClientIsAdmin>
                 {children}
               </ClientIsAdmin>
-              <Footer />
               <AfterFooter />
             </ClerkProvider>
           </FormContextProvider>

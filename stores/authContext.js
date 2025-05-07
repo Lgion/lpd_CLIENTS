@@ -7,12 +7,13 @@ import * as CartLS from "../utils/favorisManager.js"
 import mongoose from 'mongoose'
 
 const AuthContext = createContext({})
-export default AuthContext
+export default AuthContext 
 
 export const AuthContextProvider = ({children}) => {
     let router = useRouter()
     let pathname = usePathname()
     , articles_title_table = Ecommerce_articles.articles_title_table
+    , [role, setRole] = useState("")
     , handleQty = (e, ls) => { 
         // alert(localStorage.cart)
         
@@ -281,7 +282,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire, data}
+    const context = {role, setRole, ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire, data}
     
     return (
         <AuthContext.Provider value={context}>

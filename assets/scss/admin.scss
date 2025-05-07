@@ -3,32 +3,82 @@
 
 
 body{
-        >header{}
+        >header{
+            background: url(/img/sanctuaire/03.webp) center center no-repeat;
+            background-size: 100%;
+            &:before,&:after{
+                background:none !important;
+                box-shadow:none !important;
+            }
+            >menu{
+                >li{
+                    >a{
+                        &:not(.active):not(:hover){opacity:.5;}
+                    }
+                }
+            }
+        }
         >main{
             &#admin{}
             &.school{
                 >nav{
+                    padding: 1em;
+                    border: 5px solid;
+                    background:wheat;
                     &#adminMenus{}
                     >ul{
                         display: flex;
+                        flex-wrap: wrap;
+                        gap: 1em;
                         text-align: center;
-                        border-bottom: solid;
-                        background:wheat;
                         &:not(#membersMenu){gap:10px;}
                         &#membersMenu{
+                            >li{
+                                &:hover>a{
+                                    color:white;
+                                }
+                            }
                         }
                         &#yearsMenu{
-                            border-color:purple;
+                            // border-color:purple;
                             position: relative;
-                            padding-top: calc(2em + -4px);
+                            padding: calc(1em + -2px) 2.5em;
+                            margin: 1em 0 0;
+                            border: solid;
+                            &:hover{
+                                &:after{
+                                    content: unset;
+                                }
+                            }
+                            &:after{
+                                content: "CLASSES";
+                                color: white;
+                                position: absolute;
+                                top: 0;
+                                bottom: 0;
+                                right: 0;
+                                left: 0;
+                                background: rgba(0, 0, 0, .8);
+                                line-height: 2em;
+                                font-size: 2em;
+                            }
                             >li{
                                 border: solid purple;
                                 border-width: 0 3px;
+                                width: unset;
                                 &:first-of-type.addClasse{
-                                    width: 100%;
+                                    width: 50px;
                                     position: absolute;
                                     top: 0;
+                                    left: 0;
+                                    height: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
                                     >button{
+                                        width: 25px;
+                                        height: 25px;
+                                        line-height: 12px;
                                         transition:all .2s;
                                         &:hover{background:black;color:white;}
                                     }
@@ -38,9 +88,14 @@ body{
                         }
                         &#classesMenu{
                             border-color:blue;
+                            padding: 1em;
+                            background: whitesmoke;
+                            box-shadow: 0 0 10px 1px inset;
+                            border-radius: 0 0 5px 5px;                        
                             >li{
                                 border: solid blue;
-                                border-width: 0 3px;
+                                border-width: 3px;
+                                width: unset;
                                 >a{
                                     padding: .125em;
                                     display: flex;
@@ -53,18 +108,22 @@ body{
                                         height:2em;
                                         background:url("/school/edit.svg");
                                         background-size: cover;
+                                        &:hover{color:blue;border: solid;border-radius: 1em;}
                                     }
                                 }
                             }
                         }
                         >li{
+                            width: 100%;
                             background:white;
-                            flex: 1;
+                            // flex: 1;
                             transition:background .2s;
-                            &:not(.addClasse):hover{background:rgba(0,0,0,.5);}
+                            border: solid;
+                            :hover{background:rgba(0,0,0,.5);}
                             >a{
                                 display: block;
                                 padding: 1em;
+                                color:black;
                                 width: 100%;
                             }
                         }
@@ -100,6 +159,7 @@ body{
                         display:flex;
                         padding: 1em 1em 0;
                         border-bottom: solid;
+                        margin-bottom: 1em;
                         >input{
                             border-radius: 5px 0 0 0;
                         }
@@ -181,6 +241,42 @@ body{
                         }
                     }
                 }
+            }
+            &.profilContainer{
+                .card{
+                    &-header{}
+                    &-body{
+                        .card-body{
+                            font-size:1em;
+                        }
+                    }
+                }
+            }
+        }
+        >#modal{
+            >span.close{}
+            .modal{
+                &___header{
+                }
+                &___main{
+                    overflow:hidden !important;
+                    >form{
+                        overflow:scroll;
+                        margin: 0 auto;
+                        border-radius: 10px;
+                        padding: 1em;
+                        box-shadow: 0 0 10px 1px;
+                        label{
+                            display: block;
+                        }
+                        >div{
+                            border: solid;
+                            padding: 1em;
+                            margin: 1em 0;
+                        }
+                    }
+                }
+                &___footer{}
             }
         }
         >footer{}

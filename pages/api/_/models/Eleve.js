@@ -14,16 +14,16 @@ const studentSchema = mongoose.Schema({
     // current_classe_$_ref_µ_classes: { default: "", type: Object, required: true },
     current_classe: { default: "", type: ObjectId, ref: Object.keys(schemaClasseForEleve.obj)[0], required: true },
     nom: { default: "", type: String, required: true },
-    prenoms: { default: "", type: String, required: true },
+    prenoms: { default: [""], type: [Object], required: true },
     naissance_$_date: { default: "", type: String, required: true },
-    adresse: { default: "", type: String, required: true },
+    adresse_$_map: { default: "", type: String, required: true },
     parents: { default: {mere: "", pere: "", phone: ""}, type: Object, required: true },
     photo_$_file: { default: "", type: String, required: true },
     // photo: {
     //   data: Buffer,
     //   contentType: String,
     // },
-    scolarity_fees_$_checkbox: { default: {[currentSchoolYear]: "checked"}, type: Object, required: true }, // => {YYYY: {}}
+    scolarity_fees_$_checkbox: { default: {[currentSchoolYear]: false}, type: Object, required: true }, // => {YYYY: {}}
     bolobi_class_history_$_ref_µ_classes: { default: {[currentSchoolYear]:""}, type: Object, required: true },
     school_history: { default: {[currentSchoolYear]:""}, type: Object, required: true },
     absences: { default: {}, type: [String], required: true },

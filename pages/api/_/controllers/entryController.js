@@ -14,6 +14,8 @@ const fs = require('fs')
 
 
 
+exports.getEntry = (req, res, next, Model) => {
+}
 
 exports.createEntry = async (req, res, next, Model) => {
     // let test = await connectToDatabase.connect();

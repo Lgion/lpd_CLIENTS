@@ -1,0 +1,324 @@
+#map{
+    height: 300px;
+}
+
+form{
+    label{
+        &.photo{
+            color:red;
+            cursor:pointer;
+            border:solid;
+            padding:.5em;
+            &:hover{
+                background:red;
+                color:#fff;
+            }
+        }
+    }
+    div{
+        &.scolarity_fees{
+            label{
+                display: flex !important;
+                border: solid;
+                padding: .5em;
+            }
+        }
+    }
+}
+
+#school_members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+
+  li {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(100% / 3 - 1.5rem * 2 / 3);
+    min-width: 280px;
+    display: flex;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    a.member-link { 
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      width: 100%;
+
+      &:hover img{
+        aspect-ratio: 16 / 5;
+      }
+      figure {
+        margin: 0;
+        position: relative;
+
+        img {
+          display: block;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          object-fit: cover;
+          background-color: #f0f0f0;
+          transition: aspect-ratio 0.3s ease;
+        }
+
+        figcaption {
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+          color: #fff;
+          padding: 1rem 1.2rem;
+          font-size: 1.05rem;
+          font-weight: 600;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+          display: flex;
+          justify-content: space-between;
+          position:relative;
+          &:before,&:after{position:absolute;top:0;}
+          &:before{content:"Nom";left:0;}
+          &:after{content:"Prénoms";right:0;}
+          >span{
+            
+          }
+        }
+      }
+
+      section {
+        padding: 1.2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+
+        .indicators {
+          display: flex;
+          gap: 0.5rem;
+          margin-bottom: 0.4rem;
+        }
+        .isInterne, .doFeesPaid {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+        .isInterne { background-color: #4CAF50; } 
+        .doFeesPaid { background-color: #FF9800; }
+
+        div {
+          font-size: 0.9rem;
+          color: #666;
+          line-height: 1.5;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+
+          &::before {
+            font-size: 1.1em;
+            opacity: 0.7;
+          }
+
+          &.birth::before { content: '🎂'; } 
+          &.address::before { content: '📍'; } 
+          &.parents::before { content: '👥'; } 
+
+          &.address {
+            font-weight: 500;
+            color: #333;
+          }
+          &.parents:empty { 
+            display: none; 
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    li {
+      width: calc(50% - 1.5rem / 2);
+    }
+  }
+  @media (max-width: 600px) {
+    li {
+      width: 100%;
+    }
+  }
+}
+
+/* === Styles merged from app/admin/school/styles/table-classe.css === */
+
+/* Styles généraux pour le tableau */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+/* Styles pour les devoirs */
+.homework-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.homework-item {
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.homework-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.homework-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.homework-content strong {
+    color: #2c3e50;
+}
+
+.homework-content small {
+    color: #e74c3c;
+}
+
+/* Styles pour les compositions */
+.compositions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.composition-item {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.composition-details {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+}
+
+.matiere-note {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+/* Styles pour les moyennes trimestrielles */
+.moyennes-list {
+    display: flex;
+    gap: 2rem;
+}
+
+.trimestre-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.moyenne {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Styles pour les commentaires */
+.commentaires-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.commentaire-item {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    border-left: 4px solid #3498db;
+}
+
+.commentaire-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.commentaire-header small {
+    color: #666;
+}
+
+.commentaire-item p {
+    margin: 0;
+    color: #2c3e50;
+    line-height: 1.5;
+}
+
+/* Styles pour les liens des membres (Generic - from table-classe.css) */
+.member-link {
+    display: inline-block;
+    margin: 0.25rem;
+    /* padding: 0.5rem 1rem; */ 
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.member-link:hover {
+    background-color: #e9ecef;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-link:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Responsive design (from table-classe.css) */
+@media (max-width: 768px) {
+    .moyennes-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .composition-details {
+        grid-template-columns: 1fr;
+    }
+
+    .commentaire-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+}

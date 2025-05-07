@@ -1,5 +1,5 @@
 @import "./main.scss";
-@import "./admin.scss";
+// @import "./admin.scss";
 
 @import "../../app/blog/blog.scss";
 
@@ -309,7 +309,7 @@ body>div[data-floating-ui-portal]{
   }
 }
 
-.card{
+.card:not(.safe){
   @extend .card;
   >div:first-child,>h2:first-child,>h3:first-child,>h4:first-child,>h5:first-child,>h6:first-child
     {@extend .card-header;width:100%;}

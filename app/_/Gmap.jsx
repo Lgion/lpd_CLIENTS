@@ -112,7 +112,7 @@ export default function Gmap() {
     };
 
     return <Wrapper 
-        apiKey={"AIzaSyBJcEaaYtL4Y9RmWSDg10UW3dFFpUY6KXc"} 
+        apiKey={"AIzaSyA91x3_pmeeoc1bwFWvj2dehOCBuH0VKcU"} 
         render={render}
     >
         <Map 

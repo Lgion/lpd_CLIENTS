@@ -18,7 +18,7 @@ const readFile = (req, saveLocally) => {
     console.log(Object.keys(req));
     const options = {}
     if(saveLocally){
-        options.uploadDir = path.join(process.cwd(), "/public/images")
+        options.uploadDir = path.join(process.cwd(), "/public/school/"+req.query.type)
         options.filename = (name,ext,path,form) => {
             console.log(name);
             console.log(path);
@@ -28,6 +28,7 @@ const readFile = (req, saveLocally) => {
             console.log(name);
             console.log(ext);
             console.log(name + "_" + form.fields.timestamp[0] + "." + path.originalFilename.split(".").at(-1));
+            return req.query.createdFilename + "_" + form.fields.timestamp[0] + "." + path.originalFilename.split(".").at(-1)
             return name + "_" + form.fields.timestamp[0] + "." + path.originalFilename.split(".").at(-1)
         }
     }
@@ -54,11 +55,21 @@ const handler = async (req,res,next) => {
     }
     if(req.method == "POST" || req.method == "PATCH"){
 
+        console.log("\n\n\n\nBEING WRITING IMAGES .............");
+        console.log(req.url);
+        console.log(req.query);
+        console.log(req.query.type);
+        
+        
+        
+        
         try{
-            await fs.readdir(path.join(process.cwd()+"/public","/images"))
+            await fs.readdir(path.join(process.cwd()+"/public","/school/"+req.query.type))
         }catch(err){
             console.log("ok errorrr");
-            await fs.mkdir(path.join(process.cwd()+"/public","/images"))
+            await fs.mkdir(path.join(process.cwd(), "/public/school/students"), { recursive: true });
+            await fs.mkdir(path.join(process.cwd(), "/public/school/teachers"), { recursive: true });
+            await fs.mkdir(path.join(process.cwd(), "/public/school/classes"), { recursive: true });
         }
         await readFile(req,true)
         console.log("ok done");

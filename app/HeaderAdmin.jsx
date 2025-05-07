@@ -2,6 +2,7 @@ import {useContext, useEffect} from 'react'
 import { usePathname } from 'next/navigation'
 import Link from "next/link";
 import AdminContext from "../stores/adminContext.js"
+import DesignHeader from "./_/Admin/DesignHeader.jsx"
 
 export default function HeaderAdmin() {
 
@@ -23,6 +24,7 @@ export default function HeaderAdmin() {
   
   return (
     <header>
+      <DesignHeader />
       <menu className="mainMenu">
         <li>
           <Link 

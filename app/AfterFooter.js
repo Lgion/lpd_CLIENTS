@@ -5,7 +5,7 @@ export default function AfterFooter() {
         <div id="modal">
             <span className="close"></span>
             <div className="modal___header">
-
+                
             </div>
             <div className="modal___main">
 
