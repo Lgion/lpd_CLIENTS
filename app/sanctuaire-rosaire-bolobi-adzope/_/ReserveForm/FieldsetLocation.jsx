@@ -1,8 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBed,faUsers } from '@fortawesome/free-solid-svg-icons'
 
-export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants}) {
+export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange, onIndividualRoomChange, participants, individualRoomParticipants, handleFieldsetValidation}) {
     const [isnotZeroParticipant, setIsnotZeroParticipant] = useState(0)
     const [isApproximateCount, setIsApproximateCount] = useState(false)
 
@@ -42,7 +44,7 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                         checked={isApproximateCount}
                         onChange={(e) => setIsApproximateCount(e.target.checked)}
                     />
-                    <i><b>*</b> Estimation <strong>{isApproximateCount ? "approximative" : "précise"}</strong> du nombre de participants <b>active</b></i>
+                    <i><b>*</b> Estimation <strong>{isApproximateCount ? "approximative" : "précise"}</strong> du nombre de participants.</i>
                 </label>
             </div>
 
@@ -60,6 +62,7 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                         onChange={onChangeParticipants} 
                     />
                     <button type="button" onClick={e => {onChangeParticipants(e,parseInt(participants)+1)}}>+</button>
+                    <FontAwesomeIcon icon={faUsers} title="Nombre total de participants" />
                 </div>
             </div>
 
@@ -85,23 +88,60 @@ export default function FieldsetLocation({toggleFormNdrImg, onParticipantsChange
                 </div>
             </div>
 
+            <p>Vous pouvez réserver jusqu'à 7 chambres individuelles: </p>
+
             <label htmlFor="chambre" className="radioLabel safe">
-                <span>Chambre Individuel <b>(<b>10000Fcfa</b>/personne la nuité)</b></span>
-                <div>
+                <span>Chambre Individuel <b>(<b>10000Fcfa</b> la nuité)</b></span>
+                <div className="custom-number-input">
+                    <button type="button" onClick={e => {onIndividualRoomChange(parseInt(individual_room_participants.value)-1)}}>-</button>
                     <input 
                         id="individual_room_participants" 
                         type="number" 
                         name="individual_room_participants" 
-                        max={participants} 
+                        // max={participants} 
+                        max={7} 
                         min="0" 
                         value={individualRoomParticipants}
                         onChange={e => {
                             onIndividualRoomChange(e.target.value)
                         }} 
                     />
+                    <button type="button" onClick={e => {onIndividualRoomChange(parseInt(individual_room_participants.value)+1)}}>-</button>
+                    <label htmlFor="individual_room_participants" title="chambres individuelles"><FontAwesomeIcon icon={faBed} /></label>
                 </div>
-                <label htmlFor="individual_room_participants">chambres</label>
             </label>
         </section>
+        <button 
+          className="validate-button"
+          onClick={(e) => {
+            e.preventDefault();
+            
+            const totalParticipants = parseInt(document.querySelector('#participants')?.value || '0');
+            const individualRooms = parseInt(document.querySelector('#individual_room_participants')?.value || '0');
+            
+            // Vérifier si le nombre total de participants est valide
+            if (totalParticipants <= 0) {
+              alert('Le nombre total de participants doit être supérieur à 0');
+              return;
+            }
+            
+            // Vérifier si le nombre de chambres individuelles est valide
+            if (individualRooms < 0) {
+              alert('Le nombre de chambres individuelles ne peut pas être négatif');
+              return;
+            }
+            
+            // Vérifier si le nombre de chambres individuelles n'excède pas le nombre total de participants
+            if (individualRooms > totalParticipants) {
+              alert('Le nombre de chambres individuelles ne peut pas être supérieur au nombre total de participants');
+              return;
+            }
+            
+            // Si toutes les validations passent
+            handleFieldsetValidation('location');
+          }}
+        >
+          Valider
+        </button>
     </>
 }

@@ -1,5 +1,5 @@
-@import "./main.scss";
-@import "./index.scss";
+// @import "./main.scss";
+// @import "./index.scss";
 
 /*
      CE DOCUMENT EST POUR LES PERSONNES QUI DEVRONT COLLABORER AU PROJET, 
@@ -7,6 +7,148 @@
 */
 
 
+fieldset.submit{
+  display: flex;
+  width: 100%;
+  margin: 2em 0;
+  font-size: 2em;
+  border: double blue;
+  border-width: 7px 0;
+  &:not(#pound){padding: 1em 3em !important;}
+  transition: all 0.3s ease;
+   
+  &:hover {
+    border-color: #2196f3;
+    background-color: rgba(33, 150, 243, 0.05);
+    transform: scale(1.01);
+  }
+   
+  >input{
+    @extend %endingFormButtons;
+    color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+     
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+                 0 8px 16px rgba(33, 150, 243, 0.25);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15),
+                 0 2px 6px rgba(33, 150, 243, 0.2);
+    }
+  }
+}
+#recapitulatif,.payment {
+  &:not(#pound){padding:0 !important;}
+  >h4,>div {
+    text-align: center !important;
+    &:not(#pound){padding: 1em 0 !important;}
+    >button,>input {
+      padding: 0.8em 1.5em;
+      background: linear-gradient(145deg, silver, gray);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+                  0 4px 8px rgba(33, 150, 243, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        @extend %endingFormButtons;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15),
+                    0 8px 16px rgba(33, 150, 243, 0.2);
+      }
+
+      &:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1),
+                    0 2px 4px rgba(33, 150, 243, 0.2);
+      }
+    }
+  }
+}
 
 
 
+// Style du bouton de validation
+.validate-button {
+  display: none; // Caché par défaut sur desktop
+  box-shadow: 0 0 5px 2px  black !important;
+  
+  @include mobile-and-tablette {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50%;
+    margin: 1rem auto;
+    
+    &:hover {
+      background-color: darken(#007bff, 10%);
+    }
+    
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+// Style du bouton de basculement des informations de paiement
+.payment-toggle-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #e9ecef;
+  }
+  
+  h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #212529;
+  }
+  
+  .arrow {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+    
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.payment-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  
+  &.open {
+    max-height: 2000px; // Une valeur suffisamment grande pour contenir tout le contenu
+    transition: max-height 0.5s ease-in;
+  }
+}

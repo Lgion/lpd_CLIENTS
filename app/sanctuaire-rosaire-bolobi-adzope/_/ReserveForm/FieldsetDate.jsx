@@ -5,7 +5,7 @@ import moment from "moment"
 
 moment.locale('fr')
 
-export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiffDuAu}) {
+export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiffDuAu, handleFieldsetValidation}) {
     const [isWeek, setIsWeek] = useState(false)
     , onFocus = e => e.target.showPicker()
     , onChange = e => {
@@ -13,12 +13,14 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         , span = e.target.parentNode.querySelector("label[for="+e.target.id+"] span")
         , tmp = moment(e.target.value)
         span.innerHTML = tmp.format('LL')
+        
+        // document.querySelector(".dates div:last-of-type>b").innerHTML = ((du.value && au.value) && (!zero_night.checked)) 
+        document.querySelector(".dates div b").innerHTML
+            = ((du.value && au.value) && (!zero_night.checked)) 
+                ? dateDiffDuAu().day
+                : 0
 
-        document.querySelector(".dates div:last-of-type>b").innerHTML = (du.value && au.value) 
-            ? dateDiffDuAu().day
-            : 0
-
-        handleDateChange()
+        handleDateChange(zero_night.checked&&true)
     }
     , weekSelection = (e,weekNum) => {
         
@@ -29,7 +31,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         document.querySelector(".dates div b").innerHTML = 2
 
         document.querySelector(".dates ul li.on")?.classList.remove('on')
-        e.target.classList.add('on')
+        e.target.closest('li').classList.add('on')
 
         du.value = range[0]
         onChange(e1)
@@ -105,7 +107,7 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
                 document.querySelector("li"+(tmp&&"."+e.target.className)).click()
             })
         })
-        document.querySelector('fieldset.datepicker>article.dates>div').removeAttribute('style')
+        document.querySelector('fieldset.recap>article.dates>div').removeAttribute('style')
 
         // Initialiser les dates avec la semaine courante
         const e = { target: document.querySelector('li.on') };
@@ -114,23 +116,48 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
         }
     }, [])
     
-    return <fieldset className="active dates">
+    return <fieldset className="dates">
         <h4 onClick={toggleFormNdrImg}>Choisir une période (du DD/MM/YYYY au DD/MM/YYYY): </h4>
         
         <p>Vous pouvez choisir une tranche de dates de votre spécifique, ou alors sélectionner un numéro de semaine (cas fréquent pour les retraites de groupe)</p>
         
+        <div className="zero_night_box">
+            <p>SI VOUS NE RÉSERVEZ <u>AUCUNE NUÎTÉ</u>, ALORS <u>COCHEZ CETTE CASE</u>:</p>
+            <div><input type="checkbox" className="safe" name="zero_night" id="zero_night"
+            onChange={
+                e=>{
+                    document.querySelector(".dates div b").innerHTML="0"
+                    if(zero_night.checked){
+                        du.value=""
+                        du.previousElementSibling.querySelector("span").innerHTML=""
+                        au.value=""
+                        au.previousElementSibling.querySelector("span").innerHTML=""
+                    }else{
+                        le.value=""
+                        le.previousElementSibling.querySelector("span").innerHTML=""
+                    }
+                }
+            }
+             /></div>
+            <div>    
+                <p>Choisir le jour de réservation: </p>            
+                <label htmlFor="le"><span></span></label>
+                <input type="date" id="le" name="le" {...{onChange, onFocus}}/>
+            </div>
+        </div>
+        
         <div>
             <label htmlFor="du"><span></span></label>
-            <input type="date" id="du" name="du" {...{onChange, onFocus}} required />
+            <input type="date" id="du" name="du" {...{onChange, onFocus}} />
             <label htmlFor="au"><span></span></label>
-            <input type="date" id="au" name="au" {...{onChange, onFocus}} required />
+            <input type="date" id="au" name="au" {...{onChange, onFocus}} />
         </div>
 
         <ul onMouseOver={e => {e.target.querySelector('li.on')?.scrollIntoView({ behavior: "smooth", block: "center"})}}>
             <li>Weekends semaines {new Date().getFullYear()}: </li>
             {weeks_list.map((elt,i) => (i>=currentWeekNum) && <li 
                     key={i} 
-                    onClick={ e=>weekSelection(e,i) } 
+                    onClick={ e=>weekSelection(e,i+"") } 
                     className={currentWeekNum==i ? "on" : ""} 
                 >
                     <span>{i}</span>
@@ -139,5 +166,37 @@ export default function fieldsetDate({handleDateChange,toggleFormNdrImg,dateDiff
             )}
         </ul>
         <div>Nombre de nuits: <b>0</b></div>
+        <button 
+          className="validate-button"
+          onClick={(e) => {
+            e.preventDefault();
+            
+            const dateDebut = document.querySelector('#du')?.value;
+            const dateFin = document.querySelector('#au')?.value;
+            const dateLe = document.querySelector('#le')?.value;
+            
+            // Vérifier si les deux dates sont remplies
+            if(zero_night.checked){
+                if(!dateLe){
+                    alert('Veuillez sélectionner une date pour votre évènement.');
+                    return;
+                  }
+            }else if (!dateDebut || !dateFin) {
+              alert('Veuillez sélectionner les dates de début et de fin');
+              return;
+            }
+            
+            // Vérifier si la date de fin est après la date de début
+            if (new Date(dateFin) <= new Date(dateDebut)) {
+              alert('La date de fin doit être après la date de début');
+              return;
+            }
+            
+            // Si tout est valide, appeler handleFieldsetValidation
+            handleFieldsetValidation('dates');
+          }}
+        >
+          Valider
+        </button>
     </fieldset>
 }

@@ -16,6 +16,11 @@ export default function MealPlanOptions({ mealPlan, handleMealPlanChange }) {
                     padding: 1rem;
                     background-color: #f8f9fa;
                     border-radius: 0.25rem;
+                    width: 50%;
+                    align-self: center;
+                    border: 1px solid;
+                    box-shadow: 0 0 10px 1px;
+                    padding: 1em 3em;
                 }
 
                 .mealPlanOptions h5 {
@@ -25,6 +30,11 @@ export default function MealPlanOptions({ mealPlan, handleMealPlanChange }) {
 
                 .mealPlanOptions .form-check {
                     margin-bottom: 0.5rem;
+                    &:hover{
+                        >label,>input{
+                            border-bottom: solid #9356DC;
+                        }
+                    }
                 }
             `}</style>
             <h5>Choisissez votre formule de repas:</h5>

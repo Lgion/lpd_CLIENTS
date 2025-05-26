@@ -202,7 +202,7 @@ export const FormContextProvider = ({children}) => {
                     font-family: Arial;
                     font-weight: bold;
                     text-align: center;
-                    width: 66%;
+                    width: 70%;
                     height: 100%;
                     background: #0380b3;
                     display: block;
@@ -213,19 +213,22 @@ export const FormContextProvider = ({children}) => {
                     -ms-transition: margin 0.2s linear;
                     -o-transition: margin 0.2s linear;
                     transition: margin 0.2s linear;
-                    margin-left: -66%;
-                    &:first-of-type{line-height: 1.75em;}
+                    margin-left: -70%;
+                    &:first-of-type{
+                        line-height: 1.75em;
+                        font-size: 1.5em;
+                    }
                     ~span{
-                    margin-left: 0;
-                    background: none;
-                    font-size:.75em;
+                        margin-left: 0;
+                        background: none;
+                        font-size: 1.5em;
                     }
                 }
                 >i.indicator{
                     float: left;
                     background: #ccc;
                     height: 100%;
-                    width: 34%;
+                    width: 30%;
                     padding: 8px;
                     box-sizing: border-box;
                     >svg{

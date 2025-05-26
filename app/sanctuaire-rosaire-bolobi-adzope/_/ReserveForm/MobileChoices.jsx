@@ -1,48 +1,31 @@
 "use client"
 
+import { useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faChurch, faUsers, faUtensils, faIdCard, faCreditCard } from '@fortawesome/free-solid-svg-icons'
 
-export default function MobileChoices() {
+export default function MobileChoices({ onClickMobileChoices: onClick, isActive, fieldsetsValidation }) {
     const menuItems = [
-        { className: "dates", label: "Dates", icon: faCalendarDays },
-        { className: "type", label: "Évènement", icon: faChurch },
-        { className: "location", label: "Nombre", icon: faUsers },
-        { className: "meal", label: "Repas", icon: faUtensils },
-        { className: "infos", label: "Contact", icon: faIdCard },
+        { className: "infos", label: "Contact", icon: faIdCard, titre: "Informations de contact" },
+        { className: "type", label: "Évènement", icon: faChurch, titre: "Choisir un évènement" },
+        { className: "dates", label: "Dates", icon: faCalendarDays, titre: "Choisir une date" },
+        { className: "location", label: "Nombre", icon: faUsers, titre: "Choisir nombre participants" },
+        { className: "meal", label: "Repas", icon: faUtensils, titre: "Choisir le repas" },
         // { className: "payment", label: "Paiement", icon: faCreditCard }
     ]
-    , onClick = e => {
-        // console.log(item.textContent==e.target.textContent)
-        // console.log(item.textContent)
-        // console.log(e.target.textContent)
-        if (e.target.nodeName == "LI" || e.target.nodeName == "A") {
-            let lis = Array.from(e.target.closest('ul').querySelectorAll('li'))
-            , f = Array.from(bolobiForm.querySelectorAll('fieldset'))
-            , li = lis.find((item, i) => item.textContent == e.target.textContent)
-            , fieldsetClassName = li.className
-            // console.log(li)
-            lis.forEach((item, i) => item.classList.remove('active'))
-            li.classList.add('active')
-            f.forEach((item, i) => item.classList.remove('active'))
-        }
-    }
-        
+    , activeTitleToShow = menuItems.find(item => item.className.split(" ")[0] === isActive)?.titre
+    console.log("isActive", isActive);
 
-    return <ul className="bolobiForm_choices" onClick={e => {
-        const fieldsetClassName = e.target.closest('li')?.className.split(' ')[0]
-        if (fieldsetClassName) {
-            document.querySelector("fieldset.active")?.classList.remove("active")
-            document.querySelector("fieldset." + fieldsetClassName).className = "active " + document.querySelector("fieldset." + fieldsetClassName).className
-        }
-    }}>
-        <p>SÉLECTIONNER UNE ÉTAPE DE L'INSCRIPTION: </p>
+    return <ul id="bolobiForm_choices_ul" className="bolobiForm_choices">
+        <p>INSCRIPTION: </p>
+        <p>SÉLECTIONNER UNE ÉTAPE</p>
         {menuItems.map((item, index) => (
-            <li key={index} onClick={onClick} className={`${item.className}${index === 0 ? ' active' : ''}`}>
+            <li key={index} onClick={e=>{onClick(e)}} className={`${item.className}${isActive === item.className ? ' active' : ''} ${fieldsetsValidation[item.className] ? 'validated' : 'invalidated'}`}>
                 <a href={`#${item.className}`}>
-                    <FontAwesomeIcon icon={item.icon} /> {item.label}
+                    <FontAwesomeIcon icon={item.icon} /> <span>{item.label}</span>
                 </a>
             </li>
         ))}
+        <div>{activeTitleToShow}</div>
     </ul>
 }

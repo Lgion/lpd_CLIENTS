@@ -12,6 +12,7 @@ export default function ReservationManager() {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isPromotionModalVisible, setIsPromotionModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+  const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false)
   const [editingReservation, setEditingReservation] = useState(null)
   const [searchText, setSearchText] = useState('')
   const [dateRange, setDateRange] = useState(null)
@@ -36,18 +37,58 @@ export default function ReservationManager() {
     fetchReservations()
   }, [])
 
+  // Ajouter une fonction de gestion des dates
+  const handleDateRangeChange = (dates, dateStrings) => {
+    console.log('Dates reçues du RangePicker:', dates);
+    console.log('Dates en format string:', dateStrings);
+    
+    if (dates) {
+      // Créer de nouveaux objets moment à partir des chaînes de date
+      const [startStr, endStr] = dateStrings;
+      const startDate = moment(startStr, 'DD/MM/YYYY').startOf('day');
+      const endDate = moment(endStr, 'DD/MM/YYYY').endOf('day');
+      
+
+      console.log('Dates converties:', {
+        start: startDate.format('YYYY-MM-DD HH:mm:ss'),
+        end: endDate.format('YYYY-MM-DD HH:mm:ss')
+      });
+      setDateRange([startDate, endDate]);
+    } else {
+      setDateRange(null);
+    }
+  };
+
   // Filtrer les réservations
   const filteredReservations = reservations.filter(reservation => {
-    const searchLower = searchText.toLowerCase()
+    const searchLower = searchText.toLowerCase();
+    
+    // Debug des dates
+    console.log('État actuel de dateRange:', dateRange);
+    
+    // Convertir les dates de la réservation en objets moment
+    const reservationStart = moment(reservation.from).startOf('day');
+    const reservationEnd = moment(reservation.to).endOf('day');
+    
+    // Vérifier si une plage de dates est sélectionnée
     const dateInRange = !dateRange || (
-      moment(reservation.from).isSameOrAfter(dateRange[0], 'day') &&
-      moment(reservation.to).isSameOrBefore(dateRange[1], 'day')
-    )
+      reservationStart.isSameOrAfter(dateRange[0], 'day') &&
+      reservationEnd.isSameOrBefore(dateRange[1], 'day')
+    );
+    
+    console.log('Comparaison des dates pour réservation:', {
+      reservation_id: reservation._id,
+      reservationStart: reservationStart.format('YYYY-MM-DD HH:mm:ss'),
+      reservationEnd: reservationEnd.format('YYYY-MM-DD HH:mm:ss'),
+      rangeStart: dateRange ? dateRange[0].format('YYYY-MM-DD HH:mm:ss') : 'pas de date',
+      rangeEnd: dateRange ? dateRange[1].format('YYYY-MM-DD HH:mm:ss') : 'pas de date',
+      dateInRange
+    });
     
     // Vérifier si isArchived est défini, sinon considérer comme non archivé
     const isArchivedMatch = typeof reservation.isArchived === 'undefined' 
       ? !showArchived  // Si isArchived n'est pas défini, montrer dans la vue normale
-      : reservation.isArchived === showArchived
+      : reservation.isArchived === showArchived;
 
     return dateInRange && 
       (searchText === '' ||
@@ -56,8 +97,8 @@ export default function ReservationManager() {
         reservation.email?.toLowerCase().includes(searchLower) ||
         reservation.phone_number?.includes(searchText)
       ) &&
-      isArchivedMatch
-  })
+      isArchivedMatch;
+  });
 
   // Gérer la validation du paiement
   const handlePaymentValidation = async (record) => {
@@ -183,17 +224,6 @@ export default function ReservationManager() {
       key: 'community',
     },
     {
-      title: 'Contact',
-      key: 'contact',
-      render: (_, record) => (
-        <>
-          <div>{record.names}</div>
-          <div>{record.email}</div>
-          <div>{record.phone_number}</div>
-        </>
-      )
-    },
-    {
       title: 'Type',
       dataIndex: 'type_reservation',
       key: 'type',
@@ -222,20 +252,6 @@ export default function ReservationManager() {
       )
     },
     {
-      title: 'Repas',
-      key: 'meals',
-      render: (_, record) => (
-        record.meal_included ? (
-          <>
-            <div>Plan: {record.meal_plan === 1 ? '1 repas + PDJ' : '2 repas + PDJ'}</div>
-            {record.meals.breakfast && <div>PDJ: {record.meals.breakfast}</div>}
-            {record.meals.lunch && <div>Déj: {record.meals.lunch}</div>}
-            {record.meals.dinner && <div>Dîner: {record.meals.dinner}</div>}
-          </>
-        ) : 'Non inclus'
-      )
-    },
-    {
       title: 'Montants',
       key: 'montants',
       render: (_, record) => (
@@ -252,51 +268,6 @@ export default function ReservationManager() {
           </Space>
         </>
       )
-    },
-    {
-      title: 'Actions',
-      key: 'actions',
-      render: (_, record) => (
-        <Space>
-          <Button 
-            type={record.isValidated ? 'default' : 'primary'}
-            icon={record.isValidated ? <CloseCircleOutlined /> : <CheckCircleOutlined />}
-            onClick={() => handleReservationValidation(record)}
-          >
-            {record.isValidated ? 'Invalider' : 'Valider'} réservation
-          </Button>
-          <Button 
-            type={record.avance_payee ? 'default' : 'primary'}
-            icon={record.avance_payee ? <CloseCircleOutlined /> : <CheckCircleOutlined />}
-            onClick={() => handlePaymentValidation(record)}
-          >
-            {record.avance_payee ? 'Annuler' : 'Valider'} avance pécunière
-          </Button>
-          <Button 
-            onClick={() => {
-              setEditingReservation(record)
-              setIsPromotionModalVisible(true)
-            }}
-          >
-            Réduction
-          </Button>
-          <Button
-            type={record.isArchived ? 'default' : 'dashed'}
-            onClick={() => handleArchive(record)}
-          >
-            {record.isArchived ? 'Désarchiver' : 'Archiver'}
-          </Button>
-          <Button
-            danger
-            onClick={() => {
-              setEditingReservation(record)
-              setIsDeleteModalVisible(true)
-            }}
-          >
-            Supprimer
-          </Button>
-        </Space>
-      )
     }
   ]
 
@@ -311,8 +282,12 @@ export default function ReservationManager() {
             style={{ width: 300 }}
           />
           <RangePicker
-            onChange={setDateRange}
+            onChange={handleDateRangeChange}
             format="DD/MM/YYYY"
+            style={{ minWidth: '240px' }}
+            placeholder={['Date début', 'Date fin']}
+            allowClear={true}
+            showTime={false}
           />
           <Button
             type={showArchived ? 'primary' : 'default'}
@@ -321,8 +296,8 @@ export default function ReservationManager() {
             {showArchived ? 'Voir réservations actives' : 'Voir archives'}
           </Button>
         </Space>
-        <ul style={{fontSize:".8em"}}>
-          <p style={{fontSize:".8em"}}>Ce filtre s'applique sur les propriétés suivantes: 
+        <ul style={{}}>
+          <p style={{}}>Ce filtre s'applique sur les propriétés suivantes: 
           </p>
           <li>La communauté (community)</li>
           <li>Le nom (names)</li>
@@ -336,7 +311,116 @@ export default function ReservationManager() {
         dataSource={filteredReservations}
         rowKey="_id"
         scroll={{ x: true }}
+        onRow={(record) => ({
+          onClick: () => {
+            setEditingReservation(record)
+            setIsDetailsModalVisible(true)
+          },
+          style: { cursor: 'pointer' }
+        })}
       />
+
+      {/* Modal de détails */}
+      <Modal
+        title={`Détails de la réservation - ${editingReservation?.community || ''}`}
+        open={isDetailsModalVisible}
+        onCancel={() => setIsDetailsModalVisible(false)}
+        width={800}
+        footer={[
+          <Button
+            key="validate"
+            type={editingReservation?.isValidated ? 'default' : 'primary'}
+            icon={editingReservation?.isValidated ? <CloseCircleOutlined /> : <CheckCircleOutlined />}
+            onClick={() => {
+              handleReservationValidation(editingReservation)
+              setIsDetailsModalVisible(false)
+            }}
+          >
+            {editingReservation?.isValidated ? 'Invalider' : 'Valider'} réservation
+          </Button>,
+          <Button
+            key="payment"
+            type={editingReservation?.avance_payee ? 'default' : 'primary'}
+            icon={editingReservation?.avance_payee ? <CloseCircleOutlined /> : <CheckCircleOutlined />}
+            onClick={() => {
+              handlePaymentValidation(editingReservation)
+              setIsDetailsModalVisible(false)
+            }}
+          >
+            {editingReservation?.avance_payee ? 'Annuler' : 'Valider'} avance pécunière
+          </Button>,
+          <Button
+            key="promotion"
+            onClick={() => {
+              setIsPromotionModalVisible(true)
+              setIsDetailsModalVisible(false)
+            }}
+          >
+            Réduction
+          </Button>,
+          <Button
+            key="archive"
+            type={editingReservation?.isArchived ? 'default' : 'dashed'}
+            onClick={() => {
+              handleArchive(editingReservation)
+              setIsDetailsModalVisible(false)
+            }}
+          >
+            {editingReservation?.isArchived ? 'Désarchiver' : 'Archiver'}
+          </Button>,
+          <Button
+            key="delete"
+            danger
+            onClick={() => {
+              setIsDeleteModalVisible(true)
+              setIsDetailsModalVisible(false)
+            }}
+          >
+            Supprimer
+          </Button>
+        ]}
+      >
+        <div className="reservation-details">
+          <div className="detail-section">
+            <h3>Informations de contact</h3>
+            <p><strong>Nom:</strong> {editingReservation?.names}</p>
+            <p><strong>Email:</strong> {editingReservation?.email}</p>
+            <p><strong>Téléphone:</strong> {editingReservation?.phone_number}</p>
+          </div>
+
+          <div className="detail-section">
+            <h3>Détails du séjour</h3>
+            <p><strong>Dates:</strong> Du {moment(editingReservation?.from).format('DD/MM/YYYY')} au {moment(editingReservation?.to).format('DD/MM/YYYY')}</p>
+            <p><strong>Type:</strong> {editingReservation?.type_reservation}</p>
+            <p><strong>Participants:</strong> {editingReservation?.participants} au total</p>
+            {editingReservation?.individual_room_participants > 0 && (
+              <p><strong>Chambres individuelles:</strong> {editingReservation?.individual_room_participants}</p>
+            )}
+          </div>
+
+          <div className="detail-section">
+            <h3>Repas</h3>
+            {editingReservation?.meal_included ? (
+              <>
+                <p><strong>Plan de repas:</strong> {editingReservation?.meal_plan === 1 ? '1 repas + PDJ' : '2 repas + PDJ'}</p>
+                {editingReservation?.meals?.breakfast && <p><strong>Petit-déjeuner:</strong> {editingReservation?.meals.breakfast}</p>}
+                {editingReservation?.meals?.lunch && <p><strong>Déjeuner:</strong> {editingReservation?.meals.lunch}</p>}
+                {editingReservation?.meals?.dinner && <p><strong>Dîner:</strong> {editingReservation?.meals.dinner}</p>}
+              </>
+            ) : (
+              <p>Repas non inclus</p>
+            )}
+          </div>
+
+          <div className="detail-section">
+            <h3>Informations financières</h3>
+            <p><strong>Montant total:</strong> {editingReservation?.montant_total}F</p>
+            <p><strong>Avance:</strong> {editingReservation?.montant_avance}F</p>
+            <p><strong>Statut du paiement:</strong> {editingReservation?.avance_payee ? 'Payé' : 'Avance en attente'}</p>
+            <p><strong>Statut de la réservation:</strong> {editingReservation?.isValidated ? 'Validée' : 'Non validée'}</p>
+          </div>
+        </div>
+      </Modal>
 
       {/* Modal pour les promotions */}
       <Modal

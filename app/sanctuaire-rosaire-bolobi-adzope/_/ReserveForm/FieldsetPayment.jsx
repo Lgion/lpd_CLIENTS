@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 export default function FieldsetPayment({ participants, individual_room_participants, dateDiffDuAu, mealPlan }) {
+    const [isOpen, setIsOpen] = useState(false);
     const PRIX_NUIT_COMMUNE = 3000;
     const PRIX_NUIT_INDIVIDUELLE = 10000;
     const PRIX_REPAS_COMPLET = 3000; // 2 repas + petit déjeuner
@@ -30,9 +33,18 @@ export default function FieldsetPayment({ participants, individual_room_particip
 
     return (
         <fieldset className="payment">
-            <h4>Informations de paiement</h4>
+            <h4>
+                <button 
+                    type="button"
+                    className="payment-toggle-buttonzzz"
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    Informations de paiement
+                    {/* <span className={`arrow ${isOpen ? 'open' : ''}`}>▼</span> */}
+                </button>
+            </h4>
             
-            <div className="payment-details">
+            <div className={`payment-details ${isOpen ? 'open' : ''}`}>
                 <h5>Détail de votre séjour :</h5>
                 <ul>
                     <li>Durée : {nombreNuits} nuit{nombreNuits > 1 ? 's' : ''}</li>
@@ -84,6 +96,7 @@ export default function FieldsetPayment({ participants, individual_room_particip
                     padding: 1rem;
                     border-radius: 8px;
                     margin: 1rem 0;
+                    display: ${isOpen ? 'block' : 'none'};
                 }
 
                 .payment-details ul {
@@ -123,6 +136,28 @@ export default function FieldsetPayment({ participants, individual_room_particip
                 .payment-info li {
                     margin: 0.5rem 0;
                     color: #444;
+                }
+
+                .payment-toggle-button {
+                    background: #fff;
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    font-size: 1.2rem;
+                    cursor: pointer;
+                }
+
+                .payment-toggle-button:hover {
+                    background: #f5f5f5;
+                }
+
+                .arrow {
+                    font-size: 1.5rem;
+                    margin-left: 0.5rem;
+                    transition: transform 0.2s ease-in-out;
+                }
+
+                .arrow.open {
+                    transform: rotate(180deg);
                 }
             `}</style>
         </fieldset>

@@ -8,7 +8,7 @@ const mealOptions = {
     dinner: ["APF", "Tchep", "Kedjenou"]
 };
 
-export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, onMealPlanChange, onCustomMealChange}) {
+export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, onMealPlanChange, onCustomMealChange, handleFieldsetValidation}) {
     const [isMealIncluded, setIsMealIncluded] = useState(false);
     const [mealPlan, setMealPlan] = useState(""); 
     const [customMeal, setCustomMeal] = useState({
@@ -21,6 +21,9 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
         lunch: false,
         dinner: false
     });
+    const [showFlash, setShowFlash] = useState(false);
+    const [flashMessage, setFlashMessage] = useState("");
+    const [flashType, setFlashType] = useState("");
 
     // Notifier le parent des changements de repas
     useEffect(() => {
@@ -150,6 +153,30 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
     const lunchColumn = generateMealColumn("lunch", mealOptions.lunch);
     const dinnerColumn = generateMealColumn("dinner", mealOptions.dinner);
 
+    const handleValidate = () => {
+        const oneMeal = document.querySelector('input[name="one_meal"]');
+        const twoMeals = document.querySelector('input[name="two_meals"]');
+                
+        if(!document.querySelector('input[name="meal_included"]').checked){
+            // const mealConfirm = confirm('Voulez-vous vraiment NE PAS commander un repas pour votre séjour ?')
+            const mealConfirm = true
+            console.log("mealConfirm:",mealConfirm);
+            if(mealConfirm){
+                handleFieldsetValidation('meal');
+            }else {                
+                setShowFlash(true);
+                setFlashMessage("Validez vos choix de restauration avant de réessayer");
+                setFlashType("warning");
+            }
+        } else if(oneMeal.checked || twoMeals.checked) {
+            handleFieldsetValidation('meal');
+        } else {
+            setShowFlash(true);
+            setFlashMessage("Vous avez choisi \"AVEC Repas\"\nVeuillez alors sélectionner votre formule: \n1repas ou 2repas ?");
+            setFlashType("warning");
+        }
+    }
+
     return <>
         {/* {JSON.stringify(customMeal)} */}
         <style jsx>{`
@@ -234,10 +261,15 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                 padding: 1rem;
                 background-color: #f8f9fa;
                 border-radius: 0.25rem;
+                width: 50%;
+                align-self: center;
+                border: 1px solid;
+                box-shadow: 0 0 10px 1px;
+                padding: 1em 3em;
             }
 
             .mealPlanOptions h5 {
-                margin-bottom: 0.5rem;
+                margin: 1.5rem .5rem;
                 color: #495057;
             }
 
@@ -254,19 +286,20 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                     width: 100%;
                 }
             }
-        `}</style>
+        `}</style> 
         <fieldset className="meal">
             <h4 onClick={toggleFormNdrImg}>Choisir si vous souhaitez que les repas vous soient préparés: </h4>
             <h5>Vous pouvez <u><b>soit préparer vous-même</b> vos repas</u> au refectoire du santuaire, <u><b>soit commander</b> votre repas</u> à la cuisine du sanctuaire.</h5>
             <h5>Si vous préparez vous-même, tous les outils de cuisine et de dégustation sont à votre disposition (marmite, casserols, couteaux, etc...)</h5>
             <h5>il faut juste prévoir <u><b>VOTRE</b> propre bouteille de gaz</u></h5>
+            <p>CHOISIR <u><b>AVEC</b> OU <b>SANS</b></u> REPAS: (<i><u>sans repas</u> par défaut</i>)</p>
             <SectionCheckboxStyled>
                 <label htmlFor="meal">
                     <input type="checkbox" id="meal" name="meal_included" onChange={handleMealChange} />
-                    <span>Repas Inclus 🍔 😋 🍲</span>
+                    <span><span>Avec Repas</span> <span>🍔 😋 🍲</span></span>
                     <i className="indicator">
                         <svg version="1.1" id="toggle" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 33 33" xmlSpace="preserve"
+                            viewBox="0 0 55 55" xmlSpace="preserve"
                         >
                             <path className="circ path" style={{ fill: "none", strokeWidth: 3, strokeLinejoin: "round", strokeMiterlimit: 10 }} d="M6.2,6.2L6.2,6.2
                     c-5.7,5.7-5.7,14.8,0,20.5l0,0c5.7,5.7,14.8,5.7,20.5,0l0,0c5.7-5.7,5.7-14.8,0-20.5l0,0C21.1,0.6,11.9,0.6,6.2,6.2z"
@@ -278,17 +311,41 @@ export default function FieldsetMeal({SectionCheckboxStyled, toggleFormNdrImg, o
                             />
                         </svg>
                     </i>
-                    <span>Sans repas 🚫</span>
+                    <span>Sans Repas 🚫</span>
                 </label>
             </SectionCheckboxStyled>
+            <p>
+                {isMealIncluded && <>Vous avez choisi <span>AVEC <span className={!mealPlan&&"alert"}>{mealPlan || "0"}</span> repas</span></>}
+                {!isMealIncluded && <>Vous avez choisi <span>SANS repas</span></>}
+            </p>
             {isMealIncluded && (
                 <MealPlanOptions mealPlan={mealPlan} handleMealPlanChange={handleMealPlanChange} />
             )}
-            {isMealIncluded && mealPlan && (
+
+            
+            {/* POUR INCLURE LES REPAS (QUE MAMAN N'A PAS VOULU INCLURE)*/}
+            {/* {isMealIncluded && mealPlan && (
                 <div className="mealOptions">
                     {breakfastColumn}
                     {mealPlan >= 2 && lunchColumn}
                     {dinnerColumn}
+                </div>
+            )} */}
+
+
+
+            <button 
+              className="validate-button"
+              onClick={(e) => {
+                e.preventDefault();
+                handleValidate();
+              }}
+            >
+              Valider
+            </button>
+            {showFlash && (
+                <div className={`alert alert-${flashType}`} role="alert">
+                    {flashMessage}
                 </div>
             )}
         </fieldset>
