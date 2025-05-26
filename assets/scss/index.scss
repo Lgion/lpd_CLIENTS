@@ -599,10 +599,11 @@ body{
         }
         @include mobile-only{
           font-size: .8em;
+          &:not(:first-of-type)>span{display: none;}
           >span{
             left: 133px;
             right: 133px;
-            font-size: .7em;
+            font-size: 1em;
             line-height: .75em;
           }
         }
@@ -1196,7 +1197,7 @@ body{
       border-top: 0;
       scale:.5;
       transition: scale .4s;
-      left: 0em;
+      left: -3em;
       bottom:-35px;
       border-radius: 0 0 5px 5px;
       @include mobile-only{
@@ -2296,14 +2297,15 @@ body{
                 border-radius: 100px;
               }
               >p{
+                height:72%;
                 position: relative;
                 opacity: 1;
                 font-size: .75em;
                 padding: 1em;
                 margin: 0.5em;
-                border-radius: 10px 0 0;
+                border-radius: 10px 10px 0 0;
                 border: 1px solid white;
-                box-shadow: -10px -8px 10px 1px white inset;
+                box-shadow: 3px 3px 10px 1px white inset;
                 &::before{
                   content:"";
                   position:absolute;bottom:0;left:0;width:100%;box-shadow:0 0 10px 1px white;
