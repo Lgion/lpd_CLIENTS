@@ -133,7 +133,7 @@ export const AuthContextProvider = ({children}) => {
             href:"/",
             title:"Accueil: Librairie religieuse chrétienne Abidjan, Ecommerce chrétien, centre de retraite spirituelle à Bolobi (entre azaguié et yakasseme, sur route d'Adzopé)",
             h2: "DÉCOUVRIR: La Puissance Divine de Côte d'ivoire",
-            content:"🏡",
+            content:"",
             tagzone:["librairie","librairie religieuse","librairie religieuse chrétienne", "ecommerce chrétien", "sanctuaire bolobi", "retraites spirituelles"],
             titrePage:["Sanctuaire Notre Dame du Rosaire de Bolobi, et la Librairie Puissance Divine, vous souhaitent la bienvenue."],
             sns:{"Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins":"https://www.facebook.com/genevieve.achi/"},
@@ -141,10 +141,12 @@ export const AuthContextProvider = ({children}) => {
         },
         // {id:"enseignements",href:"enseignements-spirituels-chretien-catholique",title:"Enseignements spirituels chrétien catholique Puissance Divine, jésus enseigne: l",content:"Enseignements",tagzone:[],titrePage:[],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"}},
         {id:"activites-spirituelles"
-            , href:"/sanctuaire-rosaire-bolobi-adzope"
+            // , href:"/sanctuaire-rosaire-bolobi-adzope"
+            , href:"/retraites-spirituelles-bolobi"
             , title:"Sanctuaire du Rosaire de Bolobi: activités spirituelles religieuses chrétien catholique"
             , h2:"RÉSERVER: au Sanctuaire ND Rosaire de BOLOBI"
-            , content:"Sanctuaire ND du Rosaire Bolobi"
+            // , content:"Sanctuaire ND du Rosaire Bolobi"
+            , content:"Retraites Spirituelles"
             , tagzone:["retraites de prières"
                 , "activités spirituelles"
                 , "lieu de loisir abidjan"

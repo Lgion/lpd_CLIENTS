@@ -62,7 +62,8 @@ export default function Hgroup() {
                         // fill="layout"
                     />
                     <span>
-                        SANCTUAIRE Notre Dame du ROSAIRE de Bolobi
+                        <span>SANCTUAIRE</span> <span>Notre Dame du ROSAIRE</span> <span>de Bolobi</span>
+                        <span>Abidjan, Côte d'ivoire</span>
                         {/* <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
                         <strong>Assistance spirituelle</strong> */}
                     </span>
