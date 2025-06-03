@@ -1,0 +1,113 @@
+.ai-reserve-form__container {
+  max-width: 480px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+}
+
+.ai-reserve-form__title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #2a3d5c;
+}
+
+.ai-reserve-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.ai-reserve-form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ai-reserve-form__row--dates {
+  flex-direction: row;
+  gap: 1rem;
+}
+.ai-reserve-form__row--dates > div {
+  flex: 1;
+}
+
+.ai-reserve-form__row--checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ai-reserve-form input,
+.ai-reserve-form select,
+.ai-reserve-form textarea {
+  border: 1px solid #d3dbe7;
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: #f7fafd;
+}
+.ai-reserve-form input:focus,
+.ai-reserve-form select:focus,
+.ai-reserve-form textarea:focus {
+  outline: none;
+  border-color: #6b9cff;
+}
+.ai-reserve-form textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.ai-reserve-form__submit {
+  margin-top: 1.2rem;
+  padding: 0.8rem 0;
+  background: linear-gradient(90deg,#6b9cff 0%,#2a3d5c 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(107,156,255,0.08);
+}
+.ai-reserve-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-reserve-form__error {
+  color: #c0392b;
+  background: #fbeeea;
+  border-left: 4px solid #c0392b;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.97rem;
+}
+
+.ai-reserve-form__success {
+  color: #207d3a;
+  background: #eafbea;
+  border-left: 4px solid #207d3a;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.97rem;
+}
+
+@media (max-width: 600px) {
+  .ai-reserve-form__container {
+    padding: 1.2rem 0.5rem;
+  }
+  .ai-reserve-form__title {
+    font-size: 1.3rem;
+  }
+  .ai-reserve-form__row--dates {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

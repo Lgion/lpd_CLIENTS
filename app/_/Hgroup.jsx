@@ -63,7 +63,7 @@ export default function Hgroup() {
                     />
                     <span>
                         <span>SANCTUAIRE</span> <span>Notre Dame du ROSAIRE</span> <span>de Bolobi</span>
-                        <span>Abidjan, Côte d'ivoire</span>
+                        <br/><span>Abidjan, Côte d'ivoire</span>
                         {/* <strong>Évangélisation</strong>, <strong>Prière</strong> et{" "}
                         <strong>Assistance spirituelle</strong> */}
                     </span>

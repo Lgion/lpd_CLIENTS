@@ -442,6 +442,24 @@ body>div[data-floating-ui-portal]{
   }
 }
 
+.form_cta_fixed_btns{
+  position: fixed;
+  bottom:0;
+  right:0;
+  >button{
+    display: block;
+    width:100px;
+    height:100px;
+    border-radius: 100px;
+    &:first-child{
+      
+    }
+    &:last-child{
+      
+    }
+  }
+}
+
 .custom-number-input {
     position:relative;
     display: flex;
@@ -662,22 +680,37 @@ body{
           font-size:.9em;
           color: $secondary;
           text-shadow: 0 1px 0px black,.1px 0px 0px black;
+          position: absolute;
+          margin-left: -3em;
+          width: calc(100% + -6em);
           @include mobile-only{
-            display: flex;
+            // display: flex;
             flex-flow: wrap;
             height: 100%;
+            position: absolute;
+            margin-left: -3em;
+            width: calc(100% - 6em);
             >span{
               width: 100%;
-              &:nth-child(1){}
+              display: block;
+              &:nth-child(1){
+                margin: 1em 0 1em;
+              }
               &:nth-child(2){
                 line-height: 1em;
+                margin-bottom: 1em;
               }
               &:nth-child(3){}
-              &:nth-child(4){
+              &:nth-of-type(4){
                 font-size: .5em;
                 position: absolute;
                 bottom: 0;
                 letter-spacing: 1.5px;
+                margin-top: 5em;
+                display: block;
+                font-size: .75em;
+                letter-spacing: 4px;
+                background: rgba(255, 255, 255, .5);
               }
             }
           }
@@ -3027,7 +3060,7 @@ body{
             width: 100%;
             >fieldset{
               &:not(.active){
-                display:none !important;
+                // display:none !important;
               }
             }
             +#show_image{
