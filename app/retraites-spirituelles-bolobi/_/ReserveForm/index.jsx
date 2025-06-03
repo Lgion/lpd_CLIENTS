@@ -185,7 +185,7 @@ export default function ReserveForm() {
             />
 
 
-            <fieldset>
+            <fieldset className="form_message">
               <h4>Si vous souhaitez passer un message pour cette réservation, nous y tiendrons compte lorsque nous vous rapellons pour confirmer votre réservation: </h4>
               <textarea name="message" cols="30" rows="10"></textarea>
             </fieldset>
