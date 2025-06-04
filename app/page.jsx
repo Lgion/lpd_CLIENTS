@@ -1,12 +1,12 @@
 "use client"
 
 import { useContext, memo, useMemo } from 'react'
-import AuthContext from "../../stores/authContext.js"
-import Article from "./_/Article.jsx"
-import Carousel from '../_/Carousel'
-import LocateBolobi from "./_/LocateBolobi.jsx"
-import ReserveForm from "./_/ReserveForm/index.jsx"
-import BlogCategory from '../_/Blog/BlogCategory'
+import AuthContext from "../stores/authContext.js"
+import Article from "./retraites-spirituelles-bolobi/_/Article.jsx"
+import Carousel from './_/Carousel.jsx'
+import LocateBolobi from "./retraites-spirituelles-bolobi/_/LocateBolobi.jsx"
+import ReserveForm from "./retraites-spirituelles-bolobi/_/ReserveForm/index.jsx"
+import BlogCategory from './_/Blog/BlogCategory.jsx'
 
 const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
     <main className="sanctuaire_ndr">
