@@ -53,7 +53,6 @@ export default function SNS() {
                     title="Blog du Sanctuaire notre Dame du Rosaire"
                 >
                     {/* <span>bolobi.ci</span> */}
-                    <span>BLOG</span>
                 </a>
             </li> 
         </menu>

@@ -444,18 +444,23 @@ body>div[data-floating-ui-portal]{
 
 .form_cta_fixed_btns{
   position: fixed;
-  bottom:0;
+  bottom:6em;
   right:0;
-  >button{
+  >a{
     display: block;
     width:100px;
     height:100px;
+    @include mobile-only{
+      width:50px;
+      height:50px;
+    }
     border-radius: 100px;
     &:first-child{
-      
+      background: url(../../public/img/sns/whatsapp.svg) center center no-repeat;
     }
     &:last-child{
-      
+      background: url(../../public/img/form.png) center center no-repeat;
+      background-size: 75px;
     }
   }
 }
@@ -862,14 +867,12 @@ body{
           }
           &#blogB>a{
             background: url("/img/sns/blog.svg") center center no-repeat;
-            >span{
-              margin-top: 10px;
-              margin: 1.5em -10px;
-              display: inline-block;
-              @include mobile-only{
-                &:not(:active){display: none;}
-              }
-            }
+            // >span{
+            //   margin-top: 10px;
+            //   margin: 1.5em -10px;
+            //   display: inline-block;
+            //   &:not(:active){display: none;}
+            // }
           }
           a{
             background-size: contain !important;

@@ -12,8 +12,8 @@ import BlogCategory from './_/Blog/BlogCategory.jsx'
 
 const BtnCTA = ()=>{
     return <div className="form_cta_fixed_btns">
-        <button>WhatsApp</button>
-        <button>Formulaire</button>
+        <a href="https://wa.me/22665555555" target="_blank"></a>
+        <a href="#form_reservation"></a>
     </div>
 }
 
