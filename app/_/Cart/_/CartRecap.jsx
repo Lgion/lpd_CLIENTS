@@ -2,8 +2,8 @@ import {useState,useEffect,useContext} from 'react'
 import Image from "next/image"
 // import * as CartLS from "../../../../utils/favorisManager.js"
 import * as Ecommerce_articles from "../../../../assets/datas/articles.js"
-import CartPaypal from './CartPaypal';
-import CartGoogle from './CartGoogle';
+// import CartPaypal from './CartPaypal';
+// import CartGoogle from './CartGoogle';
 import AuthContext from "../../../../stores/authContext.js"
 
 export default function CartRecap() {
@@ -41,8 +41,8 @@ export default function CartRecap() {
                         <p>Vous avez {len} produit{len!=1 && "s"} ({totalProducts}) dans le panier.</p>
                         <span title="Montant total">{totalAmount}</span>
                     </div>
-                    <CartPaypal connected={userConnectedDatas} />
-                    <CartGoogle connected={userConnectedDatas} />
+                    {/* <CartPaypal connected={userConnectedDatas} /> */}
+                    {/* <CartGoogle connected={userConnectedDatas} /> */}
                 </section>
                 <ul>
                     {!cartArray 

@@ -11,7 +11,7 @@ import EcomNavbar from './components/ecomNavbar.jsx'
 import "./style.scss"
 import * as Ecommerce_articles from "../../assets/datas/articles.js"
 import Ecommerce_articles_OPTIONS from "../../assets/datas/articles_options.js"
-import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleSelectButtons,handleVariantButtonHover} from "../../utils/handleEvents.js"
+import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleVariantButtonHover} from "../../utils/handleEvents.js"
 import BlogCategory from '../_/Blog/BlogCategory'
 import ArticleGrid from './components/ArticleGrid'
 import { HoverProvider } from './context/HoverContext'
@@ -22,6 +22,23 @@ async function EcommercePage() {
     
     return <Ecommerce />
 }
+
+
+const categories = [
+    { label: "tableau_icone", color: "orange", name: "Icônes Religieuses"},
+    { label: "livret_P_D", color: "teal", name: "Publication Puissance Divine"},
+    { label: "bibles", color: "purple", name: "Saintes Bibles"},
+    { label: "NEI", color: "blue", name: "NEI"},
+    { label: "texte_priere", color: "green", name: "Textes & Prières"},
+    { label: "divers", color: "orange", name: "Croix Posées"},
+    { label: "croixp", color: "red", name: "Croix Murales"},
+    { label: "croixm", color: "teal", name: "Croix Jésus"},
+    { label: "croix", color: "gold", name: "Encens"},
+    { label: "encens", color: "silver", name: "Statue Religieuse"},
+    { label: "statue", color: "brown", name: "Grotte Religieuse"},
+    { label: "grotte", color: "pink", name: "Chapelet de Prière"},
+    { label: "chapelet", color: "wheat", name: "Divers autreproduits" }
+];
 
 function Ecommerce({categoryPosts,models={}}) {
     const {myLoader, setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
@@ -49,6 +66,8 @@ function Ecommerce({categoryPosts,models={}}) {
     
     let {isAdmin} = useContext(AuthContext)
     , [currentDatas, setCurrentDatas] = useState({})
+    , [selectedCategory, setSelectedCategory] = useState("all")
+    , [selectedType, setSelectedType] = useState("publication")
 
     useEffect(() => { 
         console.log("console.log(Ecommerce_articles)");
@@ -59,8 +78,8 @@ function Ecommerce({categoryPosts,models={}}) {
     return (
         <HoverProvider>
             <main className="ecommerce">
-                <Intro handleProductsDisplay={handleProductsDisplay} />
-                <EcomNavbar {...{models,currentDatas}} />
+                <Intro {...{selectedCategory,categories,setSelectedCategory}} />
+                <EcomNavbar {...{models,currentDatas,setSelectedCategory,setSelectedType,categories}} />
                 <ArticleGrid 
                     Ecommerce_articles={Ecommerce_articles}
                     Ecommerce_articles_OPTIONS={Ecommerce_articles_OPTIONS}
@@ -73,6 +92,8 @@ function Ecommerce({categoryPosts,models={}}) {
                     handleModalShowProduct={handleModalShowProduct}
                     isAdmin={isAdmin}
                     miniCart={miniCart}
+                    selectedCategory={selectedCategory}
+                    selectedType={selectedType}
                 />
                 <BlogCategory {...{categoryPosts,headings}} />
             </main>

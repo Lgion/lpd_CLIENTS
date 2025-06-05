@@ -32,7 +32,9 @@ export default function ArticleGrid({
     handleUpdate,
     handleDelete,
     isAdmin,
-    miniCart
+    miniCart,
+    selectedCategory,
+    selectedType
 }) {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const { setHoveredTitle } = useHover();
@@ -43,7 +45,7 @@ export default function ArticleGrid({
 
     return (
         <>
-            <article id="articles" className="publication cardsAI">
+            <article id="articles" className={selectedType+" "+selectedCategory+" cardsAI"}>
                 {Ecommerce_articles.articles.data.map((item, i) => {
                     let option = Ecommerce_articles_OPTIONS.data.find(
                         el => el.img_article == item.img
@@ -57,7 +59,7 @@ export default function ArticleGrid({
 
                     return (
                         <figure 
-                            className={item.user_name + " " + item.nom.replace(' ','_').replace('.','_').replace('/','_')} 
+                            className={item.user_name + " " + item.nom.replace(' ','_').replace('.','_').replace('/','_').replace('&','_')} 
                             key={"figure_"+i}
                             onMouseEnter={() => setHoveredTitle(item.fr__)}
                             onMouseLeave={() => setHoveredTitle('')}

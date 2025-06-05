@@ -1,12 +1,5 @@
-const Intro = ({ handleProductsDisplay }) => {
-    const categories = [
-        { name: "Bibles", color: "purple" },
-        { name: "Livres de prière", color: "blue" },
-        { name: "Chapelets", color: "green" },
-        { name: "Livres spirituels", color: "orange" },
-        { name: "Objets de dévotion", color: "red" },
-        { name: "Médailles religieuses", color: "teal" }
-    ];
+const Intro = ({ selectedCategory, setSelectedCategory, categories }) => {
+
 
     return (
         <section className="intro-section">
@@ -18,12 +11,19 @@ const Intro = ({ handleProductsDisplay }) => {
                 </p>
                 <p className="intro-categories">
                     Explorez nos catégories : {' '}
+                    <button
+                        key="all"
+                        onClick={() => setSelectedCategory('all')}
+                        className={`category-badge neutral${selectedCategory === 'all' ? ' active' : ''}`}
+                    >
+                        Toutes
+                    </button>{' '}
                     {categories.map((category, index) => (
                         <>
                             <button
                                 key={index}
-                                onClick={() => handleProductsDisplay(category.name.toLowerCase())}
-                                className={`category-badge ${category.color}`}
+                                onClick={() => setSelectedCategory(category.label)}
+                                className={`category-badge ${category.color}${selectedCategory === category.label ? ' active' : ''}`}
                             >
                                 {category.name}
                             </button>

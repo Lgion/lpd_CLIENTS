@@ -44,6 +44,8 @@ let handleModalShowProduct = (e) => {
 
 }
 , handleProductsDisplay = (e) => { 
+    console.log(e);
+    
     console.log('e.target.parentNode:', e.target.parentNode)
     e.target.parentNode.querySelectorAll('button').forEach(el=>{el.classList.remove('active')})
     e.target.classList.add('active')
@@ -75,7 +77,8 @@ let handleModalShowProduct = (e) => {
     // console.log(setSelectOptions)
     if(!e.target.classList.contains('active')){
         let tmp = []
-        document.querySelectorAll('.ecommerce>section>button').forEach(el => { 
+        document.querySelectorAll('.ecommerce>section>section>button').forEach(el => { 
+            // alert('ok')
             el.classList.toggle('active')
         })
         document.querySelector('article#articles').classList.toggle('publication')
@@ -86,8 +89,8 @@ let handleModalShowProduct = (e) => {
                 // alert((document.querySelector('main>section>button.active').innerHTML.charAt(0) == "P" && item.charAt(0) == "_")+"\n\n"+(document.querySelector('main>section>button.active').innerHTML.charAt(0) == "O" && item.charAt(0) != "_") )
                 
                 if( 
-                    document.querySelector('main>section>button.active').innerHTML.charAt(0) == "P" && item.charAt(0) == "_" 
-                    || document.querySelector('main>section>button.active').innerHTML.charAt(0) == "O" && item.charAt(0) != "_" 
+                    document.querySelector('main>section>section>button.active').innerHTML.charAt(0) == "P" && item.charAt(0) == "_" 
+                    || document.querySelector('main>section>section>button.active').innerHTML.charAt(0) == "O" && item.charAt(0) != "_" 
                 )
                     return <option value={item.replace(' ','_').replace('.','_').replace('/','_')} key={"option_"+i}>
                         {Ecommerce_articles.articles_title_table[item]}

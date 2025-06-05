@@ -1920,6 +1920,22 @@ body{
         }
       }
     }
+    &.ecommerce{
+      >article{
+        &#articles{
+          
+          &>figure{display: none;}
+          &:not(.all){
+            &.tableau_icone>figure:not(.tableau_icone), &.livret_P_D>figure:not(.livret_P_D), &.bibles>figure:not(.bibles), &.NEI>figure:not(.NEI), &.texte_priere>figure:not(.texte_priere), &.divers>figure:not(.divers), &.croixp>figure:not(.croixp), &.croixm>figure:not(.croixm), &.croix>figure:not(.croix), &.encens>figure:not(.encens), &.statue>figure:not(.statue), &.grotte>figure:not(.grotte), &.chapelet>figure:not(.chapelet)
+            {display: none !important;}
+          }
+          &.publication>figure.publication,&.objet>figure.objet,
+          &.tableau_icone>figure.tableau_icone, &.livret_P_D>figure.livret_P_D, &.bibles>figure.bibles, &.NEI>figure.NEI, &.texte_priere>figure.texte_priere, &.divers>figure.divers, &.croixp>figure.croixp, &.croixm>figure.croixm, &.croix>figure.croix, &.encens>figure.encens, &.statue>figure.statue, &.grotte>figure.grotte, &.chapelet>figure.chapelet
+            {display:block;}
+          // &.all>figure{display: black !important;}
+        }
+      }
+    }
 /*
     &.ecommerce{
       >section{

@@ -72,14 +72,14 @@ export const AuthContextProvider = ({children}) => {
     }
     , [data, setData] = useState({ categoryPosts: [], diapos: [] })
     , [cartBox, setCartBox] = useState(<>{miniCart()}</>)
-    , [selectOptions, setSelectOptions] = useState(Object.keys(Ecommerce_articles.articles_title_table)
-        .map((item,i) => {
-            if(item.charAt(0) == "_")
-                return <option value={item.replace(' ','_').replace('.','_').replace('/','_')} key={"option_"+i}>
-                    {Ecommerce_articles.articles_title_table[item]}
-                </option>
-        })
-    )
+    // , [selectOptions, setSelectOptions] = useState(Object.keys(Ecommerce_articles.articles_title_table)
+    //     .map((item,i) => {
+    //         if(item.charAt(0) == "_")
+    //             return <option value={item.replace(' ','_').replace('.','_').replace('/','_')} key={"option_"+i}>
+    //                 {Ecommerce_articles.articles_title_table[item]}
+    //             </option>
+    //     })
+    // )
     , [sommaire, setSommaire] = useState("")
     , renderSommaire = () => {
         let h3s = Array.from(document.querySelectorAll("h3:not(.tagzonePage):not(#blog)"))
@@ -171,7 +171,8 @@ export const AuthContextProvider = ({children}) => {
             , search:"information+sanctuaire++rosaire+bolobi-blog"
         },
         // {id:"bolobi",href:"/bolobi-ecole-caritative-larve-msn",title:"Bolobi: école gratuite d'Adzopé, culture du poivre, élevage de mouches soldat noire, activités spirituelles religieuses chrétien catholique et protestant",content:"Oeuvres Caritatives",tagzone:["école caritative", "école saint martin de porèz de bolobi"],titrePage:["Les activités religieuses, caritatives, et économiques du sanctuaire de Bolobi, et de l'école St Martin de Porrez"],sns:{"École St Martin de Porèz de Bolobi": "https://www.facebook.com/abidjan.puissance.divine/"},search:"école+primaire+saint+martin+porès+bolobi+azaguié+yakasseme"},
-        {id:"ecommerce",href:"/ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
+        // {id:"ecommerce",href:"/ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
+        {id:"ecommerce",href:"/ecom",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
     ]
     , findByIDMainMenu = (data, id) => data.find(
         (item,i) => item.id == id
@@ -281,7 +282,9 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire, data}
+    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire, data
+        // ,selectOptions,setSelectOptions
+    }
     
     return (
         <AuthContext.Provider value={context}>
