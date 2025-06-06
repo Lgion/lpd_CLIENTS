@@ -2,9 +2,11 @@
 
 import {useContext, useMemo, useCallback, useEffect} from 'react'
 import { usePathname } from 'next/navigation'
+import { ClerkLoaded } from "@clerk/nextjs"
 
 import AuthContext from "../stores/authContext.js"
 import {AdminContextProvider} from '../stores/adminContext.js'
+import NotConnectedPage from "./NotConnectedPage.jsx"
 import AccessDenied from "./admin/AccessDenied"
 import HeaderAdmin from "./HeaderAdmin"
 
@@ -30,6 +32,8 @@ export default function ClientIsAdmin({children}) {
         
         if (!isAdminPath) return null
         
+        if (!ClerkLoaded) return <NotConnectedPage />
+
         if (!isAdmin) return <AccessDenied />
         
         return (

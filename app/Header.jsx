@@ -11,11 +11,15 @@ import SNS from "./_/SNS.jsx"
 import Playbox from "./_/Playbox.jsx"
 import MenuSecondary from "./_/MenuSecondary.jsx"
 import AuthContext from "../stores/authContext.js"
+import EcomContext from "../stores/ecomContext.js"
 
 export default function Header() {
 
-    const { cartBox, isCartPage } = useContext(AuthContext)
+    const { cartBox , isCartPage } = useContext(AuthContext)
+    const { miniCart } = useContext(EcomContext)
     , getClass = (item, i) => { alert('okk') }
+    console.log(miniCart);
+    
 
     //   useEffect(() => {
     //     console.log(pathname);
@@ -38,7 +42,10 @@ export default function Header() {
                 onClick={() => { setMenuActive("accueil") }}
             >
             </Link>
-            {cartBox}
+            
+            {/* {cartBox} */}
+            {miniCart()}
+            
         </>}
         {/* <Subscribe /> */}
         {/* <MenuSecondary /> */}

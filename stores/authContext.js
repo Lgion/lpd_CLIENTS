@@ -12,74 +12,8 @@ export default AuthContext
 export const AuthContextProvider = ({children}) => {
     let router = useRouter()
     let pathname = usePathname()
-    , articles_title_table = Ecommerce_articles.articles_title_table
-    , handleQty = (e, ls) => { 
-        // alert(localStorage.cart)
-        
-        if (typeof window !== "undefined"){
-            ls[e.target.dataset.key] = e.target.value
-            // CartLS.addArticle(e.target.dataset.key, e.target.value)
-            CartLS.saveArticle(ls)
-        }
-
-        // alert(localStorage.cart)
-    }
-    , miniCart = (cart_id,qty) => {
-        if (typeof window !== "undefined"){
-
-            if(cart_id && qty)
-                CartLS.addArticle(cart_id,qty)
-
-            if(!cart_id){
-                let clr = setTimeout(() => { setCartBox(miniCart(true)) }, 1000)
-                return <ul className="miniCart"></ul>
-            }else{
-                const  ls = CartLS.getAllFavoris()
-                , cartArray = Object.keys(ls)
-                , len = cartArray.length
-                if(len==0)
-                    return <ul className="miniCart"><li>Votre panier est vide..</li></ul>
-                
-                const totalProducts = len == 1 ? ls[cartArray[0]] : cartArray.reduce((a,b, index)=>{
-                    if(index==1)return parseInt(ls[a])+parseInt(ls[b])
-                    else return a+ls[b]
-                })
-                , totalAmount = len == 1 ? ls[cartArray[0]]*JSON.parse(cartArray[0]).price : cartArray.reduce((a,b, index)=>{
-                    const price = [JSON.parse(a).price,JSON.parse(b).price]
-                    if(index==1)return parseInt(ls[a])*parseInt(price[0])+parseInt(ls[b])*parseInt(price[1])
-                    else return a+ls[b]*price[1]
-                })
-                return <div className="miniCart">
-                    <div>Vous avez {len} produit{len!=1 && "s"} ({totalProducts}) dans le panier.</div>
-                    <div>Montant total: {totalAmount}</div>
-                    <ul>{ 
-                        cartArray.map((item,i) => {
-                            const _item = JSON.parse(item)
-                            // console.log(item)
-                            // console.log(_item)
-                            const article = Ecommerce_articles.articles.data.find(el=>el.id_produits==_item.id)
-                            // console.log(article)
-                            return <li key={"cart_item_"+i}>
-                                <p>{article.fr}</p>
-                                <input data-key={item} defaultValue={ls[item]} onChange={e=>{handleQty(e,ls)}} className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
-                                <button data-key={item} onClick={(e)=>{CartLS.deleteArticle(e.target.dataset.key);e.target.parentNode.remove();}}>⌫</button>
-                        </li>
-                        })
-                    }</ul>
-                </div>
-            }
-        }
-    }
+    , [role, setRole] = useState("")
     , [data, setData] = useState({ categoryPosts: [], diapos: [] })
-    , [cartBox, setCartBox] = useState(<>{miniCart()}</>)
-    , [selectOptions, setSelectOptions] = useState(Object.keys(Ecommerce_articles.articles_title_table)
-        .map((item,i) => {
-            if(item.charAt(0) == "_")
-                return <option value={item.replace(' ','_').replace('.','_').replace('/','_')} key={"option_"+i}>
-                    {Ecommerce_articles.articles_title_table[item]}
-                </option>
-        })
-    )
     , [sommaire, setSommaire] = useState("")
     , renderSommaire = () => {
         let h3s = Array.from(document.querySelectorAll("h3:not(.tagzonePage):not(#blog)"))
@@ -284,7 +218,7 @@ export const AuthContextProvider = ({children}) => {
     const logout = () => {netlifyIdentity.logout()}
     const context = {user,login,logout,authReady}
     */
-    const context = {ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, CartLS, cartBox, setCartBox, miniCart, selectOptions, setSelectOptions, articles_title_table, handleQty, sommaire, setSommaire, renderSommaire, data}
+    const context = {role, setRole, ok:"okokok", isAdmin, setIsAdmin, isCartPage, mainmenu, menuActive, setMenuActive, findByIDMainMenu, settingsSlider, myLoader, sommaire, setSommaire, renderSommaire, data}
     
     return (
         <AuthContext.Provider value={context}>

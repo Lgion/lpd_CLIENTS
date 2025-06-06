@@ -4,6 +4,7 @@ import {useState,useEffect,useContext} from 'react'
 import Link from "next/link"
 import Image from "next/image"
 import AuthContext from "../../stores/authContext.js"
+import EcomContext from "../../stores/ecomContext.js"
 // import Nav from '../../components/Nav.jsx'
 import ModalProduct from './_/ModalProduct.jsx'
 import Intro from './components/Intro.jsx'
@@ -117,7 +118,8 @@ const categories = [
 ];
 
 function Ecommerce({Ecommerce_articles,Ecommerce_articles_OPTIONS,categoryPosts,models={}}) {
-    const {isAdmin, myLoader, setCartBox, miniCart, selectOptions, setSelectOptions} = useContext(AuthContext)
+    const {isAdmin, myLoader} = useContext(AuthContext)
+    const {miniCart, setCartBox, selectOptions, setSelectOptions} = useContext(EcomContext)
     , id=3
     , headings = {
         h3:"CATÉGORIE: \"LIBRARIE PUISSANCE DIVINE D'AMOUR\""
