@@ -1,0 +1,26 @@
+.fixed{
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 10px;
+    height: 95%;
+    >div{
+        height: calc(100% - 10em);
+        overflow: scroll;
+        margin: 5rem !important;
+        padding: 1em;
+        box-shadow: 0 0 10px 1px inset;
+        border: solid;
+    }
+}
+.close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3em;
+    font-size: 1.5em;
+    color: red !important;
+    border-color: red;
+    border-width: 3px;
+    border-radius: 0 0 0 0.5em;
+}

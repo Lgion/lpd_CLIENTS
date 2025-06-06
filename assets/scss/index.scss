@@ -680,9 +680,7 @@ body{
           font-size:.9em;
           color: $secondary;
           text-shadow: 0 1px 0px black,.1px 0px 0px black;
-          position: absolute;
-          margin-left: -3em;
-          width: calc(100% + -6em);
+          >span:nth-of-type(4){display: none;}
           @include mobile-only{
             // display: flex;
             flex-flow: wrap;
@@ -702,12 +700,12 @@ body{
               }
               &:nth-child(3){}
               &:nth-of-type(4){
+                display: block;
                 font-size: .5em;
                 position: absolute;
                 bottom: 0;
                 letter-spacing: 1.5px;
                 margin-top: 5em;
-                display: block;
                 font-size: .75em;
                 letter-spacing: 4px;
                 background: rgba(255, 255, 255, .5);
@@ -2032,6 +2030,23 @@ body{
       }
     }
     &.ecommerce{
+      >article{
+        &#articles{
+          
+          &>figure{display: none;}
+          &:not(.all){
+            &.tableau_icone>figure:not(.tableau_icone), &.livret_P_D>figure:not(.livret_P_D), &.bibles>figure:not(.bibles), &.NEI>figure:not(.NEI), &.texte_priere>figure:not(.texte_priere), &.divers>figure:not(.divers), &.croixp>figure:not(.croixp), &.croixm>figure:not(.croixm), &.croix>figure:not(.croix), &.encens>figure:not(.encens), &.statue>figure:not(.statue), &.grotte>figure:not(.grotte), &.chapelet>figure:not(.chapelet)
+            {display: none !important;}
+          }
+          &.publication>figure.publication,&.objet>figure.objet,
+          &.tableau_icone>figure.tableau_icone, &.livret_P_D>figure.livret_P_D, &.bibles>figure.bibles, &.NEI>figure.NEI, &.texte_priere>figure.texte_priere, &.divers>figure.divers, &.croixp>figure.croixp, &.croixm>figure.croixm, &.croix>figure.croix, &.encens>figure.encens, &.statue>figure.statue, &.grotte>figure.grotte, &.chapelet>figure.chapelet
+            {display:block;}
+          // &.all>figure{display: black !important;}
+        }
+      }
+    }
+/*
+    &.ecommerce{
       >section{
         display: flex;
         flex-flow: wrap;
@@ -2282,7 +2297,8 @@ body{
         }
       }
     }
-    &.priere{
+*/
+&.priere{
       padding: 2em;
       >h4{
         font-size: 1.3em;

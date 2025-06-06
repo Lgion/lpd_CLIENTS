@@ -16,7 +16,7 @@ export default function LogSignIn() {
         console.log(user?.primaryEmailAddress?.emailAddress)
         if(!isSignedIn)
             setIsAdmin(false)
-        if(Array.from(process.env.NEXT_PUBLIC_EMAIL_ADMIN).indexOf(user?.primaryEmailAddress?.emailAddress) !== -1
+        if(process.env.NEXT_PUBLIC_EMAIL_ADMIN.indexOf(user?.primaryEmailAddress?.emailAddress) !== -1
         // if(user?.primaryEmailAddress?.emailAddress == "hi.cyril@gmail.com"
             // || true 
         )
@@ -35,7 +35,6 @@ export default function LogSignIn() {
         {/* <a href="#" onClick={()=>{getClass("inscription","see")}} title="Inscription">
             ➕
         </a> */}
-
 
         <SignedOut>
             <SignInButton title="Se conncecter/S'incrire">&nbsp;</SignInButton>

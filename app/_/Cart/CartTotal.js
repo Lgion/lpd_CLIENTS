@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import GooglePayButton from "@google-pay/button-react";
-import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+// import GooglePayButton from "@google-pay/button-react";
+// import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import Features2 from './Features2';
 // import { useSelector } from 'react-redux';
 // import CartAdditonalFeatures from './CartAdditonalFeatures';
@@ -98,7 +98,7 @@ const CartTotal = (props) => {
             */}
 
             <div className='paypalHold'>
-                <PayPalScriptProvider>
+                {/* <PayPalScriptProvider>
                     <PayPalButtons aria-label='BUY WITH PAYPAL' createOrder={(data, actions) => {
                         return actions.order.create({
                             purchase_units: [
@@ -112,7 +112,7 @@ const CartTotal = (props) => {
                     }}>
 
                     </PayPalButtons>
-                </PayPalScriptProvider>
+                </PayPalScriptProvider> */}
             </div>
 
             {cartLen > 1 ? <div className='mobDisappear'>
