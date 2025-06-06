@@ -20,7 +20,7 @@ export default function CartRecap() {
         , ls = CartLS.getAllFavoris()
         , cartArray = Object.keys(ls)
         , len = cartArray.length
-
+        
 
         
         if(!len)
@@ -61,7 +61,7 @@ export default function CartRecap() {
                                     width={200}                                    height={200}
                                 />
                                 <span className="prix">{article.prix} </span>
-                                <p>{article.fr}</p>
+                                <p dangerouslySetInnerHTML={{__html:article.fr}}></p>
                                 <input data-key={item} defaultValue={ls[item]} onChange={e=>{handleQty(e,ls)}} className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
                                 <button data-key={item} onClick={(e)=>{CartLS.deleteArticle(e.target.dataset.key);e.target.parentNode.remove();}}>⌫</button>
                             </li>
@@ -74,6 +74,7 @@ export default function CartRecap() {
     }
     
     useEffect(() => { 
+        
         start()
         
     }, [])

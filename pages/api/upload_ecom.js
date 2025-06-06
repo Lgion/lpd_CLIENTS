@@ -42,21 +42,30 @@ export default async function handler(req, res) {
           const imageName = path.parse(originalName).name;
           // Dossier cible
           const uploadDir = path.join(process.cwd(), 'public', 'img', 'vente-religieuse', folderLabel);
+          const uploadDir_min = path.join(process.cwd(), 'public', 'img', 'vente-religieuse', "min", folderLabel);
           if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
+            fs.mkdirSync(uploadDir_min, { recursive: true });
           }
           // Nom final
-          const finalFilename = `${articleNom}_${imageName}.webp`;
-          const finalPath = path.join(uploadDir, finalFilename);
+          // const finalFilename = `${articleNom}_${imageName}.webp`;
+          const finalFilename_ = `${imageName}.webp`;
+          // const finalPath = path.join(uploadDir, finalFilename);
+          const finalPath = path.join(uploadDir, finalFilename_);
+          const finalPath_ = path.join(uploadDir_min, finalFilename_);
 
           // Convertir en webp si possible (sinon juste move)
           const sharp = require('sharp');
+          // Convertir l'image en webp si possible (sinon erreur)
           await sharp(file.filepath).webp({ quality: 90 }).toFile(finalPath);
+          await sharp(file.filepath).webp({ quality: 90 }).toFile(finalPath_);
+          // Supprimer le fichier temporaire de téléchargement
           fs.unlinkSync(file.filepath);
 
           // Retourner le chemin relatif
-          const relativePath = `/img/vente-religieuse/${folderLabel}/${finalFilename}`;
-          res.status(200).json({ url: relativePath });
+          // const relativePath = `/img/vente-religieuse/${folderLabel}/${finalFilename}`;
+          const relativePath_ = `${imageName}`;
+          res.status(200).json({ url: relativePath_ });
           resolve();
         } catch (error) {
           console.error('Erreur lors du traitement du fichier:', error);

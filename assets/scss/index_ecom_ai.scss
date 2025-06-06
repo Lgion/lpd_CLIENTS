@@ -1,0 +1,357 @@
+// Tunnel de commande e-commerce religieux
+.cart-ai-checkout {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f7fafc 0%, #e3e9f6 100%);
+  padding: 3rem 0;
+  font-family: 'Inter', Arial, sans-serif;
+  
+  &__container {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 2.5rem;
+    align-items: flex-start;
+    @media (max-width: 900px) {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+  &__recap {
+    flex: 1 1 330px;
+    background: linear-gradient(135deg, #fafdff 0%, #eaf0fb 100%);
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px #b2b2d840;
+    padding: 2rem 1.5rem;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    border: 1.5px solid #e3e9f6;
+    @media (max-width: 900px) {
+      min-width: unset;
+    }
+    > section {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 1px 6px #b2b2d820;
+      padding: 1.4rem 1.2rem;
+      margin-bottom: 0.7rem;
+      border: 1px solid #e3e9f6;
+      transition: box-shadow 0.2s, border 0.2s, transform 0.15s;
+      &:hover {
+        box-shadow: 0 4px 24px #6c63ff18;
+        border: 1.5px solid #b2b2d8;
+        transform: translateY(-2px) scale(1.01);
+      }
+      h3, h4 {
+        color: #4c4f6b;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+        font-size: 1.1rem;
+        letter-spacing: 0.01em;
+      }
+      p, li, span {
+        color: #2d3154;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    }
+    ul {
+      padding-left: 1.2rem;
+      margin: 0.7rem 0 0.4rem 0;
+      li {
+        position: relative;
+        background: #f8fafd;
+        border-radius: 0.7rem;
+        margin-bottom: 0.5rem;
+        padding: 0.8rem 1.1rem 0.8rem 2.3rem;
+        box-shadow: 0 1px 4px #b2b2d810;
+        border: 1px solid #e3e9f6;
+        transition: box-shadow 0.18s, border 0.18s, background 0.18s, transform 0.13s;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 1rem;
+        color: #2d3154;
+        &:hover {
+          background: #f0f4ff;
+          border: 1.5px solid #b2b2d8;
+          box-shadow: 0 2px 12px #6c63ff18;
+          transform: translateY(-1px) scale(1.01);
+        }
+        &::before {
+          content: "\2713";
+          position: absolute;
+          left: 0.8rem;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #6c63ff;
+          background: #e3e9f6;
+          border-radius: 50%;
+          width: 1.3em;
+          height: 1.3em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.95em;
+          font-weight: bold;
+          box-shadow: 0 1px 4px #6c63ff15;
+        }
+      }
+    }
+  }
+  &__form {
+    flex: 2 1 480px;
+    background: #fff;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 16px #b2b2d840;
+    padding: 2.5rem 2rem 2rem 2rem;
+    min-width: 320px;
+    @media (max-width: 900px) {
+      min-width: unset;
+    }
+  }
+}
+
+.cart-ai-steps {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+  justify-content: center;
+  button {
+    background: #e3e9f6;
+    color: #4c4f6b;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    &.active, &:not(:disabled):hover {
+      background: #4c4f6b;
+      color: #fff;
+    }
+    &:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.cart-ai-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-weight: 500;
+    color: #4c4f6b;
+    margin-bottom: 0.6rem;
+    input, select, textarea {
+      margin-top: 0.1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+      background: #f6f9fc;
+      transition: border 0.2s;
+      &:focus {
+        border: 1.5px solid #4c4f6b;
+        outline: none;
+      }
+    }
+    textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+  }
+}
+
+.cart-ai-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  h2 {
+    font-size: 1.25rem;
+    color: #2d3154;
+    margin-bottom: 0.7rem;
+    font-weight: 700;
+  }
+}
+
+.cart-ai-nav-btns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #6c63ff 0%, #48b1f3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #6c63ff30;
+  transition: background 0.2s, box-shadow 0.2s;
+  &:hover:not(:disabled) {
+    background: linear-gradient(90deg, #48b1f3 0%, #6c63ff 100%);
+    box-shadow: 0 4px 16px #6c63ff40;
+  }
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  background: #e3e9f6;
+  color: #4c4f6b;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.7rem 2.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover:not(:disabled) {
+    background: #c7d2fe;
+  }
+}
+
+// --- MODAL ECOMMERCE ---
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 48, 84, 0.22);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s;
+}
+
+.modal-container {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 32px #b2b2d870;
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  min-width: 330px;
+  max-width: 95vw;
+  width: 100%;
+  max-height: 90vh;
+  position: relative;
+  box-shadow: 0 0 10em 1em;
+  animation: popIn 0.18s;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: #b2b2d8;
+  cursor: pointer;
+  transition: color 0.15s;
+  &:hover { color: #6c63ff; }
+}
+
+.ecommerce_form_add {
+  margin: 0 auto;
+  overflow-y: auto;
+
+  label, input, textarea, select {
+    font-size: 1.08rem;
+    font-family: inherit;
+  }
+  input, textarea, select {
+    border: 1.5px solid #e3e9f6;
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    margin-top: 0.18rem;
+    background: #fafbff;
+    transition: border 0.16s, box-shadow 0.16s;
+    &:focus {
+      border: 1.5px solid #6c63ff;
+      outline: none;
+      box-shadow: 0 0 0 2px #6c63ff22;
+    }
+  }
+  textarea {
+    min-height: 70px;
+    resize: vertical;
+  }
+  button[type="submit"], button[type="button"] {
+    background: linear-gradient(90deg,#6c63ff 30%,#3b3f7f 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin-top: 0.3rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #b2b2d820;
+    transition: background 0.18s, transform 0.13s;
+    &:hover {
+      background: linear-gradient(90deg,#3b3f7f 0%,#6c63ff 100%);
+      transform: translateY(-1px) scale(1.04);
+    }
+  }
+  h2 {
+    text-align: center;
+    font-size: 1.28rem;
+    color: #4c4f6b;
+    margin-bottom: 0.7rem;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-container {
+    padding: 1.1rem 0.3rem 0.7rem 0.3rem;
+    min-width: unset;
+    max-width: 99vw;
+  }
+  .ecommerce {
+    padding: 1.1rem 0.5rem 0.7rem 0.5rem;
+    min-width: unset;
+    max-width: 99vw;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+// Responsive
+@media (max-width: 600px) {
+  .cart-ai-checkout__container {
+    padding: 0 0.5rem;
+  }
+  .cart-ai-checkout__recap, .cart-ai-checkout__form {
+    padding: 1rem 0.5rem;
+  }
+  .cart-ai-steps {
+    flex-direction: column;
+    gap: 0.5rem;
+    button {
+      width: 100%;
+    }
+  }
+}

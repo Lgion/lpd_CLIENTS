@@ -34,7 +34,8 @@ export default function ArticleGrid({
     isAdmin,
     miniCart,
     selectedCategory,
-    selectedType
+    selectedType,
+    openEditForm
 }) {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const { setHoveredTitle } = useHover();
@@ -63,6 +64,7 @@ export default function ArticleGrid({
                             key={"figure_"+i}
                             onMouseEnter={() => setHoveredTitle(item.fr__)}
                             onMouseLeave={() => setHoveredTitle('')}
+                            data-aLaUne={item.alaune||0}
                         >
                             <div>
                                 <Image
@@ -93,9 +95,9 @@ export default function ArticleGrid({
                                         >avec couverture: +{option.couverture} Fcfa</div>}
                                         {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
                                     </>}
-                                    {isAdmin && <ul>
-                                        <li onClick={(e) => handleUpdate(e,item)}>edit</li>
-                                        <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>delete</li>
+                                    {isAdmin && <ul class="admin_btns">
+                                        <li onClick={() => openEditForm(item)}>edit</li>
+                                        <li onClick={handleDelete} data-_id={item._id} data-src={`img/vente-religieuse/min/${Ecommerce_articles.articles_img_table[item.nom]}/${item.img}.webp`}>delete</li>
                                     </ul>}
                                 </button>}
                                 <figcaption title={item.fr}>{item.fr__}</figcaption>
