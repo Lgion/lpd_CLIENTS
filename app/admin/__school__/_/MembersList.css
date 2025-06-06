@@ -1,0 +1,96 @@
+#school_members {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+#school_members li {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+#school_members li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#school_members figure {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#school_members figure img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+
+#school_members figcaption {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+#school_members section {
+  font-size: 0.9rem;
+  color: #666;
+  display: grid;
+  gap: 0.5rem;
+}
+
+#school_members .birth,
+#school_members .address,
+#school_members .phone,
+#school_members .email,
+#school_members .parents {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#school_members .birth::before { content: '🎂'; }
+#school_members .address::before { content: '📍'; }
+#school_members .phone::before { content: '📞'; }
+#school_members .email::before { content: '📧'; }
+#school_members .parents::before { content: '👪'; }
+
+#school_members .isInterne,
+#school_members .doFeesPaid {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  border: 2px solid #ddd;
+}
+
+#school_members .isInterne.active {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+#school_members .doFeesPaid.active {
+  background-color: #2196F3;
+  border-color: #2196F3;
+}
+
+#school_members a {
+  color: #2196F3;
+  text-decoration: none;
+}
+
+#school_members a:hover {
+  text-decoration: underline;
+}

@@ -1,6 +1,6 @@
 // import { useContext } from 'react'
 // import AdminContext from "../../../../stores/adminContext.js"
-// import '../styles/table-classe.css'
+import '../styles/table-classe.css'
 
 export default ({renderClasse}) => {
     // const {renderClasse} = useContext(AdminContext)
