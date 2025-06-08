@@ -29,14 +29,15 @@ export default function StudentPage({ params }) {
             <div className="col-md-4">
               {student?.photo_$_file && (
                 <img 
-                  src={student?.photo_$_file} 
-                  alt={`${student?.nom} ${student?.prenoms?.join(' ')}`}
+                
+                  src={"/school/students/" + student.nom.toLowerCase() + "_" + student?.prenoms?.toLocaleLowerCase() +"_"+ student["photo_$_file"].substring(student["photo_$_file"].lastIndexOf('_')+1,student["photo_$_file"].indexOf('.')) + student["photo_$_file"].substring(student["photo_$_file"].indexOf('.'))} 
+                  alt={`${student?.nom} ${student?.prenoms}`}
                   className="img-fluid rounded mb-3"
                 />
               )}
             </div>
             <div className="col-md-8">
-              <h2 className="h4 mb-3">{student?.nom} {student?.prenoms?.join(' ')}</h2>
+              <h2 className="h4 mb-3">{student?.nom} {student?.prenoms}</h2>
               
               <div className="mb-3">
                 <strong>Date de naissance:</strong> {student?.naissance_$_date}

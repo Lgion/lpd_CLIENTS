@@ -4,6 +4,7 @@ import "../../../../assets/scss/admin_ai_school.scss"
 
 export default ({ data, type }) => {
     console.log(data);
+    let timestamp = ""
     
     return <ul id="school_members">
         {data?.map((elt, i) => <li
@@ -14,8 +15,8 @@ export default ({ data, type }) => {
         >
             {
                 console.log(elt)
-                
             }
+                
         <Link 
             key={"classe_profs_" + i} 
             // href={`/admin/school/${type == "teachers" ? "teacher" : "student"}/${elt.id}`}
@@ -23,8 +24,8 @@ export default ({ data, type }) => {
             className="member-link"
         >
             <figure>
-                <img src={"/school/" + type + "/" + elt.nom.toLowerCase() + "_" + elt?.prenoms?.join("-").toLocaleLowerCase() +"_"+ elt["photo_$_file"].substring(elt["photo_$_file"].indexOf('.'))} alt={"eleve saint martin de porèz en classe de \"" + elt.current_classe + "\""} />
-                <figcaption><span>{elt.nom}</span> - <span>{elt.prenoms?.join(', ')}</span></figcaption>
+                <img src={"/school/" + type + "/" + elt.nom.toLowerCase() + "_" + elt?.prenoms?.toLocaleLowerCase() +"_"+ elt["photo_$_file"].substring(elt["photo_$_file"].lastIndexOf('_')+1,elt["photo_$_file"].indexOf('.')) + elt["photo_$_file"].substring(elt["photo_$_file"].indexOf('.'))} alt={"eleve saint martin de porèz en classe de \"" + elt.current_classe + "\""} />
+                <figcaption><span>{elt.nom}</span> - <span>{elt?.prenoms}</span></figcaption>
             </figure>
             {type == "students" && <>
                 <span className={"isInterne" + (elt.isInterne ? " active" : "")}></span>

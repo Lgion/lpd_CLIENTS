@@ -19,7 +19,7 @@ export default () => {
               let notIn = showTeachers ? ecole_profs : ecole_eleves
               notIn = notIn.filter(member => {
                 let nom = member.nom.indexOf(e.target.value)
-                  , prenoms = member.prenoms?.join(', ').indexOf(e.target.value)
+                  , prenoms = member.prenoms?.indexOf(e.target.value)
                 if ((nom && prenoms) == -1) return member
               })
               console.log(notIn);

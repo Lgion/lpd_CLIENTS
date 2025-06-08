@@ -19,19 +19,12 @@ const teacherSchema = mongoose.Schema({
 })
 
 
-console.log("teach......");
-// console.log(schema.obj);
-// console.log(Object.keys(schema.obj));
-// console.log(Object.keys(schema.obj)[0]);
-
-
 let model 
 
-if(!mongoose.modelNames().includes("Profs_Ecole_St_Martin")){
-    model = mongoose.model('Profs_Ecole_St_Martin', teacherSchema)
+if(!mongoose.modelNames().includes("ai_Profs_Ecole_St_Martin")){
+    model = mongoose.model('ai_Profs_Ecole_St_Martin', teacherSchema)
 }else{
-    model = mongoose.model("Profs_Ecole_St_Martin")
+    model = mongoose.model("ai_Profs_Ecole_St_Martin")
 }
-// console.log("model teach");
-// console.log(model);
+
 module.exports = model

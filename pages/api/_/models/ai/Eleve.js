@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 const {schema: schemaClasseForEleve} = require("./Classe")
 // const {schema: schemaClasse} = require("./Classe")
-// console.log("iii");
+console.log("iii");
 console.log(schemaClasseForEleve);
 
 let currentSchoolYear = new Date()
@@ -26,7 +26,7 @@ const studentSchema = mongoose.Schema({
     scolarity_fees_$_checkbox: { default: {[currentSchoolYear]: false}, type: Object, required: true }, // => {YYYY: {}}
     bolobi_class_history_$_ref_µ_classes: { default: {[currentSchoolYear]:""}, type: Object, required: true },
     school_history: { default: {[currentSchoolYear]:""}, type: Object, required: true },
-    absences: { default: {}, type: [String], required: true },
+    absences: { default: [], type: [Object], required: true },
     notes: { default: {[currentSchoolYear]: {}}, type: Object, required: true },
     compositions: { default: currentSchoolYearField, type: Object, required: true },
     moyenne_trimetriel: {
@@ -47,17 +47,10 @@ const studentSchema = mongoose.Schema({
 })
 
 
-
-// console.log(schema.obj);
-// console.log(Object.keys(schema.obj));
-// console.log(Object.keys(schema.obj)[0]);
-
-
 let model 
 
-if(!mongoose.modelNames().includes("Eleves_Ecole_St_Martin"))
-    model = mongoose.model('Eleves_Ecole_St_Martin', studentSchema)
-else model = mongoose.model("Eleves_Ecole_St_Martin")
-// console.log("model stud");
-// console.log(model);
+if(!mongoose.modelNames().includes("ai_Eleves_Ecole_St_Martin"))
+    model = mongoose.model('ai_Eleves_Ecole_St_Martin', studentSchema)
+else model = mongoose.model("ai_Eleves_Ecole_St_Martin")
+
 module.exports = model

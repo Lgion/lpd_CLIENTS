@@ -428,7 +428,7 @@ const StudentForm = ({ model, modelKey, joinedDatasProps, endpoint, hiddens={}, 
                                             defaultValue=""
                                         >
                                             <option value="">Choisir {joinedDataName}</option>
-                                            {joinedData?.map((elt,i)=><option key={property_baseValue+"_"+i} value={elt._id}>{(elt.niveau&&elt.alias) ? elt.niveau+"-"+elt.alias : elt.nom+"-"+elt.prenoms.join("-")}</option>)}
+                                            {joinedData?.map((elt,i)=><option key={property_baseValue+"_"+i} value={elt._id}>{(elt.niveau&&elt.alias) ? elt.niveau+"-"+elt.alias : elt.nom+"-"+elt?.prenoms}</option>)}
                                         </select>
                                     </>
                                 break;
@@ -442,7 +442,7 @@ const StudentForm = ({ model, modelKey, joinedDatasProps, endpoint, hiddens={}, 
                                             defaultValue=""
                                         >
                                             <option value="">Choisir {joinedDataName}</option>
-                                            {joinedData?.map((elt,i)=><option key={property_baseValue+"_"+i} value={elt._id}>{(elt.niveau&&elt.alias) ? elt.niveau+"-"+elt.alias : elt.nom+"-"+elt.prenoms?.join("-")}</option>)}
+                                            {joinedData?.map((elt,i)=><option key={property_baseValue+"_"+i} value={elt._id}>{(elt.niveau&&elt.alias) ? elt.niveau+"-"+elt.alias : elt.nom+"-"+elt?.prenoms}</option>)}
                                         </select>
                                         <div id={inputName+"_div"}></div>
                                         <input 

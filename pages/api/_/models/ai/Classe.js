@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 // const {schema} = require("./Teacher")
 // const {schema} = require("./Eleve")
-import {modelProfs,modelEleves} from './School'
+// import {modelProfs,modelEleves} from './School'
 // const {schema: schemaTeacher} = require("./Teacher")
 // const {schema: schemaStudent} = require("./Eleve")
-console.log(modelProfs);
-let {schema: schemaTeacher} = modelProfs
-let {schema: schemaEleve} = modelEleves
+// console.log(modelProfs);
+// let {schema: schemaTeacher} = modelProfs
+// let {schema: schemaEleve} = modelEleves
 
 
 
@@ -53,9 +53,9 @@ const classeSchema = mongoose.Schema({
 
 let model 
 
-if(!mongoose.modelNames().includes("Ecole_St_Martin"))
-    model = mongoose.model('Ecole_St_Martin', classeSchema)
-else model = mongoose.model("Ecole_St_Martin")
+if(!mongoose.modelNames().includes("ai_Ecole_St_Martin"))
+    model = mongoose.model('ai_Ecole_St_Martin', classeSchema)
+else model = mongoose.model("ai_Ecole_St_Martin")
 // console.log("model classe");
 // console.log(model);
 module.exports = model

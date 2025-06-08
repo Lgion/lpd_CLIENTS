@@ -148,6 +148,7 @@ export const AdminContextProvider = ({children}) => {
             setShowStudents(true)
         }
         if (isTeachersUrl) {
+            alert('ok')
             setShowTeachers(true)
         }
         if (isClassesUrl) {
@@ -234,7 +235,7 @@ export const AdminContextProvider = ({children}) => {
                                 href={`/admin/school/teacher/${elt_._id}`}
                                 className="member-link"
                             >
-                                {elt_.nom} - {elt_.prenoms.join(', ')}
+                                {elt_.nom} - {elt_?.prenoms}
                             </Link>
                         ))
                     }
@@ -252,7 +253,7 @@ export const AdminContextProvider = ({children}) => {
                                 href={`/admin/school/student/${elt_._id}`}
                                 className="member-link"
                             >
-                                {elt_.nom} - {elt_.prenoms.join(', ')}
+                                {elt_.nom} - {elt_?.prenoms}
                             </Link>
                         ))
                     }
