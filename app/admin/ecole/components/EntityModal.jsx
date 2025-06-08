@@ -1,10 +1,84 @@
 import { useContext, useState, useRef, useEffect } from 'react';
+import '../index.scss';
 import { AiAdminContext } from '../../../../stores/ai_adminContext';
 import Gmap from '../../../_/Gmap_plus';
 
-
 // type: 'eleve' | 'enseignant' | 'classe'
+// --- Composant pour ajouter une note ---
+function AddNoteForm({ onAdd, notes }) {
+  const [showForm, setShowForm] = useState(false);
+  const [date, setDate] = useState('');
+  const [matiere, setMatiere] = useState('');
+  const [note, setNote] = useState('');
+  const [err, setErr] = useState('');
+
+  const handleValidate = () => {
+    if (!date || !matiere || !note) {
+      setErr('Tous les champs sont requis');
+      return;
+    }
+    const timestamp = new Date(date).getTime();
+    if (!timestamp || isNaN(timestamp)) {
+      setErr('Date invalide');
+      return;
+    }
+    onAdd({ [timestamp]: [matiere, note] });
+    setDate(''); setMatiere(''); setNote(''); setErr('');
+    setShowForm(false);
+  };
+
+  const handleCancel = () => {
+    setDate(''); setMatiere(''); setNote(''); setErr('');
+    setShowForm(false);
+  };
+
+  return (
+    <div className="add-note-form">
+      {/* Affichage des notes existantes */}
+      <div className="notes-list">
+        {notes && Object.keys(notes).length == 0 && (
+          <div className="no-notes">Aucune note pour l'instant</div>
+        )}
+      </div>
+
+      {!showForm ? (
+        <button type="button" className="add-note-btn" onClick={() => setShowForm(true)}>Ajouter une note</button>
+      ) : (
+        <>
+          <input type="date" className="add-note-date" value={date} onChange={e => setDate(e.target.value)} />
+          <select className="add-note-matiere" value={matiere} onChange={e => setMatiere(e.target.value)}>
+            <option value="">Choisir une matière</option>
+            <option value="Mathématiques">Mathématiques</option>
+            <option value="Français">Français</option>
+            <option value="Histoire-Géo">Histoire-Géo</option>
+            <option value="Anglais">Anglais</option>
+            <option value="SVT">SVT</option>
+            <option value="Physique-Chimie">Physique-Chimie</option>
+            <option value="EPS">EPS</option>
+            <option value="Arts">Arts</option>
+            <option value="Technologie">Technologie</option>
+            <option value="Autre">Autre</option>
+          </select>
+          <input type="number" min="0" max="20" className="add-note-note" placeholder="Note" value={note} onChange={e => setNote(e.target.value)} />
+          <button type="button" className="add-note-btn" onClick={handleValidate}>Valider</button>
+          <button type="button" className="add-note-btn" style={{ background: '#ccc', color: '#222' }} onClick={handleCancel}>Annuler</button>
+          {err && <span className="add-note-error">{err}</span>}
+        </>
+      )}
+    </div>
+  );
+}
+
+
 export default function EntityModal({ type, entity, onClose, classes = [] }) {
+  // --- Gestion de l'année scolaire sélectionnée pour les compositions ---
+  const getDefaultSchoolYear = (compositions) => {
+    const keys = Object.keys(compositions || {});
+    if (keys.length > 0) return keys[0];
+    const now = new Date();
+    return (now.getMonth()+1)<7 ? (now.getFullYear()-1)+"-"+now.getFullYear() : now.getFullYear()+"-"+(now.getFullYear()+1);
+  };
+  const [schoolYear, setSchoolYear] = useState(getDefaultSchoolYear(entity?.compositions || {}));
   // Absences
   const [showAbsencePicker, setShowAbsencePicker] = useState(false);
   const [newAbsenceDate, setNewAbsenceDate] = useState('');
@@ -447,24 +521,81 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
                 </div>
               )}
             </div>
-            <label>Notes (JSON)
-              <textarea name="notes" value={form.notes ? JSON.stringify(form.notes) : ''} onChange={e => setForm(f => ({ ...f, notes: e.target.value ? JSON.parse(e.target.value) : {} }))} />
-            </label>
-            <label>Compositions (JSON)
-              <textarea name="compositions" value={form.compositions ? JSON.stringify(form.compositions) : ''} onChange={e => setForm(f => ({ ...f, compositions: e.target.value ? JSON.parse(e.target.value) : {} }))} />
-            </label>
+
+            <label>Notes</label>
+            <div className="notes-container" style={{ border: '1px solid #ccc', borderRadius: 6, padding: 8, marginBottom: 16 }}>
+              {/* Affichage des notes triées par date croissante */}
+              {Object.entries(form.notes || {})
+                .sort((a, b) => Number(a[0]) - Number(b[0]))
+                .map(([timestamp, [matiere, note]], idx) => (
+                  <div key={timestamp} style={{ display: 'flex', alignItems: 'center', background: '#f9f9f9', borderRadius: 4, marginBottom: 4, padding: 4, position: 'relative' }}>
+                    <span style={{ minWidth: 100, fontWeight: 500 }}>{new Date(Number(timestamp)).toLocaleDateString()}</span>
+                    <span style={{ margin: '0 12px' }}>{matiere}</span>
+                    <span style={{ margin: '0 12px', fontWeight: 600 }}>{note}</span>
+                    <button type="button" onClick={() => {
+                      const newNotes = { ...form.notes };
+                      delete newNotes[timestamp];
+                      setForm(f => ({ ...f, notes: newNotes }));
+                    }} style={{ position: 'absolute', right: 6, top: 4, border: 'none', background: 'transparent', color: '#d00', fontWeight: 'bold', fontSize: 18, cursor: 'pointer' }} title="Supprimer">×</button>
+                  </div>
+                ))}
+              {/* Formulaire d'ajout de note */}
+              <AddNoteForm
+                onAdd={noteObj => {
+                  setForm(f => ({ ...f, notes: { ...f.notes, ...noteObj } }));
+                }}
+                notes={form.notes || {}}
+              />
+              {/* Champ caché pour la soumission */}
+              <input type="hidden" name="notes" value={form.notes ? JSON.stringify(form.notes) : ''} />
+            </div>
+
+            <label>Compositions (JSON)</label>
+            {/* Bloc de gestion des compositions par trimestre */}
+            <CompositionsBlock
+              compositions={form.compositions || {}}
+              schoolYear={schoolYear}
+              onChange={newCompo => setForm(f => ({ ...f, compositions: newCompo }))}
+              onChangeYear={setSchoolYear}
+            />
+            <textarea readOnly name="compositions" value={form.compositions ? JSON.stringify(form.compositions) : ''} 
+              // onChange={e => setForm(f => ({ ...f, compositions: e.target.value ? JSON.parse(e.target.value) : {} }))} 
+            />
             <label>Moyenne trimetriel (JSON)
               <textarea name="moyenne_trimetriel" value={form.moyenne_trimetriel ? JSON.stringify(form.moyenne_trimetriel) : ''} onChange={e => setForm(f => ({ ...f, moyenne_trimetriel: e.target.value ? JSON.parse(e.target.value) : {} }))} />
             </label>
-            <label>Scolarity fees (JSON)
-              <textarea name="scolarity_fees_$_checkbox" value={form.scolarity_fees_$_checkbox ? JSON.stringify(form.scolarity_fees_$_checkbox) : ''} onChange={e => setForm(f => ({ ...f, scolarity_fees_$_checkbox: e.target.value ? JSON.parse(e.target.value) : {} }))} />
-            </label>
+            <label>Scolarity fees (JSON)</label>
+            <ScolarityFeesBlock
+              fees={form.scolarity_fees_$_checkbox?.[schoolYear] || {}}
+              onChange={newFees => setForm(f => ({
+                ...f,
+                scolarity_fees_$_checkbox: {
+                  ...f.scolarity_fees_$_checkbox,
+                  [schoolYear]: newFees
+                }
+              }))}
+              schoolYear={schoolYear}
+            />
+            <textarea readOnly name="scolarity_fees_$_checkbox_" value={form.scolarity_fees_$_checkbox ? JSON.stringify(form.scolarity_fees_$_checkbox) : ''} 
+              // onChange={e => setForm(f => ({ ...f, scolarity_fees_$_checkbox: e.target.value ? JSON.parse(e.target.value) : {} }))} 
+            />
             <label>Bolobi class history (JSON)
-              <textarea name="bolobi_class_history_$_ref_µ_classes" value={form.bolobi_class_history_$_ref_µ_classes ? JSON.stringify(form.bolobi_class_history_$_ref_µ_classes) : ''} onChange={e => setForm(f => ({ ...f, bolobi_class_history_$_ref_µ_classes: e.target.value ? JSON.parse(e.target.value) : {} }))} />
             </label>
-            <label>School history (JSON)
-              <textarea name="school_history" value={form.school_history ? JSON.stringify(form.school_history) : ''} onChange={e => setForm(f => ({ ...f, school_history: e.target.value ? JSON.parse(e.target.value) : {} }))} />
-            </label>
+            <SchoolHistoryBlock
+              schoolHistory={(() => {
+                const now = new Date();
+                const currentYearStart = (now.getMonth() + 1) < 7 ? now.getFullYear() - 1 : now.getFullYear();
+                const currentYearStr = `${currentYearStart}-${currentYearStart + 1}`;
+                return {
+                  [currentYearStr]: "Martin de Porrès de Bolobi",
+                  ...(form.school_history || {})
+                };
+              })()}
+              onChange={newHistory => setForm(f => ({ ...f, school_history: newHistory }))}
+            />
+            <textarea readOnly name="school_history_" value={form.school_history ? JSON.stringify(form.school_history) : ''} 
+              // onChange={e => setForm(f => ({ ...f, bolobi_class_history_$_ref_µ_classes: e.target.value ? JSON.parse(e.target.value) : {} }))} 
+            />
           </>}
           {type === 'enseignant' && <>
             <input name="nom" value={form.nom} onChange={handleChange} placeholder="Nom" required />
@@ -525,6 +656,275 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
           }}>Supprimer</button>}
         </form>
       </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+// --- Bloc d'historique des écoles fréquentées ---
+function SchoolHistoryBlock({ schoolHistory, onChange }) {
+  // Récupérer l'année scolaire courante
+  const now = new Date();
+  const currentYearStart = (now.getMonth() + 1) < 7 ? now.getFullYear() - 1 : now.getFullYear();
+  const currentYearStr = `${currentYearStart}-${currentYearStart + 1}`;
+  // Générer les 10 années précédentes (hors année courante)
+  const years = Array.from({length: 10}, (_, i) => {
+    const start = currentYearStart - i - 1;
+    return `${start}-${start + 1}`;
+  });
+  // Années déjà renseignées
+  const usedYears = Object.keys(schoolHistory || {});
+  // Années disponibles pour ajout
+  const availableYears = years.filter(y => !usedYears.includes(y));
+  // Formulaire d'ajout
+  const [selectedYear, setSelectedYear] = useState(availableYears[0] || '');
+  const [ecole, setEcole] = useState('');
+
+  const handleAdd = () => {
+    if (!selectedYear || !ecole.trim()) return;
+    onChange({ ...schoolHistory, [selectedYear]: ecole.trim() });
+    setEcole('');
+    // Mettre à jour l'année sélectionnée après ajout
+    const nextAvailable = availableYears.filter(y => y !== selectedYear)[0] || '';
+    setSelectedYear(nextAvailable);
+  };
+  const handleRemove = (year) => {
+    const newHist = { ...schoolHistory };
+    delete newHist[year];
+    onChange(newHist);
+  };
+  return (
+    <div className="school-history-block">
+      <div className="school-history-block__header">Historique des écoles fréquentées</div>
+      <div className="school-history-block__list">
+        {usedYears.length === 0 && <span className="school-history-block__empty">Aucune école enregistrée</span>}
+        {usedYears.sort((a, b) => b.localeCompare(a)).map(y => (
+          <div className="school-history-block__entry" key={y}>
+            <span className="school-history-block__entry-year">{y}</span>
+            <span className="school-history-block__entry-ecole">{schoolHistory[y]}</span>
+            <button type="button" className="school-history-block__remove-btn" title="Supprimer" onClick={() => handleRemove(y)}>×</button>
+          </div>
+        ))}
+      </div>
+      <div className="school-history-block__add-form">
+        <select value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
+          {availableYears.map(y => (
+            <option key={y} value={y}>{y}</option>
+          ))}
+        </select>
+        <input
+          type="text"
+          value={ecole}
+          onChange={e => setEcole(e.target.value)}
+          placeholder="Nom de l'école"
+        />
+        <button type="button" onClick={handleAdd} disabled={!selectedYear || !ecole.trim()}>Ajouter</button>
+      </div>
+      <input type="hidden" name="school_history" value={(() => {
+        const now = new Date();
+        const currentYearStart = (now.getMonth() + 1) < 7 ? now.getFullYear() - 1 : now.getFullYear();
+        const currentYearStr = `${currentYearStart}-${currentYearStart + 1}`;
+        return JSON.stringify({
+          [currentYearStr]: "Martin de Porrès de Bolobi",
+          ...(schoolHistory || {})
+        });
+      })()} />
+    </div>
+  );
+}
+
+// --- Bloc de gestion des frais de scolarité par année ---
+function ScolarityFeesBlock({ fees, onChange, schoolYear }) {
+  const [showForm, setShowForm] = useState(false);
+  const [type, setType] = useState('argent');
+  const [val, setVal] = useState('');
+  const [date, setDate] = useState(() => {
+    const now = new Date();
+    return now.toISOString().slice(0, 10);
+  });
+  // Liste des dépôts : tableau [{timestamp, argent, riz}]
+  const entries = Object.entries(fees || {}).map(([ts, v]) => ({ ts, ...v }));
+  const totalArgent = entries.reduce((sum, e) => sum + (e.argent ? Number(e.argent) : 0), 0);
+  const totalRiz = entries.reduce((sum, e) => sum + (e.riz ? Number(e.riz) : 0), 0);
+  const complete = totalArgent >= 20000 && totalRiz >= 50;
+
+  const handleAdd = () => {
+    if (!val || isNaN(Number(val)) || Number(val) <= 0) return;
+    // Utiliser la date choisie, à minuit locale
+    const d = new Date(date);
+    d.setHours(0,0,0,0);
+    const ts = d.getTime();
+    const newEntry = type === 'argent'
+      ? { argent: Number(val) }
+      : { riz: Number(val) };
+    onChange({ ...fees, [ts]: newEntry });
+    setShowForm(false); setType('argent'); setVal(''); setDate(new Date().toISOString().slice(0,10));
+  };
+  const handleRemove = (ts) => {
+    const newFees = { ...fees };
+    delete newFees[ts];
+    onChange(newFees);
+  };
+  return (
+    <div className={`scolarity-fees-block ${complete ? 'scolarity-fees-block--complete' : 'scolarity-fees-block--incomplete'}`}>
+      <div className="scolarity-fees-block__header">
+        Frais de scolarité – {schoolYear}
+      </div>
+      <div className="scolarity-fees-block__totals">
+        <span>Argent : <b>{totalArgent} F</b> / 20000 F</span>
+        <span>Riz : <b>{totalRiz} kg</b> / 50 kg</span>
+      </div>
+      <div className="scolarity-fees-block__list">
+        {entries.length === 0 && <span className="scolarity-fees-block__empty">Aucun dépôt enregistré</span>}
+        {entries.sort((a,b)=>a.ts-b.ts).map(e => (
+          <div className="scolarity-fees-block__entry" key={e.ts}>
+            <span className="scolarity-fees-block__entry-date">{new Date(Number(e.ts)).toLocaleDateString()}</span>
+            {e.argent && <span className="scolarity-fees-block__entry-argent">{e.argent} F</span>}
+            {e.riz && <span className="scolarity-fees-block__entry-riz">{e.riz} kg</span>}
+            <button type="button" className="scolarity-fees-block__remove-btn" title="Supprimer" onClick={() => handleRemove(e.ts)}>×</button>
+          </div>
+        ))}
+      </div>
+      {showForm ? (
+        <div className="scolarity-fees-block__add-form">
+          <select value={type} onChange={e => setType(e.target.value)}>
+            <option value="argent">Argent (F)</option>
+            <option value="riz">Riz (kg)</option>
+          </select>
+          <input
+            type="number"
+            min="1"
+            value={val}
+            onChange={e => setVal(e.target.value)}
+            placeholder={type === 'argent' ? 'Montant en F' : 'Poids en kg'}
+            autoFocus
+          />
+          <input
+            type="date"
+            value={date}
+            onChange={e => setDate(e.target.value)}
+            className="scolarity-fees-block__add-date"
+          />
+          <button type="button" onClick={handleAdd}>Valider</button>
+          <button type="button" onClick={() => { setShowForm(false); setVal(''); setDate(new Date().toISOString().slice(0,10)); }} className="scolarity-fees-block__add-cancel">Annuler</button>
+        </div>
+      ) : (
+        <button type="button" className="scolarity-fees-block__add-btn" onClick={() => setShowForm(true)}>Ajouter un dépôt</button>
+      )}
+      <input type="hidden" name="scolarity_fees_$_checkbox" value={JSON.stringify(fees)} />
+    </div>
+  );
+}
+
+// --- Bloc de gestion des compositions par trimestre ---
+function CompositionsBlock({ compositions, schoolYear, onChange, onChangeYear }) {
+  // Format attendu : {"2025-2026": [[11, 12], [14], [8,15,11]]}
+  const [adding, setAdding] = useState(null); // trimestre en cours d'ajout
+  const [newNote, setNewNote] = useState('');
+  const trimestres = ["1er trimestre", "2e trimestre", "3e trimestre"];
+  // Génère la liste des années disponibles (de N-10 à N+10, + toutes années trouvées dans les données)
+  const now = new Date();
+  const currentYearStart = (now.getMonth()+1)<7 ? now.getFullYear()-1 : now.getFullYear();
+  const yearRange = Array.from({length: 21}, (_, i) => {
+    const start = currentYearStart - 10 + i;
+    return `${start}-${start+1}`;
+  });
+  const yearsSet = new Set([...yearRange, ...Object.keys(compositions||{})]);
+  const years = Array.from(yearsSet).sort((a,b)=>b.localeCompare(a));
+  // On récupère le tableau pour l'année courante
+  const compoArr = compositions[schoolYear] || [[], [], []];
+
+  const handleAdd = idx => {
+    if (newNote === '' || isNaN(Number(newNote))) return;
+    const noteNum = Number(newNote);
+    const newArr = compoArr.map((arr, i) => i === idx ? [...arr, noteNum] : arr);
+    onChange({ ...compositions, [schoolYear]: newArr });
+    setAdding(null); setNewNote('');
+  };
+  const handleRemove = (idx, nidx) => {
+    const newArr = compoArr.map((arr, i) => i === idx ? arr.filter((_, j) => j !== nidx) : arr);
+    onChange({ ...compositions, [schoolYear]: newArr });
+  };
+
+  return (
+    <div className="compositions-block">
+      <div className="compositions-block__header">Compositions</div>
+      <select
+        className="compositions-block__year-select"
+        value={schoolYear}
+        onChange={e => onChangeYear(e.target.value)}
+      >
+        {years.map(y => {
+          const start = parseInt(y.split('-')[0], 10);
+          let color = '';
+          if (start === currentYearStart) color = 'green';
+          else if (start < currentYearStart) color = 'red';
+          else color = 'blue';
+          return <option key={y} value={y} className={"option_"+color }>{y}</option>;
+        })}
+      </select>
+      
+      {trimestres.map((tri, idx) => (
+        <div key={tri} className="compositions-block__trimestre">
+          <div className="compositions-block__trimestre-header">
+            <span className="compositions-block__trimestre-title">{tri}</span>
+            <button
+              type="button"
+              className="compositions-block__add-btn"
+              onClick={() => { setAdding(idx); setNewNote(''); }}
+            >Ajouter</button>
+          </div>
+          <div className="compositions-block__notes">
+            {Array.isArray(compoArr[idx]) && compoArr[idx].length > 0 ? (
+              compoArr[idx].map((note, nidx) => (
+                <div key={nidx} className="compositions-block__note">
+                  {note}
+                  <button
+                    type="button"
+                    title="Supprimer"
+                    onClick={() => handleRemove(idx, nidx)}
+                  >×</button>
+                </div>
+              ))
+            ) : (
+              <span className="compositions-block__no-compo">Aucune composition</span>
+            )}
+            {adding === idx && (
+              <span className="compositions-block__add-form">
+                <input
+                  type="number"
+                  min="0"
+                  max="20"
+                  value={newNote}
+                  onChange={e => setNewNote(e.target.value)}
+                  placeholder="Note"
+                  autoFocus
+                />
+                <button
+                  type="button"
+                  className="compositions-block__add-btn"
+                  onClick={() => handleAdd(idx)}
+                >Valider</button>
+                <button
+                  type="button"
+                  className="compositions-block__add-btn compositions-block__add-btn--cancel"
+                  onClick={() => { setAdding(null); setNewNote(''); }}
+                >Annuler</button>
+              </span>
+            )}
+          </div>
+        </div>
+      ))}
+      {/* Champ caché pour la soumission */}
+      <input type="hidden" name="compositions" value={JSON.stringify({ [schoolYear]: compoArr })} />
     </div>
   );
 }
