@@ -4,11 +4,13 @@ import Image from "next/image"
 import * as Ecommerce_articles from "../../../../assets/datas/articles.js"
 // import CartPaypal from './CartPaypal';
 // import CartGoogle from './CartGoogle';
-import AuthContext from "../../../../stores/authContext.js"
+import AuthContext from "../../../../stores/ecomContext.js"
+import EcomContext from "../../../../stores/ecomContext.js"
 
 export default function CartRecap() {
 
-    const {userConnectedDatas, handleQty, CartLS} = useContext(AuthContext)
+    const {userConnectedDatas } = useContext(AuthContext)
+    const {CartLS,handleQty} = useContext(EcomContext)
     // Perform localStorage action
     , [output, setOutput] = useState([])
     , myLoader = ({ src, width, quality }) => {

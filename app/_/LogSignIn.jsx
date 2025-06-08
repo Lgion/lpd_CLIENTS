@@ -14,13 +14,9 @@ export default function LogSignIn() {
 
     useEffect(() => {
         console.log(user?.primaryEmailAddress?.emailAddress)
-        console.log(process.env.NEXT_PUBLIC_EMAIL_USER)
-        console.log(process.env.NEXT_PUBLIC_EMAIL_USER.indexOf(user?.primaryEmailAddress?.emailAddress))
-
-        
         if(!isSignedIn)
             setIsAdmin(false)
-        if(process.env.NEXT_PUBLIC_EMAIL_USER.indexOf(user?.primaryEmailAddress?.emailAddress) !== -1
+        if(process.env.NEXT_PUBLIC_EMAIL_ADMIN.indexOf(user?.primaryEmailAddress?.emailAddress) !== -1
         // if(user?.primaryEmailAddress?.emailAddress == "hi.cyril@gmail.com"
             // || true 
         ){

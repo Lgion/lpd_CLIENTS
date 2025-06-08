@@ -1,6 +1,6 @@
 import Link from "next/link";
 // import '../styles/MembersList.css'
-import "../../../../assets/scss/admin_ai.scss"
+import "../../../../assets/scss/admin_ai_school.scss"
 
 export default ({ data, type }) => {
     console.log(data);

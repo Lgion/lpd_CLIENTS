@@ -92,6 +92,7 @@ export const EcomContextProvider = ({children}) => {
         articles_title_table,
         selectOptions,
         setSelectOptions,
+        CartLS,
     }), [cartData, miniCart, handleQty, updateCart, cartBox, setCartBox, articles_title_table, selectOptions]);
 
     return (

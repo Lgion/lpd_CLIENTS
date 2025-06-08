@@ -1117,6 +1117,7 @@ body{
     >.miniCart{
       &:not(:hover) li{display: none;}
       transition: height .4s;
+      overflow: hidden;
       z-index: 1;
       position: absolute;
       left: 133px;

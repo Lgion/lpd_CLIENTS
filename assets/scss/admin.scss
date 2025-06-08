@@ -238,6 +238,42 @@ body{
                     }
                 }
             }
+            &.profilContainer{
+                .card{
+                    &-header{}
+                    &-body{
+                        .card-body{
+                            font-size:1em;
+                        }
+                    }
+                }
+            }
+        }
+        >#modal{
+            >span.close{}
+            .modal{
+                &___header{
+                }
+                &___main{
+                    overflow:hidden !important;
+                    >form{
+                        overflow:scroll;
+                        margin: 0 auto;
+                        border-radius: 10px;
+                        padding: 1em;
+                        box-shadow: 0 0 10px 1px;
+                        label{
+                            display: block;
+                        }
+                        >div{
+                            border: solid;
+                            padding: 1em;
+                            margin: 1em 0;
+                        }
+                    }
+                }
+                &___footer{}
+            }
         }
         >footer{}
 }

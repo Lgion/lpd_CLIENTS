@@ -216,7 +216,7 @@ main.ecommerce {
                 opacity: 0.9;
                 text-align: center;
                 position: absolute;
-                bottom: 0;
+                top: 100%;
                 left: 0;
                 width: 100%;
                 padding: 0.5rem 0;
@@ -224,7 +224,7 @@ main.ecommerce {
                 font-size: 1.1rem;
                 font-size: 2em;
                 height:0;
-                transition:height .1s;
+                transition:height .7s;
                 
                 &:empty {
                     // opacity: 0;

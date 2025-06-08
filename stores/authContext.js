@@ -2,8 +2,6 @@
 
 import { createContext, useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import * as Ecommerce_articles from "./../assets/datas/articles.js"
-import * as CartLS from "../utils/favorisManager.js"
 import mongoose from 'mongoose'
 
 const AuthContext = createContext({})
