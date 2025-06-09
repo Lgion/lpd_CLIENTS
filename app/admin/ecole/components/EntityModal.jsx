@@ -1,73 +1,9 @@
-import { useContext, useState, useRef, useEffect } from 'react';
+import { useContext, useState, useRef, useEffect, Fragment } from 'react';
 import '../index.scss';
 import { AiAdminContext } from '../../../../stores/ai_adminContext';
 import Gmap from '../../../_/Gmap_plus';
 
 // type: 'eleve' | 'enseignant' | 'classe'
-// --- Composant pour ajouter une note ---
-function AddNoteForm({ onAdd, notes }) {
-  const [showForm, setShowForm] = useState(false);
-  const [date, setDate] = useState('');
-  const [matiere, setMatiere] = useState('');
-  const [note, setNote] = useState('');
-  const [err, setErr] = useState('');
-
-  const handleValidate = () => {
-    if (!date || !matiere || !note) {
-      setErr('Tous les champs sont requis');
-      return;
-    }
-    const timestamp = new Date(date).getTime();
-    if (!timestamp || isNaN(timestamp)) {
-      setErr('Date invalide');
-      return;
-    }
-    onAdd({ [timestamp]: [matiere, note] });
-    setDate(''); setMatiere(''); setNote(''); setErr('');
-    setShowForm(false);
-  };
-
-  const handleCancel = () => {
-    setDate(''); setMatiere(''); setNote(''); setErr('');
-    setShowForm(false);
-  };
-
-  return (
-    <div className="add-note-form">
-      {/* Affichage des notes existantes */}
-      <div className="notes-list">
-        {notes && Object.keys(notes).length == 0 && (
-          <div className="no-notes">Aucune note pour l'instant</div>
-        )}
-      </div>
-
-      {!showForm ? (
-        <button type="button" className="add-note-btn" onClick={() => setShowForm(true)}>Ajouter une note</button>
-      ) : (
-        <>
-          <input type="date" className="add-note-date" value={date} onChange={e => setDate(e.target.value)} />
-          <select className="add-note-matiere" value={matiere} onChange={e => setMatiere(e.target.value)}>
-            <option value="">Choisir une matière</option>
-            <option value="Mathématiques">Mathématiques</option>
-            <option value="Français">Français</option>
-            <option value="Histoire-Géo">Histoire-Géo</option>
-            <option value="Anglais">Anglais</option>
-            <option value="SVT">SVT</option>
-            <option value="Physique-Chimie">Physique-Chimie</option>
-            <option value="EPS">EPS</option>
-            <option value="Arts">Arts</option>
-            <option value="Technologie">Technologie</option>
-            <option value="Autre">Autre</option>
-          </select>
-          <input type="number" min="0" max="20" className="add-note-note" placeholder="Note" value={note} onChange={e => setNote(e.target.value)} />
-          <button type="button" className="add-note-btn" onClick={handleValidate}>Valider</button>
-          <button type="button" className="add-note-btn" style={{ background: '#ccc', color: '#222' }} onClick={handleCancel}>Annuler</button>
-          {err && <span className="add-note-error">{err}</span>}
-        </>
-      )}
-    </div>
-  );
-}
 
 
 export default function EntityModal({ type, entity, onClose, classes = [] }) {
@@ -76,7 +12,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
     const keys = Object.keys(compositions || {});
     if (keys.length > 0) return keys[0];
     const now = new Date();
-    return (now.getMonth()+1)<7 ? (now.getFullYear()-1)+"-"+now.getFullYear() : now.getFullYear()+"-"+(now.getFullYear()+1);
+    return (now.getMonth() + 1) < 7 ? (now.getFullYear() - 1) + "-" + now.getFullYear() : now.getFullYear() + "-" + (now.getFullYear() + 1);
   };
   const [schoolYear, setSchoolYear] = useState(getDefaultSchoolYear(entity?.compositions || {}));
   // Absences
@@ -182,18 +118,18 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
       if (type === 'eleve') {
         console.log(form['naissance_$_date']);
         console.log(+form['naissance_$_date']);
-        console.log(form['naissance_$_date']+"");
-        console.log(+new Date(form['naissance_$_date']+""));
-        
-        
+        console.log(form['naissance_$_date'] + "");
+        console.log(+new Date(form['naissance_$_date'] + ""));
+
+
         uploadPayload.nom = form.nom;
         // Prend le premier prénom si tableau, sinon la string
         uploadPayload.prenoms = Array.isArray(form.prenoms) ? form.prenoms[0] : form.prenoms;
-        uploadPayload['naissance_$_date'] = +new Date(form['naissance_$_date']+"");
+        uploadPayload['naissance_$_date'] = +new Date(form['naissance_$_date'] + "");
         console.log("rrrrrrrrrrrrrrrrrrrrrr");
         console.log(uploadPayload);
         console.log("rrrrrrrrrrrrrrrrrrrrrr");
-        
+
       }
       if (type === 'classe') {
         uploadPayload.annee = form.annee;
@@ -208,7 +144,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
         setError("Erreur lors de l'upload du fichier : " + (error || 'aucun chemin de fichier retourné'));
         return;
       }
-      if (type === 'eleve' || type === 'enseignant'){
+      if (type === 'eleve' || type === 'enseignant') {
         newForm.photo_$_file = paths.find(p => p.endsWith('photo.webp'));
         newForm.documents = paths.filter(p => p.endsWith('photo.webp'));
       }
@@ -235,7 +171,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
       }
       setError('');
       console.log(newForm);
-      
+
       await ctx.saveEleve(newForm);
     } else if (type === 'enseignant') {
       if (!newForm.nom || !newForm.photo_$_file) return setError('Nom et photo obligatoires.');
@@ -244,7 +180,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
     } else if (type === 'classe') {
       alert('kkk ')
       console.log(newForm);
-      
+
       if (!newForm.niveau || !newForm.alias || !newForm.photo) return setError('Niveau, alias et photo obligatoires.');
       setError('');
       console.log('DEBUG SUBMIT CLASSE', newForm);
@@ -266,11 +202,19 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
         <button onClick={onClose}>Fermer</button>
         <form onSubmit={handleSubmit}>
           {type === 'eleve' && <>
-            <input name="nom" value={form.nom} onChange={handleChange} placeholder="Nom" required />
-            <input name="prenoms" value={Array.isArray(form.prenoms) ? form.prenoms.join(',') : form.prenoms || ''} onChange={e => setForm(f => ({ ...f, prenoms: e.target.value.split(',') }))} placeholder="Prénoms (séparés par des virgules)" required />
-            <input type="date" name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} required />
+            <label htmlFor="input-nom">Nom</label>
+            <input id="input-nom" name="nom" value={form.nom} onChange={handleChange} placeholder="Nom" required />
+
+            <label htmlFor="input-prenoms">Prénoms</label>
+            <input id="input-prenoms" name="prenoms" value={Array.isArray(form.prenoms) ? form.prenoms.join(',') : form.prenoms || ''} onChange={e => setForm(f => ({ ...f, prenoms: e.target.value.split(',') }))} placeholder="Prénoms (séparés par des virgules)" required />
+
+            <label htmlFor="input-naissance">Date de naissance</label>
+            <input id="input-naissance" type="date" name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} required />
+
+            <label htmlFor="input-adresse">Adresse</label>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <input
+                id="input-adresse"
                 name="adresse_$_map"
                 value={form.adresse_$_map}
                 onChange={handleChange}
@@ -284,271 +228,45 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
             </div>
             {showMap && (
               <div style={{ margin: '10px 0' }}>
-                  <Gmap 
-                      // Pass initial center based on current state (which might be from datas)
-                      // initialCenter={{ lat: parseFloat(latitude) || 5.36, lng: parseFloat(longitude) || -4.00 }}
-                      onCoordinatesClick={handleMapClick} // Pass the callback function
-                  />
+                <Gmap
+                  // Pass initial center based on current state (which might be from datas)
+                  // initialCenter={{ lat: parseFloat(latitude) || 5.36, lng: parseFloat(longitude) || -4.00 }}
+                  onCoordinatesClick={handleMapClick} // Pass the callback function
+                />
                 <button type="button" onClick={() => setShowMap(false)}>Fermer la carte</button>
               </div>
             )}
-            <div className="parents-block">
-              <div className="parent-card">
-                <img src="/mom.webp" alt="Mère" className="parent-img" />
-                <div className="parent-title">Mère</div>
-                <input name="parents.mere" value={form.parents?.mere || ''} onChange={e => setForm(f => ({ ...f, parents: { ...f.parents, mere: e.target.value } }))} placeholder="Nom de la mère" />
-                <input name="parents.phone" value={form.parents?.phone || ''} onChange={e => setForm(f => ({ ...f, parents: { ...f.parents, phone: e.target.value } }))} placeholder="Téléphone parent" />
-              </div>
-              <div className="parent-card">
-                <img src="/pa.webp" alt="Père" className="parent-img" />
-                <div className="parent-title">Père</div>
-                <input name="parents.pere" value={form.parents?.pere || ''} onChange={e => setForm(f => ({ ...f, parents: { ...f.parents, pere: e.target.value } }))} placeholder="Nom du père" />
-              </div>
-            </div>
+            <Parent form={form} setForm={setForm} />
             {console.log(ctx.classes)}
-            <select name="current_classe" value={form.current_classe || ''} onChange={handleChange} required>
+            <label htmlFor="input-classe">Classe actuelle</label>
+            <select id="input-classe" name="current_classe" value={form.current_classe || ''} onChange={handleChange} required>
               <option value="">Sélectionnez une classe</option>
               {ctx.classes && ctx.classes.map(classe => (
-                <option key={classe._id} value={classe._id}>{classe.alias} ({classe.niveau})</option>
+                <option key={classe._id} value={classe._id}>{classe.niveau} - {classe.alias}</option>
               ))}
             </select>
-            <input type="file" ref={fileInput} accept="image/*" required={!form.photo_$_file} onChange={handleFile} />
+
+            <label htmlFor="input-photo">Photo de l'élève</label>
+            <input id="input-photo" type="file" ref={fileInput} accept="image/*" required={!form.photo_$_file} onChange={handleFile} />
             {(previewUrl || form.photo_$_file) && <img src={previewUrl || form.photo_$_file} alt="photo" className="previewImageAddForm" />}
-            <div className="isinterne-card">
-              <img src="/dortoir.png" alt="Dortoir" className="isinterne-img" />
-              <label className="isinterne-label">
-                <input type="checkbox" name="isInterne" checked={!!form.isInterne} onChange={e => setForm(f => ({ ...f, isInterne: e.target.checked }))} />
-                <span>Interne</span>
-              </label>
-            </div>
-            <div className="absences-block">
-              <input type="hidden" name="absences" value={Array.isArray(form.absences) ? form.absences.join(',') : ''} />
-              <div className="absences-header">
-                <span>Absences : <b>{Array.isArray(form.absences) ? form.absences.length : 0}</b></span>
-                <button type="button" className="add-absence-btn" onClick={() => setShowAbsencePicker(true)}>Ajouter</button>
-              </div>
-              {/* Liste des absences groupées par mois */}
-              {Array.isArray(form.absences) && form.absences.length > 0 && (
-                <div className="absences-list">
-                  {Object.entries(form.absences.reduce((acc, ts) => {
-                    const d = new Date(Number(ts));
-                    const key = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}`;
-                    if (!acc[key]) acc[key] = [];
-                    acc[key].push(ts);
-                    return acc;
-                  }, {})).sort((a,b) => b[0].localeCompare(a[0])).map(([month, dates]) => (
-                    <div key={month} className="absence-month">
-                      <div className="month-title">{new Date(dates[0]*1).toLocaleString('fr-FR', {month:'long', year:'numeric'})}</div>
-                      <div className="month-dates">
-                        {dates.sort((a,b)=>a-b).map(ts => (
-                          <div className="absence-date" key={ts} style={{position:'relative', display:'inline-block', margin:'0 6px 6px 0'}}>
-                            <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
-                            <button type="button" className="remove-absence-btn" title="Supprimer" onClick={() => {
-                              if(window.confirm('Supprimer cette absence ?')) setForm(f => ({...f, absences: f.absences.filter(x => x !== ts)}));
-                            }} style={{position:'absolute',top:0,right:0,background:'none',border:'none',color:'#b00',fontWeight:'bold',cursor:'pointer',fontSize:'1.1em',lineHeight:'1em'}}>&times;</button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {/* Picker d'ajout d'absence */}
-              {showAbsencePicker && (
-                <div className="absence-picker-modal">
-                  <input type="date" onChange={e => setNewAbsenceDate(e.target.value)} />
-                  <button type="button" onClick={() => {
-                    if (newAbsenceDate) {
-                      const ts = new Date(newAbsenceDate).setHours(0,0,0,0);
-                      const absencesArr = Array.isArray(form.absences) ? form.absences : [];
-                      if (!absencesArr.includes(ts)) setForm(f => ({...f, absences: [...absencesArr, ts]}));
-                      setShowAbsencePicker(false);
-                      setNewAbsenceDate('');
-                    }
-                  }}>Valider</button>
-                  <button type="button" onClick={() => setShowAbsencePicker(false)} style={{marginLeft:8}}>Annuler</button>
-                </div>
-              )}
-            </div>
-            <div className="bonus-block">
-              <input type="hidden" name="bonus" value={form.bonus ? JSON.stringify(form.bonus) : '{}'} />
-              <div className="bonus-header">
-                <span>Bonus : <b>{form.bonus && typeof form.bonus === 'object' ? Object.keys(form.bonus).length : 0}</b></span>
-                <button type="button" className="add-bonus-btn" onClick={() => setShowBonusPicker(true)}>Ajouter</button>
-              </div>
-              {/* Liste des bonus groupés par mois */}
-              {form.bonus && typeof form.bonus === 'object' && Object.keys(form.bonus).length > 0 && (
-                <div className="bonus-list">
-                  {Object.entries(Object.entries(form.bonus).reduce((acc, [ts, txt]) => {
-                    const d = new Date(Number(ts));
-                    const key = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}`;
-                    if (!acc[key]) acc[key] = [];
-                    acc[key].push([ts, txt]);
-                    return acc;
-                  }, {})).sort((a,b) => b[0].localeCompare(a[0])).map(([month, entries]) => (
-                    <div key={month} className="bonus-month">
-                      <div className="month-title">{new Date(entries[0][0]*1).toLocaleString('fr-FR', {month:'long', year:'numeric'})}</div>
-                      <div className="month-bonus">
-                        {entries.sort((a,b)=>a[0]-b[0]).map(([ts, txt]) => (
-                          <div className="bonus-entry" key={ts} style={{position:'relative', display:'inline-block', margin:'0 6px 6px 0'}}>
-                            <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
-                            <span className="bonus-txt">{txt}</span>
-                            <button type="button" className="remove-bonus-btn" title="Supprimer" onClick={() => {
-                              if(window.confirm('Supprimer ce bonus ?')) setForm(f => { const o = {...f.bonus}; delete o[ts]; return {...f, bonus: o}; });
-                            }} style={{position:'absolute',top:0,right:0,background:'none',border:'none',color:'#b00',fontWeight:'bold',cursor:'pointer',fontSize:'1.1em',lineHeight:'1em'}}>&times;</button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {/* Picker d'ajout de bonus */}
-              {showBonusPicker && (
-                <div className="bonus-picker-modal">
-                  <input type="date" onChange={e => setNewBonusDate(e.target.value)} />
-                  <input type="text" placeholder="Raison du bonus" value={newBonusReason} onChange={e => setNewBonusReason(e.target.value)} />
-                  <button type="button" onClick={() => {
-                    if (newBonusDate && newBonusReason) {
-                      const ts = new Date(newBonusDate).setHours(0,0,0,0);
-                      setForm(f => ({...f, bonus: {...(typeof f.bonus==='object' && f.bonus ? f.bonus : {}), [ts]: newBonusReason}}));
-                      setShowBonusPicker(false);
-                      setNewBonusDate('');
-                      setNewBonusReason('');
-                    }
-                  }}>Valider</button>
-                  <button type="button" onClick={() => { setShowBonusPicker(false); setNewBonusDate(''); setNewBonusReason(''); }} style={{marginLeft:8}}>Annuler</button>
-                </div>
-              )}
-            </div>
-            <div className="manus-block">
-              <input type="hidden" name="manus" value={form.manus ? JSON.stringify(form.manus) : '{}'} />
-              <div className="manus-header">
-                <span>Manus : <b>{form.manus && typeof form.manus === 'object' ? Object.keys(form.manus).length : 0}</b></span>
-                <button type="button" className="add-manus-btn" onClick={() => setShowManusPicker(true)}>Ajouter</button>
-              </div>
-              {/* Liste des manus groupés par mois */}
-              {form.manus && typeof form.manus === 'object' && Object.keys(form.manus).length > 0 && (
-                <div className="manus-list">
-                  {Object.entries(Object.entries(form.manus).reduce((acc, [ts, txt]) => {
-                    const d = new Date(Number(ts));
-                    const key = `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}`;
-                    if (!acc[key]) acc[key] = [];
-                    acc[key].push([ts, txt]);
-                    return acc;
-                  }, {})).sort((a,b) => b[0].localeCompare(a[0])).map(([month, entries]) => (
-                    <div key={month} className="manus-month">
-                      <div className="month-title">{new Date(entries[0][0]*1).toLocaleString('fr-FR', {month:'long', year:'numeric'})}</div>
-                      <div className="month-manus">
-                        {entries.sort((a,b)=>a[0]-b[0]).map(([ts, txt]) => (
-                          <div className="manus-entry" key={ts} style={{position:'relative', display:'inline-block', margin:'0 6px 6px 0'}}>
-                            <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
-                            <span className="manus-txt">{txt}</span>
-                            <button type="button" className="remove-manus-btn" title="Supprimer" onClick={() => {
-                              if(window.confirm('Supprimer ce manus ?')) setForm(f => { const o = {...f.manus}; delete o[ts]; return {...f, manus: o}; });
-                            }} style={{position:'absolute',top:0,right:0,background:'none',border:'none',color:'#b00',fontWeight:'bold',cursor:'pointer',fontSize:'1.1em',lineHeight:'1em'}}>&times;</button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {/* Picker d'ajout de manus */}
-              {showManusPicker && (
-                <div className="manus-picker-modal">
-                  <input type="date" onChange={e => setNewManusDate(e.target.value)} />
-                  <input type="text" placeholder="Raison du manus" value={newManusReason} onChange={e => setNewManusReason(e.target.value)} />
-                  <button type="button" onClick={() => {
-                    if (newManusDate && newManusReason) {
-                      const ts = new Date(newManusDate).setHours(0,0,0,0);
-                      setForm(f => ({...f, manus: {...(typeof f.manus==='object' && f.manus ? f.manus : {}), [ts]: newManusReason}}));
-                      setShowManusPicker(false);
-                      setNewManusDate('');
-                      setNewManusReason('');
-                    }
-                  }}>Valider</button>
-                  <button type="button" onClick={() => { setShowManusPicker(false); setNewManusDate(''); setNewManusReason(''); }} style={{marginLeft:8}}>Annuler</button>
-                </div>
-              )}
-            </div>
-            <label>Commentaires (JSON ou liste)
-              <textarea name="commentaires" value={Array.isArray(form.commentaires) ? JSON.stringify(form.commentaires) : form.commentaires || ''} onChange={e => setForm(f => ({ ...f, commentaires: e.target.value ? JSON.parse(e.target.value) : [] }))} />
-            </label>
-            <div className="documents-block">
-              <label>Documents</label>
-              <input
-                type="file"
-                accept=".pdf,image/jpeg,image/jpg,image/png,image/webp"
-                multiple
-                onChange={e => {
-                  const files = Array.from(e.target.files);
-                  if (!files.length) return;
-                  setSelectedDocuments(prev => ([
-                  ...prev,
-                  ...Array.from(files).map(file => ({ file, customName: file.name }))
-                ])); // Accumule dans le hook dédié
-                  e.target.value = '';
-                }}
-              />
-              {'-'}
-              {JSON.stringify(form.documents)}
-              {console.log(form.documents?.[0])}
-              
-              {'-'}
-              {Array.isArray(selectedDocuments) && selectedDocuments.length > 0 && (
-                <div className="documents-list">
-                  {selectedDocuments.map((doc, i) => (
-                    <div className="document-item" key={doc.file.name + '-' + i}
-                      style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      {doc.file.type === "application/pdf"
-                        ? <span className="doc-icon" title="PDF">📄</span>
-                        : <span className="doc-icon" title="Image">🖼️</span>}
-                      <span>{doc.file.name}</span>
-                      <input
-                        type="text"
-                        value={doc.customName}
-                        onChange={e => {
-                          const newDocs = [...selectedDocuments];
-                          newDocs[i].customName = e.target.value;
-                          setSelectedDocuments(newDocs);
-                        }}
-                        placeholder="Nom final du fichier"
-                        style={{ marginLeft: 8, flex: 1 }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+
+            <IsInterneBlock form={form} setForm={setForm} />
+            <AbsencesBlock absences={form.absences} setForm={setForm} />
+            <BonusBlock bonus={form.bonus} setForm={setForm} />
+            <ManusBlock manus={form.manus} setForm={setForm} />
+            <CommentairesBlock
+              commentaires={Array.isArray(form.commentaires) ? form.commentaires : []}
+              setForm={setForm}
+            />
+            <input type="hidden" name="commentaires" value={JSON.stringify(Array.isArray(form.commentaires) ? form.commentaires : [])} />
+            <DocumentsBlock form={form} setForm={setForm} selectedDocuments={selectedDocuments} setSelectedDocuments={setSelectedDocuments} />
 
             <label>Notes</label>
-            <div className="notes-container" style={{ border: '1px solid #ccc', borderRadius: 6, padding: 8, marginBottom: 16 }}>
-              {/* Affichage des notes triées par date croissante */}
-              {Object.entries(form.notes || {})
-                .sort((a, b) => Number(a[0]) - Number(b[0]))
-                .map(([timestamp, [matiere, note]], idx) => (
-                  <div key={timestamp} style={{ display: 'flex', alignItems: 'center', background: '#f9f9f9', borderRadius: 4, marginBottom: 4, padding: 4, position: 'relative' }}>
-                    <span style={{ minWidth: 100, fontWeight: 500 }}>{new Date(Number(timestamp)).toLocaleDateString()}</span>
-                    <span style={{ margin: '0 12px' }}>{matiere}</span>
-                    <span style={{ margin: '0 12px', fontWeight: 600 }}>{note}</span>
-                    <button type="button" onClick={() => {
-                      const newNotes = { ...form.notes };
-                      delete newNotes[timestamp];
-                      setForm(f => ({ ...f, notes: newNotes }));
-                    }} style={{ position: 'absolute', right: 6, top: 4, border: 'none', background: 'transparent', color: '#d00', fontWeight: 'bold', fontSize: 18, cursor: 'pointer' }} title="Supprimer">×</button>
-                  </div>
-                ))}
-              {/* Formulaire d'ajout de note */}
-              <AddNoteForm
-                onAdd={noteObj => {
-                  setForm(f => ({ ...f, notes: { ...f.notes, ...noteObj } }));
-                }}
-                notes={form.notes || {}}
-              />
-              {/* Champ caché pour la soumission */}
-              <input type="hidden" name="notes" value={form.notes ? JSON.stringify(form.notes) : ''} />
-            </div>
+            <AddNoteForm
+              notes={form.notes || {}}
+              onAdd={noteObj => setForm(f => ({ ...f, notes: { ...f.notes, ...noteObj } }))}
+              onRemove={timestamp => setForm(f => { const newNotes = { ...f.notes }; delete newNotes[timestamp]; return { ...f, notes: newNotes }; })}
+            />
 
             <label>Compositions (JSON)</label>
             {/* Bloc de gestion des compositions par trimestre */}
@@ -558,12 +276,12 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
               onChange={newCompo => setForm(f => ({ ...f, compositions: newCompo }))}
               onChangeYear={setSchoolYear}
             />
-            <textarea readOnly name="compositions" value={form.compositions ? JSON.stringify(form.compositions) : ''} 
-              // onChange={e => setForm(f => ({ ...f, compositions: e.target.value ? JSON.parse(e.target.value) : {} }))} 
+            <textarea readOnly name="compositions" value={form.compositions ? JSON.stringify(form.compositions) : ''}
+            // onChange={e => setForm(f => ({ ...f, compositions: e.target.value ? JSON.parse(e.target.value) : {} }))} 
             />
-            <label>Moyenne trimetriel (JSON)
+            {/* <label>Moyenne trimetriel (JSON)
               <textarea name="moyenne_trimetriel" value={form.moyenne_trimetriel ? JSON.stringify(form.moyenne_trimetriel) : ''} onChange={e => setForm(f => ({ ...f, moyenne_trimetriel: e.target.value ? JSON.parse(e.target.value) : {} }))} />
-            </label>
+            </label> */}
             <label>Scolarity fees (JSON)</label>
             <ScolarityFeesBlock
               fees={form.scolarity_fees_$_checkbox?.[schoolYear] || {}}
@@ -576,8 +294,8 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
               }))}
               schoolYear={schoolYear}
             />
-            <textarea readOnly name="scolarity_fees_$_checkbox_" value={form.scolarity_fees_$_checkbox ? JSON.stringify(form.scolarity_fees_$_checkbox) : ''} 
-              // onChange={e => setForm(f => ({ ...f, scolarity_fees_$_checkbox: e.target.value ? JSON.parse(e.target.value) : {} }))} 
+            <textarea readOnly name="scolarity_fees_$_checkbox_" value={form.scolarity_fees_$_checkbox ? JSON.stringify(form.scolarity_fees_$_checkbox) : ''}
+            // onChange={e => setForm(f => ({ ...f, scolarity_fees_$_checkbox: e.target.value ? JSON.parse(e.target.value) : {} }))} 
             />
             <label>Bolobi class history (JSON)
             </label>
@@ -593,8 +311,8 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
               })()}
               onChange={newHistory => setForm(f => ({ ...f, school_history: newHistory }))}
             />
-            <textarea readOnly name="school_history_" value={form.school_history ? JSON.stringify(form.school_history) : ''} 
-              // onChange={e => setForm(f => ({ ...f, bolobi_class_history_$_ref_µ_classes: e.target.value ? JSON.parse(e.target.value) : {} }))} 
+            <textarea readOnly name="school_history_" value={form.school_history ? JSON.stringify(form.school_history) : ''}
+            // onChange={e => setForm(f => ({ ...f, bolobi_class_history_$_ref_µ_classes: e.target.value ? JSON.parse(e.target.value) : {} }))} 
             />
           </>}
           {type === 'enseignant' && <>
@@ -643,9 +361,9 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
                 <option key={eleve._id} value={eleve._id}>{eleve.nom} {Array.isArray(eleve.prenoms) ? eleve.prenoms.join(' ') : eleve.prenoms}</option>
               ))}
             </select>
-            
+
           </>}
-          {error && <div style={{color:'red'}}>{error}</div>}
+          {error && <div style={{ color: 'red' }}>{error}</div>}
           <button type="submit">Enregistrer</button>
           {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
           {entity && entity._id && <button type="button" onClick={() => {
@@ -666,8 +384,103 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
 
 
 
+function Parent({form,setForm,parents}){
+
+  return <div className="parents-block">
+    <div className="parent-card">
+      <img src="/mom.webp" alt="Mère" className="parent-img" />
+      <div className="parent-title">Mère</div>
+      <label htmlFor="input-mere">Nom de la mère</label>
+      <input id="input-mere" name="parents.mere" value={form?.parents?.mere || parents?.mere || ''} readOnly={setForm ? false : true} onChange={setForm ? e => setForm(f => ({ ...f, parents: { ...f.parents, mere: e.target.value } })) : null} placeholder="Nom de la mère" />
+      <label htmlFor="input-phone">Téléphone parent</label>
+      <input id="input-phone" name="parents.phone" value={form?.parents?.phone || parents?.phone || ''} readOnly={setForm ? false : true} onChange={setForm ? e => setForm(f => ({ ...f, parents: { ...f.parents, phone: e.target.value } })) : null} placeholder="Téléphone parent" />
+    </div>
+    <div className="parent-card">
+      <img src="/pa.webp" alt="Père" className="parent-img" />
+      <div className="parent-title">Père</div>
+      <label htmlFor="input-pere">Nom du père</label>
+      <input id="input-pere" name="parents.pere" value={form?.parents?.pere || parents?.pere || ''} readOnly={setForm ? false : true} onChange={setForm ? e => setForm(f => ({ ...f, parents: { ...f.parents, pere: e.target.value } })) : null} placeholder="Nom du père" />
+    </div>
+  </div>
+}
 
 
+// --- Bloc de gestion des commentaires professeur ---
+function CommentairesBlock({ commentaires, setForm }) {
+  const [newComment, setNewComment] = useState('');
+  // Format attendu : [{timestamp: commentaire}, ...]
+  // Tri du plus récent au plus ancien
+  const items = Array.isArray(commentaires) ? commentaires : [];
+  const sorted = items.slice().sort((a, b) => {
+    const ka = Object.keys(a)[0];
+    const kb = Object.keys(b)[0];
+    return kb - ka;
+  });
+
+  // Si pas de setForm, read-only : juste affichage
+  if (!setForm) {
+    return (
+      <div className="commentaires-block">
+        <div className="commentaires-block__header">Commentaires du professeur</div>
+        <div className="commentaires-block__list">
+          {sorted.length === 0 && <span className="commentaires-block__empty">Aucun commentaire</span>}
+          {sorted.map((obj, idx) => {
+            const ts = Object.keys(obj)[0];
+            const txt = obj[ts];
+            return (
+              <div key={ts} className="commentaires-block__item">
+                <span className="commentaires-block__date">{new Date(Number(ts)).toLocaleDateString()}</span>
+                <span className="commentaires-block__txt">{txt}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  // Mode édition si setForm fourni
+  const onChange = c => setForm(f => ({ ...f, commentaires: c }))
+  const handleAdd = () => {
+    if (!newComment.trim()) return;
+    const ts = Date.now();
+    onChange([{ [ts]: newComment.trim() }, ...items]);
+    setNewComment('');
+  };
+  const handleRemove = (idx) => {
+    const arr = items.slice();
+    arr.splice(idx, 1);
+    onChange(arr);
+  };
+  return (
+    <div className="commentaires-block">
+      <div className="commentaires-block__header">Commentaires du professeur</div>
+      <div className="commentaires-block__list">
+        {sorted.length === 0 && <span className="commentaires-block__empty">Aucun commentaire</span>}
+        {sorted.map((obj, idx) => {
+          const ts = Object.keys(obj)[0];
+          const txt = obj[ts];
+          return (
+            <div className="commentaires-block__entry" key={ts}>
+              <span className="commentaires-block__entry-date">{new Date(Number(ts)).toLocaleString('fr-FR')}</span>
+              <span className="commentaires-block__entry-txt">{txt}</span>
+              <button type="button" className="commentaires-block__remove-btn" title="Supprimer" onClick={() => handleRemove(idx)}>&times;</button>
+            </div>
+          );
+        })}
+      </div>
+      <div className="commentaires-block__add-form">
+        <input
+          type="text"
+          value={newComment}
+          onChange={e => setNewComment(e.target.value)}
+          placeholder="Ajouter un commentaire..."
+        />
+        <button type="button" onClick={handleAdd} disabled={!newComment.trim()}>Ajouter</button>
+      </div>
+    </div>
+  );
+}
 
 // --- Bloc d'historique des écoles fréquentées ---
 function SchoolHistoryBlock({ schoolHistory, onChange }) {
@@ -676,7 +489,7 @@ function SchoolHistoryBlock({ schoolHistory, onChange }) {
   const currentYearStart = (now.getMonth() + 1) < 7 ? now.getFullYear() - 1 : now.getFullYear();
   const currentYearStr = `${currentYearStart}-${currentYearStart + 1}`;
   // Générer les 10 années précédentes (hors année courante)
-  const years = Array.from({length: 10}, (_, i) => {
+  const years = Array.from({ length: 10 }, (_, i) => {
     const start = currentYearStart - i - 1;
     return `${start}-${start + 1}`;
   });
@@ -714,7 +527,7 @@ function SchoolHistoryBlock({ schoolHistory, onChange }) {
           </div>
         ))}
       </div>
-      <div className="school-history-block__add-form">
+      {onChange && <><div className="school-history-block__add-form">
         <select value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
           {availableYears.map(y => (
             <option key={y} value={y}>{y}</option>
@@ -736,7 +549,7 @@ function SchoolHistoryBlock({ schoolHistory, onChange }) {
           [currentYearStr]: "Martin de Porrès de Bolobi",
           ...(schoolHistory || {})
         });
-      })()} />
+      })()} /></>}
     </div>
   );
 }
@@ -760,13 +573,13 @@ function ScolarityFeesBlock({ fees, onChange, schoolYear }) {
     if (!val || isNaN(Number(val)) || Number(val) <= 0) return;
     // Utiliser la date choisie, à minuit locale
     const d = new Date(date);
-    d.setHours(0,0,0,0);
+    d.setHours(0, 0, 0, 0);
     const ts = d.getTime();
     const newEntry = type === 'argent'
       ? { argent: Number(val) }
       : { riz: Number(val) };
     onChange({ ...fees, [ts]: newEntry });
-    setShowForm(false); setType('argent'); setVal(''); setDate(new Date().toISOString().slice(0,10));
+    setShowForm(false); setType('argent'); setVal(''); setDate(new Date().toISOString().slice(0, 10));
   };
   const handleRemove = (ts) => {
     const newFees = { ...fees };
@@ -784,7 +597,7 @@ function ScolarityFeesBlock({ fees, onChange, schoolYear }) {
       </div>
       <div className="scolarity-fees-block__list">
         {entries.length === 0 && <span className="scolarity-fees-block__empty">Aucun dépôt enregistré</span>}
-        {entries.sort((a,b)=>a.ts-b.ts).map(e => (
+        {entries.sort((a, b) => a.ts - b.ts).map(e => (
           <div className="scolarity-fees-block__entry" key={e.ts}>
             <span className="scolarity-fees-block__entry-date">{new Date(Number(e.ts)).toLocaleDateString()}</span>
             {e.argent && <span className="scolarity-fees-block__entry-argent">{e.argent} F</span>}
@@ -814,10 +627,10 @@ function ScolarityFeesBlock({ fees, onChange, schoolYear }) {
             className="scolarity-fees-block__add-date"
           />
           <button type="button" onClick={handleAdd}>Valider</button>
-          <button type="button" onClick={() => { setShowForm(false); setVal(''); setDate(new Date().toISOString().slice(0,10)); }} className="scolarity-fees-block__add-cancel">Annuler</button>
+          <button type="button" onClick={() => { setShowForm(false); setVal(''); setDate(new Date().toISOString().slice(0, 10)); }} className="scolarity-fees-block__add-cancel">Annuler</button>
         </div>
       ) : (
-        <button type="button" className="scolarity-fees-block__add-btn" onClick={() => setShowForm(true)}>Ajouter un dépôt</button>
+        onChange && <button type="button" className="scolarity-fees-block__add-btn" onClick={() => setShowForm(true)}>Ajouter un dépôt</button>
       )}
       <input type="hidden" name="scolarity_fees_$_checkbox" value={JSON.stringify(fees)} />
     </div>
@@ -832,13 +645,13 @@ function CompositionsBlock({ compositions, schoolYear, onChange, onChangeYear })
   const trimestres = ["1er trimestre", "2e trimestre", "3e trimestre"];
   // Génère la liste des années disponibles (de N-10 à N+10, + toutes années trouvées dans les données)
   const now = new Date();
-  const currentYearStart = (now.getMonth()+1)<7 ? now.getFullYear()-1 : now.getFullYear();
-  const yearRange = Array.from({length: 21}, (_, i) => {
+  const currentYearStart = (now.getMonth() + 1) < 7 ? now.getFullYear() - 1 : now.getFullYear();
+  const yearRange = Array.from({ length: 21 }, (_, i) => {
     const start = currentYearStart - 10 + i;
-    return `${start}-${start+1}`;
+    return `${start}-${start + 1}`;
   });
-  const yearsSet = new Set([...yearRange, ...Object.keys(compositions||{})]);
-  const years = Array.from(yearsSet).sort((a,b)=>b.localeCompare(a));
+  const yearsSet = new Set([...yearRange, ...Object.keys(compositions || {})]);
+  const years = Array.from(yearsSet).sort((a, b) => b.localeCompare(a));
   // On récupère le tableau pour l'année courante
   const compoArr = compositions[schoolYear] || [[], [], []];
 
@@ -868,10 +681,10 @@ function CompositionsBlock({ compositions, schoolYear, onChange, onChangeYear })
           if (start === currentYearStart) color = 'green';
           else if (start < currentYearStart) color = 'red';
           else color = 'blue';
-          return <option key={y} value={y} className={"option_"+color }>{y}</option>;
+          return <option key={y} value={y} className={"option_" + color}>{y}</option>;
         })}
       </select>
-      
+
       {trimestres.map((tri, idx) => (
         <div key={tri} className="compositions-block__trimestre">
           <div className="compositions-block__trimestre-header">
@@ -928,3 +741,422 @@ function CompositionsBlock({ compositions, schoolYear, onChange, onChangeYear })
     </div>
   );
 }
+
+// Bloc gestion des absences (édition ou read-only)
+function AbsencesBlock({ absences, setForm }) {
+  const [showAbsencePicker, setShowAbsencePicker] = useState(false);
+  const [newAbsenceDate, setNewAbsenceDate] = useState('');
+  const items = Array.isArray(absences) ? absences : [];
+  const grouped = Object.entries(items.reduce((acc, ts) => {
+    const d = new Date(Number(ts));
+    const key = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}`;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(ts);
+    return acc;
+  }, {})).sort((a, b) => b[0].localeCompare(a[0]));
+
+  // Read-only
+  if (!setForm) {
+    return (
+      <div className="absences-block">
+        <div className="absences-header">
+          <span>Absences : <b>{items.length}</b></span>
+        </div>
+        {items.length > 0 && (
+          <div className="absences-list">
+            {grouped.map(([month, dates]) => (
+              <div key={month} className="absence-month">
+                <div className="month-title">{new Date(dates[0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
+                <div className="month-dates">
+                  {dates.sort((a, b) => a - b).map(ts => (
+                    <div className="absence-date" key={ts}>
+                      <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <input type="hidden" name="absences" value={items.join(',')} />
+      </div>
+    );
+  }
+
+  // Edition
+  return (
+    <div className="absences-block">
+      <input type="hidden" name="absences" value={items.join(',')} />
+      <div className="absences-header">
+        <span>Absences : <b>{items.length}</b></span>
+        <button type="button" className="add-absence-btn" onClick={() => setShowAbsencePicker(true)}>Ajouter</button>
+      </div>
+      {items.length > 0 && (
+        <div className="absences-list">
+          {grouped.map(([month, dates]) => (
+            <div key={month} className="absence-month">
+              <div className="month-title">{new Date(dates[0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
+              <div className="month-dates">
+                {dates.sort((a, b) => a - b).map(ts => (
+                  <div className="absence-date" key={ts} style={{ position: 'relative', display: 'inline-block', margin: '0 6px 6px 0' }}>
+                    <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
+                    <button type="button" className="remove-absence-btn" title="Supprimer" onClick={() => {
+                      if (window.confirm('Supprimer cette absence ?')) setForm(f => ({ ...f, absences: f.absences.filter(x => x !== ts) }));
+                    }} style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', color: '#b00', fontWeight: 'bold', cursor: 'pointer', fontSize: '1.1em', lineHeight: '1em' }}>&times;</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {showAbsencePicker && (
+        <div className="absence-picker-modal">
+          <input type="date" onChange={e => setNewAbsenceDate(e.target.value)} />
+          <button type="button" onClick={() => {
+            if (newAbsenceDate) {
+              const ts = new Date(newAbsenceDate).setHours(0, 0, 0, 0);
+              const absencesArr = Array.isArray(items) ? items : [];
+              if (!absencesArr.includes(ts)) setForm(f => ({ ...f, absences: [...absencesArr, ts] }));
+              setShowAbsencePicker(false);
+              setNewAbsenceDate('');
+            }
+          }}>Valider</button>
+          <button type="button" onClick={() => setShowAbsencePicker(false)} style={{ marginLeft: 8 }}>Annuler</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Bloc gestion des bonus (édition ou read-only)
+function BonusBlock({ bonus, setForm }) {
+  const [showBonusForm, setShowBonusForm] = useState(false);
+  const [bonusDate, setBonusDate] = useState('');
+  const [bonusLabel, setBonusLabel] = useState('');
+  const items = bonus && typeof bonus === 'object' ? Object.entries(bonus) : [];
+
+  if (!setForm) {
+    return (
+      <div className="bonus-block">
+        <div className="bonus-header">
+          <span>Bonus : <b>{items.length}</b></span>
+        </div>
+        <div className="bonus-list">
+          {items.map(([label, value]) => (
+            <div key={label} className="bonus-item">
+              <span>{label} : {value} F</span>
+            </div>
+          ))}
+        </div>
+        <input type="hidden" name="bonus" value={JSON.stringify(bonus||{})} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="bonus-block">
+      <input type="hidden" name="bonus" value={JSON.stringify(bonus||{})} />
+      <div className="bonus-header">
+        <span>Bonus : <b>{items.length}</b></span>
+        <button type="button" className="add-bonus-btn" onClick={() => setShowBonusForm(true)}>Ajouter</button>
+      </div>
+      {showBonusForm && (
+        <div className="bonus-picker-modal">
+          <input type="date" value={bonusDate} onChange={e => setBonusDate(e.target.value)} />
+          <input type="text" placeholder="Raison du bonus" value={bonusLabel} onChange={e => setBonusLabel(e.target.value)} />
+          <button type="button" onClick={() => {
+            if (bonusDate && bonusLabel) {
+              const ts = new Date(bonusDate).setHours(0,0,0,0);
+              setForm(f => ({ ...f, bonus: { ...(f.bonus||{}), [ts]: bonusLabel } }));
+              setShowBonusForm(false);
+              setBonusDate('');
+              setBonusLabel('');
+            }
+          }}>Valider</button>
+          <button type="button" onClick={() => setShowBonusForm(false)} style={{marginLeft:8}}>Annuler</button>
+        </div>
+      )}
+      <div className="bonus-list">
+        {/* Groupement par mois comme avant */}
+        {Object.entries(items.reduce((acc, [ts, txt]) => {
+          const d = new Date(Number(ts));
+          const key = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}`;
+          if (!acc[key]) acc[key] = [];
+          acc[key].push([ts, txt]);
+          return acc;
+        }, {})).sort((a, b) => b[0].localeCompare(a[0])).map(([month, entries]) => (
+          <div key={month} className="bonus-month">
+            <div className="month-title">{new Date(entries[0][0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
+            <div className="month-bonus">
+              {entries.sort((a, b) => a[0] - b[0]).map(([ts, txt]) => (
+                <div className="bonus-entry" key={ts} style={{ position: 'relative', display: 'inline-block', margin: '0 6px 6px 0' }}>
+                  <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
+                  <span className="bonus-txt">{txt}</span>
+                  <button type="button" className="remove-bonus-btn" title="Supprimer" onClick={() => {
+                    if (window.confirm('Supprimer ce bonus ?')) setForm(f => { const o = { ...f.bonus }; delete o[ts]; return { ...f, bonus: o }; });
+                  }} style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', color: '#b00', fontWeight: 'bold', cursor: 'pointer', fontSize: '1.1em', lineHeight: '1em' }}>&times;</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Bloc gestion des manuscrits (édition ou read-only)
+function ManusBlock({ manus, setForm }) {
+  const [showManusForm, setShowManusForm] = useState(false);
+  const [manusDate, setManusDate] = useState('');
+  const [manusLabel, setManusLabel] = useState('');
+  const items = manus && typeof manus === 'object' ? Object.entries(manus) : [];
+
+  if (!setForm) {
+    return (
+      <div className="manus-block">
+        <div className="manus-header">
+          <span>Malus : <b>{items.length}</b></span>
+        </div>
+        <div className="manus-list">
+          {items.map(([label, value]) => (
+            <div key={label} className="manus-item">
+              <span>{label} : {value}</span>
+            </div>
+          ))}
+        </div>
+        <input type="hidden" name="manus" value={JSON.stringify(manus||{})} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="manus-block">
+      <input type="hidden" name="manus" value={JSON.stringify(manus||{})} />
+      <div className="manus-header">
+        <span>Malus : <b>{items.length}</b></span>
+        <button type="button" className="add-manus-btn" onClick={() => setShowManusForm(true)}>Ajouter</button>
+      </div>
+      {showManusForm && (
+        <div className="manus-picker-modal">
+          <input type="date" value={manusDate} onChange={e => setManusDate(e.target.value)} />
+          <input type="text" placeholder="Raison du malus" value={manusLabel} onChange={e => setManusLabel(e.target.value)} />
+          <button type="button" onClick={() => {
+            if (manusDate && manusLabel) {
+              const ts = new Date(manusDate).setHours(0,0,0,0);
+              setForm(f => ({ ...f, manus: { ...(f.manus||{}), [ts]: manusLabel } }));
+              setShowManusForm(false);
+              setManusDate('');
+              setManusLabel('');
+            }
+          }}>Valider</button>
+          <button type="button" onClick={() => setShowManusForm(false)} style={{marginLeft:8}}>Annuler</button>
+        </div>
+      )}
+      <div className="manus-list">
+        {/* Groupement par mois comme avant */}
+        {Object.entries(items.reduce((acc, [ts, txt]) => {
+          const d = new Date(Number(ts));
+          const key = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}`;
+          if (!acc[key]) acc[key] = [];
+          acc[key].push([ts, txt]);
+          return acc;
+        }, {})).sort((a, b) => b[0].localeCompare(a[0])).map(([month, entries]) => (
+          <div key={month} className="manus-month">
+            <div className="month-title">{new Date(entries[0][0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
+            <div className="month-manus">
+              {entries.sort((a, b) => a[0] - b[0]).map(([ts, txt]) => (
+                <div className="manus-entry" key={ts} style={{ position: 'relative', display: 'inline-block', margin: '0 6px 6px 0' }}>
+                  <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
+                  <span className="manus-txt">{txt}</span>
+                  <button type="button" className="remove-manus-btn" title="Supprimer" onClick={() => {
+                    if (window.confirm('Supprimer ce malus ?')) setForm(f => { const o = { ...f.manus }; delete o[ts]; return { ...f, manus: o }; });
+                  }} style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', color: '#b00', fontWeight: 'bold', cursor: 'pointer', fontSize: '1.1em', lineHeight: '1em' }}>&times;</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+// --- Composant pour ajouter une note ---
+function AddNoteForm({ notes = {}, onAdd, onRemove }) {
+  const [showForm, setShowForm] = useState(false);
+  const [date, setDate] = useState('');
+  const [matiere, setMatiere] = useState('');
+  const [note, setNote] = useState('');
+  const [err, setErr] = useState('');
+
+  const handleValidate = () => {
+    if (!date || !matiere || !note) {
+      setErr('Tous les champs sont requis');
+      return;
+    }
+    const timestamp = new Date(date).getTime();
+    if (!timestamp || isNaN(timestamp)) {
+      setErr('Date invalide');
+      return;
+    }
+    if (onAdd) onAdd({ [timestamp]: [matiere, note] });
+    setDate(''); setMatiere(''); setNote(''); setErr('');
+    setShowForm(false);
+  };
+
+  const handleCancel = () => {
+    setDate(''); setMatiere(''); setNote(''); setErr('');
+    setShowForm(false);
+  };
+
+  return (
+    <div className="notes-container" style={{ border: '1px solid #ccc', borderRadius: 6, padding: 8, marginBottom: 16 }}>
+      {/* Affichage des notes triées par date croissante */}
+      {Object.entries(notes)
+        .sort((a, b) => Number(a[0]) - Number(b[0]))
+        .map(([timestamp, [matiere, note]], idx) => (
+          <div key={timestamp} style={{ display: 'flex', alignItems: 'center', background: '#f9f9f9', borderRadius: 4, marginBottom: 4, padding: 4, position: 'relative' }}>
+            <span style={{ minWidth: 100, fontWeight: 500 }}>{new Date(Number(timestamp)).toLocaleDateString()}</span>
+            <span style={{ margin: '0 12px' }}>{matiere}</span>
+            <span style={{ margin: '0 12px', fontWeight: 600 }}>{note}</span>
+            {onRemove && (
+              <button type="button" onClick={() => onRemove(timestamp)} style={{ position: 'absolute', right: 6, top: 4, border: 'none', background: 'transparent', color: '#d00', fontWeight: 'bold', fontSize: 18, cursor: 'pointer' }} title="Supprimer">×</button>
+            )}
+          </div>
+        ))}
+      {Object.keys(notes).length === 0 && (
+        <div className="no-notes">Aucune note pour l'instant</div>
+      )}
+      {/* Formulaire d'ajout de note (si édition) */}
+      {onAdd && (
+        !showForm ? (
+          <button type="button" className="add-note-btn" onClick={() => setShowForm(true)}>Ajouter une note</button>
+        ) : (
+          <div style={{marginTop:8}}>
+            <input type="date" className="add-note-date" value={date} onChange={e => setDate(e.target.value)} />
+            <select className="add-note-matiere" value={matiere} onChange={e => setMatiere(e.target.value)}>
+              <option value="">Choisir une matière</option>
+              <option value="Mathématiques">Mathématiques</option>
+              <option value="Français">Français</option>
+              <option value="Histoire-Géo">Histoire-Géo</option>
+              <option value="Anglais">Anglais</option>
+              <option value="SVT">SVT</option>
+              <option value="Physique-Chimie">Physique-Chimie</option>
+              <option value="EPS">EPS</option>
+              <option value="Arts">Arts</option>
+              <option value="Technologie">Technologie</option>
+              <option value="Autre">Autre</option>
+            </select>
+            <input type="number" min="0" max="20" className="add-note-note" placeholder="Note" value={note} onChange={e => setNote(e.target.value)} />
+            <button type="button" className="add-note-btn" onClick={handleValidate}>Valider</button>
+            <button type="button" className="add-note-btn" style={{ background: '#ccc', color: '#222' }} onClick={handleCancel}>Annuler</button>
+            {err && <span className="add-note-error">{err}</span>}
+          </div>
+        )
+      )}
+      {/* Champ caché pour la soumission si édition */}
+      {onAdd && (
+        <input type="hidden" name="notes" value={notes ? JSON.stringify(notes) : ''} />
+      )}
+    </div>
+  );
+}
+
+function IsInterneBlock({ form, setForm }) {
+
+  return (
+    <div className="isinterne-card">
+      <img src="/dortoir.png" alt="Dortoir" className="isinterne-img" />
+      <label className="isinterne-label">
+        <input type="checkbox" readOnly={!setForm ? true : false } name="isInterne" checked={!!form.isInterne} 
+          onChange={setForm ? e => setForm(f => ({ ...f, isInterne: e.target.checked })) : undefined} 
+        />
+        <span>Interne</span>
+      </label>
+    </div>
+  );
+}
+
+function DocumentsBlock({ form, setForm, selectedDocuments = [], setSelectedDocuments }) {
+  // Edition : upload et renommage
+  const isEdit = !!setForm;
+  return (
+    <div className="documents-block">
+      <label>Documents</label>
+      {isEdit && (
+        <input
+          type="file"
+          accept=".pdf,image/jpeg,image/jpg,image/png,image/webp"
+          multiple
+          onChange={e => {
+            const files = Array.from(e.target.files);
+            if (!files.length) return;
+            setSelectedDocuments(prev => ([
+              ...prev,
+              ...files.map(file => ({ file, customName: file.name }))
+            ]));
+            e.target.value = '';
+          }}
+        />
+      )}
+      {/* Affichage des documents déjà enregistrés (form.documents) */}
+      {Array.isArray(form.documents) && form.documents.length > 0 && (
+        <div className="documents-list">
+          {form.documents.map((doc, i) => (<Fragment key={doc.name + '-' + i}>
+            <div className="document-item"
+              style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+              onClick={() => {
+                const type = doc.type?.startsWith("image/") && doc.type !== "application/pdf" ? "img" : "pdf"
+                const img = document.querySelector('.documents-list img.docs_preview_img');
+                const frame = document.querySelector('.documents-list iframe.docs_preview_pdf');
+                if(type=="img")img.src = doc;
+                if(type=="pdf")frame.src = doc;
+              }}>
+                {doc.type}
+              {doc.type === "application/pdf"
+                ? <span className="doc-icon" title="PDF">📄</span>
+                : <span className="doc-icon" title="Image">🖼️</span>}
+              <span>{doc.name}</span>
+            </div>
+            <a href={doc} target="_blank">
+              <span className="doc-icon" title="Télécharger"> Télécharger</span>
+              <img className="docs_preview_img" src="" alt="" style={{maxWidth:'100%', maxHeight:'70vh', margin:'16px auto'}}/>
+              <iframe className="docs_preview_pdf" src="" alt="" style={{maxWidth:'100%', maxHeight:'70vh', margin:'16px auto'}}/>
+            </a>
+          </Fragment>))}
+        </div>
+      )}
+      {/* Affichage des documents sélectionnés pour upload (édition) */}
+      {isEdit && Array.isArray(selectedDocuments) && selectedDocuments.length > 0 && (
+        <div className="documents-list">
+          {selectedDocuments.map((doc, i) => (
+            <div className="document-item" key={doc.file.name + '-' + i}
+              style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              {doc.file.type === "application/pdf"
+                ? <span className="doc-icon" title="PDF">📄</span>
+                : <span className="doc-icon" title="Image">🖼️</span>}
+              <span>{doc.file.name}</span>
+              <input
+                type="text"
+                value={doc.customName}
+                onChange={e => {
+                  const newDocs = [...selectedDocuments];
+                  newDocs[i].customName = e.target.value;
+                  setSelectedDocuments(newDocs);
+                }}
+                placeholder="Nom final du fichier"
+                style={{ marginLeft: 8, flex: 1 }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export {SchoolHistoryBlock, ScolarityFeesBlock, IsInterneBlock, AddNoteForm, CompositionsBlock, CommentairesBlock, Parent, AbsencesBlock, BonusBlock, ManusBlock, DocumentsBlock } 
+
+
+

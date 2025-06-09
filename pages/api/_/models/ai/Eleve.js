@@ -29,15 +29,15 @@ const studentSchema = mongoose.Schema({
     absences: { default: [], type: [Object], required: true },
     notes: { default: {[currentSchoolYear]: {}}, type: Object, required: true },
     compositions: { default: currentSchoolYearField, type: Object, required: true },
-    moyenne_trimetriel: {
-        default: {[currentSchoolYear]: ["", "", ""]}, type: Object,
-        // validate: {
-        //     validator: function (eleves) {
-        //         return eleves.length === 3;
-        //     },
-        //     message: 'Le champ "eleves" doit contenir exactement 3 valeurs.',
-        // },
-    },
+    // moyenne_trimetriel: {
+    //     default: {[currentSchoolYear]: ["", "", ""]}, type: Object,
+    //     // validate: {
+    //     //     validator: function (eleves) {
+    //     //         return eleves.length === 3;
+    //     //     },
+    //     //     message: 'Le champ "eleves" doit contenir exactement 3 valeurs.',
+    //     // },
+    // },
     bonus: { default: [], type: [Object], required: true },
     manus: { default: [], type: [Object], required: true },
     isInterne: { default: false, type: Boolean, required: true },

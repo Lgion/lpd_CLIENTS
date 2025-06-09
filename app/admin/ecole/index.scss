@@ -1,6 +1,107 @@
 .modal{
     display: block;
     position: relative;
+    padding: 1em;
+    box-shadow: 0 0 10px 1px inset;
+    border-radius: 4px;
+}
+
+.eleve-detail {
+  position:relative;
+  max-width: 700px;
+  margin: 2em auto;
+  padding: 2em;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #d8d8ff66;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  &__photo {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    padding: 1em;
+    background: silver;
+    z-index: 10;
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 1em auto;
+    border: 2px solid #eee;
+  }
+
+  &__editbtn {
+    position:absolute;
+    right:1em;
+    z-index:2;
+    padding:0.3em 0.7em;
+    font-size:0.95em;
+    background:#fff;
+    border:1px solid #bbb;
+    border-radius:6px;
+    cursor:pointer;
+    box-shadow:0 1px 4px #0001;
+  }
+  &__title {
+    margin-bottom: 0;
+    font-size: 1.6em;
+    text-align: center;
+  }
+
+  &__classe {
+    opacity: .8;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__gmap {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+  &__gmap-btn {
+    background: transparent;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    color: #2b47a2;
+    margin-left: 0.5em;
+    font-weight: 500;
+  }
+  &__gmap-map {
+    height: 300px;
+    width: 100%;
+    margin: 1em 0 2em 0;
+  }
+
+  &__block {
+    margin: 2em 0 1em 0;
+  }
+  &__subtitle {
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+  }
+
+  // Responsive
+  @media (max-width: 600px) {
+    padding: 0.7em;
+    border-radius: 8px;
+    &__photo {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
+
+
+section>div:has(.modal){
+  position: relative;
 }
 #map{
     height: 400px;
@@ -48,6 +149,14 @@
     max-width: 100%;
     min-width: 0;
   }
+}
+
+.eleves-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.3em 2.1em;
+  justify-content: flex-start;
+  margin: 2em 0 1em 0;
 }
 
 select[name="current_classe"] {
@@ -255,6 +364,54 @@ select[name="current_classe"]:focus {
   align-items: center;
   width: fit-content;
 }
+// Spécialisation commentaires professeur
+.commentaires-block {
+  border: 2px solid #b0b0b0;
+  border-radius: 7px;
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  &__header {
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+  }
+  &__list {
+    margin-bottom: 8px;
+  }
+  &__empty {
+    color: #888;
+    font-style: italic;
+  }
+  &__entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  &__entry-date { color: #2e2e7e; font-weight: 600; margin-right: 8px; font-size: 0.95em; }
+  &__entry-txt { color: #222; font-size: 1em; }
+  &__remove-btn {
+    background: none;
+    border: none;
+    color: #d00;
+    font-weight: bold;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  &__add-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    input[type='text'] { font-size: 1em; flex: 1; }
+  }
+}
+
 // Spécialisation historique écoles
 .school-history-block {
   border: 2px solid #b3b3b3;

@@ -1,3 +1,6 @@
+Héberger des fichiers gratuitement (conversation gemini)
+https://g.co/gemini/share/3c835b11bb45
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

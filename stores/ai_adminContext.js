@@ -9,6 +9,8 @@ export const AdminContextProvider = ({ children }) => {
   const [eleves, setEleves] = useState([]);
   const [enseignants, setEnseignants] = useState([]);
   const [classes, setClasses] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   // --- ELEVE CRUD ---
   const fetchEleves = useCallback(async () => {
@@ -117,13 +119,19 @@ export const AdminContextProvider = ({ children }) => {
   }, [classes.length, fetchClasses]);
 
 
+
+
+
+
+
   return (
     <AiAdminContext.Provider
       value={{
         eleves, fetchEleves, saveEleve, deleteEleve,
         enseignants, fetchEnseignants, saveEnseignant, deleteEnseignant,
         classes, fetchClasses, saveClasse, deleteClasse,
-        uploadFile
+        uploadFile,
+        selected, setSelected, showModal, setShowModal
       }}
     >
       {children}
