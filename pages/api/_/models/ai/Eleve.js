@@ -15,6 +15,7 @@ const studentSchema = mongoose.Schema({
     current_classe: { default: "", type: ObjectId, ref: Object.keys(schemaClasseForEleve.obj)[0], required: true },
     nom: { default: "", type: String, required: true },
     prenoms: { default: [""], type: [Object], required: true },
+    sexe: { default: "", type: String, required:true },
     naissance_$_date: { default: "", type: String, required: true },
     adresse_$_map: { default: "", type: String, required: true },
     parents: { default: {mere: "", pere: "", phone: ""}, type: Object, required: true },
@@ -43,6 +44,7 @@ const studentSchema = mongoose.Schema({
     isInterne: { default: false, type: Boolean, required: true },
     commentaires: { default: [], type: [Object], required: true },
     documents: { default: [], type: [String], required: true },
+    createdAt: { default: +new Date(), type: String},
 
 })
 

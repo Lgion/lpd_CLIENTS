@@ -12,10 +12,33 @@ export const AdminContextProvider = ({ children }) => {
   const [selected, setSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  // --- UTILS LOCALSTORAGE ---
+  const loadFromStorage = (key) => {
+    if (typeof window === 'undefined') return null;
+    try {
+      const val = localStorage.getItem(key);
+      return val ? JSON.parse(val) : null;
+    } catch {
+      return null;
+    }
+  };
+  const saveToStorage = (key, val) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(key, JSON.stringify(val));
+    }
+  };
+
   // --- ELEVE CRUD ---
   const fetchEleves = useCallback(async () => {
-    const res = await fetch('/api/school_ai/eleves');
-    setEleves(await res.json());
+    let data = loadFromStorage('eleves');
+    if (data && Array.isArray(data) && data.length > 0) {
+      setEleves(data);
+    } else {
+      const res = await fetch('/api/school_ai/eleves');
+      data = await res.json();
+      setEleves(data);
+      saveToStorage('eleves', data);
+    }
   }, []);
 
   const saveEleve = useCallback(async (data) => {
@@ -25,9 +48,12 @@ export const AdminContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    await fetchEleves();
+    const updated = await fetch('/api/school_ai/eleves');
+    const newList = await updated.json();
+    setEleves(newList);
+    saveToStorage('eleves', newList);
     return await res.json();
-  }, [fetchEleves]);
+  }, []);
 
   const deleteEleve = useCallback(async (_id) => {
     await fetch('/api/school_ai/eleves', {
@@ -35,13 +61,23 @@ export const AdminContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id }),
     });
-    await fetchEleves();
-  }, [fetchEleves]);
+    const updated = await fetch('/api/school_ai/eleves');
+    const newList = await updated.json();
+    setEleves(newList);
+    saveToStorage('eleves', newList);
+  }, []);
 
   // --- ENSEIGNANT CRUD ---
   const fetchEnseignants = useCallback(async () => {
-    const res = await fetch('/api/school_ai/enseignants');
-    setEnseignants(await res.json());
+    let data = loadFromStorage('enseignants');
+    if (data && Array.isArray(data) && data.length > 0) {
+      setEnseignants(data);
+    } else {
+      const res = await fetch('/api/school_ai/enseignants');
+      data = await res.json();
+      setEnseignants(data);
+      saveToStorage('enseignants', data);
+    }
   }, []);
 
   const saveEnseignant = useCallback(async (data) => {
@@ -51,9 +87,12 @@ export const AdminContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    await fetchEnseignants();
+    const updated = await fetch('/api/school_ai/enseignants');
+    const newList = await updated.json();
+    setEnseignants(newList);
+    saveToStorage('enseignants', newList);
     return await res.json();
-  }, [fetchEnseignants]);
+  }, []);
 
   const deleteEnseignant = useCallback(async (_id) => {
     await fetch('/api/school_ai/enseignants', {
@@ -61,13 +100,23 @@ export const AdminContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id }),
     });
-    await fetchEnseignants();
-  }, [fetchEnseignants]);
+    const updated = await fetch('/api/school_ai/enseignants');
+    const newList = await updated.json();
+    setEnseignants(newList);
+    saveToStorage('enseignants', newList);
+  }, []);
 
   // --- CLASSE CRUD ---
   const fetchClasses = useCallback(async () => {
-    const res = await fetch('/api/school_ai/classes');
-    setClasses(await res.json());
+    let data = loadFromStorage('classes');
+    if (data && Array.isArray(data) && data.length > 0) {
+      setClasses(data);
+    } else {
+      const res = await fetch('/api/school_ai/classes');
+      data = await res.json();
+      setClasses(data);
+      saveToStorage('classes', data);
+    }
   }, []);
 
   const saveClasse = useCallback(async (data) => {
@@ -77,9 +126,12 @@ export const AdminContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    await fetchClasses();
+    const updated = await fetch('/api/school_ai/classes');
+    const newList = await updated.json();
+    setClasses(newList);
+    saveToStorage('classes', newList);
     return await res.json();
-  }, [fetchClasses]);
+  }, []);
 
   const deleteClasse = useCallback(async (_id) => {
     await fetch('/api/school_ai/classes', {
@@ -87,8 +139,11 @@ export const AdminContextProvider = ({ children }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _id })
     });
-    await fetchClasses();
-  }, [fetchClasses]);
+    const updated = await fetch('/api/school_ai/classes');
+    const newList = await updated.json();
+    setClasses(newList);
+    saveToStorage('classes', newList);
+  }, []);
 
   // --- UPLOAD ---
   const uploadFile = useCallback(async (payload) => {

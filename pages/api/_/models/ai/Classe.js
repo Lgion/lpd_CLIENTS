@@ -39,6 +39,7 @@ const classeSchema = mongoose.Schema({
         },
     },
     commentaires: { default: [], type: [Object], required: true },
+    createdAt: { default: +new Date(), type: String},
 
 })
 

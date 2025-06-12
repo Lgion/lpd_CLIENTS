@@ -1,5 +1,4 @@
 import { useContext, useState, useRef, useEffect, Fragment } from 'react';
-import '../index.scss';
 import { AiAdminContext } from '../../../../stores/ai_adminContext';
 import Gmap from '../../../_/Gmap_plus';
 
@@ -64,7 +63,6 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
           photo_$_file: 'https://picsum.photos/200/300',
           phone_$_tel: '01 23 45 67 89',
           email_$_email: 'jdupont@ecole.com',
-          current_classes: ['6e', '5e'],
         });
       }
       if (type === 'classe') {
@@ -104,7 +102,10 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(form);
+    
     let newForm = { ...form };
+    alert(type)
     // Si un fichier a été sélectionné, on l'upload maintenant
     if (selectedFile || (selectedDocuments && selectedDocuments.length > 0)) {
       setUploading(true);
@@ -115,10 +116,15 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
         // On transmet documents: [{file, customName}]
         uploadPayload.documents = selectedDocuments;
       }
-      if (type === 'eleve') {
+      if (type === 'classe') {
+        uploadPayload.annee = form.annee;
+        uploadPayload.niveau = form.niveau;
+        uploadPayload.alias = form.alias;
+      }
+      if (type === 'eleve' || type === 'enseignant') {
+        console.log(form['nom']);
+        console.log(+form['prenoms']);
         console.log(form['naissance_$_date']);
-        console.log(+form['naissance_$_date']);
-        console.log(form['naissance_$_date'] + "");
         console.log(+new Date(form['naissance_$_date'] + ""));
 
 
@@ -131,24 +137,34 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
         console.log("rrrrrrrrrrrrrrrrrrrrrr");
 
       }
-      if (type === 'classe') {
-        uploadPayload.annee = form.annee;
-        uploadPayload.niveau = form.niveau;
-        uploadPayload.alias = form.alias;
-      }
       const uploadRes = await ctx.uploadFile(uploadPayload);
       console.log('UPLOAD RESULT', uploadRes);
       const { paths, error } = uploadRes;
+      console.log(paths);
+      
+      console.log("\n\n\nkkkkkkkkkkkkkkkk");
+      
+      console.log(uploadRes);
+      
       setUploading(false);
+      console.log(error);
+      console.log(paths);
+      
       if (error || !paths) {
         setError("Erreur lors de l'upload du fichier : " + (error || 'aucun chemin de fichier retourné'));
         return;
+      }
+      if (type === 'classe') {
+        newForm.photo = paths.find(p => p.endsWith('photo.webp'));
+        
+        uploadPayload.annee = form.annee;
+        uploadPayload.niveau = form.niveau;
+        uploadPayload.alias = form.alias;
       }
       if (type === 'eleve' || type === 'enseignant') {
         newForm.photo_$_file = paths.find(p => p.endsWith('photo.webp'));
         newForm.documents = paths.filter(p => p.endsWith('photo.webp'));
       }
-      if (type === 'classe') newForm.photo = paths.find(p => !p.endsWith('photo.webp'));
     }
     if (type === 'eleve') {
       if (!newForm.current_classe || !newForm.photo_$_file) return setError('Classe et photo obligatoires.');
@@ -176,6 +192,22 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
     } else if (type === 'enseignant') {
       if (!newForm.nom || !newForm.photo_$_file) return setError('Nom et photo obligatoires.');
       setError('');
+      if (typeof newForm['adresse_$_map'] === 'object' && newForm['adresse_$_map'] !== null) {
+        if ('lat' in newForm['adresse_$_map'] && 'lng' in newForm['adresse_$_map']) {
+          newForm['adresse_$_map'] = `${newForm['adresse_$_map'].lat},${newForm['adresse_$_map'].lng}`;
+        }
+      }
+      // Correction current_classe(s)
+      if ('current_classes' in newForm && (!newForm.current_classes || newForm.current_classes === '')) {
+        delete newForm.current_classes;
+      }
+      // Correction naissance_$_date
+      if (typeof newForm['naissance_$_date'] === 'string' && newForm['naissance_$_date'].length > 0) {
+        newForm['naissance_$_date'] = +new Date(newForm['naissance_$_date']);
+      }
+      setError('');
+      console.log(newForm);
+
       await ctx.saveEnseignant(newForm);
     } else if (type === 'classe') {
       alert('kkk ')
@@ -198,15 +230,35 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
   // Rendu dynamique selon le type
   return (
     <div className="modal">
+      {(uploading || (typeof window !== 'undefined' && ctx && ctx.showModal && uploading)) && (
+        <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',background:'rgba(255,255,255,0.75)',zIndex:999,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.5em',fontWeight:600}}>
+          <span>Enregistrement en cours...</span>
+        </div>
+      )}
       <div className="modal-content">
         <button onClick={onClose}>Fermer</button>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} id="modalPersonForm">
+
+
+
+
+
+
+
+          
           {type === 'eleve' && <>
             <label htmlFor="input-nom">Nom</label>
             <input id="input-nom" name="nom" value={form.nom} onChange={handleChange} placeholder="Nom" required />
 
             <label htmlFor="input-prenoms">Prénoms</label>
             <input id="input-prenoms" name="prenoms" value={Array.isArray(form.prenoms) ? form.prenoms.join(',') : form.prenoms || ''} onChange={e => setForm(f => ({ ...f, prenoms: e.target.value.split(',') }))} placeholder="Prénoms (séparés par des virgules)" required />
+            
+            <label htmlFor="input-sexe">Sexe</label>
+            <select id="input-sexe" name="sexe" value={form.sexe || ''} onChange={handleChange} required>
+              <option value="">Sélectionnez le sexe</option>
+              <option value="M">Masculin</option>
+              <option value="F">Féminin</option>
+            </select>
 
             <label htmlFor="input-naissance">Date de naissance</label>
             <input id="input-naissance" type="date" name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} required />
@@ -315,17 +367,76 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
             // onChange={e => setForm(f => ({ ...f, bolobi_class_history_$_ref_µ_classes: e.target.value ? JSON.parse(e.target.value) : {} }))} 
             />
           </>}
+
+
+
+
+
+
+
           {type === 'enseignant' && <>
+            <label htmlFor="input-nom">Nom</label>
             <input name="nom" value={form.nom} onChange={handleChange} placeholder="Nom" required />
-            <input name="prenoms" value={form.prenoms} onChange={e => setForm(f => ({ ...f, prenoms: e.target.value.split(',') }))} placeholder="Prénoms (séparés par des virgules)" required />
-            <input name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} placeholder="Date de naissance" required />
-            <input name="adresse_$_map" value={form.adresse_$_map} onChange={handleChange} placeholder="Adresse" required />
-            <input name="phone_$_tel" value={form.phone_$_tel} onChange={handleChange} placeholder="Téléphone" required />
-            <input name="email_$_email" value={form.email_$_email} onChange={handleChange} placeholder="Email" required />
-            <input type="file" ref={fileInput} accept="image/*" onChange={handleFile} required={!form.photo_$_file && !previewUrl} />
+            <label htmlFor="input-prenoms">Prénoms</label>
+            <input name="prenoms" value={form.prenoms} onChange={e => setForm(f => ({ ...f, prenoms: e.target.value.split(',') }))} placeholder="Prénoms (séparés par des virgules)" required />            
+            <label htmlFor="input-sexe">Sexe</label>
+            <select id="input-sexe" name="sexe" value={form.sexe || ''} onChange={handleChange} required>
+              <option value="">Sélectionnez le sexe</option>
+              <option value="M">Masculin</option>
+              <option value="F">Féminin</option>
+            </select>
+            <label htmlFor="input-classes">Classe actuelle</label>
+            <select id="input-classes" name="current_classes" value={form.current_classes || ''} onChange={handleChange} required>
+              <option value="">Sélectionnez une classe</option>
+              {ctx.classes && ctx.classes.map(classe => (
+                <option key={classe._id} value={classe._id}>{classe.niveau} - {classe.alias}</option>
+              ))}
+            </select>
+            <label htmlFor="input-naissance">Date de naissance</label>
+            <input id="input-naissance" type="date" name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} required />
+            <label htmlFor="input-adresse">Adresse</label>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <input
+                id="input-adresse"
+                name="adresse_$_map"
+                value={form.adresse_$_map}
+                onChange={handleChange}
+                placeholder="Adresse"
+                required
+                style={{ flex: 1 }}
+              />
+              <button type="button" onClick={() => setShowMap(true)} style={{ marginLeft: 8 }}>
+                📍
+              </button>
+            </div>
+            {showMap && (
+              <div style={{ margin: '10px 0' }}>
+                <Gmap
+                  // Pass initial center based on current state (which might be from datas)
+                  // initialCenter={{ lat: parseFloat(latitude) || 5.36, lng: parseFloat(longitude) || -4.00 }}
+                  onCoordinatesClick={handleMapClick} // Pass the callback function
+                />
+                <button type="button" onClick={() => setShowMap(false)}>Fermer la carte</button>
+              </div>
+            )}
+            <label htmlFor="input-tel">N° Téléphone</label>
+            <input id="input-tel" name="phone_$_tel" value={form.phone_$_tel} onChange={handleChange} placeholder="Téléphone" required />
+            <label htmlFor="input-email">Email</label>
+            <input id="input-email" name="email_$_email" value={form.email_$_email} onChange={handleChange} placeholder="Email" required />
+            <label htmlFor="input-photo">Photo de l'enseignant</label>
+            <input id="input-photo" type="file" ref={fileInput} accept="image/*" onChange={handleFile} required={!form.photo_$_file && !previewUrl} />
             {(previewUrl || form.photo_$_file) && <img src={previewUrl || form.photo_$_file} alt="photo" className="previewImageAddForm" />}
-            <input name="current_classes" value={form.current_classes} onChange={handleChange} placeholder="Classe actuelle (ID)" required />
+
           </>}
+
+
+
+
+
+
+
+
+
           {type === 'classe' && <>
             <input name="annee" value={form.annee} onChange={handleChange} placeholder="Année" required />
             <select name="niveau" value={form.niveau} onChange={handleChange} required>

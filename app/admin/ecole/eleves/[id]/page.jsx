@@ -1,13 +1,14 @@
  "use client";
  import Link from 'next/link';
 import { useContext,useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { AiAdminContext } from '../../../../../stores/ai_adminContext';
 import { Parent, DocumentsBlock, IsInterneBlock, AddNoteForm, CompositionsBlock, SchoolHistoryBlock, ScolarityFeesBlock, CommentairesBlock, AbsencesBlock, BonusBlock, ManusBlock } from '../../components/EntityModal.jsx';
 import Gmap from '../../../../_/Gmap_plus';
 
 export default function ElevePage() {
   const { id } = useParams();
+  const router = useRouter();
   const ctx = useContext(AiAdminContext);
   if (!ctx) return <div style={{color:'red'}}>Erreur : contexte non trouvé</div>;
   const getDefaultSchoolYear = (compositions) => {
@@ -46,33 +47,39 @@ export default function ElevePage() {
   });
   console.log(eleve);
   
-  return (
-    <div className="eleve-detail">
-      <img className="eleve-detail__photo" src={eleve.photo_$_file} alt="" />
+  return !eleve ? <div>....loading.....</div>
+    : <div className="person-detail">
+      <button
+        className="person-detail__close"
+        style={{position:'absolute',top:-15,right:5,color:'red',  background:'none',border:'none',fontSize:'2em',cursor:'pointer',zIndex:10}}
+        aria-label="Fermer"
+        onClick={() => router.back()}
+      >✕</button>
       {onEdit && !showModal &&(
         <button
           type="button"
-          className="eleve-detail__editbtn"
+          className="person-detail__editbtn"
           onClick={e => { e.stopPropagation(); e.preventDefault(); onEdit(eleve); }}
           tabIndex={0}
         >Éditer</button>
       )}
       {showModal && <button
-          className="eleve-detail__editbtn"
+          className="person-detail__editbtn"
           onClick={e => { e.stopPropagation(); e.preventDefault(); setShowModal(false); }}
         >Fermer Édition</button>
       }
-      <h1 className="eleve-detail__title"><u>Élève:</u> {eleve.nom} {eleve.prenoms} (<time dateTime={eleve.naissance_$_date}>{new Date(eleve.naissance_$_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</time>)</h1>
-      <div className="eleve-detail__classe">
+      <img className="person-detail__photo" src={eleve.photo_$_file} alt="" />
+      <h1 className="person-detail__title"><u>Élève:</u> {eleve.nom} {eleve.prenoms} ({eleve.sexe}) (<time dateTime={eleve.naissance_$_date}>{new Date(eleve.naissance_$_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}</time>)</h1>
+      <div className="person-detail__classe">
         <u>En classe de:</u> <Link href={`/admin/ecole/classes/${classe._id}`}>{classe.niveau} - {classe.alias}</Link>
       </div>
-      <div className="eleve-detail__gmap">
+      <div className="person-detail__gmap">
         <u>Domicilié (coordonées gmap): </u>
-        <button className="eleve-detail__gmap-btn" onClick={() => setGmapOpen(o => !o)}>
+        <button className="person-detail__gmap-btn" onClick={() => setGmapOpen(o => !o)}>
           {gmapOpen ? 'Cacher' : eleve.adresse_$_map}
         </button>
         {gmapOpen && (
-          <div className="eleve-detail__gmap-map">
+          <div className="person-detail__gmap-map">
             <Gmap 
               initialPosition={[eleve.adresse_$_map?.lat, eleve.adresse_$_map?.lng]} 
               zoom={16}
@@ -97,12 +104,12 @@ export default function ElevePage() {
               
       <AddNoteForm notes={eleve.notes} />
 
-      <div className="eleve-detail__block eleve-detail__block--history">
-        <h2 className="eleve-detail__subtitle">Historique des écoles</h2>
+      <div className="person-detail__block person-detail__block--history">
+        <h2 className="person-detail__subtitle">Historique des écoles</h2>
         <SchoolHistoryBlock schoolHistory={eleve.schoolHistory} />
       </div>
-      <div className="eleve-detail__block eleve-detail__block--fees">
-        <h2 className="eleve-detail__subtitle">Frais de scolarité</h2>
+      <div className="person-detail__block person-detail__block--fees">
+        <h2 className="person-detail__subtitle">Frais de scolarité</h2>
         {Object.keys(allFees).length === 0 ? <div>Aucun dépôt enregistré</div> :
           Object.entries(allFees).map(([year, fees]) => (
             <div key={year} style={{marginBottom:'1.3em'}}>
@@ -120,5 +127,4 @@ export default function ElevePage() {
         <CommentairesBlock commentaires={eleve.commentaires} />
       </div>
     </div>
-  );
 }

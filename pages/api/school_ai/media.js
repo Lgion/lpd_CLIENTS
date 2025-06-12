@@ -42,6 +42,7 @@ const handler = async (req, res) => {
       console.log("\n\n\n\njiuio");
       console.log(fields);      
       console.log(payload);
+      console.log(entityType[0]);
       console.log("jiuio");
       
       payload = JSON.parse(payload?.[0] || '{}')
@@ -70,7 +71,7 @@ const handler = async (req, res) => {
         await sharp(file.filepath).webp().toFile(destPath);
         await fs.promises.unlink(file.filepath);
         let publicPath = destPath.replace('/home/nihongo/Bureau/lpd/public', '');
-        return res.status(200).json({ path: publicPath });
+        return res.status(200).json({ paths: [publicPath] });
       } else if (entityType[0] === 'eleve') {
         // --- Cas élève ---
         // Dossier: /public/school/students/[nom]-[prenoms]-[timestamp naissance_$_date]
@@ -115,24 +116,36 @@ const handler = async (req, res) => {
         }
         return res.status(200).json({ paths });
       } else if (entityType[0] === 'enseignant') {
+        const {prenoms, nom, naissance_$_date} = payload;
+        console.log(1);
+        
+        
         // --- Cas enseignant ---
         // Dossier: /public/school/teachers/[nom]-[prenoms]
-        const nom = String(fields.nom || fields.name || '').toLowerCase().replace(/[^a-z0-9\-]/g, '-');
-        const prenoms = String(fields.prenoms || '').toLowerCase().replace(/[^a-z0-9\-]/g, '-');
-        const enseignantFolder = `${nom}-${prenoms}`.replace(/--+/g, '-');
+        console.log("fields et payload");
+        console.log(fields);
+        console.log(payload);
+        const enseignantFolder = `${nom}-${prenoms}`.replace(/--+/g, '-').replace(",", '-');
         const destDir = path.join(BASE_PATH, 'teachers', enseignantFolder);
+        console.log(2);
         await fs.promises.mkdir(destDir, { recursive: true });
-        const ext = path.extname(file.originalFilename || file.name || '');
-        const destPath = path.join(destDir, 'photo' + ext);
-        await fs.promises.rename(file.filepath, destPath);
+        // const ext = path.extname(file.originalFilename || file.name || '');
+        const destPath = path.join(destDir, 'photo.webp');
+        await sharp(file.filepath).webp().toFile(destPath);
+        console.log(3);
+        await fs.promises.unlink(file.filepath);
+        // await fs.promises.rename(file.filepath, destPath);
         let publicPath = destPath.replace('/home/nihongo/Bureau/lpd/public', '');
-        return res.status(200).json({ path: publicPath });
+        console.log(4);
+        return res.status(200).json({ paths: [publicPath] });
       } else {
+        console.log("\n\n\niojoiojiojiojojiioj");
+        
         const ext = path.extname(file.originalFilename || file.name || '');
         const destPath = path.join(targetDir, 'photo' + ext);
         await fs.promises.rename(file.filepath, destPath);
         let publicPath = destPath.replace('/home/nihongo/Bureau/lpd/public', '');
-        return res.status(200).json({ path: publicPath });
+        return res.status(200).json({ path: [publicPath] });
       }
     });
   } else {
