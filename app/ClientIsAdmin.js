@@ -13,8 +13,10 @@ import HeaderAdmin from "./HeaderAdmin"
 export default function ClientIsAdmin({children}) {
     const pathname = usePathname()
     const {isAdmin, setIsAdmin} = useContext(AuthContext)
-    setIsAdmin(true)
+
     // Ajout temporaire pour déboguer
+    setIsAdmin(true)
+    
     useEffect(() => {
         console.log('ClientIsAdmin re-render causé par:', {
             pathname,

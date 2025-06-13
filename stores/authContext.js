@@ -66,6 +66,7 @@ export const AuthContextProvider = ({children}) => {
             title:"Accueil: Librairie religieuse chrétienne Abidjan, Ecommerce chrétien, centre de retraite spirituelle à Bolobi (entre azaguié et yakasseme, sur route d'Adzopé)",
             h2: "DÉCOUVRIR: La Puissance Divine de Côte d'ivoire",
             content:"",
+            icon:"fa-solid fa-house",
             tagzone:["librairie","librairie religieuse","librairie religieuse chrétienne", "ecommerce chrétien", "sanctuaire bolobi", "retraites spirituelles"],
             titrePage:["Sanctuaire Notre Dame du Rosaire de Bolobi, et la Librairie Puissance Divine, vous souhaitent la bienvenue."],
             sns:{"Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins":"https://www.facebook.com/genevieve.achi/"},
@@ -79,6 +80,7 @@ export const AuthContextProvider = ({children}) => {
             , h2:"RÉSERVER: au Sanctuaire ND Rosaire de BOLOBI"
             // , content:"Sanctuaire ND du Rosaire Bolobi"
             , content:"Retraites Spirituelles"
+            , icon:"fa-solid fa-church"
             , tagzone:["retraites de prières"
                 , "activités spirituelles"
                 , "lieu de loisir abidjan"
@@ -95,6 +97,7 @@ export const AuthContextProvider = ({children}) => {
             , title:"Un blog pour vous permettre de tout connaitre de nos activités au sanctuaire de Bolobi."
             , h2:"Blog du Rosaire de Bolobi"
             // , content:"Sanctuaire ND du Rosaire Bolobi"
+            , icon:"fa-solid fa-blog"
             , tagzone:["blog"
                 , "article bolobi"
                 , "grotte mariale bolobi"
@@ -106,7 +109,7 @@ export const AuthContextProvider = ({children}) => {
         },
         // {id:"bolobi",href:"/bolobi-ecole-caritative-larve-msn",title:"Bolobi: école gratuite d'Adzopé, culture du poivre, élevage de mouches soldat noire, activités spirituelles religieuses chrétien catholique et protestant",content:"Oeuvres Caritatives",tagzone:["école caritative", "école saint martin de porèz de bolobi"],titrePage:["Les activités religieuses, caritatives, et économiques du sanctuaire de Bolobi, et de l'école St Martin de Porrez"],sns:{"École St Martin de Porèz de Bolobi": "https://www.facebook.com/abidjan.puissance.divine/"},search:"école+primaire+saint+martin+porès+bolobi+azaguié+yakasseme"},
         // {id:"ecommerce",href:"/ecommerce-chretien-abidjan",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
-        {id:"ecommerce",href:"/ecom",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
+        {id:"ecommerce",href:"/ecom",title:"Ecommerce religieux chrétien catholique: icône grottes statues bibles",content:"Ecommerce Chrétien", icon:"fa-solid fa-cart-shopping",tagzone:["ecommerce","librarie religieuse","librairie chrétienne","publication chrétiennes","objets de piété","bibles","saintes bibles", "icônes", "croix", "encens", "statue mariale", "grotte chrétienne", "chapelets de prière"],titrePage:["Ecommerce libraire puissance divine d'Amour, Cocody 2plateaux rue des jardins"],sns:{"librairie puissance divine abidjan rue des jardins": "https://www.facebook.com/abidjan.puissance.divine/","Maria Valtorta": "https://www.facebook.com/LibrairiePuissanceMariaValtorta/"},search:"ecommerce+religieux+chrétien+puissance+divine+amour"},
     ]
     , findByIDMainMenu = (data, id) => data.find(
         (item,i) => item.id == id

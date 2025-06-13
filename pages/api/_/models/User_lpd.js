@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   fullName: { type: String, required: false },           // nom complet
   tel: { type: String, required: false },
+  communaute: { type: String, required: false },
   // username: { type: String, required: true },
   // password: { type: String, required: true },
   // role: { type: String, required: true },

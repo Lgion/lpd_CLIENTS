@@ -7,11 +7,12 @@ export default function MenuMain() {
 
     const {isAdmin, cartBox, isCartPage, mainmenu, menuActive, setMenuActive} = useContext(AuthContext)
     const pathname = usePathname();
+    const icons = mainmenu.map(item => item.icon);
     
     return <>
         <menu className="mainMenu">
             {isAdmin &&<li className='admin_menu'>
-                <Link href="/admin">ADMIN</Link>
+                <Link id="admin_menu_link" href="/admin">ADMIN</Link>
             </li>}
             
             {/* {isAdmin && <menu className="admin">
@@ -29,7 +30,7 @@ export default function MenuMain() {
                             // setMainMenuObject(item.h2)
                         }}
                     >
-                        <span>
+                        <span className={item.icon}>
                             {item.content}
                         </span>
                     </Link>

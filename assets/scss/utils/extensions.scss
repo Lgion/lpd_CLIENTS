@@ -210,6 +210,7 @@
     position: relative;
     text-decoration: none;
     color: goldenrod;
+    color: whitesmoke;
     text-shadow: 0 0 1px black, -1px 2px 5px black;
     font-size: 1.5em;
     font-weight: 900;
@@ -217,6 +218,6 @@
     border-top-right-radius: 100px 10px;
     -webkit-transition: all .3s;
     background: #ff5900;
-    background: linear-gradient(135deg, rgba(255,89,0,0.3) 0%,#cc0000 46%,#cc0a00 62%,rgba(255,89,0,0.3) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(255,89,0,0.3)', endColorstr='rgba(255,89,0,0.3)',GradientType=1 );
+    background: linear-gradient(135deg, rgba(114,114,114,0.3) 0%, #666666 46%, #696969 62%, rgba(114,114,114,0.3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4D727272', endColorstr='#4D727272',GradientType=1 );
 }

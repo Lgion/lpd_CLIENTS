@@ -40,6 +40,38 @@ export default function LogSignIn() {
             console.log(role);
             
         }
+
+        // --- Ajout récupération/création user MongoDB et stockage localStorage ---
+        const email = user?.primaryEmailAddress?.emailAddress;
+        if (email && !localStorage.getItem('user')) {
+          fetch(`/api/users?email=${encodeURIComponent(email)}`)
+            .then(async res => {
+            alert(0)
+              if (res.ok) {
+                alert(1)
+                const data = await res.json();
+                alert(2)
+                localStorage.setItem('user', JSON.stringify(data.user));
+            } else if (res.status === 404) {
+                  alert(11)
+                // Créer l'utilisateur si non trouvé
+                return fetch('/api/users', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email }),
+                })
+                  .then(res => res.json())
+                  .then(data => {
+                    alert(22)
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                  });
+              }
+            })
+            .catch(err => {
+              console.error('Erreur lors de la récupération/creation du user:', err);
+            });
+        }
+        // --- Fin ajout ---
     }, [user])
     
     
