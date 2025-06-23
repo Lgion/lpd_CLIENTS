@@ -1,9 +1,8 @@
+"use client"
+
 import React,{ useState, useEffect, useRef } from 'react'
-
-// import SliderInArticle from '../../components/_/SliderInArticle'
-import SliderInArticle from '../_/SliderInArticle'
-import {carouselBolobi_} from "../../assets/carousels"
-
+import SliderInArticle from '../SliderInArticle.jsx';
+import { carouselBolobi_ } from '../../../assets/carousels.js';
 
 export default function Features({ bem = "LP-Features", align = ""/*"--btn"*/, $datas = {
     title: "Les activités économique qui financent BOLOBI: "

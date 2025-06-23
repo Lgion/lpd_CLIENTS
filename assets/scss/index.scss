@@ -1010,6 +1010,11 @@ body{
               }
             }
             &:hover,&.active{
+              &#bolobi_menu{
+                color: $secondary_2;
+                  background: linear-gradient(135deg, rgba(255,89,0,0.3) 0%, goldenrod 46%, goldenrod 62%,rgba(255,89,0,0.3) 100%);
+                  // background: linear-gradient(135deg, goldenrod 0%, #1F4EEA 46%, #1F4EEA 62%, goldenrod 100%);
+              }
               &#activites-spirituelles_menu{
                 color: $secondary_2;
                 background: linear-gradient(135deg, $secondary_1_30 0%, #1F4EEA 46%, #1F4EEA 62%, $secondary_1_30 100%);

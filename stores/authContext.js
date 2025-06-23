@@ -91,6 +91,16 @@ export const AuthContextProvider = ({children}) => {
             , sns:{"Sanctuaire notre Dame du Rosaire de Bolobi": "https://www.facebook.com/abidjan.sanctuaire.rosaire.bolobi/"}
             , search:"retraite+spirituelle+sanctuaire+dame+rosaire+bolobi"
         },
+        {id:"bolobi"
+            ,href:"/bolobi-ecole-caritative-larve-msn"
+            ,title:"Bolobi: école gratuite d'Adzopé, culture du poivre, élevage de mouches soldat noire, activités spirituelles religieuses chrétien catholique et protestant"
+            ,content:"Oeuvres Caritatives"
+            ,icon:"fa-solid fa-test"
+            ,tagzone:["école caritative", "école saint martin de porèz de bolobi"]
+            ,titrePage:["Les activités religieuses, caritatives, et économiques du sanctuaire de Bolobi, et de l'école St Martin de Porrez"]
+            ,sns:{"École St Martin de Porèz de Bolobi": "https://www.facebook.com/abidjan.puissance.divine/"}
+            ,search:"école+primaire+saint+martin+porès+bolobi+azaguié+yakasseme"
+        },
         {id:"blog-bolobi"
             // , href:"/blog-sanctuaire-rosaire-bolobi"
             , href:"/blog"
