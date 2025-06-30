@@ -9,9 +9,9 @@ import NatureGift from "./NatureGift"
 
 
 export default function Donation() {
-  const {FieldsetRadioStyled, SectionCheckboxStyled} = useContext(FormContext)
+  // const {FieldsetRadioStyled, SectionCheckboxStyled} = useContext(FormContext)
   // , {myLoader} = useContext(AuthContext)
-  , [giftType, setGiftType] = useState("")
+  const [giftType, setGiftType] = useState("")
   , handleBtn = (e) => {
     if(form_donation.classList.contains('on')){
       form_donation.classList.remove('on')
@@ -54,10 +54,10 @@ export default function Donation() {
 
   console.log("ok")
 
-  useEffect(()=>{
-    loadRadios()
-    donationType1.click()
-  }, [FieldsetRadioStyled])
+  // useEffect(()=>{
+  //   loadRadios()
+  //   donationType1.click()
+  // }, [FieldsetRadioStyled])
 
   return <section>
     <article>
@@ -94,10 +94,10 @@ export default function Donation() {
           <br/><u>Pour la cantine scolaire</u>, nous nourrissons gratuitement tous les élèves de l'école Saint Martin de Porrèz. <i>Les internes ont en plus le petit-déjeuner.</i>
         </p>
       </section>
-      <h3>AUX <span>ÉCOLES ST MARTIN DE PORREZ</span>: </h3>
       <div>
-        <button id="do_donation_btn" onClick={handleBtn}>FAIRE UN <span>DON</span></button>
+        <button id="do_donation_btn" className="safe" onClick={handleBtn}>FAIRE UN <span>DON</span></button>
       </div>
+      <h3>AUX <span>ÉCOLES ST MARTIN DE PORREZ</span>: </h3>
     </article>
     <form id="form_donation" onSubmit={handleSubmit}>
       <fieldset className="safe">
@@ -111,7 +111,7 @@ export default function Donation() {
         <label htmlFor="email">E-mail</label>
         <input type="text" id="email" name="email" />
       </fieldset>
-      <FieldsetRadioStyled>
+      {/* <FieldsetRadioStyled>
         <h2>Définir la forme de votre don ?</h2>
         <section>
           <label htmlFor="donationType1" className="radioLabel">
@@ -130,7 +130,7 @@ export default function Donation() {
           <NatureGift />
           <input type="hidden" id="nature_predefined" name="nature_predefined" defaultValue="" />
         </section>
-      </FieldsetRadioStyled>
+      </FieldsetRadioStyled> */}
       {/* <fieldset className="money_or_nature">
       </fieldset> */}
       <fieldset>

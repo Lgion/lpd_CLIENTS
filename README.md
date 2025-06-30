@@ -1,6 +1,10 @@
 Héberger des fichiers gratuitement (conversation gemini)
 https://g.co/gemini/share/3c835b11bb45
 
+Idées évolution app école (conversation gemini)
+https://gemini.google.com/app/951a0c213d4a23a1?hl=fr
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

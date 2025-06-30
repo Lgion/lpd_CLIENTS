@@ -107,7 +107,6 @@ export default function Features({ bem = "LP-Features", align = ""/*"--btn"*/, $
                 </li> */}
             </ul>
             <SliderInArticle carousel={carouselData} carouselName="carouselBolobi_fields" />
-            {test}
         </section>
         { /* Services Section End */}
 

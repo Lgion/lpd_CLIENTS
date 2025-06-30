@@ -22,45 +22,45 @@ export const carouselBolobi_ = [
     {
         "bolobi": [
             {
-              "src": "alle-bolobi.jpg"
-              , h1: "L'allé principale du sanctuaire"
+              "src": "dortoir-ecole-saint-martin-porres-bolobi.webp"
+              , h1: "Le dortoire des élèves de l'école Saint Martin de Porres"
               , p: "Une courte description"
             },
             {
-              "src": "croix-bolobi.jpg"
-              , h1: "Une prière très puissante du haut d'une belle croix vous accueille au Sanctuaire"
+              "src": "classes-ecole-saint-martin-porres-bolobi.webp"
+              , h1: "Le batiment des classes de l'école Saint Martin de Porres"
               , p: "Une courte description"
             },
-            {
-              "src": "refectoire-bolobi.jpg"
-              , h1: "Le réfectoire du sanctuaire"
-              , p: "Une courte description"
-            },
-            {
-              "src": "salle-conference-bolobi.jpg"
-              , h1: "La salle de conférence du sanctuaire"
-              , p: "Une courte description"
-            }
+            // {
+            //   "src": "refectoire-bolobi.jpg"
+            //   , h1: "Le réfectoire du sanctuaire"
+            //   , p: "Une courte description"
+            // },
+            // {
+            //   "src": "salle-conference-bolobi.jpg"
+            //   , h1: "La salle de conférence du sanctuaire"
+            //   , p: "Une courte description"
+            // }
         ]
     },
-    {
-      "ecole-primaire-bolobi": [
-        {
-          "src": "photo-classe-ecole-bolobi.jpg"
-          , h1: "Une très belle photo de classe"
-        }
-      ]
-    },
-    {
-      "eglise-du-rosaire-bolobi": [
-        {
-          "src": "eglise-exterieur.jpg"
-          , h1: "L'Église du sanctuaire vue de l'extérieur"
-        },
-        {
-          "src": "eglise-hotel.jpg"
-          , h1: "L'hotel de l'église du sanctuaire"
-        }
-      ]
-    }
+    // {
+    //   "ecole-primaire-bolobi": [
+    //     {
+    //       "src": "photo-classe-ecole-bolobi.jpg"
+    //       , h1: "Une très belle photo de classe"
+    //     }
+    //   ]
+    // },
+    // {
+    //   "eglise-du-rosaire-bolobi": [
+    //     {
+    //       "src": "eglise-exterieur.jpg"
+    //       , h1: "L'Église du sanctuaire vue de l'extérieur"
+    //     },
+    //     {
+    //       "src": "eglise-hotel.jpg"
+    //       , h1: "L'hotel de l'église du sanctuaire"
+    //     }
+    //   ]
+    // }
 ]

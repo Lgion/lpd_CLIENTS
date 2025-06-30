@@ -15,7 +15,7 @@ export default function ClientIsAdmin({children}) {
     const {isAdmin, setIsAdmin} = useContext(AuthContext)
 
     // Ajout temporaire pour déboguer
-    setIsAdmin(true)
+    // setIsAdmin(true)
     
     useEffect(() => {
         console.log('ClientIsAdmin re-render causé par:', {

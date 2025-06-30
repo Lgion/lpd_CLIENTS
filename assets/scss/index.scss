@@ -602,8 +602,9 @@ body{
     height: 200px;
     margin-bottom: 7em;
     z-index: 100 !important;
-    @include mobile-only{
+    @include mobile-and-tablette{
       margin-top: 50px;
+      margin-bottom: 6em;
     }
     >h1{
       z-index: 1;
@@ -812,7 +813,7 @@ body{
         //   //   height:100%;
         //   background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
         // }
-        @include mobile-only{
+        @include mobile-and-tablette{
           background: white;
           z-index: 2;
           flex-flow: row;
@@ -909,6 +910,10 @@ body{
         padding: 1.15em;
         width: 90%;
         left:5%;
+        @include mobile-and-tablette{
+          bottom: -6em;
+          height:98px
+        }
         &:before {
           content: '';
           background: url(../../public/img/menu_bg_test.webp) top left;
@@ -925,28 +930,37 @@ body{
             text-align: center;
             bottom: -10%;
             position: relative;
-            height: 33%;
+            // height: 33%;
             font-size: .9em;
           }
           @include mobile-only{
             &:not(.accueil){width: 40%;}
             &.accueil{width: 10%}
           }
-          &.menu.accueil>a>span:before{content:"\f015"}
-          &.menu.activites-spirituelles>a>span:before{content:"\f51d"}
-          &.menu.ecommerce>a>span:before{content:"\f07a"}
-          &.menu.blog>a>span:before{content:"\f781"}
+          &.menu.accueil>a>span:first-of-type:before{content:"\f015"}
+          &.menu.activites-spirituelles>a>span:first-of-type:before{content:"\f51d"}
+          &.menu.ecommerce>a>span:first-of-type:before{content:"\f07a"}
+          &.menu.blog>a>span:first-of-type:before{content:"\f781"}
           >a{
             &:not([id="panier"]){
               >span{
                 &:before{
-                  content: '';
+                  // content: '';
                   position: absolute;
-                  top: 0;
+                  // top: 0;
+                  bottom: -1.5em;
                   left: 0;
+                  width:20px;
+                  height:20px;
                   font-family: 'Font Awesome 6 Free'; // ou 'Font Awesome 6 Brands' selon l'icône
                   font-weight: 900; // ou 400 selon l'icône
                   display: inline-block;
+                }
+                @include mobile-and-tablette{
+                  font-size: unset !important;
+                  &:not(.keep){
+                    display: none;
+                  }
                 }
               }
               &:not(.homeLink){
@@ -983,26 +997,27 @@ body{
                 >span{position:relative;top:-.5em;transition:all .3s;}
               }
               &.homeLink{
-                >span{    
-                  background: url(../../public/home_.webp) center center no-repeat, black;
-                  background-size: contain !important;
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 1em;
-                  border: 1px solid;
-                  // background: white;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  font-size: 1.25em;
-                  position:relative;
-                  // top:-.5em;
-                  transition:all .1s;
-                  &:hover{
-                    background: url(../../public/home.webp) center center no-repeat,white;
-                  // border-width: 3px;
-                    box-shadow: 0 0 10px 1px black;
-                  }
+                background: url(../../public/home_.webp) center center no-repeat, black;
+                background-size: contain !important;
+                width: 50px;
+                height: 50px;
+                border-radius: 1em;
+                border: 1px solid;
+                // background: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.25em;
+                position:relative;
+                // top:-.5em;
+                transition:all .1s;
+                &:hover{
+                  background: url(../../public/home.webp) center center no-repeat,white;
+                // border-width: 3px;
+                  box-shadow: 0 0 10px 1px black;
+                }
+                @include mobile-and-tablette{
+                  left: -1em;
                 }
               }
               @include mobile-and-tablette{
@@ -1309,7 +1324,10 @@ body{
     &:has(+main.bolobi){
       >h2{>span{
         color:$ternary;
-        text-shadow: 0 0 5px black, 3px 3px 3px $ternary_2, 5px 4px 0 $ternary, 0 0 3px white;
+        text-shadow:
+          0 0 6px #fff, /* Lueur diffuse mais discrète */
+          -1px -1px 0 $ternary_2, /* Ombre légèrement décalée vers le haut/gauche */
+          1px 1px 0 $ternary; /* Ombre légèrement décalée vers le bas/droite */
         // text-shadow: 0 0 3px $ternary, 0 0 3px $ternary, 0 0 3px white, 0 0 3px white;
       }
     }}
@@ -1509,7 +1527,6 @@ body{
       }
     }
     >h3.tagzonePage{
-      transition: padding .2s;
       font-size: .8em;
       margin-bottom: 0;
       position: relative;
@@ -1518,8 +1535,9 @@ body{
       text-align: center;
       transition: all .4s;
       @include mobile-only{
-        margin: 0 5em;
+        // margin: 0 5em;
         display: flex;
+        padding: .25em;
       }
       &:hover {
         text-shadow: 0 1px 3px black;
@@ -3760,7 +3778,6 @@ body{
     }
     &.bolobi{
       h3,h4{color:$ternary;}
-      padding: 2em;
       >*{
         margin-bottom: 2em;
         padding-bottom: 1em;
@@ -3795,9 +3812,10 @@ body{
               @extend .btn3DSimple02;
               @extend %ternary_ts;
               display: block;
-              font-size: 2vw;
+              font-size: 1.5em;
               margin: 0 auto;
               background: $ternary;
+              border:none;
               &::before {
                 background: $ternary_2 !important;
               }
@@ -3812,7 +3830,7 @@ body{
                   color:$ternary_1;
                 }
                 &:last-child{
-                  color:$ternary_2;
+                  // color:$ternary_2;
                 }
               }
             }
@@ -3823,10 +3841,11 @@ body{
           overflow: hidden;
           box-shadow: 0 0 10px 1px black inset;
           background: $ternary_2;
+          background:rgba(150,148,62,.5);
           transition:max-height 3s cubic-bezier(0, 0, 0.51, 1.43);
           &#form_donation{}
           &:not(.on){max-height:0;}
-          &.on{padding: 1em .5em 2em;}
+          &.on{padding: 1em 1.5em 2em;}
           
           >fieldset{
             &:last-of-type{

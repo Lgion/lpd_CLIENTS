@@ -24,15 +24,13 @@ export default function MenuMain() {
                         href={item.href}
                         title={item.title}
                         id={item.id+"_menu"}
-                        className={(item.id=="accueil"?"homeLink ":"")+(menuActive==item.id?"active":"")}
+                        className={item.icon+" "+(item.id=="accueil"?"homeLink ":"")+(menuActive==item.id?"active":"")}
                         onClick={()=>{
                             setMenuActive(item.id)
                             // setMainMenuObject(item.h2)
                         }}
+                        dangerouslySetInnerHTML={{__html: item.content}}
                     >
-                        <span className={item.icon}>
-                            {item.content}
-                        </span>
                     </Link>
                 </li>
                 )
