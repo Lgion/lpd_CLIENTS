@@ -62,8 +62,27 @@ function EcommercePage() {
         }
     }, []);
 
-    if (loading) return <div>Chargement des articles...</div>;
-    if (error) return <div>{error}</div>;
+    if (loading) return (
+        <div className="error-message loading">
+            <div className="icon">⏳</div>
+            <h3>Chargement en cours</h3>
+            <p>Veuillez patienter pendant le chargement des articles...</p>
+        </div>
+    );
+    
+    if (error) return (
+        <div className="error-message">
+            <div className="icon">⚠️</div>
+            <h3>Erreur de chargement</h3>
+            <p>{error}</p>
+            <button 
+                className="action-button" 
+                onClick={() => window.location.reload()}
+            >
+                Réessayer
+            </button>
+        </div>
+    );
 
     return <Ecommerce Ecommerce_articles={ecommerce_articles} Ecommerce_articles_OPTIONS={ecommerce_articles_OPTIONS} />;
 }

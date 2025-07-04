@@ -1,6 +1,112 @@
 // @import "./main.scss";
 // @import "./index.scss";
 
+/* Styles pour les messages d'erreur et états vides */
+.error-message, .empty-state {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 600px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  
+  .icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.2rem;
+    color: #ff4d4f;
+  }
+  
+  h3 {
+    color: #262626;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  
+  p {
+    color: #595959;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .action-button {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: #40a9ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Style spécifique pour l'état vide */
+  &.empty-state {
+    .icon {
+      color: #8c8c8c;
+    }
+    
+    .action-button {
+      background: #52c41a;
+      
+      &:hover {
+        background: #73d13d;
+        box-shadow: 0 4px 12px rgba(82, 196, 26, 0.3);
+      }
+    }
+  }
+  
+  /* Animation de chargement */
+  &.loading {
+    .icon {
+      animation: spin 1.5s linear infinite;
+      color: #1890ff;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Adaptation mobile */
+@include mobile-and-tablette {
+  .error-message, .empty-state {
+    margin: 1.5rem;
+    padding: 2rem 1rem;
+    
+    .icon {
+      font-size: 2.8rem;
+    }
+    
+    h3 {
+      font-size: 1.3rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
 /*
      CE DOCUMENT EST POUR LES PERSONNES QUI DEVRONT COLLABORER AU PROJET, 
      POUVOIR INTERAGIR VIA UN FICHIER DÉDIÉ POUR INTÉRAGIR AVEC LE PROJET.

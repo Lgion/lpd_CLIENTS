@@ -813,7 +813,7 @@ body{
         //   //   height:100%;
         //   background: url(../../public/img/ecommerce-chretien-notre-dame-toute-graces_____.webp) top right no-repeat;
         // }
-        @include mobile-only{
+        @include mobile-and-tablette{
           background: white;
           z-index: 2;
           flex-flow: row;
@@ -912,6 +912,7 @@ body{
         left:5%;
         @include mobile-and-tablette{
           bottom: -6em;
+          height:98px
         }
         &:before {
           content: '';
@@ -929,25 +930,28 @@ body{
             text-align: center;
             bottom: -10%;
             position: relative;
-            height: 33%;
+            // height: 33%;
             font-size: .9em;
           }
           @include mobile-only{
             &:not(.accueil){width: 40%;}
             &.accueil{width: 10%}
           }
-          &.menu.accueil>a>span:before{content:"\f015"}
-          &.menu.activites-spirituelles>a>span:before{content:"\f51d"}
-          &.menu.ecommerce>a>span:before{content:"\f07a"}
-          &.menu.blog>a>span:before{content:"\f781"}
+          &.menu.accueil>a>span:first-of-type:before{content:"\f015"}
+          &.menu.activites-spirituelles>a>span:first-of-type:before{content:"\f51d"}
+          &.menu.ecommerce>a>span:first-of-type:before{content:"\f07a"}
+          &.menu.blog>a>span:first-of-type:before{content:"\f781"}
           >a{
             &:not([id="panier"]){
               >span{
                 &:before{
-                  content: '';
+                  // content: '';
                   position: absolute;
-                  top: 0;
+                  // top: 0;
+                  bottom: -1.5em;
                   left: 0;
+                  width:20px;
+                  height:20px;
                   font-family: 'Font Awesome 6 Free'; // ou 'Font Awesome 6 Brands' selon l'icône
                   font-weight: 900; // ou 400 selon l'icône
                   display: inline-block;

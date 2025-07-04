@@ -1338,6 +1338,42 @@ article#articles {
             border-color: #99F6E4;
             &:hover { background-color: #D1FAE5; }
         }
+        
+        &.croix {
+            background-color: #FFC080;
+            color: #B91C1C;
+            border-color: #FFC080;
+            &:hover { background-color: #FFC080; }
+        }
+
+        &.encens {
+            background-color: #FFC080;
+            color: #B91C1C;
+            border-color: #FFC080;
+            &:hover { background-color: #FFC080; }
+        }
+
+        &.statue {
+            background-color: #FFC080;
+            color: #B91C1C;
+            border-color: #FFC080;
+            &:hover { background-color: #FFC080; }
+        }
+
+        &.grotte {
+            background-color: #FFC080;
+            color: #B91C1C;
+            border-color: #FFC080;
+            &:hover { background-color: #FFC080; }
+        }
+
+        &.chapelet {
+            background-color: #FFC080;
+            color: #B91C1C;
+            border-color: #FFC080;
+            &:hover { background-color: #FFC080; }
+        }
+        
     }
 }
 
