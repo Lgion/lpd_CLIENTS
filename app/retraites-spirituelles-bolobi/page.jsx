@@ -10,7 +10,7 @@ const BtnCTA = ()=>{
         <a href="#form_reservation"></a>
     </div>
 }
-
+ 
 
 
 export default function LieuxActivites() {
