@@ -133,7 +133,9 @@ export default function ReserveForm() {
     setError('');
     try {
       // Validation rapide côté client
-      if (!form.names || !form.phone_number || !form.from || !form.to || !form.participants || !form.montant_total || !form.montant_avance) {
+      const isDateToRequired = form.type_reservation !== 'pray' && form.type_reservation !== 'celebration';
+      
+      if (!form.names || !form.phone_number || !form.from || (isDateToRequired && !form.to) || !form.participants || !form.montant_total || !form.montant_avance) {
         setError('Merci de remplir tous les champs obligatoires.');
         setLoading(false);
         return;

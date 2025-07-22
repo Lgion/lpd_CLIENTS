@@ -38,15 +38,17 @@ export default async function handler(req, res) {
       montant_total, montant_avance
     } = req.body;
     // Validation rapide
-    if (!names || !phone_number || !from || !to || !participants || !montant_total || !montant_avance) {
+    const isDateToRequired = type_reservation !== 'pray' && type_reservation !== 'celebration';
+    
+    if (!names || !phone_number || !from || (isDateToRequired && !to) || !participants || !montant_total || !montant_avance) {
       return res.status(400).json({ success: false, message: 'Champs obligatoires manquants.' });
     }
     const reservation = await modelReservation.create({
       names,
       phone_number,
-      email,
+      email: email || 'non-fourni@exemple.com', // Valeur par défaut si email vide,
       from: new Date(from),
-      to: new Date(to),
+      to: to ? new Date(to) : new Date(from), // Utiliser la date d'arrivée si pas de date de départ
       participants,
       individual_room_participants,
       message,
