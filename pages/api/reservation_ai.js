@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     const {
       names, phone_number, email, from, to, participants,
       individual_room_participants, message, type_reservation, meal_included,
-      meal_plan,
+      meal_plan, community,
       montant_total, montant_avance
     } = req.body;
     // Validation rapide
@@ -61,7 +61,7 @@ export default async function handler(req, res) {
       isValidated: false,
       isArchived: false,
       deletedAt: null,
-      community: '0',
+      community: community || '',
     });
 
 
