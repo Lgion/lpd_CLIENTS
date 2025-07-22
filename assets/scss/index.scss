@@ -6,6 +6,10 @@
 
 $void_gray: #c9ded6;
 
+.ai-reserve-form input,.ai-reserve-form select, .ai-reserve-form textarea{
+  color:black !important;
+}
+
 // @font-face {
 //   font-family:"Agbalumo";
 //   src: url("/font/Agbalumo/Agbalumo-Regular.ttf") format("truetype");
