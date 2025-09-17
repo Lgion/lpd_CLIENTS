@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
-import { Table, Button, Modal, Form, DatePicker, Input, InputNumber, Select, Space, Tag, message } from 'antd'
+import { Checkbox, Table, Button, Modal, Form, DatePicker, Input, InputNumber, Select, Space, Tag, message } from 'antd'
 import { SearchOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
 import moment from 'moment'
 
@@ -13,11 +13,13 @@ export default function ReservationManager() {
   const [isPromotionModalVisible, setIsPromotionModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false)
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false)
   const [editingReservation, setEditingReservation] = useState(null)
   const [searchText, setSearchText] = useState('')
   const [dateRange, setDateRange] = useState(null)
   const [showArchived, setShowArchived] = useState(false)
   const [form] = Form.useForm()
+  const [editForm] = Form.useForm()
   const [promotionForm] = Form.useForm()
 
   // Charger les réservations
@@ -205,6 +207,111 @@ export default function ReservationManager() {
     }
   }
 
+  // Calculer le montant total basé sur les paramètres
+  const calculateTotalAmount = (participants, individualRoomParticipants, mealIncluded, mealPlan, dates) => {
+    console.log('=== calculateTotalAmount ===')
+    console.log('participants:', participants)
+    console.log('individualRoomParticipants:', individualRoomParticipants)
+    console.log('mealIncluded:', mealIncluded)
+    console.log('mealPlan:', mealPlan, 'type:', typeof mealPlan)
+    console.log('dates:', dates)
+    
+    if (!dates || dates.length !== 2) {
+      console.log('Dates invalides, retour 0')
+      return { total: 0, advance: 0 }
+    }
+    
+    const nights = dates[1].diff(dates[0], 'days')
+    console.log('nights:', nights)
+    if (nights <= 0) {
+      console.log('Nombre de nuits <= 0, retour 0')
+      return { total: 0, advance: 0 }
+    }
+    
+    // Coût hébergement
+    const collectiveRoomParticipants = participants - (individualRoomParticipants || 0)
+    const accommodationCost = (individualRoomParticipants || 0) * 10000 * nights + collectiveRoomParticipants * 3000 * nights
+    console.log('accommodationCost:', accommodationCost)
+    
+    // Coût repas
+    let mealCost = 0
+    if (mealIncluded) {
+      const dailyMealCost = mealPlan === 1 ? 2000 : 3000
+      mealCost = participants * dailyMealCost * nights
+      console.log('dailyMealCost:', dailyMealCost)
+      console.log('mealCost:', mealCost)
+    }
+    
+    const total = accommodationCost + mealCost
+    const advance = Math.round(total * 0.3) // 30% d'avance
+    
+    console.log('total final:', total)
+    console.log('advance final:', advance)
+    console.log('=== fin calculateTotalAmount ===')
+    
+    return { total, advance }
+  }
+
+  // Gérer la modification d'une réservation
+  const handleEditSubmit = async (values) => {
+    try {
+      const response = await fetch(`/api/reservation?id=${editingReservation._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...editingReservation,
+          ...values,
+          from: new Date(values.date_from),
+          to: new Date(values.date_to),
+          meal_plan: values.meal_included ? values.meal_plan : 0
+        }),
+      })
+
+      if (response.ok) {
+        message.success('Réservation modifiée avec succès')
+        setIsEditModalVisible(false)
+        fetchReservations()
+        editForm.resetFields()
+      }
+    } catch (error) {
+      message.error('Erreur lors de la modification de la réservation')
+    }
+  }
+
+  // Gérer les changements dans le formulaire de modification
+  const handleFormValuesChange = (changedValues, allValues) => {
+    if (changedValues.date_from || changedValues.date_to || changedValues.participants || changedValues.individual_room_participants || 
+        changedValues.meal_included || changedValues.meal_plan) {
+      
+      // Construire le tableau de dates à partir de date_from et date_to
+      let dates = null
+      if (allValues.date_from && allValues.date_to) {
+        dates = [moment(allValues.date_from), moment(allValues.date_to)]
+      }
+      
+      const { total, advance } = calculateTotalAmount(
+        allValues.participants,
+        allValues.individual_room_participants,
+        allValues.meal_included,
+        allValues.meal_plan,
+        dates
+      )
+      
+      editForm.setFieldsValue({
+        montant_total: total,
+        montant_avance: advance
+      })
+    }
+  }
+
+  const typeOptions = [
+    { value: 'retraite', label: 'Retraite de groupe (générallement le weekend)' },
+    { value: 'pray', label: 'Prière ponctuelle (recollection, veillé, 100avé...)' },
+    { value: 'individuel', label: 'Retraite de prière Individuelle' },
+    { value: 'celebration', label: 'Célébration (mariage, baptême, conférence...)' },
+    { value: 'repos', label: 'Séjour Repos-Détente' },
+    { value: 'longTerm', label: 'Vacances / Long séjour' },
+  ];
   // Colonnes du tableau
   const columns = [
     {
@@ -235,7 +342,9 @@ export default function ReservationManager() {
           type === 'repos' ? 'cyan' :
           type === 'longTerm' ? 'purple' : 'default'
         }>
-          {type}
+          {typeOptions.find(el => el.value==type).label}
+
+          {/* {typeOptions[type]} */}
         </Tag>
       )
     },
@@ -299,10 +408,10 @@ export default function ReservationManager() {
         <ul style={{}}>
           <p style={{}}>Ce filtre s'applique sur les propriétés suivantes: 
           </p>
-          <li>La communauté (community)</li>
-          <li>Le nom (names)</li>
-          <li>L'email (email)</li>
-          <li>Le numéro de téléphone (phone_number)</li>
+          <li>La communauté, </li>
+          <li>Le nom, </li>
+          <li>L'email, </li>
+          <li>Le numéro de téléphone</li>
         </ul>
       </div>
 
@@ -369,6 +478,35 @@ export default function ReservationManager() {
             {editingReservation?.isArchived ? 'Désarchiver' : 'Archiver'}
           </Button>,
           <Button
+            key="edit"
+            type="default"
+            onClick={() => {
+              setIsEditModalVisible(true)
+              setIsDetailsModalVisible(false)
+              // Pré-remplir le formulaire avec les données actuelles
+              setTimeout(() => {
+                editForm.setFieldsValue({
+                  names: editingReservation?.names,
+                  community: editingReservation?.community,
+                  phone_number: editingReservation?.phone_number,
+                  email: editingReservation?.email,
+                  date_from: moment(editingReservation?.from).format('YYYY-MM-DD'),
+                  date_to: moment(editingReservation?.to).format('YYYY-MM-DD'),
+                  participants: editingReservation?.participants,
+                  individual_room_participants: editingReservation?.individual_room_participants,
+                  type_reservation: editingReservation?.type_reservation,
+                  meal_included: editingReservation?.meal_included === true,
+                  meal_plan: editingReservation?.meal_plan || 1,
+                  montant_total: editingReservation?.montant_total,
+                  montant_avance: editingReservation?.montant_avance,
+                  message: editingReservation?.message
+                })
+              }, 100)
+            }}
+          >
+            Modifier
+          </Button>,
+          <Button
             key="delete"
             danger
             onClick={() => {
@@ -386,12 +524,14 @@ export default function ReservationManager() {
             <p><strong>Nom:</strong> {editingReservation?.names}</p>
             <p><strong>Email:</strong> {editingReservation?.email}</p>
             <p><strong>Téléphone:</strong> {editingReservation?.phone_number}</p>
+            <p><strong>Nom communauté:</strong> {editingReservation?.community}</p>
+            <p><strong>Message:</strong> {editingReservation?.message}</p>
           </div>
 
           <div className="detail-section">
             <h3>Détails du séjour</h3>
             <p><strong>Dates:</strong> Du {moment(editingReservation?.from).format('DD/MM/YYYY')} au {moment(editingReservation?.to).format('DD/MM/YYYY')}</p>
-            <p><strong>Type:</strong> {editingReservation?.type_reservation}</p>
+            <p><strong>Type de réservation:</strong> {typeOptions.find(el=>el.value==editingReservation?.type_reservation)?.label}</p>
             <p><strong>Participants:</strong> {editingReservation?.participants} au total</p>
             {editingReservation?.individual_room_participants > 0 && (
               <p><strong>Chambres individuelles:</strong> {editingReservation?.individual_room_participants}</p>
@@ -458,6 +598,206 @@ export default function ReservationManager() {
             <Button type="primary" htmlType="submit">
               Appliquer la promotion
             </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* Modal de modification */}
+      <Modal
+        title="Modifier la réservation"
+        open={isEditModalVisible}
+        onCancel={() => {
+          setIsEditModalVisible(false)
+          editForm.resetFields()
+        }}
+        width={800}
+        footer={null}
+      >
+        <div>{JSON.stringify(editForm)}</div>
+        <hr />
+        <div>{editingReservation ? JSON.stringify(editingReservation) : null}</div>
+        <Form
+          form={editForm}
+          onFinish={handleEditSubmit}
+          onValuesChange={handleFormValuesChange}
+          layout="vertical"
+        >
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <Form.Item
+              name="names"
+              label="Nom complet"
+              rules={[{ required: true, message: 'Le nom est requis' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="community"
+              label="Communauté"
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="phone_number"
+              label="Téléphone"
+              rules={[{ required: true, message: 'Le téléphone est requis' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[{ type: 'email', message: 'Email invalide' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              name="date_from"
+              label="Date d'arrivée"
+              rules={[{ required: true, message: 'La date d\'arrivée est requise' }]}
+            >
+              <input 
+                type="date" 
+                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+                value={editForm.getFieldValue('date_from') || ''}
+                onChange={(e) => {
+                  editForm.setFieldsValue({ date_from: e.target.value })
+                  const currentValues = editForm.getFieldsValue()
+                  const dates = [moment(e.target.value), moment(currentValues.date_to)]
+                  handleFormValuesChange({ dates }, { ...currentValues, dates })
+                }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="date_to"
+              label="Date de départ"
+              rules={[{ required: true, message: 'La date de départ est requise' }]}
+            >
+              <input 
+                type="date" 
+                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+                value={editForm.getFieldValue('date_to') || ''}
+                onChange={(e) => {
+                  editForm.setFieldsValue({ date_to: e.target.value })
+                  const currentValues = editForm.getFieldsValue()
+                  const dates = [moment(currentValues.date_from), moment(e.target.value)]
+                  handleFormValuesChange({ dates }, { ...currentValues, dates })
+                }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="type_reservation"
+              label="Type de réservation"
+              rules={[{ required: true, message: 'Le type est requis' }]}
+            >
+              <select 
+                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+                value={editForm.getFieldValue('type_reservation') || ''}
+                onChange={(e) => {
+                  editForm.setFieldsValue({ type_reservation: e.target.value })
+                }}
+              >
+                <option value="">Sélectionner un type</option>
+                <option value="retraite">Retraite de groupe (générallement le weekend)</option>
+                <option value="pray">Prière ponctuelle (recollection, veillé, 100avé...)</option>
+                <option value="individuel">Retraite de prière Individuelle</option>
+                <option value="celebration">Célébration (mariage, baptême, conférence...)</option>
+                <option value="repos">Séjour Repos-Détente</option>
+                <option value="longTerm">Vacances / Long séjour</option>
+              </select>
+            </Form.Item>
+
+            <Form.Item
+              name="participants"
+              label="Nombre de participants"
+              rules={[{ required: true, message: 'Le nombre de participants est requis' }]}
+            >
+              <InputNumber min={1} style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              name="individual_room_participants"
+              label="Chambres individuelles"
+            >
+              <InputNumber min={0} style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              name="montant_total"
+              label="Montant total (FCFA)"
+              rules={[{ required: true, message: 'Le montant total est requis' }]}
+            >
+              <InputNumber min={0} style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              name="montant_avance"
+              label="Montant avance (FCFA)"
+              rules={[{ required: true, message: 'Le montant d\'avance est requis' }]}
+            >
+              <InputNumber min={0} style={{ width: '100%' }} />
+            </Form.Item>
+          </div>
+
+          <Form.Item name="meal_included" valuePropName="checked">
+            <Checkbox>Inclure les repas dans la réservation</Checkbox>
+          </Form.Item>
+
+          <Form.Item
+            noStyle
+            shouldUpdate={(prevValues, currentValues) => prevValues.meal_included !== currentValues.meal_included}
+          >
+            {({ getFieldValue }) => {
+              const mealIncluded = getFieldValue('meal_included')
+              console.log('meal_included value:', mealIncluded)
+              return mealIncluded ? (
+                <Form.Item
+                  name="meal_plan"
+                  label="Plan de repas"
+                  rules={[{ required: true, message: 'Veuillez sélectionner un plan de repas' }]}
+                >
+                  <select 
+                    style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+                    value={editForm.getFieldValue('meal_plan') || ''}
+                    onChange={(e) => {
+                      editForm.setFieldsValue({ meal_plan: parseInt(e.target.value) })
+                      const currentValues = editForm.getFieldsValue()
+                      handleFormValuesChange({ meal_plan: parseInt(e.target.value) }, { ...currentValues, meal_plan: parseInt(e.target.value) })
+                    }}
+                  >
+                    <option value="">Choisir un plan de repas</option>
+                    <option value={1}>1 repas + petit-déjeuner (2,000 FCFA/jour/personne)</option>
+                    <option value={2}>2 repas + petit-déjeuner (3,000 FCFA/jour/personne)</option>
+                  </select>
+                </Form.Item>
+              ) : null
+            }}
+          </Form.Item>
+
+          <Form.Item
+            name="message"
+            label="Message"
+          >
+            <Input.TextArea rows={3} />
+          </Form.Item>
+
+          <Form.Item style={{ textAlign: 'right', marginTop: '24px' }}>
+            <Space>
+              <Button onClick={() => {
+                setIsEditModalVisible(false)
+                editForm.resetFields()
+              }}>
+                Annuler
+              </Button>
+              <Button type="primary" htmlType="submit">
+                Sauvegarder
+              </Button>
+            </Space>
           </Form.Item>
         </Form>
       </Modal>

@@ -2,13 +2,15 @@ import {useState,useEffect,useContext} from 'react'
 import Image from "next/image"
 // import * as CartLS from "../../../../utils/favorisManager.js"
 import * as Ecommerce_articles from "../../../../assets/datas/articles.js"
-import CartPaypal from './CartPaypal';
-import CartGoogle from './CartGoogle';
-import AuthContext from "../../../../stores/authContext.js"
+// import CartPaypal from './CartPaypal';
+// import CartGoogle from './CartGoogle';
+import AuthContext from "../../../../stores/ecomContext.js"
+import EcomContext from "../../../../stores/ecomContext.js"
 
 export default function CartRecap() {
 
-    const {userConnectedDatas, handleQty, CartLS} = useContext(AuthContext)
+    const {userConnectedDatas } = useContext(AuthContext)
+    const {CartLS,handleQty} = useContext(EcomContext)
     // Perform localStorage action
     , [output, setOutput] = useState([])
     , myLoader = ({ src, width, quality }) => {
@@ -20,7 +22,7 @@ export default function CartRecap() {
         , ls = CartLS.getAllFavoris()
         , cartArray = Object.keys(ls)
         , len = cartArray.length
-
+        
 
         
         if(!len)
@@ -41,8 +43,8 @@ export default function CartRecap() {
                         <p>Vous avez {len} produit{len!=1 && "s"} ({totalProducts}) dans le panier.</p>
                         <span title="Montant total">{totalAmount}</span>
                     </div>
-                    <CartPaypal connected={userConnectedDatas} />
-                    <CartGoogle connected={userConnectedDatas} />
+                    {/* <CartPaypal connected={userConnectedDatas} /> */}
+                    {/* <CartGoogle connected={userConnectedDatas} /> */}
                 </section>
                 <ul>
                     {!cartArray 
@@ -61,7 +63,7 @@ export default function CartRecap() {
                                     width={200}                                    height={200}
                                 />
                                 <span className="prix">{article.prix} </span>
-                                <p>{article.fr}</p>
+                                <p dangerouslySetInnerHTML={{__html:article.fr}}></p>
                                 <input data-key={item} defaultValue={ls[item]} onChange={e=>{handleQty(e,ls)}} className="qty" type="number" min="1" max="99" title={"Choisir une quantité entre 1 et 99"} />
                                 <button data-key={item} onClick={(e)=>{CartLS.deleteArticle(e.target.dataset.key);e.target.parentNode.remove();}}>⌫</button>
                             </li>
@@ -74,6 +76,7 @@ export default function CartRecap() {
     }
     
     useEffect(() => { 
+        
         start()
         
     }, [])

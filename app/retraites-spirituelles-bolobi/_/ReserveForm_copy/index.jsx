@@ -35,6 +35,26 @@ const titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance su
 
 export default function ReserveForm() {
   const [form, setForm] = useState(initialState);
+
+  // Pré-remplissage du formulaire avec les infos du user localStorage
+  useEffect(() => {
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        setForm(form => ({
+          ...form,
+          names: user.fullName || form.names || '',
+          email: user.email || form.email || '',
+          phone_number: user.tel || form.phone_number || '',
+          community: user.communaute || form.community || '',
+          // Ajoute d'autres correspondances ici si besoin
+        }));
+      } catch (e) {
+        // Optionnel: gérer l'erreur de parsing
+      }
+    }
+  }, []);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
@@ -113,15 +133,60 @@ export default function ReserveForm() {
     setError('');
     try {
       // Validation rapide côté client
-      if (!form.names || !form.phone_number || !form.from || !form.to || !form.participants || !form.montant_total || !form.montant_avance) {
-        setError('Merci de remplir tous les champs obligatoires.');
+      const isDateToRequired = form.type_reservation !== 'pray' && form.type_reservation !== 'celebration';
+      
+      // Debug: log form values to identify missing fields
+      console.log('Form validation - Current form values:', {
+        names: form.names,
+        phone_number: form.phone_number,
+        from: form.from,
+        to: form.to,
+        participants: form.participants,
+        montant_total: form.montant_total,
+        montant_avance: form.montant_avance,
+        type_reservation: form.type_reservation,
+        isDateToRequired
+      });
+      
+      // Check each required field individually for better error reporting
+      const missingFields = [];
+      if (!form.names) missingFields.push('Nom complet');
+      if (!form.phone_number) missingFields.push('Téléphone');
+      if (!form.from) missingFields.push('Date d\'arrivée');
+      if (isDateToRequired && !form.to) missingFields.push('Date de départ');
+      if (!form.participants) missingFields.push('Nombre de participants');
+      if (!form.montant_total) missingFields.push('Montant total');
+      if (!form.montant_avance) missingFields.push('Montant de l\'avance');
+      
+      if (missingFields.length > 0) {
+        console.log('Missing required fields:', missingFields);
+        setError(`Champs obligatoires manquants: ${missingFields.join(', ')}`);
         setLoading(false);
         return;
       }
       const res = await axios.post('/api/reservation_ai', form);
       if (res.data && res.data.success) {
+        // alert("a")
         setSuccess('Réservation enregistrée avec succès !');
+        // alert("b")
         setReservationData(res.data); // Stocker les données de réservation
+        // alert("c")
+        const user = JSON.parse(localStorage.getItem('user')) || {};
+        // alert("d"+user)
+        const userToSave = {
+          email: user.email || form.email,
+          fullName: user.fullName || form.names,
+          tel: user.tel || form.phone_number,
+          communaute: user.communaute || form.community,
+          options: user.options,
+          commandes: user.commandes || { sanctuaire: [], ecom: [] },
+        };
+        // alert("e")
+        localStorage.setItem('user', JSON.stringify(userToSave));
+        // alert("f")
+        await axios.post('/api/users', userToSave);
+        // alert("g")
+        
         // On ne réinitialise plus le formulaire
       } else {
         setError(res.data?.message || 'Une erreur est survenue.');
@@ -154,6 +219,13 @@ export default function ReserveForm() {
           <label>Email</label>
           <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Votre email" />
         </div>
+        <div className="ai-reserve-form__row">
+          <label>Type de réservation *</label>
+          <select name="type_reservation" value={form.type_reservation} onChange={handleChange} required>
+            <option value={null}>---Choisir un type de réservation---</option>
+            {typeOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+          </select>
+        </div>
         <div className="ai-reserve-form__row ai-reserve-form__row--dates">
           <div>
             <label>Date {form.type_reservation === 'pray' ? 'de la prière' : form.type_reservation === 'celebration' ? 'de la célébration' : "d'arrivée"} *</label>
@@ -176,12 +248,6 @@ export default function ReserveForm() {
           <input name="individual_room_participants" type="number" min="0" value={form.individual_room_participants} onChange={handleChange} />
         </div>
         )}
-        <div className="ai-reserve-form__row">
-          <label>Type de réservation *</label>
-          <select name="type_reservation" value={form.type_reservation} onChange={handleChange} required>
-            {typeOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-          </select>
-        </div>
         {form.type_reservation !== 'pray' && (
         <>
         {/* Pour célébration et autres, repas possible sauf prière ponctuelle */}

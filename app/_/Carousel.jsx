@@ -4,7 +4,7 @@ import React, { useState, useContext, useEffect, memo, useCallback, useMemo } fr
 import Image from "next/image"
 import Slider from "react-slick";
 import AuthContext from "../../stores/authContext.js"
-import EditMongoForm from '../admin/school/EditMongoForm'
+// import EditMongoForm from '../admin/school/EditMongoForm'
 import {createPortal} from "react-dom"
 
 
@@ -152,9 +152,9 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                     ---
                     {JSON.stringify(models?.schemaDiapo?.paths)} */}
                     {/* {JSON.stringify(memoizedDiapos[0]['identifiant_$_hidden'])} */}
-                    {
+                    {/* {
                         createPortal(
-                            <EditMongoForm 
+                            // <EditMongoForm 
                                 hiddens={{identifiant: page+"_0"}}
                                 endpoint="diapo"
                                 modelKey={"slider"} 
@@ -163,7 +163,7 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                             />
                             , document.querySelector('#modal .modal___main')
                         )
-                    }
+                    } */}
                     </>
                 )}
                 <Slider {...settingsSlider}>

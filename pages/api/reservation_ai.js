@@ -34,19 +34,21 @@ export default async function handler(req, res) {
     const {
       names, phone_number, email, from, to, participants,
       individual_room_participants, message, type_reservation, meal_included,
-      meal_plan,
+      meal_plan, community,
       montant_total, montant_avance
     } = req.body;
     // Validation rapide
-    if (!names || !phone_number || !from || !to || !participants || !montant_total || !montant_avance) {
+    const isDateToRequired = type_reservation !== 'pray' && type_reservation !== 'celebration';
+    
+    if (!names || !phone_number || !from || (isDateToRequired && !to) || !participants || !montant_total || !montant_avance) {
       return res.status(400).json({ success: false, message: 'Champs obligatoires manquants.' });
     }
     const reservation = await modelReservation.create({
       names,
       phone_number,
-      email,
+      email: email || 'non-fourni@exemple.com', // Valeur par défaut si email vide,
       from: new Date(from),
-      to: new Date(to),
+      to: to ? new Date(to) : new Date(from), // Utiliser la date d'arrivée si pas de date de départ
       participants,
       individual_room_participants,
       message,
@@ -59,7 +61,7 @@ export default async function handler(req, res) {
       isValidated: false,
       isArchived: false,
       deletedAt: null,
-      community: '0',
+      community: community || '##NA##',
     });
 
 
@@ -176,10 +178,17 @@ async function sendConfirmationEmail_bis(reservation) {
       <p>Bonjour,</p>
       <p>Votre réservation a été enregistrée avec succès.</p>
       
+      <h3>Informations/Coordonnées: </h3>
+        <li>Nom complet : ${reservation.names}</li>
+        <li>Téléphone : ${reservation.phone_number}</li>
+        <li>Email : ${reservation.email}</li>
+        <li>Nom de la communauté : ${reservation.community}</li>
+        <li>Message particulier : ${reservation.message}</li>
+
       <h3>Détails de la réservation :</h3>
       <ul>
-        <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString()}</li>
-        <li>Date de départ : ${new Date(reservation.to).toLocaleDateString()}</li>
+        <li>Date d'arrivée : ${new Intl.DateTimeFormat('fr-FR', {dateStyle: 'full'}).format(new Date(reservation.from))}</li>
+        <li>Date de départ : ${new Intl.DateTimeFormat('fr-FR', {dateStyle: 'full'}).format(new Date(reservation.to))}</li>
         <li>Nombre de participants : ${reservation.participants}</li>
         ${reservation.individual_room_participants > 0 ? 
           `<li>Dont en chambre individuelle : ${reservation.individual_room_participants}</li>` : ''}

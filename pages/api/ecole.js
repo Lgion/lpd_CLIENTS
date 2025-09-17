@@ -4,11 +4,11 @@ const {getModels,createSchool} = require("./_/controllers/ecole")
 
 
 export default function handler(req, res, next) {
-    console.log("\n\n\n\n_________")
-    console.log(req.method)
-    console.log("\n\n\n\n-----------")
-    console.log(req.body)
-    console.log("\n\n\n\n??????????")
+    // console.log("\n\n\n\n_________je suis dans members.js")
+    // console.log(req.method)
+    // console.log("\n\n\n\n-----------")
+    // console.log(req.body)
+    // console.log("\n\n\n\n??????????")
 
     if(req.method == "GET")
         getModels(req,res,next)

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import dbConnect from './lib/dbConnect'
 
 export default async function handler(req, res) {
   const { identifiant } = req.query
@@ -8,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority')
+    await dbConnect();
 
     const Diapos = mongoose.models.Diapos_slider || mongoose.model('Diapos_slider', new mongoose.Schema({}))
     // const diapos = await Diapos.find({ "identifiant_$_hidden": identifiant })
@@ -22,7 +23,8 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Erreur lors de la récupération des diapos:', error)
     res.status(500).json([])  // Renvoie un tableau vide en cas d'erreur
-  } finally {
-    await mongoose.disconnect()
-  }
+  } 
+  // finally {
+  //   await mongoose.disconnect()
+  // }
 }

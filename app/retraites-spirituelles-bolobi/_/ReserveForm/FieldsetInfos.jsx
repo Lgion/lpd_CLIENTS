@@ -68,7 +68,7 @@ export default function FieldsetInfos({ toggleFormNdrImg, handleFieldsetValidati
                 <div className="mb-3">
                     <label htmlFor="community" className="form-label d-flex align-items-center">
                         <FaBuilding className="me-2" />
-                        Communauté
+                        Nom de votre Communauté 
                     </label>
                     <input 
                         type="text" 

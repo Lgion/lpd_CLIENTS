@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const reservationSchema = mongoose.Schema({
-  community: { default:"0", type: String, required: true},
+  community: { default:'##NOT_APPLICABLE##', type: String, required: false},
   names: { default:"John smith", type: String, required: true },
   phone_number: { default:"+2250102030405", type: String, required: true },
   email: { default:"a@b.c", type: String, required: false },
@@ -10,7 +10,7 @@ const reservationSchema = mongoose.Schema({
   // sleep: { default:0, type: Number, required: true },
   participants: { default:1, type: Number, required: true },
   individual_room_participants: { type: Number, default: 0 },
-  message: { default:"", type: String },
+  message: { default:"##AUCUN_MESSAGE##", type: String },
   contact: { type: String, default: "[]" },
   type_reservation: { type: String, enum: ['pray', 'retraite', 'individuel', 'celebration', 'repos', 'longTerm'], default: "pray" },
   meal_included: { type: Boolean, default: false },

@@ -23,6 +23,8 @@ export default function ClientIsHome({children}) {
 
             <Nav />
         </>}
-        {pathname?.indexOf('admin') == -1 && children}
+        {pathname?.indexOf('admin') == -1 && <>{children}</>}
+        
+        
     </>
 }
