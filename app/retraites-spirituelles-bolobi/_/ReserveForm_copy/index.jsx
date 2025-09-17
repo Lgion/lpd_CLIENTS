@@ -142,13 +142,13 @@ export default function ReserveForm() {
       }
       const res = await axios.post('/api/reservation_ai', form);
       if (res.data && res.data.success) {
-        alert("a")
+        // alert("a")
         setSuccess('Réservation enregistrée avec succès !');
-        alert("b")
+        // alert("b")
         setReservationData(res.data); // Stocker les données de réservation
-        alert("c")
+        // alert("c")
         const user = JSON.parse(localStorage.getItem('user')) || {};
-        alert("d"+user)
+        // alert("d"+user)
         const userToSave = {
           email: user.email || form.email,
           fullName: user.fullName || form.names,
@@ -157,11 +157,11 @@ export default function ReserveForm() {
           options: user.options,
           commandes: user.commandes || { sanctuaire: [], ecom: [] },
         };
-        alert("e")
+        // alert("e")
         localStorage.setItem('user', JSON.stringify(userToSave));
-        alert("f")
+        // alert("f")
         await axios.post('/api/users', userToSave);
-        alert("g")
+        // alert("g")
         
         // On ne réinitialise plus le formulaire
       } else {

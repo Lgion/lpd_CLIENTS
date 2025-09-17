@@ -61,7 +61,7 @@ export default async function handler(req, res) {
       isValidated: false,
       isArchived: false,
       deletedAt: null,
-      community: community || '',
+      community: community || '##NA##',
     });
 
 
@@ -178,10 +178,17 @@ async function sendConfirmationEmail_bis(reservation) {
       <p>Bonjour,</p>
       <p>Votre réservation a été enregistrée avec succès.</p>
       
+      <h3>Informations/Coordonnées: </h3>
+        <li>Nom complet : ${reservation.names}</li>
+        <li>Téléphone : ${reservation.phone_number}</li>
+        <li>Email : ${reservation.email}</li>
+        <li>Nom de la communauté : ${reservation.community}</li>
+        <li>Message particulier : ${reservation.message}</li>
+
       <h3>Détails de la réservation :</h3>
       <ul>
-        <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString()}</li>
-        <li>Date de départ : ${new Date(reservation.to).toLocaleDateString()}</li>
+        <li>Date d'arrivée : ${new Intl.DateTimeFormat('fr-FR', {dateStyle: 'full'}).format(new Date(reservation.from))}</li>
+        <li>Date de départ : ${new Intl.DateTimeFormat('fr-FR', {dateStyle: 'full'}).format(new Date(reservation.to))}</li>
         <li>Nombre de participants : ${reservation.participants}</li>
         ${reservation.individual_room_participants > 0 ? 
           `<li>Dont en chambre individuelle : ${reservation.individual_room_participants}</li>` : ''}

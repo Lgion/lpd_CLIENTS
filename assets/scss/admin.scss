@@ -342,6 +342,7 @@ body>div:has(.ant-modal-root){
     p {
       margin: 8px 0;
       color: rgba(0, 0, 0, 0.85);
+      >strong{text-decoration: underline;}
 
       strong {
         margin-right: 8px;
