@@ -1,25 +1,36 @@
 /************************************************************/
 /**************************FUNCTION**************************/
 /************************************************************/
-@function LP-Features($elementName: ""){
-    
+@function LP-Features($elementName: "") {
+
     // @return ($elementName);
-    @if $elementName == null {@return $elementName};
-    @if $elementName == "" {@return (exempleParamFromBEMComponentVariable: red)};
-    @if $elementName == "__PurposesList01" {
-        @return (
-            bg: (un:#FAE3E3,deux:#E6F8ED,trois:#E3EAFA,quatre:#F3EAD6,cinq:#E7E6FF,six:#DEDEDE),
-            colors: (un:red,deux:green,trois:purple,quatre:gold,cinq:orange,six:yellow),
-            icones: (un:"\e9cb",deux:"\e94c",trois:"\ea01",quatre:"\e9a3",cinq:"\ea05",six:"\e92a")
-        );
-    };
-    @if $elementName == "__PurposesList02" {
-        @return (
-            bg: (un:#FAE3E3,deux:#E6F8ED,trois:#E3EAFA,quatre:#F3EAD6,cinq:#E7E6FF,six:#DEDEDE),
-            colors: (un:red,deux:green,trois:purple,quatre:gold,cinq:orange,six:yellow),
-            icones: (un:"\e9cb",deux:"\e94c",trois:"\ea01",quatre:"\e9a3",cinq:"\ea05",six:"\e92a")
-        );
-    };
+    @if $elementName ==null {
+        @return $elementName
+    }
+
+    ;
+
+    @if $elementName =="" {
+        @return (exempleParamFromBEMComponentVariable: red)
+    }
+
+    ;
+
+    @if $elementName =="__PurposesList01" {
+        @return (bg: (un:#FAE3E3, deux:#E6F8ED, trois:#E3EAFA, quatre:#F3EAD6, cinq:#E7E6FF, six:#DEDEDE),
+            colors: (un:red, deux:green, trois:purple, quatre:gold, cinq:orange, six:yellow),
+            icones: (un:"\e9cb", deux:"\e94c", trois:"\ea01", quatre:"\e9a3", cinq:"\ea05", six:"\e92a"));
+    }
+
+    ;
+
+    @if $elementName =="__PurposesList02" {
+        @return (bg: (un:#FAE3E3, deux:#E6F8ED, trois:#E3EAFA, quatre:#F3EAD6, cinq:#E7E6FF, six:#DEDEDE),
+            colors: (un:red, deux:green, trois:purple, quatre:gold, cinq:orange, six:yellow),
+            icones: (un:"\e9cb", deux:"\e94c", trois:"\ea01", quatre:"\e9a3", cinq:"\ea05", six:"\e92a"));
+    }
+
+    ;
 }
 
 /******VARAIBLES******/
@@ -31,9 +42,9 @@ $LP-Features: LP-Features();
 //$LP-Features: ();
 /******ELEMENTS******/
 $__PurposesList01: (
-    bg: (#FAE3E3,#E6F8ED,#E3EAFA,#F3EAD6,#E7E6FF,#DEDEDE),
-    colors: (red,green,purple,gold,orange,yellow),
-    icones: ("\e9cb","\e94c","\ea01","\e9a3","\ea05","\e92a")
+    bg: (#FAE3E3, #E6F8ED, #E3EAFA, #F3EAD6, #E7E6FF, #DEDEDE),
+    colors: (red, green, purple, gold, orange, yellow),
+    icones: ("\e9cb", "\e94c", "\ea01", "\e9a3", "\ea05", "\e92a")
 );
 /*************************************
 *************************************
@@ -48,8 +59,8 @@ box-shadow(color), background, border-color
 /************************************************************/
 /**************************PLACEHOLDER**************************/
 /************************************************************/
-%LP-Features{
-    template_base:"section>h2+p+ul>li.......";
+%LP-Features {
+    template_base: "section>h2+p+ul>li.......";
     template_block_sample: "section.LP-Features>h2{Our Services}+p{lorem}";
     template_blockElement_sample__PurposesList01: "section.LP-Features>h2{Our Services}+p{lorem}+ul.LP-Features__PurposesList01>(li>i+h3{Content Writing}+p{lorem})*6";
     template_blockElement_sample__PricingList01: "section.LP-Features>h2{Our Services}+p{lorem}+ul.LP-Features__PricingList01>(li>h2{Starter Plan}+(div{49$}>span{/mo})+(ul>li{Consectetur adipiscing}*5)+a{Get Plan})*3";
@@ -57,21 +68,22 @@ box-shadow(color), background, border-color
     padding: 80px 0;
     position: relative;
 
-    &§§§title{
+    &§§§title {
         text-align: center;
-        >h2{
+
+        >h2 {
             @include h2_subline_01("___feature-name___");
         }
-        >p{
-        }
+
+        >p {}
     }
 
 
-    &__PurposesList01
-    {
+    &__PurposesList01 {
         @include newRowList(4 6 12);
         margin-top: 40px;
-        >li{
+
+        >li {
             // @extend .fadeInDown;
             padding: 60px 30px;
             background: #fff;
@@ -80,12 +92,14 @@ box-shadow(color), background, border-color
             margin-bottom: 30px;
             position: relative;
             margin: 15px 0;
-            &:hover{
-                &:before{
+
+            &:hover {
+                &:before {
                     box-shadow: 0px 10px 50px 0px rgba(84, 110, 122, 0.35);
                     background: transparent;
                 }
-                >i{
+
+                >i {
                     background: transparent !important;
                     -webkit-transform: scale(1.1);
                     -moz-transform: scale(1.1);
@@ -93,9 +107,10 @@ box-shadow(color), background, border-color
                     -o-transform: scale(1.1);
                     transform: scale(1.1);
                 }
-                
+
             }
-            &:before{
+
+            &:before {
                 content: "";
                 border: 1px solid #eaeaea;
                 position: absolute;
@@ -109,25 +124,31 @@ box-shadow(color), background, border-color
                 -webkit-transition: all 0.3s ease-in-out;
                 -o-transition: all 0.3s ease-in-out;
             }
+
             // @each $prop, $list in map-get($__PurposesList01, colors) {
             @for $i from 1 through length(map-get($__PurposesList01, colors)) {
-                &:nth-of-type(#{$i})>i{
-                    background: lighten(
-                        nth(
-                            map-get($__PurposesList01, colors), $i
-                        ), 20%
-                    );
+                &:nth-of-type(#{$i})>i {
+                    background: lighten(nth(map-get($__PurposesList01, colors), $i ), 20%);
                     color: nth(map-get($__PurposesList01, colors), $i) !important;
-                    &:before{content: nth(map-get($__PurposesList01, icones), $i);}
+
+                    &:before {
+                        content: nth(map-get($__PurposesList01, icones), $i);
+                    }
                 }
             }
-            >h3{
+
+            >h3 {
                 font-size: 18px;
                 font-weight: 500;
                 margin-bottom: 15px;
             }
-            >p{margin: 0;}
-            >i{
+
+            >p {
+                margin: 0;
+            }
+
+            >i {
+                position: relative;
                 margin-bottom: 20px;
                 width: 60px;
                 height: 60px;
@@ -142,14 +163,27 @@ box-shadow(color), background, border-color
                 -moz-transition: all 0.3s ease-in-out;
                 -webkit-transition: all 0.3s ease-in-out;
                 -o-transition: all 0.3s ease-in-out;
-                &:before{content:"";font-family: 'LineIcons' !important;font-style: normal;}
+
+                &:before {
+                    content: "";
+                    font-family: 'LineIcons' !important;
+                    font-style: normal;
+                }
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    object-fit: cover !important;
+                    width: 150% !important;
+                }
             }
         }
     }
-    &__PurposesList02
-    {
+
+    &__PurposesList02 {
         @extend .row;
-        >li{
+
+        >li {
             @extend .col-lg-4;
             @extend .col-md-6;
             @extend .col-12;
@@ -157,7 +191,8 @@ box-shadow(color), background, border-color
             position: relative;
             margin-top: 15px;
             margin-bottom: 15px;
-            >i{
+
+            >i {
                 float: left;
                 font-size: 30px;
                 color: #F97794;
@@ -166,8 +201,9 @@ box-shadow(color), background, border-color
                 margin-bottom: 85px;
                 display: block;
             }
-            >div{
-                >i{
+
+            >div {
+                >i {
                     font-size: 86px;
                     color: rgba(0, 0, 0, 0.07);
                     font-weight: 400;
@@ -178,7 +214,8 @@ box-shadow(color), background, border-color
                     width: 100%;
                     @extend %ff_icon0;
                 }
-                >h3{
+
+                >h3 {
                     font-size: 18px;
                     font-weight: 500;
                     margin-bottom: 10px;
@@ -187,20 +224,22 @@ box-shadow(color), background, border-color
                     -webkit-transition: all 0.4s ease-in-out;
                     -o-transition: all 0.4s ease-in-out;
                 }
-                >p{
+
+                >p {
                     font-size: 14px;
                     position: relative;
                 }
             }
         }
     }
-    &__PricingList01
-    {
+
+    &__PricingList01 {
         @extend .row;
-        flex-wrap:unset;
-        gap:15px;
+        flex-wrap: unset;
+        gap: 15px;
         margin-top: 40px;
-        >li{
+
+        >li {
             @extend .col-lg-4;
             @extend .col-md-4;
             @extend .col-12;
@@ -214,18 +253,24 @@ box-shadow(color), background, border-color
             box-shadow: 0px 10px 50px 0px rgba(84, 110, 122, 0.15);
             transition: all 0.3s;
             margin-top: 30px;
-            &:hover{box-shadow: rgba(84, 110, 122, 0.35) 0px 10px 50px 0px;}
-            &.big{
+
+            &:hover {
+                box-shadow: rgba(84, 110, 122, 0.35) 0px 10px 50px 0px;
+            }
+
+            &.big {
                 transform: scale3d(1.05, 1.1, 1.1);
             }
-            >h2{
+
+            >h2 {
                 font-size: 18px;
                 color: #546E7A;
                 font-weight: 500;
                 padding-top: 15px;
                 padding-bottom: 15px;
             }
-            >div{
+
+            >div {
                 color: #263238;
                 font-size: 36px;
                 line-height: 40px;
@@ -234,45 +279,55 @@ box-shadow(color), background, border-color
                 background-color: #fff !important;
                 border-bottom: 1px solid #e9edf2;
                 padding-bottom: 40px;
-                >span{
+
+                >span {
                     font-size: 12px;
                     line-height: 15px;
                     font-weight: 400;
                     color: #A2A2A2;
                 }
             }
-            >ul{
-                >li{
+
+            >ul {
+                >li {
                     padding: 12px;
                     font-size: 14px;
+
                     &:nth-child(even) {
                         background-color: #f9f9f9;
                     }
-                    @include tablette-only{
+
+                    @include tablette-only {
                         font-size: 13px;
                     }
                 }
             }
-            >a{
+
+            >a {
                 @extend .btn;
                 // @extend .btn-common;
                 display: block;
                 background: #f9f9f9;
-                            //SOIT L'UN SOIT L'AUTRE
-                                // border: 30px solid #f9f9f9;
-                                margin: 30px 75px;
-                                border-radius: 0;
-                                outline: 75px solid #f9f9f9;
+                //SOIT L'UN SOIT L'AUTRE
+                // border: 30px solid #f9f9f9;
+                margin: 30px 75px;
+                border-radius: 0;
+                outline: 75px solid #f9f9f9;
                 color: rgb(255, 255, 255);
                 position: relative;
                 z-index: 1;
                 padding: 12px 32px;
                 overflow: hidden;
-                &:hover{
-                    color:white;
-                    &:after{width: 100%;}
+
+                &:hover {
+                    color: white;
+
+                    &:after {
+                        width: 100%;
+                    }
                 }
-                &:before{
+
+                &:before {
                     content: "";
                     width: 100%;
                     height: 100%;
@@ -283,7 +338,8 @@ box-shadow(color), background, border-color
                     z-index: -1;
                     border-radius: 30px;
                 }
-                &:after{
+
+                &:after {
                     content: '';
                     position: absolute;
                     width: 0;
@@ -298,6 +354,7 @@ box-shadow(color), background, border-color
             }
         }
     }
+
     //bgee
     //bgm
 }
@@ -305,34 +362,53 @@ box-shadow(color), background, border-color
 /************************************************************/
 /**************************MIXIN**************************/
 /************************************************************/
-@mixin LP-Features(
-        $paramMixi: $LP-Features
-        // , $exempleParamFromBEMComponentVariable: map-get($LP-Features, exempleParamFromBEMComponentVariable)
-        // BEMMixinParam
-    ){
+@mixin LP-Features($paramMixi: $LP-Features // , $exempleParamFromBEMComponentVariable: map-get($LP-Features, exempleParamFromBEMComponentVariable)
+
+    // BEMMixinParam
+) {
 
     @extend %LP-Features;
-    &.--animated{
-        >ul{
-            >li{
+
+    &.--animated {
+        >ul {
+            >li {
                 @extend .animated;
-                &:nth-of-type(1){animation-delay: 0.2s;}
-                &:nth-of-type(2){animation-delay: 0.4s;}
-                &:nth-of-type(3){animation-delay: 0.6s;}
-                &:nth-of-type(4){animation-delay: 0.8s;}
-                &:nth-of-type(5){animation-delay: 1s;}
-                &:nth-of-type(6){animation-delay: 1.2s;}
+
+                &:nth-of-type(1) {
+                    animation-delay: 0.2s;
+                }
+
+                &:nth-of-type(2) {
+                    animation-delay: 0.4s;
+                }
+
+                &:nth-of-type(3) {
+                    animation-delay: 0.6s;
+                }
+
+                &:nth-of-type(4) {
+                    animation-delay: 0.8s;
+                }
+
+                &:nth-of-type(5) {
+                    animation-delay: 1s;
+                }
+
+                &:nth-of-type(6) {
+                    animation-delay: 1.2s;
+                }
+
                 animation-name: fadeInDown;
             }
         }
-        
+
     }
 
-    
+
     @extend %LP-Features§§§title;
-    >h2
-    //, &__ELEMENT_NAME 
-    {
+    >h2 //, &__ELEMENT_NAME 
+
+        {
         // @extend %LP-Features__ELEMENT_NAME;
 
 
@@ -340,29 +416,31 @@ box-shadow(color), background, border-color
 
 
     }
-    >span
-    //, &__ELEMENT_NAME
-    {
+
+    >span //, &__ELEMENT_NAME
+
+        {
         // @extend %LP-Features__ELEMENT_NAME;
     }
-    >p
-    //, &__ELEMENT_NAME 
-    {
+
+    >p //, &__ELEMENT_NAME 
+
+        {
         // @extend %LP-Features__ELEMENT_NAME;
     }
-    &__PurposesList01 
-    {
+
+    &__PurposesList01 {
         @extend %LP-Features__PurposesList01;
     }
-    &__PurposesList02
-    {
+
+    &__PurposesList02 {
         @extend %LP-Features__PurposesList02;
     }
-    &__PricingList01
-    {
+
+    &__PricingList01 {
         @extend %LP-Features__PricingList01;
     }
-    
+
     //bgee
     //bgm
 }
@@ -370,22 +448,26 @@ box-shadow(color), background, border-color
 /************************************************************/
 /**************************BLOC BEM (extension)**************************/
 /************************************************************/
-.LP-Features{
+.LP-Features {
     \$__PurposesList01: '(\
         bg: (#FAE3E3,#E6F8ED,#E3EAFA,#F3EAD6,#E7E6FF,#DEDEDE),\
         colors: (red,green,purple,gold,orange,yellow),\
         icones: ("\e9cb","\e94c","\ea01","\e9a3","\ea05","\e92a")\
         );\
     ';
-    @include LP-Features(/*ICI, VOUS POUVEZ ÉCRASER LES VALEUR DE LA VARIABLES "$defaultValues"*/);
+    @include LP-Features(
+        /*ICI, VOUS POUVEZ ÉCRASER LES VALEUR DE LA VARIABLES "$defaultValues"*/
+    );
     //bge
     //bgm
 }
-@mixin generate_LP-Features($name,$args){
-    .#{$name}{
+
+@mixin generate_LP-Features($name, $args) {
+    .#{$name} {
         @include LP-Features();
-        >h2:after{
-            content:map-get($args, etitle_after);
+
+        >h2:after {
+            content: map-get($args, etitle_after);
         }
     }
 }
@@ -393,4 +475,3 @@ box-shadow(color), background, border-color
 @include generate_LP-Features("OurServices", (etitle_after: "Services"));
 @include generate_LP-Features("PricingPlans", (etitle_after: "Pricing"));
 @include generate_LP-Features("WhyUs", (etitle_after: "Why"));
-

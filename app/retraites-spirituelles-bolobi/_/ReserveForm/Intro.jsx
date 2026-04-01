@@ -2,7 +2,7 @@
 
 
 
-export default function Intro({sommaire,titreH3}) {
+export default function Intro({ sommaire, titreH3 }) {
     return <>
         <h3 id="forthH3" data-icon="4" data-sommaire={sommaire || titreH3}>{titreH3}</h3>
         <p>Le sanctuaire ND Rosaire de Bolobi est <u>alimenté en électricité par l'énergie solaire</u>, <u><b>un groupe électrogène complète cette source</b> en cas de temps défavorable</u>.</p>

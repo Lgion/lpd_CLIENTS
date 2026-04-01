@@ -1,6 +1,6 @@
 "use client"
 
-import {useState,useEffect,useContext} from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Link from "next/link"
 import Image from "next/image"
 import AuthContext from "../../stores/authContext.js"
@@ -13,7 +13,7 @@ import "./style.scss"
 import "../../assets/scss/index_ecom_ai.scss"
 // import * as Ecommerce_articles from "../../assets/datas/articles.js"
 // import Ecommerce_articles_OPTIONS from "../../assets/datas/articles_options.js"
-import {handleModalShowProduct,handleAddToCart,handleProductsDisplay,handleSelect,handleVariantButtonHover} from "../../utils/handleEvents.js"
+import { handleModalShowProduct, handleAddToCart, handleProductsDisplay, handleSelect, handleVariantButtonHover } from "../../utils/handleEvents.js"
 import BlogCategory from '../_/Blog/BlogCategory'
 import ArticleGrid from './components/ArticleGrid'
 import AddArticleForm from './components/AddArticleForm.jsx';
@@ -47,8 +47,8 @@ function EcommercePage() {
             fetch('/api/ecom')
                 .then(res => res.ok ? res.json() : Promise.reject(res))
                 .then(data => {
-                    const articlesObj = {articles: {data: data.articles},articles_img_table,articles_title_table};
-                    const optionsObj = {data: data.options};
+                    const articlesObj = { articles: { data: data.articles }, articles_img_table, articles_title_table };
+                    const optionsObj = { data: data.options };
                     setEcommerce_articles(articlesObj);
                     setEcommerce_articles_OPTIONS(optionsObj);
                     window.localStorage.setItem('ecommerce_articles', JSON.stringify(articlesObj));
@@ -69,14 +69,14 @@ function EcommercePage() {
             <p>Veuillez patienter pendant le chargement des articles...</p>
         </div>
     );
-    
+
     if (error) return (
         <div className="error-message">
             <div className="icon">⚠️</div>
             <h3>Erreur de chargement</h3>
             <p>{error}</p>
-            <button 
-                className="action-button" 
+            <button
+                className="action-button"
                 onClick={() => window.location.reload()}
             >
                 Réessayer
@@ -107,8 +107,8 @@ const articles_title_table = {
     'tableau/icone': "Icônes Religieuses",
     '_livret P.D': "Publication Puissance Divine",
     '_bibles': "Saintes Bibles",
-            'NEI': "NEI",
-            'texte&priere': "Textes & Prières",
+    'NEI': "NEI",
+    'texte&priere': "Textes & Prières",
     'croixp': "Croix Posées",
     'croixm': "Croix Murales",
     'croix': "Croix Jésus",
@@ -121,31 +121,31 @@ const articles_title_table = {
 }
 
 const categories = [
-    { label: "tableau_icone", color: "orange", name: "Icônes Religieuses"},
-    { label: "livret_P_D", color: "teal", name: "Publication Puissance Divine"},
-    { label: "bibles", color: "purple", name: "Saintes Bibles"},
-    { label: "NEI", color: "blue", name: "NEI"},
-    { label: "texte_priere", color: "green", name: "Textes & Prières"},
-    { label: "divers", color: "orange", name: "Croix Posées"},
-    { label: "croixp", color: "red", name: "Croix Murales"},
-    { label: "croixm", color: "teal", name: "Croix Jésus"},
-    { label: "croix", color: "gold", name: "Encens"},
-    { label: "encens", color: "silver", name: "Statue Religieuse"},
-    { label: "statue", color: "brown", name: "Grotte Religieuse"},
-    { label: "grotte", color: "pink", name: "Chapelet de Prière"},
+    { label: "tableau_icone", color: "orange", name: "Icônes Religieuses" },
+    { label: "livret_P_D", color: "teal", name: "Publication Puissance Divine" },
+    { label: "bibles", color: "purple", name: "Saintes Bibles" },
+    { label: "NEI", color: "blue", name: "NEI" },
+    { label: "texte_priere", color: "green", name: "Textes & Prières" },
+    { label: "divers", color: "orange", name: "Croix Posées" },
+    { label: "croixp", color: "red", name: "Croix Murales" },
+    { label: "croixm", color: "teal", name: "Croix Jésus" },
+    { label: "croix", color: "gold", name: "Encens" },
+    { label: "encens", color: "silver", name: "Statue Religieuse" },
+    { label: "statue", color: "brown", name: "Grotte Religieuse" },
+    { label: "grotte", color: "pink", name: "Chapelet de Prière" },
     { label: "chapelet", color: "wheat", name: "Divers autreproduits" }
 ];
 
-function Ecommerce({Ecommerce_articles,Ecommerce_articles_OPTIONS,categoryPosts,models={}}) {
-    const {isAdmin, myLoader} = useContext(AuthContext)
-    const {miniCart, setCartBox, selectOptions, setSelectOptions} = useContext(EcomContext)
-    , id=3
-    , headings = {
-        h3:"CATÉGORIE: \"LIBRARIE PUISSANCE DIVINE D'AMOUR\""
-    }
+function Ecommerce({ Ecommerce_articles, Ecommerce_articles_OPTIONS, categoryPosts, models = {} }) {
+    const { isAdmin, myLoader } = useContext(AuthContext)
+    const { miniCart, setCartBox, selectOptions, setSelectOptions } = useContext(EcomContext)
+        , id = 3
+        , headings = {
+            h3: "CATÉGORIE: \"LIBRARIE PUISSANCE DIVINE D'AMOUR\""
+        }
     // Nouvel état pour l'article en cours d'édition
     const [editingArticle, setEditingArticle] = useState(null);
-    
+
     const handleUpdate = async (e, item) => {
         e.preventDefault();
         if (!item || !item._id) return alert('Article invalide ou ID manquant');
@@ -196,35 +196,35 @@ function Ecommerce({Ecommerce_articles,Ecommerce_articles_OPTIONS,categoryPosts,
             alert('Erreur lors de la suppression : ' + err.message);
         }
     }
-    
-    let [currentDatas, setCurrentDatas] = useState({})
-    , [selectedCategory, setSelectedCategory] = useState("all")
-    , [selectedType, setSelectedType] = useState("publication")
 
-    useEffect(() => { 
+    let [currentDatas, setCurrentDatas] = useState({})
+        , [selectedCategory, setSelectedCategory] = useState("all")
+        , [selectedType, setSelectedType] = useState("publication")
+
+    useEffect(() => {
         console.log("console.log(Ecommerce_articles)");
         console.log(categoryPosts);
         setCartBox(miniCart(true))
     }, [])
-    
+
     return (
         <HoverProvider>
             <main className="ecommerce">
                 {editingArticle && (
-                    <div className="modal-edit-article" style={{position:'fixed',top:0,left:0,width:'100vw',height:'100vh',zIndex:1000000,background:'rgba(0,0,0,0.5)',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                        <div style={{background:'#fff',padding:32,borderRadius:12,boxShadow:'0 8px 32px #0003',minWidth:340,maxWidth:480,height:"80%",overflowY:"scroll",position:'relative'}}>
-                            <button onClick={closeEditForm} style={{position:'absolute',top:8,right:8,fontSize:24,lineHeight:1,border:'none',background:'none',cursor:'pointer'}}>&times;</button>
+                    <div className="modal-edit-article" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 1000000, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <div style={{ background: '#fff', padding: 32, borderRadius: 12, boxShadow: '0 8px 32px #0003', minWidth: 340, maxWidth: 480, height: "80%", overflowY: "scroll", position: 'relative' }}>
+                            <button onClick={closeEditForm} style={{ position: 'absolute', top: 8, right: 8, fontSize: 24, lineHeight: 1, border: 'none', background: 'none', cursor: 'pointer' }}>&times;</button>
                             <AddArticleForm
-                                onSubmit={item => handleUpdate({ preventDefault:()=>{} }, { ...editingArticle, ...item })}
+                                onSubmit={item => handleUpdate({ preventDefault: () => { } }, { ...editingArticle, ...item })}
                                 onCancel={closeEditForm}
                                 initialData={editingArticle}
                             />
                         </div>
                     </div>
                 )}
-                <Intro {...{selectedCategory,categories,setSelectedCategory}} />
-                <EcomNavbar {...{models,currentDatas,setSelectedCategory,setSelectedType,categories}} />
-                <ArticleGrid 
+                <Intro {...{ selectedCategory, categories, setSelectedCategory }} />
+                <EcomNavbar {...{ models, currentDatas, setSelectedCategory, setSelectedType, categories }} />
+                <ArticleGrid
                     Ecommerce_articles={Ecommerce_articles}
                     Ecommerce_articles_OPTIONS={Ecommerce_articles_OPTIONS}
                     myLoader={myLoader}
@@ -240,7 +240,7 @@ function Ecommerce({Ecommerce_articles,Ecommerce_articles_OPTIONS,categoryPosts,
                     selectedType={selectedType}
                     openEditForm={openEditForm}
                 />
-                <BlogCategory {...{categoryPosts,headings}} />
+                <BlogCategory {...{ categoryPosts, headings, filterCategory: "librairie" }} />
             </main>
         </HoverProvider>
     );

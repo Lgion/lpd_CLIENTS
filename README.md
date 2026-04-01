@@ -1,43 +1,19 @@
-Héberger des fichiers gratuitement (conversation gemini)
-https://g.co/gemini/share/3c835b11bb45
-
-Idées évolution app école (conversation gemini)
-https://gemini.google.com/app/951a0c213d4a23a1?hl=fr
-
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# TODOLIST: 
+- page sanctuaire: il faut rajouter quelque petites informations: 1° chacun doit venir avec ses draps
+DONE
+- il faut rajouter plus de photos, pour chaque menu et pour tous les thèmes
+- il faut facilter la créaqtion de post de blog, via notamment la capture de photo associé à un vocal pour générer un brouillon (qui pourra plus facilement etre traité plu tard)
+WIP données trop lourde, API GEMINI 1.5 restreinte
+- il faut réhabiliter la page école, rectifier tout le design
+WIP manque juste des images et un tout petit peu de mise en forme
+- rectifier le composant carousel pour rendre fonctionnel les boutons CRUD, il générait des logs indéfinis et avec des bugs, s'assurer que ce n'est plus le cas
+- il faut réhabiliter le composant des posts de blog en bas de chaque page
+## Backend: 
+- il faut une page d'accueil au backend, listant les dernieres actions de tous les menus confondus (retraite, école, librairie, etc)
+- il faut s'assurer que l'email de confirmation recu après chaque réservation contient toutes les informations nécessaire, ainsi qu'un lien vers le backend pour la gestion des retraites spirituelles
+- dans le sanctuaire remplacer le tableau par des cards
+- activer le menu blog
+- améliorer le menu ecommerce
+## Ecomerce: 
+- voir le parcours pour intégrer wave et répondre à l'email
+- améliorer l'affichage

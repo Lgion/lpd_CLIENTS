@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from 'react'
 import BlogCategory from '../_/Blog/BlogCategory'
 import BlogPost from '../_/Blog/BlogPost'
 import Link from 'next/link'
+import AiGenerationModal from './AiGenerationModal'
 import AuthContext from "../../stores/authContext.js"
 
 export default function BlogPage() {
@@ -14,6 +15,7 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)
   const [showForm, setShowForm] = useState(false)
+  const [showAiModal, setShowAiModal] = useState(false)
   const [editingPost, setEditingPost] = useState(null)
   const [newPost, setNewPost] = useState({
     title: '',
@@ -28,6 +30,7 @@ export default function BlogPage() {
   })
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewUrl, setPreviewUrl] = useState('')
+  const [isAddingNewCategory, setIsAddingNewCategory] = useState(false)
   , {isAdmin} = useContext(AuthContext)
 
   useEffect(() => {
@@ -201,6 +204,7 @@ export default function BlogPage() {
       setSelectedImage(null)
       setPreviewUrl('')
       setEditingPost(null)
+      setIsAddingNewCategory(false)
       await fetchPosts()
       
       alert(`Article ${editingPost ? 'modifié' : 'créé'} avec succès`)
@@ -271,6 +275,19 @@ export default function BlogPage() {
 
       {showForm && isAdmin && (
         <form onSubmit={handleSubmit} className="blog-form">
+          <div className="aiGenerationModal__header">
+            <button 
+              type="button" 
+              onClick={() => setShowAiModal(true)}
+              className="aiGenerationModal__triggerBtn"
+            >
+              🪄 Générer le post via IA
+            </button>
+            <p className="aiGenerationModal__headerDesc">
+              Chargez des photos, vidéos ou audios pour pré-remplir automatiquement ce formulaire.
+            </p>
+          </div>
+
           <div className="form-group">
             <label>Titre</label>
             <input
@@ -314,8 +331,17 @@ export default function BlogPage() {
           <div className="form-group">
             <label>Catégorie</label>
             <select
-              value={newPost.category}
-              onChange={(e) => setNewPost({...newPost, category: e.target.value})}
+              value={isAddingNewCategory ? 'new' : newPost.category}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === 'new') {
+                  setIsAddingNewCategory(true);
+                  setNewPost({...newPost, category: ''});
+                } else {
+                  setIsAddingNewCategory(false);
+                  setNewPost({...newPost, category: value});
+                }
+              }}
               required
             >
               <option value="">Sélectionner une catégorie</option>
@@ -326,10 +352,12 @@ export default function BlogPage() {
               ))}
               <option value="new">Nouvelle catégorie...</option>
             </select>
-            {newPost.category === 'new' && (
+            {isAddingNewCategory && (
               <input
                 type="text"
+                autoFocus
                 placeholder="Entrez le nom de la nouvelle catégorie"
+                value={newPost.category}
                 onChange={(e) => setNewPost({...newPost, category: e.target.value})}
                 required
               />
@@ -355,6 +383,21 @@ export default function BlogPage() {
             {uploading ? 'Téléchargement...' : (editingPost ? 'Modifier l\'article' : 'Publier l\'article')}
           </button>
         </form>
+      )}
+
+      {showAiModal && (
+        <AiGenerationModal 
+          onClose={() => setShowAiModal(false)}
+          onSuccess={(postData) => {
+            setNewPost(prev => ({
+              ...prev,
+              title: postData.title || prev.title,
+              excerpt: postData.excerpt || prev.excerpt,
+              content: postData.content || prev.content,
+              category: postData.category || prev.category
+            }));
+          }}
+        />
       )}
 
       {loading ? (

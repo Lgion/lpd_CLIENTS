@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method === 'POST') {
     try {
-      const { title, excerpt, coverImage, content, author, date } = req.body;
+      const { title, excerpt, coverImage, content, author, date, category } = req.body;
       
       // Créer un slug à partir du titre
       const slug = title
@@ -35,6 +35,7 @@ title: '${title}'
 excerpt: '${excerpt}'
 coverImage: '${coverImage}'
 date: '${date}'
+category: '${category || 'all'}'
 author:
   name: ${author.name}
   picture: ${author.picture || ''}
@@ -74,7 +75,7 @@ ${content}`;
   } else if (req.method === 'PUT') {
     try {
       const { slug } = req.query;
-      const { title, excerpt, coverImage, content, author, date } = req.body;
+      const { title, excerpt, coverImage, content, author, date, category } = req.body;
       const filePath = path.join(postsDirectory, `${slug}.md`);
 
       // Vérifier si le fichier existe
@@ -88,6 +89,7 @@ title: '${title}'
 excerpt: '${excerpt}'
 coverImage: '${coverImage}'
 date: '${date}'
+category: '${category || 'all'}'
 author:
   name: ${author.name}
   picture: ${author.picture || ''}

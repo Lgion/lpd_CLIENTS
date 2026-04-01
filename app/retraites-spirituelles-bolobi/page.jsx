@@ -10,7 +10,7 @@ import ReserveForm_ from "./_/ReserveForm_copy/index.jsx"
 import BlogCategory from '../_/Blog/BlogCategory'
 
 
-const BtnCTA = ()=>{
+const BtnCTA = () => {
     return <div className="form_cta_fixed_btns">
         <a href="https://wa.me/22665555555" target="_blank" title="Contactez nous sur whatsapp pour plus d'informations"></a>
         <a href="#form_reservation" title="Remplir le formulaire de réservation pour votre séjour au sanctuaire de Bolobi"></a>
@@ -26,7 +26,7 @@ const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
         {/* <ReserveForm /> */}
         <ReserveForm_ />
         <BtnCTA />
-        {/* <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} /> */}
+        <BlogCategory {...{ categoryPosts, headings, className: "sndr", filterCategory: "sanctuaire" }} />
     </main>
 ));
 
@@ -35,14 +35,14 @@ export default function LieuxActivites() {
     const { categoryPosts, diapos } = data
 
     const headings = useMemo(() => ({
-      h3: "CATÉGORIE: \"SANCTUAIRE NOTRE DAME DU ROSAIRE DE BOLOBI\""
+        h3: "CATÉGORIE: \"SANCTUAIRE NOTRE DAME DU ROSAIRE DE BOLOBI\""
     }), []);
 
     return useMemo(() => (
-        <SanctuaireContent 
-            diapos={diapos} 
-            categoryPosts={categoryPosts} 
-            headings={headings} 
+        <SanctuaireContent
+            diapos={diapos}
+            categoryPosts={categoryPosts}
+            headings={headings}
         />
     ), [diapos, categoryPosts, headings]);
 }

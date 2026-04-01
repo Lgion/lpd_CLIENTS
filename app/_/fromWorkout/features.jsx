@@ -11,26 +11,32 @@ export default function Features({ bem = "LP-Features", align = ""/*"--btn"*/, $
         {
             title: "Agriculture"
             , p: "(potagers, maraîchage, pépinieres, champignons, champs poivre palme et cacao, et maïs entre autres)."
+            , img: "/img/_/bolobi/features_icons/agriculture_icon.png"
         },
         {
             title: "Élevage"
             , p: "(poulet/chair & ponte, escargots, larves MSN, insectes)."
+            , img: "/img/_/bolobi/features_icons/elevage_icon.png"
         },
         {
             title: "Hébergement/Restauration"
             , p: "(services aux retraitants, avec quelques options)."
+            , img: "/img/_/bolobi/features_icons/hebergement_icon.png"
         },
         {
             title: "Don"
             , p: "L'activité caritative du SNDR en l'école ESMP, a besoin de vos dons."
+            , img: "/img/_/bolobi/features_icons/don_icon.png"
         },
         {
             title: "Boisson"
             , p: "Des boissons locales produites sur place: bangui exquis, bolob, mélange maison à base de citron ou de miel.."
+            , img: "/img/_/bolobi/features_icons/boisson_icon.png"
         },
         {
             title: "Boutique alimentaire"
             , p: "Une petite boutique de quartier à Bolobi, disponible aux retraitants comme aux campements des alentours."
+            , img: "/img/_/bolobi/features_icons/boutique_icon.png"
         }
     ]
 }}){
@@ -71,7 +77,9 @@ export default function Features({ bem = "LP-Features", align = ""/*"--btn"*/, $
                         setCarouselData([carouselBolobi_[i%3]])}
                     }
                 >
-                    <i className={elt?.icon} />
+                    <i className={elt?.icon}>
+                        {elt?.img && <img src={elt.img} alt={elt.title} style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '5px' }} />}
+                    </i>
                     <h3>{elt?.title}</h3>
                     <p>{elt?.p}</p>
                 </li>)}
@@ -106,7 +114,7 @@ export default function Features({ bem = "LP-Features", align = ""/*"--btn"*/, $
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
                 </li> */}
             </ul>
-            <SliderInArticle carousel={carouselData} carouselName="carouselBolobi_fields" />
+            {/* <SliderInArticle carousel={carouselData} carouselName="carouselBolobi_fields" /> */}
         </section>
         { /* Services Section End */}
 

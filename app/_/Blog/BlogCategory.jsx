@@ -1,17 +1,18 @@
+"use client";
 import Head from 'next/head'
 import BlogPost from './BlogPost'
 import { useEffect, useState, useCallback, useMemo } from 'react';
 
 const BLOG_NAME = "BOLOBI"
 
-export default function BlogCategory({categoryPosts, headings, className="", onEdit, onDelete, isAdmin}) {
+export default function BlogCategory({ categoryPosts, headings, className = "", onEdit, onDelete, isAdmin, filterCategory }) {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchPosts = useCallback(async () => {
     setIsLoading(true);
     const storedPosts = localStorage.getItem('blogPosts');
-    
+
     console.log("Stored posts from localStorage:", storedPosts);
 
     if (storedPosts) {
@@ -32,7 +33,7 @@ export default function BlogCategory({categoryPosts, headings, className="", onE
       const response = await fetch('/api/posts');
       const data = await response.json();
       console.log("Fetched posts from API:", data);
-      
+
       if (Array.isArray(data)) {
         setPosts(data);
         localStorage.setItem('blogPosts', JSON.stringify(data));
@@ -55,17 +56,28 @@ export default function BlogCategory({categoryPosts, headings, className="", onE
     }
   }, [categoryPosts, fetchPosts]);
 
+  const filteredPosts = useMemo(() => {
+    if (!filterCategory) return posts;
+    const filter = filterCategory.toLowerCase();
+    return posts.filter(post => 
+      post.category?.toLowerCase() === filter || 
+      post.categories?.some(cat => cat.toLowerCase() === filter)
+    );
+  }, [posts, filterCategory]);
+
   return (
     <>
+      <hr />
       <div className="blog_category_header">
+        <h2>BLOG: </h2>
         <h3>{headings.h3}</h3>
         <p>{headings.subtitle}</p>
       </div>
       <div className="blog_category_posts blog-grid">
         {isLoading ? (
           <div>Chargement...</div>
-        ) : posts.length > 0 ? (
-          posts.map((post) => (
+        ) : filteredPosts.length > 0 ? (
+          filteredPosts.map((post) => (
             <div key={post.slug} className="blog-post-container">
               <BlogPost
                 title={post.title}
@@ -93,7 +105,7 @@ export default function BlogCategory({categoryPosts, headings, className="", onE
             </div>
           ))
         ) : (
-          <div>Aucun article disponible</div>
+          <div>Aucun article de blog disponible</div>
         )}
       </div>
     </>

@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import Image from "next/image"
 import AuthContext from "../../../stores/authContext.js"
 import FormContext from "../../../stores/formContext.js"
-import {loadRadios} from '../../_/swappy_radio'
+import { loadRadios } from '../../_/swappy_radio'
 import MoneyGift from "./MoneyGift"
 import NatureGift from "./NatureGift"
 
@@ -12,45 +12,49 @@ export default function Donation() {
   // const {FieldsetRadioStyled, SectionCheckboxStyled} = useContext(FormContext)
   // , {myLoader} = useContext(AuthContext)
   const [giftType, setGiftType] = useState("")
-  , handleBtn = (e) => {
-    if(form_donation.classList.contains('on')){
-      form_donation.classList.remove('on')
-      e.target.innerHTML = "FAIRE UN <span>DON</span>"
-    }else{
-      form_donation.classList.add('on')
-      e.target.innerHTML = "Fermer"
+    , handleBtn = (e) => {
+      if (e.target.nodeName == "BUTTON") {
+        if (form_donation.classList.contains('on')) {
+          form_donation.classList.remove('on')
+          e.target.innerHTML = "FAIRE UN <span>DON</span>"
+          e.target.parentNode.nextElementSibling.style.display = "block"
+        } else {
+          form_donation.classList.add('on')
+          e.target.innerHTML = "Fermer"
+          e.target.parentNode.nextElementSibling.style.display = "none"
+        }
+      }
     }
-  }
-  , handleSubmit = async function(e){
-    e.preventDefault()
+    , handleSubmit = async function (e) {
+      e.preventDefault()
 
-    let fieldset_nature_predefined = Array.from(e.target.querySelectorAll('fieldset.nature_predefined'))
-    nature_predefined.value = fieldset_nature_predefined.map(elt=>{
-      let input = elt.querySelector('input')
-      if(input.value>0)
-        return input.value+input.id+";;;"
-    })
+      let fieldset_nature_predefined = Array.from(e.target.querySelectorAll('fieldset.nature_predefined'))
+      nature_predefined.value = fieldset_nature_predefined.map(elt => {
+        let input = elt.querySelector('input')
+        if (input.value > 0)
+          return input.value + input.id + ";;;"
+      })
 
-    const fd = new FormData(e.target)
-    , fd_ = {donation: {}}
+      const fd = new FormData(e.target)
+        , fd_ = { donation: {} }
 
-    document.querySelectorAll('input[type="radio"]:checked').forEach(elt=>{
-        if(fd.has(elt.name))fd.set(elt.name,elt.value)
-        else fd.append(elt.name,elt.id)
-    })
-    Array.from(fd).forEach(elt=>{fd_.donation[elt[0]] = elt[1]})
-    console.log(fd_);
-    fetch("/api/donation", {
+      document.querySelectorAll('input[type="radio"]:checked').forEach(elt => {
+        if (fd.has(elt.name)) fd.set(elt.name, elt.value)
+        else fd.append(elt.name, elt.id)
+      })
+      Array.from(fd).forEach(elt => { fd_.donation[elt[0]] = elt[1] })
+      console.log(fd_);
+      fetch("/api/donation", {
         method: "POST"
         , headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(fd_),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fd_),
         //   body: JSON.stringify({oui:"n,on"}),
         //   body: new FormData(e.target),
-    })
+      })
 
-  }
+    }
 
   console.log("ok")
 
@@ -74,12 +78,12 @@ export default function Donation() {
       */}
       <h3><u>BOLOBI:</u> Un sanctuaire chrétien, son activité caritative, et de leur financement économique.</h3>
       <Image
-          key={"ecole_bolobi_eleves_pose"}
-          // loader={myLoader}
-          // src={"/img/_/ecole-primaire-bolobi/photo-classe-ecole-bolobi.jpg"}
-          src={"/img/_/bolobi/croix-bolobi.jpg"}
-          alt={"Les élèves de l'école de bolobi posent pour la mamie Mme ACHI"}
-          width={200} height={400}
+        key={"ecole_bolobi_eleves_pose"}
+        // loader={myLoader}
+        // src={"/img/_/ecole-primaire-bolobi/photo-classe-ecole-bolobi.jpg"}
+        src={"/img/_/bolobi/croix-bolobi.jpg"}
+        alt={"Les élèves de l'école de bolobi posent pour la mamie Mme ACHI"}
+        width={200} height={400}
       />
       <section>
         <h4>L'<strong>Oeuvre caritative</strong> du sanctuaire: l'<strong>école Saint Martin de Porrèz</strong></h4>
@@ -90,8 +94,8 @@ export default function Donation() {
         </p>
         <p>
           Un internat et une cantine sont à la disposition des élèves de l'école, actifs depuis septembre 2021.
-          <br/><u>Pour l'internat</u>, nous demandons un financement à auteur de <b>5000F mensuel</b> aux parents d'élèves
-          <br/><u>Pour la cantine scolaire</u>, nous nourrissons gratuitement tous les élèves de l'école Saint Martin de Porrèz. <i>Les internes ont en plus le petit-déjeuner.</i>
+          <br /><u>Pour l'internat</u>, nous demandons un financement à auteur de <b>5000F mensuel</b> aux parents d'élèves
+          <br /><u>Pour la cantine scolaire</u>, nous nourrissons gratuitement tous les élèves de l'école Saint Martin de Porrèz. <i>Les internes ont en plus le petit-déjeuner.</i>
         </p>
       </section>
       <div>
