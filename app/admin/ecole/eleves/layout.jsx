@@ -10,7 +10,7 @@ import './EleveCard.scss';
 
 export default function EcoleAdminEleveLayout({ children }) {
     const ctx = useContext(AiAdminContext);
-    if (!ctx) return <div style={{color:'red'}}>Erreur : AiAdminContext non trouvé. Vérifiez que l'application est bien entourée par le provider.</div>;
+    if (!ctx) return <div className="admin-error">Erreur : AiAdminContext non trouvé. Vérifiez que l'application est bien entourée par le provider.</div>;
     const {eleves, selected, setSelected, showModal, setShowModal} = ctx
     const canvasRef = useRef();
     const chartInstance = useRef(null);
@@ -61,7 +61,7 @@ export default function EcoleAdminEleveLayout({ children }) {
     
     return (<div>
         <h1>Liste des élèves <button onClick={() => { setSelected(null); setShowModal(true); }} className={"ecole-admin__nav-btn"}>Ajouter un élève</button></h1>
-        <div style={{position: 'relative', width: 200, height: 200}}>
+        <div className="chart-container">
             <canvas ref={canvasRef} id="camembert"></canvas>
         </div>
         
@@ -78,7 +78,7 @@ export default function EcoleAdminEleveLayout({ children }) {
                 ))}
             </div>
             :
-            <div style={{textAlign:'center',marginTop:'2em',fontSize:'1.3em'}}>Chargement...</div>
+            <div className="admin-loading">Chargement...</div>
         }
 
         {showModal && <EntityModal type="eleve" entity={selected} onClose={() => setShowModal(false)} classes={ctx.classes || []} />}

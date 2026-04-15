@@ -27,7 +27,7 @@ export default function EleveCard({ classe, eleve, onEdit }) {
   const progress = getScolarityProgress(fees);
 
   return (
-    <div className="eleve-card-wrapper" style={{position:'relative'}}>
+    <div className="eleve-card-wrapper">
       <Link href={`/admin/ecole/eleves/${eleve._id}`} className="eleve-card" tabIndex={0}>
         <img className="eleve-card__photo" src={photoUrl} alt={eleve.nom + ' ' + prenoms} />
         <div className="eleve-card__infos">
@@ -51,8 +51,7 @@ export default function EleveCard({ classe, eleve, onEdit }) {
         {onEdit && (
           <button
             type="button"
-            className="eleve-card__editbtn"
-            style={{position:'absolute',top:8,right:8,zIndex:2,padding:'0.3em 0.7em',fontSize:'0.95em',background:'#fff',border:'1px solid #bbb',borderRadius:'6px',cursor:'pointer',boxShadow:'0 1px 4px #0001'}}
+            className="card-edit-btn"
             onClick={e => { e.stopPropagation(); e.preventDefault(); onEdit(eleve); }}
             tabIndex={0}
           >Éditer</button>

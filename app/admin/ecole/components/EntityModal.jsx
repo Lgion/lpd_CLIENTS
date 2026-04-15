@@ -231,7 +231,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
   return (
     <div className="modal">
       {(uploading || (typeof window !== 'undefined' && ctx && ctx.showModal && uploading)) && (
-        <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',background:'rgba(255,255,255,0.75)',zIndex:999,display:'flex',alignItems:'center',justifyContent:'center',fontSize:'1.5em',fontWeight:600}}>
+        <div className="modal-person__loading">
           <span>Enregistrement en cours...</span>
         </div>
       )}
@@ -264,7 +264,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
             <input id="input-naissance" type="date" name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} required />
 
             <label htmlFor="input-adresse">Adresse</label>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="modal-person__field-row">
               <input
                 id="input-adresse"
                 name="adresse_$_map"
@@ -272,14 +272,14 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
                 onChange={handleChange}
                 placeholder="Adresse"
                 required
-                style={{ flex: 1 }}
+                className="modal-person__field-input"
               />
-              <button type="button" onClick={() => setShowMap(true)} style={{ marginLeft: 8 }}>
+              <button type="button" onClick={() => setShowMap(true)} className="modal-person__map-btn">
                 📍
               </button>
             </div>
             {showMap && (
-              <div style={{ margin: '10px 0' }}>
+              <div className="modal-person__map-preview">
                 <Gmap
                   // Pass initial center based on current state (which might be from datas)
                   // initialCenter={{ lat: parseFloat(latitude) || 5.36, lng: parseFloat(longitude) || -4.00 }}
@@ -395,7 +395,7 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
             <label htmlFor="input-naissance">Date de naissance</label>
             <input id="input-naissance" type="date" name="naissance_$_date" value={form.naissance_$_date} onChange={handleChange} required />
             <label htmlFor="input-adresse">Adresse</label>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="modal-person__field-row">
               <input
                 id="input-adresse"
                 name="adresse_$_map"
@@ -403,14 +403,14 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
                 onChange={handleChange}
                 placeholder="Adresse"
                 required
-                style={{ flex: 1 }}
+                className="modal-person__field-input"
               />
-              <button type="button" onClick={() => setShowMap(true)} style={{ marginLeft: 8 }}>
+              <button type="button" onClick={() => setShowMap(true)} className="modal-person__map-btn">
                 📍
               </button>
             </div>
             {showMap && (
-              <div style={{ margin: '10px 0' }}>
+              <div className="modal-person__map-preview">
                 <Gmap
                   // Pass initial center based on current state (which might be from datas)
                   // initialCenter={{ lat: parseFloat(latitude) || 5.36, lng: parseFloat(longitude) || -4.00 }}
@@ -474,9 +474,9 @@ export default function EntityModal({ type, entity, onClose, classes = [] }) {
             </select>
 
           </>}
-          {error && <div style={{ color: 'red' }}>{error}</div>}
+          {error && <div className="modal-person__error">{error}</div>}
           <button type="submit">Enregistrer</button>
-          {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
+          {error && <div className="modal-person__error">{error}</div>}
           {entity && entity._id && <button type="button" onClick={() => {
             if (type === 'eleve') ctx.deleteEleve(entity._id);
             if (type === 'enseignant') ctx.deleteEnseignant(entity._id);
@@ -909,11 +909,11 @@ function AbsencesBlock({ absences, setForm }) {
               <div className="month-title">{new Date(dates[0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
               <div className="month-dates">
                 {dates.sort((a, b) => a - b).map(ts => (
-                  <div className="absence-date" key={ts} style={{ position: 'relative', display: 'inline-block', margin: '0 6px 6px 0' }}>
+                  <div className="absence-date" key={ts}>
                     <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
                     <button type="button" className="remove-absence-btn" title="Supprimer" onClick={() => {
                       if (window.confirm('Supprimer cette absence ?')) setForm(f => ({ ...f, absences: f.absences.filter(x => x !== ts) }));
-                    }} style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', color: '#b00', fontWeight: 'bold', cursor: 'pointer', fontSize: '1.1em', lineHeight: '1em' }}>&times;</button>
+                    }}>&times;</button>
                   </div>
                 ))}
               </div>
@@ -933,7 +933,7 @@ function AbsencesBlock({ absences, setForm }) {
               setNewAbsenceDate('');
             }
           }}>Valider</button>
-          <button type="button" onClick={() => setShowAbsencePicker(false)} style={{ marginLeft: 8 }}>Annuler</button>
+          <button type="button" onClick={() => setShowAbsencePicker(false)} className="modal-person__cancel-btn">Annuler</button>
         </div>
       )}
     </div>
@@ -985,7 +985,7 @@ function BonusBlock({ bonus, setForm }) {
               setBonusLabel('');
             }
           }}>Valider</button>
-          <button type="button" onClick={() => setShowBonusForm(false)} style={{marginLeft:8}}>Annuler</button>
+          <button type="button" onClick={() => setShowBonusForm(false)} className="modal-person__cancel-btn">Annuler</button>
         </div>
       )}
       <div className="bonus-list">
@@ -1001,12 +1001,12 @@ function BonusBlock({ bonus, setForm }) {
             <div className="month-title">{new Date(entries[0][0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
             <div className="month-bonus">
               {entries.sort((a, b) => a[0] - b[0]).map(([ts, txt]) => (
-                <div className="bonus-entry" key={ts} style={{ position: 'relative', display: 'inline-block', margin: '0 6px 6px 0' }}>
+                <div className="bonus-entry" key={ts}>
                   <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
                   <span className="bonus-txt">{txt}</span>
                   <button type="button" className="remove-bonus-btn" title="Supprimer" onClick={() => {
                     if (window.confirm('Supprimer ce bonus ?')) setForm(f => { const o = { ...f.bonus }; delete o[ts]; return { ...f, bonus: o }; });
-                  }} style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', color: '#b00', fontWeight: 'bold', cursor: 'pointer', fontSize: '1.1em', lineHeight: '1em' }}>&times;</button>
+                  }}>&times;</button>
                 </div>
               ))}
             </div>
@@ -1062,7 +1062,7 @@ function ManusBlock({ manus, setForm }) {
               setManusLabel('');
             }
           }}>Valider</button>
-          <button type="button" onClick={() => setShowManusForm(false)} style={{marginLeft:8}}>Annuler</button>
+          <button type="button" onClick={() => setShowManusForm(false)} className="modal-person__cancel-btn">Annuler</button>
         </div>
       )}
       <div className="manus-list">
@@ -1078,12 +1078,12 @@ function ManusBlock({ manus, setForm }) {
             <div className="month-title">{new Date(entries[0][0] * 1).toLocaleString('fr-FR', { month: 'long', year: 'numeric' })}</div>
             <div className="month-manus">
               {entries.sort((a, b) => a[0] - b[0]).map(([ts, txt]) => (
-                <div className="manus-entry" key={ts} style={{ position: 'relative', display: 'inline-block', margin: '0 6px 6px 0' }}>
+                <div className="manus-entry" key={ts}>
                   <span>{new Date(Number(ts)).toLocaleDateString('fr-FR')}</span>
                   <span className="manus-txt">{txt}</span>
                   <button type="button" className="remove-manus-btn" title="Supprimer" onClick={() => {
                     if (window.confirm('Supprimer ce malus ?')) setForm(f => { const o = { ...f.manus }; delete o[ts]; return { ...f, manus: o }; });
-                  }} style={{ position: 'absolute', top: 0, right: 0, background: 'none', border: 'none', color: '#b00', fontWeight: 'bold', cursor: 'pointer', fontSize: '1.1em', lineHeight: '1em' }}>&times;</button>
+                  }}>&times;</button>
                 </div>
               ))}
             </div>
@@ -1122,29 +1122,29 @@ function AddNoteForm({ notes = {}, onAdd, onRemove }) {
   };
 
   return (
-    <div className="notes-container" style={{ border: '1px solid #ccc', borderRadius: 6, padding: 8, marginBottom: 16 }}>
+    <div className="notes-container">
       {/* Affichage des notes triées par date croissante */}
       {Object.entries(notes)
         .sort((a, b) => Number(a[0]) - Number(b[0]))
         .map(([timestamp, [matiere, note]], idx) => (
-          <div key={timestamp} style={{ display: 'flex', alignItems: 'center', background: '#f9f9f9', borderRadius: 4, marginBottom: 4, padding: 4, position: 'relative' }}>
-            <span style={{ minWidth: 100, fontWeight: 500 }}>{new Date(Number(timestamp)).toLocaleDateString()}</span>
-            <span style={{ margin: '0 12px' }}>{matiere}</span>
-            <span style={{ margin: '0 12px', fontWeight: 600 }}>{note}</span>
+          <div key={timestamp} className="notes-container__item">
+            <span className="notes-container__date">{new Date(Number(timestamp)).toLocaleDateString()}</span>
+            <span className="notes-container__matiere">{matiere}</span>
+            <span className="notes-container__note">{note}</span>
             {onRemove && (
-              <button type="button" onClick={() => onRemove(timestamp)} style={{ position: 'absolute', right: 6, top: 4, border: 'none', background: 'transparent', color: '#d00', fontWeight: 'bold', fontSize: 18, cursor: 'pointer' }} title="Supprimer">×</button>
+              <button type="button" onClick={() => onRemove(timestamp)} className="notes-container__remove" title="Supprimer">×</button>
             )}
           </div>
         ))}
       {Object.keys(notes).length === 0 && (
-        <div className="no-notes">Aucune note pour l'instant</div>
+        <div className="notes-container__no-notes">Aucune note pour l'instant</div>
       )}
       {/* Formulaire d'ajout de note (si édition) */}
       {onAdd && (
         !showForm ? (
           <button type="button" className="add-note-btn" onClick={() => setShowForm(true)}>Ajouter une note</button>
         ) : (
-          <div style={{marginTop:8}}>
+          <div className="notes-container__form">
             <input type="date" className="add-note-date" value={date} onChange={e => setDate(e.target.value)} />
             <select className="add-note-matiere" value={matiere} onChange={e => setMatiere(e.target.value)}>
               <option value="">Choisir une matière</option>
@@ -1161,8 +1161,8 @@ function AddNoteForm({ notes = {}, onAdd, onRemove }) {
             </select>
             <input type="number" min="0" max="20" className="add-note-note" placeholder="Note" value={note} onChange={e => setNote(e.target.value)} />
             <button type="button" className="add-note-btn" onClick={handleValidate}>Valider</button>
-            <button type="button" className="add-note-btn" style={{ background: '#ccc', color: '#222' }} onClick={handleCancel}>Annuler</button>
-            {err && <span className="add-note-error">{err}</span>}
+            <button type="button" className="add-note-btn notes-container__cancel" onClick={handleCancel}>Annuler</button>
+            {err && <span className="notes-container__error">{err}</span>}
           </div>
         )
       )}
@@ -1216,11 +1216,10 @@ function DocumentsBlock({ form, setForm, selectedDocuments = [], setSelectedDocu
         <div className="documents-list">
           {form.documents.map((doc, i) => (<Fragment key={doc.name + '-' + i}>
             <div className="document-item"
-              style={{ display: 'flex', alignItems: 'center', gap: 8 }}
               onClick={() => {
                 const type = doc.type?.startsWith("image/") && doc.type !== "application/pdf" ? "img" : "pdf"
-                const img = document.querySelector('.documents-list img.docs_preview_img');
-                const frame = document.querySelector('.documents-list iframe.docs_preview_pdf');
+                const img = document.querySelector('.documents-list img.docs-preview__img');
+                const frame = document.querySelector('.documents-list iframe.docs-preview__pdf');
                 if(type=="img")img.src = doc;
                 if(type=="pdf")frame.src = doc;
               }}>
@@ -1232,8 +1231,8 @@ function DocumentsBlock({ form, setForm, selectedDocuments = [], setSelectedDocu
             </div>
             <a href={doc} target="_blank">
               <span className="doc-icon" title="Télécharger"> Télécharger</span>
-              <img className="docs_preview_img" src="" alt="" style={{maxWidth:'100%', maxHeight:'70vh', margin:'16px auto'}}/>
-              <iframe className="docs_preview_pdf" src="" alt="" style={{maxWidth:'100%', maxHeight:'70vh', margin:'16px auto'}}/>
+              <img className="docs-preview__img" src="" alt="" />
+              <iframe className="docs-preview__pdf" src="" alt="" />
             </a>
           </Fragment>))}
         </div>
@@ -1242,8 +1241,7 @@ function DocumentsBlock({ form, setForm, selectedDocuments = [], setSelectedDocu
       {isEdit && Array.isArray(selectedDocuments) && selectedDocuments.length > 0 && (
         <div className="documents-list">
           {selectedDocuments.map((doc, i) => (
-            <div className="document-item" key={doc.file.name + '-' + i}
-              style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div className="document-item" key={doc.file.name + '-' + i}>
               {doc.file.type === "application/pdf"
                 ? <span className="doc-icon" title="PDF">📄</span>
                 : <span className="doc-icon" title="Image">🖼️</span>}
@@ -1257,7 +1255,7 @@ function DocumentsBlock({ form, setForm, selectedDocuments = [], setSelectedDocu
                   setSelectedDocuments(newDocs);
                 }}
                 placeholder="Nom final du fichier"
-                style={{ marginLeft: 8, flex: 1 }}
+                className="modal-person__field-input"
               />
             </div>
           ))}

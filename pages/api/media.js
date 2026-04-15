@@ -17,64 +17,64 @@ const readFile = (req, saveLocally) => {
     // console.log(req);
     console.log(Object.keys(req));
     const options = {}
-    if(saveLocally){
-        options.uploadDir = path.join(process.cwd(), "/public/school/"+req.query.type)
-        options.filename = (name,ext,path,form) => {
-            console.log(name);
-            console.log(path);
-            // console.log("\n\n\nfdfdsfdsfdsfds\n\n\n");
-            // console.log(form);
-            console.log(form.fields.timestamp[0]);
-            console.log(name);
-            console.log(ext);
-            console.log(name + "_" + form.fields.timestamp[0] + "." + path.originalFilename.split(".").at(-1));
-            return req.query.createdFilename + "_" + form.fields.timestamp[0] + "." + path.originalFilename.split(".").at(-1)
-            return name + "_" + form.fields.timestamp[0] + "." + path.originalFilename.split(".").at(-1)
+    if (saveLocally) {
+        console.log("TRING TO WRITE IMAGE !!!!");
+
+        options.uploadDir = path.join(process.cwd(), "/public/images/" + (req.query.pathRel || ""))
+        options.filename = (name, ext, pathElt, form) => {
+            const timestamp = form.fields.timestamp[0];
+            const originalExt = pathElt.originalFilename.split(".").at(-1);
+
+            // Si createdFilename est fourni (ex: le nom de base calculé par le front)
+            if (req.query.createdFilename) {
+                return `${req.query.createdFilename}_${timestamp}.${originalExt}`;
+            }
+
+            return `${name}_${timestamp}.${originalExt}`;
         }
     }
-    
+
     const form = formidable(options)
-    return new Promise((res,rej) => {
-        form.parse(req, (err,fields,files)=>{
-            if(err)rej(err)
-            res({fields,files})
+    return new Promise((res, rej) => {
+        form.parse(req, (err, fields, files) => {
+            if (err) rej(err)
+            res({ fields, files })
         })
     })
 }
 
 
-const handler = async (req,res,next) => {
+const handler = async (req, res, next) => {
     console.log(req.query);
-    if(req.query.src){
+    if (req.query.src) {
         fs.unlink(path.join(process.cwd(), "/public", req.query.src), (err) => {
-            if(err){
+            if (err) {
                 console.log("ok errorrr ohh");
                 console.log(err);
-            }        
+            }
         })
     }
-    if(req.method == "POST" || req.method == "PATCH"){
+    if (req.method == "POST" || req.method == "PATCH") {
 
         console.log("\n\n\n\nBEING WRITING IMAGES .............");
         console.log(req.url);
         console.log(req.query);
         console.log(req.query.type);
-        
-        
-        
-        
-        try{
-            await fs.readdir(path.join(process.cwd()+"/public","/school/"+req.query.type))
-        }catch(err){
-            console.log("ok errorrr");
-            await fs.mkdir(path.join(process.cwd(), "/public/school/students"), { recursive: true });
-            await fs.mkdir(path.join(process.cwd(), "/public/school/teachers"), { recursive: true });
-            await fs.mkdir(path.join(process.cwd(), "/public/school/classes"), { recursive: true });
+
+
+
+
+        const uploadPath = path.join(process.cwd(), "public/images", req.query.pathRel || "");
+        try {
+            await fs.access(uploadPath);
+        } catch (err) {
+            console.log("Creating directory:", uploadPath);
+            await fs.mkdir(uploadPath, { recursive: true });
         }
-        await readFile(req,true)
+        await readFile(req, true)
         console.log("ok done");
 
-        res.json({done: "fichier écrit ;)"})
+        res.json({ done: "fichier écrit ;)" })
     }
 }
 

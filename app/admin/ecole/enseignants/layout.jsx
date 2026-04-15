@@ -8,7 +8,7 @@ import PersonCard from '../components/PersonCard';
 
 export default function EcoleAdminEleveLayout({ children }) {
     const ctx = useContext(AiAdminContext);
-    if (!ctx) return <div style={{color:'red'}}>Erreur : AiAdminContext non trouvé. Vérifiez que l'application est bien entourée par le provider.</div>;
+    if (!ctx) return <div className="admin-error">Erreur : AiAdminContext non trouvé. Vérifiez que l'application est bien entourée par le provider.</div>;
     const {enseignants, classes, selected, setSelected, showModal, setShowModal} = ctx
 
     
@@ -28,7 +28,7 @@ export default function EcoleAdminEleveLayout({ children }) {
                 ))}
             </div>
             :
-            <div style={{textAlign:'center',marginTop:'2em',fontSize:'1.3em'}}>Chargement...</div>
+            <div className="admin-loading">Chargement...</div>
         }
         {showModal && <EntityModal type="enseignant" entity={selected} onClose={() => setShowModal(false)} classes={ctx.classes || []} />}
         {children}

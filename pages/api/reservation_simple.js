@@ -55,10 +55,12 @@ async function sendConfirmationEmail(reservation) {
       
       <h3>Détails de la réservation :</h3>
       <ul>
-        <li>Communauté : ${reservation.community}</li>
+        <li>Communauté : ${reservation.community || 'N/A'}</li>
         <li>Nom : ${reservation.names}</li>
         <li>N° téléphone : ${reservation.phone_number}</li>
         <li>Email : ${reservation.email || "Email non fourni"}</li>
+        <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString('fr-FR')}</li>
+        <li>Date de départ : ${new Date(reservation.to).toLocaleDateString('fr-FR')}</li>
         <li>Message : ${reservation.message || "Aucun message associé"}</li>
       </ul>
 
@@ -118,8 +120,8 @@ async function sendPaymentConfirmationEmail(reservation) {
       
       <h3>Rappel des détails de la réservation :</h3>
       <ul>
-        <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString()}</li>
-        <li>Date de départ : ${new Date(reservation.to).toLocaleDateString()}</li>
+        <li>Date d'arrivée : ${new Date(reservation.from).toLocaleDateString('fr-FR')}</li>
+        <li>Date de départ : ${new Date(reservation.to).toLocaleDateString('fr-FR')}</li>
         <li>Nombre de participants : ${reservation.participants}</li>
       </ul>
 

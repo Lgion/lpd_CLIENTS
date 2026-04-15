@@ -7,7 +7,7 @@ export default function PersonCard({ person, classe, onClick, onEdit, type }) {
   const photoUrl = person.photo_$_file || '/default-photo.png';
 
   return (
-    <div className="person-card-wrapper" style={{position:'relative'}}>
+    <div className="person-card-wrapper">
       <Link href={`/admin/ecole/${type}s/${person._id}`} className="person-card" tabIndex={0} >
         <img className="person-card__photo" src={photoUrl} alt={person.nom + ' ' + person.prenoms} />
         <div className="person-card__infos">
@@ -27,8 +27,7 @@ export default function PersonCard({ person, classe, onClick, onEdit, type }) {
         {onEdit && (
           <button
             type="button"
-            className="person-card__editbtn"
-            style={{position:'absolute',top:8,right:8,zIndex:2}}
+            className="card-edit-btn"
             onClick={e => { e.stopPropagation(); e.preventDefault(); onEdit(person); }}
             tabIndex={0}
           >Éditer</button>

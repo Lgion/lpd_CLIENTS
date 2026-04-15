@@ -10,7 +10,7 @@ export default function EnseignantDetailPage() {
   const { id } = useParams();
   const router = useRouter();
   const ctx = useContext(AiAdminContext);
-  if (!ctx) return <div style={{color:'red'}}>Erreur : contexte non trouvé</div>;
+  if (!ctx) return <div className="admin-error">Erreur : contexte non trouvé</div>;
   useEffect(() => {
     ctx.fetchEnseignants && ctx.fetchEnseignants();
     ctx.fetchClasses && ctx.fetchClasses();
@@ -21,13 +21,12 @@ export default function EnseignantDetailPage() {
   const classe = ctx.classes.find(c=>c._id==enseignant.current_classes)
   const [gmapOpen, setGmapOpen] = useState(false)
 
-  if (!enseignant) return <div style={{color:'red'}}>Enseignant introuvable</div>;
+  if (!enseignant) return <div className="admin-error">Enseignant introuvable</div>;
 
   return !enseignant ? <div>....loading.....</div>
-    : <div className="person-detail" style={{position:'relative'}}>
+    : <div className="person-detail person-detail--relative">
       <button
-        className="person-detail__close"
-        style={{position:'absolute',top:-15,right:5,color:'red',background:'none',border:'none',fontSize:'2em',cursor:'pointer',zIndex:10}}
+        className="person-detail__close-btn"
         aria-label="Fermer"
         onClick={() => router.back()}
       >✕</button>
@@ -45,8 +44,8 @@ export default function EnseignantDetailPage() {
         >Fermer Édition</button>
       }
       <img className="person-detail__photo" src={enseignant.photo_$_file || '/default-photo.png'} alt="" />
-      <h1 className="person-detail__title"><u>Enseignant :</u> {enseignant.nom} {enseignant.prenoms} ({enseignant.sexe}) <span style={{fontWeight:400}}>[<time dateTime={enseignant.naissance_$_date}>{enseignant.naissance_$_date ? new Date(enseignant.naissance_$_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</time>]</span></h1>
-      <div className="person-detail__classe" style={{marginBottom:'1em'}}>
+      <h1 className="person-detail__title"><u>Enseignant :</u> {enseignant.nom} {enseignant.prenoms} ({enseignant.sexe}) <span className="person-detail__subtitle-light">[<time dateTime={enseignant.naissance_$_date}>{enseignant.naissance_$_date ? new Date(enseignant.naissance_$_date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</time>]</span></h1>
+      <div className="person-detail__classe">
         <u>Classe principale :</u> <Link href={`/admin/ecole/classes/${classe._id}`}>{classe.niveau} - {classe.alias}</Link>
       </div>
       <div className="person-detail__gmap">
@@ -63,10 +62,10 @@ export default function EnseignantDetailPage() {
           </div>
         )}
       </div>
-      <div className="person-detail__contact" style={{marginBottom:'1em'}}>
+      <div className="person-detail__contact">
         <u>Contact :</u><br/>
-        <span style={{display:'block',margin:'0.3em 0'}}><b>Téléphone : </b>{enseignant.phone_$_tel  || <span style={{color:'grey'}}>Non renseigné</span>}</span>
-        <span style={{display:'block',margin:'0.3em 0'}}><b>Email : </b>{enseignant.email_$_email || <span style={{color:'grey'}}>Non renseigné</span>}</span>
+        <span className="person-detail__contact-item"><b>Téléphone : </b>{enseignant.phone_$_tel  || <span className="person-detail__empty-text">Non renseigné</span>}</span>
+        <span className="person-detail__contact-item"><b>Email : </b>{enseignant.email_$_email || <span className="person-detail__empty-text">Non renseigné</span>}</span>
       </div>
       {/* Ajoute ici d'autres blocs d'infos si besoin */}
     </div>

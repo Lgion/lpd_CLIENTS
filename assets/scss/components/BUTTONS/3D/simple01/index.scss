@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // JE N'AI PAS RÉSOLU COMMENT RAJOUTER COMPASS DANS UNE APP NEXTJS
 // @import "compass/css3";
 
@@ -15,8 +17,8 @@ $bg_shadow: rgba(0,0,0,0.4);
   left: 50%;
   width: $width;
   height: $height;
-  margin-top: (-$height)/2;
-  margin-left: (-$width)/2; 
+  margin-top: math.div(-$height, 2);
+  margin-left: math.div(-$width, 2); 
 }
 
 
@@ -45,7 +47,7 @@ $bg_shadow: rgba(0,0,0,0.4);
     //   0 5px 5px 1px $bg_shadow);
   }
   &:active {
-    margin-top: (-$height)/2 + 4;
+    margin-top: math.div(-$height, 2) + 4;
     // @include box-shadow(none);
   }
 }

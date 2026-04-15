@@ -61,11 +61,6 @@
     >.modal___footer{
         border-radius: 0 0 10px 10px;overflow: hidden;height:10%;
     }
-    >.modal___main{
-        height: 80%;
-    }
-        &.active{
-    }
 }
 %txt_rogner{
     text-overflow: ellipsis;
@@ -200,13 +195,9 @@
 
 */
 %menu_elements{
+    display: block;
     height: 75px;
     padding: 20px 0;
-    @include mobile-and-tablette{
-        height: 60px;
-        padding: 20px .25em;
-    }
-    display: block;
     // text-indent: 0.5em;
     box-shadow: 0 0 10px 1px black;
     border: solid;
@@ -221,7 +212,13 @@
     border-top-left-radius: 10px 100px;
     border-top-right-radius: 100px 10px;
     -webkit-transition: all .3s;
+    transition: all .3s;
     background: #ff5900;
     background: linear-gradient(135deg, rgba(114,114,114,0.3) 0%, #666666 46%, #696969 62%, rgba(114,114,114,0.3) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4D727272', endColorstr='#4D727272',GradientType=1 );
+
+    @include mobile-and-tablette{
+        height: 60px;
+        padding: 20px .25em;
+    }
 }

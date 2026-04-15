@@ -10,7 +10,7 @@ export default function ElevePage() {
   const { id } = useParams();
   const router = useRouter();
   const ctx = useContext(AiAdminContext);
-  if (!ctx) return <div style={{color:'red'}}>Erreur : contexte non trouvé</div>;
+  if (!ctx) return <div className="admin-error">Erreur : contexte non trouvé</div>;
   const getDefaultSchoolYear = (compositions) => {
     const keys = Object.keys(compositions || {});
     if (keys.length > 0) return keys[0];
@@ -30,7 +30,7 @@ export default function ElevePage() {
   const eleve = (ctx.eleves || []).find(e => String(e._id) === String(id));
   const [gmapOpen, setGmapOpen] = useState(false)
   const [schoolYear, setSchoolYear] = useState(getDefaultSchoolYear(eleve?.compositions || {}));
-  if (!eleve) return <div style={{color:'red'}}>Élève introuvable</div>;
+  if (!eleve) return <div className="admin-error">Élève introuvable</div>;
   const classe = (ctx.classes || []).find(c => c._id === eleve.current_classe) || {}
 
 
@@ -50,8 +50,7 @@ export default function ElevePage() {
   return !eleve ? <div>....loading.....</div>
     : <div className="person-detail">
       <button
-        className="person-detail__close"
-        style={{position:'absolute',top:-15,right:5,color:'red',  background:'none',border:'none',fontSize:'2em',cursor:'pointer',zIndex:10}}
+        className="person-detail__close-btn"
         aria-label="Fermer"
         onClick={() => router.back()}
       >✕</button>
@@ -112,17 +111,17 @@ export default function ElevePage() {
         <h2 className="person-detail__subtitle">Frais de scolarité</h2>
         {Object.keys(allFees).length === 0 ? <div>Aucun dépôt enregistré</div> :
           Object.entries(allFees).map(([year, fees]) => (
-            <div key={year} style={{marginBottom:'1.3em'}}>
-              <div style={{fontWeight:600,marginBottom:4}}>{year}</div>
+            <div key={year} className="person-detail__year-block">
+              <div className="person-detail__year-title">{year}</div>
               <ScolarityFeesBlock fees={fees} schoolYear={year} />
             </div>
           ))
         }
-        <div style={{marginTop:'1em',fontSize:'0.97em',color:'#444'}}>
+        <div className="person-detail__footer-text">
           <b>Total sur toutes années :</b> {totalArgent} F | {totalRiz} kg riz
         </div>
       </div>
-      <div style={{margin:'2em 0 1em 0'}}>
+      <div className="person-detail__history-margin">
         <h2>Commentaires</h2>
         <CommentairesBlock commentaires={eleve.commentaires} />
       </div>

@@ -1,318 +1,343 @@
-body{
-        >header{
-            background: url(/img/sanctuaire/03.webp) center center no-repeat;
-            background-size: 100%;
-            &:before,&:after{
-                background:none !important;
-                box-shadow:none !important;
-            }
-            >menu{
-                >li{
-                    >a{
-                        &:not(.active):not(:hover){opacity:.5;}
+body {
+    >header {
+        background: url(/img/sanctuaire/03.webp) center center no-repeat;
+        background-size: 100%;
+
+        &:before,
+        &:after {
+            background: none !important;
+            box-shadow: none !important;
+        }
+
+        >menu {
+            >li {
+                >a {
+                    &:not(.active):not(:hover) {
+                        opacity: .5;
                     }
                 }
             }
         }
-        >main{
-            &#admin{}
-            &.school{
-                >nav{
-                    padding: 1em;
-                    border: 5px solid;
-                    background:wheat;
-                    &#adminMenus{}
-                    >ul{
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 1em;
-                        text-align: center;
-                        &:not(#membersMenu){gap:10px;}
-                        &#membersMenu{
-                            >li{
-                                &:hover>a{
-                                    color:white;
-                                }
-                            }
-                        }
-                        &#yearsMenu{
-                            // border-color:purple;
-                            position: relative;
-                            padding: calc(1em + -2px) 2.5em;
-                            margin: 1em 0 0;
-                            border: solid;
-                            &:hover{
-                                &:after{
-                                    content: unset;
-                                }
-                            }
-                            &:after{
-                                content: "CLASSES";
+    }
+
+    >main {
+        &.school {
+            >nav {
+                padding: 1em;
+                border: 5px solid;
+                background: wheat;
+                background: wheat;
+
+                >ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1em;
+                    text-align: center;
+
+                    &:not(#membersMenu) {
+                        gap: 10px;
+                    }
+
+                    &#membersMenu {
+                        >li {
+                            &:hover>a {
                                 color: white;
-                                position: absolute;
-                                top: 0;
-                                bottom: 0;
-                                right: 0;
-                                left: 0;
-                                background: rgba(0, 0, 0, .8);
-                                line-height: 2em;
-                                font-size: 2em;
-                            }
-                            >li{
-                                border: solid purple;
-                                border-width: 0 3px;
-                                width: unset;
-                                &:first-of-type.addClasse{
-                                    width: 50px;
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    height: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    >button{
-                                        width: 25px;
-                                        height: 25px;
-                                        line-height: 12px;
-                                        transition:all .2s;
-                                        &:hover{background:black;color:white;}
-                                    }
-                                }
-                                >a{padding: .25em;}
-                            }
-                        }
-                        &#classesMenu{
-                            border-color:blue;
-                            padding: 1em;
-                            background: whitesmoke;
-                            box-shadow: 0 0 10px 1px inset;
-                            border-radius: 0 0 5px 5px;                        
-                            >li{
-                                border: solid blue;
-                                border-width: 3px;
-                                width: unset;
-                                >a{
-                                    padding: .125em;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    gap: 5px;
-                                    >span{
-                                        display: inline-block;
-                                        width:2em;
-                                        height:2em;
-                                        background:url("/school/edit.svg");
-                                        background-size: cover;
-                                        &:hover{color:blue;border: solid;border-radius: 1em;}
-                                    }
-                                }
-                            }
-                        }
-                        >li{
-                            width: 100%;
-                            background:white;
-                            // flex: 1;
-                            transition:background .2s;
-                            border: solid;
-                            :hover{background:rgba(0,0,0,.5);}
-                            >a{
-                                display: block;
-                                padding: 1em;
-                                color:black;
-                                width: 100%;
                             }
                         }
                     }
-                }
-                >section{
-                    padding: 1em ;
-                    &#adminContent{}
-                    >table{
-                        >thead{
-                            >tr{
-                                >th{}
+
+                    &#yearsMenu {
+                        // border-color:purple;
+                        position: relative;
+                        padding: calc(1em + -2px) 2.5em;
+                        margin: 1em 0 0;
+                        border: solid;
+
+                        &:hover {
+                            &:after {
+                                content: unset;
                             }
                         }
-                        >tbody{
-                            >tr{
-                                >td{
-                                    &:first-of-type{
-                                    }
-                                    &:last-of-type{
-                                        display: flex;
-                                        flex-flow: wrap;
-                                        gap:10px;
-                                        >a{
-    
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    >form{
-                        display:flex;
-                        padding: 1em 1em 0;
-                        border-bottom: solid;
-                        margin-bottom: 1em;
-                        >input{
-                            border-radius: 5px 0 0 0;
-                        }
-                        >button{
-                            width: 10%;
-                            border-radius: 0 5px 0 0;
+
+                        &:after {
+                            content: "CLASSES";
+                            color: white;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            right: 0;
+                            left: 0;
+                            background: rgba(0, 0, 0, .8);
+                            line-height: 2em;
                             font-size: 2em;
                         }
-                    }
-                    >ul{
-                        display: flex;
-                        flex-flow: wrap;
-                        justify-content: space-evenly;
-                        padding: .5em 0;
-                        &#school_members{
 
-                        }
-                        >li{
-                            position: relative;
-                            // width: 31%;
-                            height: 300px;
-                            border:1px solid;
-                            border-radius: 5px;
-                            cursor:pointer;
-                            transition: all .3s;
-                            &:hover{
-                                // width: 33%;
-                                box-shadow: 0 0 10px 1px;
-                                border-style:dotted;
-                            }
-                            &.off{display:none;}
-                            >figure{
-                                height:40%;
-                                border-bottom: solid;
-                                padding-bottom:.25em; 
-                                >img{height:calc(100% - 1em);object-fit: contain;}
-                                >figcaption{
-                                    text-align: center;
-                                }
-                            }
-                            >span{
+                        >li {
+                            border: solid purple;
+                            border-width: 0 3px;
+                            width: unset;
+
+                            &:first-of-type.addClasse {
+                                width: 50px;
                                 position: absolute;
-                                top:0;
-                                right: 0;
-                                height: 2.5em;
-                                width: 2.5em;
-                                background-size: contain !important;
-                                filter:grayscale(1);
-                                &.active{filter:grayscale(0);}
-                                &.isInterne{
-                                    background:url("/school/students/interne.svg");
-                                }
-                                &.doFeesPaid{
-                                    top: 2.5em;
-                                    background:url("/school/students/fees.svg");
-                                }
-                            }
-                            >section{
-                                padding: 1em;
-                                >div{
+                                top: 0;
+                                left: 0;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
 
-                                    &.birth{
-    
+                                >button {
+                                    width: 25px;
+                                    height: 25px;
+                                    line-height: 12px;
+                                    transition: all .2s;
+
+                                    &:hover {
+                                        background: black;
+                                        color: white;
                                     }
-                                    &.address{
-    
-                                    }
-                                    &.parents{
-                                        
-                                    }
-                                    &.phone{
-    
-                                    }
-                                    &.email{
-    
+                                }
+                            }
+
+                            >a {
+                                padding: .25em;
+                            }
+                        }
+                    }
+
+                    &#classesMenu {
+                        border-color: blue;
+                        padding: 1em;
+                        background: whitesmoke;
+                        box-shadow: 0 0 10px 1px inset;
+                        border-radius: 0 0 5px 5px;
+
+                        >li {
+                            border: solid blue;
+                            border-width: 3px;
+                            width: unset;
+
+                            >a {
+                                padding: .125em;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 5px;
+
+                                >span {
+                                    display: inline-block;
+                                    width: 2em;
+                                    height: 2em;
+                                    background: url("/school/edit.svg");
+                                    background-size: cover;
+
+                                    &:hover {
+                                        color: blue;
+                                        border: solid;
+                                        border-radius: 1em;
                                     }
                                 }
                             }
                         }
                     }
-                }
-            }
-            &.profilContainer{
-                .card{
-                    &-header{}
-                    &-body{
-                        .card-body{
-                            font-size:1em;
+
+                    >li {
+                        width: 100%;
+                        background: white;
+                        // flex: 1;
+                        transition: background .2s;
+                        border: solid;
+
+                        :hover {
+                            background: rgba(0, 0, 0, .5);
                         }
-                    }
-                }
-            }
-        }
-        >#modal{
-            >span.close{}
-            .modal{
-                &___header{
-                }
-                &___main{
-                    overflow:hidden !important;
-                    >form{
-                        overflow:scroll;
-                        margin: 0 auto;
-                        border-radius: 10px;
-                        padding: 1em;
-                        box-shadow: 0 0 10px 1px;
-                        label{
+
+                        >a {
                             display: block;
-                        }
-                        >div{
-                            border: solid;
                             padding: 1em;
-                            margin: 1em 0;
+                            color: black;
+                            width: 100%;
                         }
                     }
                 }
-                &___footer{}
+            }
+
+            >section {
+                padding: 1em;
+
+                >table {
+                    >thead {
+                        >tr {
+                            >th {
+                                border-bottom: 2px solid #ddd;
+                            }
+                        }
+                    }
+
+                    >tbody {}
+                }
+
+                >form {
+                    display: flex;
+                    padding: 1em 1em 0;
+                    border-bottom: solid;
+                    margin-bottom: 1em;
+
+                    >input {
+                        border-radius: 5px 0 0 0;
+                    }
+
+                    >button {
+                        width: 10%;
+                        border-radius: 0 5px 0 0;
+                        font-size: 2em;
+                    }
+                }
+
+                >ul {
+                    >li {
+                        position: relative;
+                        // width: 31%;
+                        height: 300px;
+                        border: 1px solid;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: all .3s;
+
+                        &:hover {
+                            // width: 33%;
+                            box-shadow: 0 0 10px 1px;
+                            border-style: dotted;
+                        }
+
+                        &.off {
+                            display: none;
+                        }
+
+                        >figure {
+                            height: 40%;
+                            border-bottom: solid;
+                            padding-bottom: .25em;
+
+                            >img {
+                                height: calc(100% - 1em);
+                                object-fit: contain;
+                            }
+
+                            >figcaption {
+                                text-align: center;
+                            }
+                        }
+
+                        >span {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            height: 2.5em;
+                            width: 2.5em;
+                            background-size: contain !important;
+                            filter: grayscale(1);
+
+                            &.active {
+                                filter: grayscale(0);
+                            }
+
+                            &.isInterne {
+                                background: url("/school/students/interne.svg");
+                            }
+
+                            &.doFeesPaid {
+                                top: 2.5em;
+                                background: url("/school/students/fees.svg");
+                            }
+                        }}
+                }
             }
         }
-        >footer{}
-}
-.ant-modal-close{
-    background-color: red !important;
-    transition: background .1s;
-    &:hover{
-        background: orangered !important;
-        color:white !important;
+
+        &.profilContainer {
+            .card {
+                &-body {
+                    .card-body {
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+    }
+
+    >#modal {
+        .modal {
+            &___main {
+                overflow: hidden !important;
+
+                >form {
+                    overflow: scroll;
+                    margin: 0 auto;
+                    border-radius: 10px;
+                    padding: 1em;
+                    box-shadow: 0 0 10px 1px;
+
+                    label {
+                        display: block;
+                    }
+
+                    >div {
+                        border: solid;
+                        padding: 1em;
+                        margin: 1em 0;
+                    }
+                }
+            }
+        }
     }
 }
-body>div:has(.ant-modal-root){
+
+.ant-modal-close {
+    background-color: red !important;
+    transition: background .1s;
+
+    &:hover {
+        background: orangered !important;
+        color: white !important;
+    }
+}
+
+body>div:has(.ant-modal-root) {
     z-index: 100;
 }
-.ant-modal-root{
-    >.ant-modal-wrap{
+
+.ant-modal-root {
+    >.ant-modal-wrap {
         margin: 0 2em;
         overflow: hidden !important;
         top: 0;
     }
 }
-.ant-modal{
+
+.ant-modal {
     // padding-bottom:10em;
     height: 100%;
     width: 100% !important;
     top: 0 !important;
-    >div{
+
+    >div {
         height: 100%;
-        >.ant-modal-content{
+
+        >.ant-modal-content {
             height: 100%;
-            >div{
+
+            >div {
                 background: whitesmoke !important;
-                    box-shadow: 0 0 10px 1px inset;
-                    padding: 1em;
-                    display: flex;
-                    flex-flow: wrap;
-                    gap: 1em;
-                    justify-content: center;
-                &.ant-modal-body{
+                box-shadow: 0 0 10px 1px inset;
+                padding: 1em;
+                display: flex;
+                flex-flow: wrap;
+                gap: 1em;
+                justify-content: center;
+
+                &.ant-modal-body {
                     height: 80%;
                     overflow: scroll;
                 }
@@ -321,40 +346,707 @@ body>div:has(.ant-modal-root){
 
     }
 }
-.reservation-details {
-  .detail-section {
-    margin-bottom: 24px;
-    padding: 16px;
-    // background-color: #fafafa;
-    border-radius: 8px;
 
-    &:last-child {
-      margin-bottom: 0;
+// Sanctuaire Admin Styles (BEM)
+.sanctuaire-admin {
+    padding: 20px;
+
+    &__header {
+        margin-bottom: 20px;
+        border: 2px solid;
+        padding: .5em;
+        border-radius: 5px;
     }
 
-    h3 {
-      margin: 0 0 16px 0;
-      color: #1890ff;
-      font-size: 16px;
-      font-weight: 600;
+    &__controls {
+        margin-bottom: 10px;
     }
 
-    p {
-      margin: 8px 0;
-      color: rgba(0, 0, 0, 0.85);
-      >strong{text-decoration: underline;}
-
-      strong {
-        margin-right: 8px;
-        color: rgba(0, 0, 0, 0.65);
-      }
+    &__search {
+        width: 300px;
     }
-  }
+
+    &__datepicker {
+        min-width: 240px;
+    }
+
+    &__info-list {
+        margin-top: 10px;
+        margin-bottom: 1em;
+        list-style: none;
+        padding: 0;
+
+        &-title {
+            font-weight: bold;
+        }
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+            border: 1px dotted;
+            padding: 1em;
+            background: white;
+            border-radius: 5px;
+        }
+
+        li {
+            list-style-type: none;
+            margin-left: 15px;
+            position: relative;
+
+            &:before {
+                content: "•";
+                position: absolute;
+                left: -15px;
+            }
+        }
+
+        &+.ant-space {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &__table {
+        .ant-table-tbody>tr {
+            cursor: pointer;
+
+            &:hover {
+                background-color: #e6f7ff !important;
+            }
+        }
+
+        table {
+            border: solid;
+            box-shadow: 0 0 10px .1px inset;
+            padding: .25em;
+
+            td {
+                border-right: 1px dotted;
+                border-bottom: 1px dotted;
+            }
+        }
+    }
+
+    &__details {
+        .detail-section {
+            margin-bottom: 24px;
+            padding: 16px;
+            border-radius: 8px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            h3 {
+                margin: 0 0 16px 0;
+                color: #1890ff;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            p {
+                margin: 8px 0;
+                color: rgba(0, 0, 0, 0.85);
+
+                strong {
+                    margin-right: 8px;
+                    color: rgba(0, 0, 0, 0.65);
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &__edit-form {
+        &-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+
+            @media (max-width: 600px) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        &-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+        }
+
+        &-footer {
+            text-align: right;
+            margin-top: 24px;
+        }
+    }
 }
 
 // Style pour rendre les lignes du tableau cliquables
-.ant-table-tbody > tr {
-  &:hover {
-    background-color: #e6f7ff !important;
-  }
+.ant-table-tbody>tr {
+    &:hover {
+        background-color: #e6f7ff !important;
+    }
+}
+
+.mongo-form {
+    &__coordinates-group {
+        margin-top: 1rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+    }
+
+    &__field-row {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__label-clickable {
+        cursor: pointer;
+        display: block;
+    }
+}
+// Ecommerce Admin Styles (BEM)
+.ecommerce-admin {
+    padding: 20px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
+
+    &__add-btn {
+        background: #000;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #333;
+        }
+
+        span {
+            font-size: 24px;
+        }
+    }
+
+    &__search-container {
+        margin-bottom: 24px;
+    }
+
+    &__search-input {
+        width: 100%;
+        padding: 10px 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: #000;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+    }
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    &__image-container {
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        background: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    &__image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    &__content {
+        padding: 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.4;
+        min-height: 2.8em;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    &__badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    &__category {
+        display: inline-block;
+        background: #ebf5ff;
+        color: #004299;
+        font-size: 11px;
+        padding: 2px 10px;
+        border-radius: 9999px;
+        font-weight: 600;
+    }
+
+    &__type {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 10px;
+        border-radius: 9999px;
+
+        &--objet {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        &--publication {
+            background: #faf5ff;
+            color: #6b21a8;
+        }
+    }
+
+    &__author {
+        font-size: 13px;
+        color: #666;
+        font-style: italic;
+    }
+
+    &__footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    &__price {
+        font-size: 17px;
+        font-weight: 700;
+        color: #000;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 6px;
+    }
+
+    &__btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &--edit {
+            background: #000;
+            color: #fff;
+            font-size: 16px;
+            &:hover { background: #333; }
+        }
+
+        &--delete {
+            background: #000;
+            color: #fff;
+            font-size: 18px;
+            &:hover { background: #333; }
+        }
+    }
+}
+
+// Common Admin Modal & Form (BEM)
+.admin-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    &__content {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        max-width: 600px;
+        width: 100%;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+        }
+    }
+
+    &__close-btn {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: #999;
+        cursor: pointer;
+        line-height: 1;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    &__body {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    &__footer {
+        padding: 20px;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    &__btn {
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+
+        &--cancel {
+            background: #f3f4f6;
+            color: #374151;
+            &:hover { background: #e5e7eb; }
+        }
+
+        &--save {
+            background: #000;
+            color: #fff;
+            &:hover { background: #333; }
+        }
+    }
+}
+
+.admin-form {
+    &__group {
+        margin-bottom: 16px;
+    }
+
+    &__label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+
+    &__input, &__select, &__textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: #000;
+        }
+    }
+
+    &__textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+}
+
+// Admin Dashboard Styles (BEM)
+.admin-dashboard {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &__header {
+        margin-bottom: 32px;
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin: 0;
+        }
+        p {
+            color: #666;
+            margin-top: 4px;
+        }
+    }
+
+    &__stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        margin-bottom: 32px;
+    }
+
+    &__stat-card {
+        background: #fff;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f0f0f0;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        &-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            
+            &--blue { background: #eff6ff; color: #3b82f6; }
+            &--green { background: #f0fdf4; color: #22c55e; }
+            &--purple { background: #faf5ff; color: #a855f7; }
+            &--orange { background: #fff7ed; color: #f97316; }
+        }
+
+        &-info {
+            .stat-value {
+                font-size: 24px;
+                font-weight: 800;
+                color: #1a1a1a;
+                display: block;
+            }
+            .stat-label {
+                font-size: 14px;
+                color: #666;
+                font-weight: 500;
+            }
+        }
+    }
+
+    &__content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 24px;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__section {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f0f0f0;
+        overflow: hidden;
+
+        &-header {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+                font-size: 18px;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .view-all {
+                font-size: 14px;
+                font-weight: 600;
+                color: #3b82f6;
+                text-decoration: none;
+                &:hover { text-decoration: underline; }
+            }
+        }
+    }
+
+    &__list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    &__list-item {
+        padding: 16px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.2s;
+
+        &:last-child { border-bottom: none; }
+        &:hover { background: #f9fafb; }
+
+        &-main {
+            .title {
+                font-weight: 600;
+                color: #1a1a1a;
+                display: block;
+            }
+            .subtitle {
+                font-size: 13px;
+                color: #666;
+            }
+        }
+
+        &-meta {
+            text-align: right;
+            .amount {
+                font-weight: 700;
+                color: #1a1a1a;
+                display: block;
+            }
+            .date {
+                font-size: 12px;
+                color: #999;
+            }
+        }
+    }
+
+    &__empty {
+        padding: 40px;
+        text-align: center;
+        color: #999;
+        font-style: italic;
+    }
+}
+
+// Loading & Error States (Common Admin)
+.admin-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #666;
+    gap: 16px;
+
+    .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+}
+
+.admin-error {
+    text-align: center;
+    padding: 60px 20px;
+    background: #fff;
+    border-radius: 16px;
+    margin: 40px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    h2 { color: #dc2626; margin-bottom: 16px; }
+    p { color: #666; margin-bottom: 24px; }
+    
+    button {
+        background: #000;
+        color: #fff;
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        &:hover { background: #333; }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

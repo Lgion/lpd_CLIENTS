@@ -77,15 +77,25 @@ exports.modifyEntry = (req, res, next, Model) => {
     delete req.body.timestamp
     const entryObject = req.body
 
-    Model.findOneAndUpdate({ _id: req.query._id },{ ...entryObject })
-        .then((resp) => {
-            console.log("ok del");
-            res.status(201).json({ message: 'Objet modifié!' ,resp})
-        })
-        .catch((error) => {
-            console.log("hmm.. err");
-            res.status(400).json({ error })
-        })
+    mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority',
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        }
+    ).then(() => {
+        Model.findOneAndUpdate({ _id: req.query._id },{ ...entryObject })
+            .then((resp) => {
+                console.log("ok del");
+                res.status(201).json({ message: 'Objet modifié!' ,resp})
+            })
+            .catch((error) => {
+                console.log("hmm.. err");
+                res.status(400).json({ error })
+            })
+    }).catch(e => {
+        console.log(e, 'Connexion à MongoDB échouée !');
+        res.status(500).json({ error: 'Database connection failed' });
+    });
 }
 exports.deleteEntry = async (req, res, next, Model) => {
     mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority',

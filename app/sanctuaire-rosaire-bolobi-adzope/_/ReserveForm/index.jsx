@@ -415,6 +415,11 @@ export default function ReserveForm() {
     fd.set('to', zero_night.checked? le.value : au.value)
     
     // Ajouter le tableau de contacts converti en JSON
+    fd_.reservation.community = contactInfo.community;
+    fd_.reservation.names = contactInfo.names;
+    fd_.reservation.phone_number = contactInfo.phone_number;
+    fd_.reservation.email = contactInfo.email;
+    fd_.reservation.message = fd.get('message');
     fd.append('contact', JSON.stringify([contactInfo]))
 
     // Calcul des montants
@@ -500,7 +505,7 @@ export default function ReserveForm() {
     
     // if(true)return false
     try {
-      const response = await fetch("/api/reservationn", {
+      const response = await fetch("/api/reservation", {
           method: "POST",
           headers: {
               'Content-Type': 'application/json',

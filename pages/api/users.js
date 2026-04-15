@@ -13,20 +13,24 @@ async function handlePost(req, res) {
 
   // On cherche l'utilisateur par email
   let user = await User_lpd.findOne({ email });
-  console.log(9);
+  const { commande } = req.body;
 
   if (user) {
-    console.log(10);
-    // Optionnel: mettre à jour les infos client si besoin
-    user.fullName = user.fullName || fullName;
-    user.tel = user.tel || tel;
-    user.communaute = user.communaute || communaute;
-    user.options = { ...options, ...user.options };
-    console.log(11);
+    // Mettre à jour les infos client
+    user.fullName = fullName || user.fullName;
+    user.tel = tel || user.tel;
+    user.communaute = communaute || user.communaute;
+    user.options = { ...user.options, ...options };
+    
+    // Ajouter la commande à l'historique si présente
+    if (commande) {
+      if (!user.commandes) user.commandes = { ecom: [], sanctuaire: [] };
+      if (!user.commandes.ecom) user.commandes.ecom = [];
+      user.commandes.ecom.push(commande);
+    }
+
     await user.save();
   } else {
-    console.log("10b");
-    console.log("10b");
     // Création du user
     user = new User_lpd({
       email,
@@ -36,10 +40,9 @@ async function handlePost(req, res) {
       options,
       commandes: {
         sanctuaire: [],
-        ecom: []
+        ecom: commande ? [commande] : []
       }
     });
-    console.log("11b");
     await user.save();
   }
 

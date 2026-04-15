@@ -2100,10 +2100,11 @@ body {
 
         >div {
           &#admin_carousel {
+            z-index: 1;
             border: solid;
             padding: 0;
             position: absolute;
-            left: -75px;
+            right: 0px;
             width: 75px;
             height: 40.5px;
             display: flex;

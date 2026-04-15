@@ -1,5 +1,6 @@
-import { isLoaded } from "@clerk/nextjs"
+import { useAuth } from "@clerk/nextjs"
 export default function NotConnectedPage() {
+  const { isLoaded } = useAuth();
   console.log(isLoaded);
   
     return (

@@ -2,6 +2,7 @@
 
 import { useContext, useMemo, memo } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
 import AuthContext from "../stores/authContext.js"
 import Carousel from "./_/Carousel"
@@ -30,6 +31,8 @@ const HomeContent = memo(({ diapos }) => (
       <p>Aussi, occasionnellement, nous recevons des <b>dons</b> d'institutions philantropes ou de fidèles chrétiens.</p>
     </article>
     <Carousel page="home" diapos={diapos} icon="2" titre={"LES DIFFERENTES ACTIVITÉS DU SANCTUAIRE EN IMAGES: "} />
+    <hr />
+    <p style={{ textAlign: "center" }}>Accédez au blog de la Puissance Divine ici: <Link href="/blog">Blog</Link></p>
   </main>
 ));
 

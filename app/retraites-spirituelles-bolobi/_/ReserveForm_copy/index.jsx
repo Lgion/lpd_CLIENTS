@@ -31,7 +31,7 @@ const typeOptions = [
 ];
 
 const titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance sur paiement demandé): "
-, sommaire = "RÉSERVER DATE"
+  , sommaire = "RÉSERVER DATE"
 
 export default function ReserveForm() {
   const [form, setForm] = useState(initialState);
@@ -134,7 +134,7 @@ export default function ReserveForm() {
     try {
       // Validation rapide côté client
       const isDateToRequired = form.type_reservation !== 'pray' && form.type_reservation !== 'celebration';
-      
+
       if (!form.names || !form.phone_number || !form.from || (isDateToRequired && !form.to) || !form.participants || !form.montant_total || !form.montant_avance) {
         setError('Merci de remplir tous les champs obligatoires.');
         setLoading(false);
@@ -162,7 +162,7 @@ export default function ReserveForm() {
         // alert("f")
         await axios.post('/api/users', userToSave);
         // alert("g")
-        
+
         // On ne réinitialise plus le formulaire
       } else {
         setError(res.data?.message || 'Une erreur est survenue.');
@@ -175,7 +175,7 @@ export default function ReserveForm() {
   };
 
   return (<>
-    <Intro {...{sommaire,titreH3}} />
+    <Intro {...{ sommaire, titreH3 }} />
     <div id="form_reservation" className="ai-reserve-form__container">
       <h2 className="ai-reserve-form__title">Réserver une retraite spirituelle</h2>
       <form className="ai-reserve-form" onSubmit={handleSubmit}>
@@ -208,10 +208,10 @@ export default function ReserveForm() {
             <input name="from" type="date" value={form.from} onChange={handleChange} required />
           </div>
           {(form.type_reservation !== 'pray' && form.type_reservation !== 'celebration') && (
-          <div>
-            <label>Date de départ *</label>
-            <input name="to" type="date" value={form.to} onChange={handleChange} required style={!form.to ? {background:'#ffeaea',borderColor:'#d32f2f'} : {}} />
-          </div>
+            <div>
+              <label>Date de départ *</label>
+              <input name="to" type="date" value={form.to} onChange={handleChange} required style={!form.to ? { background: '#ffeaea', borderColor: '#d32f2f' } : {}} />
+            </div>
           )}
         </div>
         <div className="ai-reserve-form__row">
@@ -219,38 +219,38 @@ export default function ReserveForm() {
           <input name="participants" type="number" min="1" value={form.participants} onChange={handleChange} required />
         </div>
         {!(form.type_reservation === 'pray' || form.type_reservation === 'celebration') && (
-        <div className="ai-reserve-form__row">
-          <label>Chambres individuelles</label>
-          <input name="individual_room_participants" type="number" min="0" value={form.individual_room_participants} onChange={handleChange} />
-        </div>
-        )}
-        {form.type_reservation !== 'pray' && (
-        <>
-        {/* Pour célébration et autres, repas possible sauf prière ponctuelle */}
-        <div className="ai-reserve-form__row ai-reserve-form__row--checkbox">
-          <label>
-            <input name="meal_included" type="checkbox" checked={form.meal_included} onChange={handleChange} />
-            Repas inclus
-          </label>
-        </div>
-        {form.meal_included && (
           <div className="ai-reserve-form__row">
-            <label>Plan de repas *</label>
-            <select name="meal_plan" value={form.meal_plan} onChange={handleChange} required
-              style={!form.meal_plan ? {background:'#ffeaea',borderColor:'#d32f2f'} : {}}>
-              <option value="">Choisir le plan</option>
-              <option value="1">1 repas + 1 petit déjeuner (2.000 FCFA/jour/pers.)</option>
-              <option value="2">2 repas + 1 petit déjeuner (3.000 FCFA/jour/pers.)</option>
-            </select>
+            <label>Chambres individuelles</label>
+            <input name="individual_room_participants" type="number" min="0" max="9" value={form.individual_room_participants} onChange={handleChange} />
           </div>
         )}
-        </>
+        {form.type_reservation !== 'pray' && (
+          <>
+            {/* Pour célébration et autres, repas possible sauf prière ponctuelle */}
+            <div className="ai-reserve-form__row ai-reserve-form__row--checkbox">
+              <label>
+                <input name="meal_included" type="checkbox" checked={form.meal_included} onChange={handleChange} />
+                Repas inclus
+              </label>
+            </div>
+            {form.meal_included && (
+              <div className="ai-reserve-form__row">
+                <label>Plan de repas *</label>
+                <select name="meal_plan" value={form.meal_plan} onChange={handleChange} required
+                  style={!form.meal_plan ? { background: '#ffeaea', borderColor: '#d32f2f' } : {}}>
+                  <option value="">Choisir le plan</option>
+                  <option value="1">1 repas + 1 petit déjeuner (2.000 FCFA/jour/pers.)</option>
+                  <option value="2">2 repas + 1 petit déjeuner (3.000 FCFA/jour/pers.)</option>
+                </select>
+              </div>
+            )}
+          </>
         )}
         {/* Pour prière ponctuelle, pas de repas possible */}
         <div className="ai-reserve-form__row">
           <label>Montant total (FCFA) *</label>
           <input name="montant_total" type="number" min="0" value={form.montant_total} readOnly tabIndex={-1} style={{ background: '#e9ecef', cursor: 'not-allowed' }} required />
-          <div className="ai-reserve-form__desc-montant" style={{fontSize:'.97em',color:'#555',marginTop:'0.2em'}}>
+          <div className="ai-reserve-form__desc-montant" style={{ fontSize: '.97em', color: '#555', marginTop: '0.2em' }}>
             {(() => {
               const fromDate = form.from ? new Date(form.from) : null;
               const toDate = form.to ? new Date(form.to) : null;
@@ -265,16 +265,16 @@ export default function ReserveForm() {
               const dortoirs = Math.max(participants - chambres, 0);
               let details = [];
               if (form.type_reservation === 'pray') {
-                if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants>1?'s':''} x 500 FCFA`);
+                if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants > 1 ? 's' : ''} x 500 FCFA`);
                 return (
                   <>
-                    <span>Prix unique : <b>500 FCFA/participant</b></span><br/>
+                    <span>Prix unique : <b>500 FCFA/participant</b></span><br />
                     {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
                   </>
                 );
               }
               if (form.type_reservation === 'celebration') {
-                if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants>1?'s':''} x 500 FCFA`);
+                if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants > 1 ? 's' : ''} x 500 FCFA`);
                 if (form.meal_included && form.meal_plan && participants > 0) {
                   const planTarif = form.meal_plan === '2' ? 3000 : 2000;
                   const planLabel = form.meal_plan === '2' ? '2 repas + 1 petit déj.' : '1 repas + 1 petit déj.';
@@ -282,23 +282,23 @@ export default function ReserveForm() {
                 }
                 return (
                   <>
-                    <span>Prix unique : <b>500 FCFA/participant</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/pers.</b></> : null}</span><br/>
+                    <span>Prix unique : <b>500 FCFA/participant</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/pers.</b></> : null}</span><br />
                     {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
                   </>
                 );
               }
               if (nights > 0) {
-                if (dortoirs > 0) details.push(`${dortoirs * nights * 3000} FCFA, pour ${dortoirs} pers. en dortoir x ${nights} nuit${nights>1?'s':''} x 3.000 FCFA`);
-                if (chambres > 0) details.push(`${chambres * nights * 10000} FCFA, pour ${chambres} chambre${chambres>1?'s':''} individuelle${chambres>1?'s':''} x ${nights} nuit${nights>1?'s':''} x 10.000 FCFA`);
+                if (dortoirs > 0) details.push(`${dortoirs * nights * 3000} FCFA, pour ${dortoirs} pers. en dortoir x ${nights} nuit${nights > 1 ? 's' : ''} x 3.000 FCFA`);
+                if (chambres > 0) details.push(`${chambres * nights * 10000} FCFA, pour ${chambres} chambre${chambres > 1 ? 's' : ''} individuelle${chambres > 1 ? 's' : ''} x ${nights} nuit${nights > 1 ? 's' : ''} x 10.000 FCFA`);
                 if (form.meal_included && form.meal_plan && participants > 0) {
                   const planTarif = form.meal_plan === '2' ? 3000 : 2000;
-                  const planLabel = form.meal_plan === '2' ? '2 repas + 1 petit déj. ('+planTarif+' FCFA/jour/pers.)' : '1 repas + 1 petit déj. ('+planTarif+' FCFA/jour/pers.)';
-                  details.push(`${(participants * (nights+1) * planTarif).toLocaleString()} FCFA, pour ${participants} pers. x ${nights+1} jour${nights>1?'s':''} x (${planLabel})`);
+                  const planLabel = form.meal_plan === '2' ? '2 repas + 1 petit déj. (' + planTarif + ' FCFA/jour/pers.)' : '1 repas + 1 petit déj. (' + planTarif + ' FCFA/jour/pers.)';
+                  details.push(`${(participants * (nights + 1) * planTarif).toLocaleString()} FCFA, pour ${participants} pers. x ${nights + 1} jour${nights > 1 ? 's' : ''} x (${planLabel})`);
                 }
               }
               return (
                 <>
-                  <span>Nombre de nuits : <b>{nights}</b> | Dortoir : <b>3.000 FCFA/nuit</b> | Chambre individuelle : <b>10.000 FCFA/nuit</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/jour/pers.</b></> : null}</span><br/>
+                  <span>Nombre de nuits : <b>{nights}</b> | Dortoir : <b>3.000 FCFA/nuit</b> | Chambre individuelle : <b>10.000 FCFA/nuit</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/jour/pers.</b></> : null}</span><br />
                   {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
                 </>
               );
@@ -307,8 +307,8 @@ export default function ReserveForm() {
         </div>
         <div className="ai-reserve-form__row">
           <label>Montant de l'avance (€) *</label>
-          <input name="montant_avance" type="number" min="0" value={form.montant_avance} onChange={handleChange} 
-            placeholder={form.montant_total ? `Ex: ${Math.ceil(form.montant_total*0.2)} FCFA (20% de ${form.montant_total}F CFA)` : ''} required />
+          <input name="montant_avance" type="number" min="0" value={form.montant_avance} onChange={handleChange}
+            placeholder={form.montant_total ? `Ex: ${Math.ceil(form.montant_total * 0.2)} FCFA (20% de ${form.montant_total}F CFA)` : ''} required />
         </div>
         <div className="ai-reserve-form__row">
           <label>Message</label>

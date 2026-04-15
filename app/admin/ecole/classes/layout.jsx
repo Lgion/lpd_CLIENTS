@@ -8,7 +8,7 @@ import { AiAdminContext } from '../../../../stores/ai_adminContext';
 
 export default function ClassesPage({children}) {
   const ctx = useContext(AiAdminContext);
-  if (!ctx) return <div style={{color:'red'}}>Erreur : AiAdminContext non trouvé. Vérifiez que l'application est bien entourée par le provider.</div>;
+  if (!ctx) return <div className="admin-error">Erreur : AiAdminContext non trouvé. Vérifiez que l'application est bien entourée par le provider.</div>;
   const { classes = [] } = ctx;
   const [selected, setSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +28,7 @@ export default function ClassesPage({children}) {
                       ))}
                   </div>
                   :
-                  <div style={{textAlign:'center',marginTop:'2em',fontSize:'1.3em'}}>Chargement...</div>
+                  <div className="admin-loading">Chargement...</div>
               }
       {showModal && <EntityModal type="classe" entity={selected} onClose={() => setShowModal(false)} />}
       {children}

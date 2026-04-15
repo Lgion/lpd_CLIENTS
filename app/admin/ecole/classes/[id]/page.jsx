@@ -14,10 +14,10 @@ export default function ClasseDetailPage() {
     ctx.fetchEleves && ctx.fetchEleves();
     ctx.fetchEnseignants && ctx.fetchEnseignants();
   }, []);
-  if (!ctx) return <div style={{color:'red'}}>Erreur : contexte non trouvé</div>;
+  if (!ctx) return <div className="admin-error">Erreur : contexte non trouvé</div>;
   const { setSelected, showModal, setShowModal } = ctx;
   const classe = (ctx.classes || []).find(c => String(c._id) === String(id));
-  if (!classe) return <div style={{color:'red'}}>Classe introuvable</div>;
+  if (!classe) return <div className="admin-error">Classe introuvable</div>;
   // Liste des élèves de la classe
   const eleves = (ctx.eleves || []).filter(e => e.current_classe === classe._id);
   const enseignants = (ctx.enseignants || []).filter(e => e.current_classes === classe._id);
@@ -29,10 +29,9 @@ export default function ClasseDetailPage() {
   console.log(classe);
   
   return !classe ? <div>....loading.....</div>
-      : <div className="person-detail" style={{position:'relative'}}>
+      : <div className="person-detail person-detail--relative">
       <button
-        className="person-detail__close"
-        style={{position:'absolute',top:-15,right:5,color:'red',background:'none',border:'none',fontSize:'2em',cursor:'pointer',zIndex:10}}
+        className="person-detail__close-btn"
         aria-label="Fermer"
         onClick={() => router.back()}
       >✕</button>

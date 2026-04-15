@@ -6,7 +6,7 @@ import './ClasseCard.scss';
 export default function ClasseCard({ classe, onEdit, onClick }) {
   if (!classe) return null;
   return (
-    <div className="person-card-wrapper" style={{position:'relative'}}>
+    <div className="person-card-wrapper">
       <Link href={`/admin/ecole/classes/${classe._id}`} className="classe-card" tabIndex={0}>
         <div className="classe-card__header">
           <span className="classe-card__niveau">{classe.niveau}</span>
@@ -25,7 +25,7 @@ export default function ClasseCard({ classe, onEdit, onClick }) {
         {onEdit && (
           <button
             type="button"
-            className="classe-card__editbtn"
+            className="card-edit-btn"
             onClick={e => { e.stopPropagation(); e.preventDefault(); onEdit(classe); }}
           >Éditer</button>
         )}

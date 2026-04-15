@@ -43,13 +43,13 @@ export default function ReservationManager() {
   const handleDateRangeChange = (dates, dateStrings) => {
     console.log('Dates reçues du RangePicker:', dates);
     console.log('Dates en format string:', dateStrings);
-    
+
     if (dates) {
       // Créer de nouveaux objets moment à partir des chaînes de date
       const [startStr, endStr] = dateStrings;
       const startDate = moment(startStr, 'DD/MM/YYYY').startOf('day');
       const endDate = moment(endStr, 'DD/MM/YYYY').endOf('day');
-      
+
 
       console.log('Dates converties:', {
         start: startDate.format('YYYY-MM-DD HH:mm:ss'),
@@ -64,20 +64,20 @@ export default function ReservationManager() {
   // Filtrer les réservations
   const filteredReservations = reservations.filter(reservation => {
     const searchLower = searchText.toLowerCase();
-    
+
     // Debug des dates
     console.log('État actuel de dateRange:', dateRange);
-    
+
     // Convertir les dates de la réservation en objets moment
     const reservationStart = moment(reservation.from).startOf('day');
     const reservationEnd = moment(reservation.to).endOf('day');
-    
+
     // Vérifier si une plage de dates est sélectionnée
     const dateInRange = !dateRange || (
       reservationStart.isSameOrAfter(dateRange[0], 'day') &&
       reservationEnd.isSameOrBefore(dateRange[1], 'day')
     );
-    
+
     console.log('Comparaison des dates pour réservation:', {
       reservation_id: reservation._id,
       reservationStart: reservationStart.format('YYYY-MM-DD HH:mm:ss'),
@@ -86,13 +86,13 @@ export default function ReservationManager() {
       rangeEnd: dateRange ? dateRange[1].format('YYYY-MM-DD HH:mm:ss') : 'pas de date',
       dateInRange
     });
-    
+
     // Vérifier si isArchived est défini, sinon considérer comme non archivé
-    const isArchivedMatch = typeof reservation.isArchived === 'undefined' 
+    const isArchivedMatch = typeof reservation.isArchived === 'undefined'
       ? !showArchived  // Si isArchived n'est pas défini, montrer dans la vue normale
       : reservation.isArchived === showArchived;
 
-    return dateInRange && 
+    return dateInRange &&
       (searchText === '' ||
         reservation.community?.toLowerCase().includes(searchLower) ||
         reservation.names?.toLowerCase().includes(searchLower) ||
@@ -215,24 +215,24 @@ export default function ReservationManager() {
     console.log('mealIncluded:', mealIncluded)
     console.log('mealPlan:', mealPlan, 'type:', typeof mealPlan)
     console.log('dates:', dates)
-    
+
     if (!dates || dates.length !== 2) {
       console.log('Dates invalides, retour 0')
       return { total: 0, advance: 0 }
     }
-    
+
     const nights = dates[1].diff(dates[0], 'days')
     console.log('nights:', nights)
     if (nights <= 0) {
       console.log('Nombre de nuits <= 0, retour 0')
       return { total: 0, advance: 0 }
     }
-    
+
     // Coût hébergement
     const collectiveRoomParticipants = participants - (individualRoomParticipants || 0)
     const accommodationCost = (individualRoomParticipants || 0) * 10000 * nights + collectiveRoomParticipants * 3000 * nights
     console.log('accommodationCost:', accommodationCost)
-    
+
     // Coût repas
     let mealCost = 0
     if (mealIncluded) {
@@ -241,14 +241,14 @@ export default function ReservationManager() {
       console.log('dailyMealCost:', dailyMealCost)
       console.log('mealCost:', mealCost)
     }
-    
+
     const total = accommodationCost + mealCost
     const advance = Math.round(total * 0.3) // 30% d'avance
-    
+
     console.log('total final:', total)
     console.log('advance final:', advance)
     console.log('=== fin calculateTotalAmount ===')
-    
+
     return { total, advance }
   }
 
@@ -280,15 +280,15 @@ export default function ReservationManager() {
 
   // Gérer les changements dans le formulaire de modification
   const handleFormValuesChange = (changedValues, allValues) => {
-    if (changedValues.date_from || changedValues.date_to || changedValues.participants || changedValues.individual_room_participants || 
-        changedValues.meal_included || changedValues.meal_plan) {
-      
+    if (changedValues.date_from || changedValues.date_to || changedValues.participants || changedValues.individual_room_participants ||
+      changedValues.meal_included || changedValues.meal_plan) {
+
       // Construire le tableau de dates à partir de date_from et date_to
       let dates = null
       if (allValues.date_from && allValues.date_to) {
         dates = [moment(allValues.date_from), moment(allValues.date_to)]
       }
-      
+
       const { total, advance } = calculateTotalAmount(
         allValues.participants,
         allValues.individual_room_participants,
@@ -296,7 +296,7 @@ export default function ReservationManager() {
         allValues.meal_plan,
         dates
       )
-      
+
       editForm.setFieldsValue({
         montant_total: total,
         montant_avance: advance
@@ -337,12 +337,12 @@ export default function ReservationManager() {
       render: (type) => (
         <Tag color={
           type === 'pray' ? 'blue' :
-          type === 'retraite' ? 'green' :
-          type === 'celebration' ? 'gold' :
-          type === 'repos' ? 'cyan' :
-          type === 'longTerm' ? 'purple' : 'default'
+            type === 'retraite' ? 'green' :
+              type === 'celebration' ? 'gold' :
+                type === 'repos' ? 'cyan' :
+                  type === 'longTerm' ? 'purple' : 'default'
         }>
-          {typeOptions.find(el => el.value==type).label}
+          {typeOptions.find(el => el.value == type).label}
 
           {/* {typeOptions[type]} */}
         </Tag>
@@ -379,21 +379,29 @@ export default function ReservationManager() {
       )
     }
   ]
-
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ marginBottom: '20px' }}>
-        <Space size="large" style={{ marginBottom: '10px' }}>
+    <div className="sanctuaire-admin">
+      <div className="sanctuaire-admin__header">
+        <div className="sanctuaire-admin__info-list">
+          <p className="sanctuaire-admin__info-list-title">Ce filtre s'applique sur les propriétés suivantes:</p>
+          <ul>
+            <li>La communauté</li>
+            <li>Le nom</li>
+            <li>L'email</li>
+            <li>Le numéro de téléphone</li>
+          </ul>
+        </div>
+        <Space size="large" className="sanctuaire-admin__controls">
           <Search
             placeholder="Rechercher..."
             allowClear
             onSearch={setSearchText}
-            style={{ width: 300 }}
+            className="sanctuaire-admin__search"
           />
           <RangePicker
             onChange={handleDateRangeChange}
             format="DD/MM/YYYY"
-            style={{ minWidth: '240px' }}
+            className="sanctuaire-admin__datepicker"
             placeholder={['Date début', 'Date fin']}
             allowClear={true}
             showTime={false}
@@ -405,14 +413,6 @@ export default function ReservationManager() {
             {showArchived ? 'Voir réservations actives' : 'Voir archives'}
           </Button>
         </Space>
-        <ul style={{}}>
-          <p style={{}}>Ce filtre s'applique sur les propriétés suivantes: 
-          </p>
-          <li>La communauté, </li>
-          <li>Le nom, </li>
-          <li>L'email, </li>
-          <li>Le numéro de téléphone</li>
-        </ul>
       </div>
 
       <Table
@@ -420,12 +420,12 @@ export default function ReservationManager() {
         dataSource={filteredReservations}
         rowKey="_id"
         scroll={{ x: true }}
+        className="sanctuaire-admin__table"
         onRow={(record) => ({
           onClick: () => {
             setEditingReservation(record)
             setIsDetailsModalVisible(true)
-          },
-          style: { cursor: 'pointer' }
+          }
         })}
       />
 
@@ -518,7 +518,7 @@ export default function ReservationManager() {
           </Button>
         ]}
       >
-        <div className="reservation-details">
+        <div className="sanctuaire-admin__details">
           <div className="detail-section">
             <h3>Informations de contact</h3>
             <p><strong>Nom:</strong> {editingReservation?.names}</p>
@@ -531,7 +531,7 @@ export default function ReservationManager() {
           <div className="detail-section">
             <h3>Détails du séjour</h3>
             <p><strong>Dates:</strong> Du {moment(editingReservation?.from).format('DD/MM/YYYY')} au {moment(editingReservation?.to).format('DD/MM/YYYY')}</p>
-            <p><strong>Type de réservation:</strong> {typeOptions.find(el=>el.value==editingReservation?.type_reservation)?.label}</p>
+            <p><strong>Type de réservation:</strong> {typeOptions.find(el => el.value == editingReservation?.type_reservation)?.label}</p>
             <p><strong>Participants:</strong> {editingReservation?.participants} au total</p>
             {editingReservation?.individual_room_participants > 0 && (
               <p><strong>Chambres individuelles:</strong> {editingReservation?.individual_room_participants}</p>
@@ -590,7 +590,7 @@ export default function ReservationManager() {
               max={100}
               formatter={value => `${value}%`}
               parser={value => value.replace('%', '')}
-              style={{ width: '100%' }}
+              className="sanctuaire-admin__edit-form-input"
             />
           </Form.Item>
 
@@ -622,7 +622,7 @@ export default function ReservationManager() {
           onValuesChange={handleFormValuesChange}
           layout="vertical"
         >
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+          <div className="sanctuaire-admin__edit-form-grid">
             <Form.Item
               name="names"
               label="Nom complet"
@@ -659,9 +659,9 @@ export default function ReservationManager() {
               label="Date d'arrivée"
               rules={[{ required: true, message: 'La date d\'arrivée est requise' }]}
             >
-              <input 
-                type="date" 
-                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+              <input
+                type="date"
+                className="sanctuaire-admin__edit-form-input"
                 value={editForm.getFieldValue('date_from') || ''}
                 onChange={(e) => {
                   editForm.setFieldsValue({ date_from: e.target.value })
@@ -677,9 +677,9 @@ export default function ReservationManager() {
               label="Date de départ"
               rules={[{ required: true, message: 'La date de départ est requise' }]}
             >
-              <input 
-                type="date" 
-                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+              <input
+                type="date"
+                className="sanctuaire-admin__edit-form-input"
                 value={editForm.getFieldValue('date_to') || ''}
                 onChange={(e) => {
                   editForm.setFieldsValue({ date_to: e.target.value })
@@ -695,8 +695,8 @@ export default function ReservationManager() {
               label="Type de réservation"
               rules={[{ required: true, message: 'Le type est requis' }]}
             >
-              <select 
-                style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+              <select
+                className="sanctuaire-admin__edit-form-input"
                 value={editForm.getFieldValue('type_reservation') || ''}
                 onChange={(e) => {
                   editForm.setFieldsValue({ type_reservation: e.target.value })
@@ -717,14 +717,14 @@ export default function ReservationManager() {
               label="Nombre de participants"
               rules={[{ required: true, message: 'Le nombre de participants est requis' }]}
             >
-              <InputNumber min={1} style={{ width: '100%' }} />
+              <InputNumber min={1} className="sanctuaire-admin__edit-form-input" />
             </Form.Item>
 
             <Form.Item
               name="individual_room_participants"
               label="Chambres individuelles"
             >
-              <InputNumber min={0} style={{ width: '100%' }} />
+              <InputNumber min={0} className="sanctuaire-admin__edit-form-input" />
             </Form.Item>
 
             <Form.Item
@@ -732,7 +732,7 @@ export default function ReservationManager() {
               label="Montant total (FCFA)"
               rules={[{ required: true, message: 'Le montant total est requis' }]}
             >
-              <InputNumber min={0} style={{ width: '100%' }} />
+              <InputNumber min={0} className="sanctuaire-admin__edit-form-input" />
             </Form.Item>
 
             <Form.Item
@@ -740,7 +740,7 @@ export default function ReservationManager() {
               label="Montant avance (FCFA)"
               rules={[{ required: true, message: 'Le montant d\'avance est requis' }]}
             >
-              <InputNumber min={0} style={{ width: '100%' }} />
+              <InputNumber min={0} className="sanctuaire-admin__edit-form-input" />
             </Form.Item>
           </div>
 
@@ -761,8 +761,8 @@ export default function ReservationManager() {
                   label="Plan de repas"
                   rules={[{ required: true, message: 'Veuillez sélectionner un plan de repas' }]}
                 >
-                  <select 
-                    style={{ width: '100%', padding: '8px', border: '1px solid #d9d9d9', borderRadius: '6px' }}
+                  <select
+                    className="sanctuaire-admin__edit-form-input"
                     value={editForm.getFieldValue('meal_plan') || ''}
                     onChange={(e) => {
                       editForm.setFieldsValue({ meal_plan: parseInt(e.target.value) })
@@ -786,7 +786,7 @@ export default function ReservationManager() {
             <Input.TextArea rows={3} />
           </Form.Item>
 
-          <Form.Item style={{ textAlign: 'right', marginTop: '24px' }}>
+          <Form.Item className="sanctuaire-admin__edit-form-footer">
             <Space>
               <Button onClick={() => {
                 setIsEditModalVisible(false)

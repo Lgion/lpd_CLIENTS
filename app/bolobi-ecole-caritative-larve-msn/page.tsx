@@ -20,14 +20,14 @@ export default function Index() {
       <Donation />
       <hr />
       <Features />
-      <Carousel 
-        page="ecole" 
-        diapos={diapos} 
-        icon="2" 
-        titre={"L'ÉCOLE SAINT MARTIN DE PORÈZ EN IMAGES"} 
+      <Carousel
+        page="ecole"
+        diapos={diapos}
+        icon="2"
+        titre={"L'ÉCOLE SAINT MARTIN DE PORÈZ EN IMAGES"}
       />
-      <BlogCategory 
-        {...{ categoryPosts, headings, filterCategory: "école" }} 
+      <BlogCategory
+        {...{ categoryPosts, headings, filterCategory: "ecole" }}
       />
     </main>
   );

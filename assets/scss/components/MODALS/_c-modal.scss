@@ -1,0 +1,123 @@
+.c-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__main {
+    background: #fff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    min-width: 340px;
+    max-width: 480px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    color: black;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    figcaption {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close {
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    label, p {
+      display: flex;
+      flex-direction: column;
+      font-weight: 500;
+      font-size: 14px;
+      color: #333;
+      margin: 0;
+      gap: 4px;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]), select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background: #0070f3;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 10px;
+      width: 100%;
+
+      &:hover {
+        background: #005bb5;
+      }
+    }
+
+    &__file-label {
+      background: #f8f9fa;
+      border: 2px dashed #0070f3;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #0070f3;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: block;
+      margin: 10px 0;
+
+      &:hover {
+        background: #e7f1ff;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #eee;
+    }
+
+    .formDataDisplay {
+      display: none;
+    }
+  }
+}

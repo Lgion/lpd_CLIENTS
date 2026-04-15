@@ -832,16 +832,7 @@ section>div:has(.modal){
   &__content {
     margin-top: 32px;
     >div{
-      >h1{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: silver;
-        padding: 1em;
-        >button{
-
-        }
-      }
+      >h1{}
     }
   }
 
@@ -856,4 +847,214 @@ section>div:has(.modal){
       margin-top: 18px;
     }
   }
+}
+
+// EntityModal and associated blocks (BEM)
+.modal-person {
+  &__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.75);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+
+  &__field-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  &__field-input {
+    flex: 1;
+  }
+
+  &__map-preview {
+    margin: 10px 0;
+  }
+
+  &__error {
+    color: red;
+    margin-top: 8px;
+  }
+
+  &__remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    color: #b00;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1.1em;
+    line-height: 1em;
+  }
+  
+  &__cancel-btn {
+    margin-left: 8px;
+  }
+}
+
+.notes-container {
+    &__item {
+        display: flex;
+        align-items: center;
+        background: #f9f9f9;
+        border-radius: 4px;
+        margin-bottom: 4px;
+        padding: 4px;
+        position: relative;
+    }
+    
+    &__date {
+        min-width: 100px;
+        font-weight: 500;
+    }
+    
+    &__matiere {
+        margin: 0 12px;
+    }
+    
+    &__note {
+        margin: 0 12px;
+        font-weight: 600;
+    }
+    
+    &__remove {
+        position: absolute;
+        right: 6px;
+        top: 4px;
+        border: none;
+        background: transparent;
+        color: #d00;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    &__form {
+        margin-top: 8px;
+    }
+    
+    &__no-notes {
+        color: #888;
+        font-style: italic;
+    }
+
+    &__error {
+        color: red;
+        margin-left: 8px;
+    }
+    
+    &__cancel {
+        background: #ccc !important;
+        color: #222 !important;
+    }
+}
+
+.docs-preview {
+    &__img, &__pdf {
+        max-width: 100%;
+        max-height: 70vh;
+        margin: 16px auto;
+        display: block;
+    }
+}
+.eleve-card-wrapper, .person-card-wrapper {
+  position: relative;
+}
+
+.card-edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  padding: 0.3em 0.7em;
+  font-size: 0.95em;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px #0001;
+}
+
+.admin-error {
+  color: red;
+}
+
+.person-detail {
+  &--relative {
+    position: relative;
+  }
+  
+  &__close-btn {
+    position: absolute;
+    top: -15px;
+    right: 5px;
+    color: red;
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  &__year-block {
+    margin-bottom: 1.3em;
+  }
+  
+  &__year-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  &__footer-text {
+    margin-top: 1em;
+    font-size: 0.97em;
+    color: #444;
+  }
+  
+  &__history-margin {
+    margin: 2em 0 1em 0;
+  }
+}
+
+.person-detail {
+  &__subtitle-light {
+    font-weight: 400;
+  }
+  
+  &__contact {
+    margin-bottom: 1em;
+  }
+  
+  &__contact-item {
+    display: block;
+    margin: 0.3em 0;
+  }
+  
+  &__empty-text {
+    color: grey;
+  }
+}
+
+.admin-loading {
+    text-align: center;
+    margin-top: 2em;
+    font-size: 1.3em;
+}
+
+.chart-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
 }

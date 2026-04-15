@@ -1,5 +1,4 @@
-/**/
-
+@use "sass:color";
 
 $mobile: 650;
 $tablette: 960;
@@ -12,18 +11,18 @@ $dark: $darkmode;
 $bright: #eaeaea;
 
 $black: black;
-$black1: lighten($black,10%);
-$black2: lighten($black,20%);
-$black3: lighten($black,30%);
-$black5: lighten($black,50%);
+$black1: color.adjust($black, $lightness: 10%);
+$black2: color.adjust($black, $lightness: 20%);
+$black3: color.adjust($black, $lightness: 30%);
+$black5: color.adjust($black, $lightness: 50%);
 
 $black: black;
 $white: white;
 $dark: #eaeaea;
 $dark1: #f6f6f6;
-$dark2: lighten($dark,20%);
-$dark3: lighten($dark,30%);
-$dark5: lighten($dark,50%);
+$dark2: color.adjust($dark, $lightness: 20%);
+$dark3: color.adjust($dark, $lightness: 30%);
+$dark5: color.adjust($dark, $lightness: 50%);
 
 $shadow0: 8px 25px 45px -12px rgba(94, 94, 94, 0.62);
 $shadow0_: 8px 25px 45px -0px rgba(94, 94, 94, 1);

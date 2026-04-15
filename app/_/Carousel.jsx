@@ -4,8 +4,8 @@ import React, { useState, useContext, useEffect, memo, useCallback, useMemo } fr
 import Image from "next/image"
 import Slider from "react-slick";
 import AuthContext from "../../stores/authContext.js"
-// import EditMongoForm from '../admin/school/EditMongoForm'
-import {createPortal} from "react-dom"
+import EditMongoForm from '../admin/school/EditMongoForm'
+import { createPortal } from "react-dom"
 
 
 
@@ -19,31 +19,24 @@ import {createPortal} from "react-dom"
 
 
 
-const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titre, icon=1, sommaire, h3id="anchorCarousel"}) {
+const Carousel = memo(function Carousel({ page = "home", diapos: initialDiapos, titre, icon = 1, sommaire, h3id = "anchorCarousel" }) {
     const [h3, setH3] = useState("TROUVER UN TITRE")
     const [diapos, setDiapos] = useState(initialDiapos || [])
+    const [modalState, setModalState] = useState({ isOpen: false, item: null })
     const { settingsSlider, isAdmin } = useContext(AuthContext)
-    , [models, setModels] = useState({})
+        , [models, setModels] = useState({})
 
     const myLoader = useCallback(({ src, width, quality }) => {
         return `${src}?w=${width}&q=${quality || 75}`
     }, [])
 
     const handleUpdate = useCallback((e, item) => {
-        setDiapos(prevDiapos => prevDiapos.filter(r => r._id !== item._id))
-        const modal = document.getElementById('modal')
-        if (modal) {
-            modal.classList.add('active')
-            document.querySelectorAll('#modal .modal___main>form').forEach(elt => {
-                elt.classList.remove('active')
-            })
-            document.querySelector('#modal .modal___main>form.slider_update')?.classList.add('active')
-        }
+        setModalState({ isOpen: true, item: item })
     }, [])
 
     const handleDelete = useCallback((e) => {
         const doSupp = confirm("Êtes-vous sûr de vouloir supprimer cette photo du diapo ?")
-        if(doSupp) {
+        if (doSupp) {
             fetch(`/api/diapo?_id=${e.target.dataset._id}&src=${e.target.dataset.src}`, {
                 method: "DELETE"
             })
@@ -55,11 +48,11 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
         const timeStamp = localStorage.getItem('carouselDiaposTimeStamp')
         const now = +new Date()
         const shouldFetch = (((now - timeStamp) / 1000) / 3600) > 24
-        
+
         if (storedDiapos && !shouldFetch) {
             try {
                 let parsedDiapos = JSON.parse(storedDiapos)
-                parsedDiapos = parsedDiapos.filter(item => item['identifiant_$_hidden']==page+"_0")
+                parsedDiapos = parsedDiapos.filter(item => item['identifiant_$_hidden'] == page + "_0")
                 if (Array.isArray(parsedDiapos) && parsedDiapos.length > 0) {
                     setDiapos(parsedDiapos)
                     return
@@ -70,14 +63,14 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
         }
 
         try {
-            const response = await fetch('/api/diapos?identifiant='+page+'_0')
+            const response = await fetch('/api/diapos?identifiant=' + page + '_0')
             // const response = await fetch('/api/diapos')
             const data = await response.json()
             if (Array.isArray(data) && data.length > 0) {
                 const timeStamp = +new Date()
                 localStorage.setItem('carouselDiaposTimeStamp', timeStamp)
                 localStorage.setItem('carouselDiapos', JSON.stringify(data))
-                const currentData = data.filter(item => item['identifiant_$_hidden']==page+"_0")
+                const currentData = data.filter(item => item['identifiant_$_hidden'] == page + "_0")
                 setDiapos(currentData)
             } else {
                 console.error('Les données de diapos reçues ne sont pas un tableau valide')
@@ -92,13 +85,13 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
 
         let ok = async () => {
             const ok = await fetch("/api/diapo")
-            , data = await ok.json()
+                , data = await ok.json()
             console.log(data);
             setModels(data)
             console.log(data);
-            
-          }
-          ok()
+
+        }
+        ok()
     }, [])
     useEffect(() => {
         setH3(titre)
@@ -115,61 +108,45 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
         <>
             <h3 className="carousel" id={h3id} data-icon={icon} data-sommaire={sommaire || titre}>{h3}</h3>
             <section className="carousel">
-                {/*false && */isAdmin && (<>
+                {isAdmin && (<>
                     <div id="admin_carousel">
-                        <button title="Recharger les données du carousel" style={{left:"2em"}} onClick={reloadBtn}>⟳</button>
+                        <button title="Recharger les données du carousel" style={{ left: "2em" }} onClick={reloadBtn}>⟳</button>
                         <button
                             title="Ajouter une slide à votre diapo"
-                            onClick={() => {
-                                const modal = document.getElementById('modal')
-                                if (modal) {
-                                    modal.classList.add('active')
-                                    // Ajout du header et footer à la modale
-                                    const header = document.querySelector('#modal .modal___header')
-                                    const footer = document.querySelector('#modal .modal___footer')
-                                    if (header) {
-                                        header.innerHTML = `
-                                            <figcaption>
-                                                <strong>Ajouter une nouvelle diapositive</strong>
-                                                <span class="close">×</span>
-                                            </figcaption>
-                                        `
-                                    }
-                                    if (footer) {
-                                        footer.innerHTML = `
-                                            <button type="submit" class="submit">Enregistrer</button>
-                                            <button type="button" class="cancel">Annuler</button>
-                                        `
-                                    }
-                                    document.querySelector('#modal .modal___main>form.slider')?.classList.add('active')
-                                }
-                            }}
+                            onClick={() => setModalState({ isOpen: true, item: null })}
                         >
                             +
                         </button>
                     </div>
-                    {/* {JSON.stringify(models)}
-                    ---
-                    {JSON.stringify(models?.schemaDiapo?.paths)} */}
-                    {/* {JSON.stringify(memoizedDiapos[0]['identifiant_$_hidden'])} */}
-                    {/* {
-                        createPortal(
-                            // <EditMongoForm 
-                                hiddens={{identifiant: page+"_0"}}
-                                endpoint="diapo"
-                                modelKey={"slider"} 
-                                model={models?.schemaDiapo?.paths || {}} 
-                                // joinedDatasProps={{classes: ecole_classes}} 
-                            />
-                            , document.querySelector('#modal .modal___main')
-                        )
-                    } */}
-                    </>
+                    {modalState.isOpen && createPortal(
+                        <div className="c-modal">
+                            <div className="c-modal__main">
+                                <div className="c-modal__header">
+                                    <figcaption>
+                                        <strong>{modalState.item ? "Modifier la diapositive" : "Ajouter une nouvelle diapositive"} ({page})</strong>
+                                        <span className="close" onClick={() => setModalState({ isOpen: false, item: null })}></span>
+                                    </figcaption>
+                                </div>
+                                <EditMongoForm
+                                    hiddens={{ identifiant: page + "_0" }}
+                                    endpoint="diapo"
+                                    modelKey="slider"
+                                    model={models?.schemaDiapo?.paths || {}}
+                                    datas={modalState.item}
+                                />
+                                <div className="c-modal__footer">
+                                    <button type="button" className="cancel safe" style={{ padding: '8px 16px', background: '#ccc', border: 'none', borderRadius: '4px', cursor: 'pointer' }} onClick={() => setModalState({ isOpen: false, item: null })}>Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                        , document.body
+                    )}
+                </>
                 )}
                 <Slider {...settingsSlider}>
-                    {memoizedDiapos.map((item, i) => item['identifiant_$_hidden'].indexOf(page)!==-1 && (
+                    {memoizedDiapos.map((item, i) => item['identifiant_$_hidden'].indexOf(page) !== -1 && (
                         <figure key={`carousel${i}`}>
-                            {false && isAdmin && (
+                            {isAdmin && (
                                 <ul className="admin">
                                     <li onClick={(e) => handleUpdate(e, item)}>✎</li>
                                     <li onClick={handleDelete} data-_id={item._id} data-src={item.src_$_file}>🗑️</li>
@@ -177,7 +154,12 @@ const Carousel = memo(function Carousel({page="home",diapos: initialDiapos, titr
                             )}
                             <Image
                                 loader={myLoader}
-                                src={item.src_$_file.replace("images/","images/"+(JSON.parse(item.metas)?.path || "")+"/")}
+                                src={item.src_$_file.replace("images/", "images/" + (() => {
+                                    try {
+                                        const m = typeof item.metas === 'string' ? JSON.parse(item.metas) : (item.metas || {});
+                                        return m.path ? m.path + "/" : "";
+                                    } catch (e) { return ""; }
+                                })())}
                                 alt={item.alt}
                                 title={item.title}
                                 width={200}
