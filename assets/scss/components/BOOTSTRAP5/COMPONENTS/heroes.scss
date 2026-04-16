@@ -114,7 +114,7 @@ box-shadow(color), background, border-color
             @extend .col-lg-6;
             >form{
                 flex-wrap: wrap;
-                justify-content: start !important;
+                justify-content: flex-start !important;
                 @include to-tablette(map-get($b5_breakpoints,tablette)+"px"){
                     button{width: 100%;margin-bottom:1.5rem !important;}
                 }

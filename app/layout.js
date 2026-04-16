@@ -64,8 +64,8 @@ export async function generateMetadata() {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       <body className="">
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
         
         <AuthContextProvider>
           <FormContextProvider>

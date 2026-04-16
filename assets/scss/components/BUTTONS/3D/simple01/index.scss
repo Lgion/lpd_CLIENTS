@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @use "sass:math";
 
 // JE N'AI PAS RÉSOLU COMMENT RAJOUTER COMPASS DANS UNE APP NEXTJS
@@ -7,7 +9,7 @@ $font_size: 22px;
 $width: 124px;
 $height: 44px;
 $bg: #CC4331;
-$bg_hover: lighten($bg, 5%);
+$bg_hover: color.adjust($bg, $lightness: 5%, $space: hsl);
 $txt_color: white;
 $bg_shadow: rgba(0,0,0,0.4);
 

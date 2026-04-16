@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /************************************************************/
 /**************************FUNCTION**************************/
 /************************************************************/
@@ -128,7 +130,7 @@ box-shadow(color), background, border-color
             // @each $prop, $list in map-get($__PurposesList01, colors) {
             @for $i from 1 through length(map-get($__PurposesList01, colors)) {
                 &:nth-of-type(#{$i})>i {
-                    background: lighten(nth(map-get($__PurposesList01, colors), $i ), 20%);
+                    background: color.adjust(nth(map-get($__PurposesList01, colors), $i ), $lightness: 20%, $space: hsl);
                     color: nth(map-get($__PurposesList01, colors), $i) !important;
 
                     &:before {

@@ -1,0 +1,89 @@
+
+> achicyr_pda_4vercel_2@0.1.0 build /home/nihongo/Bureau/lpd
+> next build
+
+   ▲ Next.js 15.0.2
+   - Environments: .env
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+$n: 234.4 is not an int.
+    ╷
+193 │     $value: if(divide($value, 255) < .04045, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
+    │                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 193:82            luminance()
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 176:8             contrast-ratio()
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 161:22            color-contrast()
+  assets/scss/vendors/bootstrap_v5/scss/mixins/_table-variants.scss 4:13  table-variant()
+  assets/scss/vendors/bootstrap_v5/scss/_tables.scss 154:3                @import
+  assets/scss/vendors/bootstrap_v5/scss/bootstrap.scss 21:9               @import
+  assets/scss/components/BOOTSTRAP5/index.scss 3:9                        @import
+  assets/scss/main.scss 17:9                                              @import
+  assets/scss/index.scss 3:9                                              root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss
+$n: 234.4 is not an int.
+    ╷
+193 │     $value: if(divide($value, 255) < .04045, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
+    │                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 193:82            luminance()
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 176:8             contrast-ratio()
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 161:22            color-contrast()
+  assets/scss/vendors/bootstrap_v5/scss/mixins/_table-variants.scss 4:13  table-variant()
+  assets/scss/vendors/bootstrap_v5/scss/_tables.scss 154:3                @import
+  assets/scss/vendors/bootstrap_v5/scss/bootstrap.scss 21:9               @import
+  assets/scss/components/BOOTSTRAP5/index.scss 3:9                        @import
+  assets/scss/main.scss 17:9                                              @import
+  assets/scss/index.scss 3:9                                              root stylesheet
+    at tryRunOrWebpackError (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:313010)
+    at __webpack_require_module__ (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:130607)
+    at /home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:131454
+    at symbolIterator (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/neo-async/async.js:1:14444)
+    at done (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/neo-async/async.js:1:14824)
+    at Hook.eval [as callAsync] (eval at create (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:13:28858), <anonymous>:15:1)
+    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:13:26012)
+    at /home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:130328
+    at symbolIterator (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/neo-async/async.js:1:14402)
+-- inner error --
+$n: 234.4 is not an int.
+    ╷
+193 │     $value: if(divide($value, 255) < .04045, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
+    │                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 193:82            luminance()
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 176:8             contrast-ratio()
+  assets/scss/vendors/bootstrap_v5/scss/_functions.scss 161:22            color-contrast()
+  assets/scss/vendors/bootstrap_v5/scss/mixins/_table-variants.scss 4:13  table-variant()
+  assets/scss/vendors/bootstrap_v5/scss/_tables.scss 154:3                @import
+  assets/scss/vendors/bootstrap_v5/scss/bootstrap.scss 21:9               @import
+  assets/scss/components/BOOTSTRAP5/index.scss 3:9                        @import
+  assets/scss/main.scss 17:9                                              @import
+  assets/scss/index.scss 3:9                                              root stylesheet
+    at Object.<anonymous> (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!/home/nihongo/Bureau/lpd/assets/scss/index.scss:1:7)
+    at /home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:922602
+    at Hook.eval [as call] (eval at create (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:13:28636), <anonymous>:7:1)
+    at Hook.CALL_DELEGATE [as _call] (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:13:25906)
+    at /home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:131198
+    at tryRunOrWebpackError (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:312964)
+    at __webpack_require_module__ (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:130607)
+    at /home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/webpack/bundle5.js:28:131454
+    at symbolIterator (/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/neo-async/async.js:1:14444)
+
+Generated code for /home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!/home/nihongo/Bureau/lpd/assets/scss/index.scss
+
+Import trace for requested module:
+./assets/scss/index.scss
+
+
+> Build failed because of webpack errors
+ ELIFECYCLE  Command failed with exit code 1.

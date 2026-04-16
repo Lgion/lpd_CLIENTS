@@ -12,7 +12,7 @@
     position: absolute;
     right: 136px;
     top: 40px;
-    background: url(../img/cart.png) center no-repeat,
+    background: url(/img/cart.png) center no-repeat,
     rgba(34, 105, 176, .4);
     border-radius: 0 10px 10px;
     background-size: contain;
@@ -21,7 +21,7 @@
         position: fixed;
         top: 2em;
         left: 2em;
-        background: url(../img/cart.png) center no-repeat, orange;
+        background: url(/img/cart.png) center no-repeat, orange;
         background-size: contain;
         padding: 3em;
 

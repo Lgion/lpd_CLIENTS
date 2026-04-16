@@ -1,3 +1,5 @@
+@use "sass:color";
+
 /**/
 
 
@@ -71,12 +73,12 @@ $txt-input-palette: (
 /*********************************************************************************************************/
 /***************SHADOW************************************************************************************/
 @mixin heading-shadow($colour: $colour-primary, $size: $heading-shadow-size) {
-    @if (lightness($colour) < 25%) {
-        $colour: lighten($colour, 10%);
+    @if (color.channel($colour, 'lightness', $space: hsl) < 25%) {
+        $colour: color.adjust($colour, $lightness: 10%, $space: hsl);
     }
 
     @else {
-        $colour: darken($colour, 10%);
+        $colour: color.adjust($colour, $lightness: -10%, $space: hsl);
     }
 
     text-shadow: $size $size $colour;

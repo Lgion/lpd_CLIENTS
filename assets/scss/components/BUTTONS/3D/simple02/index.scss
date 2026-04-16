@@ -1,3 +1,5 @@
+@use "sass:color";
+
 %test {
     position: absolute;
     content: '';
@@ -26,7 +28,7 @@
         width: 100%;
         left: 8px;
         transform: skewX(45deg);
-        background-color: darken(#3498db, 20%);
+        background-color: color.adjust(#3498db, $lightness: -20%, $space: hsl);
     }
 
     &::after {
@@ -36,7 +38,7 @@
         width: 15px;
         bottom: -8px;
         transform: skewY(45deg);
-        background-color: darken(#3498db, 30%);
+        background-color: color.adjust(#3498db, $lightness: -30%, $space: hsl);
     }
 
     &:active {

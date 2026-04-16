@@ -1,3 +1,5 @@
+@use "sass:color";
+
 
 @mixin formBarreLocation(){
 // IL FAUT COLLER ICI EN COMMENTAIRES
@@ -25,7 +27,7 @@
             padding:1em;
             background: transparent;
             outline: none;
-            &::placeholder{color: lighten($black,40%);font-weight: 700;}
+            &::placeholder{color: color.adjust($black,$lightness: 40%, $space: hsl);font-weight: 700;}
         }
     }
 }

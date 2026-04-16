@@ -4,15 +4,16 @@ const mongoose = require('mongoose')
 
 
 const donationSchema = mongoose.Schema({
-  donation_type: { default:"0", type: Boolean },
-  firstname: { default:"John", type: String, required: true },
-  lastname: { default:"Smith", type: String, required: true },
-  phone_number: { default:"+2250102030405", type: String, required: true },
-  email: { default:"a@b.c", type: String, required: true },
-  montant: { default:1, type: Number },
-  nature: { default:"", type: String },
-  nature_predefined: { default:"", type: String },
-
+  donation_type: { type: String, enum: ["argent", "nature", "both"], default: "argent" },
+  firstname: { type: String, required: true },
+  lastname: { type: String },
+  communauty: { type: String },
+  reason: { type: String },
+  phone_number: { type: String, required: true },
+  email: { type: String },
+  montant: { type: Number, default: 0 },
+  nature: { type: String },
+  createdAt: { type: Date, default: Date.now }
 })
 
-module.exports = mongoose.model('Donation_PDA', donationSchema)
+module.exports = mongoose.models.Donation_PDA || mongoose.model('Donation_PDA', donationSchema)

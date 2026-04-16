@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
 
 // Variables
@@ -68,7 +70,7 @@ $transition: all 0.3s ease;
           margin-top: 1em;
 
           &:hover {
-            background: darken($primary-color, 10%);
+            background: color.adjust($primary-color, $lightness: -10%, $space: hsl);
           }
         }
       }
@@ -128,7 +130,7 @@ $transition: all 0.3s ease;
       transition: $transition;
 
       &:hover {
-        background: darken($secondary-color, 10%);
+        background: color.adjust($secondary-color, $lightness: -10%, $space: hsl);
         transform: translateY(-2px);
       }
     }
@@ -239,7 +241,7 @@ $transition: all 0.3s ease;
     transition: $transition;
 
     &:hover {
-      background: darken($secondary-color, 10%);
+      background: color.adjust($secondary-color, $lightness: -10%, $space: hsl);
     }
 
     &:disabled {
@@ -386,7 +388,7 @@ $transition: all 0.3s ease;
         color: white;
 
         &:hover {
-          background: darken($primary-color, 10%);
+          background: color.adjust($primary-color, $lightness: -10%, $space: hsl);
         }
       }
 
@@ -395,7 +397,7 @@ $transition: all 0.3s ease;
         color: white;
 
         &:hover {
-          background: darken(#dc3545, 10%);
+          background: color.adjust(#dc3545, $lightness: -10%, $space: hsl);
         }
       }
     }

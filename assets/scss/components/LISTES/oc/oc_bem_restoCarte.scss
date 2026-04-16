@@ -1,10 +1,13 @@
-
-%carteRestaurant{
-// IL FAUT COLLER ICI EN COMMENTAIRES
-// LE CODE HTML ASSOCIÉ
+%carteRestaurant {
+    // IL FAUT COLLER ICI EN COMMENTAIRES
+    // LE CODE HTML ASSOCIÉ
     position: relative;
     overflow: hidden;
     // background: url(/assets/images/restaurants/restaurant-1.jpg) no-repeat, $dark;
+    background-size: contain;
+    padding: 270px 0 5em;
+
+
 
     @include from-tablette {
         // background: url(/assets/images/restaurants/restaurant-1.jpg);
@@ -20,8 +23,6 @@
         }
     }
 
-    background-size: contain;
-    padding: 270px 0 5em;
 
     &__titre {
         // @extend %titreType0_level1;
@@ -72,17 +73,16 @@
             }
         }
     }
-    
+
     &__section {
         position: relative;
         overflow: hidden;
         z-index: 1;
+        padding: 1em;
 
         @include from-tablette {
             background: rgba(255, 255, 255, .8);
         }
-
-        padding:1em;
 
         >h2,
         &__titre {
@@ -105,7 +105,7 @@
             @extend %listChoice__liste--languette_0;
         }
     }
-    
+
     &__btn {
         @extend %button_0;
         display: block;
@@ -114,10 +114,12 @@
         z-index: 2;
         position: relative;
     }
+
     //bge
     //bgm
 }
-@mixin carteRestaurant($paramMixi: $carteRestaurant){
+
+@mixin carteRestaurant($paramMixi: $carteRestaurant) {
     @extend %carteRestaurant;
 
     &__section {
@@ -127,17 +129,22 @@
     &__titre {
         @extend %carteRestaurant__titre;
     }
+
     &__btn {
         @extend %carteRestaurant__btn;
     }
+
     //bgm
 }
-@function carteRestaurant(){
-    
+
+@function carteRestaurant() {
+
     @return ();
 }
+
 $carteRestaurant: carteRestaurant();
-.carteRestaurant{
+
+.carteRestaurant {
     @include carteRestaurant($carteRestaurant);
     //bge
     //bgm

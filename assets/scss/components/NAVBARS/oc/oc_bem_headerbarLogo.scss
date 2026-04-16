@@ -1,3 +1,5 @@
+@use "sass:color";
+
 
 @mixin headerbarLogo(){
 // IL FAUT COLLER ICI EN COMMENTAIRES
@@ -12,7 +14,7 @@
       padding-left: 1em;
     }
     &__logo{width:200px;display: inline-block;}
-    box-shadow:0 0 10px 1px lighten($black,70%);
+    box-shadow:0 0 10px 1px color.adjust($black,$lightness: 70%, $space: hsl);
     position: relative;
     padding:1em 0;
 }

@@ -1,0 +1,592 @@
+
+> achicyr_pda_4vercel_2@0.1.0 build /home/nihongo/Bureau/lpd
+> next build
+
+   ▲ Next.js 15.0.2
+   - Environments: .env
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!/home/nihongo/Bureau/lpd/node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!/home/nihongo/Bureau/lpd/assets/scss/index.scss': No serializer registered for Warning
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> Array { 24 items } -> webpack/lib/ModuleWarning -> Warning
+ ⚠ Compiled with warnings
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Warning
+
+(5:399035) autoprefixer: end value has mixed support, consider using flex-end instead
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Warning
+
+(5:433192) autoprefixer: end value has mixed support, consider using flex-end instead
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 0, column 8 of file:///home/nihongo/Bureau/lpd/assets/scss/index.scss:0:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+0 | @import "./main.scss";
+
+assets/scss/index.scss 1:9  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 0, column 8 of file:///home/nihongo/Bureau/lpd/assets/scss/main.scss:0:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+0 | @import "./utils/variables";
+
+assets/scss/main.scss 1:9   @import
+assets/scss/index.scss 1:9  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 1, column 8 of file:///home/nihongo/Bureau/lpd/assets/scss/index.scss:1:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+1 | @import "../../app/blog/blog.scss";
+
+assets/scss/index.scss 2:9  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 2, column 8 of file:///home/nihongo/Bureau/lpd/assets/scss/main.scss:2:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+2 | @import "./utils/functions";
+
+assets/scss/main.scss 3:9   @import
+assets/scss/index.scss 1:9  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 8, column 4 of file:///home/nihongo/Bureau/lpd/assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss:8:4:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+8 |     position: relative;
+
+assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss 9:5  @import
+assets/scss/components/CARDS/index.scss 1:9                @import
+assets/scss/components/index.scss 5:9                      @import
+assets/scss/main.scss 16:9                                 @import
+assets/scss/index.scss 1:9                                 root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 9, column 4 of file:///home/nihongo/Bureau/lpd/assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss:9:4:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+9 |     width: 100%;
+
+assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss 10:5  @import
+assets/scss/components/CARDS/index.scss 1:9                 @import
+assets/scss/components/index.scss 5:9                       @import
+assets/scss/main.scss 16:9                                  @import
+assets/scss/index.scss 1:9                                  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 9, column 11 of file:///home/nihongo/Bureau/lpd/assets/scss/components/BUTTONS/3D/simple01/index.scss:9:11:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+9 | $bg_hover: lighten($bg, 5%);
+
+assets/scss/components/BUTTONS/3D/simple01/index.scss 10:12  @import
+assets/scss/components/BUTTONS/index.scss 3:9                @import
+assets/scss/components/index.scss 2:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 9, column 11 of file:///home/nihongo/Bureau/lpd/assets/scss/components/BUTTONS/3D/simple01/index.scss:9:11:
+lighten() is deprecated. Suggestions:
+
+color.scale($color, $lightness: 9.9221789883%)
+color.adjust($color, $lightness: 5%)
+
+More info: https://sass-lang.com/d/color-functions
+
+9 | $bg_hover: lighten($bg, 5%);
+
+assets/scss/components/BUTTONS/3D/simple01/index.scss 10:12  @import
+assets/scss/components/BUTTONS/index.scss 3:9                @import
+assets/scss/components/index.scss 2:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 10, column 4 of file:///home/nihongo/Bureau/lpd/assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss:10:4:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+10 |     border-radius:1em;
+
+assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss 11:5  @import
+assets/scss/components/CARDS/index.scss 1:9                 @import
+assets/scss/components/index.scss 5:9                       @import
+assets/scss/main.scss 16:9                                  @import
+assets/scss/index.scss 1:9                                  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 11, column 4 of file:///home/nihongo/Bureau/lpd/assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss:11:4:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+11 |     box-shadow: $shadow1;
+
+assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss 12:5  @import
+assets/scss/components/CARDS/index.scss 1:9                 @import
+assets/scss/components/index.scss 5:9                       @import
+assets/scss/main.scss 16:9                                  @import
+assets/scss/index.scss 1:9                                  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 22, column 4 of file:///home/nihongo/Bureau/lpd/assets/scss/components/LISTES/oc/oc_bem_restoCarte.scss:22:4:
+Sass's behavior for declarations that appear after nested
+rules will be changing to match the behavior specified by CSS in an upcoming
+version. To keep the existing behavior, move the declaration above the nested
+rule. To opt into the new behavior, wrap the declaration in `& {}`.
+
+More info: https://sass-lang.com/d/mixed-decls
+
+22 |     background-size: contain;
+
+assets/scss/components/LISTES/oc/oc_bem_restoCarte.scss 23:5  @import
+assets/scss/components/LISTES/index.scss 3:9                  @import
+assets/scss/components/index.scss 14:9                        @import
+assets/scss/main.scss 16:9                                    @import
+assets/scss/index.scss 1:9                                    root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 22, column 15 of file:///home/nihongo/Bureau/lpd/assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss:22:15:
+darken() is deprecated. Suggestions:
+
+color.scale($color, $lightness: -91.8%)
+color.adjust($color, $lightness: -45%)
+
+More info: https://sass-lang.com/d/color-functions
+
+22 |         color: darken($ternary, 45%);
+
+assets/scss/components/CARDS/oc/oc_bem_cardCoeur.scss 23:16  @import
+assets/scss/components/CARDS/index.scss 1:9                  @import
+assets/scss/components/index.scss 5:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 27, column 34 of file:///home/nihongo/Bureau/lpd/assets/scss/components/FORMS/oc/oc_bem_formBarreLocation.scss:27:34:
+lighten() is deprecated. Suggestions:
+
+color.scale($color, $lightness: 40%)
+color.adjust($color, $lightness: 40%)
+
+More info: https://sass-lang.com/d/color-functions
+
+27 |             &::placeholder{color: lighten($black,40%);font-weight: 700;}
+
+assets/scss/components/FORMS/oc/oc_bem_formBarreLocation.scss 28:35  formBarreLocation()
+assets/scss/components/FORMS/oc/oc_bem_formBarreLocation.scss 32:20  @import
+assets/scss/components/FORMS/index.scss 2:9                          @import
+assets/scss/components/index.scss 8:9                                @import
+assets/scss/main.scss 16:9                                           @import
+assets/scss/index.scss 1:9                                           root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 28, column 26 of file:///home/nihongo/Bureau/lpd/assets/scss/components/BUTTONS/3D/simple02/index.scss:28:26:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+28 |         background-color: darken(#3498db, 20%);
+
+assets/scss/components/BUTTONS/3D/simple02/index.scss 29:27  @import
+assets/scss/components/BUTTONS/index.scss 4:9                @import
+assets/scss/components/index.scss 2:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 28, column 26 of file:///home/nihongo/Bureau/lpd/assets/scss/components/BUTTONS/3D/simple02/index.scss:28:26:
+darken() is deprecated. Suggestions:
+
+color.scale($color, $lightness: -37.6383763838%)
+color.adjust($color, $lightness: -20%)
+
+More info: https://sass-lang.com/d/color-functions
+
+28 |         background-color: darken(#3498db, 20%);
+
+assets/scss/components/BUTTONS/3D/simple02/index.scss 29:27  @import
+assets/scss/components/BUTTONS/index.scss 4:9                @import
+assets/scss/components/index.scss 2:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 31, column 8 of file:///home/nihongo/Bureau/lpd/assets/scss/index.scss:31:8:
+Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+31 | @import "./style.scss";
+
+assets/scss/index.scss 32:9  root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 38, column 26 of file:///home/nihongo/Bureau/lpd/assets/scss/components/BUTTONS/3D/simple02/index.scss:38:26:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+38 |         background-color: darken(#3498db, 30%);
+
+assets/scss/components/BUTTONS/3D/simple02/index.scss 39:27  @import
+assets/scss/components/BUTTONS/index.scss 4:9                @import
+assets/scss/components/index.scss 2:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 38, column 26 of file:///home/nihongo/Bureau/lpd/assets/scss/components/BUTTONS/3D/simple02/index.scss:38:26:
+darken() is deprecated. Suggestions:
+
+color.scale($color, $lightness: -56.4575645756%)
+color.adjust($color, $lightness: -30%)
+
+More info: https://sass-lang.com/d/color-functions
+
+38 |         background-color: darken(#3498db, 30%);
+
+assets/scss/components/BUTTONS/3D/simple02/index.scss 39:27  @import
+assets/scss/components/BUTTONS/index.scss 4:9                @import
+assets/scss/components/index.scss 2:9                        @import
+assets/scss/main.scss 16:9                                   @import
+assets/scss/index.scss 1:9                                   root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 94, column 25 of file:///home/nihongo/Bureau/lpd/assets/scss/utils/mixins.scss:94:25:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+94 | @mixin mobile-only($max: map-get($breakpoints, mobile) + "px") {
+
+assets/scss/utils/mixins.scss 95:26    mobile-only()
+assets/scss/themes/template.scss 28:5  @import
+assets/scss/main.scss 8:9              @import
+assets/scss/index.scss 1:9             root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+Deprecation Warning on line 118, column 33 of file:///home/nihongo/Bureau/lpd/assets/scss/utils/mixins.scss:118:33:
+Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+118 | @mixin mobile-and-tablette($max: map-get($breakpoints, tablette) + "px") {
+
+assets/scss/utils/mixins.scss 119:34     mobile-and-tablette()
+assets/scss/utils/extensions.scss 220:5  @import
+assets/scss/main.scss 5:9                @import
+assets/scss/index.scss 1:9               root stylesheet
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+418 repetitive deprecation warnings omitted.
+
+Import trace for requested module:
+./assets/scss/index.scss.webpack[javascript/auto]!=!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[2]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[11].use[3]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[13].oneOf[11].use[4]!./node_modules/.pnpm/next@15.0.2_react-dom@19.0.0-rc-02c0e824-20241028_react@19.0.0-rc-02c0e824-20241028__react@19_7vdwko6gl2ewswimujf3mvgsaa/node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[13].oneOf[11].use[5]!./assets/scss/index.scss
+./assets/scss/index.scss
+
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/20) ...
+[Function (anonymous)]
+false
+false
+[Function (anonymous)]
+false
+false
+[Function (anonymous)]
+--- BLOG FILTERING DEBUG ---
+Total posts available: 0
+Requested filter category: ecole
+Normalized filter string: "ecole"
+Number of posts after filtering: 0
+--- END BLOG DEBUG ---
+false
+false
+[Function (anonymous)]
+false
+false
+[Function (anonymous)]
+false
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+--- BLOG FILTERING DEBUG ---
+Total posts available: 0
+Requested filter category: sanctuaire
+Normalized filter string: "sanctuaire"
+Number of posts after filtering: 0
+--- END BLOG DEBUG ---
+false
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+false
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+true
+false
+[Function (anonymous)]
+isActive infos
+false
+false
+   Generating static pages (5/20) 
+   Generating static pages (10/20) 
+   Generating static pages (15/20) 
+ ✓ Generating static pages (20/20)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                               Size     First Load JS
+┌ ƒ /                                     3.34 kB         376 kB
+├ ƒ /_not-found                           904 B           101 kB
+├ ƒ /admin                                1.47 kB         111 kB
+├ ƒ /admin/ecole                          167 B           100 kB
+├ ƒ /admin/ecole/classes                  167 B           100 kB
+├ ƒ /admin/ecole/classes/[id]             2 kB            111 kB
+├ ƒ /admin/ecole/eleves                   167 B           100 kB
+├ ƒ /admin/ecole/eleves/[id]              1.83 kB         124 kB
+├ ƒ /admin/ecole/enseignants              167 B           100 kB
+├ ƒ /admin/ecole/enseignants/[id]         2.82 kB         116 kB
+├ ƒ /admin/ecommerce                      1.83 kB         123 kB
+├ ƒ /admin/sanctuaire                     288 kB          410 kB
+├ ƒ /admin/school                         2.29 kB         382 kB
+├ ƒ /admin/school/student/[id]            1.4 kB          381 kB
+├ ƒ /admin/school/teacher/[id]            1.21 kB         380 kB
+├ ƒ /api/generate-post                    167 B           100 kB
+├ ƒ /blog                                 8.55 kB         360 kB
+├ ƒ /blog/[slug]                          36.5 kB         143 kB
+├ ƒ /bolobi-ecole-caritative-larve-msn    9.69 kB         399 kB
+├ ƒ /ecom                                 11.3 kB         394 kB
+├ ƒ /panier-ecommerce-religieux           5.8 kB          384 kB
+├ ƒ /posts/[slug]                         1.11 kB         107 kB
+├ ƒ /retraites-spirituelles-bolobi        27.6 kB         414 kB
+└ ƒ /sanctuaire-rosaire-bolobi-adzope     124 kB          577 kB
++ First Load JS shared by all             100 kB
+  ├ chunks/17f6c7aa-4f6209d3ff6f3075.js   52.6 kB
+  ├ chunks/3422-9d9da94373831419.js       45.5 kB
+  └ other shared chunks (total)           2.17 kB
+
+Route (pages)                             Size     First Load JS
+┌ ƒ /api/_/app                            0 B            92.7 kB
+├ ƒ /api/_/controllers/donation           0 B            92.7 kB
+├ ƒ /api/_/controllers/ecole              0 B            92.7 kB
+├ ƒ /api/_/controllers/entryController    0 B            92.7 kB
+├ ƒ /api/_/controllers/members            0 B            92.7 kB
+├ ƒ /api/_/controllers/reservation        0 B            92.7 kB
+├ ƒ /api/_/controllers/user               0 B            92.7 kB
+├ ƒ /api/_/middlewares/auth               0 B            92.7 kB
+├ ƒ /api/_/middlewares/multer             0 B            92.7 kB
+├ ƒ /api/_/models/ai/Classe               0 B            92.7 kB
+├ ƒ /api/_/models/ai/Eleve                0 B            92.7 kB
+├ ƒ /api/_/models/ai/Teacher              0 B            92.7 kB
+├ ƒ /api/_/models/Articles                0 B            92.7 kB
+├ ƒ /api/_/models/ArticlesOptions         0 B            92.7 kB
+├ ƒ /api/_/models/chatgpt                 0 B            92.7 kB
+├ ƒ /api/_/models/Classe                  0 B            92.7 kB
+├ ƒ /api/_/models/Donation                0 B            92.7 kB
+├ ƒ /api/_/models/Ecommerce               0 B            92.7 kB
+├ ƒ /api/_/models/Eleve                   0 B            92.7 kB
+├ ƒ /api/_/models/old/Classe              0 B            92.7 kB
+├ ƒ /api/_/models/old/Eleve               0 B            92.7 kB
+├ ƒ /api/_/models/old/School              0 B            92.7 kB
+├ ƒ /api/_/models/old/Teacher             0 B            92.7 kB
+├ ƒ /api/_/models/Reservation             0 B            92.7 kB
+├ ƒ /api/_/models/School                  0 B            92.7 kB
+├ ƒ /api/_/models/Slider                  0 B            92.7 kB
+├ ƒ /api/_/models/Teacher                 0 B            92.7 kB
+├ ƒ /api/_/models/User                    0 B            92.7 kB
+├ ƒ /api/_/models/User_lpd                0 B            92.7 kB
+├ ƒ /api/_/mongodb                        0 B            92.7 kB
+├ ƒ /api/_/mongodb_                       0 B            92.7 kB
+├ ƒ /api/_/routes/reservation             0 B            92.7 kB
+├ ƒ /api/_/routes/user                    0 B            92.7 kB
+├ ƒ /api/_/server                         0 B            92.7 kB
+├ ƒ /api/admin/dashboard_stats            0 B            92.7 kB
+├ ƒ /api/diapo                            0 B            92.7 kB
+├ ƒ /api/diapos                           0 B            92.7 kB
+├ ƒ /api/donation                         0 B            92.7 kB
+├ ƒ /api/ecole                            0 B            92.7 kB
+├ ƒ /api/ecom                             0 B            92.7 kB
+├ ƒ /api/ecomFixtures                     0 B            92.7 kB
+├ ƒ /api/lib/dbConnect                    0 B            92.7 kB
+├ ƒ /api/lib/ecole                        0 B            92.7 kB
+├ ƒ /api/lib/mongocode                    0 B            92.7 kB
+├ ƒ /api/media                            0 B            92.7 kB
+├ ƒ /api/members                          0 B            92.7 kB
+├ ƒ /api/posts                            0 B            92.7 kB
+├ ƒ /api/posts/[slug]                     0 B            92.7 kB
+├ ƒ /api/reservation                      0 B            92.7 kB
+├ ƒ /api/reservation_ai                   0 B            92.7 kB
+├ ƒ /api/reservation_simple               0 B            92.7 kB
+├ ƒ /api/school_ai/classes                0 B            92.7 kB
+├ ƒ /api/school_ai/ecole                  0 B            92.7 kB
+├ ƒ /api/school_ai/eleves                 0 B            92.7 kB
+├ ƒ /api/school_ai/enseignants            0 B            92.7 kB
+├ ƒ /api/school_ai/media                  0 B            92.7 kB
+├ ƒ /api/school_ai/members                0 B            92.7 kB
+├ ƒ /api/upload                           0 B            92.7 kB
+├ ƒ /api/upload_ecom                      0 B            92.7 kB
+└ ƒ /api/users                            0 B            92.7 kB
++ First Load JS shared by all             92.7 kB
+  ├ chunks/framework-8c2d28445317eb01.js  57.3 kB
+  ├ chunks/main-0860384f6f952716.js       33.2 kB
+  └ other shared chunks (total)           2.14 kB
+
+ƒ  (Dynamic)  server-rendered on demand
+
