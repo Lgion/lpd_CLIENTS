@@ -16,12 +16,15 @@ WIP manque juste des images et un tout petit peu de mise en forme
 DONE
 - il faut une page d'accueil au backend, listant les dernieres actions de tous les menus confondus (retraite, école, librairie, etc)
 WIP
+- voir le parcours pour intégrer wave et répondre à l'email
 - toujours sur la page d'accueil, il faut pouvoir afficher des statistique de visites et autres (à la google analytics)
+- ajouter GA et GTM ???
 - mettre le qr code wave et OM lorsque le user a fini de réserver (réservation enregistré avec succès) et dans l'email
 - améliorer le menu ecommerce
-dans l'admin sanctuaire, il faut rappeler au tel tous les groupe dont le nom de la communauté n'est pas connu afin de modifier leur réservation pour y mettre le nom de leur communauté
-- la page de l'école doit pouvoir afficher les dons, ainsi que lire les informations de l'école sur mongodb du compte archist (nbre élèves, profs, classes, etc) avec un lien vers l'application de l'école
+- dans l'admin sanctuaire, il faut rappeler au tel tous les groupe dont le nom de la communauté n'est pas connu afin de modifier leur réservation pour y mettre le nom de leur communauté
+- la page de l'école doit pouvoir afficher les dons, ainsi que les stats de l'école st martin porres (nbre élèves, profs, classes, etc) avec un lien vers l'application de l'école
 ## Ecomerce: 
 - voir le parcours pour intégrer wave et répondre à l'email
 - améliorer l'affichage
+- il faut une barre de recherche pour faciliter au plus possible les users clients comme employés
 

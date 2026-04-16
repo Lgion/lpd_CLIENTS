@@ -1,5 +1,6 @@
 import { headers } from 'next/headers'
 import { ClerkProvider } from "@clerk/nextjs";
+import { GoogleTagManager } from '@next/third-parties/google';
 import localFont from "next/font/local";
 import "./globals.css";
 import "./../assets/scss/index.scss"
@@ -63,8 +64,8 @@ export async function generateMetadata() {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       <body className="">
-      {/*<body className={`${geistSans.variable} ${geistMono.variable}`}>*/}
         
         <AuthContextProvider>
           <FormContextProvider>
