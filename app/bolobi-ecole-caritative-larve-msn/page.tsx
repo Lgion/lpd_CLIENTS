@@ -31,7 +31,7 @@ export default function Index() {
         titre={"L'ÉCOLE SAINT MARTIN DE PORÈZ EN IMAGES"}
       />
       <BlogCategory
-        {...{ categoryPosts, headings, filterCategory: "ecole" }}
+        {...{ headings, filterCategory: "ecole" }}
       />
     </main>
   );

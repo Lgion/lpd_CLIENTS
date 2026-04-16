@@ -26,7 +26,7 @@ const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
         {/* <ReserveForm /> */}
         <ReserveForm_ />
         <BtnCTA />
-        <BlogCategory {...{ categoryPosts, headings, className: "sndr", filterCategory: "sanctuaire" }} />
+        <BlogCategory {...{ headings, className: "sndr", filterCategory: "sanctuaire" }} />
     </main>
 ));
 
