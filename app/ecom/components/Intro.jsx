@@ -6,7 +6,7 @@ const Intro = ({ selectedCategory, setSelectedCategory, categories }) => {
             <div className="intro-container">
                 <h2 className="intro-title">Librairie Puissance Divine d'Amour</h2>
                 <p className="intro-description">
-                    Découvrez notre sélection d'articles religieux soigneusement choisis pour nourrir votre foi 
+                    Découvrez notre sélection d'articles religieux soigneusement choisis pour nourrir votre foi
                     et enrichir votre vie spirituelle.
                 </p>
                 <p className="intro-categories">
@@ -21,7 +21,7 @@ const Intro = ({ selectedCategory, setSelectedCategory, categories }) => {
                     {categories.map((category, index) => (
                         <>
                             <button
-                                key={index}
+                                key={"cat_" + index}
                                 onClick={() => setSelectedCategory(category.label)}
                                 className={`category-badge ${category.color}${selectedCategory === category.label ? ' active' : ''}`}
                             >

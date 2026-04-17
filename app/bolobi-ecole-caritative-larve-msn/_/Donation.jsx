@@ -39,6 +39,13 @@ export default function Donation() {
       form.classList.add('on');
       e.target.innerHTML = "Fermer";
       e.target.parentNode.nextElementSibling.style.display = "none";
+      
+      // GA4 : Tracking de l'ouverture du formulaire
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'begin_donation', {
+          page_title: 'École Saint Martin'
+        });
+      }
     }
   };
 
@@ -63,6 +70,16 @@ export default function Donation() {
         body: JSON.stringify(data),
       });
       if (res.ok) {
+        
+        // GA4 : Tracking du don réussi
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'donation_complete', {
+            currency: 'XOF',
+            value: data.montant ? parseFloat(data.montant) : 0,
+            donation_type: data.donation_type
+          });
+        }
+
         alert("Merci pour votre don !");
         e.target.reset();
         setUseMoney(false);

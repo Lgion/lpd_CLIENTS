@@ -126,14 +126,14 @@ const categories = [
     { label: "bibles", color: "purple", name: "Saintes Bibles" },
     { label: "NEI", color: "blue", name: "NEI" },
     { label: "texte_priere", color: "green", name: "Textes & Prières" },
-    { label: "divers", color: "orange", name: "Croix Posées" },
-    { label: "croixp", color: "red", name: "Croix Murales" },
-    { label: "croixm", color: "teal", name: "Croix Jésus" },
-    { label: "croix", color: "gold", name: "Encens" },
-    { label: "encens", color: "silver", name: "Statue Religieuse" },
-    { label: "statue", color: "brown", name: "Grotte Religieuse" },
-    { label: "grotte", color: "pink", name: "Chapelet de Prière" },
-    { label: "chapelet", color: "wheat", name: "Divers autreproduits" }
+    { label: "croixp", color: "orange", name: "Croix Posées" },
+    { label: "croixm", color: "red", name: "Croix Murales" },
+    { label: "croix", color: "teal", name: "Croix Jésus" },
+    { label: "encens", color: "gold", name: "Encens" },
+    { label: "statue", color: "silver", name: "Statue Religieuse" },
+    { label: "grotte", color: "brown", name: "Grotte Religieuse" },
+    { label: "chapelet", color: "pink", name: "Chapelet de Prière" },
+    { label: "divers", color: "wheat", name: "Divers" }
 ];
 
 function Ecommerce({ Ecommerce_articles, Ecommerce_articles_OPTIONS, categoryPosts, models = {} }) {
@@ -200,6 +200,8 @@ function Ecommerce({ Ecommerce_articles, Ecommerce_articles_OPTIONS, categoryPos
     let [currentDatas, setCurrentDatas] = useState({})
         , [selectedCategory, setSelectedCategory] = useState("all")
         , [selectedType, setSelectedType] = useState("publication")
+        , [searchQuery, setSearchQuery] = useState("")
+        , [isSearchVisible, setIsSearchVisible] = useState(false)
 
     useEffect(() => {
         console.log("console.log(Ecommerce_articles)");
@@ -223,7 +225,43 @@ function Ecommerce({ Ecommerce_articles, Ecommerce_articles_OPTIONS, categoryPos
                     </div>
                 )}
                 <Intro {...{ selectedCategory, categories, setSelectedCategory }} />
-                <EcomNavbar {...{ models, currentDatas, setSelectedCategory, setSelectedType, categories }} />
+                <EcomNavbar 
+                    models={models} 
+                    currentDatas={currentDatas} 
+                    setSelectedCategory={setSelectedCategory} 
+                    setSelectedType={setSelectedType} 
+                    categories={categories}
+                    isSearchVisible={isSearchVisible}
+                    setIsSearchVisible={setIsSearchVisible}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                />
+
+                {isSearchVisible && (
+                    <div className="search-panel">
+                        <div className="search-panel__container">
+                            <input 
+                                type="text" 
+                                placeholder="Rechercher un produit (titre, auteur...)" 
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                autoFocus
+                            />
+                            <button 
+                                type="button" 
+                                onClick={() => {
+                                    setSearchQuery("");
+                                    setIsSearchVisible(false);
+                                }} 
+                                title="Fermer la recherche"
+                                className="search-panel__clear"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    </div>
+                )}
+
                 <ArticleGrid
                     Ecommerce_articles={Ecommerce_articles}
                     Ecommerce_articles_OPTIONS={Ecommerce_articles_OPTIONS}
@@ -239,6 +277,7 @@ function Ecommerce({ Ecommerce_articles, Ecommerce_articles_OPTIONS, categoryPos
                     selectedCategory={selectedCategory}
                     selectedType={selectedType}
                     openEditForm={openEditForm}
+                    searchQuery={searchQuery}
                 />
                 <BlogCategory {...{ categoryPosts, headings, filterCategory: "librairie" }} />
             </main>

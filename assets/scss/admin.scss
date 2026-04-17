@@ -1050,3 +1050,124 @@ body>div:has(.ant-modal-root) {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+// --- Google Analytics Dashboard Section (BEM) ---
+.admin-analytics {
+    grid-column: 1 / -1;
+    background: #f8fafd;
+    border-left: 4px solid #4285F4;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-top: 24px;
+
+    &__header {
+        padding: 20px;
+        border-bottom: 1px solid #e0e0e0;
+        
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            
+            span {
+                font-size: 1.25em;
+            }
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    &__block {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        h3 {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #333;
+            margin: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.95em;
+
+        label {
+            color: #666;
+            margin: 0;
+        }
+    }
+
+    &__value {
+        color: #1a1a1a;
+        font-weight: 700;
+        
+        &--blue { color: #4285F4; }
+        &--green { color: #34A853; }
+        &--orange { color: #e65100; }
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f5f5f5;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        &-title {
+            color: #555;
+            font-size: 0.9em;
+            max-width: 70%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &-badge {
+            background: #e8f0fe;
+            color: #4285F4;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+        
+        &-device {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #555;
+            text-transform: capitalize;
+        }
+    }
+}

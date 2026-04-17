@@ -66,10 +66,35 @@ export default function Cart() {
   const handleNext = () => setStep(step+1);
   const handlePrev = () => setStep(step-1);
 
-  // Soumission finale (à adapter selon backend)
+  // --- GA4 : BEGIN CHECKOUT ---
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      try {
+        const CartLS = JSON.parse(window.localStorage.getItem('cart')) || {};
+        const items = Object.keys(CartLS).map(itemKey => {
+          const p = JSON.parse(itemKey);
+          return {
+            item_id: p.id,
+            item_name: p.title || "Produit",
+            price: parseFloat(p.price),
+            quantity: CartLS[itemKey]
+          };
+        });
+
+        if (items.length > 0) {
+          window.gtag('event', 'begin_checkout', {
+            currency: 'XOF',
+            value: items.reduce((sum, i) => sum + (i.price * i.quantity), 0),
+            items: items
+          });
+        }
+      } catch (e) { console.error("GA4 Error:", e); }
+    }
+  }, []);
+
+  // Soumission finale
   const handleSubmit = async e => {
     e.preventDefault();
-    // Récupère le panier depuis le localStorage (CartLS)
     let cart = [];
     try {
       const CartLS = JSON.parse(window.localStorage.getItem('cart')) || {};
@@ -88,11 +113,14 @@ export default function Cart() {
       alert('Votre panier est vide');
       return;
     }
+
+    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
     // Prépare la commande
     const commande = {
       produits: cart,
       date: new Date().toISOString(),
-      montant: cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+      montant: totalAmount,
       livraison: form.livraison,
       paiement: form.paiement,
       instructions: form.instructions
@@ -120,6 +148,22 @@ export default function Cart() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
+        
+        // --- GA4 : PURCHASE ---
+        if (window.gtag) {
+          window.gtag('event', 'purchase', {
+            transaction_id: data.orderId || `T_${Date.now()}`,
+            value: totalAmount,
+            currency: 'XOF',
+            items: cart.map(item => ({
+              item_id: item.id,
+              item_name: item.title || "Produit", 
+              price: item.price,
+              quantity: item.qty
+            }))
+          });
+        }
+
         alert('Commande envoyée avec succès !');
         window.localStorage.removeItem('cart'); // Vide le panier
         setStep(1);

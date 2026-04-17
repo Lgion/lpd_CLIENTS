@@ -11,7 +11,7 @@ import Modal from './Modal.jsx'
 import { useState } from "react";
 import AddArticleForm from './AddArticleForm.jsx';
 
-export default function EcomNavbar({models,currentDatas,setSelectedCategory,setSelectedType}) {
+export default function EcomNavbar({models,currentDatas,setSelectedCategory,setSelectedType, isSearchVisible, setIsSearchVisible}) {
     const {isAdmin} = useContext(AuthContext)
     const { hoveredTitle } = useHover()
     const [showAddModal, setShowAddModal] = useState(false);
@@ -100,6 +100,14 @@ export default function EcomNavbar({models,currentDatas,setSelectedCategory,setS
                     }
                 }}
             >À La Une</button>}
+
+            <button 
+                className={"search-toggle" + (isSearchVisible ? " active" : "")} 
+                onClick={() => setIsSearchVisible(!isSearchVisible)}
+                title="Rechercher un produit"
+            >
+                🔍
+            </button>
 
             <div className="howtoshow">
                 <button onClick={handleProductsDisplay} className="active">▢</button>

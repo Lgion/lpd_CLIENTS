@@ -2,31 +2,42 @@
 
 import { useEffect, useContext } from 'react'
 import { usePathname } from 'next/navigation'
-import {EcomContextProvider} from '../stores/ecomContext.js'
+import { EcomContextProvider } from '../stores/ecomContext.js'
 
 import AuthContext from "../stores/authContext.js"
 import Header from "./Header";
 import Nav from "./Nav";
 import Footer from "./Footer";
 
-export default function ClientIsHome({children}) {
+export default function ClientIsHome({ children }) {
+    const pathname = usePathname();
+    const { isAdmin } = useContext(AuthContext);
 
-    const pathname = usePathname()
-    , {isAdmin} = useContext(AuthContext)
+    const isProductPage = pathname?.indexOf('vente-en-ligne') !== -1;
+    const isAdminPage = pathname?.indexOf('admin') !== -1;
 
     useEffect(() => {
-        console.log(isAdmin);
-    
-    }, [isAdmin])
-    
-    return <EcomContextProvider>
-        {((pathname && pathname?.indexOf('admin') == -1) || (!isAdmin && pathname?.indexOf('admin') != -1)) && <>
-            <Header />
+        console.log("IsAdmin:", isAdmin);
+    }, [isAdmin]);
 
-            <Nav />
-        </>}
-        {pathname?.indexOf('admin') == -1 && <>{children} <Footer /></>}
-        
-        
-    </EcomContextProvider>
+    return (
+        <EcomContextProvider>
+            {((pathname && !isAdminPage && !isProductPage) || (!isAdmin && isAdminPage)) && (
+                <>
+                    <Header />
+                    <Nav />
+                </>
+            )}
+            
+            {!isAdminPage && (
+                <>
+                    {children}
+                    {!isProductPage && <Footer />}
+                </>
+            )}
+
+
+            {/* Seul ClientIsAdmin gère l'affichage de children pour les pages Admin */}
+        </EcomContextProvider>
+    );
 }

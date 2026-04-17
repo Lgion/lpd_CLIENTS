@@ -229,8 +229,7 @@ main.ecommerce {
                 transition: height .7s;
 
                 &:empty {
-                    // opacity: 0;
-                    height: 0;
+                    display: none;
                 }
 
                 &:not(:empty) {
@@ -278,6 +277,9 @@ main.ecommerce {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 2rem;
         padding: 2rem;
+        z-index: 2;
+        position: relative;
+        background: white;
 
         &.filter {
             >figure:not(.on) {
@@ -687,11 +689,17 @@ main.ecommerce {
         >figure {
             a[target="_blank"] {
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 65%;
-                z-index: 1;
+                top: -10px;
+                left: 20%;
+                z-index: 10;
+                display: inline;
+                border: solid;
+                border-top: none;
+                border-radius: 10px;
+                background: white;
+                padding: .25em;
+                // width: 100%;
+                // height: 65%;
                 cursor: pointer;
 
                 &:focus {
@@ -1200,6 +1208,9 @@ article#articles {
                 border-radius: 6px;
                 cursor: pointer;
                 transition: all 0.2s ease;
+                position: absolute;
+                right: 5px;
+                bottom: calc(5em + 5px);
 
                 &:hover {
                     background: #e2e8f0;
@@ -1209,10 +1220,7 @@ article#articles {
 
         // Lien produit
         a[target="_blank"] {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
+            // pointer-events: none;
         }
     }
 }
@@ -1255,6 +1263,7 @@ article#articles {
 .intro-section {
     padding: 2rem 0;
     line-height: 1.6;
+    background-color: white;
 
     .intro-container {
         max-width: 1200px;
@@ -1286,146 +1295,52 @@ article#articles {
         padding: 1em;
         gap: .5em;
         bottom: 0;
+        z-index: -1;
 
         &:hover {
             z-index: 1111;
-
+            background: white;
         }
     }
 
     .category-badge {
         display: inline-block;
-        padding: 0.25rem 0.75rem;
-        margin: 0 0.25rem;
-        border-radius: 6px;
-        font-size: 0.95rem;
+        padding: 0.4rem 1rem;
+        margin: 0 0.25rem 0.5rem 0.25rem;
+        border-radius: 2rem;
+        font-size: 0.9rem;
         font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 2px solid transparent;
         text-decoration: none;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
-        &:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        &.active {
+            transform: scale(1.15);
+            border-color: #1e293b;
+            box-shadow: 0 8px 16px rgba(108, 99, 255, 0.2);
+            font-weight: 700;
+            z-index: 2;
         }
 
-        &:active {
-            transform: translateY(1px);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        &:hover:not(.active) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        &.purple {
-            background-color: #F3E8FF;
-            color: #7E22CE;
-            border-color: #E9D5FF;
-
-            &:hover {
-                background-color: #EDE9FE;
-            }
-        }
-
-        &.blue {
-            background-color: #E0F2FE;
-            color: #0369A1;
-            border-color: #BAE6FD;
-
-            &:hover {
-                background-color: #DBEAFE;
-            }
-        }
-
-        &.green {
-            background-color: #DCFCE7;
-            color: #15803D;
-            border-color: #BBF7D0;
-
-            &:hover {
-                background-color: #D1FAE5;
-            }
-        }
-
-        &.orange {
-            background-color: #FFEDD5;
-            color: #C2410C;
-            border-color: #FED7AA;
-
-            &:hover {
-                background-color: #FEE2E2;
-            }
-        }
-
-        &.red {
-            background-color: #FEE2E2;
-            color: #B91C1C;
-            border-color: #FECACA;
-
-            &:hover {
-                background-color: #FEE2E2;
-            }
-        }
-
-        &.teal {
-            background-color: #CCFBF1;
-            color: #0F766E;
-            border-color: #99F6E4;
-
-            &:hover {
-                background-color: #D1FAE5;
-            }
-        }
-
-        &.croix {
-            background-color: #FFC080;
-            color: #B91C1C;
-            border-color: #FFC080;
-
-            &:hover {
-                background-color: #FFC080;
-            }
-        }
-
-        &.encens {
-            background-color: #FFC080;
-            color: #B91C1C;
-            border-color: #FFC080;
-
-            &:hover {
-                background-color: #FFC080;
-            }
-        }
-
-        &.statue {
-            background-color: #FFC080;
-            color: #B91C1C;
-            border-color: #FFC080;
-
-            &:hover {
-                background-color: #FFC080;
-            }
-        }
-
-        &.grotte {
-            background-color: #FFC080;
-            color: #B91C1C;
-            border-color: #FFC080;
-
-            &:hover {
-                background-color: #FFC080;
-            }
-        }
-
-        &.chapelet {
-            background-color: #FFC080;
-            color: #B91C1C;
-            border-color: #FFC080;
-
-            &:hover {
-                background-color: #FFC080;
-            }
-        }
-
+        &.neutral { background-color: #f1f5f9; color: #475569; border-color: #e2e8f0; }
+        &.purple { background-color: #f3e8ff; color: #7e22ce; border-color: #e9d5ff; }
+        &.blue { background-color: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+        &.green { background-color: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+        &.orange { background-color: #ffedd5; color: #c2410c; border-color: #fed7aa; }
+        &.red { background-color: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+        &.teal { background-color: #ccfbf1; color: #0f766e; border-color: #99f6e4; }
+        &.gold { background-color: #fef3c7; color: #92400e; border-color: #fde68a; }
+        &.silver { background-color: #f8fafc; color: #64748b; border-color: #cbd5e1; }
+        &.brown { background-color: #efebe9; color: #5d4037; border-color: #d7ccc8; }
+        &.pink { background-color: #fce4ec; color: #c2185b; border-color: #f8bbd0; }
+        &.wheat { background-color: #f5f5dc; color: #827717; border-color: #e6e6ad; }
     }
 }
 
@@ -1730,5 +1645,95 @@ article#articles {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+// --- SEARCH PANEL & TOGGLE ---
+.search-toggle {
+    background: #e3e9f6;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s, transform 0.2s;
+    margin-right: 1rem;
+
+    &:hover {
+        background: #6c63ff22;
+        transform: scale(1.1);
+    }
+
+    &.active {
+        background: #6c63ff;
+        color: white;
+        box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+    }
+}
+
+.search-panel {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #e3e9f6;
+    padding: 1.5rem 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    animation: slideDown 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &__container {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        gap: 1rem;
+        padding: 0 1rem;
+
+        input {
+            flex: 1;
+            border: 2px solid #e3e9f6;
+            border-radius: 2rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+
+            &:focus {
+                border-color: #6c63ff;
+                box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+            }
+        }
+
+        .search-panel__clear {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #b2b2d8;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            z-index: 10;
+            padding: 0.5rem;
+
+            &:hover {
+                color: #6c63ff;
+                transform: scale(1.2);
+            }
+            &:active {
+                transform: scale(0.9);
+            }
+        }
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

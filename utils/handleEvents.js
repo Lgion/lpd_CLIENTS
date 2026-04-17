@@ -16,31 +16,61 @@ export {
 let handleModalShowProduct = (e) => {
     const modal = document.querySelector('#modal')
     modal.classList.add('active')
-    // console.log(document.querySelector('#modal .modal___main'))
-    modal.querySelector(".modal___header").innerHTML = e.target.closest('figure').querySelector('.toPutInModal').innerHTML
+    
+    const figure = e.target.closest('figure')
+    const title = figure.querySelector('figcaption h3')?.innerText || "Produit inconnu"
+    const price = parseFloat(figure.querySelector('.price')?.innerText) || 0
+    const id = figure.querySelector('.toAddCart')?.dataset.id || "unknown"
+
+    // GA4 : Suivi de la vue du produit
+    if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'view_item', {
+            currency: 'XOF',
+            value: price,
+            items: [{
+                item_id: id,
+                item_name: title,
+                price: price
+            }]
+        });
+    }
+
+    modal.querySelector(".modal___header").innerHTML = figure.querySelector('.toPutInModal').innerHTML
     modal.querySelector(".modal___main").append(modal.querySelector(".modal___header .img"))
     modal.querySelector(".modal___main").append(modal.querySelector(".modal___header .content"))
     modal.querySelector(".modal___footer").append(modal.querySelector(".modal___header .options"))
     modal.querySelector(".modal___footer").append(modal.querySelector(".modal___header .localQty"))
 }
 , handleAddToCart = (e, setCartBox, miniCart) => {
-    // alert(setCartBox)
-    // console.log(CartLS)
     const el = e.target
     , id = el.dataset.id
     , coloris = el.dataset.coloris
     , couverture = el.dataset.couverture
     , option_name = el.dataset.option_name
-    , cart_id = JSON.stringify({id,coloris,couverture,option_name,price:el.dataset.price})
-    , qty = el.closest('figure').querySelector('.qty').value
-    // alert(qty)
-    // alert(id+coloris+couverture+option_name)
-    // console.log(Ecommerce_articles.articles.data)
+    , figure = el.closest('figure')
+    , title = figure.querySelector('figcaption h3')?.innerText || "Produit"
+    , cart_id = JSON.stringify({id,title,coloris,couverture,option_name,price:el.dataset.price})
+    , qty = figure.querySelector('.qty').value
+
     if(qty>0 && qty<100){
+        // GA4 : Suivi de l'ajout au panier
+        if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'add_to_cart', {
+                currency: 'XOF',
+                value: price * qty,
+                items: [{
+                    item_id: id,
+                    item_name: title,
+                    price: price,
+                    quantity: parseInt(qty)
+                }]
+            });
+        }
+
         setCartBox(miniCart(cart_id,qty))
         document.getElementById('panier')?.classList.add('active')
         setTimeout(()=>{document.getElementById('panier')?.classList.remove('active')}, 3000)
-    }else alert("pb qty")
+    } else alert("pb qty")
 
 }
 , handleProductsDisplay = (e) => { 

@@ -6,27 +6,27 @@ import Modal from './Modal';
 import { useHover } from '../context/HoverContext';
 
 const strip_tags = (html, ...rest) => {
-    if(rest.length < 2) {
+    if (rest.length < 2) {
         html = html.replace(/<\/?(?!\!)[^>]*>/gi, '');
     } else {
         var allowed = rest[1];
-        var specified = eval("["+rest[2]+"]" );
-        if(allowed){
-            var regex='</?(?!(' + specified.join('|') + '))\b[^>]*>';
-            html=html.replace(new RegExp(regex, 'gi'), '');
-        } else{
-            var regex='</?(' + specified.join('|') + ')\b[^>]*>';
-            html=html.replace(new RegExp(regex, 'gi'), '');
+        var specified = eval("[" + rest[2] + "]");
+        if (allowed) {
+            var regex = '</?(?!(' + specified.join('|') + '))\b[^>]*>';
+            html = html.replace(new RegExp(regex, 'gi'), '');
+        } else {
+            var regex = '</?(' + specified.join('|') + ')\b[^>]*>';
+            html = html.replace(new RegExp(regex, 'gi'), '');
         }
     }
     return html;
 };
 
-export default function ArticleGrid({ 
-    Ecommerce_articles, 
-    Ecommerce_articles_OPTIONS, 
-    myLoader, 
-    setCartBox, 
+export default function ArticleGrid({
+    Ecommerce_articles,
+    Ecommerce_articles_OPTIONS,
+    myLoader,
+    setCartBox,
     handleAddToCart,
     handleVariantButtonHover,
     handleUpdate,
@@ -35,7 +35,8 @@ export default function ArticleGrid({
     miniCart,
     selectedCategory,
     selectedType,
-    openEditForm
+    openEditForm,
+    searchQuery = ""
 }) {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const { setHoveredTitle } = useHover();
@@ -44,27 +45,37 @@ export default function ArticleGrid({
         setSelectedProduct({ item, option });
     };
 
+    // Filtrage dynamique basé sur la recherche
+    const filteredArticles = Ecommerce_articles.articles.data.filter(item => {
+        const query = searchQuery.toLowerCase();
+        return (
+            item.nom.toLowerCase().includes(query) || 
+            (item.auteur && item.auteur.toLowerCase().includes(query)) ||
+            (item.fr && item.fr.toLowerCase().includes(query))
+        );
+    });
+
     return (
         <>
-            <article id="articles" className={selectedType+" "+selectedCategory+" cardsAI"}>
-                {Ecommerce_articles.articles.data.map((item, i) => {
+            <article id="articles" className={selectedType + " " + selectedCategory + " cardsAI"}>
+                {filteredArticles.map((item, i) => {
                     let option = Ecommerce_articles_OPTIONS.data.find(
                         el => el.img_article == item.img
                         // && (item.autre == (el.opt_nom||"") || item.taille == el.taille_||"")
                     );
-                    
+
                     item.fr_ = item.fr.replace("<br>").replace("<br/>");
                     item.fr__ = strip_tags(item.fr);
 
-                    
+
 
                     return (
-                        <figure 
-                            className={item.user_name + " " + item.nom.replace(' ','_').replace('.','_').replace('/','_').replace('&','_')} 
-                            key={"figure_"+i}
+                        <figure
+                            className={item.user_name + " " + item.nom.replace(' ', '_').replace('.', '_').replace('/', '_').replace('&', '_')}
+                            key={"figure_" + i}
                             onMouseEnter={() => setHoveredTitle(item.fr__)}
                             onMouseLeave={() => setHoveredTitle('')}
-                            data-aLaUne={item.alaune||0}
+                            data-aLaUne={item.alaune || 0}
                         >
                             <div>
                                 <Image
@@ -75,23 +86,25 @@ export default function ArticleGrid({
                                 />
                             </div>
                             <div className="info-container">
-                                {(option||isAdmin)&&<button className="options"
-                                    // onClick={handleVariantButtonHover}
+                                {(option || isAdmin) && <button className="options"
+                                // onClick={handleVariantButtonHover}
                                 >
                                     <span>Ɏ</span>
                                     {option && <>
                                         {option.coloris && <div className="coloris">{option.coloris}</div>}
-                                        {option.couverture && <div className="couverture" 
-                                            onClick={e=>{const tmp = e.target.closest('figure');
-                                            if(tmp.isActive==undefined){
-                                                tmp.isActive=true
-                                                alert("couverture ajoutée")
-                                            }else{
-                                                tmp.isActive=!tmp.isActive
-                                                alert("couverture retiré")
-                                            }}}
-                                            onMouseOver={e=>{const tmp=e.target.closest('figure').querySelector('img').srcset;if(tmp.indexOf('-cov')==-1)e.target.closest('figure').querySelector('img').srcset=tmp.replaceAll('.webp','-cov.webp')}}
-                                            onMouseOut={e=>{const tmp_=e.target.closest('figure');const tmp=tmp_.querySelector('img').srcset;if(!e.target.closest('figure').isActive&&tmp.indexOf('-cov')!==-1)e.target.closest('figure').querySelector('img').srcset=tmp.replaceAll('-cov.webp','.webp')}}
+                                        {option.couverture && <div className="couverture"
+                                            onClick={e => {
+                                                const tmp = e.target.closest('figure');
+                                                if (tmp.isActive == undefined) {
+                                                    tmp.isActive = true
+                                                    alert("couverture ajoutée")
+                                                } else {
+                                                    tmp.isActive = !tmp.isActive
+                                                    alert("couverture retiré")
+                                                }
+                                            }}
+                                            onMouseOver={e => { const tmp = e.target.closest('figure').querySelector('img').srcset; if (tmp.indexOf('-cov') == -1) e.target.closest('figure').querySelector('img').srcset = tmp.replaceAll('.webp', '-cov.webp') }}
+                                            onMouseOut={e => { const tmp_ = e.target.closest('figure'); const tmp = tmp_.querySelector('img').srcset; if (!e.target.closest('figure').isActive && tmp.indexOf('-cov') !== -1) e.target.closest('figure').querySelector('img').srcset = tmp.replaceAll('-cov.webp', '.webp') }}
                                         >avec couverture: +{option.couverture} Fcfa</div>}
                                         {option.opt_nom && <div className="option_name">{option.opt_nom}</div>}
                                     </>}
@@ -104,15 +117,15 @@ export default function ArticleGrid({
                                 <p className="dimensions">{item.dimensions}</p>
                                 <span className="prix">{item.prix} €</span>
                                 <section>
-                                    <input 
-                                        defaultValue="1" 
-                                        className="qty" 
-                                        type="number" 
-                                        min="1" 
-                                        max="99" 
-                                        title="Choisir une quantité entre 1 et 99" 
+                                    <input
+                                        defaultValue="1"
+                                        className="qty"
+                                        type="number"
+                                        min="1"
+                                        max="99"
+                                        title="Choisir une quantité entre 1 et 99"
                                     />
-                                    <button 
+                                    <button
                                         className="addToCart"
                                         onClick={(e) => handleAddToCart(e, setCartBox, miniCart)}
                                         data-id={item.id_produits}
@@ -124,8 +137,8 @@ export default function ArticleGrid({
                                     >
                                         Ajouter au panier
                                     </button>
-                                    <button 
-                                        className="showArticleModal" 
+                                    <button
+                                        className="showArticleModal"
                                         onClick={() => handleModalShow(item, option)}
                                         title="Afficher article"
                                     >
@@ -133,18 +146,18 @@ export default function ArticleGrid({
                                     </button>
                                 </section>
                             </div>
-                            <Link 
+                            <Link
                                 href={`/vente-en-ligne/${item.id_produits}`}
-                                target="_blank" 
+                                target="_blank"
                                 title="Afficher le produit"
-                            />
+                            >-&gt; page produit</Link>
                         </figure>
                     );
                 })}
             </article>
 
-            <Modal 
-                isOpen={!!selectedProduct} 
+            <Modal
+                isOpen={!!selectedProduct}
                 onClose={() => setSelectedProduct(null)}
             >
                 {selectedProduct && (

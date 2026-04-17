@@ -11,9 +11,17 @@ import BlogCategory from '../_/Blog/BlogCategory'
 
 
 const BtnCTA = () => {
+    const trackReservation = () => {
+        if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'begin_reservation', {
+                page: 'Retraites Spirituelles'
+            });
+        }
+    };
+
     return <div className="form_cta_fixed_btns">
         <a href="https://wa.me/22665555555" target="_blank" title="Contactez nous sur whatsapp pour plus d'informations"></a>
-        <a href="#form_reservation" title="Remplir le formulaire de réservation pour votre séjour au sanctuaire de Bolobi"></a>
+        <a href="#form_reservation" onClick={trackReservation} title="Remplir le formulaire de réservation pour votre séjour au sanctuaire de Bolobi"></a>
     </div>
 }
 
