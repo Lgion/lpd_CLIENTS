@@ -429,6 +429,51 @@ export default function ReservationManager() {
         })}
       />
 
+      {/* Nouveau bloc : Communautés & Groupes Connus */}
+      <div className="sanctuaire-admin__knownCommunities">
+        <h2 className="sanctuaire-admin__section-title">👥 Communautés & Responsables Identifiés</h2>
+        <div className="sanctuaire-admin__communities-grid">
+          {(() => {
+            const communitiesMap = {};
+            reservations.forEach(res => {
+              const name = (!res.community || res.community === '##NOT_APPLICABLE##') ? res.names : res.community;
+              if (!communitiesMap[name]) {
+                communitiesMap[name] = {
+                  name,
+                  phone: res.phone_number,
+                  email: res.email,
+                  count: 0
+                };
+              }
+              communitiesMap[name].count += 1;
+            });
+
+            return Object.values(communitiesMap)
+              .sort((a, b) => b.count - a.count)
+              .map((comm, index) => (
+                <div key={index} className="community-card">
+                  <div className="community-card__badge">{comm.count} séjour{comm.count > 1 ? 's' : ''}</div>
+                  <h3 className="community-card__name">{comm.name}</h3>
+                  <div className="community-card__info">
+                    <a href={`tel:${comm.phone}`} className="community-card__link community-card__link--tel">
+                      📞 {comm.phone}
+                    </a>
+                    <div className="community-card__email">
+                      {comm.email && comm.email !== 'a@b.c' ? (
+                        <a href={`mailto:${comm.email}`} className="community-card__link">
+                          ✉️ {comm.email}
+                        </a>
+                      ) : (
+                        <span className="community-card__na">✉️ Email : N.A</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ));
+          })()}
+        </div>
+      </div>
+
       {/* Modal de détails */}
       <Modal
         title={`Détails de la réservation - ${editingReservation?.community || ''}`}

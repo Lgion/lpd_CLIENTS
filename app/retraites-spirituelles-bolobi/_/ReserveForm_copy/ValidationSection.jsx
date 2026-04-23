@@ -1,89 +1,190 @@
 import Image from 'next/image'
 
-export default function ValidationSection({ reservationData }) {
-    console.log(reservationData);
-    
+export default function ValidationSection({ reservationData, onClose }) {
     if (!reservationData) return null;
 
     return (
         <div className="validation-content">
-            <h3>Réservation enregistrée avec succès !</h3>
-            
-            <p className="confirmation-message">
-                Votre demande de réservation a été enregistrée. Un email de confirmation 
-                contenant toutes les informations a été envoyé à <strong>{reservationData.email}</strong>.
-            </p>
+            <div className="validation-header">
+                <h3>🎉 Réservation validée !</h3>
+                <p>Votre demande a été enregistrée avec succès.</p>
+            </div>
 
-            <div className="qr-code-container">
-                <Image 
-                    src="/qrcode.png" 
-                    alt="QR Code de paiement" 
-                    width={200} 
-                    height={200}
-                />
-                <p className="qr-info">
-                    Scannez ce QR code pour procéder au paiement de l'avance de <strong>{reservationData.montant_avance}F</strong>
+            <div className="payment-methods">
+                <h4>Procéder au paiement de l'avance</h4>
+                <p className="payment-instruction">
+                    Veuillez scanner l'un des QR codes ci-dessous pour payer l'avance de <strong>{reservationData.montant_avance} FCFA</strong>.
                 </p>
+
+                <div className="qr-grid">
+                    <div className="qr-item">
+                        <h5>Orange Money</h5>
+                        <div className="qr-wrapper">
+                            <Image
+                                src="/OM.jpg"
+                                alt="QR Code Orange Money"
+                                width={180}
+                                height={180}
+                                className="qr-image"
+                            />
+                        </div>
+                        <p className="qr-vendor">Sanctuaire Bolobi</p>
+                    </div>
+
+                    <div className="qr-item">
+                        <h5>Wave Business</h5>
+                        <div className="qr-wrapper">
+                            <Image
+                                src="/wave_business.png"
+                                alt="QR Code Wave Business"
+                                width={180}
+                                height={180}
+                                className="qr-image"
+                            />
+                        </div>
+                        <p className="qr-vendor">Sanctuaire Bolobi</p>
+                    </div>
+                </div>
             </div>
 
             <div className="payment-reminder">
-                <h4>Rappel des montants :</h4>
-                <ul>
-                    <li>Montant total : <strong>{reservationData.montant_total}F</strong></li>
-                    <li>Avance à payer : <strong>{reservationData.montant_avance}F</strong></li>
-                    <li>Solde à régler sur place : <strong>{reservationData.montant_total - reservationData.montant_avance}F</strong></li>
-                </ul>
+                <h4>Rappel de votre réservation</h4>
+                <div className="summary-grid">
+                    <div className="summary-line">
+                        <span>Montant total :</span>
+                        <strong>{reservationData.montant_total} FCFA</strong>
+                    </div>
+                    <div className="summary-line">
+                        <span>Avance à payer :</span>
+                        <strong className="text-primary">{reservationData.montant_avance} FCFA</strong>
+                    </div>
+                    <div className="summary-line">
+                        <span>Solde sur place :</span>
+                        <strong>{reservationData.montant_total - reservationData.montant_avance} FCFA</strong>
+                    </div>
+                </div>
             </div>
+
+            <button className="modal-close-btn" onClick={onClose}>
+                J'ai compris, fermer
+            </button>
 
             <style jsx>{`
                 .validation-content {
-                    background: #f8f9fa;
-                    padding: 2rem;
-                    border-radius: 8px;
+                    background: #fff;
+                    padding: 1.5rem;
                     text-align: center;
+                    max-width: 600px;
+                    margin: 0 auto;
                 }
 
-                h3 {
-                    color: #28a745;
+                .validation-header h3 {
+                    color: #207d3a;
+                    font-size: 1.6rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                .validation-header p {
+                    color: #666;
                     margin-bottom: 1.5rem;
                 }
 
-                .confirmation-message {
-                    margin-bottom: 2rem;
-                    line-height: 1.6;
+                .payment-methods {
+                    background: #f8faff;
+                    border: 1px dashed #cbd5e1;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    margin-bottom: 1.5rem;
                 }
 
-                .qr-code-container {
-                    margin: 2rem auto;
-                    max-width: 300px;
+                .payment-methods h4 {
+                    margin-top: 0;
+                    color: #2a3d5c;
                 }
 
-                .qr-info {
-                    margin-top: 1rem;
-                    color: #666;
+                .payment-instruction {
+                    font-size: 0.95rem;
+                    color: #475569;
+                    margin-bottom: 1.5rem;
+                }
+
+                .qr-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                }
+
+                .qr-item h5 {
+                    margin: 0 0 0.8rem 0;
+                    font-size: 1rem;
+                    color: #1e293b;
+                }
+
+                .qr-wrapper {
+                    background: white;
+                    padding: 8px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                    display: inline-block;
+                }
+
+                .qr-vendor {
+                    font-size: 0.8rem;
+                    color: #64748b;
+                    margin-top: 0.5rem;
                 }
 
                 .payment-reminder {
-                    background: white;
-                    padding: 1.5rem;
-                    border-radius: 8px;
-                    margin-top: 2rem;
+                    background: #f1f5f9;
+                    padding: 1rem 1.5rem;
+                    border-radius: 10px;
+                    margin-bottom: 1.5rem;
                     text-align: left;
                 }
 
                 .payment-reminder h4 {
-                    color: #2196f3;
-                    margin-bottom: 1rem;
+                    margin: 0 0 0.8rem 0;
+                    font-size: 1rem;
+                    color: #334155;
                 }
 
-                .payment-reminder ul {
-                    list-style: none;
-                    padding: 0;
+                .summary-grid {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
                 }
 
-                .payment-reminder li {
-                    margin: 0.5rem 0;
-                    color: #666;
+                .summary-line {
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 0.95rem;
+                    color: #475569;
+                }
+
+                .text-primary {
+                    color: #2563eb;
+                }
+
+                .modal-close-btn {
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: #475569;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                }
+
+                .modal-close-btn:hover {
+                    background: #334155;
+                }
+
+                @media (max-width: 500px) {
+                    .qr-grid {
+                        grid-template-columns: 1fr;
+                    }
                 }
             `}</style>
         </div>

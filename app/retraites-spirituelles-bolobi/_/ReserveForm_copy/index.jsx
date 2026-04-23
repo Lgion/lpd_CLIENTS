@@ -59,6 +59,7 @@ export default function ReserveForm() {
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
   const [reservationData, setReservationData] = useState(null); // Ajouter un état pour stocker les données de réservation
+  const [showModal, setShowModal] = useState(false);
 
   // Calcul automatique du montant total
   React.useEffect(() => {
@@ -163,6 +164,7 @@ export default function ReserveForm() {
         await axios.post('/api/users', userToSave);
         // alert("g")
 
+        setShowModal(true); // Afficher la modal de succès
         // On ne réinitialise plus le formulaire
       } else {
         setError(res.data?.message || 'Une erreur est survenue.');
@@ -318,17 +320,45 @@ export default function ReserveForm() {
         {success && (
           <>
             <div className="ai-reserve-form__success">{success}</div>
-            {reservationData && (
-              <ValidationSection reservationData={form} />
-            )}
+            <button
+              type="button"
+              className="ai-reserve-form__reopen-btn"
+              onClick={() => setShowModal(true)}
+            >
+              🎟️ Re-ouvrir le coupon de paiement
+            </button>
           </>
         )}
-        {!success && (
-          <button className="ai-reserve-form__submit" type="submit" disabled={loading}>
-            {loading ? 'Envoi en cours...' : 'Envoyer la réservation'}
-          </button>
-        )}
+
+        <button
+          className="ai-reserve-form__submit"
+          type="submit"
+          disabled={loading || !!success}
+        >
+          {loading ? (
+            <div className="ai-reserve-form__submit-content">
+              <div className="spinner"></div>
+              <span>Envoi en cours...</span>
+            </div>
+          ) : success ? (
+            'Réservation envoyée'
+          ) : (
+            'Envoyer la réservation'
+          )}
+        </button>
       </form>
+
+      {/* Modal de validation */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-body" onClick={(e) => e.stopPropagation()}>
+            <ValidationSection
+              reservationData={form}
+              onClose={() => setShowModal(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   </>);
 }

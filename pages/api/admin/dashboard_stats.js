@@ -14,6 +14,10 @@ export default async function handler(req, res) {
         // 1. Get stats
         const totalReservations = await modelReservation.countDocuments();
         const totalProducts = await Articles.countDocuments();
+        
+        // Calcul des réservations récentes (30 derniers jours) via l'ID
+        const thirtyDaysAgoId = Math.floor((Date.now() - 30 * 24 * 60 * 60 * 1000) / 1000).toString(16) + "0000000000000000";
+        const recentReservations = await modelReservation.countDocuments({ _id: { $gte: thirtyDaysAgoId } });
 
         // 2. Get latest reservations
         const latestReservations = await modelReservation.find({})
@@ -220,6 +224,7 @@ export default async function handler(req, res) {
         return res.status(200).json({
             stats: {
                 totalReservations,
+                recentReservations,
                 totalProducts,
                 totalSalesCount,
                 totalSalesRevenue,
