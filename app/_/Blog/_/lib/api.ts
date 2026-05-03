@@ -47,6 +47,7 @@ export function getAllPosts(fields: string[] = [
   'coverImage',
   'excerpt',
   'category',
+  'youtubeLinks',
 ]) {
   const slugs = getPostSlugs()
   const posts = slugs

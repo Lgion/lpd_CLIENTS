@@ -1,4 +1,5 @@
 import * as Ecommerce_articles from "./../assets/datas/articles.js"
+import { addArticle } from "./favorisManager.js"
 
 export {
     handleModalShowProduct
@@ -47,8 +48,9 @@ let handleModalShowProduct = (e) => {
     , coloris = el.dataset.coloris
     , couverture = el.dataset.couverture
     , option_name = el.dataset.option_name
+    , price = parseFloat(el.dataset.price) || 0
     , figure = el.closest('figure')
-    , title = figure.querySelector('figcaption h3')?.innerText || "Produit"
+    , title = figure.querySelector('figcaption h3')?.innerText || figure.querySelector('figcaption')?.innerText || "Produit"
     , cart_id = JSON.stringify({id,title,coloris,couverture,option_name,price:el.dataset.price})
     , qty = figure.querySelector('.qty').value
 
@@ -67,10 +69,17 @@ let handleModalShowProduct = (e) => {
             });
         }
 
-        setCartBox(miniCart(cart_id,qty))
+        // Ajout au panier dans localStorage
+        addArticle(cart_id, parseInt(qty));
+        
+        // Déclencher un event global pour forcer la maj du contexte Ecom
+        if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('cart_updated'));
+        }
+
         document.getElementById('panier')?.classList.add('active')
         setTimeout(()=>{document.getElementById('panier')?.classList.remove('active')}, 3000)
-    } else alert("pb qty")
+    } else alert("Quantité invalide")
 
 }
 , handleProductsDisplay = (e) => { 

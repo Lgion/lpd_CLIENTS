@@ -23,33 +23,40 @@ const BlogPost = ({
   slug,
   category,
 }: Props) => {
-  
+
   return (
     <section className="ndrPosts">
-      <h4 className="">
-        <Link
-          as={`/posts/${slug}`}
-          href="/posts/[slug]"
-          className=""
-        >
+      {category && (
+        <span className={`category-badge-floating ${category}`}>
+          {category}
+        </span>
+      )}
+      
+      <h4 className="post-title-main">
+        <Link as={`/posts/${slug}`} href="/posts/[slug]">
           {title}
-          {category && <span className={`category-badge ${category}`}>{category}</span>}
         </Link>
       </h4>
-      {/* <CoverImage title={title} src={coverImage} slug={slug} /> */}
-      <Link as={`/posts/${slug}`} href="/posts/[slug]" aria-label={title}>
-        <Image
-          src={coverImage}
-          alt={`Cover Image for ${title}`}
-          width={1300}
-          height={630}
-        />
-      <section className="">
-        <p className="">{excerpt}</p>
-        <div>
-          <Avatar name={author.name} picture={author.picture} date={date} />&nbsp;
+
+      <Link as={`/posts/${slug}`} href="/posts/[slug]" className="post-link-container">
+        <div className="post-image-wrapper">
+          <Image
+            src={coverImage}
+            alt={title}
+            width={600}
+            height={400}
+            className="post-cover-image"
+          />
         </div>
-      </section>
+        
+        <section className="postContent">
+          <div className="postContent__inner">
+            <p className="postContent__excerpt">{excerpt}</p>
+            <div className="postContent__author">
+              <Avatar name={author.name} picture={author.picture} date={date} />
+            </div>
+          </div>
+        </section>
       </Link>
     </section>
   )

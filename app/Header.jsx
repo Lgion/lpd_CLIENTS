@@ -1,6 +1,6 @@
-// "use client"
+"use client"
 
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import Link from "next/link";
 
 import LogSignIn from "./_/LogSignIn.jsx"
@@ -15,16 +15,22 @@ import EcomContext from "../stores/ecomContext.js"
 
 export default function Header() {
 
-    const { cartBox , isCartPage } = useContext(AuthContext)
+    const { cartBox, isCartPage } = useContext(AuthContext)
     const { miniCart } = useContext(EcomContext)
-    , getClass = (item, i) => { alert('okk') }
-    console.log(miniCart);
-    
+    const [isScrolled, setIsScrolled] = useState(false)
 
-    //   useEffect(() => {
-    //     console.log(pathname);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 150) {
+                setIsScrolled(true)
+            } else {
+                setIsScrolled(false)
+            }
+        }
 
-    //   }, [])
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
 
     return <header>
@@ -37,31 +43,14 @@ export default function Header() {
             <Link
                 href="panier-ecommerce-religieux"
                 title="Accedez au panier ecommerce religieux chrétien de la librairie puissance divine d'abidjan"
-                // title="Accéder à la page panier, ou visualiser son contenu, ou encore modifier le rapidement ici à la volé"
                 id="panier"
-                onClick={() => { setMenuActive("accueil") }}
+                className={isScrolled ? 'is-sticky' : ''}
             >
             </Link>
-            
-            {/* {cartBox} */}
+
             {miniCart()}
-            
+
         </>}
-        {/* <Subscribe /> */}
-        {/* <MenuSecondary /> */}
-
-        
-        
-        {/* <Playbox /> */}
-
-        {/* <Link
-            href="/blog"
-            onClick={()=>{setMenuActive("blog")}}
-            title="Découvrez nos articles et actualités"
-            className="blog-button"
-        >
-            Blog
-        </Link> */}
 
     </header>
 }

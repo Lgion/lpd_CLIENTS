@@ -1,31 +1,45 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image"
-import AuthContext from "../../../stores/authContext.js"
-import FormContext from "../../../stores/formContext.js"
-import { loadRadios } from '../../_/swappy_radio'
-import MoneyGift from "./MoneyGift"
-import NatureGift from "./NatureGift"
-
+import { useUser, SignInButton } from "@clerk/nextjs"
+import NatureItemsSelector from "./NatureItemsSelector"
+import ProjectsSelector from "./ProjectsSelector"
 
 export default function Donation() {
-  const [useMoney, setUseMoney] = useState(false);
-  const [useNature, setUseNature] = useState(false);
-  const [donations, setDonations] = useState([]);
+  const { user, isLoaded } = useUser();
+  const [selectedType, setSelectedType] = useState(""); // "argent", "nature", "projects", "scolarity"
+  const [globalDonations, setGlobalDonations] = useState([]);
+  const [userDonations, setUserDonations] = useState([]);
   const [visibleCount, setVisibleCount] = useState(10);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchHistory();
+    fetchGlobalHistory();
   }, []);
 
-  const fetchHistory = async () => {
+  useEffect(() => {
+    if (user) {
+      fetchUserHistory();
+    }
+  }, [user]);
+
+  const fetchGlobalHistory = async () => {
     try {
       const res = await fetch("/api/donation");
       const data = await res.json();
-      if (Array.isArray(data)) setDonations(data);
+      if (Array.isArray(data)) setGlobalDonations(data);
     } catch (error) {
-      console.error("Erreur lors de la récupération de l'historique:", error);
+      console.error("Erreur lors de la récupération de l'historique global:", error);
+    }
+  };
+
+  const fetchUserHistory = async () => {
+    try {
+      const res = await fetch(`/api/donation?user_id=${user.id}`);
+      const data = await res.json();
+      if (Array.isArray(data)) setUserDonations(data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération de l'historique utilisateur:", error);
     }
   };
 
@@ -39,8 +53,7 @@ export default function Donation() {
       form.classList.add('on');
       e.target.innerHTML = "Fermer";
       e.target.parentNode.nextElementSibling.style.display = "none";
-      
-      // GA4 : Tracking de l'ouverture du formulaire
+
       if (typeof window !== 'undefined' && window.gtag) {
         window.gtag('event', 'begin_donation', {
           page_title: 'École Saint Martin'
@@ -51,8 +64,12 @@ export default function Donation() {
 
   const handleSubmit = async function (e) {
     e.preventDefault();
-    if (!useMoney && !useNature) {
-      alert("Veuillez choisir au moins un type de don (Espèce ou Nature).");
+    if (!user) {
+      alert("Veuillez vous connecter pour faire un don.");
+      return;
+    }
+    if (!selectedType) {
+      alert("Veuillez choisir un type de don.");
       return;
     }
 
@@ -60,8 +77,17 @@ export default function Donation() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
-    // Définir le type de don pour le backend
-    data.donation_type = (useMoney && useNature) ? "both" : useMoney ? "argent" : "nature";
+    data.donation_type = selectedType;
+    data.user_id = user.id;
+
+    // Fix pour scolarité : montant fixe si non saisi
+    if (selectedType === 'scolarity' && !data.montant) {
+      data.montant = 90000;
+    }
+
+    if (data.nature_items) {
+      data.nature_items = JSON.parse(data.nature_items);
+    }
 
     try {
       const res = await fetch("/api/donation", {
@@ -70,8 +96,6 @@ export default function Donation() {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        
-        // GA4 : Tracking du don réussi
         if (typeof window !== 'undefined' && window.gtag) {
           window.gtag('event', 'donation_complete', {
             currency: 'XOF',
@@ -79,12 +103,11 @@ export default function Donation() {
             donation_type: data.donation_type
           });
         }
-
         alert("Merci pour votre don !");
         e.target.reset();
-        setUseMoney(false);
-        setUseNature(false);
-        fetchHistory(); // Rafraîchir l'historique
+        setSelectedType("");
+        fetchGlobalHistory();
+        fetchUserHistory();
       } else {
         const err = await res.json();
         alert("Erreur : " + (err.error || "Une erreur est survenue"));
@@ -105,19 +128,68 @@ export default function Donation() {
         alt={"Les élèves de l'école de bolobi posent pour la mamie Mme ACHI"}
         width={200} height={400}
       />
-      <section>
+      <section className="school_descr">
         <h4>L'<strong>Oeuvre caritative</strong> du sanctuaire: l'<strong>école Saint Martin de Porrèz</strong></h4>
-        <p>L'école Saint Martin de Porrèz est une école primaire gratuite basé à <strong>Bolobi</strong>. Cette école est en premier lieu à l'endroit des enfants des travailleurs agricoles des alentours de bolobi (proche yakasseme).</p>
+        <p>L'école Saint Martin de Porrèz est une école primaire gratuite basé à <strong>Bolobi</strong> (après Azaguié sur la route Abidjan-Adzopé). Cette école est en premier lieu à l'endroit des enfants des travailleurs agricoles des alentours de Bolobi (proche village Yakasseme).</p>
         <p>
-          Le sanctuaire Notre Dame de Bolobi a ouvert l'<strong>école Saint Martin</strong> de Porrez en septembre 2020 avec une classe, le CP1.
-          L'objectif du sanctuaire est d'ouvrir toutes les classes du primaire à raison d'une nouvelle classe supplémentaire chaque année. Selon cette objectif nous devrions être reconnu par l'Etat pour l'année scolaire 2025-2026.
+          Le <b>sanctuaire Notre Dame de Bolobi</b> a <u>ouvert l'école <strong>Saint Martin de Porrez</strong> en septembre 2020</u> avec une classe, le CP1, et 11 élèves.
+          L'objectif du sanctuaire est d'ouvrir toutes les classes du primaire à raison d'une nouvelle classe supplémentaire chaque année. L'école a <u>démarré les <b>demandes d'homologation</b> durant l'année scolaire 2025-2026</u>, afin d'être <b>reconnu par l'Etat</b> et exercer dans une plus grande sérénité.
         </p>
         <p>
-          Un internat et une cantine sont à la disposition des élèves de l'école, actifs depuis septembre 2021.
+          Un <b>internat</b> et une <b>cantine</b> sont à la disposition des élèves de l'école, <u>actifs depuis septembre 2021</u>.
           <br /><u>Pour l'internat</u>, nous demandons un financement à auteur de <b>5000F mensuel</b> aux parents d'élèves
-          <br /><u>Pour la cantine scolaire</u>, nous nourrissons gratuitement tous les élèves de l'école Saint Martin de Porrèz. <i>Les internes ont en plus le petit-déjeuner.</i>
+          <br /><u>Pour la cantine scolaire</u>, nous nourrissons gratuitement tous les élèves de l'école Saint Martin de Porrèz, moyennant une participation des parents, au début en nature (riz) mais depuis 2026-2027 en espèce. <i>Les internes ont en plus le petit-déjeuner et le dîner.</i>
         </p>
       </section>
+
+      {user && userDonations.length > 0 && (
+        <div id="gaveGift" className="gave-gift-section">
+          <h4>Vos précédents dons :</h4>
+          <div className="gave-gift-grid">
+            {userDonations.map((d, index) => (
+              <div key={d._id || index} className={`gave-gift-card gave-gift-card--${d.donation_type}`}>
+                <div className="gave-gift-card__header">
+                  <span className="date">{new Date(d.createdAt).toLocaleDateString()}</span>
+                  <span className="type">{d.donation_type}</span>
+                </div>
+                <div className="gave-gift-card__body">
+                  {d.montant > 0 && <div><strong>Montant :</strong> {d.montant.toLocaleString()} FCFA</div>}
+
+                  {d.donation_type === 'scolarity' && (
+                    <div className="scolarity-info">
+                      {!d.scolarity_student_assigned ? (
+                        <div className="student-pending">
+                          <div className="student-placeholder-img">👤</div>
+                          <p>Sélection de l'élève en cours...</p>
+                        </div>
+                      ) : (
+                        <div className="student-assigned">
+                          {d.scolarity_student?.photo && <img src={d.scolarity_student.photo} alt="Elève" className="student-img" />}
+                          <p><strong>Elève :</strong> {d.scolarity_student?.prenoms} {d.scolarity_student?.nom}</p>
+                          <p><strong>Classe :</strong> {d.scolarity_student?.classe}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {d.donation_type === 'projects' && d.project_id && (
+                    <div><strong>Projet :</strong> {d.project_id.title}</div>
+                  )}
+
+                  {d.donation_type === 'nature' && d.nature_items && d.nature_items.length > 0 && (
+                    <ul>
+                      {d.nature_items.map((item, i) => (
+                        <li key={i}>{item.quantity} {item.unit} de {item.label}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div>
         <button id="do_donation_btn" className="safe" onClick={handleBtn}>FAIRE UN <span>DON</span></button>
       </div>
@@ -125,66 +197,119 @@ export default function Donation() {
     </article>
 
     <form id="form_donation" onSubmit={handleSubmit}>
-      <fieldset className="safe">
+      {!user && (
+        <div className="login-prompt">
+          <p>Vous devez être connecté pour faire un don.</p>
+          <SignInButton mode="modal">
+            <button type="button" className="btn-login-donate">🚀 SE CONNECTER POUR DONNER</button>
+          </SignInButton>
+        </div>
+      )}
+      <fieldset className="safe" disabled={!user}>
         <h2>Coordonnées de contact: </h2>
         <label htmlFor="nom">Nom *</label>
-        <input type="text" id="nom" name="firstname" required />
+        <input type="text" id="nom" name="firstname" required defaultValue={user?.lastName || ""} />
         <label htmlFor="prenom">Prénom</label>
-        <input type="text" id="prenom" name="lastname" />
-        <label htmlFor="communauté">Communauté ?</label>
+        <input type="text" id="prenom" name="lastname" defaultValue={user?.firstName || ""} />
+        <label htmlFor="communauté">Communauté ou groupe social?</label>
         <input type="text" id="communauté" name="communauty" />
+        <label htmlFor="phone">N° Téléphone *</label>
+        <input type="text" id="phone" name="phone_number" required defaultValue={user?.phoneNumbers?.[0]?.phoneNumber || ""} />
+        <label htmlFor="email">E-mail</label>
+        <input type="email" id="email" name="email" defaultValue={user?.primaryEmailAddress?.emailAddress || ""} />
         <label htmlFor="reason">Raison invoqué (pourquoi ce don) ?</label>
         <input type="text" id="reason" name="reason" />
-        <label htmlFor="phone">N° Téléphone *</label>
-        <input type="text" id="phone" name="phone_number" required />
-        <label htmlFor="email">E-mail</label>
-        <input type="email" id="email" name="email" />
 
         <div className="donation-choice-grid">
           <div
-            className={`donation-card ${useMoney ? 'donation-card--active' : ''}`}
-            onClick={() => setUseMoney(!useMoney)}
+            className={`donation-card ${selectedType === 'scolarity' ? 'donation-card--active' : ''}`}
+            onClick={() => setSelectedType('scolarity')}
           >
-            <div className="donation-card__icon">💵</div>
+            <div className="donation-card__icon">🎓</div>
             <div className="donation-card__content">
-              <h3>Espèce</h3>
-              <p>Don financier (virement, espèces...)</p>
+              <h3>Scolarité</h3>
+              <p>Prendre en charge un élève</p>
             </div>
-            <input type="checkbox" name="use_money" checked={useMoney} readOnly style={{ display: 'none' }} />
           </div>
 
           <div
-            className={`donation-card ${useNature ? 'donation-card--active' : ''}`}
-            onClick={() => setUseNature(!useNature)}
+            className={`donation-card ${selectedType === 'projects' ? 'donation-card--active' : ''}`}
+            onClick={() => setSelectedType('projects')}
+          >
+            <div className="donation-card__icon">🏗️</div>
+            <div className="donation-card__content">
+              <h3>Projets</h3>
+              <p>Financer un projet spécifique</p>
+            </div>
+          </div>
+
+          <div
+            className={`donation-card ${selectedType === 'nature' ? 'donation-card--active' : ''}`}
+            onClick={() => setSelectedType('nature')}
           >
             <div className="donation-card__icon">📦</div>
             <div className="donation-card__content">
               <h3>Nature</h3>
-              <p>Nouriture, vêtements, fournitures...</p>
+              <p>Nourriture, vêtements, fournitures...</p>
             </div>
-            <input type="checkbox" name="use_nature" checked={useNature} readOnly style={{ display: 'none' }} />
+          </div>
+
+          <div
+            className={`donation-card ${selectedType === 'argent' ? 'donation-card--active' : ''}`}
+            onClick={() => setSelectedType('argent')}
+          >
+            <div className="donation-card__icon">💵</div>
+            <div className="donation-card__content">
+              <h3>Espèce</h3>
+              <p>Don financier libre</p>
+            </div>
           </div>
         </div>
 
-        <div className={`conditional-fields ${useMoney || useNature ? 'conditional-fields--expanded' : ''}`}>
-          {useMoney && (
-            <div className="field-group field-group--animate">
-              <label htmlFor="money_amount">Montant du don (FCFA) *</label>
+        <div className={`conditional-fields ${selectedType ? 'conditional-fields--expanded' : ''}`}>
+
+          {selectedType === 'scolarity' && (
+            <div className="field-group scolarity-contract">
+              <h4>Contrat de Scolarisation</h4>
+              <div className="contract-details">
+                <p><strong>Bénéficiaire :</strong> N.A (Attribution en cours)</p>
+                <p><strong>Classe :</strong> Primaire</p>
+                <p><strong>Délai d'attribution estimé :</strong> 2 jours</p>
+                <p><strong>Montant des frais de scolarité par enfant:</strong> 90000 FCFA</p>
+              </div>
+              <p>Si vous etes d'accord avec tout ces tout ces détails, et que vous cliquez le bouton "valider votre don", Nous vous recontacterons d'ici 2 jours pour continuer avec vous votre don à l'école Martin de Porres de Bolobi.</p>
+            </div>
+          )}
+
+          {selectedType === 'projects' && (
+            <div className="field-group">
+              <ProjectsSelector onProjectSelect={() => { }} />
+              <label htmlFor="money_amount_proj" style={{ marginTop: '15px', display: 'block' }}>Montant du don (FCFA) *</label>
               <div className="input-with-icon">
                 <span className="input-prefix">FCFA</span>
-                <input type="number" id="money_amount" name="montant" required placeholder="0" />
+                <input type="number" id="money_amount_proj" name="montant" required placeholder="0" />
               </div>
             </div>
           )}
 
-          {useNature && (
+          {selectedType === 'argent' && (
             <div className="field-group field-group--animate">
-              <label htmlFor="nature_description">Description du don en nature *</label>
+              <label htmlFor="money_amount_cash">Montant du don (FCFA) *</label>
+              <div className="input-with-icon">
+                <span className="input-prefix">FCFA</span>
+                <input type="number" id="money_amount_cash" name="montant" required placeholder="0" />
+              </div>
+            </div>
+          )}
+
+          {selectedType === 'nature' && (
+            <div className="field-group field-group--animate">
+              <NatureItemsSelector onItemsChange={() => { }} />
+              <label htmlFor="nature_description" style={{ marginTop: '15px', display: 'block' }}>Description supplémentaire du don en nature</label>
               <textarea
                 id="nature_description"
                 name="nature"
-                required
-                placeholder="Détaillez ici ce que vous souhaitez offrir (ex: 3 sacs de riz, 10 livres de maths CP1...)"
+                placeholder="Précisez tout autre détail utile..."
               ></textarea>
             </div>
           )}
@@ -192,23 +317,28 @@ export default function Donation() {
       </fieldset>
 
       <fieldset>
-        <input type="submit" value={loading ? "Envoi en cours..." : "Valider mon don"} disabled={loading} />
+        <input type="submit" value={loading ? "Envoi en cours..." : "Valider mon don"} disabled={loading || !user} />
       </fieldset>
     </form>
 
     <div className="gifts-historic">
       <h3 className="gifts-historic__title">Historique des dons reçus :</h3>
       <ul className="gifts-historic__list">
-        {donations.length === 0 ? (
+        {globalDonations.length === 0 ? (
           <div className="gifts-historic__empty">
             Aucun don enregistré jusqu'à maintenant...
           </div>
         ) : (
-          donations.slice(0, visibleCount).map((d, index) => (
+          globalDonations.slice(0, visibleCount).map((d, index) => (
             <li
               key={d._id || index}
               className={`gifts-historic__item gifts-historic__item--${d.donation_type}`}
             >
+              <span className={`gifts-historic__badge gifts-historic__badge--${d.donation_type}`}>
+                {d.donation_type === 'argent' ? 'Espèce' : 
+                 d.donation_type === 'nature' ? 'Nature' : 
+                 d.donation_type === 'scolarity' ? 'Scolarité' : 'Projet'}
+              </span>
               <div className="gifts-historic__row">
                 <div className="gifts-historic__field">
                   <span className="gifts-historic__label">Donateur</span>
@@ -247,6 +377,14 @@ export default function Donation() {
                     </span>
                   </div>
                 )}
+                {d.donation_type === 'scolarity' && (
+                  <div className="gifts-historic__field">
+                    <span className="gifts-historic__label">Bénéficiaire</span>
+                    <span className="gifts-historic__value">
+                      {!d.scolarity_student_assigned ? "N.A (Attribution en cours)" : `${d.scolarity_student.prenoms} ${d.scolarity_student.nom}`}
+                    </span>
+                  </div>
+                )}
               </div>
 
               {d.reason && (<div className="gifts-historic__row" >
@@ -261,7 +399,7 @@ export default function Donation() {
       </ul>
 
       {
-        visibleCount < donations.length && (
+        visibleCount < globalDonations.length && (
           <button
             type="button"
             className="gifts-historic__more-btn"
@@ -272,5 +410,5 @@ export default function Donation() {
         )
       }
     </div >
-  </section >
+  </section>
 }

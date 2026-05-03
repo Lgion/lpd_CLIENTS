@@ -2,8 +2,45 @@ const fs = require('fs')
     , path = require('path')
     , multer = require('../middlewares/multer')
     , mongoose = require('mongoose')
-// , { connectToDatabase } = require("../mongodb")
-// , connectToDatabase = require("../mongodb_")
+    , https = require('https')
+
+// Helper pour rapatrier une image externe
+const repatriateImage = async (url) => {
+    if (!url || !url.startsWith('http')) return url;
+    
+    const uploadDir = path.join(process.cwd(), 'public/img/blog');
+    try {
+        const testFile = path.join(uploadDir, '.write-test');
+        fs.writeFileSync(testFile, 'test');
+        fs.unlinkSync(testFile);
+    } catch (e) {
+        return url;
+    }
+
+    return new Promise((resolve) => {
+        const ext = path.extname(new URL(url).pathname) || '.webp';
+        const filename = `repatriated-${Date.now()}${ext}`;
+        const dest = path.join(uploadDir, filename);
+        const file = fs.createWriteStream(dest);
+
+        https.get(url, (response) => {
+            if (response.statusCode !== 200) {
+                file.close();
+                fs.unlinkSync(dest);
+                return resolve(url);
+            }
+            response.pipe(file);
+            file.on('finish', () => {
+                file.close();
+                resolve(`/img/blog/${filename}`);
+            });
+        }).on('error', () => {
+            file.close();
+            if (fs.existsSync(dest)) fs.unlinkSync(dest);
+            resolve(url);
+        });
+    });
+};
 
 
 
@@ -46,6 +83,11 @@ exports.createEntry = async (req, res, next, Model) => {
 
 
 
+    // Rapatriement automatique si URL externe
+    if (entryObject['src_$_file']) {
+        entryObject['src_$_file'] = await repatriateImage(entryObject['src_$_file']);
+    }
+
     mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority',
         {
             useNewUrlParser: true,
@@ -70,12 +112,17 @@ exports.createEntry = async (req, res, next, Model) => {
         })
         .catch((e) => console.log(e, 'Connexion à MongoDB échouée !'))
 }
-exports.modifyEntry = (req, res, next, Model) => {
+exports.modifyEntry = async (req, res, next, Model) => {
 
     console.log(req.query._id);
     delete req.body.modelKey
     delete req.body.timestamp
     const entryObject = req.body
+
+    // Rapatriement automatique si URL externe
+    if (entryObject['src_$_file']) {
+        entryObject['src_$_file'] = await repatriateImage(entryObject['src_$_file']);
+    }
 
     mongoose.connect('mongodb+srv://archist:1&Bigcyri@cluster0.61na4.mongodb.net/?retryWrites=true&w=majority',
         {
@@ -105,11 +152,19 @@ exports.deleteEntry = async (req, res, next, Model) => {
         }
     )
         .then(() => {
-            console.log(process.cwd());
-            console.log(path.join(process.cwd(), "/public", req.query.src));
-            fs.unlink(path.join(process.cwd(), "/public", req.query.src), (err) => {
-                if (err) console.log(err);
-                Model.deleteOne({ _id: req.query._id })
+            const relativePath = req.query.src;
+            const fullPath = path.join(process.cwd(), "/public", relativePath);
+            const archiveDir = path.join(process.cwd(), "/public/img/blog/archive");
+
+            if (fs.existsSync(fullPath)) {
+                if (!fs.existsSync(archiveDir)) fs.mkdirSync(archiveDir, { recursive: true });
+                const archivedName = `${Date.now()}-${path.basename(fullPath)}`;
+                try {
+                    fs.renameSync(fullPath, path.join(archiveDir, archivedName));
+                } catch (e) { console.error("Archive error:", e); }
+            }
+
+            Model.deleteOne({ _id: req.query._id })
                     .then(() => {
                         console.log("eeeeeeeeeeeend ok");
                         res.status(200).json({ message: 'Objet supprimé !' })
@@ -118,6 +173,5 @@ exports.deleteEntry = async (req, res, next, Model) => {
                         console.log("eeeeeeeeeeeend not ok");
                         res.status(401).json({ error })
                     })
-            })
         })
 }

@@ -251,7 +251,8 @@ body {
                                 top: 2.5em;
                                 background: url("/school/students/fees.svg");
                             }
-                        }}
+                        }
+                    }
                 }
             }
         }
@@ -599,6 +600,7 @@ body>div:has(.ant-modal-root) {
         display: block;
     }
 }
+
 // Ecommerce Admin Styles (BEM)
 .ecommerce-admin {
     padding: 20px;
@@ -608,7 +610,7 @@ body>div:has(.ant-modal-root) {
         justify-content: space-between;
         align-items: center;
         margin-bottom: 24px;
-        
+
         h1 {
             font-size: 24px;
             font-weight: 700;
@@ -792,14 +794,20 @@ body>div:has(.ant-modal-root) {
             background: #000;
             color: #fff;
             font-size: 16px;
-            &:hover { background: #333; }
+
+            &:hover {
+                background: #333;
+            }
         }
 
         &--delete {
             background: #000;
             color: #fff;
             font-size: 18px;
-            &:hover { background: #333; }
+
+            &:hover {
+                background: #333;
+            }
         }
     }
 }
@@ -881,13 +889,19 @@ body>div:has(.ant-modal-root) {
         &--cancel {
             background: #f3f4f6;
             color: #374151;
-            &:hover { background: #e5e7eb; }
+
+            &:hover {
+                background: #e5e7eb;
+            }
         }
 
         &--save {
             background: #000;
             color: #fff;
-            &:hover { background: #333; }
+
+            &:hover {
+                background: #333;
+            }
         }
     }
 }
@@ -905,7 +919,9 @@ body>div:has(.ant-modal-root) {
         margin-bottom: 6px;
     }
 
-    &__input, &__select, &__textarea {
+    &__input,
+    &__select,
+    &__textarea {
         width: 100%;
         padding: 10px 12px;
         border: 1px solid #d1d5db;
@@ -930,15 +946,18 @@ body>div:has(.ant-modal-root) {
     padding: 24px;
     max-width: 1200px;
     margin: 0 auto;
+    z-index: 10000;
 
     &__header {
         margin-bottom: 32px;
+
         h1 {
             font-size: 28px;
             font-weight: 800;
             color: #1a1a1a;
             margin: 0;
         }
+
         p {
             color: #666;
             margin-top: 4px;
@@ -950,6 +969,14 @@ body>div:has(.ant-modal-root) {
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 20px;
         margin-bottom: 32px;
+    }
+
+    &__stats-grid,
+    &__header {
+        background: white;
+        border-radius: 1em;
+        padding: 1em;
+        border: 1px solid black;
     }
 
     &__stat-card {
@@ -976,11 +1003,26 @@ body>div:has(.ant-modal-root) {
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            
-            &--blue { background: #eff6ff; color: #3b82f6; }
-            &--green { background: #f0fdf4; color: #22c55e; }
-            &--purple { background: #faf5ff; color: #a855f7; }
-            &--orange { background: #fff7ed; color: #f97316; }
+
+            &--blue {
+                background: #eff6ff;
+                color: #3b82f6;
+            }
+
+            &--green {
+                background: #f0fdf4;
+                color: #22c55e;
+            }
+
+            &--purple {
+                background: #faf5ff;
+                color: #a855f7;
+            }
+
+            &--orange {
+                background: #fff7ed;
+                color: #f97316;
+            }
         }
 
         &-info {
@@ -990,6 +1032,7 @@ body>div:has(.ant-modal-root) {
                 color: #1a1a1a;
                 display: block;
             }
+
             .stat-label {
                 font-size: 14px;
                 color: #666;
@@ -1033,7 +1076,10 @@ body>div:has(.ant-modal-root) {
                 font-weight: 600;
                 color: #3b82f6;
                 text-decoration: none;
-                &:hover { text-decoration: underline; }
+
+                &:hover {
+                    text-decoration: underline;
+                }
             }
         }
     }
@@ -1052,8 +1098,13 @@ body>div:has(.ant-modal-root) {
         align-items: center;
         transition: background 0.2s;
 
-        &:last-child { border-bottom: none; }
-        &:hover { background: #f9fafb; }
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background: #f9fafb;
+        }
 
         &-main {
             .title {
@@ -1061,6 +1112,7 @@ body>div:has(.ant-modal-root) {
                 color: #1a1a1a;
                 display: block;
             }
+
             .subtitle {
                 font-size: 13px;
                 color: #666;
@@ -1069,11 +1121,13 @@ body>div:has(.ant-modal-root) {
 
         &-meta {
             text-align: right;
+
             .amount {
                 font-weight: 700;
                 color: #1a1a1a;
                 display: block;
             }
+
             .date {
                 font-size: 12px;
                 color: #999;
@@ -1120,9 +1174,16 @@ body>div:has(.ant-modal-root) {
     max-width: 600px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 
-    h2 { color: #dc2626; margin-bottom: 16px; }
-    p { color: #666; margin-bottom: 24px; }
-    
+    h2 {
+        color: #dc2626;
+        margin-bottom: 16px;
+    }
+
+    p {
+        color: #666;
+        margin-bottom: 24px;
+    }
+
     button {
         background: #000;
         color: #fff;
@@ -1131,13 +1192,21 @@ body>div:has(.ant-modal-root) {
         font-weight: 700;
         border: none;
         cursor: pointer;
-        &:hover { background: #333; }
+
+        &:hover {
+            background: #333;
+        }
     }
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 // --- Google Analytics Dashboard Section (BEM) ---
@@ -1153,7 +1222,7 @@ body>div:has(.ant-modal-root) {
     &__header {
         padding: 20px;
         border-bottom: 1px solid #e0e0e0;
-        
+
         h2 {
             display: flex;
             align-items: center;
@@ -1161,7 +1230,7 @@ body>div:has(.ant-modal-root) {
             font-size: 18px;
             font-weight: 700;
             margin: 0;
-            
+
             span {
                 font-size: 1.25em;
             }
@@ -1181,7 +1250,7 @@ body>div:has(.ant-modal-root) {
         gap: 20px;
         position: relative;
         padding-top: 45px;
-        
+
         &-title {
             position: absolute;
             top: 0;
@@ -1203,7 +1272,7 @@ body>div:has(.ant-modal-root) {
         background: #fff;
         padding: 20px;
         border-radius: 12px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -1240,10 +1309,18 @@ body>div:has(.ant-modal-root) {
     &__value {
         color: #1a1a1a;
         font-weight: 700;
-        
-        &--blue { color: #4285F4; }
-        &--green { color: #34A853; }
-        &--orange { color: #e65100; }
+
+        &--blue {
+            color: #4285F4;
+        }
+
+        &--green {
+            color: #34A853;
+        }
+
+        &--orange {
+            color: #e65100;
+        }
     }
 
     &__item {
@@ -1275,7 +1352,7 @@ body>div:has(.ant-modal-root) {
             font-size: 0.8em;
             font-weight: 700;
         }
-        
+
         &-device {
             display: flex;
             align-items: center;

@@ -28,13 +28,13 @@ const transporter = nodemailer.createTransport({
   }
 });
 // // // Les avantages de SMTP2GO par rapport à Gmail sont :
-  /*
-  Pour utiliser SMTP2GO :
-  - Créez un compte gratuit sur SMTP2GO (https://www.smtp2go.com/)
-  - Dans votre fichier .env.local, ajoutez ces variables :
-  SMTP2GO_USER=votre_utilisateur_smtp2go
-  SMTP2GO_PASS=votre_mot_de_passe_smtp2go
-  */
+/*
+Pour utiliser SMTP2GO :
+- Créez un compte gratuit sur SMTP2GO (https://www.smtp2go.com/)
+- Dans votre fichier .env.local, ajoutez ces variables :
+SMTP2GO_USER=votre_utilisateur_smtp2go
+SMTP2GO_PASS=votre_mot_de_passe_smtp2go
+*/
 // const transporter = nodemailer.createTransport({
 //   host: 'mail.smtp2go.com',
 //   port: 2525,
@@ -46,7 +46,7 @@ const transporter = nodemailer.createTransport({
 // });
 
 async function sendConfirmationEmail(reservation) {
-  try{
+  try {
     // Préparer le contenu de l'email
     const emailContent = `
       <h2>Confirmation de réservation - Sanctuaire Notre Dame du Rosaire</h2>
@@ -96,13 +96,13 @@ async function sendConfirmationEmail(reservation) {
       responseCode: error.responseCode,
       stack: error.stack
     });
-    
+
     if (error.code === 'ESOCKET') {
       console.error('Erreur de connexion au serveur SMTP. Vérifiez votre connexion Internet et les paramètres du serveur SMTP.');
     } else if (error.code === 'EAUTH') {
       console.error('Erreur d\'authentification. Vérifiez vos identifiants SMTP2GO_USER et SMTP2GO_PASS.');
     }
-    
+
     return false;
   }
 }
@@ -111,7 +111,7 @@ async function sendPaymentConfirmationEmail(reservation) {
   try {
     // Vérifier la connexion SMTP
     await transporter.verify();
-    
+
     // Préparer le contenu de l'email
     const emailContent = `
       <h2>Confirmation de paiement - Sanctuaire Notre Dame du Rosaire</h2>
@@ -186,26 +186,26 @@ export default async function handler(req, res) {
         // Créer une nouvelle réservation
         console.log('API - POST - Création d\'une nouvelle réservation');
         console.log('API - POST - Données reçues:', req.body);
-        
+
         try {
-          
+
           // const newReservation = await modelReservation.create(req.body.reservation);
           // console.log('API - POST - Réservation créée avec succès:', newReservation);
           console.log('API - POST - Pas de réservation à créer');
-          
+
           // Envoyer l'email de confirmation
           const tmp = await sendConfirmationEmail({
             ...req.body.reservation
             // ...newReservation.toObject(),
             // email: req.body.reservation.email
           });
-          
-          return res.status(200).json({blablabla: "msg temporaire"});
-          
+
+          return res.status(200).json({ blablabla: "msg temporaire" });
+
           return res.status(201).json(newReservation);
         } catch (createError) {
           console.error('API - POST - Erreur lors de la création:', createError);
-          return res.status(400).json({ 
+          return res.status(400).json({
             message: 'Erreur lors de la création de la réservation',
             error: createError.message,
             details: createError
@@ -216,25 +216,25 @@ export default async function handler(req, res) {
         // Modifier une réservation existante
         console.log('API - PUT - Modification d\'une réservation');
         const { id } = req.query;
-        
+
         // Vérifier si c'est une validation de paiement
         if (req.body.action === 'validatePayment') {
           const reservation = await modelReservation.findById(id);
           if (!reservation) {
             return res.status(404).json({ message: 'Réservation non trouvée' });
           }
-          
+
           // Mettre à jour le statut de paiement
           reservation.avance_payee = true;
           reservation.isValidated = true;
-          
+
           // Envoyer un email de confirmation de paiement
           await sendPaymentConfirmationEmail(reservation);
-          
+
           const updatedReservation = await reservation.save();
           return res.status(200).json(updatedReservation);
         }
-        
+
         // Modification normale de la réservation
         const updatedReservation = await modelReservation.findByIdAndUpdate(
           id,
@@ -261,8 +261,8 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     console.error('API - Erreur générale:', error);
-    return res.status(500).json({ 
-      message: 'Erreur serveur', 
+    return res.status(500).json({
+      message: 'Erreur serveur',
       error: error.message,
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     })

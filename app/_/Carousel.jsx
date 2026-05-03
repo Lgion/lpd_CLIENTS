@@ -23,6 +23,7 @@ const Carousel = memo(function Carousel({ page = "home", diapos: initialDiapos, 
     const [h3, setH3] = useState("TROUVER UN TITRE")
     const [diapos, setDiapos] = useState(initialDiapos || [])
     const [modalState, setModalState] = useState({ isOpen: false, item: null })
+    const [fitMode, setFitMode] = useState("cover") // État pour object-fit
     const { settingsSlider, isAdmin } = useContext(AuthContext)
         , [models, setModels] = useState({})
 
@@ -108,6 +109,14 @@ const Carousel = memo(function Carousel({ page = "home", diapos: initialDiapos, 
         <>
             <h3 className="carousel" id={h3id} data-icon={icon} data-sommaire={sommaire || titre}>{h3}</h3>
             <section className="carousel">
+                <button 
+                    className="toggle-fit-btn" 
+                    onClick={() => setFitMode(fitMode === "cover" ? "contain" : "cover")}
+                    title={fitMode === "cover" ? "Afficher l'image entière" : "Remplir le cadre"}
+                >
+                    {fitMode === "cover" ? "🔍" : "🖼️"}
+                </button>
+
                 {isAdmin && (<>
                     <div id="admin_carousel">
                         <button title="Recharger les données du carousel" style={{ left: "2em" }} onClick={reloadBtn}>⟳</button>
@@ -164,11 +173,11 @@ const Carousel = memo(function Carousel({ page = "home", diapos: initialDiapos, 
                                 title={item.title}
                                 width={200}
                                 height={200}
+                                style={{ objectFit: fitMode }}
                             />
                             <ul></ul>
                             <figcaption>
                                 <h4>{item.title}</h4>
-                                {/* <p>{item.figcaption}</p> */}
                             </figcaption>
                         </figure>
                     ))}

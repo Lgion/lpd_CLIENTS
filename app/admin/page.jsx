@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import HowTo from './components/HowTo'
+
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState(null)
@@ -29,31 +31,27 @@ export default function AdminDashboard() {
         fetchDashboardData()
     }, [])
 
-    if (loading) {
-        return (
-            <div className="admin-loading">
-                <div className="spinner"></div>
-                Chargement du tableau de bord...
-            </div>
-        )
-    }
-
-    if (error) {
-        return (
-            <div className="admin-error">
-                <h2>Oups! Une erreur est survenue</h2>
-                <p>{error}</p>
-                <button onClick={() => window.location.reload()}>Réessayer</button>
-            </div>
-        )
-    }
-
     return (
         <div className="admin-dashboard">
-            <header className="admin-dashboard__header">
-                <h1>Tableau de Bord</h1>
-                <p>Bienvenue dans l'interface de gestion Bolobi. Voici un aperçu de l'activité récente.</p>
-            </header>
+            <HowTo />
+
+            {loading ? (
+                <div className="admin-loading">
+                    <div className="spinner"></div>
+                    Chargement des données du tableau de bord...
+                </div>
+            ) : error ? (
+                <div className="admin-error">
+                    <h2>Oups! Une erreur est survenue</h2>
+                    <p>{error}</p>
+                    <button onClick={() => window.location.reload()}>Réessayer</button>
+                </div>
+            ) : (
+                <>
+                    <header className="admin-dashboard__header">
+                        <h1>Tableau de Bord</h1>
+                        <p>Bienvenue dans l'interface de gestion Bolobi. Voici un aperçu de l'activité récente.</p>
+                    </header>
 
             <div className="admin-dashboard__stats-grid">
                 <div className="admin-dashboard__stat-card">
@@ -63,7 +61,7 @@ export default function AdminDashboard() {
                         <span className="stat-label">Réservations</span>
                     </div>
                 </div>
-                
+
                 <div className="admin-dashboard__stat-card">
                     <div className="admin-dashboard__stat-card-icon admin-dashboard__stat-card-icon--green">🛍️</div>
                     <div className="admin-dashboard__stat-card-info">
@@ -167,13 +165,13 @@ export default function AdminDashboard() {
                                 <span>📈</span> Statistiques de Visite (30 Derniers Jours)
                             </h2>
                         </div>
-                        
+
                         <div className="admin-analytics__grid">
-                            
+
                             {/* --- GROUPE 1: PERFORMANCE & AUDIENCE --- */}
                             <div className="admin-analytics__group">
                                 <h3 className="admin-analytics__group-title">🌍 Statistiques Générales</h3>
-                                
+
                                 {/* Performances Globales */}
                                 <div className="admin-analytics__block">
                                     <h4>Performances Globales</h4>
@@ -243,7 +241,7 @@ export default function AdminDashboard() {
                                                 <span className="admin-analytics__value admin-analytics__value--blue">{src.sessions} sessions</span>
                                             </div>
                                         )) : (
-                                              <span className="admin-dashboard__empty">Sources non identifiées.</span>
+                                            <span className="admin-dashboard__empty">Sources non identifiées.</span>
                                         )}
                                     </div>
                                 </div>
@@ -260,7 +258,7 @@ export default function AdminDashboard() {
                                                 <span className="admin-analytics__value">{device.users} visiteurs</span>
                                             </div>
                                         )) : (
-                                              <span className="admin-dashboard__empty">Non identifiés.</span>
+                                            <span className="admin-dashboard__empty">Non identifiés.</span>
                                         )}
                                     </div>
                                 </div>
@@ -279,7 +277,7 @@ export default function AdminDashboard() {
                                                 </span>
                                             </div>
                                         )) : (
-                                              <span className="admin-dashboard__empty">Données manquantes.</span>
+                                            <span className="admin-dashboard__empty">Données manquantes.</span>
                                         )}
                                     </div>
                                 </div>
@@ -288,7 +286,7 @@ export default function AdminDashboard() {
                             {/* --- GROUPE 2: E-COMMERCE --- */}
                             <div className="admin-analytics__group">
                                 <h3 className="admin-analytics__group-title">🛒 Commerce & Ventes</h3>
-                                
+
                                 {/* Performances E-commerce */}
                                 <div className="admin-analytics__block">
                                     <h4>Performances E-commerce</h4>
@@ -375,8 +373,8 @@ export default function AdminDashboard() {
                                         <div className="admin-analytics__row">
                                             <label>Taux de Conversion:</label>
                                             <span className="admin-analytics__value">
-                                                {stats.gaData.engagement?.begin_reservation > 0 
-                                                    ? Math.round((stats.recentReservations / stats.gaData.engagement.begin_reservation) * 100) 
+                                                {stats.gaData.engagement?.begin_reservation > 0
+                                                    ? Math.round((stats.recentReservations / stats.gaData.engagement.begin_reservation) * 100)
                                                     : 0}%
                                             </span>
                                         </div>
@@ -433,7 +431,10 @@ export default function AdminDashboard() {
                         </div>
                     </section>
                 )}
-            </div>
+                </div>
+                </>
+            )}
         </div>
     )
 }
+

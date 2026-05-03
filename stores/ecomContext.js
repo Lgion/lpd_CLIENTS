@@ -25,6 +25,15 @@ export const EcomContextProvider = ({children}) => {
         }
     }, []);
 
+    // Écouter les mises à jour globales du panier
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const handleCartUpdate = () => updateCart();
+            window.addEventListener('cart_updated', handleCartUpdate);
+            return () => window.removeEventListener('cart_updated', handleCartUpdate);
+        }
+    }, [updateCart]);
+
     // Fonction pour gérer la quantité
     const handleQty = useCallback((e, ls) => {
         if (typeof window !== "undefined") {

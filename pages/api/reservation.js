@@ -28,13 +28,13 @@ const transporter = nodemailer.createTransport({
   }
 });
 // // // Les avantages de SMTP2GO par rapport à Gmail sont :
-  /*
-  Pour utiliser SMTP2GO :
-  - Créez un compte gratuit sur SMTP2GO (https://www.smtp2go.com/)
-  - Dans votre fichier .env.local, ajoutez ces variables :
-  SMTP2GO_USER=votre_utilisateur_smtp2go
-  SMTP2GO_PASS=votre_mot_de_passe_smtp2go
-  */
+/*
+Pour utiliser SMTP2GO :
+- Créez un compte gratuit sur SMTP2GO (https://www.smtp2go.com/)
+- Dans votre fichier .env.local, ajoutez ces variables :
+SMTP2GO_USER=votre_utilisateur_smtp2go
+SMTP2GO_PASS=votre_mot_de_passe_smtp2go
+*/
 // const transporter = nodemailer.createTransport({
 //   host: 'mail.smtp2go.com',
 //   port: 2525,
@@ -52,8 +52,8 @@ async function sendConfirmationEmail(reservation) {
     console.log('Connexion SMTP vérifiée avec succès');
 
     // Calculer les détails des chambres
-    const chambresIndividuelles = reservation.individual_room_participants > 0 
-      ? `<li>Chambre(s) individuelle(s) : ${reservation.individual_room_participants} personne(s) × 10,000 FCFA/nuit</li>` 
+    const chambresIndividuelles = reservation.individual_room_participants > 0
+      ? `<li>Chambre(s) individuelle(s) : ${reservation.individual_room_participants} personne(s) × 10,000 FCFA/nuit</li>`
       : '';
     const chambresCollectives = reservation.participants - reservation.individual_room_participants > 0
       ? `<li>Chambre(s) collective(s) : ${reservation.participants - reservation.individual_room_participants} personne(s) × 3,000 FCFA/nuit</li>`
@@ -62,10 +62,10 @@ async function sendConfirmationEmail(reservation) {
     // Préparer les détails des repas
     let detailsRepas = '';
     if (reservation.meal_included) {
-      const planRepas = reservation.meal_plan === 1 
+      const planRepas = reservation.meal_plan === 1
         ? '1 repas + petit-déjeuner (2,000 FCFA/jour/personne)'
         : '2 repas + petit-déjeuner (3,000 FCFA/jour/personne)';
-      
+
       detailsRepas = `
         <h3>Détails des repas :</h3>
         <ul>
@@ -97,8 +97,8 @@ async function sendConfirmationEmail(reservation) {
           <li><strong>Date d'arrivée :</strong> ${new Date(reservation.from).toLocaleDateString('fr-FR')}</li>
           <li><strong>Date de départ :</strong> ${new Date(reservation.to).toLocaleDateString('fr-FR')}</li>
           <li><strong>Nombre de participants :</strong> ${reservation.participants}</li>
-          ${reservation.individual_room_participants > 0 ? 
-            `<li><strong>Dont en chambre individuelle :</strong> ${reservation.individual_room_participants}</li>` : ''}
+          ${reservation.individual_room_participants > 0 ?
+        `<li><strong>Dont en chambre individuelle :</strong> ${reservation.individual_room_participants}</li>` : ''}
         </ul>
 
         <h3 style="color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 5px;">Hébergement :</h3>
@@ -162,7 +162,7 @@ async function sendPaymentConfirmationEmail(reservation) {
   try {
     // Vérifier la connexion SMTP
     await transporter.verify();
-    
+
     // Préparer le contenu de l'email
     const emailContent = `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -242,14 +242,14 @@ export default async function handler(req, res) {
         try {
           const newReservation = await modelReservation.create(req.body.reservation);
           console.log('API - POST - Réservation créée avec succès');
-          
+
           // Envoyer l'email de confirmation
           await sendConfirmationEmail(newReservation.toObject());
-          
+
           return res.status(201).json(newReservation);
         } catch (createError) {
           console.error('API - POST - Erreur lors de la création:', createError);
-          return res.status(400).json({ 
+          return res.status(400).json({
             message: 'Erreur lors de la création de la réservation',
             error: createError.message
           });
