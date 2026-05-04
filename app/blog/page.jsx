@@ -578,14 +578,42 @@ export default function BlogPage() {
       {showAiModal && (
         <AiGenerationModal
           onClose={() => setShowAiModal(false)}
-          onSuccess={(postData) => {
+          onSuccess={(postData, capturedFiles) => {
+            // 1. Mettre à jour les champs texte
             setNewPost(prev => ({
               ...prev,
               title: postData.title || prev.title,
               excerpt: postData.excerpt || prev.excerpt,
               content: postData.content || prev.content,
-              category: postData.category || prev.category
+              category: postData.category || prev.category,
+              // 2. Extraire les liens
+              youtubeLinks: [
+                ...prev.youtubeLinks,
+                ...capturedFiles
+                  .filter(f => f.isLink)
+                  .map(f => f.url)
+              ]
             }));
+
+            // 3. Extraire les médias (images et vidéos)
+            const mediaFiles = capturedFiles.filter(f => 
+              !f.isLink && (f.type.startsWith('image/') || f.type.startsWith('video/'))
+            );
+
+            if (mediaFiles.length > 0) {
+              // On ajoute à la galerie
+              setGalleryFiles(prev => [...prev, ...mediaFiles]);
+              
+              // Si aucune image de couverture n'est déjà sélectionnée, on prend la première image du lot
+              const firstImage = mediaFiles.find(f => f.type.startsWith('image/'));
+              if (firstImage && !selectedImage) {
+                setSelectedImage(firstImage);
+                setPreviewUrl(URL.createObjectURL(firstImage));
+              }
+            }
+
+            setShowForm(true);
+            setShowAiModal(false);
           }}
         />
       )}

@@ -16,6 +16,10 @@ $transition: all 0.3s ease;
   // margin: 0 2rem auto;
   padding: 0 1.5rem 5em;
 
+  &:has(.ai-overlay) {
+    z-index: 100;
+  }
+
   .blog-header {
     margin-bottom: 3rem;
     text-align: center;
@@ -125,8 +129,8 @@ $transition: all 0.3s ease;
 
     .category-filters {
       position: fixed;
-      right: 2rem;
-      top: 50%;
+      right: -1rem;
+      bottom: 20%;
       transform: translateY(-50%);
       z-index: 1000;
       background: transparent;
@@ -179,7 +183,7 @@ $transition: all 0.3s ease;
 
     .fab-add-post {
       position: fixed;
-      bottom: 2rem;
+      bottom: 20%;
       right: 2rem;
       width: 60px;
       height: 60px;
@@ -714,6 +718,11 @@ $transition: all 0.3s ease;
     font-size: 1.1rem;
     line-height: 1.8;
     color: $text-color;
+    text-align: justify;
+
+    @media (min-width: 600px) {
+      padding: 2rem;
+    }
 
     // Titres
     h1,

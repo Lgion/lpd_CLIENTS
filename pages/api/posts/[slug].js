@@ -34,6 +34,8 @@ export default async function handler(req, res) {
         coverImage: data.coverImage,
         date: data.date,
         author: data.author,
+        category: data.category || 'all',
+        youtubeLinks: data.youtubeLinks || [],
         content: contentHtml,
       }
 

@@ -139,7 +139,6 @@ export default function PostPage() {
         </section>
       )}
 
-      <div className="post-body" dangerouslySetInnerHTML={{ __html: content }} />
     </article>
   )
 }

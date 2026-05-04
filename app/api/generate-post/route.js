@@ -7,64 +7,80 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
     const files = formData.getAll('files');
+    const userPrompt = formData.get('userPrompt') || "";
 
     if (!files || files.length === 0) {
-      return NextResponse.json({ success: false, message: 'Aucun fichier fourni.' }, { status: 400 });
+      return NextResponse.json({ success: false, message: 'Aucun média fourni.' }, { status: 400 });
     }
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    
-    // Preparation des donnees multimédia pour genAI
-    // L'API attend soit du byte (base64) en inlineData, soit on pourrait utiliser fileManager 
-    // Mais pour de petits fichiers (images, audio court), inlineData base64 marche bien.
-    
-    // TODO: Si on uploade des vidéos lourdes, il faut utiliser fileManager
-    // File API is recommended for audio and video
-    const contents = [];
-    
-    for (const file of files) {
-      const buffer = await file.arrayBuffer();
-      const nodeBuffer = Buffer.from(buffer);
-      
-      // Si c'est un très gros fichier, l'approche inlineData peut crash Vercel (limite ~4MB pour nextjs standard body max)
-      // On utilisera fileManager pour tout via une méthode temporaire ou on le passe direct si c'est gérable
-      const mimeType = file.type || 'application/octet-stream';
-      
-      const fileData = {
-        inlineData: {
-          data: nodeBuffer.toString('base64'),
-          mimeType: mimeType
-        }
-      };
-      contents.push(fileData);
-    }
-    
-    const prompt = `Agis comme un rédacteur de blog pour le web. 
-Tu vas recevoir des fichiers multimédias (texte, transcription vocale, image, ou vidéo).
-Analyse-les attentivement et génère un article de blog structuré qui met en avant leur contenu de manière engageante.
-Le contenu doit être au format Markdown.
 
-Retourne UNIQUEMENT une chaîne JSON valide (sans backticks \`\`\`json) ayant obligatoirement la structure stricte suivante :
+    const parts = [];
+    const mediaNames = [];
+
+    for (const file of files) {
+      const mimeType = (file.type || '').toLowerCase();
+      const fileName = file.name || 'capture';
+
+      try {
+        const buffer = await file.arrayBuffer();
+        const nodeBuffer = Buffer.from(buffer);
+
+        // On garde une trace du nom pour le texte
+        mediaNames.push(fileName);
+
+        // CAS 1 : AUDIO & VIDÉO (Analyse Binaire)
+        if (mimeType.startsWith('audio/') || mimeType.startsWith('video/') || mimeType.startsWith('image/')) {
+          // Sécurité contre les fichiers vides qui font planter l'IA
+          if (nodeBuffer.length > 1000) {
+            parts.push({
+              inlineData: {
+                data: nodeBuffer.toString('base64'),
+                mimeType: mimeType.split(';')[0],
+              }
+            });
+          }
+        } 
+      } catch (err) {
+        console.warn(`Fichier "${fileName}" ignoré par l'IA.`, err);
+      }
+    }
+
+    const prompt = `Agis comme un rédacteur de blog expert et narrateur. 
+Tu vas recevoir des fichiers multimédias (audio, photos, vidéos). 
+
+DIRECTIVES PRIORITAIRES DE L'UTILISATEUR :
+"${userPrompt}"
+
+CONSIGNES DE RÉDACTION :
+1. ANALYSE : Utilise l'audio pour le fond du récit et les images/vidéos pour enrichir tes descriptions et ton inspiration.
+2. DISCRÉTION : Ne cite JAMAIS les noms des fichiers (ex: [capture.jpg]) dans le texte final. L'article doit paraître naturel et fluide.
+3. TON : Adapte-toi au ton demandé dans les directives utilisateur.
+
+Format : Markdown élégant.
+
+Retourne UNIQUEMENT une chaîne JSON valide :
 {
-  "title": "Un titre accrocheur synthétisant le sujet",
-  "excerpt": "Un résumé court (1 ou 2 phrases) pour accrocher le lecteur",
-  "content": "Le contenu intégral du post ici, avec des titres (#, ##), du formatage gras, des listes si adéquates... Minimum 200 mots. En Markdown.",
-  "category": "Une catégorie pertinente parmi : 'Événements', 'Enseignements', 'Témoignages', 'Actualités'. Si aucune ne correspond, propose un mot-clé pertinent."
+  "title": "Titre percutant",
+  "excerpt": "Résumé court",
+  "content": "Contenu détaillé (min 300 mots) avec ## Titres.",
+  "category": "Choisir : 'Événements', 'Enseignements', 'Témoignages' ou 'Actualités'",
+  "youtubeLinks": [] 
 }
 `;
 
-    contents.push({ text: prompt });
+    parts.push({ text: prompt });
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-pro',
-      contents: contents,
+      model: 'gemini-flash-latest',
+      contents: [{ role: 'user', parts }],
       config: {
         responseMimeType: "application/json",
       }
     });
 
     const responseText = response.text;
-    
+
     let postData;
     try {
       postData = JSON.parse(responseText);
