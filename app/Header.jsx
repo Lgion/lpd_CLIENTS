@@ -10,12 +10,12 @@ import Hgroup from "./_/Hgroup.jsx"
 import SNS from "./_/SNS.jsx"
 import Playbox from "./_/Playbox.jsx"
 import MenuSecondary from "./_/MenuSecondary.jsx"
-import AuthContext from "../stores/authContext.js"
+import AuthContext from "../stores/authContext_.js"
 
 export default function Header() {
 
     const { cartBox, isCartPage } = useContext(AuthContext)
-    , getClass = (item, i) => { alert('okk') }
+        , getClass = (item, i) => { alert('okk') }
 
     //   useEffect(() => {
     //     console.log(pathname);
@@ -43,8 +43,8 @@ export default function Header() {
         {/* <Subscribe /> */}
         {/* <MenuSecondary /> */}
 
-        
-        
+
+
         {/* <Playbox /> */}
 
         {/* <Link

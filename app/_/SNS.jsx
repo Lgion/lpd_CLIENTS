@@ -1,27 +1,27 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import Link from "next/link";
 import Image from "next/image"
-import AuthContext from "../../stores/authContext.js"
+import AuthContext from "../../stores/authContext_.js"
 
 export default function SNS() {
 
-    const {myLoader} = useContext(AuthContext)
-    , waMessage = "ok wa test"
-    
+    const { myLoader } = useContext(AuthContext)
+        , waMessage = "ok wa test"
+
     return (
         <menu className="SNS">
             {/* <li id="share">
                 <button></button>
             </li> */}
             <li id="fb">
-            {/* https://www.npmjs.com/package/react-facebook */}
+                {/* https://www.npmjs.com/package/react-facebook */}
                 <a href="https://www.facebook.com/genevieve.achi/" target="_blank" rel="noopener noreferrer">
                 </a>
             </li>
             <li id="whatsapp">
-            {/* https://faq.whatsapp.com/5913398998672934/?locale=fr_FR */}
+                {/* https://faq.whatsapp.com/5913398998672934/?locale=fr_FR */}
                 {/* <Link href="" target="_blank"></Link> */}
-                <Link href={"https://wa.me/+2250709360672?text="+encodeURI(waMessage)} legacyBehavior>
+                <Link href={"https://wa.me/+2250709360672?text=" + encodeURI(waMessage)} legacyBehavior>
                     <a target="_blank" rel="noopener noreferrer">
                         {/* <Image
                             loader={myLoader}
@@ -55,7 +55,7 @@ export default function SNS() {
                     {/* <span>bolobi.ci</span> */}
                     {/* <span>BLOG</span> */}
                 </a>
-            </li> 
+            </li>
         </menu>
     )
 }

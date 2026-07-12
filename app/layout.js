@@ -8,8 +8,8 @@ import "../styles/cartBestSellers.css"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import {AuthContextProvider} from '../stores/authContext.js'
-import {FormContextProvider} from '../stores/formContext.js'
+import { AuthContextProvider } from '../stores/authContext_.js'
+import { FormContextProvider } from '../stores/formContext.js'
 
 // import Nav from '../components/Nav'
 import ClientIsHome from "./ClientIsHome";
@@ -41,11 +41,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 })
-;
+  ;
 export async function generateMetadata() {
   const headersList = await headers()
   const domain = headersList.get('host')
-  
+
   // URL de base en fonction du domaine
   const baseUrl = domain.indexOf("sactuaire-rosaire-bolobi") !== -1
     ? 'https://sanctuaire-rosaire-bolobi.com'
@@ -65,8 +65,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className="">
-      {/*<body className={`${geistSans.variable} ${geistMono.variable}`}>*/}
-        
+        {/*<body className={`${geistSans.variable} ${geistMono.variable}`}>*/}
+
         <AuthContextProvider>
           <FormContextProvider>
             <ClerkProvider>

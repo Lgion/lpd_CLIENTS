@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, memo, useMemo } from 'react'
-import AuthContext from "../stores/authContext.js"
+import AuthContext from "../stores/authContext_.js"
 import Article from "./retraites-spirituelles-bolobi/_/Article.jsx"
 import Carousel from './_/Carousel.jsx'
 import LocateBolobi from "./retraites-spirituelles-bolobi/_/LocateBolobi.jsx"
@@ -10,7 +10,7 @@ import ReserveForm_ from "./retraites-spirituelles-bolobi/_/ReserveForm_copy/ind
 import BlogCategory from './_/Blog/BlogCategory.jsx'
 
 
-const BtnCTA = ()=>{
+const BtnCTA = () => {
     return <div className="form_cta_fixed_btns">
         <a href="https://wa.me/22665555555" target="_blank"></a>
         <a href="#form_reservation"></a>
@@ -35,14 +35,14 @@ export default function LieuxActivites() {
     const { categoryPosts, diapos } = data
 
     const headings = useMemo(() => ({
-      h3: "CATÉGORIE: \"SANCTUAIRE NOTRE DAME DU ROSAIRE DE BOLOBI\""
+        h3: "CATÉGORIE: \"SANCTUAIRE NOTRE DAME DU ROSAIRE DE BOLOBI\""
     }), []);
 
     return useMemo(() => (
-        <SanctuaireContent 
-            diapos={diapos} 
-            categoryPosts={categoryPosts} 
-            headings={headings} 
+        <SanctuaireContent
+            diapos={diapos}
+            categoryPosts={categoryPosts}
+            headings={headings}
         />
     ), [diapos, categoryPosts, headings]);
 }
