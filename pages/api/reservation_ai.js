@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     } = req.body;
     // Validation rapide
     const isDateToRequired = type_reservation !== 'pray' && type_reservation !== 'celebration';
-    
+
     if (!names || !phone_number || !from || (isDateToRequired && !to) || !participants || !montant_total || !montant_avance) {
       return res.status(400).json({ success: false, message: 'Champs obligatoires manquants.' });
     }
@@ -81,7 +81,7 @@ export default async function handler(req, res) {
 
 
 async function sendConfirmationEmail(reservation) {
-  try{
+  try {
     // Préparer le contenu de l'email
     const emailContent = `
       <h2>Confirmation de réservation - Sanctuaire Notre Dame du Rosaire</h2>
@@ -129,13 +129,13 @@ async function sendConfirmationEmail(reservation) {
       responseCode: error.responseCode,
       stack: error.stack
     });
-    
+
     if (error.code === 'ESOCKET') {
       console.error('Erreur de connexion au serveur SMTP. Vérifiez votre connexion Internet et les paramètres du serveur SMTP.');
     } else if (error.code === 'EAUTH') {
       console.error('Erreur d\'authentification. Vérifiez vos identifiants SMTP2GO_USER et SMTP2GO_PASS.');
     }
-    
+
     return false;
   }
 }
@@ -147,8 +147,8 @@ async function sendConfirmationEmail_bis(reservation) {
     console.log('Connexion SMTP vérifiée avec succès');
 
     // Calculer les détails des chambres
-    const chambresIndividuelles = reservation.individual_room_participants > 0 
-      ? `<li>Chambre(s) individuelle(s) : ${reservation.individual_room_participants} personne(s) × 10,000 FCFA/nuit</li>` 
+    const chambresIndividuelles = reservation.individual_room_participants > 0
+      ? `<li>Chambre(s) individuelle(s) : ${reservation.individual_room_participants} personne(s) × 10,000 FCFA/nuit</li>`
       : '';
     const chambresCollectives = reservation.participants - reservation.individual_room_participants > 0
       ? `<li>Chambre(s) collective(s) : ${reservation.participants - reservation.individual_room_participants} personne(s) × 3,000 FCFA/nuit</li>`
@@ -157,10 +157,10 @@ async function sendConfirmationEmail_bis(reservation) {
     // Préparer les détails des repas
     let detailsRepas = '';
     if (reservation.meal_included) {
-      const planRepas = reservation.meal_plan === 1 
+      const planRepas = reservation.meal_plan === 1
         ? '1 repas + petit-déjeuner (2,000 FCFA/jour/personne)'
         : '2 repas + petit-déjeuner (3,000 FCFA/jour/personne)';
-      
+
       detailsRepas = `
         <h3>Détails des repas :</h3>
         <ul>
@@ -179,19 +179,23 @@ async function sendConfirmationEmail_bis(reservation) {
       <p>Votre réservation a été enregistrée avec succès.</p>
       
       <h3>Informations/Coordonnées: </h3>
+      <ul>
         <li>Nom complet : ${reservation.names}</li>
         <li>Téléphone : ${reservation.phone_number}</li>
         <li>Email : ${reservation.email}</li>
         <li>Nom de la communauté : ${reservation.community}</li>
         <li>Message particulier : ${reservation.message}</li>
+      </ul>
 
       <h3>Détails de la réservation :</h3>
       <ul>
-        <li>Date d'arrivée : ${new Intl.DateTimeFormat('fr-FR', {dateStyle: 'full'}).format(new Date(reservation.from))}</li>
-        <li>Date de départ : ${new Intl.DateTimeFormat('fr-FR', {dateStyle: 'full'}).format(new Date(reservation.to))}</li>
+        <li>Date d'arrivée : ${new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full' }).format(new Date(reservation.from))}</li>
+        <li>Date de départ : ${new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full' }).format(new Date(reservation.to))}</li>
         <li>Nombre de participants : ${reservation.participants}</li>
-        ${reservation.individual_room_participants > 0 ? 
-          `<li>Dont en chambre individuelle : ${reservation.individual_room_participants}</li>` : ''}
+        ${reservation.individual_room_participants > 0
+        ? `<li>Dont en chambre individuelle : ${reservation.individual_room_participants}</li>`
+        : ''
+      }
       </ul>
 
       <h3>Hébergement :</h3>
@@ -241,13 +245,13 @@ async function sendConfirmationEmail_bis(reservation) {
       responseCode: error.responseCode,
       stack: error.stack
     });
-    
+
     if (error.code === 'ESOCKET') {
       console.error('Erreur de connexion au serveur SMTP. Vérifiez votre connexion Internet et les paramètres du serveur SMTP.');
     } else if (error.code === 'EAUTH') {
       console.error('Erreur d\'authentification. Vérifiez vos identifiants SMTP2GO_USER et SMTP2GO_PASS.');
     }
-    
+
     return false;
   }
 }
