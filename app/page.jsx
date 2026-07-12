@@ -31,8 +31,8 @@ const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
 ));
 
 export default function LieuxActivites() {
-    const { data } = useContext(AuthContext)
-    const { categoryPosts, diapos } = data
+    const { data } = useContext(AuthContext) || {}
+    const { categoryPosts = [], diapos = [] } = data || {}
 
     const headings = useMemo(() => ({
         h3: "CATÉGORIE: \"SANCTUAIRE NOTRE DAME DU ROSAIRE DE BOLOBI\""
