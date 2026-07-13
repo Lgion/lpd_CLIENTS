@@ -103,14 +103,12 @@ export default function LogSignIn() {
         </SignedOut> */}
 
         <SignedIn>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
-                <UserButton afterSignOutUrl="/" />
-                {isAdmin && (
-                    <Link href="/admin" style={{ fontSize: '0.8rem', padding: '2px 8px', background: '#333', color: 'white', borderRadius: '4px', textDecoration: 'none' }}>
-                        Admin
-                    </Link>
-                )}
-            </div>
+            <UserButton afterSignOutUrl="/" />
+            {isAdmin && (
+                <Link href="/admin" style={{ fontSize: '0.8rem', padding: '2px 8px', background: '#333', color: 'white', borderRadius: '4px', textDecoration: 'none' }}>
+                    Admin
+                </Link>
+            )}
             {/* <button onClick={() => signOut()} >
             out
             </button> */}
