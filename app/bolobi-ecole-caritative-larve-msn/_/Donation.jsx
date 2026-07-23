@@ -120,7 +120,7 @@ export default function Donation() {
   };
 
   return <section>
-    <article>
+    <article id="school_descr">
       <h3><u>BOLOBI:</u> Un sanctuaire chrétien, son activité caritative, et de leur financement économique.</h3>
       <Image
         key={"ecole_bolobi_eleves_pose"}
@@ -190,10 +190,10 @@ export default function Donation() {
         </div>
       )}
 
-      <div>
+      <div id="giveGift_btn">
         <button id="do_donation_btn" className="safe" onClick={handleBtn}>FAIRE UN <span>DON</span></button>
       </div>
-      <h3>AUX <span>ÉCOLES ST MARTIN DE PORREZ</span>: </h3>
+      <h3 id="giveGift_btnSubtitle">AUX <span>ÉCOLES ST MARTIN DE PORREZ</span>: </h3>
     </article>
 
     <form id="form_donation" onSubmit={handleSubmit}>
@@ -335,9 +335,9 @@ export default function Donation() {
               className={`gifts-historic__item gifts-historic__item--${d.donation_type}`}
             >
               <span className={`gifts-historic__badge gifts-historic__badge--${d.donation_type}`}>
-                {d.donation_type === 'argent' ? 'Espèce' : 
-                 d.donation_type === 'nature' ? 'Nature' : 
-                 d.donation_type === 'scolarity' ? 'Scolarité' : 'Projet'}
+                {d.donation_type === 'argent' ? 'Espèce' :
+                  d.donation_type === 'nature' ? 'Nature' :
+                    d.donation_type === 'scolarity' ? 'Scolarité' : 'Projet'}
               </span>
               <div className="gifts-historic__row">
                 <div className="gifts-historic__field">
