@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Cards from "./Cards";
 import IntroVideo from './components/IntroVideo'
+import CalendrierLiturgique from '../../retraites-spirituelles-bolobi/_/components/CalendrierLiturgique'
 
 
 
@@ -23,9 +24,12 @@ export default function Article() {
         <p>Niché dans les magnifiques collines verdoyantes du <b>diocèse d'Agboville</b>, en périphérie du grand Abidjan sur la <b>route Abidjan-Adzopé</b>, s'étendant sur 18Ha, ce sanctuaire chrétien offre une expérience spirituelle apaisante et unique.</p>
         <p>Voici les principaux thèmes relatifs au Sanctuare ND du Rosaire de Bolobi: </p>
         <Cards />
+
+        <CalendrierLiturgique />
         {/* <p>encore un peu de blablabla pour présenter les différents types d'activités possibles au Sanctuaire... Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque suscipit, explicabo aperiam, eius eaque ratione, iusto deleniti quos iste quasi non assumenda rem neque quaerat sit in voluptatibus provident sed!</p> */}
         {/* <SliderInArticle carousel={carouselBolobi} carouselName="carouselBolobi_spirituel" /> */}
         {/* <button onClick={()=>{setShowArticle(!showArticle)}}>Afficher {!showArticle?"plus":"moins"}...</button> */}
 
     </article>
 }
+

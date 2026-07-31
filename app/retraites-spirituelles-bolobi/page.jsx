@@ -8,14 +8,8 @@ import LocateBolobi from "./_/LocateBolobi.jsx"
 // import ReserveForm from "./_/ReserveForm/index.jsx"
 import ReserveForm_ from "./_/ReserveForm_copy/index.jsx"
 import BlogCategory from '../_/Blog/BlogCategory'
+import BtnCTA from "./_/components/BtnCTA.jsx"
 
-
-const BtnCTA = ()=>{
-    return <div className="form_cta_fixed_btns">
-        <a href="https://wa.me/22665555555" target="_blank" title="Contactez nous sur whatsapp pour plus d'informations"></a>
-        <a href="#form_reservation" title="Remplir le formulaire de réservation pour votre séjour au sanctuaire de Bolobi"></a>
-    </div>
-}
 
 
 const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
