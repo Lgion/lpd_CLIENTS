@@ -7,7 +7,7 @@ import AuthContext from "../../stores/authContext.js"
 export default function LogSignIn() {
 
     const [isCartPage, setIsCartPage] = useState()
-        , { setIsAdmin, role, setRole } = useContext(AuthContext)
+        , { isAdmin, setIsAdmin, role, setRole } = useContext(AuthContext)
         // , { isLoaded, userId, sessionId, getToken } = useAuth()
         , { isSignedIn, user } = useUser()
         , { signOut } = useClerk();
@@ -104,6 +104,11 @@ export default function LogSignIn() {
 
         <SignedIn>
             <UserButton afterSignOutUrl="/" />
+            {isAdmin && (
+                <Link href="http://librairie-puissance-divine.ci/admin" target="_blank" style={{ fontSize: '0.8rem', padding: '2px 8px', background: '#333', color: 'white', borderRadius: '4px', textDecoration: 'none' }}>
+                    Admin
+                </Link>
+            )}
             {/* <button onClick={() => signOut()} >
             out
             </button> */}

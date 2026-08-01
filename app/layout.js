@@ -9,12 +9,14 @@ import "../styles/cartBestSellers.css"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import {AuthContextProvider} from '../stores/authContext.js'
-import {FormContextProvider} from '../stores/formContext.js'
+import { AuthContextProvider } from '../stores/authContext.js'
+import { FormContextProvider } from '../stores/formContext.js'
+import { EcomContextProvider } from '../stores/ecomContext.js'
 
 // import Nav from '../components/Nav'
 import ClientIsHome from "./ClientIsHome";
 import ClientIsAdmin from "./ClientIsAdmin";
+import Header from "./Header";
 import AfterFooter from "./AfterFooter";
 
 // dans votre fichier _app.js ou un composant spécifique
@@ -41,11 +43,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 })
-;
+  ;
 export async function generateMetadata() {
   const headersList = await headers()
   const domain = headersList.get('host')
-  
+
   // URL de base en fonction du domaine
   const baseUrl = domain.indexOf("sactuaire-rosaire-bolobi") !== -1
     ? 'https://sanctuaire-rosaire-bolobi.com'
@@ -66,16 +68,14 @@ export default function RootLayout({ children }) {
     <html lang="fr">
       <body className="">
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
-        
+
         <AuthContextProvider>
           <FormContextProvider>
             <ClerkProvider>
-              <ClientIsHome>
+              <EcomContextProvider>
+                <Header />
                 {children}
-              </ClientIsHome>
-              <ClientIsAdmin>
-                {children}
-              </ClientIsAdmin>
+              </EcomContextProvider>
               <AfterFooter />
             </ClerkProvider>
           </FormContextProvider>

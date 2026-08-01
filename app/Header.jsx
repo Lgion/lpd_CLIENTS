@@ -36,7 +36,7 @@ export default function Header() {
     return <header>
         <Hgroup />
         <SNS />
-        <MenuMain />
+        {/* <MenuMain /> */}
 
         <LogSignIn />
         {!isCartPage && <>
