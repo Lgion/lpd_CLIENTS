@@ -58,11 +58,11 @@ export default function CalendrierLiturgique() {
         { icon: "🤝", label: "Accompagnement spirituel" }
     ];
 
-    return (
+    return <>
+        <h3 id="calendrier-retraites" data-icon="3" data-sommaire="Programme des Retraites 2026-2027">
+            Programme & Calendrier Liturgique des Retraites 2026-2027
+        </h3>
         <section className="calendrier_liturgique_wrapper">
-            <h3 id="calendrier-retraites" data-icon="3" data-sommaire="Programme des Retraites 2026-2027">
-                Programme & Calendrier Liturgique des Retraites 2026-2027
-            </h3>
 
             <p className="intro_text">
                 Les <strong>Frères de Saint-Jean</strong> et l'<strong>Écosanctuaire Marial de Bolobi</strong> vous proposent un cycle complet de retraites spirituelles tout au long de l'année 2026-2027 sous le thème : <br />
@@ -85,22 +85,22 @@ export default function CalendrierLiturgique() {
                 <div className="affiche_actions">
                     <h4>Affiche Officielle du Sanctuaire</h4>
                     <p>Consultez ou téléchargez le calendrier permanent des retraites 2026-2027 au format haute définition.</p>
-                    
+
                     <div className="action_buttons">
                         <button type="button" className="btn_action primary" onClick={() => setIsOpen(true)}>
                             🔍 Agrandir l'affiche
                         </button>
-                        <a 
-                            href="/calendrier-permanent-bolobi.jpg" 
+                        <a
+                            href="/calendrier-permanent-bolobi.jpg"
                             download="Calendrier-Retraites-Bolobi-2026-2027.jpg"
                             className="btn_action secondary"
                             title="Télécharger la version JPG de l'affiche"
                         >
                             📥 Télécharger l'affiche (JPG)
                         </a>
-                        <a 
-                            href="https://wa.me/2250779288293?text=Bonjour%20Père%20Gilbert,%20je%20souhaite%20des%20renseignements%20sur%20les%20retraites%20spirituelles%202026-2027." 
-                            target="_blank" 
+                        <a
+                            href="https://wa.me/2250779288293?text=Bonjour%20Père%20Gilbert,%20je%20souhaite%20des%20renseignements%20sur%20les%20retraites%20spirituelles%202026-2027."
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="btn_action whatsapp"
                             title="Renseignements et inscriptions auprès du Père Gilbert via WhatsApp"
@@ -143,8 +143,8 @@ export default function CalendrierLiturgique() {
             {isOpen && (
                 <div className="lightbox_backdrop" onClick={() => setIsOpen(false)}>
                     <div className="lightbox_modal" onClick={(e) => e.stopPropagation()}>
-                        <button 
-                            className="lightbox_close" 
+                        <button
+                            className="lightbox_close"
                             onClick={() => setIsOpen(false)}
                             aria-label="Fermer la vue agrandie"
                         >
@@ -161,16 +161,16 @@ export default function CalendrierLiturgique() {
                             />
                         </div>
                         <div className="lightbox_footer">
-                            <a 
-                                href="/calendrier-permanent-bolobi.jpg" 
+                            <a
+                                href="/calendrier-permanent-bolobi.jpg"
                                 download="Calendrier-Retraites-Bolobi-2026-2027.jpg"
                                 className="btn_action secondary"
                             >
                                 📥 Télécharger en HD
                             </a>
-                            <a 
-                                href="https://wa.me/2250779288293?text=Bonjour%20Père%20Gilbert,%20je%20souhaite%20des%20renseignements%20sur%20les%20retraites%20spirituelles%20de%20Bolobi." 
-                                target="_blank" 
+                            <a
+                                href="https://wa.me/2250779288293?text=Bonjour%20Père%20Gilbert,%20je%20souhaite%20des%20renseignements%20sur%20les%20retraites%20spirituelles%20de%20Bolobi."
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn_action whatsapp"
                             >
@@ -181,5 +181,5 @@ export default function CalendrierLiturgique() {
                 </div>
             )}
         </section>
-    );
+    </>
 }

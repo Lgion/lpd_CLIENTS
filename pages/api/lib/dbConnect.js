@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 
 // URI MongoDB depuis l'env ou fallback local
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/lpd';
-console.log('[MONGODB_URI]', MONGODB_URI);
 
 if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
@@ -18,20 +17,30 @@ if (!cached) {
  * Connexion MongoDB optimisée pour Next.js API routes
  * - Réutilise la connexion si déjà ouverte
  * - Ne jamais fermer la connexion dans une API route
- * - Utilise le pattern singleton
+ * - Utilise le pattern singleton avec gestion des requêtes simultanées
  */
 async function dbConnect() {
-  if (cached.conn) {
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn;
   }
+
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      bufferCommands: false, // recommandé avec Next.js
-    }).then((mongoose) => mongoose);
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+      return mongooseInstance;
+    });
   }
-  cached.conn = await cached.promise;
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
   return cached.conn;
 }
 

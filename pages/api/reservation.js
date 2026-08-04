@@ -2,6 +2,7 @@
 import modelReservation from './_/models/Reservation'
 import mongoose from 'mongoose'
 import nodemailer from 'nodemailer'
+import dbConnect from './lib/dbConnect'
 
 // Configurer le transporteur d'email
 // const transporter = nodemailer.createTransport({
@@ -209,12 +210,8 @@ export default async function handler(req, res) {
   console.log('API - Méthode reçue:', req.method);
   console.log('API - Corps de la requête:', req.body);
 
-  // Connexion à MongoDB si nécessaire
-  if (mongoose.connection.readyState !== 1) {
-    console.log('API - Connexion à MongoDB...');
-    await mongoose.connect(process.env.MONGODB_URI)
-    console.log('API - Connecté à MongoDB');
-  }
+  // Connexion à MongoDB via dbConnect
+  await dbConnect();
 
   try {
     switch (req.method) {

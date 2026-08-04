@@ -1,4 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import dbConnect from './lib/dbConnect'
 const mongoose = require('mongoose')
 const {getStudents,getTeachers} = require("./_/controllers/members")
 const EleveModel = require('./_/models/old/Eleve')
@@ -7,18 +7,7 @@ const ClasseModel = require('./_/models/old/Classe')
 
 
 export default async function handler(req, res, next) {
-    // console.log("\n\n\n\n_________je suis dans members.js")
-    // console.log(req.method)
-    // console.log("\n\n\n\n-----------")
-    // console.log(req.body)
-    // console.log("\n\n\n\n??????????")
-
-    // Connexion à MongoDB si nécessaire
-    if (mongoose.connection.readyState !== 1) {
-        console.log('API - Connexion à MongoDB...');
-        await mongoose.connect(process.env.MONGODB_URI)
-        console.log('API - Connecté à MongoDB');
-    }
+    await dbConnect();
 
 
 

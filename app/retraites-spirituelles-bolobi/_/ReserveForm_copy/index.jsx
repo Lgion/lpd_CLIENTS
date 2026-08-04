@@ -3,6 +3,8 @@ import axios from 'axios';
 import '../../../../assets/scss/index_ai_reserveForm.scss';
 import Intro from '../ReserveForm/Intro';
 import ValidationSection from './ValidationSection'; // Importer ValidationSection
+import ReservationCalendar from './ReservationCalendar';
+import AdminReservationToolbarModal from './AdminReservationToolbarModal';
 
 const initialState = {
   names: '',
@@ -35,6 +37,31 @@ const titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance su
 
 export default function ReserveForm() {
   const [form, setForm] = useState(initialState);
+  const [allReservations, setAllReservations] = useState([]);
+
+  const fetchAllReservations = async () => {
+    try {
+      const res = await fetch('/api/reservation');
+      if (res.ok) {
+        const data = await res.json();
+        setAllReservations(Array.isArray(data) ? data : []);
+      }
+    } catch (err) {
+      console.error('Erreur chargement réservations:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllReservations();
+  }, []);
+
+  const handleSelectCalendarDates = (fromStr, toStr) => {
+    setForm(prev => ({
+      ...prev,
+      from: fromStr || '',
+      to: toStr || (prev.type_reservation === 'pray' || prev.type_reservation === 'celebration' ? '' : prev.to)
+    }));
+  };
 
   // Pré-remplissage du formulaire avec les infos du user localStorage
   useEffect(() => {
@@ -185,9 +212,7 @@ export default function ReserveForm() {
         localStorage.setItem('user', JSON.stringify(userToSave));
         // alert("f")
         await axios.post('/api/users', userToSave);
-        // alert("g")
-        
-        // On ne réinitialise plus le formulaire
+        fetchAllReservations();
       } else {
         setError(res.data?.message || 'Une erreur est survenue.');
       }
@@ -201,6 +226,10 @@ export default function ReserveForm() {
   return (<>
     <Intro {...{sommaire,titreH3}} />
     <div id="form_reservation" className="ai-reserve-form__container">
+      <AdminReservationToolbarModal
+        reservations={allReservations}
+        onRefresh={fetchAllReservations}
+      />
       <h2 className="ai-reserve-form__title">Réserver une retraite spirituelle</h2>
       <form className="ai-reserve-form" onSubmit={handleSubmit}>
         <div className="ai-reserve-form__row">
@@ -238,6 +267,13 @@ export default function ReserveForm() {
           </div>
           )}
         </div>
+        <ReservationCalendar
+          reservations={allReservations}
+          selectedFrom={form.from}
+          selectedTo={form.to}
+          onSelectDates={handleSelectCalendarDates}
+          typeReservation={form.type_reservation}
+        />
         <div className="ai-reserve-form__row">
           <label>Nombre de participants *</label>
           <input name="participants" type="number" min="1" value={form.participants} onChange={handleChange} required />
