@@ -136,7 +136,7 @@ export const AuthContextProvider = ({ children }) => {
                 h2: "DÉCOUVRIR: La Puissance Divine de Côte d'ivoire",
                 content: "",
                 tagzone: ["librairie", "librairie religieuse", "librairie religieuse chrétienne", "ecommerce chrétien", "sanctuaire bolobi", "retraites spirituelles"],
-                titrePage: ["Sanctuaire Notre Dame du Rosaire de Bolobi, et la Librairie Puissance Divine, vous souhaitent la bienvenue."],
+                titrePage: ["Sanctuaire Notre Dame du Rosaire de Bolobi, vous souhaitent la bienvenue."],
                 sns: { "Puissance Divine d'Amour d'Abidjan Cocody 2plateaux rue des jardins": "https://www.facebook.com/genevieve.achi/" },
                 search: "librairie+chrétienne+abidjan+cocody+2plateau"
             },

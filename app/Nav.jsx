@@ -54,7 +54,8 @@ export default function Nav() {
         </h2>
         <h3 className="tagzonePage">
             {menuActive && <>
-                {mainmenu.find(elt => elt.id == menuActive)?.tagzone.map((elt, i) => <span key={"tagzone_" + menuActive + "_" + i}>{elt}, </span>)}
+                {/* {mainmenu.find(elt => elt.id == menuActive)?.tagzone.map((elt, i) => <span key={"tagzone_" + menuActive + "_" + i}>{elt}, </span>)} */}
+                {mainmenu.find(elt => elt.id == "activites-spirituelles")?.tagzone.map((elt, i) => <span key={"tagzone_" + menuActive + "_" + i}>{elt}, </span>)}
                 <a target="_blank" href={mainmenu.find(elt => elt.id == menuActive)?.sns[Object.keys(mainmenu.find(elt => elt.id == menuActive)?.sns)[0]]} title={Object.keys(mainmenu.find(elt => elt.id == menuActive)?.sns)[0]} rel="noopener noreferrer">
                     {/* <img src={"/img/"+menuActive+".svg"} alt={"Page '"+menuActive+"' de la librairie puissance divine d'amour"} /> */}
                 </a>
