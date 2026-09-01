@@ -5,6 +5,7 @@ import Intro from '../ReserveForm/Intro';
 import ValidationSection from './ValidationSection'; // Importer ValidationSection
 import ReservationCalendar from './ReservationCalendar';
 import AdminReservationToolbarModal from './AdminReservationToolbarModal';
+import VoiceReservationSection from '../../../sanctuaire-rosaire-bolobi-adzope/_/ReserveForm/VoiceReservationSection';
 
 const initialState = {
   names: '',
@@ -36,6 +37,7 @@ const titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance su
 , sommaire = "RÉSERVER DATE"
 
 export default function ReserveForm() {
+  const [formMode, setFormMode] = useState('classic'); // 'classic' | 'audio'
   const [form, setForm] = useState(initialState);
   const [allReservations, setAllReservations] = useState([]);
 
@@ -116,12 +118,22 @@ export default function ReserveForm() {
     const chambres = parseInt(form.individual_room_participants, 10) || 0;
     const dortoirs = Math.max(participants - chambres, 0);
     let montant = (dortoirs * nights * 3000) + (chambres * nights * 10000);
-    // Ajout du tarif repas si inclus
+    // Ajout du tarif repas si inclus (1 repas/j = 2 000 FCFA, 2 repas/j = 3 000 FCFA, jamais de 1000F)
     if (form.meal_included && form.meal_plan && nights > 0 && participants > 0) {
-      const planTarif = form.meal_plan === '2' ? 3000 : 2000;
-      montant += nights * participants * planTarif;
+      const fullDays = Math.max(nights - 1, 0); // Jours intermédiaires (samedi, etc.)
+      const borderDaysCost = nights >= 1 ? 4000 : 0; // 2 jours de bordure (Arrivée & Départ = 1 repas/j = 2 000 FCFA × 2 = 4 000 FCFA total / pers)
+      const dailyRate = form.meal_plan === '2' ? 3000 : 2000;
+      montant += (fullDays * dailyRate + borderDaysCost) * participants;
     }
-    setForm(prev => ({ ...prev, montant_total: nights > 0 ? montant : '' }));
+    setForm(prev => {
+      const newTotal = nights > 0 ? montant : '';
+      const suggestedAdvance = newTotal ? Math.ceil((newTotal * 0.2) / 1000) * 1000 : '';
+      return { 
+        ...prev, 
+        montant_total: newTotal,
+        montant_avance: prev.montant_avance || suggestedAdvance
+      };
+    });
   }, [form.from, form.to, form.participants, form.individual_room_participants, form.meal_included, form.meal_plan]);
 
   const handleChange = (e) => {
@@ -225,12 +237,65 @@ export default function ReserveForm() {
 
   return (<>
     <Intro {...{sommaire,titreH3}} />
-    <div id="form_reservation" className="ai-reserve-form__container">
-      <AdminReservationToolbarModal
-        reservations={allReservations}
-        onRefresh={fetchAllReservations}
+
+    {/* BOUTONS SWITCHER MODE FORMULAIRE CLASSIC vs AUDIO VOCAL */}
+    <div className="mode-switcher-bar" style={{ display: 'flex', justifyContent: 'center', gap: 16, margin: '24px 0 32px 0', flexWrap: 'wrap' }}>
+      <button
+        type="button"
+        className={`mode-switch-btn ${formMode === 'classic' ? 'mode-switch-btn--active' : ''}`}
+        onClick={() => setFormMode('classic')}
+        style={{
+          padding: '14px 28px',
+          borderRadius: 50,
+          border: '2px solid #2563eb',
+          background: formMode === 'classic' ? '#2563eb' : '#ffffff',
+          color: formMode === 'classic' ? '#ffffff' : '#2563eb',
+          fontWeight: 800,
+          fontSize: '1rem',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: formMode === 'classic' ? '0 6px 20px rgba(37,99,235,0.3)' : 'none'
+        }}
+      >
+        📝 Formulaire Classique
+      </button>
+
+      <button
+        type="button"
+        className={`mode-switch-btn ${formMode === 'audio' ? 'mode-switch-btn--active' : ''}`}
+        onClick={() => setFormMode('audio')}
+        style={{
+          padding: '14px 28px',
+          borderRadius: 50,
+          border: '2px solid #2563eb',
+          background: formMode === 'audio' ? 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)' : '#ffffff',
+          color: formMode === 'audio' ? '#ffffff' : '#2563eb',
+          fontWeight: 800,
+          fontSize: '1rem',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: formMode === 'audio' ? '0 6px 20px rgba(37,99,235,0.3)' : 'none'
+        }}
+      >
+        🎙️ Mode Réservation Vocale (Guidée IA)
+      </button>
+    </div>
+
+    {formMode === 'audio' && (
+      <VoiceReservationSection 
+        onVoiceSuccess={(data) => {
+          setReservationData(data);
+        }}
       />
-      <h2 className="ai-reserve-form__title">Réserver une retraite spirituelle</h2>
+    )}
+
+    {formMode === 'classic' && (
+      <div id="form_reservation" className="ai-reserve-form__container">
+        <AdminReservationToolbarModal
+          reservations={allReservations}
+          onRefresh={fetchAllReservations}
+        />
+        <h2 className="ai-reserve-form__title">Réserver une retraite spirituelle</h2>
       <form className="ai-reserve-form" onSubmit={handleSubmit}>
         <div className="ai-reserve-form__row">
           <label>Nom complet *</label>
@@ -351,9 +416,12 @@ export default function ReserveForm() {
                 if (dortoirs > 0) details.push(`${dortoirs * nights * 3000} FCFA, pour ${dortoirs} pers. en dortoir x ${nights} nuit${nights>1?'s':''} x 3.000 FCFA`);
                 if (chambres > 0) details.push(`${chambres * nights * 10000} FCFA, pour ${chambres} chambre${chambres>1?'s':''} individuelle${chambres>1?'s':''} x ${nights} nuit${nights>1?'s':''} x 10.000 FCFA`);
                 if (form.meal_included && form.meal_plan && participants > 0) {
-                  const planTarif = form.meal_plan === '2' ? 3000 : 2000;
-                  const planLabel = form.meal_plan === '2' ? '2 repas + 1 petit déj. ('+planTarif+' FCFA/jour/pers.)' : '1 repas + 1 petit déj. ('+planTarif+' FCFA/jour/pers.)';
-                  details.push(`${(participants * (nights+1) * planTarif).toLocaleString()} FCFA, pour ${participants} pers. x ${nights+1} jour${nights>1?'s':''} x (${planLabel})`);
+                  const fullDays = Math.max(nights - 1, 0);
+                  const borderDaysCost = nights >= 1 ? 4000 : 0;
+                  const dailyRate = form.meal_plan === '2' ? 3000 : 2000;
+                  const planLabel = form.meal_plan === '2' ? '2 repas/j (3.000 FCFA)' : '1 repas/j (2.000 FCFA)';
+                  const mealTotal = (fullDays * dailyRate + borderDaysCost) * participants;
+                  details.push(`${mealTotal.toLocaleString()} FCFA, pour ${participants} pers. x (${fullDays}j. intermédiaires [${planLabel}] + 2j. bordure [1 repas/j = 2.000 FCFA/j = 4.000 FCFA total])`);
                 }
               }
               return (
@@ -366,9 +434,24 @@ export default function ReserveForm() {
           </div>
         </div>
         <div className="ai-reserve-form__row">
-          <label>Montant de l'avance (€) *</label>
-          <input name="montant_avance" type="number" min="0" value={form.montant_avance} onChange={handleChange} 
-            placeholder={form.montant_total ? `Ex: ${Math.ceil(form.montant_total*0.2)} FCFA (20% de ${form.montant_total}F CFA)` : ''} required />
+          <label>Montant de l'avance (FCFA, arrondi au 1 000 FCFA près) *</label>
+          <input 
+            name="montant_avance" 
+            type="number" 
+            min="0" 
+            step="1000"
+            value={form.montant_avance} 
+            onChange={handleChange} 
+            onBlur={(e) => {
+              const val = parseInt(e.target.value, 10);
+              if (val && val % 1000 !== 0) {
+                const rounded = Math.ceil(val / 1000) * 1000;
+                setForm(prev => ({ ...prev, montant_avance: rounded }));
+              }
+            }}
+            placeholder={form.montant_total ? `Ex: ${Math.ceil((form.montant_total*0.2)/1000)*1000} FCFA (20% arrondi)` : ''} 
+            required 
+          />
         </div>
         <div className="ai-reserve-form__row">
           <label>Message</label>
@@ -379,7 +462,7 @@ export default function ReserveForm() {
           <>
             <div className="ai-reserve-form__success">{success}</div>
             {reservationData && (
-              <ValidationSection reservationData={form} />
+              <ValidationSection reservationData={reservationData} />
             )}
           </>
         )}
@@ -390,5 +473,6 @@ export default function ReserveForm() {
         )}
       </form>
     </div>
+    )}
   </>);
 }

@@ -6,7 +6,18 @@ import AuthContext from "../../stores/authContext_.js"
 export default function SNS() {
 
     const { myLoader } = useContext(AuthContext)
-        , waMessage = "ok wa test"
+        , waMessage = "Bonjour Sanctuaire Notre Dame du Rosaire de Bolobi, je souhaite avoir des informations.";
+    
+    const directorPhone = process.env.NEXT_PUBLIC_DIRECTOR_WHATSAPP || "0779288293";
+    const waUrl = `https://wa.me/+225${directorPhone}?text=${encodeURIComponent(waMessage)}`;
+
+    const handleWaClick = () => {
+        fetch('/api/whatsapp_relay', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: waMessage, sender: 'Visiteur du site' })
+        }).catch(err => console.error(err));
+    };
 
     return (
         <menu className="SNS">
@@ -19,18 +30,7 @@ export default function SNS() {
                 </a>
             </li>
             <li id="whatsapp">
-                {/* https://faq.whatsapp.com/5913398998672934/?locale=fr_FR */}
-                {/* <Link href="" target="_blank"></Link> */}
-                <Link href={"https://wa.me/+2250709360672?text=" + encodeURI(waMessage)} legacyBehavior>
-                    <a target="_blank" rel="noopener noreferrer">
-                        {/* <Image
-                            loader={myLoader}
-                            src={`https://static.whatsapp.net/rsrc.php/v3/y7/r/DSxOAUB0raA.png`}
-                            alt={" "}
-                            width={50} height={50}
-                        /> */}
-                        {/* <img src="https://static.whatsapp.net/rsrc.php/v3/y7/r/DSxOAUB0raA.png" alt="contacter la librairie puissance divine via wahtsapp ! " /> */}
-                    </a>
+                <Link href={waUrl} target="_blank" rel="noopener noreferrer" onClick={handleWaClick}>
                 </Link>
             </li>
             <li id="ytube">

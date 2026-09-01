@@ -9,7 +9,7 @@ import { useUser } from "@clerk/nextjs"
 import { useGetEleves } from "./hooks.js"
 // import styled,{createGlobalStyle} from 'styled-components'
 import { ecole_classes, ecole_profs, ecole_eleves } from "../assets/classes.js"
-import EditMongoForm from "../app/admin/school/EditMongoForm.jsx"
+// import EditMongoForm from "../app/admin/school/EditMongoForm.jsx"
 import AuthContext from "./authContext_.js"
 
 const AdminContext = createContext({
@@ -48,120 +48,31 @@ export const AdminContextProvider = ({ children }) => {
 
 
 
-    const MembersMenu = () => <ul id="membersMenu">
-        <li className={showTeachers ? "active" : ""}>
-            <Link
-                href="school#teachers"
-                onClick={e => {
-                    setShowTeachers(true)
-                    setShowStudents(false)
-                    setClasse({})
-                }}
-            >Professeurs</Link>
-        </li>
-        <li className={showStudents ? "active" : ""}>
-            <Link
-                href="school#students"
-                onClick={e => {
-                    setShowTeachers(false)
-                    setShowStudents(true)
-                    setClasse({})
-                    setYear("")
-                }}
-            >Élèves</Link>
-        </li>
-    </ul>
-        , YearsList = () => <ul id="yearsMenu">
-            {console.log(user)}
-            {["admin", "editeur"].indexOf(role) != -1 && <li
-                className="addClasse"
-                onClick={e => {
-                    modal.classList.add('active')
-                    // setShowModal(true)
-                    document.querySelector('#modal .modal___main>form.student')?.classList.remove('active')
-                    document.querySelector('#modal .modal___main>form.teacher')?.classList.remove('active')
-                    document.querySelector('#modal .modal___main>form.classe')?.classList.add('active')
-                }}
-            >
-                {JSON.stringify(user.role)}
-                {user.role}
-                <button>+</button>
-                {/* {JSON.stringify(models)}
-                ---
-                {JSON.stringify(models?.schemaClasse?.paths)} */}
-                {createPortal(
-                    <EditMongoForm
-                        endpoint="ecole"
-                        modelKey="classe"
-                        model={models?.schemaClasse?.paths || {}}
-                        //   joinedDatasProps={{eleves:ecole_eleves, teachers: ecole_profs}} 
-                        joinedDatasProps={{ eleves: eleves, teachers: profs }}
-                    />
-                    , document.querySelector('#modal .modal___main')
-                )}
-            </li>}
-            {years.map((elt, i) => <li
-                key={"years_" + i}
-                onClick={(e) => {
-                    setYear(e.target.innerText)
-                    setShowTeachers(false)
-                    setShowStudents(false)
-                }}
-                className={elt == year ? "active" : ""}
-            // className={elt==year&&!showTeachers&&!showStudents?"active":""}
-            >
-                <Link href={"school#" + elt}>{elt}</Link>
-            </li>)}
-        </ul>
-        , ClassesList = ({ data }) => {
-            console.log(data);
-            //   alert('ok')
+    const isWhichHash = () => {
 
-            const toRender = <ul id="classesMenu">
-                {data.map((elt, i) => <li
-                    key={elt.annee + "_" + elt.niveau + "_" + elt.alias + "_" + i}
-                    onClick={e => { setClasse(elt) }}
-                    className={(classe?.niveau + "-" + classe?.alias) == (elt.niveau + "-" + elt.alias) ? "active" : ""}
-                >
-                    <Link href={"school#" + elt.annee + "___" + elt.niveau + "-" + elt.alias}>{elt.niveau}-{elt.alias}
-                        <span
-                            onClick={e => {
-                                // e.stopPropagation()
-                                alert("modifier classe")
-                            }}
-                            title="Éditer classe"
-                        >✎</span>
-                    </Link>
-                </li>)}
-            </ul>
-
-            return toRender
+        // let a = pathname.split('#')
+        let loc = location.hash.substring(1)
+            , isTeachersUrl = loc.indexOf('teachers') != -1
+            , isStudentsUrl = loc.indexOf('students') != -1
+            , isClassesUrl = loc.length > 0 && !isTeachersUrl && !isStudentsUrl
+        if (isStudentsUrl) {
+            setShowStudents(true)
         }
-        , isWhichHash = () => {
-
-            // let a = pathname.split('#')
-            let loc = location.hash.substring(1)
-                , isTeachersUrl = loc.indexOf('teachers') != -1
-                , isStudentsUrl = loc.indexOf('students') != -1
-                , isClassesUrl = loc.length > 0 && !isTeachersUrl && !isStudentsUrl
-            if (isStudentsUrl) {
-                setShowStudents(true)
-            }
-            if (isTeachersUrl) {
-                alert('ok')
-                setShowTeachers(true)
-            }
-            if (isClassesUrl) {
-                let annee = loc.split('___')
-                console.log(annee)
-                setYear(annee[0])
-                // setClasse(annee?.[1] ? ecole_classes.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : [])
-                // setClasse(annee?.[1] ? school?.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1])||{} : {})
-                const foundClasse = annee?.[1] ? school?.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : undefined;
-                setClasse(foundClasse || {}); // Use foundClasse if truthy, otherwise default to {}
-
-            }
+        if (isTeachersUrl) {
+            alert('ok')
+            setShowTeachers(true)
         }
+        if (isClassesUrl) {
+            let annee = loc.split('___')
+            console.log(annee)
+            setYear(annee[0])
+            // setClasse(annee?.[1] ? ecole_classes.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : [])
+            // setClasse(annee?.[1] ? school?.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1])||{} : {})
+            const foundClasse = annee?.[1] ? school?.find(elt => elt.annee == annee[0] && (elt.niveau + "-" + elt.alias) == annee[1]) : undefined;
+            setClasse(foundClasse || {}); // Use foundClasse if truthy, otherwise default to {}
+
+        }
+    }
 
 
 
@@ -377,7 +288,6 @@ export const AdminContextProvider = ({ children }) => {
         , setModels, models
         , isWhichHash
         // ,setShowModal
-        , MembersMenu, YearsList, ClassesList
     }
 
 

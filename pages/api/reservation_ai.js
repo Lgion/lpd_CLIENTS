@@ -25,6 +25,8 @@ async function dbConnect() {
   await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
+import { generateReservationEmailHTML } from './_utils/emailTemplate';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Méthode non autorisée' });
@@ -43,12 +45,18 @@ export default async function handler(req, res) {
     if (!names || !phone_number || !from || (isDateToRequired && !to) || !participants || !montant_total || !montant_avance) {
       return res.status(400).json({ success: false, message: 'Champs obligatoires manquants.' });
     }
+
+    // Arrondi de l'avance au 1 000 FCFA supérieur
+    const montant_avance_rounded = Math.ceil(parseInt(montant_avance, 10) / 1000) * 1000;
+    const wavePaymentUrl = `${process.env.WAVE_LINK || 'https://pay.wave.com/m/M_ci_tk7yljaMIDFk/c/ci/?amount='}${montant_avance_rounded}`;
+    const waveQrPic = process.env.WAVE_QR_PIC || 'wave_qr.pdf';
+
     const reservation = await modelReservation.create({
       names,
       phone_number,
-      email: email || 'non-fourni@exemple.com', // Valeur par défaut si email vide,
+      email: email || 'non-fourni@exemple.com',
       from: new Date(from),
-      to: to ? new Date(to) : new Date(from), // Utiliser la date d'arrivée si pas de date de départ
+      to: to ? new Date(to) : new Date(from),
       participants,
       individual_room_participants,
       message,
@@ -56,7 +64,7 @@ export default async function handler(req, res) {
       meal_included,
       meal_plan: meal_included ? meal_plan : undefined,
       montant_total,
-      montant_avance,
+      montant_avance: montant_avance_rounded,
       avance_payee: false,
       isValidated: false,
       isArchived: false,
@@ -64,16 +72,38 @@ export default async function handler(req, res) {
       community: community || '##NA##',
     });
 
+    // Envoyer l'email de confirmation HTML5 au client et BCC aux admins
+    const resObj = reservation.toObject();
+    try {
+      const emailHTML = generateReservationEmailHTML({
+        reservation: resObj,
+        wavePaymentUrl,
+        waveQrPic
+      });
 
-    // Envoyer l'email de confirmation
-    // const tmp = await sendConfirmationEmail({
-    //   ...reservation
-    //   // ...newReservation.toObject(),
-    //   // email: req.body.reservation.email
-    // });
-    const tmp = await sendConfirmationEmail_bis(reservation.toObject());
+      const adminEmails = (process.env.NEXT_PUBLIC_EMAIL_ADMIN || '').split(' ').filter(Boolean);
 
-    return res.status(201).json({ success: true, reservation });
+      await transporter.sendMail({
+        from: {
+          name: 'Sanctuaire Notre Dame du Rosaire',
+          address: process.env.EMAIL_USER_CYR || process.env.EMAIL_USER_MAM
+        },
+        to: resObj.email,
+        bcc: adminEmails,
+        subject: `Confirmation de réservation - ${resObj.names}`,
+        html: emailHTML
+      });
+      console.log('Email HTML de confirmation envoyé avec succès');
+    } catch (emailErr) {
+      console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailErr);
+    }
+
+    return res.status(201).json({
+      success: true,
+      reservation: resObj,
+      wavePaymentUrl,
+      waveQrPic
+    });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
   }

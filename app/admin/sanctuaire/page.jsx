@@ -1,15 +1,20 @@
 "use client"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Checkbox, Table, Button, Modal, Form, DatePicker, Input, InputNumber, Select, Space, Tag, message, Spin } from 'antd'
-import { SearchOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons'
+import { SearchOutlined, CheckCircleOutlined, CloseCircleOutlined, AudioOutlined } from '@ant-design/icons'
 import moment from 'moment'
+import InventaireManager from './inventaire'
+import EntretienManager from './entretien'
+import VoiceDictationModal from './VoiceDictationModal'
 
 const { RangePicker } = DatePicker
 const { Search } = Input
 
 export default function ReservationManager() {
+  const [activeTab, setActiveTab] = useState('reservations')
   const [reservations, setReservations] = useState([])
   const [loading, setLoading] = useState(true)
+  const [isVoiceModalVisible, setIsVoiceModalVisible] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isPromotionModalVisible, setIsPromotionModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
@@ -22,6 +27,54 @@ export default function ReservationManager() {
   const [form] = Form.useForm()
   const [editForm] = Form.useForm()
   const [promotionForm] = Form.useForm()
+
+  const handleVoiceParsedForReservation = (parsedData) => {
+    setEditingReservation(null)
+    setIsEditModalVisible(true)
+    setTimeout(() => {
+      editForm.resetFields()
+      editForm.setFieldsValue({
+        names: parsedData.names || 'Pèlerin',
+        community: parsedData.community || '',
+        phone_number: parsedData.phone_number || '',
+        email: parsedData.email || '',
+        date_from: parsedData.date_from,
+        date_to: parsedData.date_to,
+        participants: parsedData.participants || 1,
+        individual_room_participants: parsedData.individual_room_participants || 0,
+        type_reservation: parsedData.type_reservation || 'retraite',
+        meal_included: true,
+        meal_plan: 1,
+        montant_total: parsedData.montant_total || 0,
+        montant_avance: parsedData.montant_avance || 0,
+        message: parsedData.message || ''
+      })
+    }, 100)
+  }
+
+  // Calcul des métriques financières (SPEC_04)
+  const metrics = useMemo(() => {
+    const active = reservations.filter(r => !r.isArchived);
+    const validated = active.filter(r => r.isValidated);
+    const pending = active.filter(r => !r.isValidated)
+      .sort((a, b) => new Date(a.createdAt || a.from) - new Date(b.createdAt || b.from)); // Du plus ancien au plus récent
+    const paid = active.filter(r => r.avance_payee);
+
+    return {
+      caEstime: active.reduce((sum, r) => sum + (parseInt(r.montant_total, 10) || 0), 0),
+      caCalcule: validated.reduce((sum, r) => sum + (parseInt(r.montant_total, 10) || 0), 0),
+      totalAvancesPayees: paid.reduce((sum, r) => sum + (parseInt(r.montant_avance, 10) || 0), 0),
+      soldeRestant: validated.reduce((sum, r) =>
+        sum + Math.max((parseInt(r.montant_total, 10) || 0) - (parseInt(r.montant_avance, 10) || 0), 0), 0
+      ),
+      totalActive: active.length,
+      totalValidated: validated.length,
+      totalPending: pending.length,
+      totalPaid: paid.length,
+      pendingList: pending,
+      pendingTotalPotential: pending.reduce((sum, r) => sum + (parseInt(r.montant_total, 10) || 0), 0)
+    };
+  }, [reservations]);
 
   // Charger les réservations
   const fetchReservations = async () => {
@@ -385,101 +438,248 @@ export default function ReservationManager() {
   ]
   return (
     <div className="sanctuaire-admin">
-      <div className="sanctuaire-admin__header">
-        <div className="sanctuaire-admin__info-list">
-          <p className="sanctuaire-admin__info-list-title">Ce filtre s'applique sur les propriétés suivantes:</p>
-          <ul>
-            <li>La communauté</li>
-            <li>Le nom</li>
-            <li>L'email</li>
-            <li>Le numéro de téléphone</li>
-          </ul>
-        </div>
-        <Space size="large" className="sanctuaire-admin__controls">
-          <Search
-            placeholder="Rechercher..."
-            allowClear
-            onSearch={setSearchText}
-            className="sanctuaire-admin__search"
-          />
-          <RangePicker
-            onChange={handleDateRangeChange}
-            format="DD/MM/YYYY"
-            className="sanctuaire-admin__datepicker"
-            placeholder={['Date début', 'Date fin']}
-            allowClear={true}
-            showTime={false}
-          />
-          <Button
-            type={showArchived ? 'primary' : 'default'}
-            onClick={() => setShowArchived(!showArchived)}
+      {/* Navigation Onglets Admin Sanctuaire (SPEC_05 Redesign 2026) */}
+      <div className="sanctuaire-admin__tab-container">
+        <nav className="sanctuaire-admin__tab-nav">
+          <button
+            className={`sanctuaire-admin__tab-btn ${activeTab === 'reservations' ? 'sanctuaire-admin__tab-btn--active' : ''}`}
+            onClick={() => setActiveTab('reservations')}
           >
-            {showArchived ? 'Voir réservations actives' : 'Voir archives'}
-          </Button>
-        </Space>
+            <span className="tab-icon">📅</span>
+            <span className="tab-text">Réservations & CA</span>
+          </button>
+
+          <button
+            className={`sanctuaire-admin__tab-btn ${activeTab === 'inventaire' ? 'sanctuaire-admin__tab-btn--active' : ''}`}
+            onClick={() => setActiveTab('inventaire')}
+          >
+            <span className="tab-icon">📦</span>
+            <span className="tab-text">Inventaire Matériel</span>
+          </button>
+
+          <button
+            className={`sanctuaire-admin__tab-btn ${activeTab === 'entretien' ? 'sanctuaire-admin__tab-btn--active' : ''}`}
+            onClick={() => setActiveTab('entretien')}
+          >
+            <span className="tab-icon">🔧</span>
+            <span className="tab-text">Entretiens & Travaux</span>
+          </button>
+        </nav>
       </div>
 
-      <Table
-        columns={columns}
-        dataSource={filteredReservations}
-        rowKey="_id"
-        scroll={{ x: true }}
-        loading={loading}
-        className="sanctuaire-admin__table"
-        onRow={(record) => ({
-          onClick: () => {
-            setEditingReservation(record)
-            setIsDetailsModalVisible(true)
-          }
-        })}
-      />
+      {activeTab === 'inventaire' && <InventaireManager />}
+      {activeTab === 'entretien' && <EntretienManager />}
 
-      {/* Nouveau bloc : Communautés & Groupes Connus */}
-      <div className="sanctuaire-admin__knownCommunities">
-        <h2 className="sanctuaire-admin__section-title">👥 Communautés & Responsables Identifiés</h2>
-        <Spin spinning={loading} tip="Chargement des communautés...">
-          <div className="sanctuaire-admin__communities-grid">
-            {(() => {
-              const communitiesMap = {};
-              reservations.forEach(res => {
-                const name = (!res.community || res.community === '##NOT_APPLICABLE##') ? res.names : res.community;
-                if (!communitiesMap[name]) {
-                  communitiesMap[name] = {
-                    name,
-                    phone: res.phone_number,
-                    email: res.email,
-                    count: 0
-                  };
-                }
-                communitiesMap[name].count += 1;
-              });
+      {activeTab === 'reservations' && (
+        <>
 
-              return Object.values(communitiesMap)
-                .sort((a, b) => b.count - a.count)
-                .map((comm, index) => (
-                  <div key={index} className="community-card">
-                    <div className="community-card__badge">{comm.count} séjour{comm.count > 1 ? 's' : ''}</div>
-                    <h3 className="community-card__name">{comm.name}</h3>
-                    <div className="community-card__info">
-                      <a href={`tel:${comm.phone}`} className="community-card__link community-card__link--tel">
-                        📞 {comm.phone}
-                      </a>
-                      <div className="community-card__email">
-                        {comm.email && comm.email !== 'a@b.c' ? (
-                          <a href={`mailto:${comm.email}`} className="community-card__link">
-                            ✉️ {comm.email}
-                          </a>
-                        ) : (
-                          <span className="community-card__na">✉️ Email : N.A</span>
-                        )}
+
+          {/* Panneau de Tableau de Bord Financier (SPEC_04) */}
+          <div className="sanctuaire-admin__metrics">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+              <h2 className="sanctuaire-admin__metrics-title" style={{ margin: 0 }}>
+                💰 Tableau de Bord Financier & Réservations
+              </h2>
+
+              <Button
+                className="spec05-voice-btn"
+                size="large"
+                icon={<AudioOutlined />}
+                onClick={() => setIsVoiceModalVisible(true)}
+                style={{
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 12,
+                  fontWeight: 700,
+                  boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)'
+                }}
+              >
+                🎙️ Créer Réservation par Voix IA
+              </Button>
+            </div>
+
+            <div className="sanctuaire-admin__metrics-grid">
+              <div className="metric-card metric-card--estimate">
+                <span className="metric-card__label">CA Estimé</span>
+                <span className="metric-card__value">
+                  {metrics.caEstime.toLocaleString('fr-FR')} FCFA
+                </span>
+                <span className="metric-card__sub">
+                  {metrics.totalActive} réservation(s) active(s)
+                </span>
+              </div>
+
+              <div className="metric-card metric-card--calculated">
+                <span className="metric-card__label">CA Calculé</span>
+                <span className="metric-card__value">
+                  {metrics.caCalcule.toLocaleString('fr-FR')} FCFA
+                </span>
+                <span className="metric-card__sub">
+                  {metrics.totalValidated} réservation(s) validée(s)
+                </span>
+              </div>
+
+              <div className="metric-card metric-card--paid">
+                <span className="metric-card__label">Avances encaissées</span>
+                <span className="metric-card__value">
+                  {metrics.totalAvancesPayees.toLocaleString('fr-FR')} FCFA
+                </span>
+                <span className="metric-card__sub">
+                  {metrics.totalPaid} paiement(s) d'avance reçus
+                </span>
+              </div>
+
+              <div className="metric-card metric-card--remaining">
+                <span className="metric-card__label">Solde à percevoir</span>
+                <span className="metric-card__value">
+                  {metrics.soldeRestant.toLocaleString('fr-FR')} FCFA
+                </span>
+                <span className="metric-card__sub">dû par les réservations validées</span>
+              </div>
+            </div>
+
+            {/* Encart d'action : Réservations non validées triées du plus ancien au plus récent */}
+            {metrics.totalPending > 0 && (
+              <div className="sanctuaire-admin__metrics-alert">
+                <div className="sanctuaire-admin__metrics-alert__header">
+                  <h3>
+                    ⚠️ {metrics.totalPending} réservation(s) non validée(s) — Action requise ASAP
+                  </h3>
+                  <span className="alert-total">
+                    Chiffre d'affaires potentiel en attente : {metrics.pendingTotalPotential.toLocaleString('fr-FR')} FCFA
+                  </span>
+                </div>
+
+                <div className="sanctuaire-admin__metrics-alert__list">
+                  {metrics.pendingList.map((res) => (
+                    <div key={res._id} className="sanctuaire-admin__metrics-alert__item">
+                      <div className="item-info">
+                        <span className="item-name">
+                          👤 {res.names} {res.community && res.community !== '##NOT_APPLICABLE##' ? `(${res.community})` : ''}
+                        </span>
+                        <span className="item-meta">
+                          📅 Arrivée le {moment(res.from).format('DD/MM/YYYY')} • 📞 {res.phone_number} • 👥 {res.participants} pers.
+                        </span>
+                      </div>
+                      <div className="item-actions">
+                        <span className="item-amount">
+                          {(parseInt(res.montant_total, 10) || 0).toLocaleString('fr-FR')} FCFA
+                        </span>
+                        <Button
+                          type="primary"
+                          size="small"
+                          icon={<CheckCircleOutlined />}
+                          style={{ background: '#22c55e', borderColor: '#22c55e' }}
+                          onClick={() => handleReservationValidation(res)}
+                        >
+                          Valider ASAP
+                        </Button>
                       </div>
                     </div>
-                  </div>
-                ));
-            })()}
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </Spin>
-      </div>
+
+          <div className="sanctuaire-admin__header">
+            <div className="sanctuaire-admin__info-list">
+              <p className="sanctuaire-admin__info-list-title">Ce filtre s'applique sur les propriétés suivantes:</p>
+              <ul>
+                <li>La communauté</li>
+                <li>Le nom</li>
+                <li>L'email</li>
+                <li>Le numéro de téléphone</li>
+              </ul>
+            </div>
+            <Space size="large" className="sanctuaire-admin__controls">
+              <Search
+                placeholder="Rechercher..."
+                allowClear
+                onSearch={setSearchText}
+                className="sanctuaire-admin__search"
+              />
+              <RangePicker
+                onChange={handleDateRangeChange}
+                format="DD/MM/YYYY"
+                className="sanctuaire-admin__datepicker"
+                placeholder={['Date début', 'Date fin']}
+                allowClear={true}
+                showTime={false}
+              />
+              <Button
+                type={showArchived ? 'primary' : 'default'}
+                onClick={() => setShowArchived(!showArchived)}
+              >
+                {showArchived ? 'Voir réservations actives' : 'Voir archives'}
+              </Button>
+            </Space>
+          </div>
+
+          <Table
+            columns={columns}
+            dataSource={filteredReservations}
+            rowKey="_id"
+            scroll={{ x: true }}
+            loading={loading}
+            className="sanctuaire-admin__table"
+            onRow={(record) => ({
+              onClick: () => {
+                setEditingReservation(record)
+                setIsDetailsModalVisible(true)
+              }
+            })}
+          />
+
+          {/* Nouveau bloc : Communautés & Groupes Connus */}
+          <div className="sanctuaire-admin__knownCommunities">
+            <h2 className="sanctuaire-admin__section-title">👥 Communautés & Responsables Identifiés</h2>
+            <Spin spinning={loading} tip="Chargement des communautés...">
+              <div className="sanctuaire-admin__communities-grid">
+                {(() => {
+                  const communitiesMap = {};
+                  reservations.forEach(res => {
+                    const name = (!res.community || res.community === '##NOT_APPLICABLE##') ? res.names : res.community;
+                    if (!communitiesMap[name]) {
+                      communitiesMap[name] = {
+                        name,
+                        phone: res.phone_number,
+                        email: res.email,
+                        count: 0
+                      };
+                    }
+                    communitiesMap[name].count += 1;
+                  });
+
+                  return Object.values(communitiesMap)
+                    .sort((a, b) => b.count - a.count)
+                    .map((comm, index) => (
+                      <div key={index} className="community-card">
+                        <div className="community-card__badge">{comm.count} séjour{comm.count > 1 ? 's' : ''}</div>
+                        <h3 className="community-card__name">{comm.name}</h3>
+                        <div className="community-card__info">
+                          <a href={`tel:${comm.phone}`} className="community-card__link community-card__link--tel">
+                            📞 {comm.phone}
+                          </a>
+                          <div className="community-card__email">
+                            {comm.email && comm.email !== 'a@b.c' ? (
+                              <a href={`mailto:${comm.email}`} className="community-card__link">
+                                ✉️ {comm.email}
+                              </a>
+                            ) : (
+                              <span className="community-card__na">✉️ Email : N.A</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ));
+                })()}
+              </div>
+            </Spin>
+          </div>
+        </>
+      )}
 
       {/* Modal de détails */}
       <Modal
@@ -865,6 +1065,14 @@ export default function ReservationManager() {
       >
         <p>Êtes-vous sûr de vouloir supprimer cette réservation ? Cette action est irréversible.</p>
       </Modal>
+
+      {/* Modal de dictée vocale IA pour Réservations */}
+      <VoiceDictationModal
+        open={isVoiceModalVisible}
+        onCancel={() => setIsVoiceModalVisible(false)}
+        onParsed={handleVoiceParsedForReservation}
+        mode="reservation"
+      />
     </div>
   )
 }

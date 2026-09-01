@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import HowTo from './components/HowTo'
-
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState(null)
@@ -33,7 +31,6 @@ export default function AdminDashboard() {
 
     return (
         <div className="admin-dashboard">
-            <HowTo />
 
             {loading ? (
                 <div className="admin-loading">

@@ -17,9 +17,11 @@ import FieldsetInfos from "./FieldsetInfos"
 import FieldsetMeal from "./FieldsetMeal"
 import FieldsetPayment from "./FieldsetPayment"
 import ValidationSection from "./ValidationSection"
+import VoiceReservationSection from "./VoiceReservationSection"
 
 export default function ReserveForm() { 
 
+  const [formMode, setFormMode] = useState('classic'); // 'classic' | 'audio'
   const [isFormValidated, setIsFormValidated] = useState(false);
   const [reservationData, setReservationData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -541,13 +543,65 @@ export default function ReserveForm() {
       )}
       <Intro {...{sommaire,titreH3}} />
 
+      {/* BOUTONS SWITCHER MODE FORMULAIRE CLASSIC vs AUDIO VOCAL */}
+      <div className="mode-switcher-bar" style={{ display: 'flex', justifyContent: 'center', gap: 12, margin: '20px 0 30px 0' }}>
+        <button
+          type="button"
+          className={`mode-switch-btn ${formMode === 'classic' ? 'mode-switch-btn--active' : ''}`}
+          onClick={() => setFormMode('classic')}
+          style={{
+            padding: '12px 24px',
+            borderRadius: 50,
+            border: '2px solid #2563eb',
+            background: formMode === 'classic' ? '#2563eb' : '#ffffff',
+            color: formMode === 'classic' ? '#ffffff' : '#2563eb',
+            fontWeight: 800,
+            fontSize: '0.95rem',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: formMode === 'classic' ? '0 6px 18px rgba(37,99,235,0.3)' : 'none'
+          }}
+        >
+          📝 Formulaire Classique
+        </button>
+
+        <button
+          type="button"
+          className={`mode-switch-btn ${formMode === 'audio' ? 'mode-switch-btn--active' : ''}`}
+          onClick={() => setFormMode('audio')}
+          style={{
+            padding: '12px 24px',
+            borderRadius: 50,
+            border: '2px solid #2563eb',
+            background: formMode === 'audio' ? 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)' : '#ffffff',
+            color: formMode === 'audio' ? '#ffffff' : '#2563eb',
+            fontWeight: 800,
+            fontSize: '0.95rem',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: formMode === 'audio' ? '0 6px 18px rgba(37,99,235,0.3)' : 'none'
+          }}
+        >
+          🎙️ Mode Réservation Vocale (Guidée IA)
+        </button>
+      </div>
+
+      {formMode === 'audio' && !isFormValidated && (
+        <VoiceReservationSection 
+          onVoiceSuccess={(data) => {
+            setReservationData(data);
+            setIsFormValidated(true);
+          }}
+        />
+      )}
+
       {isSubmitting && (
         <div className="overlay">
           <div className="spinner"></div>
         </div>
       )}
 
-      {!isFormValidated && (
+      {!isFormValidated && formMode === 'classic' && (
         <>
 
           <MobileChoices {...{onClickMobileChoices,isActive,fieldsetsValidation}} />
