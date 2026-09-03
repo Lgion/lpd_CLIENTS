@@ -1,4 +1,6 @@
-%addToCart{
+@import "./oc_bem_aiGenerationModal";
+
+%addToCart {
     // width: 100px;
     // height:40px;
     background: url(../img/addToCart.png) center center no-repeat;
@@ -9,7 +11,10 @@
 %modal {
     z-index: 100;
     position: fixed;
-    top: 0em;right: 0em;bottom: 0em;left: 0em;
+    top: 0em;
+    right: 0em;
+    bottom: 0em;
+    left: 0em;
     background: rgba(10, 10, 10, .5);
 
     &.active {
@@ -27,10 +32,15 @@
         // right: 1.5em;
     }
 
-    >div{background:whitesmoke;}
+    >div {
+        background: whitesmoke;
+    }
 
     >.modal___header {
-        border-radius: 10px 10px 0 0;overflow: hidden;height:10%;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        height: 10%;
+
         >figcaption {
             display: flex;
             align-items: center;
@@ -41,7 +51,9 @@
     }
 
     >.modal___footer {
-        border-radius: 0 0 10px 10px;overflow: hidden;height:10%;
+        border-radius: 0 0 10px 10px;
+        overflow: hidden;
+        height: 10%;
         display: flex;
         justify-content: center;
         gap: 1em;

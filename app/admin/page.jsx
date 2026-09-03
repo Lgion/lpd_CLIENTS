@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import PageEditor from './components/PageEditor'
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState(null)
@@ -428,6 +429,10 @@ export default function AdminDashboard() {
                         </div>
                     </section>
                 )}
+
+                <section className="admin-dashboard__section admin-dashboard__section--full" style={{ marginTop: '30px' }}>
+                    <PageEditor />
+                </section>
                 </div>
                 </>
             )}

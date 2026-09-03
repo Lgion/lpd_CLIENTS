@@ -1,8 +1,6 @@
-// import fs from 'fs'
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
-// const Eleve = require('../../../../../pages/api/_/models/Eleve')
 
 const postsDirectory = join(process.cwd(), '_posts')
 
@@ -47,7 +45,6 @@ export function getAllPosts(fields: string[] = [
   'coverImage',
   'excerpt',
   'category',
-  'youtubeLinks',
 ]) {
   const slugs = getPostSlugs()
   const posts = slugs

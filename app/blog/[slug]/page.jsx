@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import ReactMarkdown from 'react-markdown'
+import Carousel from '../../_/Carousel'
 
 export default function BlogPost() {
   const params = useParams()
@@ -80,6 +81,8 @@ export default function BlogPost() {
           <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
       </div>
+
+      <Carousel page={`blog_${params.slug}`} titre="Galerie de l'article" />
       
       <div className="blog-post-footer">
         <a href="/blog" className="back-to-blog">

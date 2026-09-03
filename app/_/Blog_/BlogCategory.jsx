@@ -1,18 +1,17 @@
-"use client";
 import Head from 'next/head'
 import BlogPost from './BlogPost'
 import { useEffect, useState, useCallback, useMemo } from 'react';
 
 const BLOG_NAME = "BOLOBI"
 
-export default function BlogCategory({ categoryPosts, headings, className = "", onEdit, onDelete, isAdmin, filterCategory }) {
+export default function BlogCategory({categoryPosts, headings, className="", onEdit, onDelete, isAdmin}) {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchPosts = useCallback(async () => {
     setIsLoading(true);
     const storedPosts = localStorage.getItem('blogPosts');
-
+    
     console.log("Stored posts from localStorage:", storedPosts);
 
     if (storedPosts) {
@@ -33,7 +32,7 @@ export default function BlogCategory({ categoryPosts, headings, className = "", 
       const response = await fetch('/api/posts');
       const data = await response.json();
       console.log("Fetched posts from API:", data);
-
+      
       if (Array.isArray(data)) {
         setPosts(data);
         localStorage.setItem('blogPosts', JSON.stringify(data));
@@ -56,58 +55,17 @@ export default function BlogCategory({ categoryPosts, headings, className = "", 
     }
   }, [categoryPosts, fetchPosts]);
 
-  const filteredPosts = useMemo(() => {
-    console.log("--- BLOG FILTERING DEBUG ---");
-    console.log("Total posts available:", posts.length);
-    console.log("Requested filter category:", filterCategory);
-
-    if (!filterCategory) {
-        console.log("No filter category provided, returning all posts.");
-        return posts;
-    }
-    
-    const normalizeStr = (str) => 
-      str ? str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim() : "";
-      
-    const filter = normalizeStr(filterCategory);
-    console.log("Normalized filter string:", `"${filter}"`);
-    
-    const result = posts.filter((post, index) => {
-      const postCat = normalizeStr(post.category);
-      const postCats = Array.isArray(post.categories) ? post.categories.map(normalizeStr) : [];
-      const postTitle = post.title ? normalizeStr(post.title) : "";
-      
-      const isMatch = postCat === filter || postCats.includes(filter) || postTitle.includes(filter);
-      
-      if (index < 10) {
-          console.log(`Checking post "${post.title}":`, {
-              category: post.category,
-              normalizedCat: postCat,
-              isMatch: isMatch
-          });
-      }
-
-      return isMatch;
-    });
-
-    console.log("Number of posts after filtering:", result.length);
-    console.log("--- END BLOG DEBUG ---");
-    return result;
-  }, [posts, filterCategory]);
-
   return (
     <>
-      <hr />
       <div className="blog_category_header">
-        <h2>BLOG: </h2>
         <h3>{headings.h3}</h3>
         <p>{headings.subtitle}</p>
       </div>
       <div className="blog_category_posts blog-grid">
         {isLoading ? (
           <div>Chargement...</div>
-        ) : filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
+        ) : posts.length > 0 ? (
+          posts.map((post) => (
             <div key={post.slug} className="blog-post-container">
               <BlogPost
                 title={post.title}
@@ -135,7 +93,7 @@ export default function BlogCategory({ categoryPosts, headings, className = "", 
             </div>
           ))
         ) : (
-          <div>Aucun article de blog disponible</div>
+          <div>Aucun article disponible</div>
         )}
       </div>
     </>
