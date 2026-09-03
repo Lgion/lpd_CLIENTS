@@ -1,9 +1,9 @@
 import dbConnect from './lib/dbConnect'
 const mongoose = require('mongoose')
 const {getStudents,getTeachers} = require("./_/controllers/members")
-const EleveModel = require('./_/models/old/Eleve')
-const ProfModel = require('./_/models/old/Teacher')
-const ClasseModel = require('./_/models/old/Classe')
+const EleveModel = require('./_/models/Eleve')
+const ProfModel = require('./_/models/Teacher')
+const ClasseModel = require('./_/models/Classe')
 
 
 export default async function handler(req, res, next) {

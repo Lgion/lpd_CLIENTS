@@ -8,7 +8,7 @@ import "../styles/cartBestSellers.css"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { AuthContextProvider } from '../stores/authContext_.js'
+import { AuthContextProvider } from '../stores/authContext.js'
 import { FormContextProvider } from '../stores/formContext.js'
 
 // import Nav from '../components/Nav'

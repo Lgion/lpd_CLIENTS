@@ -5,7 +5,7 @@ import BlogCategory from '../_/Blog/BlogCategory'
 import BlogPost from '../_/Blog/BlogPost'
 import Link from 'next/link'
 import AiGenerationModal from './AiGenerationModal'
-import AuthContext from "../../stores/authContext_.js"
+import AuthContext from "../../stores/authContext.js"
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([])

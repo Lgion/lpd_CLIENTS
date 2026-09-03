@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Link from "next/link"
 import Image from "next/image"
-import AuthContext from "../stores/authContext_.js"
+import AuthContext from "../stores/authContext.js"
 
 // import img1 from "./../public/img/ecommerce-catholique-saint-esprit-Dieu-amour.webp"
 

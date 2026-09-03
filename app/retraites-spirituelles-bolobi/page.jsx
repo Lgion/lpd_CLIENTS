@@ -5,8 +5,7 @@ import AuthContext from "../../stores/authContext.js"
 import Article from "./_/Article.jsx"
 import Carousel from '../_/Carousel'
 import LocateBolobi from "./_/LocateBolobi.jsx"
-// import ReserveForm from "./_/ReserveForm/index.jsx"
-import ReserveForm_ from "./_/ReserveForm_copy/index.jsx"
+import ReserveForm from "./_/ReserveForm/index.jsx"
 import BlogCategory from '../_/Blog/BlogCategory'
 import BtnCTA from "./_/components/BtnCTA.jsx"
 
@@ -17,8 +16,7 @@ const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
         <Article />
         <Carousel page="sanctuaire" diapos={diapos} titre={"LE SANCTUAIRE DE BOLOBI EN IMAGES"} icon="2" sommaire="La grotte Mariale de notre dame du Rosaire de Bolobi" />
         <LocateBolobi />
-        {/* <ReserveForm /> */}
-        <ReserveForm_ />
+        <ReserveForm />
         <BtnCTA />
         {/* <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} /> */}
     </main>

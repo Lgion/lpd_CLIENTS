@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react'
 import Link from "next/link";
-import AuthContext from "../../stores/authContext_.js"
+import AuthContext from "../../stores/authContext.js"
 import { usePathname } from 'next/navigation';
 
 export default function MenuMain() {

@@ -3,7 +3,7 @@
 import { useEffect, useContext } from 'react'
 import { usePathname } from 'next/navigation'
 
-import AuthContext from "../stores/authContext_.js"
+import AuthContext from "../stores/authContext.js"
 import Header from "./Header";
 import Nav from "./Nav";
 

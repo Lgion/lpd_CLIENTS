@@ -10,7 +10,7 @@ import Hgroup from "./_/Hgroup.jsx"
 import SNS from "./_/SNS.jsx"
 import Playbox from "./_/Playbox.jsx"
 import MenuSecondary from "./_/MenuSecondary.jsx"
-import AuthContext from "../stores/authContext_.js"
+import AuthContext from "../stores/authContext.js"
 
 export default function Header() {
 

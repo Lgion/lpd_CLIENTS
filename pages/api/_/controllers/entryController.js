@@ -1,6 +1,5 @@
 const fs = require('fs')
     , path = require('path')
-    , multer = require('../middlewares/multer')
     , mongoose = require('mongoose')
 // , { connectToDatabase } = require("../mongodb")
 // , connectToDatabase = require("../mongodb_")

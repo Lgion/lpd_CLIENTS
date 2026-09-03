@@ -10,7 +10,7 @@ import { useGetEleves } from "./hooks.js"
 // import styled,{createGlobalStyle} from 'styled-components'
 import { ecole_classes, ecole_profs, ecole_eleves } from "../assets/classes.js"
 // import EditMongoForm from "../app/admin/school/EditMongoForm.jsx"
-import AuthContext from "./authContext_.js"
+import AuthContext from "./authContext.js"
 
 const AdminContext = createContext({
     // ok: null,

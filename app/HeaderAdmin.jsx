@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from "next/link";
-import AdminContext from "../stores/adminContext_.js"
+import AdminContext from "../stores/adminContext.js"
 
 export default function HeaderAdmin() {
 

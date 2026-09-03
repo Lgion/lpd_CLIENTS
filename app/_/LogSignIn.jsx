@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import Link from "next/link";
 import { SignInButton, SignUpButton, UserProfile, UserButton, useAuth, isLoaded, useUser, SignedIn, SignedOut, useClerk } from "@clerk/nextjs"
 
-import AuthContext from "../../stores/authContext_.js"
+import AuthContext from "../../stores/authContext.js"
 
 export default function LogSignIn() {
 

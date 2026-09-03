@@ -3,7 +3,7 @@
 import React, { useState, useContext, useEffect, memo, useCallback, useMemo } from "react";
 import Image from "next/image"
 import Slider from "react-slick";
-import AuthContext from "../../stores/authContext_.js"
+import AuthContext from "../../stores/authContext.js"
 // import EditMongoForm from '../admin/school/EditMongoForm'
 import { createPortal } from "react-dom"
 
