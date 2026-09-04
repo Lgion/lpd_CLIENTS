@@ -1,4 +1,5 @@
 import dbConnect from '../lib/dbConnect';
+import requireAdminAuth from '../lib/requireAdmin';
 import modelReservation from '../_/models/Reservation';
 import modelInventaire from '../_/models/Inventaire';
 
@@ -7,6 +8,9 @@ export default async function handler(req, res) {
     res.setHeader('Allow', ['GET']);
     return res.status(405).json({ message: `Méthode ${req.method} non autorisée` });
   }
+
+  const isAuth = await requireAdminAuth(req, res);
+  if (!isAuth) return;
 
   await dbConnect();
 

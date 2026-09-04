@@ -231,9 +231,8 @@ export default async function handler(req, res) {
           const newReservation = await modelReservation.create(req.body.reservation);
           console.log('API - POST - Réservation créée avec succès:', newReservation);
           
-          return res.status(200).json({blablabla: "msg temporaire"});
           // Envoyer l'email de confirmation
-          const tmp = await sendConfirmationEmail({
+          await sendConfirmationEmail({
             ...newReservation.toObject(),
             email: req.body.reservation.email
           });
