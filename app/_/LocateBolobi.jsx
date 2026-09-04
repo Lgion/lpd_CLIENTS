@@ -12,7 +12,7 @@ import Event from './Locate/Event.js'
 // import Magnifier from './Locate/Magnifier.js'
 import NdrToggle from './Locate/NdrToggle.jsx'
 import NdrImage from './Locate/NdrImage.jsx'
-import Gmap from '../../_/Gmap.jsx'
+import Gmap from './Gmap.jsx'
 {/*
 import L from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../../../assets/scss/index_ai_reserveForm.scss';
-import Intro from '../ReserveForm/Intro';
+import '../../../assets/scss/index_ai_reserveForm.scss';
+import Intro from './Intro';
 import ValidationSection from './ValidationSection'; // Importer ValidationSection
 import ReservationCalendar from './ReservationCalendar';
 import AdminReservationToolbarModal from './AdminReservationToolbarModal';
-import VoiceReservationSection from '../../../sanctuaire-rosaire-bolobi-adzope/_/ReserveForm/VoiceReservationSection';
+import VoiceReservationSection from './VoiceReservationSection';
 
 const initialState = {
   names: '',
@@ -34,7 +34,7 @@ const typeOptions = [
 ];
 
 const titreH3 = "RÉSERVER UN SÉJOUR SUR LE CALENDRIER DU SANCTUAIRE (avance sur paiement demandé): "
-, sommaire = "RÉSERVER DATE"
+  , sommaire = "RÉSERVER DATE"
 
 export default function ReserveForm() {
   const [formMode, setFormMode] = useState('classic'); // 'classic' | 'audio'
@@ -128,8 +128,8 @@ export default function ReserveForm() {
     setForm(prev => {
       const newTotal = nights > 0 ? montant : '';
       const suggestedAdvance = newTotal ? Math.ceil((newTotal * 0.2) / 1000) * 1000 : '';
-      return { 
-        ...prev, 
+      return {
+        ...prev,
         montant_total: newTotal,
         montant_avance: prev.montant_avance || suggestedAdvance
       };
@@ -173,7 +173,7 @@ export default function ReserveForm() {
     try {
       // Validation rapide côté client
       const isDateToRequired = form.type_reservation !== 'pray' && form.type_reservation !== 'celebration';
-      
+
       // Debug: log form values to identify missing fields
       console.log('Form validation - Current form values:', {
         names: form.names,
@@ -186,7 +186,7 @@ export default function ReserveForm() {
         type_reservation: form.type_reservation,
         isDateToRequired
       });
-      
+
       // Check each required field individually for better error reporting
       const missingFields = [];
       if (!form.names) missingFields.push('Nom complet');
@@ -196,7 +196,7 @@ export default function ReserveForm() {
       if (!form.participants) missingFields.push('Nombre de participants');
       if (!form.montant_total) missingFields.push('Montant total');
       if (!form.montant_avance) missingFields.push('Montant de l\'avance');
-      
+
       if (missingFields.length > 0) {
         console.log('Missing required fields:', missingFields);
         setError(`Champs obligatoires manquants: ${missingFields.join(', ')}`);
@@ -236,7 +236,7 @@ export default function ReserveForm() {
   };
 
   return (<>
-    <Intro {...{sommaire,titreH3}} />
+    <Intro {...{ sommaire, titreH3 }} />
 
     {/* BOUTONS SWITCHER MODE FORMULAIRE CLASSIC vs AUDIO VOCAL */}
     <div className="mode-switcher-bar" style={{ display: 'flex', justifyContent: 'center', gap: 16, margin: '24px 0 32px 0', flexWrap: 'wrap' }}>
@@ -282,7 +282,7 @@ export default function ReserveForm() {
     </div>
 
     {formMode === 'audio' && (
-      <VoiceReservationSection 
+      <VoiceReservationSection
         onVoiceSuccess={(data) => {
           setReservationData(data);
         }}
@@ -296,183 +296,183 @@ export default function ReserveForm() {
           onRefresh={fetchAllReservations}
         />
         <h2 className="ai-reserve-form__title">Réserver une retraite spirituelle</h2>
-      <form className="ai-reserve-form" onSubmit={handleSubmit}>
-        <div className="ai-reserve-form__row">
-          <label>Nom complet *</label>
-          <input name="names" value={form.names} onChange={handleChange} required placeholder="Votre nom" />
-        </div>
-        <div className="ai-reserve-form__row">
-          <label>Communauté</label>
-          <input name="community" value={form.community} onChange={handleChange} placeholder="(Optionnel) Ex: Paroisse, groupe, mouvement..." />
-        </div>
-        <div className="ai-reserve-form__row">
-          <label>Téléphone *</label>
-          <input name="phone_number" value={form.phone_number} onChange={handleChange} required placeholder="Votre numéro" />
-        </div>
-        <div className="ai-reserve-form__row">
-          <label>Email</label>
-          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Votre email" />
-        </div>
-        <div className="ai-reserve-form__row">
-          <label>Type de réservation *</label>
-          <select name="type_reservation" value={form.type_reservation} onChange={handleChange} required>
-            <option value={null}>---Choisir un type de réservation---</option>
-            {typeOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
-          </select>
-        </div>
-        <div className="ai-reserve-form__row ai-reserve-form__row--dates">
-          <div>
-            <label>Date {form.type_reservation === 'pray' ? 'de la prière' : form.type_reservation === 'celebration' ? 'de la célébration' : "d'arrivée"} *</label>
-            <input name="from" type="date" value={form.from} onChange={handleChange} required />
-          </div>
-          {(form.type_reservation !== 'pray' && form.type_reservation !== 'celebration') && (
-          <div>
-            <label>Date de départ *</label>
-            <input name="to" type="date" value={form.to} onChange={handleChange} required style={!form.to ? {background:'#ffeaea',borderColor:'#d32f2f'} : {}} />
-          </div>
-          )}
-        </div>
-        <ReservationCalendar
-          reservations={allReservations}
-          selectedFrom={form.from}
-          selectedTo={form.to}
-          onSelectDates={handleSelectCalendarDates}
-          typeReservation={form.type_reservation}
-        />
-        <div className="ai-reserve-form__row">
-          <label>Nombre de participants *</label>
-          <input name="participants" type="number" min="1" value={form.participants} onChange={handleChange} required />
-        </div>
-        {!(form.type_reservation === 'pray' || form.type_reservation === 'celebration') && (
-        <div className="ai-reserve-form__row">
-          <label>Chambres individuelles</label>
-          <input name="individual_room_participants" type="number" min="0" value={form.individual_room_participants} onChange={handleChange} />
-        </div>
-        )}
-        {form.type_reservation !== 'pray' && (
-        <>
-        {/* Pour célébration et autres, repas possible sauf prière ponctuelle */}
-        <div className="ai-reserve-form__row ai-reserve-form__row--checkbox">
-          <label>
-            <input name="meal_included" type="checkbox" checked={form.meal_included} onChange={handleChange} />
-            Repas inclus
-          </label>
-        </div>
-        {form.meal_included && (
+        <form className="ai-reserve-form" onSubmit={handleSubmit}>
           <div className="ai-reserve-form__row">
-            <label>Plan de repas *</label>
-            <select name="meal_plan" value={form.meal_plan} onChange={handleChange} required
-              style={!form.meal_plan ? {background:'#ffeaea',borderColor:'#d32f2f'} : {}}>
-              <option value="">Choisir le plan</option>
-              <option value="1">1 repas + 1 petit déjeuner (2.000 FCFA/jour/pers.)</option>
-              <option value="2">2 repas + 1 petit déjeuner (3.000 FCFA/jour/pers.)</option>
+            <label>Nom complet *</label>
+            <input name="names" value={form.names} onChange={handleChange} required placeholder="Votre nom" />
+          </div>
+          <div className="ai-reserve-form__row">
+            <label>Communauté</label>
+            <input name="community" value={form.community} onChange={handleChange} placeholder="(Optionnel) Ex: Paroisse, groupe, mouvement..." />
+          </div>
+          <div className="ai-reserve-form__row">
+            <label>Téléphone *</label>
+            <input name="phone_number" value={form.phone_number} onChange={handleChange} required placeholder="Votre numéro" />
+          </div>
+          <div className="ai-reserve-form__row">
+            <label>Email</label>
+            <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Votre email" />
+          </div>
+          <div className="ai-reserve-form__row">
+            <label>Type de réservation *</label>
+            <select name="type_reservation" value={form.type_reservation} onChange={handleChange} required>
+              <option value={null}>---Choisir un type de réservation---</option>
+              {typeOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
             </select>
           </div>
-        )}
-        </>
-        )}
-        {/* Pour prière ponctuelle, pas de repas possible */}
-        <div className="ai-reserve-form__row">
-          <label>Montant total (FCFA) *</label>
-          <input name="montant_total" type="number" min="0" value={form.montant_total} readOnly tabIndex={-1} style={{ background: '#e9ecef', cursor: 'not-allowed' }} required />
-          <div className="ai-reserve-form__desc-montant" style={{fontSize:'.97em',color:'#555',marginTop:'0.2em'}}>
-            {(() => {
-              const fromDate = form.from ? new Date(form.from) : null;
-              const toDate = form.to ? new Date(form.to) : null;
-              let nights = 0;
-              if (fromDate && toDate) {
-                const diffTime = toDate.getTime() - fromDate.getTime();
-                nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                if (isNaN(nights) || nights <= 0) nights = 0;
-              }
-              const participants = parseInt(form.participants, 10) || 0;
-              const chambres = parseInt(form.individual_room_participants, 10) || 0;
-              const dortoirs = Math.max(participants - chambres, 0);
-              let details = [];
-              if (form.type_reservation === 'pray') {
-                if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants>1?'s':''} x 500 FCFA`);
-                return (
-                  <>
-                    <span>Prix unique : <b>500 FCFA/participant</b></span><br/>
-                    {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
-                  </>
-                );
-              }
-              if (form.type_reservation === 'celebration') {
-                if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants>1?'s':''} x 500 FCFA`);
-                if (form.meal_included && form.meal_plan && participants > 0) {
-                  const planTarif = form.meal_plan === '2' ? 3000 : 2000;
-                  const planLabel = form.meal_plan === '2' ? '2 repas + 1 petit déj.' : '1 repas + 1 petit déj.';
-                  details.push(`${participants * planTarif} FCFA, pour ${participants} pers. x (${planLabel})`);
-                }
-                return (
-                  <>
-                    <span>Prix unique : <b>500 FCFA/participant</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/pers.</b></> : null}</span><br/>
-                    {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
-                  </>
-                );
-              }
-              if (nights > 0) {
-                if (dortoirs > 0) details.push(`${dortoirs * nights * 3000} FCFA, pour ${dortoirs} pers. en dortoir x ${nights} nuit${nights>1?'s':''} x 3.000 FCFA`);
-                if (chambres > 0) details.push(`${chambres * nights * 10000} FCFA, pour ${chambres} chambre${chambres>1?'s':''} individuelle${chambres>1?'s':''} x ${nights} nuit${nights>1?'s':''} x 10.000 FCFA`);
-                if (form.meal_included && form.meal_plan && participants > 0) {
-                  const fullDays = Math.max(nights - 1, 0);
-                  const borderDaysCost = nights >= 1 ? 4000 : 0;
-                  const dailyRate = form.meal_plan === '2' ? 3000 : 2000;
-                  const planLabel = form.meal_plan === '2' ? '2 repas/j (3.000 FCFA)' : '1 repas/j (2.000 FCFA)';
-                  const mealTotal = (fullDays * dailyRate + borderDaysCost) * participants;
-                  details.push(`${mealTotal.toLocaleString()} FCFA, pour ${participants} pers. x (${fullDays}j. intermédiaires [${planLabel}] + 2j. bordure [1 repas/j = 2.000 FCFA/j = 4.000 FCFA total])`);
-                }
-              }
-              return (
-                <>
-                  <span>Nombre de nuits : <b>{nights}</b> | Dortoir : <b>3.000 FCFA/nuit</b> | Chambre individuelle : <b>10.000 FCFA/nuit</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/jour/pers.</b></> : null}</span><br/>
-                  {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
-                </>
-              );
-            })()}
-          </div>
-        </div>
-        <div className="ai-reserve-form__row">
-          <label>Montant de l'avance (FCFA, arrondi au 1 000 FCFA près) *</label>
-          <input 
-            name="montant_avance" 
-            type="number" 
-            min="0" 
-            step="1000"
-            value={form.montant_avance} 
-            onChange={handleChange} 
-            onBlur={(e) => {
-              const val = parseInt(e.target.value, 10);
-              if (val && val % 1000 !== 0) {
-                const rounded = Math.ceil(val / 1000) * 1000;
-                setForm(prev => ({ ...prev, montant_avance: rounded }));
-              }
-            }}
-            placeholder={form.montant_total ? `Ex: ${Math.ceil((form.montant_total*0.2)/1000)*1000} FCFA (20% arrondi)` : ''} 
-            required 
-          />
-        </div>
-        <div className="ai-reserve-form__row">
-          <label>Message</label>
-          <textarea name="message" value={form.message} onChange={handleChange} placeholder="Votre message (optionnel)" />
-        </div>
-        {error && <div className="ai-reserve-form__error">{error}</div>}
-        {success && (
-          <>
-            <div className="ai-reserve-form__success">{success}</div>
-            {reservationData && (
-              <ValidationSection reservationData={reservationData} />
+          <div className="ai-reserve-form__row ai-reserve-form__row--dates">
+            <div>
+              <label>Date {form.type_reservation === 'pray' ? 'de la prière' : form.type_reservation === 'celebration' ? 'de la célébration' : "d'arrivée"} *</label>
+              <input name="from" type="date" value={form.from} onChange={handleChange} required />
+            </div>
+            {(form.type_reservation !== 'pray' && form.type_reservation !== 'celebration') && (
+              <div>
+                <label>Date de départ *</label>
+                <input name="to" type="date" value={form.to} onChange={handleChange} required style={!form.to ? { background: '#ffeaea', borderColor: '#d32f2f' } : {}} />
+              </div>
             )}
-          </>
-        )}
-        {!success && (
-          <button className="ai-reserve-form__submit" type="submit" disabled={loading}>
-            {loading ? 'Envoi en cours...' : 'Envoyer la réservation'}
-          </button>
-        )}
-      </form>
-    </div>
+          </div>
+          <ReservationCalendar
+            reservations={allReservations}
+            selectedFrom={form.from}
+            selectedTo={form.to}
+            onSelectDates={handleSelectCalendarDates}
+            typeReservation={form.type_reservation}
+          />
+          <div className="ai-reserve-form__row">
+            <label>Nombre de participants *</label>
+            <input name="participants" type="number" min="1" value={form.participants} onChange={handleChange} required />
+          </div>
+          {!(form.type_reservation === 'pray' || form.type_reservation === 'celebration') && (
+            <div className="ai-reserve-form__row">
+              <label>Chambres individuelles</label>
+              <input name="individual_room_participants" type="number" min="0" value={form.individual_room_participants} onChange={handleChange} />
+            </div>
+          )}
+          {form.type_reservation !== 'pray' && (
+            <>
+              {/* Pour célébration et autres, repas possible sauf prière ponctuelle */}
+              <div className="ai-reserve-form__row ai-reserve-form__row--checkbox">
+                <label>
+                  <input name="meal_included" type="checkbox" checked={form.meal_included} onChange={handleChange} />
+                  Repas inclus
+                </label>
+              </div>
+              {form.meal_included && (
+                <div className="ai-reserve-form__row">
+                  <label>Plan de repas *</label>
+                  <select name="meal_plan" value={form.meal_plan} onChange={handleChange} required
+                    style={!form.meal_plan ? { background: '#ffeaea', borderColor: '#d32f2f' } : {}}>
+                    <option value="">Choisir le plan</option>
+                    <option value="1">1 repas + 1 petit déjeuner (2.000 FCFA/jour/pers.)</option>
+                    <option value="2">2 repas + 1 petit déjeuner (3.000 FCFA/jour/pers.)</option>
+                  </select>
+                </div>
+              )}
+            </>
+          )}
+          {/* Pour prière ponctuelle, pas de repas possible */}
+          <div className="ai-reserve-form__row">
+            <label>Montant total (FCFA) *</label>
+            <input name="montant_total" type="number" min="0" value={form.montant_total} readOnly tabIndex={-1} style={{ background: '#e9ecef', cursor: 'not-allowed' }} required />
+            <div className="ai-reserve-form__desc-montant" style={{ fontSize: '.97em', color: '#555', marginTop: '0.2em' }}>
+              {(() => {
+                const fromDate = form.from ? new Date(form.from) : null;
+                const toDate = form.to ? new Date(form.to) : null;
+                let nights = 0;
+                if (fromDate && toDate) {
+                  const diffTime = toDate.getTime() - fromDate.getTime();
+                  nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                  if (isNaN(nights) || nights <= 0) nights = 0;
+                }
+                const participants = parseInt(form.participants, 10) || 0;
+                const chambres = parseInt(form.individual_room_participants, 10) || 0;
+                const dortoirs = Math.max(participants - chambres, 0);
+                let details = [];
+                if (form.type_reservation === 'pray') {
+                  if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants > 1 ? 's' : ''} x 500 FCFA`);
+                  return (
+                    <>
+                      <span>Prix unique : <b>500 FCFA/participant</b></span><br />
+                      {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
+                    </>
+                  );
+                }
+                if (form.type_reservation === 'celebration') {
+                  if (participants > 0) details.push(`${participants * 500} FCFA, pour ${participants} participant${participants > 1 ? 's' : ''} x 500 FCFA`);
+                  if (form.meal_included && form.meal_plan && participants > 0) {
+                    const planTarif = form.meal_plan === '2' ? 3000 : 2000;
+                    const planLabel = form.meal_plan === '2' ? '2 repas + 1 petit déj.' : '1 repas + 1 petit déj.';
+                    details.push(`${participants * planTarif} FCFA, pour ${participants} pers. x (${planLabel})`);
+                  }
+                  return (
+                    <>
+                      <span>Prix unique : <b>500 FCFA/participant</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/pers.</b></> : null}</span><br />
+                      {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
+                    </>
+                  );
+                }
+                if (nights > 0) {
+                  if (dortoirs > 0) details.push(`${dortoirs * nights * 3000} FCFA, pour ${dortoirs} pers. en dortoir x ${nights} nuit${nights > 1 ? 's' : ''} x 3.000 FCFA`);
+                  if (chambres > 0) details.push(`${chambres * nights * 10000} FCFA, pour ${chambres} chambre${chambres > 1 ? 's' : ''} individuelle${chambres > 1 ? 's' : ''} x ${nights} nuit${nights > 1 ? 's' : ''} x 10.000 FCFA`);
+                  if (form.meal_included && form.meal_plan && participants > 0) {
+                    const fullDays = Math.max(nights - 1, 0);
+                    const borderDaysCost = nights >= 1 ? 4000 : 0;
+                    const dailyRate = form.meal_plan === '2' ? 3000 : 2000;
+                    const planLabel = form.meal_plan === '2' ? '2 repas/j (3.000 FCFA)' : '1 repas/j (2.000 FCFA)';
+                    const mealTotal = (fullDays * dailyRate + borderDaysCost) * participants;
+                    details.push(`${mealTotal.toLocaleString()} FCFA, pour ${participants} pers. x (${fullDays}j. intermédiaires [${planLabel}] + 2j. bordure [1 repas/j = 2.000 FCFA/j = 4.000 FCFA total])`);
+                  }
+                }
+                return (
+                  <>
+                    <span>Nombre de nuits : <b>{nights}</b> | Dortoir : <b>3.000 FCFA/nuit</b> | Chambre individuelle : <b>10.000 FCFA/nuit</b>{form.meal_included && form.meal_plan ? <> | Repas : <b>{form.meal_plan === '2' ? '3.000' : '2.000'} FCFA/jour/pers.</b></> : null}</span><br />
+                    {details.length > 0 && <div>Détail : {details.map((d, i) => <div key={i}>{d}</div>)}</div>}
+                  </>
+                );
+              })()}
+            </div>
+          </div>
+          <div className="ai-reserve-form__row">
+            <label>Montant de l'avance (FCFA, arrondi au 1 000 FCFA près) *</label>
+            <input
+              name="montant_avance"
+              type="number"
+              min="0"
+              step="1000"
+              value={form.montant_avance}
+              onChange={handleChange}
+              onBlur={(e) => {
+                const val = parseInt(e.target.value, 10);
+                if (val && val % 1000 !== 0) {
+                  const rounded = Math.ceil(val / 1000) * 1000;
+                  setForm(prev => ({ ...prev, montant_avance: rounded }));
+                }
+              }}
+              placeholder={form.montant_total ? `Ex: ${Math.ceil((form.montant_total * 0.2) / 1000) * 1000} FCFA (20% arrondi)` : ''}
+              required
+            />
+          </div>
+          <div className="ai-reserve-form__row">
+            <label>Message</label>
+            <textarea name="message" value={form.message} onChange={handleChange} placeholder="Votre message (optionnel)" />
+          </div>
+          {error && <div className="ai-reserve-form__error">{error}</div>}
+          {success && (
+            <>
+              <div className="ai-reserve-form__success">{success}</div>
+              {reservationData && (
+                <ValidationSection reservationData={reservationData} />
+              )}
+            </>
+          )}
+          {!success && (
+            <button className="ai-reserve-form__submit" type="submit" disabled={loading}>
+              {loading ? 'Envoi en cours...' : 'Envoyer la réservation'}
+            </button>
+          )}
+        </form>
+      </div>
     )}
   </>);
 }

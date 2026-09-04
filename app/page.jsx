@@ -2,12 +2,12 @@
 
 import { useContext, memo, useMemo } from 'react'
 import AuthContext from "../stores/authContext.js"
-import Article from "./retraites-spirituelles-bolobi/_/Article.jsx"
+import Article from "./_/Article.jsx"
 import Carousel from './_/Carousel.jsx'
-import LocateBolobi from "./retraites-spirituelles-bolobi/_/LocateBolobi.jsx"
-import ReserveForm from "./retraites-spirituelles-bolobi/_/ReserveForm/index.jsx"
+import LocateBolobi from "./_/LocateBolobi.jsx"
+import ReserveForm from "./_/ReserveForm/index.jsx"
 import BlogCategory from './_/Blog/BlogCategory.jsx'
-import BtnCTA from "./retraites-spirituelles-bolobi/_/components/BtnCTA.jsx"
+import BtnCTA from "./_/components/BtnCTA.jsx"
 
 
 
