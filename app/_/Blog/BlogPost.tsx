@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from 'next/link'
 import Avatar from './_/avatar'
-import CoverImage from './_/cover-image'
 import type Author from './_/interfaces/author'
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
   coverImage: string
   date: string
   excerpt: string
-  author: Author
+  author?: Author | string | any
   slug: string
   category?: string
 }
@@ -23,6 +22,15 @@ const BlogPost = ({
   slug,
   category,
 }: Props) => {
+  const authorName = typeof author === 'object' && author !== null
+    ? (author.name || 'Sanctuaire NDR')
+    : (typeof author === 'string' && author ? author : 'Sanctuaire NDR')
+
+  const authorPicture = typeof author === 'object' && author !== null
+    ? (author.picture || '/assets/img/logo.png')
+    : '/assets/img/logo.png'
+
+  const safeCoverImage = coverImage || '/assets/img/logo.png'
 
   return (
     <section className="ndrPosts">
@@ -41,8 +49,8 @@ const BlogPost = ({
       <Link as={`/posts/${slug}`} href="/posts/[slug]" className="post-link-container">
         <div className="post-image-wrapper">
           <Image
-            src={coverImage}
-            alt={title}
+            src={safeCoverImage}
+            alt={title || 'Article blog'}
             width={600}
             height={400}
             className="post-cover-image"
@@ -53,7 +61,7 @@ const BlogPost = ({
           <div className="postContent__inner">
             <p className="postContent__excerpt">{excerpt}</p>
             <div className="postContent__author">
-              <Avatar name={author.name} picture={author.picture} date={date} />
+              <Avatar name={authorName} picture={authorPicture} date={date} />
             </div>
           </div>
         </section>

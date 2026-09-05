@@ -946,7 +946,7 @@ body>div:has(.ant-modal-root) {
 .admin-dashboard {
     padding: 24px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 7em auto;
     z-index: 10000;
 
     &__header {
@@ -1058,6 +1058,10 @@ body>div:has(.ant-modal-root) {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         border: 1px solid #f0f0f0;
         overflow: hidden;
+
+        &--full {
+            grid-column: 1/-1;
+        }
 
         &-header {
             padding: 20px;
@@ -1729,18 +1733,36 @@ body>div:has(.ant-modal-root) {
         }
 
         &--blue {
-            &::before { background: #3b82f6; }
-            .kpi-icon { background: #eff6ff; color: #2563eb; }
+            &::before {
+                background: #3b82f6;
+            }
+
+            .kpi-icon {
+                background: #eff6ff;
+                color: #2563eb;
+            }
         }
 
         &--amber {
-            &::before { background: #f59e0b; }
-            .kpi-icon { background: #fffbeb; color: #d97706; }
+            &::before {
+                background: #f59e0b;
+            }
+
+            .kpi-icon {
+                background: #fffbeb;
+                color: #d97706;
+            }
         }
 
         &--emerald {
-            &::before { background: #10b981; }
-            .kpi-icon { background: #ecfdf5; color: #059669; }
+            &::before {
+                background: #10b981;
+            }
+
+            .kpi-icon {
+                background: #ecfdf5;
+                color: #059669;
+            }
         }
     }
 
@@ -1772,7 +1794,8 @@ body>div:has(.ant-modal-root) {
             border-color: #cbd5e1;
             font-size: 0.88rem;
 
-            &:hover, &:focus {
+            &:hover,
+            &:focus {
                 border-color: #0f172a;
             }
         }
@@ -1801,7 +1824,7 @@ body>div:has(.ant-modal-root) {
     }
 
     .spec05-custom-table {
-        .ant-table-thead > tr > th {
+        .ant-table-thead>tr>th {
             background: #f8fafc;
             color: #475569;
             font-weight: 700;
@@ -1812,14 +1835,14 @@ body>div:has(.ant-modal-root) {
             padding: 14px 18px;
         }
 
-        .ant-table-tbody > tr {
+        .ant-table-tbody>tr {
             transition: background 0.2s ease;
 
             &:hover {
                 background: #f8fafc !important;
             }
 
-            > td {
+            >td {
                 padding: 14px 18px;
                 border-bottom: 1px solid #f1f5f9;
                 font-size: 0.9rem;
@@ -1851,9 +1874,20 @@ body>div:has(.ant-modal-root) {
         flex-direction: column;
         gap: 2px;
 
-        .resp-person { font-weight: 600; color: #1e293b; font-size: 0.85rem; }
-        .resp-vendor { font-size: 0.78rem; color: #64748b; }
-        .resp-none { color: #cbd5e1; }
+        .resp-person {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.85rem;
+        }
+
+        .resp-vendor {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .resp-none {
+            color: #cbd5e1;
+        }
     }
 
     // Badges 2026
@@ -1867,16 +1901,59 @@ body>div:has(.ant-modal-root) {
         font-weight: 700;
         letter-spacing: 0.2px;
 
-        &--neuf { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-        &--bon { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
-        &--usage { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-        &--reparer { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
-        &--hors { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+        &--neuf {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
 
-        &--planified { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-        &--progress { background: #fef9c3; color: #a16207; border: 1px solid #fef08a; }
-        &--done { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-        &--canceled { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+        &--bon {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+
+        &--usage {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fde68a;
+        }
+
+        &--reparer {
+            background: #ffedd5;
+            color: #c2410c;
+            border: 1px solid #fed7aa;
+        }
+
+        &--hors {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        &--planified {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+
+        &--progress {
+            background: #fef9c3;
+            color: #a16207;
+            border: 1px solid #fef08a;
+        }
+
+        &--done {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        &--canceled {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
 
         &--urgent {
             background: #ffe4e6;
@@ -1885,9 +1962,23 @@ body>div:has(.ant-modal-root) {
             animation: pulseGlow 2s infinite;
         }
 
-        &--haute { background: #ffedd5; color: #c2410c; border: 1px solid #fed7aa; }
-        &--normale { background: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe; }
-        &--basse { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+        &--haute {
+            background: #ffedd5;
+            color: #c2410c;
+            border: 1px solid #fed7aa;
+        }
+
+        &--normale {
+            background: #e0e7ff;
+            color: #4338ca;
+            border: 1px solid #c7d2fe;
+        }
+
+        &--basse {
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
     }
 
     .spec05-category-pill {
@@ -1971,31 +2062,49 @@ body>div:has(.ant-modal-root) {
         }
     }
 
-    .ant-form-item-label > label {
+    .ant-form-item-label>label {
         font-weight: 600;
         color: #334155;
         font-size: 0.85rem;
     }
 
-    .ant-input, .ant-input-number, .ant-select-selector {
+    .ant-input,
+    .ant-input-number,
+    .ant-select-selector {
         border-radius: 10px !important;
         border-color: #cbd5e1 !important;
 
-        &:focus, &:hover {
+        &:focus,
+        &:hover {
             border-color: #0f172a !important;
         }
     }
 }
 
 @keyframes pulseGlow {
-    0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
-    70% { box-shadow: 0 0 0 8px rgba(225, 29, 72, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(225, 29, 72, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 // Voice Assistant Modal 2026
@@ -2066,7 +2175,18 @@ body>div:has(.ant-modal-root) {
 }
 
 @keyframes micPulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
-    70% { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(239, 68, 68, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6);
+    }
+
+    70% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 18px rgba(239, 68, 68, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
 }

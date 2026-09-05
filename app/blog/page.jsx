@@ -81,23 +81,12 @@ export default function BlogPage() {
     }
   }
 
-  const [repatriationCount, setRepatriationCount] = useState(0);
-
-  async function fetchRepatriationCount() {
-    try {
-      const res = await fetch('/api/admin/repatriate');
-      const data = await res.json();
-      setRepatriationCount(data.count || 0);
-    } catch (e) { console.error(e); }
-  }
-
   async function fetchPosts() {
     try {
       const response = await fetch('/api/posts')
       const data = await response.json()
       setPosts(data)
       setFilteredPosts(data)
-      fetchRepatriationCount()
     } catch (error) {
       console.error('Erreur lors du chargement des posts:', error)
     } finally {

@@ -51,6 +51,23 @@ export default function BlogPost() {
     )
   }
 
+  const authorName = typeof post.author === 'object' && post.author !== null
+    ? (post.author.name || 'Sanctuaire NDR')
+    : (typeof post.author === 'string' && post.author ? post.author : 'Sanctuaire NDR')
+
+  const authorPicture = typeof post.author === 'object' && post.author !== null
+    ? post.author.picture
+    : null
+
+  let formattedDate = 'Récemment'
+  if (post.date) {
+    try {
+      formattedDate = format(new Date(post.date), 'dd MMMM yyyy', { locale: fr })
+    } catch (e) {
+      console.error('Error formatting date:', e)
+    }
+  }
+
   return (
     <article className="blog-post">
       <div className="blog-post-header">
@@ -62,13 +79,13 @@ export default function BlogPost() {
         )}
         <div className="blog-post-meta">
           <div className="blog-post-author">
-            {post.author.picture && (
-              <img src={post.author.picture} alt={post.author.name} className="author-avatar" />
+            {authorPicture && (
+              <img src={authorPicture} alt={authorName} className="author-avatar" />
             )}
-            <span>{post.author.name}</span>
+            <span>{authorName}</span>
           </div>
           <time dateTime={post.date}>
-            {format(new Date(post.date), 'dd MMMM yyyy', { locale: fr })}
+            {formattedDate}
           </time>
         </div>
       </div>

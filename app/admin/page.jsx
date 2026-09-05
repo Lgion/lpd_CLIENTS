@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import PageEditor from './components/PageEditor'
+import AccessDenied from './AccessDenied'
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState(null)
@@ -15,6 +16,11 @@ export default function AdminDashboard() {
         async function fetchDashboardData() {
             try {
                 const response = await fetch('/api/admin/dashboard_stats')
+                if (response.status === 401) {
+                    setError('401')
+                    setLoading(false)
+                    return
+                }
                 if (!response.ok) throw new Error('Erreur lors du chargement des données')
                 const data = await response.json()
                 setStats(data.stats)
@@ -38,6 +44,8 @@ export default function AdminDashboard() {
                     <div className="spinner"></div>
                     Chargement des données du tableau de bord...
                 </div>
+            ) : error === '401' ? (
+                <AccessDenied />
             ) : error ? (
                 <div className="admin-error">
                     <h2>Oups! Une erreur est survenue</h2>

@@ -3,7 +3,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import localFont from "next/font/local";
 import "./globals.css";
 import "./../assets/scss/index.scss"
-import "../styles/cartBestSellers.css"
 // import '../styles/globals.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -32,12 +31,12 @@ import AfterFooter from "./AfterFooter";
 // const kenia = Kenia({ subsets: ['latin'], weight: ['400'], variable: "--font-kenia" })
 // const shipporiMincho = Shippori_Mincho({ subsets: ['latin'], weight: ['400'], variable: "--font-shipporiMincho" })
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../assets/fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 })
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../assets/fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 })

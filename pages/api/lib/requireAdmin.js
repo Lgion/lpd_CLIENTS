@@ -7,23 +7,37 @@ import { getAuth } from '@clerk/nextjs/server';
  * @returns {Promise<boolean>} True if authenticated, false if response handled
  */
 export async function requireAdminAuth(req, res) {
-  try {
-    const { userId } = getAuth(req);
-    
-    // In development or test if bypass is configured, allow
-    if (process.env.NODE_ENV === 'development' && process.env.ALLOW_ADMIN_BYPASS === 'true') {
-      return true;
-    }
+  console.log('[DEBUG ADMIN Backend requireAdminAuth called]', {
+    url: req.url,
+    cookiesPresent: !!req.headers.cookie,
+    allowBypass: process.env.ALLOW_ADMIN_BYPASS
+  });
 
-    if (!userId) {
-      res.status(401).json({ success: false, message: 'Authentification requise (Connexion demandée)' });
+  if (process.env.ALLOW_ADMIN_BYPASS === 'true') {
+    console.log('[DEBUG ADMIN Backend] Bypass active via ALLOW_ADMIN_BYPASS');
+    return true;
+  }
+
+  try {
+    const authData = getAuth(req);
+    console.log('[DEBUG ADMIN Backend Clerk AuthData]', { userId: authData?.userId });
+
+    if (!authData?.userId) {
+      console.log('[DEBUG ADMIN Backend] No userId found in Clerk request headers -> returning 401');
+      res.status(401).json({ 
+        success: false, 
+        message: 'Authentification requise. Veuillez vous connecter.' 
+      });
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('Erreur lors de la vérification de l\'authentification admin:', error);
-    res.status(500).json({ success: false, message: 'Erreur d\'authentification serveur' });
+    console.error('[DEBUG ADMIN Backend Exception in requireAdminAuth]', error.message);
+    res.status(401).json({ 
+      success: false, 
+      message: 'Authentification requise. Veuillez vous reconnecter.' 
+    });
     return false;
   }
 }

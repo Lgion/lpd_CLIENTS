@@ -5,59 +5,63 @@ import AdminContext from "../stores/adminContext.js"
 
 export default function HeaderAdmin() {
 
-  // console.log("\n\n\n\n")
-  // console.log(usePathname())
-  // console.log("\n\n\n\n")
-
   let { adminMenuActive, setAdminMenuActive } = useContext(AdminContext)
-    , pathname = usePathname()
-  pathname = pathname || ""
+    , pathname = usePathname() || ""
 
   useEffect(() => {
-    if (pathname.indexOf('/admin/school') == 0) setAdminMenuActive('school')
-    if (pathname.indexOf('/admin/ecommerce') == 0) setAdminMenuActive('ecommerce')
-    if (pathname.indexOf('/admin/sanctuaire') == 0) setAdminMenuActive('sanctuaire')
-    if (pathname.indexOf('/admin/blog') == 0) setAdminMenuActive('blog')
-  }, [])
-  // console.log(pathname);
+    if (pathname === '/admin') setAdminMenuActive('dashboard')
+    else if (pathname.indexOf('/admin/sanctuaire') === 0) setAdminMenuActive('sanctuaire')
+    else if (pathname.indexOf('/blog') === 0) setAdminMenuActive('blog')
+  }, [pathname, setAdminMenuActive])
 
   return (
-    <header>
+    <header className="header-admin-nav">
       <menu className="mainMenu">
         <li>
           <Link
-            href="/admin/school"
-            onClick={() => { setAdminMenuActive("school") }}
-            className={adminMenuActive == "school" ? "active" : ""}
+            href="/admin"
+            onClick={() => setAdminMenuActive("dashboard")}
+            className={adminMenuActive === "dashboard" ? "active" : ""}
           >
-            Ecole St Martin
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/admin/ecommerce"
-            onClick={() => { setAdminMenuActive("ecommerce") }}
-            className={adminMenuActive == "ecommerce" ? "active" : ""}
-          >
-            Ecommerce
+            📊 Dashboard
           </Link>
         </li>
         <li>
           <Link
             href="/admin/sanctuaire"
-            onClick={() => { setAdminMenuActive("sanctuaire") }}
-            className={adminMenuActive == "sanctuaire" ? "active" : ""}
+            onClick={() => setAdminMenuActive("sanctuaire")}
+            className={adminMenuActive === "sanctuaire" ? "active" : ""}
           >
-            Sanctuaire NDR
+            ⛪ Sanctuaire NDR
           </Link>
         </li>
         <li>
           <Link
-            href="/admin/blog"
-            onClick={() => { setAdminMenuActive("blog") }}
-            className={adminMenuActive == "blog" ? "active" : ""}
+            href="/blog"
+            onClick={() => setAdminMenuActive("blog")}
+            className={adminMenuActive === "blog" ? "active" : ""}
           >
-            Blog
+            📝 Blog
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="https://school-managment-project.vercel.app/"
+            title="Accéder à la page de l'école St Martin de Porres de Bolobi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🏫 École St Martin ↗
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="https://librairie-puissance-divine.ci/"
+            title="Accéder au E-Commerce Chrétien de la Puissance Divine d'Amour d'Abidjan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            🛒 E-Commerce ↗
           </Link>
         </li>
       </menu>
