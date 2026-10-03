@@ -8,6 +8,7 @@ import LocateBolobi from "./_/LocateBolobi.jsx"
 import ReserveForm from "./_/ReserveForm/index.jsx"
 import BlogCategory from './_/Blog/BlogCategory.jsx'
 import BtnCTA from "./_/components/BtnCTA.jsx"
+import Bictorys from "./_/components/Bictorys.jsx"
 
 
 
@@ -18,6 +19,7 @@ const SanctuaireContent = memo(({ diapos, categoryPosts, headings }) => (
         <LocateBolobi />
         <ReserveForm />
         <BtnCTA />
+        <Bictorys />
         {/* <BlogCategory {...{ categoryPosts, headings, className: "sndr" }} /> */}
     </main>
 ));
